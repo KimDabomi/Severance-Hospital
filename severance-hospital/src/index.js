@@ -1,17 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+/** test */
+/**/
+import App from "./App";
+/*/
+import App from './Test';
+/**/
+
+/** 라우터 */
+import { BrowserRouter } from "react-router-dom";
+
+/** redux 구성을 위한 참조 */
+import { Provider } from "react-redux"; // provider을 통해 store 구독
+import store from "./store"; // 전체 slice를 포함한 store
+
+/** Meta, GlobalStyles */
+import Meta from "./Meta";
+import GlobalStyles from "./GlobalStyles";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // store 속성 명시
+  <Provider store={store}>
+    <BrowserRouter>
+      <Meta />
+      <GlobalStyles />
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
