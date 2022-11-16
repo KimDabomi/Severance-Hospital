@@ -1,13 +1,15 @@
-import React from "react";
-import { Link, Routes, Route } from "react-router-dom";
+import React,{memo} from 'react';
+import {Route,Routes} from 'react-router-dom';
+import Login from './pages/main/Login';
 
-function App() {
+const App = memo(() => {
   return (
     <div>
-      <h1>Team-3</h1>
-      <h2>otw test text01</h2>
+      <Routes>
+        <Route path='/' element={<Login />} />
+      </Routes>
     </div>
   );
-}
+});
 
 export default App;
