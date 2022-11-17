@@ -229,3 +229,4 @@ $RECYCLE.BIN/
 
 #####
 data.json
+.env.*
