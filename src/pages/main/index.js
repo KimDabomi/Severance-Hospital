@@ -1,13 +1,10 @@
-import React from "react";
+import React,{memo} from "react";
 
-const index = () => {
+const Main = memo(() => {
   return (
-    <div>
-      {/* 
-      ...
-       */}
-    </div>
+    <>
+    </>
   );
-};
+});
 
-export default index;
+export default Main;
