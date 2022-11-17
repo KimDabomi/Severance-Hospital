@@ -1,31 +1,40 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+/** 컴포넌트 참조 */
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
-import MainImage from '../../assets/img/img-visual-patient1.jpg';
+/** 이미지 참조 */
+import MainImage from "../../assets/img/img-visual-patient1.jpg";
 
+/** 메인 스타일 블럭 */
 const MainContainer = styled.main`
-  margin: 0 auto;
-  text-align: center;
+  width: 100%;
+  background-color: #eee;
 `;
 
+/** 이미지 슬라이드 스타일 블럭 */
+const SlideContainer = styled.figure`
+  width: 1920px;
+  height: 500px;
+  margin: 0 auto;
+`;
 
 const MainPage = () => {
   return (
     <>
-    <Header />
-    <MainContainer>
-    <img src={MainImage} alt="main_img" />
-    <div>
-      <h1>Main Contants</h1>
-    </div>
-    <a>TOP</a>
-    </MainContainer>
-    <Footer />
-    </>
-  )
-}
+      <Header />
 
-export default MainPage
+      <MainContainer>
+        <SlideContainer>
+            <img src={MainImage} alt="main_img" />
+        </SlideContainer>
+      </MainContainer>
+
+      <Footer />
+    </>
+  );
+};
+
+export default MainPage;
