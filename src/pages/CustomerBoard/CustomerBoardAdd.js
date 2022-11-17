@@ -1,16 +1,22 @@
 import React, { memo } from 'react';
+import styled from 'styled-components';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 import CustomerBoardHeader from './Header';
 
+const CustomerBoardAddCont = styled.div`
+    margin: auto;
+    max-width: 1280px;
+`;
+
 const CustomerBoardAdd = memo(() => {
     return (
-        <div>
+        <CustomerBoardAddCont>
             <Header />
                 <CustomerBoardHeader />
 
-                <h4>개인정보 수집 동의</h4>
+                <h4 className='pageSubtitle'>개인정보 수집 동의</h4>
 
                 <div>
                     <ul>
@@ -88,7 +94,7 @@ const CustomerBoardAdd = memo(() => {
                         <tr>
                             <th>병원/기관</th>
                             <td>
-                                <select>
+                                <select name='hospital'>
                                     <option value=''>병원/대학을 선택하세요.</option>
                                 </select>
                             </td>
@@ -96,7 +102,7 @@ const CustomerBoardAdd = memo(() => {
                         <tr>
                             <th>부서</th>
                             <td>
-                                <select>
+                                <select name='dept'>
                                     <option value=''>부서를 선택하세요.</option>
                                 </select>
                             </td>
@@ -116,17 +122,22 @@ const CustomerBoardAdd = memo(() => {
                         <tr>
                             <th>내용</th>
                             <td>
-                                <textarea type='text' name='title' placeholder='건의 사항 및 상세 내용을 1500자 이내로 입력해주세요.' maxLength='1500'/>
+                                <textarea type='text' name='title' id='textarea' placeholder='건의 사항 및 상세 내용을 1500자 이내로 입력해주세요.' maxLength='1500'/>
+
+                                {/* 글자수 카운팅 */}
+                                <p id='chkTextLengthArea'>0/
+                                <span id="counter">1500</span></p>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    {/* 글자수 카운팅 */}
-                    <p id='chkTextLengthArea'>0/
-                    <span id="counter">1500</span></p>
+
+                   
+                    <button type='submit'>접수신청</button>
+                    <button type='reset'>다시신청</button>
                 </form>
             <Footer />
-        </div>
+        </CustomerBoardAddCont>
     );
 });
 
