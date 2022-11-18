@@ -56,7 +56,18 @@ const Container = styled.div`
     }
   }
   form {
-
+    width: 40%;
+    margin-top: 200px;
+    margin-left: 10%;
+    input {
+      width: 60%;
+      height: 60px;
+      margin: 2% 0 0 12%;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 20%;
+    }
   }
 `;
 const Login = memo(() => {
@@ -94,8 +105,8 @@ const Login = memo(() => {
           <Link to='/login'>본인인증 로그인</Link>
         </div>
         <form>
-          <input name="email" type="email" placeholder="이메일" value={email} onChange={onEmailHandler} className="email_input" />
-          <input name="password" type="new_password" placeholder="비밀번호" value={password} onChange={onPasswordHandler} className="password_input" />
+          <input name="email" type="email" placeholder="아이디를 입력해 주세요." value={email} onChange={onEmailHandler} className="email_input" />
+          <input name="password" type="new_password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={onPasswordHandler} className="password_input" />
           <button type="submit" onSubmit={onSubmit} className="login_button">로그인</button>
         </form>
       </div>
