@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 
 const index = () => {
@@ -12,15 +11,3 @@ const index = () => {
 };
 
 export default index;
-=======
-import React,{memo} from "react";
-
-const Main = memo(() => {
-  return (
-    <>
-    </>
-  );
-});
-
-export default Main;
->>>>>>> login-kdbm
