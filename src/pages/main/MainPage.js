@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 
 /** 이미지 참조 */
 import MainImage from "../../assets/img/img-visual-patient1.jpg";
+import { head } from "lodash";
 
 /** 메인 스타일 블럭 */
 const MainContainer = styled.main`
@@ -28,7 +29,7 @@ const MainPage = () => {
 
       <MainContainer>
         <SlideContainer>
-            <img src={MainImage} alt="main_img" />
+          <img src={MainImage} alt="main_img" />
         </SlideContainer>
       </MainContainer>
 
