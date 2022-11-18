@@ -17,7 +17,7 @@ const CustomerSlice = createSlice({
 });
 
 // 액션함수들 내보내기
-export const { plus, minus } = CustomerSlice.actions;
+export const {} = CustomerSlice.actions;
 
 // 리듀서 객체 내보내기
 export default CustomerSlice.reducer;
