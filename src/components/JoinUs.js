@@ -1,4 +1,5 @@
 import React, {memo,useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const JoinUs = memo(() => {
   const [name, setName] = useState("");
@@ -7,6 +8,8 @@ const JoinUs = memo(() => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const onNameHandler = e => {
     setName(e.currentTarget.value);
@@ -36,6 +39,8 @@ const JoinUs = memo(() => {
     e.preventDefault();
     if(password !== confirmPassword) {
       return alert('비밀번호와 비밀번호확인은 같아야 합니다.');
+    } else {
+      navigate('/login');
     }
   }
 
