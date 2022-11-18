@@ -1,0 +1,18 @@
+{
+    "customerBoard": [
+        {
+          "id":1,
+          "name": "name",
+          "title": "길찾기가 어려워요",
+          "content": "길찾기가 어려워요 ㅜㅜ",
+          "register": "",
+          "agree": "",
+          "staff": "",
+          "tel": "",
+          "hospital": "",
+          "dept": "",
+          "email": "",
+          "date": "2022-04-27T01:52:26Z"
+        }
+    ]
+}
