@@ -1,18 +1,17 @@
 {
-    "customerBoard": [
-        {
-          "id":1,
-          "name": "name",
-          "title": "길찾기가 어려워요",
-          "content": "길찾기가 어려워요 ㅜㅜ",
-          "register": "",
-          "agree": "",
-          "staff": "",
-          "tel": "",
-          "hospital": "",
-          "dept": "",
-          "email": "",
-          "date": "2022-04-27T01:52:26Z"
-        }
-    ]
+  "customerBoard": [
+    {
+      "id": 1,
+      "name": "주혜지",
+      "title": "길찾기가 어려워요",
+      "content": "길찾기가 어려워요 ㅜㅜ",
+      "register": "친절",
+      "staff": "김직원",
+      "tel": "010-1234-1234",
+      "hospital": "세브란스병원",
+      "dept": "세브란스병원부서",
+      "email": "rosyjoo1999@naver.com",
+      "date": "2022-04-27T01:52:26Z"
+    }
+  ]
 }

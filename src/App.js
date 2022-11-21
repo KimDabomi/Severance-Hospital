@@ -18,7 +18,7 @@ function App() {
         {/* 고객의소리 페이지 라우팅*/}
         <Route path='/customer.do' element={<CustomerBoardList />}/>
         <Route path="/suggest.do" element={<CustomerBoardAdd/>}/>
-        <Route path="/suggest.do/id" element={<CustomerBoardView/>}/>
+        <Route path="/suggestion/:id" element={<CustomerBoardView/>}/>
       </Routes>
     </div>
   );

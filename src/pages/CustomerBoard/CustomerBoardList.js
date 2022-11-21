@@ -1,6 +1,11 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { getList, deleteItem } from '../../slices/CustomerBoardSlice';
+import { useQueryString } from '../../hooks/useQueryString';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -56,46 +61,75 @@ const CustomerBoardCont = styled.div`
     td {
       padding: 10px;
     }
-
-    button{
-        /* text-align:right;  */
-    }
-
   }
+    .paging{
+      margin: 50px 0 50px;
+    }
 `;
 
 const CustomerBoardList = memo(() => {
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector(
+    (state) => state.CustomerBoardSlice
+  );
+
+  /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+  useEffect(() => {
+    dispatch(getList());
+  }, []);
+
   const navigate = useNavigate();
+
   return (
     <CustomerBoardCont>
       <Header />
       <CustomerBoardHeader />
-
       <h4 className="pageSubtitle">고객의소리 게시판</h4>
 
-      <table>
-        <thead>
-          <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>id</td>
-            <td>title</td>
-            <td>userid</td>
-            <td>date</td>
-          </tr>
-        </tbody>
-      </table>
+      {/* 조회결과 표시하기 */}
+      {error ? (
+        <h1>에러 발생함</h1>
+      ) : (
+        data && (
+          <table>
+            <thead>
+              <tr>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                //처리 결과는 존재하지만 0개인경우
+                data.length > 0 ? (
+                  data.map((v, i) => {
+                    return (
+                      <tr key={v.id}>
+                        <td>{v.id}</td>
+                        <td>{v.title}</td>
+                        <td>{v.name}</td>
+                        <td>{dayjs(new Date(v.date)).format('YYYY/MM/DD')}</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="4">글이 없습니다.</td>
+                  </tr>
+                )
+              }
+            </tbody>
+          </table>
+        )
+      )}
 
-      <button type="button">
-        <NavLink to="/suggest.do">글쓰기</NavLink>
-      </button>
-      <Pagination count={10} className='paging' />
+      <div className='buttonContColumn'>
+        <NavLink className='buttonBlue' to="/suggest.do">글쓰기</NavLink>
+        <Pagination count={10} className="paging" />
+      </div>
       <Footer />
     </CustomerBoardCont>
   );
