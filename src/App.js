@@ -6,7 +6,6 @@ import MainPage from "./pages/main/MainPage";
 function App() {
   return (
     <div>
-      <Link to="main_page"></Link>
       <Routes>
         <Route path="/" exapt={true} element={<MainPage />} />
       </Routes>
