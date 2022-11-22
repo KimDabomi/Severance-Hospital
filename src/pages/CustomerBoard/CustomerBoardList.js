@@ -16,28 +16,6 @@ const CustomerBoardCont = styled.div`
   margin: auto;
   max-width: 1280px;
 
-  h4 {
-    position: relative;
-    font-size: 20px;
-    margin-bottom: 22px;
-    line-height: 1.5;
-    padding-left: 19px;
-    box-sizing: border-box;
-
-    &::before {
-      position: absolute;
-      width: 11px;
-      height: 11px;
-      border: 3px solid #0094fb;
-      border-radius: 50%;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      content: '';
-      left: 0;
-      top: 50%;
-      transform: translate(0, -50%);
-    }
-  }
   table {
     border: 1px solid #ddd;
     border-left: none;
@@ -109,7 +87,7 @@ const CustomerBoardList = memo(() => {
                     return (
                       <tr key={v.id}>
                         <td>{v.id}</td>
-                        <td>{v.title}</td>
+                        <td><NavLink to={`/suggestion/${v.id}`}>{v.title}</NavLink></td>
                         <td>{v.name}</td>
                         <td>{dayjs(new Date(v.date)).format('YYYY/MM/DD')}</td>
                       </tr>
