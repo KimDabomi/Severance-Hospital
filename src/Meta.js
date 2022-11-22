@@ -22,6 +22,26 @@ const Meta = (props) => {
         <link rel="icon" href={props.icon} type="image/png" />
         <link rel="shortcut icon" href={props.chortcutIcon} type="image/png" />
         <link rel="apple-touch-icon" href={props.appleTouchIcon} type="image/png" />
+
+        {/* 네이버 나눔 글꼴 https://hangeul.naver.com/font/nanum */}
+
+        {/* 나눔고딕
+        font-family: 'NanumGothicLight';
+        font-family: 'NanumGothic';
+        font-family: 'NanumGothicBold';
+        font-family: 'NanumGothicExtraBold'; */}
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet"></link>
+        
+        {/* 나눔스퀘어
+        font-family: 'NanumSquareLight';
+        font-family: 'NanumSquare';
+        font-family: 'NanumSquareBold';
+        font-family: 'NanumSquareExtraBold';
+        font-family: 'NanumSquareAcb';
+        font-family: 'NanumSquareAceb';
+        font-family: 'NanumSquareAcl';
+        font-family: 'NanumSquareAcr'; */}
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"></link>
       </Helmet>
     </HelmetProvider>
   );
