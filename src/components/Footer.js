@@ -16,6 +16,7 @@ const FooterContainer = styled.footer`
   padding-bottom: 30px;
   box-sizing: border-box;
 
+
   /* 사이트 바로가기 스타일 */
   .familySite {
     width: 100%;

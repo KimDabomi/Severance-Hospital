@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
 import MainPage from "./pages/main/MainPage";
+import Login from "./components/Login";
 
 //고객의소리
 import CustomerBoardList from './pages/CustomerBoard/CustomerBoardList';
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" exapt={true} element={<MainPage />} />
 
         {/* 고객의소리 페이지 라우팅*/}
+        <Route path='/login' element={<Login />} />
         <Route path='/customer.do' element={<CustomerBoardList />}/>
         <Route path="/suggest.do" element={<CustomerBoardAdd/>}/>
         <Route path="/suggest.do/id" element={<CustomerBoardView/>}/>
