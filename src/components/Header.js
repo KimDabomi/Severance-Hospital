@@ -14,14 +14,16 @@ import chevronIcon from "../assets/img/ico-chevron-down-xs-bold@2x.png";
 
 /** 헤더 스타일 */
 const HeaderContainer = styled.header`
-  width: 1280px;
+  width: 100%;
   height: 125px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 /** 사용자, 회원가입 아이콘 스타일 */
 const UtilContainer = styled.div`
-  width: 100%;
+  width: 1280px;
   height: 41px;
   display: flex;
   justify-content: flex-end;
@@ -66,7 +68,7 @@ const UtilContainer = styled.div`
 
 /** 메인 네비게이션 스타일 */
 const GnbContainer = styled.div`
-  width: 100%;
+  width: 1280px;
   height: 84px;
   display: flex;
   justify-content: space-between;
@@ -130,7 +132,7 @@ const Header = () => {
           </li>
         </ul>
         <div>
-          <sapn>KO</sapn>
+          <span>KO</span>
           <img src={chevronIcon} />
         </div>
       </UtilContainer>

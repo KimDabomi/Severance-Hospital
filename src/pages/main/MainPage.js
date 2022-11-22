@@ -10,27 +10,38 @@ import Footer from "../../components/Footer";
 import MainImage from "../../assets/img/img-visual-patient1.jpg";
 import ExternalLink from "../../assets/img/ico-external-link-white@2x.png";
 import ShortcutExpert from "../../assets/img/ico-shortcut-expert@2x.png";
+import ShortcutDepartment from "../../assets/img/ico-shortcut-department@2x.png";
+import ShortcutCalendar from "../../assets/img/ico-shortcut-calendar@2x.png";
+import ShortcutRecervation from "../../assets/img/ico-shortcut-reservation@2x.png";
+
+import sympathyStory from "../../assets/img/bg-sympathy-story.jpg";
 
 /** 메인 스타일 블럭 */
 const Main = styled.main`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 /** 이미지 슬라이드 스타일 블럭 */
 const SlideFigure = styled.figure`
   width: 1920px;
   height: 500px;
-  margin: 0 auto;
 `;
 
 /** 카테고리별 병원 바로가기 스타일 */
 /** 빠른 메뉴 */
 const HospitalSection = styled.section`
-  width: 1280px;
-  margin: 0 auto;
+  width: 1920px;
+  padding-bottom: 60px;
+  background-image: url(./img/bg-main-pattern.png);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .exteralLinks {
-    width: 100%;
+    width: 1280px;
     height: 73px;
     ul {
       width: 100%;
@@ -79,14 +90,15 @@ const HospitalSection = styled.section`
     }
   }
 
-  .shortcut {
-    width: 100%;
+  .shortcutSlider {
+    width: 1280px;
     height: 194px;
+    padding: 58px 0;
+    box-sizing: border-box;
+
     ul {
       width: 100%;
       height: 100%;
-      padding: 58px 0;
-      box-sizing: border-box;
       display: flex;
 
       li {
@@ -95,27 +107,70 @@ const HospitalSection = styled.section`
 
         a {
           width: 100%;
-          height: 76px;
+          height: 100%;
           display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-
-
-          strong {
-            font-size: 24px;
-          }
-
-          span {
-            width: 215px;
-            font-size: 16px;
-          }
 
           img {
             width: 60px;
             height: 60px;
             padding: 8px 22.5px;
           }
+
+          .textBox {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            strong {
+              font-size: 24px;
+              line-height: 24px;
+            }
+
+            span {
+              font-size: 16px;
+              line-height: 22px;
+              color: #333333;
+            }
+          }
         }
+      }
+    }
+  }
+
+  .infoSlider {
+    width: 1280px;
+
+    dl {
+      width: 297px;
+      height: 360px;
+      background-image: url(./img/bg-sympathy-story.jpg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      dt {
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        margin-top: 80px;
+
+        ::after {
+          content: "";
+          display: block;
+          margin: 20px auto 0;
+          width: 40px;
+          height: 1px;
+          display: flex;
+          background-color: white;
+        }
+      }
+
+      dd {
+        width: 260px;
+        height: 173px;
+        background-color: white;
+        margin-bottom: 18.5px;
       }
     }
   }
@@ -165,16 +220,69 @@ const MainPage = () => {
               </li>
             </ul>
           </div>
-          <div className="shortcut">
+          <div className="shortcutSlider">
             <ul>
               <li>
                 <Link to="/">
                   <img src={ShortcutExpert} />
-                  <strong>의료진 찾기</strong>
-                  <span>전문 의료진을 빠르게 찾을 수 있습니다.</span>
+                  <div className="textBox">
+                    <strong>의료진 찾기</strong>
+                    <span>
+                      전문 의료진을 빠르게
+                      <br />
+                      찾을 수 있습니다.
+                    </span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <img src={ShortcutDepartment} />
+                  <div className="textBox">
+                    <strong>의료진 찾기</strong>
+                    <span>
+                      진료 전 진료과를
+                      <br />
+                      안내해 드립니다.
+                    </span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <img src={ShortcutCalendar} />
+                  <div className="textBox">
+                    <strong>의료진 찾기</strong>
+                    <span>
+                      회원/비회원 편리하게
+                      <br />
+                      예약할 수 있습니다.
+                    </span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <img src={ShortcutRecervation} />
+                  <div className="textBox">
+                    <strong>의료진 찾기</strong>
+                    <span>
+                      회원 및 비회원 예약
+                      <br />
+                      내역을 볼 수 있습니다.
+                    </span>
+                  </div>
                 </Link>
               </li>
             </ul>
+          </div>
+          <div className="infoSlider">
+            <dl>
+              <dt>공감Story</dt>
+              <dd>
+                <div></div>
+              </dd>
+            </dl>
           </div>
         </HospitalSection>
       </Main>
