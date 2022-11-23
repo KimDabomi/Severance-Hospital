@@ -48,7 +48,7 @@ const Meta = (props) => {
 };
 
 Meta.defaultProps = {
-  title: "Severance Hospital",
+  title: "세브란스병원",
   description: "Severance Hospital",
   author: "EZEN Academy Team 3",
   subject: "Severance Hospital Clone Project",
