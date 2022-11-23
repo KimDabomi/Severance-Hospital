@@ -1,11 +1,12 @@
 import React,{memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link,Routes,Route } from 'react-router-dom';
 import styled from 'styled-components';
 import loginImg from '../assets/img/login.png';
 import localImg from '../assets/img/local.jpg';
 import childImg from '../assets/img/child.jpg';
 import globalImg from '../assets/img/global.jpg';
+import JoinAccept from './JoinAccept';
 
 const Container = styled.div`
 position: relative;
@@ -163,23 +164,24 @@ const JoinWay = memo(() => {
         <h1>회원가입</h1>
         <p>세브란스 홈페이지에 방문해주셔서 감사 드립니다. 통합 계정으로 모든 패밀리사이트를 이용할 수 있습니다.</p>
         <div className='ways'>
-            <div className='root_box'>
+            <Link to='/join_accept' className='root_box'>
                 <h2>내/외국인</h2>
                 <p>14세 이상</p>
                 <p>국내거주 내/외국인</p>
                 <img src={localImg} alt='내/외국인' />
-            </div>
-            <div className='root_box'>
+            </Link>
+            <Link to='/join_accept' className='root_box'>
                 <h2>소아/청소년</h2>
                 <p>14세 미만</p>
                 <p>내/외국인</p>
                 <img src={childImg} alt='소아/청소년' />
-            </div>
-            <div className='root_box'>
+            </Link>
+            <Link to='/join_accept' className='root_box'>
                 <h2>해외거주 외국인</h2>
                 <p>Foreign membership</p>
                 <img src={globalImg} alt='해외거주외국인' />
-            </div>
+            </Link>
+            <Routes><Route path='/join_accept' element={<JoinAccept />} /></Routes>
             <div className='root_box'>
                 <h2>SNS 회원가입</h2>
                 <p>기존 사용하는 계정으로<br />
