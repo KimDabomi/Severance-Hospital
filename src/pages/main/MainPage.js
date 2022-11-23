@@ -364,31 +364,31 @@ const MainPage = () => {
           <div className="exteralLinks">
             <ul>
               <li>
-                <a href="https://cancer.severance.healthcare/cancer/index.do">
+                <a href="https://cancer.severance.healthcare/cancer/index.do" target="_black" rel="noopener noreferrer">
                   <span>연세암병원</span>
                   <img src={ExternalLink} />
                 </a>
               </li>
               <li>
-                <a href="https://sev-heart.severance.healthcare/sev-heart/index.do">
+                <a href="https://sev-heart.severance.healthcare/sev-heart/index.do" target="_black" rel="noopener noreferrer">
                   <span>심장혈관병원</span>
                   <img src={ExternalLink} />
                 </a>
               </li>
               <li>
-                <a href="https://sev-children.severance.healthcare/sev-children/index.do">
+                <a href="https://sev-children.severance.healthcare/sev-children/index.do" target="_black" rel="noopener noreferrer">
                   <span>어린이병원</span>
                   <img src={ExternalLink} />
                 </a>
               </li>
               <li>
-                <a href="https://sev-eye.severance.healthcare/sev-eye/index.do">
+                <a href="https://sev-eye.severance.healthcare/sev-eye/index.do" target="_black" rel="noopener noreferrer">
                   <span>안과병원</span>
                   <img src={ExternalLink} />
                 </a>
               </li>
               <li>
-                <a href="https://sev-rehabil.severance.healthcare/sev-rehabil/index.do">
+                <a href="https://sev-rehabil.severance.healthcare/sev-rehabil/index.do" target="_black" rel="noopener noreferrer">
                   <span>재활병원</span>
                   <img src={ExternalLink} />
                 </a>
