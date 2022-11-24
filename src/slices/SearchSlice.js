@@ -9,9 +9,9 @@ export const getStaffList = createAsyncThunk('SearchSlice/getStaffList', async (
 
     const API_URL = process.env.REACT_APP_API_STAFF_LIST;
 
-    // /pages/ProfessorList.js 에서 검색어를 {keyword: 검색어값} 형태로 전달하면 payload객체를 통해 넘어온다.
+    // 검색어를 {keyword: 검색어값} 형태로 전달하면 payload객체를 통해 넘어온다.
     // --> payload.keyword
-    // 여기서는 그 값을 학과명 검색어로 활용
+    // 여기서는 그 값을 검색어로 활용
     let params = null;
 
     // payload객체가 null이나 undefined가 아니고, 그 안의 keyword값이 존재한다면?
