@@ -6,64 +6,68 @@ import loginImg from '../assets/img/login.png';
 
 const Container = styled.div`
 position: relative;
-  .nav {
+.nav {
     width: 100%;
-    height: 120px;
+    height: 100px;
     border-bottom: 1px solid #eee;
-    padding: 45px 10% 0 10%;
+    padding: 40px 1.5% 0 2%;
     box-sizing: border-box;
 
     img {
-      width: 15%; 
-      height: 50%;
+      width: 16%; 
+      height: 60%;
       float: left; 
-      margin: 0 12% 0 0;
+      margin-right: 15%;
     }
 
     a {
-      font-size: 24px;
-      
-      margin-right: 5%;
+      font-size: 18px;
+      margin: 0 5% 0 0;
+      font-weight: bold;
       &:last-child {
         margin-right: 0;
+      }
+      &:hover {
+        color: rgb(0,148,251);
       }
     }
   }
   h1 {
     text-align: center;
     padding: 70px 0;
-    font-size: 44px;
+    font-size: 40px;
+    font-weight: bold;
   }
   .login_section {
     text-align: center;
-    margin-left: 10%;
+    margin-left: 2%;
 
     a {
       display: block;
       float: left;
-      width: 44%;
+      width: 48%;
       height: 60px;
       line-height: 60px;
       font-size: 22px;
       font-weight: bold;
-      border: 1px solid #ccc;
+      border: 1px solid #eee;
 
       &:first-child {
-        border-bottom: 5px solid rgb(255,234,169);
+        border-bottom: 3px solid rgb(255,234,169);
       }
       &:last-child {
-        background-color: #eee;
+        background-color: rgb(249,249,249);
       }
     }
   }
   .login_input {
-    width: 40%;
-    margin: 140px 0 0 9%;
+    width: 48%;
+    margin-top: 120px;
     position: relative;
 
     .email_input,.password_input {
       width: 55%;
-      height: 60px;
+      height: 50px;
       margin: 2% 0 0 12%;
       border: 1px solid #ccc;
       padding-left: 3%;
@@ -72,7 +76,7 @@ position: relative;
     }
     button {
       width: 20%;
-      height: 135px;
+      height: 113px;
       position: absolute;
       top: 9.5%;
       right: 9%;
@@ -84,23 +88,26 @@ position: relative;
     }
   }
   .remember {
-    margin: 1% 0 0 13.7%;
-    font-size: 18px;
+    margin: 1% 0 0 6%;
+    font-size: 16px;
+    color: rgba(100,100,100);
   }
   .find {
-    padding: 4% 0 0 14%;
+    padding: 4% 0 0 6%;
     a {
-      border: 1px solid #ccc;
-      padding: 20px 5.4%;
+      border: 1px solid rgb(100,100,100);
+      padding: 10px 5.6%;
       box-sizing: border-box;
       border-radius: 4%;
-      font-size: 18px;
+      font-size: 16px;
+      color: rgba(100,100,100);
+
       &:first-child {
         margin-right: 15px;
       }
     }
   }
-  footer {
+  /* footer {
     margin-top : 100px;
     border-top: 1px solid black;
     padding: 3% 10%;
@@ -131,42 +138,42 @@ position: relative;
       font-size: 16px;
       border-radius: 4%;
     }
-  }
+  } */
   .sns_login {
     position: absolute;
     left: 53%;
-    top: 42%;
+    top: 63%;
     width: 42%;
 
     h3 {
-      font-size: 22px;
+      font-size: 18px;
     }
     ul {
-      border-radius: 4%;
-      background-color: #eee;
-      width: 80%;
-      height: 120px;
+      border-radius: 2px;
+      background-color: rgb(249,249,249);
+      width: 94%;
+      height: 85px;
       padding: 5%;
       margin-top: 20px;
       box-sizing: border-box;
       li {
         float: left;
-        margin: 0 11%;
+        margin: 10px 5% 0 14%;
       }
     }
   }
   .go_join {
     position: absolute;
     left: 53%;
-    top: 62%;
+    top: 87%;
     width: 40%;
     h3 {
-      font-size: 22px;
+      font-size: 18px;
     }
     p {
       margin-top: 20px;
       line-height: 1.5em;
-      font-size: 18px;
+      font-size: 16px;
       float: left;
     }
     button {
@@ -240,13 +247,13 @@ const Login = memo(() => {
           나에게 딱 맞는 정보를 확인해 보세요!</p>
           <button type='button'>회원가입</button>
         </div>
-        <footer>
+        {/* <footer>
           <Link to='/'>이용약관</Link>
           <Link to='/'>개인정보처리방침</Link>
           <address>03722 서울특별시 서대문구 연세로 50-1</address>
           <p>COPYRIGHT(C) SEVERANCE HOSPITAL. ALL RIGHTS RESERVED.</p>
           <button type='button'>연세의료원 네트워크</button>
-        </footer>
+        </footer> */}
       </div>
     </Container>
   );

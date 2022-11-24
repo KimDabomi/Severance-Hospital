@@ -19,9 +19,9 @@ function App() {
         {/* <Route path="/" exapt={true} element={<MainPage />} /> */}
 
         {/* 고객의소리 페이지 라우팅*/}
-        {/* <Route path='/login' element={<Login />} /> */}
+        <Route path='/' element={<Login />} />
         {/* <Route path='/join_way' element={<JoinWay />} /> */}
-        <Route path='/' element={<JoinAccept />} />
+        {/* <Route path='/join_accept' element={<JoinAccept />} /> */}
         
         {/* <Route path='/customer.do' element={<CustomerBoardList />}/>
         <Route path="/suggest.do" element={<CustomerBoardAdd/>}/>

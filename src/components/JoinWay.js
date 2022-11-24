@@ -3,37 +3,37 @@ import { useNavigate } from 'react-router-dom';
 import { Link,Routes,Route } from 'react-router-dom';
 import styled from 'styled-components';
 import loginImg from '../assets/img/login.png';
-import localImg from '../assets/img/local.jpg';
-import childImg from '../assets/img/child.jpg';
-import globalImg from '../assets/img/global.jpg';
 import JoinAccept from './JoinAccept';
 
 const Container = styled.div`
 position: relative;
-  .nav {
+.nav {
     width: 100%;
-    height: 120px;
+    height: 100px;
     border-bottom: 1px solid #eee;
-    padding: 45px 10% 0 10%;
+    padding: 40px 1.5% 0 2%;
     box-sizing: border-box;
 
     img {
-      width: 15%; 
-      height: 50%;
+      width: 16%; 
+      height: 60%;
       float: left; 
-      margin: 0 12% 0 0;
+      margin-right: 15%;
     }
 
     a {
-      font-size: 24px;
-      
-      margin-right: 5%;
+      font-size: 18px;
+      margin: 0 5% 0 0;
+      font-weight: bold;
       &:last-child {
         margin-right: 0;
       }
+      &:hover {
+        color: rgb(0,148,251);
+      }
     }
   }
-  footer {
+  /* footer {
     margin-top : 500px;
     border-top: 1px solid black;
     padding: 3% 10%;
@@ -64,18 +64,19 @@ position: relative;
       font-size: 16px;
       border-radius: 4%;
     }
-  }
+  } */
   h1 {
     text-align: center;
     padding: 70px 0;
-    font-size: 44px;
+    font-size: 40px;
+    font-weight: bold;
   }
   p {
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
   }
   .ways {
-    padding-left: 10%;
+    padding-left: 2%;
     box-sizing: border-box;
     .root_box {
         margin-top: 30px;
@@ -83,15 +84,15 @@ position: relative;
         padding-top: 3%;
         box-sizing: border-box;
         float: left;
-        width: 20.8%;
-        height: 300px;
-        border: 1px solid #ccc;
+        width: 22.5%;
+        height: 230px;
+        border: 1px solid rgb(200,200,200);
         text-align: center;
         &:last-child {
             margin-right: 0;
         }
         h2 {
-            font-size: 28px;
+            font-size: 22px;
             margin-bottom: 15px;
             font-weight: bold;
         }
@@ -128,7 +129,7 @@ position: relative;
     }
   }
   .qna {
-    margin-right: 35%;
+    margin-right: 32%;
     height: 50px;
     line-height: 50px;
     p {
@@ -140,7 +141,7 @@ position: relative;
             background-color: white;
             border: 1px solid #ddd;
             padding: 10px 25px;
-            font-size: 18px;
+            font-size: 14px;
             border-radius: 30px;
         }
     }
@@ -168,18 +169,18 @@ const JoinWay = memo(() => {
                 <h2>내/외국인</h2>
                 <p>14세 이상</p>
                 <p>국내거주 내/외국인</p>
-                <img src={localImg} alt='내/외국인' />
+                {/* <img src={localImg} alt='내/외국인' /> */}
             </Link>
             <Link to='/join_accept' className='root_box'>
                 <h2>소아/청소년</h2>
                 <p>14세 미만</p>
                 <p>내/외국인</p>
-                <img src={childImg} alt='소아/청소년' />
+                {/* <img src={childImg} alt='소아/청소년' /> */}
             </Link>
             <Link to='/join_accept' className='root_box'>
                 <h2>해외거주 외국인</h2>
                 <p>Foreign membership</p>
-                <img src={globalImg} alt='해외거주외국인' />
+                {/* <img src={globalImg} alt='해외거주외국인' /> */}
             </Link>
             <Routes><Route path='/join_accept' element={<JoinAccept />} /></Routes>
             <div className='root_box'>
@@ -198,13 +199,13 @@ const JoinWay = memo(() => {
                 </p>
             </div>
         </div>
-        <footer>
+        {/* <footer>
           <Link to='/'>이용약관</Link>
           <Link to='/'>개인정보처리방침</Link>
           <address>03722 서울특별시 서대문구 연세로 50-1</address>
           <p>COPYRIGHT(C) SEVERANCE HOSPITAL. ALL RIGHTS RESERVED.</p>
           <button type='button'>연세의료원 네트워크</button>
-        </footer>
+        </footer> */}
       </div>
     </Container>
   );
