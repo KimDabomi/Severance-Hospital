@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
-import StaffSearch from "./pages/main/StaffSearch";
+import StaffSearch from "./pages/staff/StaffSearch";
 
 function App() {
   return (
