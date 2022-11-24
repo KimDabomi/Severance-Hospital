@@ -35,11 +35,52 @@ const FooterContainer = styled.footer`
         display: flex;
         align-items: center;
 
-        img {
+        a {
           width: 30px;
           height: 30px;
-          filter: grayscale(1);
-          cursor: pointer;
+        }
+
+        .npIcon {
+          background: url(./assets/img/ico-sns-gray-np@2x.png) no-repeat center /cover;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            background: url(./assets/img/ico-sns-np@2x.png) no-repeat center /cover;
+          }
+        }
+        .nbIcon {
+          background: url(./assets/img/ico-sns-gray-nb@2x.png) no-repeat center /cover;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            background: url(./assets/img/ico-sns-nb@2x.png) no-repeat center /cover;
+          }
+        }
+        .ytIcon {
+          background: url(./assets/img/ico-sns-gray-yt@2x.png) no-repeat center /cover;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            background: url(./assets/img/ico-sns-yt@2x.png) no-repeat center /cover;
+          }
+        }
+        .igIcon {
+          background: url(./assets/img/ico-sns-gray-ig@2x.png) no-repeat center /cover;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            background: url(./assets/img/ico-sns-ig@2x.png) no-repeat center /cover;
+          }
+        }
+        .fbIcon {
+          background: url(./assets/img/ico-sns-gray-fb@2x.png) no-repeat center /cover;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            background: url(./assets/img/ico-sns-fb@2x.png) no-repeat center /cover;
+          }
+        }
+        .ttIcon {
+          background: url(./assets/img/ico-sns-gray-tt@2x.png) no-repeat center /cover;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            background: url(./assets/img/ico-sns-tt@2x.png) no-repeat center /cover;
+          }
         }
       }
     }
@@ -89,22 +130,28 @@ const Footer = () => {
       <div className="familySite">
         <ul className="snsLink">
           <li>
-            <img src={npImg} alt="naver_post_image" />
+            <a href="https://m.post.naver.com/my.naver?memberNo=19457070" target="_blank" rel="noopener noreferrer" className="npIcon">
+            </a>
           </li>
           <li>
-            <img src={nbImg} alt="naver_blog_image" />
+            <a href="https://blog.naver.com/meet_the_sev" target="_blank" rel="noopener noreferrer" className="nbIcon">
+            </a>
           </li>
           <li>
-            <img src={ytImg} alt="youtube_image" />
+            <a href="https://www.youtube.com/user/SeveranceHospital" target="_blank" rel="noopener noreferrer" className="ytIcon">
+            </a>
           </li>
           <li>
-            <img src={igImg} alt="instagram_image" />
+            <a href="https://www.instagram.com/severance_insta/" target="_blank" rel="noopener noreferrer" className="igIcon">
+            </a>
           </li>
           <li>
-            <img src={fbImg} alt="facebook_image" />
+            <a href="https://www.facebook.com/SeveranceFan" target="_blank" rel="noopener noreferrer" className="fbIcon">
+            </a>
           </li>
           <li>
-            <img src={ttImg} alt="twitter_image" />
+            <a href="https://twitter.com/iSEVERANCE" target="_blank" rel="noopener noreferrer" className="ttIcon">
+            </a>
           </li>
         </ul>
       </div>

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 /** 컴포넌트 참조 */
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import TopBanner from "../../components/TopBanner";
 
 /** 이미지 참조 */
 // 메인 슬라이드
@@ -20,8 +21,6 @@ import ShortcutRecervation from "../../assets/img/ico-shortcut-reservation@2x.pn
 // 힘내요, 세브란스, 전공의 모집
 import Cheerup from "../../assets/img/main-cheerup.jpg";
 import Recruitment from "../../assets/img/img-recruitment.png";
-
-import Check from "../../assets/img/ico-chevron-down-xs-bold@2x.png";
 
 /** 메인 스타일 */
 const Main = styled.main`
@@ -66,7 +65,7 @@ const SlideSection = styled.section`
 const HospitalSection = styled.section`
   width: 1920px;
   padding-bottom: 60px;
-  background: url(./img/bg-main-pattern.png) no-repeat center / cover;
+  background: url(./assets/img/bg-main-pattern.png) no-repeat center / cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -257,7 +256,7 @@ const NewsSection = styled.section`
           display: block;
           width: 27px;
           height: 27px;
-          background: url(./img/btn-more-plus.jpg) no-repeat center / cover;
+          background: url(./assets/img/btn-more-plus.jpg) no-repeat center / cover;
         }
       }
 
@@ -273,7 +272,7 @@ const NewsSection = styled.section`
           display: block;
           width: 60px;
           height: 60px;
-          background: url(./img/btn-left-white.png) no-repeat center / cover;
+          background: url(./assets/img/btn-left-white.png) no-repeat center / cover;
           border: none;
           float: left;
         }
@@ -283,7 +282,7 @@ const NewsSection = styled.section`
           width: 60px;
           height: 60px;
           margin-left: 20px;
-          background: url(./img/btn-right-white.png) no-repeat center / cover;
+          background: url(./assets/img/btn-right-white.png) no-repeat center / cover;
           border: none;
 
           &::after {
@@ -342,123 +341,16 @@ const BannerSection = styled.section`
   height: 614px;
   padding: 65px 0 80px;
   box-sizing: border-box;
-  background: url(./img/bg-mkt-banner.jpg) no-repeat center / cover;
-`;
-
-/** 상단 배너 스타일 */
-const TopBannerSection = styled.section`
-  width: 100%;
-  height: 90px;
-  background-color: #0054d1;
-  display: flex;
-  justify-content: center;
-
-  .topBannerContent {
-    width: 1280px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      font-size: 16px;
-      color: white;
-      font-weight: 700;
-      line-height: 55px;
-    }
-
-    .title {
-      font-size: 24px;
-    }
-
-    .tel {
-      font-size: 40px;
-    }
-
-    .telOverseas {
-      font-weight: normal;
-    }
-
-    /* 전화기 이미지 */
-    .telYellow {
-      display: block;
-      width: 52px;
-      height: 52px;
-      background: url(./img/ico-tel-yellow@2x.png) no-repeat center / cover;
-    }
-
-    .telPrimary {
-      display: block;
-      width: 52px;
-      height: 52px;
-      background: url(./img/ico-tel-primary@2x.png) no-repeat center / cover;
-    }
-
-    /* 오늘하루 열지않기 */
-    button {
-      border: none;
-      .label {
-        font-weight: normal;
-      }
-    }
-
-    .topBannerCloseIcon {
-      display: block;
-      width: 26px;
-      height: 26px;
-      background: url(./img/ico-close-circle@2x.png) no-repeat center / cover;
-    }
-
-    .topBannerCloseCheckbox[type="checkbox"] {
-      display: none;
-    }
-    .topBannerCloseCheckbox[type="checkbox"] + label {
-      display: inline-block;
-      width: 17px;
-      height: 17px;
-      background-color: white;
-      position: relative;
-    }
-    .topBannerCloseCheckbox[id="close"]:checked + label::after {
-      width: 17px;
-      height: 17px;
-      text-align: center;
-      position: absolute;
-        left: 0;
-        top:0;
-      
-
-    }
-
-  }
+  background: url(./assets/img/bg-mkt-banner.jpg) no-repeat center / cover;
 `;
 
 const MainPage = () => {
   return (
     <>
-      <TopBannerSection>
-        <div className="topBannerContent">
-          <i className="telYellow" />
-          <span className="title">진료예약</span>
-          <a href="/">
-            <span className="tel">1599-1004</span>
-          </a>
-          <span className="telOverseas">해외 수신번호(+82-2-2228-1004)</span>
-          <i className="telPrimary" />
-          <span className="title">건강검진예약</span>
-          <a href="/">
-            <span className="tel">1588-7757</span>
-          </a>
-          <input type="checkbox" id="close" className="topBannerCloseCheckbox" />
-          <label for="close" className="closeText"></label>
-          <span>오늘하루 열지않기</span>
-          <button type="button">
-            <i className="topBannerCloseIcon" />
-          </button>
-        </div>
-      </TopBannerSection>
+      <TopBanner />
 
       <Header />
+
       <Main>
         <SlideSection>
           <img src={MainImage} alt="main_img" />
@@ -562,13 +454,13 @@ const MainPage = () => {
             </ul>
           </div>
           <div className="infoSlider">
-            <dl style={{ backgroundImage: "url(./img/bg-sympathy-story.jpg) no-repeat center /cover" }}>
+            <dl style={{ backgroundImage: "url(./assets/img/bg-sympathy-story.jpg)" }}>
               <dt>공감Story</dt>
               <dd>
                 <div></div>
               </dd>
             </dl>
-            <dl style={{ backgroundImage: "url(./img/bg-health-info.jpg) no-repeat center /cover" }}>
+            <dl style={{ backgroundImage: "url(./assets/img/bg-health-info.jpg)" }}>
               <dt>건강정보</dt>
               <dd>
                 <div></div>
