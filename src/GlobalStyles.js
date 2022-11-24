@@ -115,6 +115,30 @@ textarea{
         transform: translate(-50%, -50%);
         background-color: #fff;
         z-index : 101;
+        text-align:center;
+        padding: 30px;
+        box-sizing: border-box;
+        font-size: 16px;    
+    }
+    .alert{
+        height: 50%;
+        
+    }
+    .closeBtnCont{
+        height: 50%;
+        position: relative;
+        padding-top: 20px;
+        box-sizing: border-box;
+        .closeBtn{
+            border: none;
+            width: 80px; height: 40px;
+            background-color: #0094fb;
+            color: white;
+            min-width: 80px;
+            padding: 0 19px;
+            font-size: 16px;
+            border-radius: 3px;
+        }
     }
 }
     
@@ -230,6 +254,11 @@ textarea{
     background-color: #e6e6e6;
     text-align: center;
     }
+    .articleArea{
+        width: 100%;
+        overflow:hidden;
+        word-wrap:break-word;
+    }
   }
 
   .flexBetween{
@@ -242,6 +271,49 @@ textarea{
     &:first-child{
         padding-top:0;
     }
+  }
+
+  /** 의약품 검색 페이지 */
+  .tabMenu{
+    margin-bottom: 60px;
+    border: 1px solid #ebebeb;
+    overflow: hidden;
+    position: relative;
+    background-color: #f9f9f9;
+    padding-bottom: 2px;
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    a{
+        display: block;
+        height: 100%;
+        width: 50%;
+        line-height: 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: center;
+        font-size: 18px;
+        line-height: 3;
+        color: #333;
+        &:first-child{
+            border-right: 1px solid #ebebeb;
+        }
+        &.active{
+            background-color: #fff;
+            font-weight: bold;
+            border-bottom: 3px solid #ffd553;
+        }
+    }
+  }
+
+  .drugOption{
+    width: 100%;
+    padding:15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-top: 30px;
+    display: flex-wrap;
   }
 
 `;

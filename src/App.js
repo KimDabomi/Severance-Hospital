@@ -8,6 +8,8 @@ import CustomerBoardList from './pages/CustomerBoard/CustomerBoardList';
 import CustomerBoardAdd from './pages/CustomerBoard/CustomerBoardAdd';
 import CustomerBoardView from './pages/CustomerBoard/CustomerBoardView';
 
+//의약품검색
+import DrugSearch from './pages/DrugSearch/DrugSearch';
 function App() {
   return (
     <div>
@@ -19,6 +21,9 @@ function App() {
         <Route path='/customer.do' element={<CustomerBoardList />}/>
         <Route path="/suggest.do" element={<CustomerBoardAdd/>}/>
         <Route path="/suggestion/:id" element={<CustomerBoardView/>}/>
+
+        {/* 의약품검색 페이지 라우팅 */}
+        <Route path='/drug.do/*' element={<DrugSearch />}/>
       </Routes>
     </div>
   );

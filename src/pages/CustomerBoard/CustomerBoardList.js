@@ -57,7 +57,6 @@ const CustomerBoardList = memo(() => {
     dispatch(getList());
   }, []);
 
-  const navigate = useNavigate();
 
   return (
     <CustomerBoardCont>

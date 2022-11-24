@@ -120,8 +120,6 @@ const CustomerBoardSlice = createSlice({
         [getItem.pending]:pending,
         [getItem.fulfilled]:(state,{meta,payload})=>{
             return{
-                //전체적으로 데이터가 배열이지만, 단일행 조회의 경우 단건의 데이터만 응답결과로 수신되므로
-                //배열로 묶어 처리한다.
                 data: [payload],
                 loading: false,
                 error: null

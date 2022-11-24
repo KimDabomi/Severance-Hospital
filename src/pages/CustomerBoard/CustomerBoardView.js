@@ -92,13 +92,9 @@ const CustomerBoardView = memo(() => {
               </dl>
             </div>
             <div className="articleQarea">
-              <strong class="qnaTitle">Q</strong>
-              <div>{item.content}</div>
+              <strong className="qnaTitle">Q</strong>
+              <p className='articleArea'>{item.content}</p>
             </div>
-          </div>
-        )
-      )}
-
       <div className="buttonCont">
         <NavLink className="buttonBlue" to="/customer.do">
           목록
@@ -112,6 +108,10 @@ const CustomerBoardView = memo(() => {
           삭제
         </button>
       </div>
+          </div>
+        )
+      )}
+
       <Footer />
     </div>
   );
