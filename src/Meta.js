@@ -22,6 +22,7 @@ const Meta = (props) => {
         <link rel="icon" href={props.icon} type="image/png" />
         <link rel="shortcut icon" href={props.chortcutIcon} type="image/png" />
         <link rel="apple-touch-icon" href={props.appleTouchIcon} type="image/png" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </Helmet>
     </HelmetProvider>
   );

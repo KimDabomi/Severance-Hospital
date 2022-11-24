@@ -141,7 +141,7 @@ position: relative;
             border: 1px solid #ddd;
             padding: 10px 25px;
             font-size: 18px;
-            border-radius: 50%;
+            border-radius: 30px;
         }
     }
   }
