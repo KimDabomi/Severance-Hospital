@@ -1,3 +1,11 @@
+/**
+ * @ File Name: CustomerBoardSlice.js
+ * @ Author: 주혜지 (rosyjoo1999@gmail.com)
+ * @ Last Update: 2022-11-25 15:1:00
+ * @ Description: 고객의 소리 crud slice
+ */
+
+
 import { createSlice, createAsyncThunk  } from '@reduxjs/toolkit';
 import axios from 'axios';
 import {pending, fulfilled, rejected} from '../helper/ReduxHelper';

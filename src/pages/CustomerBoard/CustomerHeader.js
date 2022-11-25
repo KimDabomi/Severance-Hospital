@@ -1,3 +1,11 @@
+/**
+ * @ File Name: Header.js
+ * @ Author: 주혜지 (rosyjoo1999@gmail.com)
+ * @ Last Update: 2022-11-25 15:1:00
+ * @ Description: 고객의 소리 헤더 component
+ */
+
+
 import React, { memo } from 'react';
 import styled from 'styled-components';
 

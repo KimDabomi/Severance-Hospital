@@ -1,3 +1,11 @@
+/**
+ * @ File Name: CustomerBoardView.js
+ * @ Author: 주혜지 (rosyjoo1999@gmail.com)
+ * @ Last Update: 2022-11-25 15:1:00
+ * @ Description: 고객의 소리 상세 페이지
+ */
+
+
 import React, { memo, useEffect, useMemo, useCallback } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,7 +17,7 @@ import {
 import dayjs from 'dayjs';
 
 import styled from 'styled-components';
-import CustomerBoardHeader from './Header';
+import CustomerBoardHeader from './CustomerHeader';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 

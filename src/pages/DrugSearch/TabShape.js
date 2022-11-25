@@ -1,8 +1,32 @@
 import React, { memo } from 'react';
+import styled from 'styled-components';
+
+const DrugCont = styled.div`
+  .drugOption{
+    width: 100%;
+    padding:15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-top: 30px;
+    display: flex-wrap;
+    box-sizing: border-box;
+  
+    dl{
+        display: block;
+        background-color: #fff;
+        width: calc(50% - 30px);
+        margin: 15px;
+        padding: 30px;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    }
+`;
 
 const TabShape = memo(() => {
   return (
-    <div>
+    <DrugCont className='pageCont'>
       <fieldset>
         <div className='drugOption'>
             <dl>
@@ -302,7 +326,7 @@ const TabShape = memo(() => {
           </button>
         </div>
       </fieldset>
-    </div>
+    </DrugCont>
   );
 });
 

@@ -26,6 +26,7 @@ textarea{
     margin: auto;
     max-width: 1280px;
     padding-bottom: 95px;
+
 }
 //페이지 상위 타이틀
 .pageTitle{
@@ -122,7 +123,7 @@ textarea{
     }
     .alert{
         height: 50%;
-        
+        word-wrap:break-word;
     }
     .closeBtnCont{
         height: 50%;
@@ -305,15 +306,6 @@ textarea{
             border-bottom: 3px solid #ffd553;
         }
     }
-  }
-
-  .drugOption{
-    width: 100%;
-    padding:15px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    margin-top: 30px;
-    display: flex-wrap;
   }
 
 `;
