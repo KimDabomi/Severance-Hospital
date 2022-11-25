@@ -72,7 +72,7 @@ const SlideSection = styled.section`
 const HospitalSection = styled.section`
   width: 1920px;
   padding-bottom: 60px;
-  background: url(./assets/img/bg-main-pattern.png) no-repeat center / cover;
+  background: url(./img/bg-main-pattern.png) no-repeat center / cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -263,7 +263,7 @@ const NewsSection = styled.section`
           display: block;
           width: 27px;
           height: 27px;
-          background: url(./assets/img/btn-more-plus.jpg) no-repeat center / cover;
+          background: url(./img/btn-more-plus.jpg) no-repeat center / cover;
         }
       }
 
@@ -279,7 +279,7 @@ const NewsSection = styled.section`
           display: block;
           width: 60px;
           height: 60px;
-          background: url(./assets/img/btn-left-white.png) no-repeat center / cover;
+          background: url(./img/btn-left-white.png) no-repeat center / cover;
           border: none;
           float: left;
         }
@@ -289,7 +289,7 @@ const NewsSection = styled.section`
           width: 60px;
           height: 60px;
           margin-left: 20px;
-          background: url(./assets/img/btn-right-white.png) no-repeat center / cover;
+          background: url(./img/btn-right-white.png) no-repeat center / cover;
           border: none;
 
           &::after {
@@ -348,7 +348,7 @@ const BannerSection = styled.section`
   height: 614px;
   padding: 65px 0 80px;
   box-sizing: border-box;
-  background: url(./assets/img/bg-mkt-banner.jpg) no-repeat center / cover;
+  background: url(./img/bg-mkt-banner.jpg) no-repeat center / cover;
 `;
 
 const MainPage = () => {
@@ -461,13 +461,13 @@ const MainPage = () => {
             </ul>
           </div>
           <div className="infoSlider">
-            <dl style={{ backgroundImage: "url(./assets/img/bg-sympathy-story.jpg)" }}>
+            <dl style={{ backgroundImage: "url(./img/bg-sympathy-story.jpg)" }}>
               <dt>공감Story</dt>
               <dd>
                 <div></div>
               </dd>
             </dl>
-            <dl style={{ backgroundImage: "url(./assets/img/bg-health-info.jpg)" }}>
+            <dl style={{ backgroundImage: "url(./img/bg-health-info.jpg)" }}>
               <dt>건강정보</dt>
               <dd>
                 <div></div>
