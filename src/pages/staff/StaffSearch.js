@@ -14,7 +14,7 @@ import { getStaffList } from '../../slices/StaffSearchSlice';
 
 import { useQueryString } from '../../hooks/useQueryString';
 
-import Header from '../../components/Header';
+import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
 import Search from '../../components/Search';
 import Dropdown from '../../components/Dropdown';
