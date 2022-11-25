@@ -6,7 +6,6 @@ import StaffSearch from "./pages/staff/StaffSearch";
 function App() {
   return (
     <div>
-      <Link to="main_page"></Link>
       <Routes>
         <Route path="/" exapt={true} element={<StaffSearch />} />
       </Routes>
