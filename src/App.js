@@ -7,6 +7,7 @@ function App() {
   return (
     <div>
       <Routes>
+      <Route path="/" exapt={true} element={<MainPage />} />
         <Route path="/" exapt={true} element={<StaffSearch />} />
       </Routes>
     </div>
