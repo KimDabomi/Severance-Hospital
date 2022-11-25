@@ -1,8 +1,16 @@
+/**
+ * @ File Name: JoinUs.js
+ * @ Author: 김다보미 (cdabomi@nate.com)
+ * @ Last Update: 2022-11-25 15:00
+ * @ Description: 회원가입 정보 입력 페이지
+ */
+
 import React, {memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import loginImg from '../assets/img/login.png';
+import LoginFooter from './LoginFooter';
 
 
 const Container = styled.div`
@@ -30,7 +38,7 @@ const Container = styled.div`
       }
     }
   }
-  footer {
+  /* footer {
     margin-top : 100px;
     border-top: 1px solid black;
     padding: 3% 10%;
@@ -61,7 +69,7 @@ const Container = styled.div`
       font-size: 16px;
       border-radius: 4%;
     }
-  }
+  } */
 `;
 
 const JoinUs = memo(() => {
@@ -129,13 +137,14 @@ const JoinUs = memo(() => {
               <button type="submit" onSubmit={onSubmit} className="Join_button">계정 생성하기</button>
           </form>
         </div>
-        <footer>
+        {/* <footer>
           <Link to='/'>이용약관</Link>
           <Link to='/'>개인정보처리방침</Link>
           <address>03722 서울특별시 서대문구 연세로 50-1</address>
           <p>COPYRIGHT(C) SEVERANCE HOSPITAL. ALL RIGHTS RESERVED.</p>
           <button type='button'>연세의료원 네트워크</button>
-        </footer>
+        </footer> */}
+        <LoginFooter />
       </div>
     </Container>
   );

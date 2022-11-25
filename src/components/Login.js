@@ -1,8 +1,19 @@
+/**
+ * @ File Name: Login.js
+ * @ Author: 김다보미 (cdabomi@nate.com)
+ * @ Last Update: 2022-11-25 16:40
+ * @ Description: 로그인 첫 페이지
+ */
+
 import React,{memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import loginImg from '../assets/img/login.png';
+import LoginFooter from './LoginFooter';
+import naver from '../assets/img/ico-sns-naver@2x.png';
+import kakao from '../assets/img/ico-sns-kakao@2x.png';
+import facebook from '../assets/img/ico-sns-facebook@2x.png';
 
 const Container = styled.div`
 position: relative;
@@ -153,12 +164,17 @@ position: relative;
       background-color: rgb(249,249,249);
       width: 94%;
       height: 85px;
-      padding: 5%;
+      padding: 3% 27%;
       margin-top: 20px;
       box-sizing: border-box;
       li {
+        margin-right: 10%;
         float: left;
-        margin: 10px 5% 0 14%;
+        a {
+          img {
+            width: 50px;
+          }
+        }
       }
     }
   }
@@ -211,7 +227,7 @@ const Login = memo(() => {
         <div className='nav'>
           <Link to='/login'><img src={loginImg} alt="통합로그인센터" /></Link>
           <Link to='/login'>로그인</Link>
-          <Link to='/join_us'>회원가입</Link>
+          <Link to='/join_way'>회원가입</Link>
           <Link to='/'>아이디/비밀번호 찾기</Link>
           <Link to='/'>병원등록번호 조회</Link>
           <Link to='/'>이용정책</Link>
@@ -236,9 +252,9 @@ const Login = memo(() => {
         <div className='sns_login'>
           <h3>SNS 계정으로 로그인</h3>
           <ul>
-            <li><Link to='/'>네이버</Link></li>
-            <li><Link to='/'>카카오</Link></li>
-            <li><Link to='/'>페이스북</Link></li>
+            <li><Link to='/'><img src={naver} alt='naver' /></Link></li>
+            <li><Link to='/'><img src={kakao} alt='kakao' /></Link></li>
+            <li><Link to='/'><img src={facebook} alt='facebook' /></Link></li>
           </ul>
         </div>
         <div className='go_join'>
@@ -254,6 +270,7 @@ const Login = memo(() => {
           <p>COPYRIGHT(C) SEVERANCE HOSPITAL. ALL RIGHTS RESERVED.</p>
           <button type='button'>연세의료원 네트워크</button>
         </footer> */}
+        <LoginFooter />
       </div>
     </Container>
   );

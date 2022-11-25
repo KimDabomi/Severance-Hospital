@@ -1,8 +1,17 @@
+/**
+ * @ File Name: JoinAccept.js
+ * @ Author: 김다보미 (cdabomi@nate.com)
+ * @ Last Update: 2022-11-25 15:00
+ * @ Description: 약관동의 페이지
+ */
+
 import React,{memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import loginImg from '../assets/img/login.png';
+import LoginFooter from './LoginFooter';
+import Right from '../assets/img/ico-arrow-right-gray@2x.png';
 
 
 const Container = styled.div`
@@ -96,17 +105,10 @@ position: relative;
                         border: 2px solid rgb(0,148,251);
                     } 
                 }
-                span {
-                    float: left;
-                    margin: 10px 4.7%;
-                    font-size: 32px;
-                    color: #ccc;
-                    font-variation-settings:
-                    'FILL' 0,
-                    'wght' 600,
-                    'GRAD' 0,
-                    'opsz' 40
-                }
+            }
+            img {
+                float: left;
+                margin: 5px 5%;
             }
         }
     }
@@ -236,14 +238,17 @@ const JoinAccept = memo(() => {
             <div className="steps">
                 <ol>
                     <li>
-                        <div className="box">약관동의 하기</div><span class="material-symbols-outlined">arrow_forward_ios</span>
+                        <div className="box">약관동의 하기</div>
                     </li>      
+                    <img src={Right} alt='right' />
                     <li>
-                        <div className="box">본인인증 하기</div><span class="material-symbols-outlined">arrow_forward_ios</span>
-                    </li>       
-                    <li>
-                        <div className="box">정보입력 하기</div><span class="material-symbols-outlined">arrow_forward_ios</span>
+                        <div className="box">본인인증 하기</div>
                     </li>
+                    <img src={Right} alt='right' />
+                    <li>
+                        <div className="box">정보입력 하기</div>
+                    </li>
+                    <img src={Right} alt='right' />
                     <li>
                         <div className="box">회원가입 완료</div>
                     </li>
@@ -713,6 +718,7 @@ const JoinAccept = memo(() => {
           <p>COPYRIGHT(C) SEVERANCE HOSPITAL. ALL RIGHTS RESERVED.</p>
           <button type='button'>연세의료원 네트워크</button>
         </footer> */}
+        <LoginFooter />
       </div>
     </Container>
   );

@@ -1,3 +1,11 @@
+/**
+ * @ File Name: LoginFooter.js
+ * @ Author: 김다보미 (cdabomi@nate.com)
+ * @ Last Update: 2022-11-25 15:00
+ * @ Description: 로그인 페이지 푸터
+ */
+
+
 import React from "react";
 import styled from "styled-components";
 
@@ -16,6 +24,8 @@ const FooterContainer = styled.footer`
   padding-bottom: 30px;
   padding-left: 2%;
   box-sizing: border-box;
+  float: left;
+  margin-top: 100px;
 
   /* 사이트 바로가기 스타일 */
   .familySite {

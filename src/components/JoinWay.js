@@ -1,9 +1,25 @@
+/**
+ * @ File Name: JoinWay.js
+ * @ Author: 김다보미 (cdabomi@nate.com)
+ * @ Last Update: 2022-11-25 16:20
+ * @ Description: 회원가입 방법 선택 페이지
+ */
+
+
 import React,{memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link,Routes,Route } from 'react-router-dom';
 import styled from 'styled-components';
 import loginImg from '../assets/img/login.png';
 import JoinAccept from './JoinAccept';
+import LoginFooter from './LoginFooter';
+import localImg from '../assets/img/ico-login1@2x.png';
+import childImg from '../assets/img/ico-login2@2x.png';
+import globalImg from '../assets/img/ico-login3@2x.png';
+import naver from '../assets/img/ico-sns-naver@2x.png';
+import kakao from '../assets/img/ico-sns-kakao@2x.png';
+import facebook from '../assets/img/ico-sns-facebook@2x.png';
+
 
 const Container = styled.div`
 position: relative;
@@ -99,6 +115,10 @@ position: relative;
         p {
             margin-bottom: 15px;
         }
+        img {
+            margin: auto;
+            width: 20%;
+        }
         &:nth-child(2) {
             p {
                 margin-bottom: 19px;
@@ -109,19 +129,29 @@ position: relative;
                 margin-bottom: 50px;
             }
         }
-        &:last-child {
+        &:nth-child(4) {
             p {
-                margin-bottom: 80px;
+                margin-bottom: 25px;
+                line-height: 1.5em;
             }
             ul {
-                li {
+              li {
+                a {
+                  img {
                     float: left;
-                    margin-left: 13%;
+                    width: 17%;
+                    margin-left: 7%;
+                  }
                 }
+                &:first-child {
+                  a {
+                    img {
+                      margin-left: 18%;
+                    }
+                  }
+                }
+              }
             }
-        }
-        img {
-            margin: auto;
         }
         &:hover {
             border: 1px solid rgb(0,148,251);
@@ -156,7 +186,7 @@ const JoinWay = memo(() => {
         <div className='nav'>
           <Link to='/login'><img src={loginImg} alt="통합로그인센터" /></Link>
           <Link to='/login'>로그인</Link>
-          <Link to='/join_us'>회원가입</Link>
+          <Link to='/join_accept'>회원가입</Link>
           <Link to='/'>아이디/비밀번호 찾기</Link>
           <Link to='/'>병원등록번호 조회</Link>
           <Link to='/'>이용정책</Link>
@@ -169,18 +199,18 @@ const JoinWay = memo(() => {
                 <h2>내/외국인</h2>
                 <p>14세 이상</p>
                 <p>국내거주 내/외국인</p>
-                {/* <img src={localImg} alt='내/외국인' /> */}
+                <img src={localImg} alt='내/외국인' />
             </Link>
             <Link to='/join_accept' className='root_box'>
                 <h2>소아/청소년</h2>
                 <p>14세 미만</p>
                 <p>내/외국인</p>
-                {/* <img src={childImg} alt='소아/청소년' /> */}
+                <img src={childImg} alt='소아/청소년' />
             </Link>
             <Link to='/join_accept' className='root_box'>
                 <h2>해외거주 외국인</h2>
                 <p>Foreign membership</p>
-                {/* <img src={globalImg} alt='해외거주외국인' /> */}
+                <img src={globalImg} alt='해외거주외국인' />
             </Link>
             <Routes><Route path='/join_accept' element={<JoinAccept />} /></Routes>
             <div className='root_box'>
@@ -188,9 +218,9 @@ const JoinWay = memo(() => {
                 <p>기존 사용하는 계정으로<br />
                 간단하게 가입</p>
                 <ul>
-                    <li><Link to='/'>네이버</Link></li>
-                    <li><Link to='/'>카카오</Link></li>
-                    <li><Link to='/'>페이스북</Link></li>
+                  <li><Link to='/'><img src={naver} alt='naver' /></Link></li>
+                  <li><Link to='/'><img src={kakao} alt='kakao' /></Link></li>
+                  <li><Link to='/'><img src={facebook} alt='facebook' /></Link></li>
                 </ul>
             </div>
             <div className='qna'>
@@ -206,6 +236,7 @@ const JoinWay = memo(() => {
           <p>COPYRIGHT(C) SEVERANCE HOSPITAL. ALL RIGHTS RESERVED.</p>
           <button type='button'>연세의료원 네트워크</button>
         </footer> */}
+        <LoginFooter />
       </div>
     </Container>
   );
