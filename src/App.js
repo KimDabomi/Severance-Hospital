@@ -13,10 +13,6 @@ import CustomerBoardList from './pages/CustomerBoard/CustomerBoardList';
 import CustomerBoardAdd from './pages/CustomerBoard/CustomerBoardAdd';
 import CustomerBoardView from './pages/CustomerBoard/CustomerBoardView';
 
-//고객의소리
-import CustomerBoardAdd from './pages/CustomerBoard/CustomerBoardAdd';
-import CustomerBoardList from './pages/CustomerBoard/CustomerBoardList';
-import CustomerBoardView from './pages/CustomerBoard/CustomerBoardView';
 //의약품검색
 import DrugSearch from './pages/DrugSearch/DrugSearch';
 
