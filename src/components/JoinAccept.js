@@ -9,9 +9,10 @@ import React,{memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import loginImg from '../assets/img/login.png';
 import LoginFooter from './LoginFooter';
 import Right from '../assets/img/ico-arrow-right-gray@2x.png';
+import loginImg from '../assets/img/logo@2x.png';
+
 
 
 const Container = styled.div`
