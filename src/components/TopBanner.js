@@ -1,3 +1,10 @@
+/**
+ * @ File Name: TopBanner.js
+ * @ Author: 박다윗 (davidpark.0098@gmail.com)
+ * @ Last Update: 2022-11-25 15:02:00
+ * @ Description: 메인 페이지 top banner
+ */
+
 import React, { memo } from "react";
 import styled from "styled-components";
 

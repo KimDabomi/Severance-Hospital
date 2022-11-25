@@ -1,10 +1,17 @@
+/**
+ * @ File Name: MainPage.js
+ * @ Author: 박다윗 (davidpark.0098@gmail.com)
+ * @ Last Update: 2022-11-25 15:02:00
+ * @ Description: 메인 페이지
+ */
+
 /** import */
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 /** 컴포넌트 참조 */
-import Header from "../../components/Header";
+import MainPageHeader from "../../components/MainPageHeader";
 import Footer from "../../components/Footer";
 import TopBanner from "../../components/TopBanner";
 
@@ -349,7 +356,7 @@ const MainPage = () => {
     <>
       <TopBanner />
 
-      <Header />
+      <MainPageHeader />
 
       <Main>
         <SlideSection>
