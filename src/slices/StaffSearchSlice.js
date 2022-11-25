@@ -4,7 +4,7 @@ import { pending, fulfilled, rejected } from '../assets/helper/Reduxhelper';
 import { cloneDeep } from 'lodash';
 
 
-export const getStaffList = createAsyncThunk('SearchSlice/getStaffList', async (payload, { rejectWithValue }) => {
+export const getStaffList = createAsyncThunk('StaffSearchSlice/getStaffList', async (payload, { rejectWithValue }) => {
     let result = null;
 
     const API_URL = process.env.REACT_APP_API_STAFF_LIST;
@@ -34,7 +34,7 @@ export const getStaffList = createAsyncThunk('SearchSlice/getStaffList', async (
 });
 
 /** 단일행 데이터 조회를 위한 비동기 함수 */
-export const getItem = createAsyncThunk("SearchSlice/getItem", async (payload, { rejectWithValue }) => {
+export const getItem = createAsyncThunk("StaffSearchSlice/getItem", async (payload, { rejectWithValue }) => {
     let result = null;
 
     // 환경설정 파일에 정의된 URL에서 ':id'부분을 찾아 payload를 통해 전달된 일련번호로 치환
@@ -50,8 +50,8 @@ export const getItem = createAsyncThunk("SearchSlice/getItem", async (payload, {
     return result;
 });
 
-const SearchSlice = createSlice({
-    name: 'SearchSlice',
+const StaffSearchSlice = createSlice({
+    name: 'StaffSearchSlice',
     initialState: {
         data: null,
         loading: false,
@@ -83,4 +83,4 @@ const SearchSlice = createSlice({
     },
 });
 
-export default SearchSlice.reducer;
+export default StaffSearchSlice.reducer;

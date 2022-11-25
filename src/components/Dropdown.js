@@ -30,7 +30,7 @@ const Dropdown = memo(() => {
 
     /** 리덕스 관련 초기화 */
     const dispatch = useDispatch();
-    const { data, loading, error } = useSelector((state) => state.SearchSlice);
+    const { data, loading, error } = useSelector((state) => state.StaffSearchSlice);
     console.log(data);
 
     // // 이 컴포넌트가 화면에 마운트 되었는지를 확인하기 위한 hook

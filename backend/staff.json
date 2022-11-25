@@ -1,0 +1,10 @@
+{
+  "staff": [
+      {
+        "id":1,
+        "name": "오태원",
+        "medicalSubject": "간암",
+        "department": "간암최외과"
+      }
+  ]
+}

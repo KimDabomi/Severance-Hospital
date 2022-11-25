@@ -42,7 +42,7 @@ const Search = memo(() => {
 
     /** 리덕스 관련 초기화 */
     const dispatch = useDispatch();
-    const { data, loading, error } = useSelector((state) => state.SearchSlice);
+    const { data, loading, error } = useSelector((state) => state.StaffSearchSlice);
     console.log(data);
 
     /** 최초 마운트시 리덕스를 통해 목록을 조회한다. */
