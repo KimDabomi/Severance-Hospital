@@ -20,9 +20,9 @@ import DrugSearch from './pages/DrugSearch/DrugSearch';
 function App() {
   return (
     <div>
-      {/* <Link to="main_page"></Link> */}
+      <Link to="main_page"></Link>
       <Routes>
-        {/* <Route path="/" exapt={true} element={<MainPage />} /> */}
+        <Route path="/" exapt={true} element={<MainPage />} />
 
         {/* 고객의소리 페이지 라우팅*/}
         <Route path='/login' element={<Login />} />
