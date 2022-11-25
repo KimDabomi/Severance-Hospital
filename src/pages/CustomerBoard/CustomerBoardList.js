@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getList, deleteItem } from '../../slices/CustomerBoardSlice';
 import { useQueryString } from '../../hooks/useQueryString';
 
-import Header from '../../components/Header';
+import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
 import CustomerBoardHeader from './CustomerHeader';
 import { Pagination } from '@mui/material';

@@ -10,7 +10,8 @@ import React,{memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link,Routes,Route } from 'react-router-dom';
 import styled from 'styled-components';
-import loginImg from '../assets/img/login.png';
+import loginImg from '../assets/img/logo@2x.png';
+
 import JoinAccept from './JoinAccept';
 import LoginFooter from './LoginFooter';
 import localImg from '../assets/img/ico-login1@2x.png';

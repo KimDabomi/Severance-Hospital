@@ -9,7 +9,7 @@ import React,{memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import loginImg from '../assets/img/login.png';
+import loginImg from '../assets/img/logo@2x.png';
 import LoginFooter from './LoginFooter';
 import naver from '../assets/img/ico-sns-naver@2x.png';
 import kakao from '../assets/img/ico-sns-kakao@2x.png';

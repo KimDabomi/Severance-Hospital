@@ -18,7 +18,7 @@ import dayjs from 'dayjs';
 
 import styled from 'styled-components';
 import CustomerBoardHeader from './CustomerHeader';
-import Header from '../../components/Header';
+import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
 
 const CustomerBoardView = memo(() => {
