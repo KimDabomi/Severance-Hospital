@@ -1,9 +1,16 @@
+/**
+ * @ File Name: Search.js
+ * @ Author: 오태원 (daxxx2030@gail.com)
+ * @ Last Update: 2022-11-25 15:00
+ * @ Description: 의료진 찾기 검색창
+ */
+
 import React, { memo, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getStaffList } from '../slices/SearchSlice';
+import { getStaffList } from '../slices/StaffSearchSlice';
 
 import { useQueryString } from '../hooks/useQueryString';
 

@@ -1,7 +1,14 @@
+/**
+ * @ File Name: Dropdown.js
+ * @ Author: 오태원 (daxxx2030@gail.com)
+ * @ Last Update: 2022-11-25 15:00
+ * @ Description: 의료진 찾기 dropdown창
+ */
+
 import React, { memo, useState, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
-import { getStaffList, getItem } from '../slices/SearchSlice';
+import { getStaffList, getItem } from '../slices/StaffSearchSlice';
 import useMountedRef from '../hooks/useMountedRef';
 import styled from 'styled-components';
 
