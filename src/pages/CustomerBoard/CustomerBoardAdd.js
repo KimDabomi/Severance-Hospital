@@ -200,7 +200,7 @@ const CustomerBoardAdd = memo(() => {
     const regex = RegexHelper.getInstance();
 
     try{
-      regex.check(document.querySelector('#agree'),'개인정보 수집·이용에 동의하지 않을 경우 접수 불가합니다.')
+      // regex.check(document.querySelector('#agree'),'개인정보 수집·이용에 동의하지 않을 경우 접수 불가합니다.')
       regex.value(document.querySelector('#name'),'이름을 입력해주세요.')
       regex.value(document.querySelector('#tel2'),'연락처를 입력해주세요.')
       regex.value(document.querySelector('#tel3'),'연락처를 입력해주세요.')

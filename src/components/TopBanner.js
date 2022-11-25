@@ -15,6 +15,7 @@ const TopBannerSection = styled.section`
   background-color: #0054d1;
   display: flex;
   justify-content: center;
+  letter-spacing: 0;
 
   .topBannerContent {
     width: 1280px;
@@ -40,7 +41,7 @@ const TopBannerSection = styled.section`
         width: 52px;
         height: 52px;
         margin-right: 15px;
-        background: url(./assets/img/ico-tel-yellow@2x.png) no-repeat center / cover;
+        background: url(./img/ico-tel-yellow@2x.png) no-repeat center / cover;
       }
 
       .title {
@@ -75,7 +76,7 @@ const TopBannerSection = styled.section`
         width: 52px;
         height: 52px;
         margin-right: 15px;
-        background: url(./assets/img/ico-tel-primary@2x.png) no-repeat center / cover;
+        background: url(./img/ico-tel-primary@2x.png) no-repeat center / cover;
       }
 
       .title {
@@ -112,7 +113,7 @@ const TopBannerSection = styled.section`
       }
 
       .topBannerCloseCheckbox[id="close"]:checked + label::before {
-        background: white url(./assets/img/ico-checkbox-checked.png) no-repeat 45% center;
+        background: white url(./img/ico-checkbox-checked.png) no-repeat 45% center;
         background-size: 13px 10px;
       }
 
@@ -136,7 +137,7 @@ const TopBannerSection = styled.section`
           display: block;
           width: 26px;
           height: 26px;
-          background: url(./assets/img/ico-close-circle@2x.png) no-repeat center / cover;
+          background: url(./img/ico-close-circle@2x.png) no-repeat center / cover;
         }
       }
     }
