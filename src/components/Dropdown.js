@@ -3,6 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { getStaffList, getItem } from '../slices/SearchSlice';
 import useMountedRef from '../hooks/useMountedRef';
+import styled from 'styled-components';
+
+const StaffDrop = styled.div`
+    /* width: 300px; */
+
+    .dropBox {
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        margin-top: 3px;
+        display: inline-block;
+        font-size: 16px;
+        padding: 6.5px 40px 8px 15px;
+    }
+    
+`;
 
 const Dropdown = memo(() => {
 
@@ -11,8 +26,13 @@ const Dropdown = memo(() => {
     const { data, loading, error } = useSelector((state) => state.SearchSlice);
     console.log(data);
 
-    // 이 컴포넌트가 화면에 마운트 되었는지를 확인하기 위한 hook
-    const mountedRef = useMountedRef();
+    // // 이 컴포넌트가 화면에 마운트 되었는지를 확인하기 위한 hook
+    // const mountedRef = useMountedRef();
+
+    // // 각 드롭다운의 선택 상태를 저장하기 위한 상태변수
+    // const [state, setState] = useState({
+    //     department: ''
+    // });
 
     /** 드롭다운 선택 변경시 호출되는 이벤트 */
     const onSelectChange = useCallback( (e) => {
@@ -32,10 +52,10 @@ const Dropdown = memo(() => {
 
         // 기존의 상태값을 그대로 복사한 상태에서
         // 드롭다운의 name속성과 일치하는 key에 대한 value를 수정
-        // const newState = {...department, [key]: value};
+        // const newState = {...state, [key]: value};
 
         // // 상태값 갱신
-        // setDepartment(newState);
+        // setState(newState);
 
         // // 갱신된 상태값 확인
         // console.log(newState);
@@ -47,9 +67,9 @@ const Dropdown = memo(() => {
 
 
     return (
-        <>
+        <StaffDrop>
         {/* 평소에는 안 뜨다가 선택된 데이터가 떠야함... */}
-            <select name='department' onChange={onSelectChange} className='' >
+            <select name='department' onChange={onSelectChange} className='dropBox' >
                 <option value="">부서를 선택해 주세요</option>
                 {data && data.map((v, i) => {
                     return (
@@ -65,15 +85,11 @@ const Dropdown = memo(() => {
                 return(                
                 <ul>
                     <li>
-                        {/* {id}
-                        {name}
-                        {department}
-                        {medicalSubject} */}
                     </li>
                 </ul>
                 );
             })}
-        </>
+        </StaffDrop>
     );
 });
 

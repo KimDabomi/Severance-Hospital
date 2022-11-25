@@ -8,35 +8,20 @@ import { getStaffList } from '../slices/SearchSlice';
 import { useQueryString } from '../hooks/useQueryString';
 
 // 입력 컨트롤들을 포함하는 박스
-const ControlContainer = styled.form`
-    position: sticky;
-    top: 0;
-    background-color: #fff;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
-
+const ControlContainer = styled.div`
+    
     .controll {
-        margin-right: 5px;
-        display: inline-block;
+        margin-right: 10px;
         font-size: 16px;
-        padding: 7px 10px 5px 10px;
+        padding: 8px 15px;
         border: 1px solid #ccc;
     }
 
     .clickable {
-        background-color: #fff;
-        color: #000;
+        background-color: #0094fb;
+        color: #fff;
         text-decoration: none;
         cursor: pointer;
-
-        &:hover {
-            background-color: #06f2;
-        }
-
-        &:active {
-            transform: scale(0.9, 0.9);
-        }
     }
 `;
 
@@ -75,8 +60,8 @@ const Search = memo(() => {
     return (
         <>
             <ControlContainer >
-                <input type='text' name='keyword' className='controll' onSubmit={onSearchSubmit} />
-                <button type='submit' className='controll clickable' >검색</button>
+                <input type='text' name='keyword' className='controll' onSubmit={onSearchSubmit} placeholder='의료진 또는 질병명을 입력해주세요' />
+                <button type='submit' className='controll clickable' ><i>검색(아이콘 자리)</i></button>
             </ControlContainer>
 
             {
