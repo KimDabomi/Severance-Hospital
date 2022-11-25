@@ -1,3 +1,0 @@
-# Severance-Hospital
-
-Severance Hospital
