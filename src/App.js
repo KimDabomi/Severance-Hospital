@@ -33,7 +33,7 @@ function App() {
         <Route path='/customer.do' element={<CustomerBoardList />}/>
         <Route path="/suggest.do" element={<CustomerBoardAdd/>}/>
         <Route path="/suggest.do/id" element={<CustomerBoardView/>}/>
-
+        <Route path="/staff" element={<StaffSearch/>}/>
          {/* 의약품검색 페이지 라우팅 */}
          <Route path='/drug.do/*' element={<DrugSearch />}/>
       </Routes>
