@@ -9,14 +9,6 @@
 import React from "react";
 import styled from "styled-components";
 
-/** SNS 아이콘 이미지 */
-import npImg from "../assets/img/ico-sns-gray-np@2x.png";
-import nbImg from "../assets/img/ico-sns-gray-nb@2x.png";
-import ytImg from "../assets/img/ico-sns-gray-yt@2x.png";
-import igImg from "../assets/img/ico-sns-gray-ig@2x.png";
-import fbImg from "../assets/img/ico-sns-gray-fb@2x.png";
-import ttImg from "../assets/img/ico-sns-gray-tt@2x.png";
-
 /** 푸터 스타일 */
 const FooterContainer = styled.footer`
   width: 100%;
@@ -48,45 +40,45 @@ const FooterContainer = styled.footer`
         }
 
         .npIcon {
-          background: url(./assets/img/ico-sns-gray-np@2x.png) no-repeat center /cover;
+          background: url(./img/ico-sns-gray-np@2x.png) no-repeat center /cover;
           transition: 0.2s ease-in-out;
           &:hover {
-            background: url(./assets/img/ico-sns-np@2x.png) no-repeat center /cover;
+            background: url(./img/ico-sns-np@2x.png) no-repeat center /cover;
           }
         }
         .nbIcon {
-          background: url(./assets/img/ico-sns-gray-nb@2x.png) no-repeat center /cover;
+          background: url(./img/ico-sns-gray-nb@2x.png) no-repeat center /cover;
           transition: 0.2s ease-in-out;
           &:hover {
-            background: url(./assets/img/ico-sns-nb@2x.png) no-repeat center /cover;
+            background: url(./img/ico-sns-nb@2x.png) no-repeat center /cover;
           }
         }
         .ytIcon {
-          background: url(./assets/img/ico-sns-gray-yt@2x.png) no-repeat center /cover;
+          background: url(./img/ico-sns-gray-yt@2x.png) no-repeat center /cover;
           transition: 0.2s ease-in-out;
           &:hover {
-            background: url(./assets/img/ico-sns-yt@2x.png) no-repeat center /cover;
+            background: url(./img/ico-sns-yt@2x.png) no-repeat center /cover;
           }
         }
         .igIcon {
-          background: url(./assets/img/ico-sns-gray-ig@2x.png) no-repeat center /cover;
+          background: url(./img/ico-sns-gray-ig@2x.png) no-repeat center /cover;
           transition: 0.2s ease-in-out;
           &:hover {
-            background: url(./assets/img/ico-sns-ig@2x.png) no-repeat center /cover;
+            background: url(./img/ico-sns-ig@2x.png) no-repeat center /cover;
           }
         }
         .fbIcon {
-          background: url(./assets/img/ico-sns-gray-fb@2x.png) no-repeat center /cover;
+          background: url(./img/ico-sns-gray-fb@2x.png) no-repeat center /cover;
           transition: 0.2s ease-in-out;
           &:hover {
-            background: url(./assets/img/ico-sns-fb@2x.png) no-repeat center /cover;
+            background: url(./img/ico-sns-fb@2x.png) no-repeat center /cover;
           }
         }
         .ttIcon {
-          background: url(./assets/img/ico-sns-gray-tt@2x.png) no-repeat center /cover;
+          background: url(./img/ico-sns-gray-tt@2x.png) no-repeat center /cover;
           transition: 0.2s ease-in-out;
           &:hover {
-            background: url(./assets/img/ico-sns-tt@2x.png) no-repeat center /cover;
+            background: url(./img/ico-sns-tt@2x.png) no-repeat center /cover;
           }
         }
       }

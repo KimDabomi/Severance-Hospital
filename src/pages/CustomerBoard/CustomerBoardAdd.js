@@ -13,7 +13,7 @@ import RegexHelper from '../../helper/RegexHelper';
 import dayjs from 'dayjs';
 
 import styled from 'styled-components';
-import Header from '../../components/Header';
+import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
 
 import CustomerBoardHeader from './CustomerHeader';

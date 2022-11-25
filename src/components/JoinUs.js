@@ -9,7 +9,7 @@ import React, {memo,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import loginImg from '../assets/img/login.png';
+import loginImg from '../assets/img/logo@2x.png';
 import LoginFooter from './LoginFooter';
 
 
