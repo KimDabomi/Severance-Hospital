@@ -7,13 +7,19 @@
 
 /** import */
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 /** 컴포넌트 참조 */
+// 헤더, 푸터
 import MainPageHeader from "../../components/MainPageHeader";
 import Footer from "../../components/Footer";
+// 상단 배너
 import TopBanner from "../../components/TopBanner";
+// 인포슬라이더캐러셀
+import InfoSliderCarousel from "../../components/InfoSliderCarousel";
+// 메인슬라이더캐러셀
+import MainSliderCarousel from "../../components/MainSliderCarousel";
 
 /** 이미지 참조 */
 // 메인 슬라이드
@@ -29,9 +35,6 @@ import ShortcutRecervation from "../../assets/img/ico-shortcut-reservation@2x.pn
 import Cheerup from "../../assets/img/main-cheerup.jpg";
 import Recruitment from "../../assets/img/img-recruitment.png";
 
-/** 슬라이더 */
-import InfoSliderCarousel from "../../components/InfoSliderCarousel";
-
 /** 메인 스타일 */
 const Main = styled.main`
   width: 100%;
@@ -42,40 +45,40 @@ const Main = styled.main`
 `;
 
 /** 이미지 슬라이드 스타일 */
-const SlideSection = styled.section`
-  width: 100%;
-  position: relative;
+// const SlideSection = styled.section`
+//   width: 100%;
+//   position: relative;
 
-  img {
-    display: block;
-    max-width: 1920px;
-    height: auto;
-    margin: 0 auto;
-  }
+//   img {
+//     display: block;
+//     max-width: 1920px;
+//     height: auto;
+//     margin: 0 auto;
+//   }
 
-  article {
-    position: absolute;
-    top: 50%;
-    left: 320px;
-    transform: translate(0, -50%);
+//   article {
+//     position: absolute;
+//     top: 50%;
+//     left: 320px;
+//     transform: translate(0, -50%);
 
-    .slide_title {
-      font-size: 66px;
-      line-height: 72px;
-      font-family: "NanumSquare";
-      color: white;
-    }
+//     .slide_title {
+//       font-size: 66px;
+//       line-height: 72px;
+//       font-family: "NanumSquare";
+//       color: white;
+//     }
 
-    .slide_text {
-      font-size: 24px;
-      line-height: 32px;
-      font-family: "NanumSquare";
-      color: white;
-      display: block;
-      margin-top: 15px;
-    }
-  }
-`;
+//     .slide_text {
+//       font-size: 24px;
+//       line-height: 32px;
+//       font-family: "NanumSquare";
+//       color: white;
+//       display: block;
+//       margin-top: 15px;
+//     }
+//   }
+// `;
 
 /** 카테고리별 병원 바로가기 스타일 */
 const HospitalSection = styled.section`
@@ -368,7 +371,7 @@ const MainPage = () => {
       <MainPageHeader />
 
       <Main>
-        <SlideSection>
+        {/* <SlideSection>
           <img src={MainImage} alt="main_img" />
           <article>
             <span className="slide_title">
@@ -376,7 +379,8 @@ const MainPage = () => {
             </span>
             <span className="slide_text">질병 치료를 넘어 환자의 마음까지 치유하겠습니다.</span>
           </article>
-        </SlideSection>
+        </SlideSection> */}
+        <MainSliderCarousel />
 
         <HospitalSection>
           <div className="exteralLinks">

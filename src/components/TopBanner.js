@@ -5,14 +5,13 @@
  * @ Description: 메인 페이지 top banner
  */
 
+/** import */
 import React, { memo } from "react";
 import styled from "styled-components";
 
 /** material ui */
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-
 // 체크박스
 import CheckBox from "./CheckBox";
 
