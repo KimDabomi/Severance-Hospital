@@ -407,7 +407,7 @@ const MainPage = () => {
           <div className="shortcutSlider">
             <ul>
               <li>
-                <Link to="/">
+                <Link to="/staff">
                   <img src={ShortcutExpert} />
                   <div className="textBox">
                     <strong>의료진 찾기</strong>
