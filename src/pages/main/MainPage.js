@@ -29,20 +29,29 @@ import ShortcutRecervation from "../../assets/img/ico-shortcut-reservation@2x.pn
 import Cheerup from "../../assets/img/main-cheerup.jpg";
 import Recruitment from "../../assets/img/img-recruitment.png";
 
+/** 슬라이더 */
+import InfoSliderCarousel from "../../components/InfoSliderCarousel";
+
 /** 메인 스타일 */
 const Main = styled.main`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 `;
 
 /** 이미지 슬라이드 스타일 */
 const SlideSection = styled.section`
-  width: 1920px;
-  height: 500px;
+  width: 100%;
   position: relative;
+
+  img {
+    display: block;
+    max-width: 1920px;
+    height: auto;
+    margin: 0 auto;
+  }
 
   article {
     position: absolute;
@@ -464,13 +473,13 @@ const MainPage = () => {
             <dl style={{ backgroundImage: "url(./img/bg-sympathy-story.jpg)" }}>
               <dt>공감Story</dt>
               <dd>
-                <div></div>
+                <InfoSliderCarousel category="의료진 이야기" />
               </dd>
             </dl>
             <dl style={{ backgroundImage: "url(./img/bg-health-info.jpg)" }}>
               <dt>건강정보</dt>
               <dd>
-                <div></div>
+                <InfoSliderCarousel category="질환/신체부위별 찾기" />
               </dd>
             </dl>
             <a href="https://yuhs.severance.healthcare/yuhs/history/museum/cheerupsev.do">

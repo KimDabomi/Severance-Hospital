@@ -8,6 +8,14 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
+/** material ui */
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
+// 체크박스
+import CheckBox from "./CheckBox";
+
 /** 상단 배너 스타일 */
 const TopBannerSection = styled.section`
   width: 100%;
@@ -16,6 +24,7 @@ const TopBannerSection = styled.section`
   display: flex;
   justify-content: center;
   letter-spacing: 0;
+  white-space: nowrap;
 
   .topBannerContent {
     width: 1280px;
@@ -97,7 +106,7 @@ const TopBannerSection = styled.section`
       display: flex;
       align-items: center;
       margin-left: auto;
-
+/* 
       .topBannerCloseCheckbox[type="checkbox"] {
         display: none;
       }
@@ -115,7 +124,7 @@ const TopBannerSection = styled.section`
       .topBannerCloseCheckbox[id="close"]:checked + label::before {
         background: white url(./img/ico-checkbox-checked.png) no-repeat 45% center;
         background-size: 13px 10px;
-      }
+      } */
 
       .closeText {
         font-size: 16px;
@@ -168,9 +177,12 @@ const TopBanner = memo(() => {
         </article>
 
         <div className="closeBox">
-          <input type="checkbox" id="close" className="topBannerCloseCheckbox" />
+          {/* <input type="checkbox" id="close" className="topBannerCloseCheckbox" />
           <label htmlFor="close"></label>
-          <span className="closeText">오늘하루 열지않기</span>
+          <span className="closeText">오늘하루 열지않기</span> */}
+          <FormGroup>
+            <FormControlLabel control={<CheckBox />} label="오늘하루 열지않기" />
+          </FormGroup>
           <button type="button">
             <i className="topBannerCloseIcon" />
           </button>
