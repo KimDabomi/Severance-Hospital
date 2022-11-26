@@ -13,7 +13,7 @@ import styled from "styled-components";
 // slick
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick-theme.css";
 
 /** 슬라이드 전체 박스 스타일 */
 const SlideContainer = styled.div`
@@ -73,49 +73,49 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-// 뒤로가기 버튼 스타일
-const PrevButton = styled.div`
-  width: 28px;
-  height: 28px;
+// // 앞으로가기 버튼 스타일
+// const NextButton = styled.div`
+//   width: 28px;
+//   height: 28px;
 
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translate(-150%);
-  z-index: 100;
+//   position: absolute;
+//   bottom: 20px;
+//   left: 50%;
+//   transform: translate(-50%);
+//   z-index: 100;
 
-  background: #fff url(./img/ico-chevron-left-sm-lightgray@2x.png) no-repeat center / cover;
-  background-size: 8px 15px;
+//   background: #fff url(./img/ico-chevron-right-sm-lightgray@2x.png) no-repeat center / cover;
+//   background-size: 8px 15px;
 
-  box-sizing: border-box;
-  border: 1px solid #eee;
+//   border: 1px solid #eee;
+//   box-sizing: border-box;
 
-  overflow: hidden;
+//   overflow: hidden;
 
-  cursor: pointer;
-`;
+//   cursor: pointer;
+// `;
 
-// 앞으로가기 버튼 스타일
-const NextButton = styled.div`
-  width: 28px;
-  height: 28px;
+// // 뒤로가기 버튼 스타일
+// const PrevButton = styled.div`
+//   width: 28px;
+//   height: 28px;
 
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translate(-50%);
-  z-index: 100;
+//   position: absolute;
+//   bottom: 20px;
+//   left: 50%;
+//   transform: translate(-150%);
+//   z-index: 100;
 
-  background: #fff url(./img/ico-chevron-right-sm-lightgray@2x.png) no-repeat center / cover;
-  background-size: 8px 15px;
+//   background: #fff url(./img/ico-chevron-left-sm-lightgray@2x.png) no-repeat center / cover;
+//   background-size: 8px 15px;
 
-  border: 1px solid #eee;
-  box-sizing: border-box;
+//   box-sizing: border-box;
+//   border: 1px solid #eee;
 
-  overflow: hidden;
+//   overflow: hidden;
 
-  cursor: pointer;
-`;
+//   cursor: pointer;
+// `;
 
 // 더보기 버튼 스타일
 const PlusButton = styled.div`
@@ -145,7 +145,71 @@ const PlusButton = styled.div`
   }
 `;
 
-function InfoSliderCarousel({category, title, text}) {
+// 앞으로가기 버튼 스타일
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        width: "28px",
+        height: "28px",
+
+        position: "absolute",
+        top: "100%",
+        left: "50%",
+        transform: "translate(-50%, -48px)",
+        zIndex: "100",
+
+        background: "#fff url(./img/ico-chevron-right-sm-lightgray@2x.png) no-repeat center / cover",
+        backgroundSize: "8px 15px",
+
+        border: "1px solid #eee",
+        boxSizing: "border-box",
+
+        overflow: "hidden",
+
+        cursor: "pointer"
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+// 뒤로가기 버튼 스타일
+function PrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        width: "28px",
+        height: "28px",
+
+        position: "absolute",
+        top: "100%",
+        left: "50%",
+        transform: "translate(-150%, -48px)",
+        zIndex: "100",
+
+        background: "#fff url(./img/ico-chevron-left-sm-lightgray@2x.png) no-repeat center / cover",
+        backgroundSize: "8px 15px",
+
+        border: "1px solid #eee",
+        boxSizing: "border-box",
+
+        overflow: "hidden",
+
+        cursor: "pointer"
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function InfoSliderCarousel({ category, title, text }) {
   // 슬라이드 설정
   const settings = {
     infinite: true,
@@ -155,8 +219,8 @@ function InfoSliderCarousel({category, title, text}) {
     autoplay: true,
     autoplaySpeed: 3000,
     dots: false,
-    nextArrow: <PrevButton />,
-    prevArrow: <NextButton />
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
   };
 
   return (

@@ -21,8 +21,7 @@ import MainSlideImageFirst from "../assets/img/img-visual-patient1.jpg";
 import MainSlideImageSecond from "../assets/img/img-home-visual_221117.png";
 
 /** 슬라이드 전체 박스 스타일 */
-const SlideContainer = styled.div`
-`;
+const SlideContainer = styled.div``;
 
 // 슬라이드 영역 스타일
 const StyledSlider = styled(Slider)`
@@ -39,6 +38,48 @@ const StyledSlider = styled(Slider)`
   .slick-slide div {
     //슬라이더  컨텐츠
     cursor: pointer;
+  }
+
+  .slick-dots {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .slick-dots li button::after {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .slick-dots li button::before,
+  .slick-dots li.slick-active button::before {
+    display: none;
+  }
+
+  .slick-dots li button {
+    width: 0;
+    height: 0;
+    margin: 0;
+  }
+
+  .slick-dots li {
+    width: 12px;
+    height: 12px;
+  }
+
+  .slick-dots li.slick-active button::after {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: #ffd553;
   }
 `;
 

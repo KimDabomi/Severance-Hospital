@@ -23,7 +23,7 @@ import MainSliderCarousel from "../../components/MainSliderCarousel";
 
 /** 이미지 참조 */
 // 메인 슬라이드
-import MainImage from "../../assets/img/img-visual-patient1.jpg";
+// import MainImage from "../../assets/img/img-visual-patient1.jpg";
 // 병원 바로가기 아이콘
 import ExternalLink from "../../assets/img/ico-external-link-white@2x.png";
 // 바로가기 메뉴 아이콘
