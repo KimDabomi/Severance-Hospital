@@ -5,10 +5,14 @@
  * @ Description: material ui 체크박스
  */
 
+/** import */
 import * as React from "react";
+
+/** material ui */
 import { styled } from "@mui/material/styles";
 import Checkbox from "@mui/material/Checkbox";
 
+/** 버튼 스타일 */
 const BpIcon = styled("span")(({ theme }) => ({
   width: 20,
   height: 20,
@@ -19,12 +23,13 @@ const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: 0
 }));
 
+/** 버튼 체크 스타일 */
 const BpCheckedIcon = styled(BpIcon)({
   background: "white url(./img/ico-checkbox-checked.png) no-repeat 45% center",
   backgroundSize: "13px 10px"
 });
 
-// Inspired by blueprintjs
+/** 버튼 스타일 적용 */
 function BpCheckbox(props) {
   return (
     <Checkbox
@@ -41,6 +46,7 @@ function BpCheckbox(props) {
   );
 }
 
+/** 버튼 출력 */
 export default function CustomizedCheckbox() {
   return (
     <div>
