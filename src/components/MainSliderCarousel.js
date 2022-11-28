@@ -45,6 +45,7 @@ const StyledSlider = styled(Slider)`
     bottom: 20px;
   }
 
+  /* 비활성화된 동그라미 */
   .slick-dots li button::after {
     content: "";
     display: block;
@@ -62,21 +63,31 @@ const StyledSlider = styled(Slider)`
     display: none;
   }
 
+  /* 동그라미 버튼 */
   .slick-dots li button {
-    width: 0;
-    height: 0;
+    width: 12px;
+    height: 12px;
     margin: 0;
   }
 
+  /* 동그라미 리스트 박스 */
   .slick-dots li {
     width: 12px;
     height: 12px;
   }
 
+  /* 활성화된 동그라미 리스트 박스 */
+  .slick-dots li.slick-active{
+    width: 30px;
+    height: 12px;
+    border-radius: 6px;
+  }
+
+  /* 활성화된 동그라미 */
   .slick-dots li.slick-active button::after {
     content: "";
     display: block;
-    width: 12px;
+    width: 30px;
     height: 12px;
     border-radius: 6px;
     background-color: #ffd553;
@@ -123,11 +134,12 @@ function InfoSliderCarousel() {
   // 슬라이드 설정
   const settings = {
     infinite: true,
-    speed: 500,
+    fade: true,
+    speed: 1000,
     slideToShow: 1,
     slideToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     dots: true
   };
 
