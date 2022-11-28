@@ -36,13 +36,14 @@ const StyledSlider = styled(Slider)`
     display: none;
   }
 
-  .slick-slide div {
-    //슬라이더  컨텐츠
+  /* .slick-slide div {
     cursor: pointer;
-  }
+  } */
 
-  //
+  // 슬라이드 컨텐츠 박스
   .postBox {
+    width: 260px;
+    height: 173px;
     a {
       display: block;
       width: 260px;
@@ -73,7 +74,7 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-// // 앞으로가기 버튼 스타일
+// 앞으로가기 버튼 스타일
 // const NextButton = styled.div`
 //   width: 28px;
 //   height: 28px;

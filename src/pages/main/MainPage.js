@@ -20,6 +20,8 @@ import TopBanner from "../../components/TopBanner";
 import InfoSliderCarousel from "../../components/InfoSliderCarousel";
 // 메인슬라이더캐러셀
 import MainSliderCarousel from "../../components/MainSliderCarousel";
+// 뉴스스라이더캐러셀
+import NewsSliderCarousel from "../../components/NewsSliderCarousel";
 
 /** 이미지 참조 */
 // 메인 슬라이드
@@ -227,7 +229,7 @@ const HospitalSection = styled.section`
       }
     }
 
-    a {
+    .infoSliderShortcut {
       width: 297px;
       height: 360px;
 
@@ -311,46 +313,6 @@ const NewsSection = styled.section`
             clear: both;
           }
         }
-      }
-    }
-
-    .newsBox {
-      width: 297px;
-      height: 211px;
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 30px 30px 28px;
-      margin-right: 30px;
-      box-sizing: border-box;
-      position: relative;
-
-      .newsCategory {
-        display: block;
-        position: absolute;
-        top: -16px;
-        left: 30px;
-        width: 78px;
-        height: 40px;
-        padding: 0 10px;
-        box-sizing: border-box;
-        background-color: #ac47d1;
-        font-size: 14px;
-        text-align: center;
-        line-height: 40px;
-        color: white;
-        white-space: nowrap;
-      }
-
-      .newsContentTitle {
-        font-size: 18px;
-        line-height: 28px;
-      }
-
-      .newsDate {
-        font-size: 16px;
-        line-height: 16px;
       }
     }
   }
@@ -488,10 +450,10 @@ const MainPage = () => {
                 <InfoSliderCarousel category="질환/신체부위별 찾기" />
               </dd>
             </dl>
-            <a href="https://yuhs.severance.healthcare/yuhs/history/museum/cheerupsev.do">
+            <a href="https://yuhs.severance.healthcare/yuhs/history/museum/cheerupsev.do" className="infoSliderShortcut">
               <img src={Cheerup} alt="박기호 사진전 힘내요, 세브란스 세브란스 코로나 병동의 기록" />
             </a>
-            <a href="https://recruit.severance.healthcare/recruit/recruit.do">
+            <a href="https://recruit.severance.healthcare/recruit/recruit.do" className="infoSliderShortcut">
               <img src={Recruitment} alt="2023년 세브란스병원 전공의 (인턴 및 레지던트 1년차) 모집" />
             </a>
           </div>
@@ -511,16 +473,9 @@ const MainPage = () => {
                 <button type="button" className="right_btn" />
               </div>
             </article>
-            <article className="newsBox">
-              <span className="newsCategory">언론 보도</span>
-              <strong className="newsContentTitle">[뉴시스] 연세의대, 양성사업단 발족…글로벌 의사과학자 키운다</strong>
-              <span className="newsDate">2022-11-17</span>
-            </article>
-            <article className="newsBox">
-              <span className="newsCategory">언론 보도</span>
-              <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
-              <span className="newsDate">2022-11-15</span>
-            </article>
+
+            <NewsSliderCarousel />
+
           </div>
         </NewsSection>
 
