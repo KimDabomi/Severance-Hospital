@@ -18,53 +18,61 @@ import "slick-carousel/slick/slick-theme.css";
 /** 슬라이드 전체 박스 스타일 */
 // 슬라이드 영역 스타일
 const StyledSlider = styled(Slider)`
-    width: 1280px;
+  width: 297px;
+  height: 211px;
+  overflow: hidden;
+  position: relative;
+
+  .newsBox {
+    width: 297px;
     height: 211px;
-    margin: 0 auto;
+    
+    background-color: white;
+
     display: flex;
-    padding-top: 20px;
-    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    padding: 30px 30px 28px;
+    margin-right: 30px;
+    box-sizing: border-box;
+
     position: relative;
 
-    .newsBox {
-      width: 297px;
-      height: 211px;
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 30px 30px 28px;
-      margin-right: 30px;
+    .newsCategory {
+      width: 78px;
+      height: 40px;
+      display: block;
+
+      position: absolute;
+      top: -10px;
+      left: 30px;
+      z-index: 10000;
+      
+      padding: 0 10px;
       box-sizing: border-box;
-      position: relative;
 
-      .newsCategory {
-        display: block;
-        position: absolute;
-        top: -16px;
-        left: 30px;
-        width: 78px;
-        height: 40px;
-        padding: 0 10px;
-        box-sizing: border-box;
-        background-color: #ac47d1;
-        font-size: 14px;
-        text-align: center;
-        line-height: 40px;
-        color: white;
-        white-space: nowrap;
-      }
+      background-color: #ac47d1;
+      color: white;
 
-      .newsContentTitle {
-        font-size: 18px;
-        line-height: 28px;
-      }
-
-      .newsDate {
-        font-size: 16px;
-        line-height: 16px;
-      }
+      font-size: 14px;
+      line-height: 40px;
+      text-align: center;
+      
+      white-space: nowrap;
+      
     }
+
+    .newsContentTitle {
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .newsDate {
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
 
   .slick-prev::before,
   .slick-next::before {
@@ -150,33 +158,33 @@ function InfoSliderCarousel({ category, title, text }) {
     slideToShow: 3,
     slideToScroll: 1,
     dots: false,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
+    // nextArrow: <NextArrow />,
+    // prevArrow: <PrevArrow />
   };
 
   return (
-      <StyledSlider {...settings}>
-          <article className="newsBox">
-            <span className="newsCategory">언론 보도</span>
-            <strong className="newsContentTitle">[뉴시스] 연세의대, 양성사업단 발족…글로벌 의사과학자 키운다</strong>
-            <span className="newsDate">2022-11-17</span>
-          </article>
-          <article className="newsBox">
-            <span className="newsCategory">언론 보도</span>
-            <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
-            <span className="newsDate">2022-11-15</span>
-          </article>
-          <article className="newsBox">
-            <span className="newsCategory">언론 보도</span>
-            <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
-            <span className="newsDate">2022-11-15</span>
-          </article>
-          <article className="newsBox">
-            <span className="newsCategory">언론 보도</span>
-            <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
-            <span className="newsDate">2022-11-15</span>
-          </article>
-      </StyledSlider>
+    <StyledSlider {...settings}>
+      <article className="newsBox">
+        <span className="newsCategory">언론 보도</span>
+        <strong className="newsContentTitle">[뉴시스] 연세의대, 양성사업단 발족…글로벌 의사과학자 키운다</strong>
+        <span className="newsDate">2022-11-17</span>
+      </article>
+      <article className="newsBox">
+        <span className="newsCategory">언론 보도</span>
+        <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
+        <span className="newsDate">2022-11-15</span>
+      </article>
+      <article className="newsBox">
+        <span className="newsCategory">언론 보도</span>
+        <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
+        <span className="newsDate">2022-11-15</span>
+      </article>
+      <article className="newsBox">
+        <span className="newsCategory">언론 보도</span>
+        <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
+        <span className="newsDate">2022-11-15</span>
+      </article>
+    </StyledSlider>
   );
 }
 
