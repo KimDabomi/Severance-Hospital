@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinAccept.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-11-25 15:00
+ * @ Last Update: 2022-11-28 17:00
  * @ Description: 약관동의 페이지
  */
 
@@ -12,69 +12,47 @@ import styled from 'styled-components';
 import LoginFooter from './LoginFooter';
 import Right from '../assets/img/ico-arrow-right-gray@2x.png';
 import loginImg from '../assets/img/logo@2x.png';
+import step01 from '../assets/img/ico-login-step1-on@2x.png';
+import step02 from '../assets/img/ico-login-step2-off@2x.png';
+import step03 from '../assets/img/ico-login-step3-off@2x.png';
+import step04 from '../assets/img/ico-login-step4-off@2x.png';
 
 
 
 const Container = styled.div`
-position: relative;
-  .nav {
-    width: 100%;
-    height: 100px;
-    border-bottom: 1px solid #eee;
-    padding: 40px 1.5% 0 2%;
-    box-sizing: border-box;
-
-    img {
-      width: 16%; 
-      height: 60%;
-      float: left; 
-      margin-right: 15%;
-    }
-
-    a {
-      font-size: 18px;
-      margin: 0 5% 0 0;
-      font-weight: bold;
-      &:last-child {
-        margin-right: 0;
-      }
-      &:hover {
-        color: rgb(0,148,251);
-      }
-    }
-  }
-  /* footer {
-    margin-top : 500px;
-    border-top: 1px solid black;
-    padding: 3% 10%;
-    box-sizing: border-box;
-    color: rgb(50,50,50);
     position: relative;
-    a {
-      font-size: 18px;
-      margin: 0 3% 3% 0;
-      color: rgb(20,20,20);
+    .nav {
+        width: 1280px;
+        height: 84px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+
+        ul {
+            display: flex;
+            li {
+                display: flex;
+                align-items: center;
+                a {
+                    text-align: center;
+                    font-size: 20px;
+                    padding: 0 33px;
+                    line-height: 84px;
+                    img {
+                        width: 200px;
+                        margin-right: 100px;
+                    }
+                }
+                &:nth-child(5) {
+                margin-left: 20px;
+                }
+                &:nth-child(6) {
+                margin-left: 20px;
+                }
+            }
+        }
     }
-    address {
-      margin: 50px 0 5px 0;
-    }
-    p {
-      font-size: 16px;
-      text-align: left;
-      margin: 0;
-      padding: 0;
-    }
-    button {
-      position: absolute;
-      right: 10%;
-      top: 25%;
-      background-color: white;
-      border: 1px solid #ddd;
-      padding: 0.8% 0.7%;
-      font-size: 16px;
-      border-radius: 4%;
-    }
-  } */
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -96,20 +74,32 @@ position: relative;
                     font-size: 16px;
                     float: left;
                     border: 1px solid #ccc;
-                    padding: 15px 44px;
+                    width: 20%;
+                    text-align: left;
+                    padding: 5px 0;
                     box-sizing: border-box;
-                    border-radius: 30px;   
+                    border-radius: 30px;
+                    img {
+                        margin: 5px 10px 5px 50px;
+                        float: left;
+                        width: 10%;
+                    }
+                    p {
+                        float: left;
+                        margin-top: 4px;
+                    }
                 }
                 &:first-child {
                     .box {
                         color: rgb(0,148,251);
                         border: 2px solid rgb(0,148,251);
-                    } 
+                    }
                 }
             }
-            img {
+            .right {
                 float: left;
-                margin: 5px 5%;
+                margin: 10px 2%;
+                height: 20px;
             }
         }
     }
@@ -218,6 +208,34 @@ position: relative;
         margin-left: 10px;
     }
   }
+  .checkBox {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+  }
+    .checkBox + label {
+      position: relative;
+      height: 20px;
+    }
+    .checkBox + label::before {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      /* border: 1px solid #aaa; */
+      vertical-align: middle;
+      border-radius: 0;
+      margin: -2px 5px 0 0;
+      background-color: #fff;
+      content: '';
+      border: 0;
+      border-radius: 50%;
+      background: #959595 url(./img/ico-checkbox-checked-white.png) no-repeat 45% center !important;
+      background-size: 11px 8px !important;
+    }
+    .checkBox:checked + label::before {
+      background-color: #0094fb !important;
+    }
 `;
 const JoinAccept = memo(() => {
 
@@ -226,12 +244,14 @@ const JoinAccept = memo(() => {
     <Container>
       <div>
         <div className='nav'>
-          <Link to='/login'><img src={loginImg} alt="통합로그인센터" /></Link>
-          <Link to='/login'>로그인</Link>
-          <Link to='/join_us'>회원가입</Link>
-          <Link to='/'>아이디/비밀번호 찾기</Link>
-          <Link to='/'>병원등록번호 조회</Link>
-          <Link to='/'>이용정책</Link>
+            <ul>
+                <li><Link to='/login'><img src={loginImg} alt="통합로그인센터" /></Link></li>
+                <li><Link to='/login'>로그인</Link></li>
+                <li><Link to='/join_way'>회원가입</Link></li>
+                <li><Link to='/'>아이디/비밀번호 찾기</Link></li>
+                <li><Link to='/'>병원등록번호 조회</Link></li>
+                <li><Link to='/'>이용정책</Link></li>
+            </ul>
         </div>
 
         <h1>회원가입</h1>
@@ -239,19 +259,19 @@ const JoinAccept = memo(() => {
             <div className="steps">
                 <ol>
                     <li>
-                        <div className="box">약관동의 하기</div>
+                        <div className="box"><img src={step01} alt='step01' /><p>약관동의 하기</p></div>
                     </li>      
-                    <img src={Right} alt='right' />
+                    <img src={Right} alt='right' className='right' />
                     <li>
-                        <div className="box">본인인증 하기</div>
+                        <div className="box"><img src={step02} alt='step02' /><p>본인인증 하기</p></div>
                     </li>
-                    <img src={Right} alt='right' />
+                    <img src={Right} alt='right' className='right' />
                     <li>
-                        <div className="box">정보입력 하기</div>
+                        <div className="box"><img src={step03} alt='step03' /><p>정보입력 하기</p></div>
                     </li>
-                    <img src={Right} alt='right' />
+                    <img src={Right} alt='right' className='right' />
                     <li>
-                        <div className="box">회원가입 완료</div>
+                        <div className="box"><img src={step04} alt='step04' /><p>회원가입 완료</p></div>
                     </li>
                 </ol>
             </div>
@@ -277,12 +297,12 @@ const JoinAccept = memo(() => {
                     {/* <legend class="sr-only">약관동의</legend> */}
                     <div class="agreement">
                         <div className="agree_all">
-                            <input type="checkbox" name="agree_all" id="agree_all" className="checkbox" />
+                            <input type="checkbox" name="agree_all" id="agree_all" className="checkBox" />
                             <label for="agree_all">약관 전체 동의</label>
                         </div>
                         <hr />
                         <div className="agree_title">
-                            <input className="agree_term" name="agree_term" type="checkbox" class="custom-control" value="Y" data-parsley-error-message="이용약관을 에 동의를 해야 회원가입 진행이 가능합니다." required data-parsley-class-handler=".agree_term" />
+                            <input type="checkbox" name="agree_term" id="agree_term" className="checkBox"  required />
                             <label for="agree_term"><span><strong>연세의료원 이용약관</strong>(필수)</span> </label>
                             {/* <a href="#policy1" class="d-down-sm js-layer-open"><span class="sr-only">연세의료원 이용약관 보기</span></a> */}
                         </div>
@@ -581,9 +601,10 @@ const JoinAccept = memo(() => {
                         </div>
                             
                         <div class="agree_title">
-                            <input className="agree_private" name="agree_private" type="checkbox" class="custom-control" data-parsley-error-message="개인정보 수집·이용에 동의를 해야 회원가입 진행이 가능합니다." value="Y" required data-parsley-class-handler=".agree_private" />
+                            <input type="checkbox" name="agree_private" id="agree_private" className="checkBox" required />
                             <label for="agree_private"><span><strong>개인정보 수집&middot;이용</strong>(필수)</span>
-                            </label><a href="#policy2" class="d-down-sm js-layer-open"><span class="sr-only">개인정보 수집·이용 보기</span></a>
+                            </label>
+                            {/* <a href="#policy2" class="d-down-sm js-layer-open"><span class="sr-only">개인정보 수집·이용 보기</span></a> */}
                         </div>						
                         <div class="custom-scroll">
                             <div className="agree_content">
@@ -684,7 +705,7 @@ const JoinAccept = memo(() => {
                         </div>
 
                         <div class="agree_title">
-                            <input id="agree_marketing" name="agree_marketing" type="checkbox" className="custom-control" value="Y" />
+                            <input type="checkbox" name="agree_marketing" id="agree_marketing" className="checkBox" required />
                             <label for="agree_marketing"><span><strong>의학정보 및 홍보 마케팅 제공 수집&middot;이용</strong>(선택)</span></label>
                             {/* <a href="#" className="d-down-sm js-layer-open"><span class="sr-only">의학정보 및 홍보 마케팅 제공 수집·이용 보기</span></a> */}
                         </div>

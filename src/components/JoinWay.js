@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinWay.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-11-25 16:20
+ * @ Last Update: 2022-11-28 17:00
  * @ Description: 회원가입 방법 선택 페이지
  */
 
@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import { Link,Routes,Route } from 'react-router-dom';
 import styled from 'styled-components';
 import loginImg from '../assets/img/logo@2x.png';
-
 import JoinAccept from './JoinAccept';
 import LoginFooter from './LoginFooter';
 import localImg from '../assets/img/ico-login1@2x.png';
@@ -25,63 +24,45 @@ import facebook from '../assets/img/ico-sns-facebook@2x.png';
 const Container = styled.div`
 position: relative;
 .nav {
-    width: 100%;
-    height: 100px;
+    width: 1280px;
+    height: 84px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #eee;
-    padding: 40px 1.5% 0 2%;
-    box-sizing: border-box;
 
-    img {
-      width: 16%; 
-      height: 60%;
-      float: left; 
-      margin-right: 15%;
-    }
-
-    a {
-      font-size: 18px;
-      margin: 0 5% 0 0;
-      font-weight: bold;
-      &:last-child {
-        margin-right: 0;
+    h1 {
+      .sevLogo {
+        width: 231px;
+        height: 40px;
+        object-fit: cover;
       }
-      &:hover {
-        color: rgb(0,148,251);
+    }
+    ul {
+      display: flex;
+
+      li {
+        display: flex;
+        align-items: center;
+        a {
+          text-align: center;
+          font-size: 20px;
+          padding: 0 33px;
+          line-height: 84px;
+          img {
+            width: 200px;
+            margin-right: 100px;
+          }
+        }
+        &:nth-child(5) {
+          margin-left: 20px;
+        }
+        &:nth-child(6) {
+          margin-left: 20px;
+        }
       }
     }
   }
-  /* footer {
-    margin-top : 500px;
-    border-top: 1px solid black;
-    padding: 3% 10%;
-    box-sizing: border-box;
-    color: rgb(50,50,50);
-    position: relative;
-    a {
-      font-size: 18px;
-      margin: 0 3% 3% 0;
-      color: rgb(20,20,20);
-    }
-    address {
-      margin: 50px 0 5px 0;
-    }
-    p {
-      font-size: 16px;
-      text-align: left;
-      margin: 0;
-      padding: 0;
-    }
-    button {
-      position: absolute;
-      right: 10%;
-      top: 25%;
-      background-color: white;
-      border: 1px solid #ddd;
-      padding: 0.8% 0.7%;
-      font-size: 16px;
-      border-radius: 4%;
-    }
-  } */
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -185,12 +166,14 @@ const JoinWay = memo(() => {
     <Container>
       <div>
         <div className='nav'>
-          <Link to='/login'><img src={loginImg} alt="통합로그인센터" /></Link>
-          <Link to='/login'>로그인</Link>
-          <Link to='/join_accept'>회원가입</Link>
-          <Link to='/'>아이디/비밀번호 찾기</Link>
-          <Link to='/'>병원등록번호 조회</Link>
-          <Link to='/'>이용정책</Link>
+          <ul>
+              <li><Link to='/login'><img src={loginImg} alt="통합로그인센터" /></Link></li>
+              <li><Link to='/login'>로그인</Link></li>
+              <li><Link to='/join_way'>회원가입</Link></li>
+              <li><Link to='/'>아이디/비밀번호 찾기</Link></li>
+              <li><Link to='/'>병원등록번호 조회</Link></li>
+              <li><Link to='/'>이용정책</Link></li>
+          </ul>
         </div>
 
         <h1>회원가입</h1>
