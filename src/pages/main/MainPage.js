@@ -244,26 +244,24 @@ const HospitalSection = styled.section`
 /** NEWS 스타일 */
 const NewsSection = styled.section`
   width: 100%;
-  height: 391px;
+  height: 390px;
   padding: 80px 0;
   box-sizing: border-box;
   background-color: #003d7d;
-
+  
   .newsArticleBox {
     width: 1280px;
-    height: 211px;
+    height: 230px;
     margin: 0 auto;
     display: flex;
-    padding-top: 20px;
-    overflow: hidden;
+    align-items: flex-end;
 
     .news {
-      width: 210px;
+      width: 214px;
       height: 211px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      margin-right: 117px;
+      margin-right: 114px;
 
       h3 {
         font-size: 48px;
@@ -272,6 +270,7 @@ const NewsSection = styled.section`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 15px;
 
         a {
           display: block;
@@ -287,7 +286,7 @@ const NewsSection = styled.section`
         color: white;
       }
 
-      .btns {
+      /* .btns {
         margin-top: 15px;
         .left_btn {
           display: block;
@@ -313,7 +312,7 @@ const NewsSection = styled.section`
             clear: both;
           }
         }
-      }
+      } */
     }
   }
 `;
@@ -468,18 +467,17 @@ const MainPage = () => {
               </h3>
               <p>고객여러분께 가장 빠른 소식을 제공해 드리겠습니다.</p>
 
-              <div className="btns">
+              {/* <div className="btns">
                 <button type="button" className="left_btn" />
                 <button type="button" className="right_btn" />
-              </div>
+              </div> */}
             </article>
 
             <NewsSliderCarousel />
-
           </div>
         </NewsSection>
 
-        <BannerSection></BannerSection>
+        <BannerSection />
       </Main>
 
       <Footer />

@@ -7,7 +7,6 @@
 
 /** import */
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // slick
@@ -18,23 +17,47 @@ import "slick-carousel/slick/slick-theme.css";
 /** 슬라이드 전체 박스 스타일 */
 // 슬라이드 영역 스타일
 const StyledSlider = styled(Slider)`
-  width: 297px;
-  height: 211px;
-  overflow: hidden;
-  position: relative;
+  width: 952px;
+  height: 230px;
+
+  .slick-prev::before,
+  .slick-next::before {
+    opacity: 0;
+    display: none;
+  }
+
+  // 슬라이드의 각각 하나의 객체
+  .slick-slide div {
+    /* cursor: pointer; */
+    width: 297px;
+  }
+
+  /* slidesToShow 옵션으로 표시되는 모든 객체 묶음 */
+  .slick-list {
+    width: 982px;
+  }
+
+  /* 개체의 트랙 */
+  .slick-track {
+  }
+
+  /* 개체들 */
+  /* 슬라이드 */
+  .slick-slide {
+    height: 230px;
+    display: flex;
+    align-items: flex-end;
+  }
 
   .newsBox {
     width: 297px;
-    height: 211px;
-    
+    height: 210px;
+
     background-color: white;
 
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
+
     padding: 30px 30px 28px;
-    margin-right: 30px;
     box-sizing: border-box;
 
     position: relative;
@@ -47,8 +70,7 @@ const StyledSlider = styled(Slider)`
       position: absolute;
       top: -10px;
       left: 30px;
-      z-index: 10000;
-      
+
       padding: 0 10px;
       box-sizing: border-box;
 
@@ -58,9 +80,8 @@ const StyledSlider = styled(Slider)`
       font-size: 14px;
       line-height: 40px;
       text-align: center;
-      
+
       white-space: nowrap;
-      
     }
 
     .newsContentTitle {
@@ -69,44 +90,36 @@ const StyledSlider = styled(Slider)`
     }
 
     .newsDate {
+      display: block;
       font-size: 16px;
       line-height: 16px;
+      position: absolute;
+      bottom: 28px;
     }
-  }
-
-  .slick-prev::before,
-  .slick-next::before {
-    opacity: 0;
-    display: none;
-  }
-
-  .slick-slide div {
-    //슬라이더  컨텐츠
-    cursor: pointer;
   }
 `;
 
 // 앞으로가기 버튼 스타일
 function NextArrow(props) {
+  console.log(props);
   const { className, style, onClick } = props;
   return (
     <div
       className={className}
       style={{
         ...style,
-        width: "28px",
-        height: "28px",
+        width: "60px",
+        height: "60px",
 
         position: "absolute",
         top: "100%",
-        left: "50%",
-        transform: "translate(-50%, -48px)",
+        left: "-247px",
+        transform: "translate(0, -100%)",
         zIndex: "100",
 
-        background: "#fff url(./img/ico-chevron-right-sm-lightgray@2x.png) no-repeat center / cover",
-        backgroundSize: "8px 15px",
+        background: "url(./img/btn-right-white.png) no-repeat center / cover",
 
-        border: "1px solid #eee",
+        border: "none",
         boxSizing: "border-box",
 
         overflow: "hidden",
@@ -126,19 +139,18 @@ function PrevArrow(props) {
       className={className}
       style={{
         ...style,
-        width: "28px",
-        height: "28px",
+        width: "60px",
+        height: "60px",
 
         position: "absolute",
         top: "100%",
-        left: "50%",
-        transform: "translate(-150%, -48px)",
+        left: "-327px",
+        transform: "translate(0, -100%)",
         zIndex: "100",
 
-        background: "#fff url(./img/ico-chevron-left-sm-lightgray@2x.png) no-repeat center / cover",
-        backgroundSize: "8px 15px",
+        background: "url(./img/btn-left-white.png) no-repeat center / cover",
 
-        border: "1px solid #eee",
+        border: "none",
         boxSizing: "border-box",
 
         overflow: "hidden",
@@ -155,11 +167,11 @@ function InfoSliderCarousel({ category, title, text }) {
   const settings = {
     infinite: true,
     speed: 500,
-    slideToShow: 3,
-    slideToScroll: 1,
+    slidesToShow: 3,
+    slidesToScroll: 1,
     dots: false,
-    // nextArrow: <NextArrow />,
-    // prevArrow: <PrevArrow />
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
   };
 
   return (
@@ -169,16 +181,31 @@ function InfoSliderCarousel({ category, title, text }) {
         <strong className="newsContentTitle">[뉴시스] 연세의대, 양성사업단 발족…글로벌 의사과학자 키운다</strong>
         <span className="newsDate">2022-11-17</span>
       </article>
+
       <article className="newsBox">
         <span className="newsCategory">언론 보도</span>
         <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
         <span className="newsDate">2022-11-15</span>
       </article>
+
       <article className="newsBox">
         <span className="newsCategory">언론 보도</span>
         <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
         <span className="newsDate">2022-11-15</span>
       </article>
+
+      <article className="newsBox">
+        <span className="newsCategory">언론 보도</span>
+        <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
+        <span className="newsDate">2022-11-15</span>
+      </article>
+
+      <article className="newsBox">
+        <span className="newsCategory">언론 보도</span>
+        <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
+        <span className="newsDate">2022-11-15</span>
+      </article>
+
       <article className="newsBox">
         <span className="newsCategory">언론 보도</span>
         <strong className="newsContentTitle">[뉴스1] 20대 당뇨환자 4년만에 57% 급증…지난해 3만8천명 병원찾아</strong>
