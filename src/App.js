@@ -24,16 +24,17 @@ function App() {
       <Routes>
         <Route path="/" exapt={true} element={<MainPage />} />
 
-        {/* 고객의소리 페이지 라우팅*/}
         <Route path='/login' element={<Login />} />
         <Route path='/join_way' element={<JoinWay />} />
         <Route path='/join_accept' element={<JoinAccept />} />
         <Route path='/join_us' element={<JoinUs />} />
         
+        {/* 고객의소리 페이지 라우팅*/}
         <Route path='/customer.do' element={<CustomerBoardList />}/>
         <Route path="/suggest.do" element={<CustomerBoardAdd/>}/>
-        <Route path="/suggest.do/id" element={<CustomerBoardView/>}/>
+        <Route path="/suggestion/:id" element={<CustomerBoardView/>}/>
         <Route path="/staff" element={<StaffSearch/>}/>
+
          {/* 의약품검색 페이지 라우팅 */}
          <Route path='/drug.do/*' element={<DrugSearch />}/>
       </Routes>

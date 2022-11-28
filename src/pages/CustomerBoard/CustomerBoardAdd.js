@@ -103,23 +103,6 @@ const CustomerBoardAddCont = styled.div`
   .Width175{
     max-width: 175px;
   }
-  .formControl {
-    width: 100%;
-    border-radius: 0;
-    height: 45px;
-    border: 1px solid #dadada;
-    padding: 8px 15px;
-    background: #fff;
-    text-align: left;
-    font-size: 16px;
-    line-height: 27px;
-    vertical-align: middle;
-    box-sizing: border-box;
-    &:focus {
-      outline: none;
-      border-color: #0094fb;
-    }
-  }
 
   input:read-only{
     color: #c2c2c2; 
