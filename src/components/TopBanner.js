@@ -157,7 +157,7 @@ const TopBanner = memo(() => {
         <article className="firstItem">
           <i className="telYellow" />
           <span className="title">진료예약</span>
-          <a href="/">
+          <a href="tel:1599-1004">
             <span className="tel">1599-1004</span>
           </a>
           <span className="telOverseas">해외 수신번호(+82-2-2228-1004)</span>
@@ -168,7 +168,7 @@ const TopBanner = memo(() => {
         <article className="secondItem">
           <i className="telPrimary" />
           <span className="title">건강검진예약</span>
-          <a href="/">
+          <a href="tel:1588-7757">
             <span className="tel">1588-7757</span>
           </a>
         </article>
