@@ -98,7 +98,7 @@ const TopBannerSection = styled.section`
     .closeBox {
       display: flex;
       margin-left: auto;
-      
+
       .topBannerCloseCheckbox[type="checkbox"] {
         display: none;
       }
@@ -129,6 +129,7 @@ const TopBannerSection = styled.section`
           margin: 0 5px;
         }
       }
+
       button {
         background: inherit;
         border: none;
