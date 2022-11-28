@@ -9,12 +9,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
-/** material ui */
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-// 체크박스
-import CheckBox from "./CheckBox";
-
 /** 상단 배너 스타일 */
 const TopBannerSection = styled.section`
   width: 100%;
@@ -103,17 +97,16 @@ const TopBannerSection = styled.section`
 
     .closeBox {
       display: flex;
-      align-items: center;
       margin-left: auto;
-/* 
+      
       .topBannerCloseCheckbox[type="checkbox"] {
         display: none;
       }
 
       .topBannerCloseCheckbox[type="checkbox"] + label::before {
         display: inline-block;
-        width: 20px;
-        height: 20px;
+        width: 17px;
+        height: 17px;
         border: 1px solid #aaa;
         box-sizing: border-box;
         background-color: white;
@@ -123,15 +116,19 @@ const TopBannerSection = styled.section`
       .topBannerCloseCheckbox[id="close"]:checked + label::before {
         background: white url(./img/ico-checkbox-checked.png) no-repeat 45% center;
         background-size: 13px 10px;
-      } */
-
-      .closeText {
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 20px;
-        margin: 0 5px;
       }
 
+      label {
+        display: flex;
+        align-items: center;
+
+        .closeText {
+          font-size: 16px;
+          font-weight: normal;
+          line-height: normal;
+          margin: 0 5px;
+        }
+      }
       button {
         background: inherit;
         border: none;
@@ -176,12 +173,10 @@ const TopBanner = memo(() => {
         </article>
 
         <div className="closeBox">
-          {/* <input type="checkbox" id="close" className="topBannerCloseCheckbox" />
-          <label htmlFor="close"></label>
-          <span className="closeText">오늘하루 열지않기</span> */}
-          <FormGroup>
-            <FormControlLabel control={<CheckBox />} label="오늘하루 열지않기" />
-          </FormGroup>
+          <input type="checkbox" id="close" className="topBannerCloseCheckbox" />
+          <label htmlFor="close">
+            <span className="closeText">오늘하루 열지않기</span>
+          </label>
           <button type="button">
             <i className="topBannerCloseIcon" />
           </button>

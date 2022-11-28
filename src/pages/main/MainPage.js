@@ -337,8 +337,10 @@ const NewsSection = styled.section`
         box-sizing: border-box;
         background-color: #ac47d1;
         font-size: 14px;
+        text-align: center;
         line-height: 40px;
         color: white;
+        white-space: nowrap;
       }
 
       .newsContentTitle {

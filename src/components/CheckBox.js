@@ -2,7 +2,7 @@
  * @ File Name: CheckBox.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
  * @ Last Update: 2022-11-26 15:02:00
- * @ Description: material ui 체크박스
+ * @ Description: material ui 체크박스 **사용안함**
  */
 
 /** import */
@@ -14,8 +14,8 @@ import Checkbox from "@mui/material/Checkbox";
 
 /** 버튼 스타일 */
 const BpIcon = styled("span")(({ theme }) => ({
-  width: 20,
-  height: 20,
+  width: 17,
+  height: 17,
   background: "white",
   boxShadow: "none",
   border: "1px solid #aaa",
