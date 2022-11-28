@@ -7,17 +7,23 @@
 
 /** import */
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 /** 컴포넌트 참조 */
+// 헤더, 푸터
 import MainPageHeader from "../../components/MainPageHeader";
 import Footer from "../../components/Footer";
+// 상단 배너
 import TopBanner from "../../components/TopBanner";
+// 인포슬라이더캐러셀
+import InfoSliderCarousel from "../../components/InfoSliderCarousel";
+// 메인슬라이더캐러셀
+import MainSliderCarousel from "../../components/MainSliderCarousel";
 
 /** 이미지 참조 */
 // 메인 슬라이드
-import MainImage from "../../assets/img/img-visual-patient1.jpg";
+// import MainImage from "../../assets/img/img-visual-patient1.jpg";
 // 병원 바로가기 아이콘
 import ExternalLink from "../../assets/img/ico-external-link-white@2x.png";
 // 바로가기 메뉴 아이콘
@@ -35,44 +41,50 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 `;
 
 /** 이미지 슬라이드 스타일 */
-const SlideSection = styled.section`
-  width: 1920px;
-  height: 500px;
-  position: relative;
+// const SlideSection = styled.section`
+//   width: 100%;
+//   position: relative;
 
-  article {
-    position: absolute;
-    top: 50%;
-    left: 320px;
-    transform: translate(0, -50%);
+//   img {
+//     display: block;
+//     max-width: 1920px;
+//     height: auto;
+//     margin: 0 auto;
+//   }
 
-    .slide_title {
-      font-size: 66px;
-      line-height: 72px;
-      font-family: "NanumSquare";
-      color: white;
-    }
+//   article {
+//     position: absolute;
+//     top: 50%;
+//     left: 320px;
+//     transform: translate(0, -50%);
 
-    .slide_text {
-      font-size: 24px;
-      line-height: 32px;
-      font-family: "NanumSquare";
-      color: white;
-      display: block;
-      margin-top: 15px;
-    }
-  }
-`;
+//     .slide_title {
+//       font-size: 66px;
+//       line-height: 72px;
+//       font-family: "NanumSquare";
+//       color: white;
+//     }
+
+//     .slide_text {
+//       font-size: 24px;
+//       line-height: 32px;
+//       font-family: "NanumSquare";
+//       color: white;
+//       display: block;
+//       margin-top: 15px;
+//     }
+//   }
+// `;
 
 /** 카테고리별 병원 바로가기 스타일 */
 const HospitalSection = styled.section`
   width: 1920px;
   padding-bottom: 60px;
-  background: url(./assets/img/bg-main-pattern.png) no-repeat center / cover;
+  background: url(./img/bg-main-pattern.png) no-repeat center / cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -263,7 +275,7 @@ const NewsSection = styled.section`
           display: block;
           width: 27px;
           height: 27px;
-          background: url(./assets/img/btn-more-plus.jpg) no-repeat center / cover;
+          background: url(./img/btn-more-plus.jpg) no-repeat center / cover;
         }
       }
 
@@ -279,7 +291,7 @@ const NewsSection = styled.section`
           display: block;
           width: 60px;
           height: 60px;
-          background: url(./assets/img/btn-left-white.png) no-repeat center / cover;
+          background: url(./img/btn-left-white.png) no-repeat center / cover;
           border: none;
           float: left;
         }
@@ -289,7 +301,7 @@ const NewsSection = styled.section`
           width: 60px;
           height: 60px;
           margin-left: 20px;
-          background: url(./assets/img/btn-right-white.png) no-repeat center / cover;
+          background: url(./img/btn-right-white.png) no-repeat center / cover;
           border: none;
 
           &::after {
@@ -348,7 +360,7 @@ const BannerSection = styled.section`
   height: 614px;
   padding: 65px 0 80px;
   box-sizing: border-box;
-  background: url(./assets/img/bg-mkt-banner.jpg) no-repeat center / cover;
+  background: url(./img/bg-mkt-banner.jpg) no-repeat center / cover;
 `;
 
 const MainPage = () => {
@@ -359,7 +371,7 @@ const MainPage = () => {
       <MainPageHeader />
 
       <Main>
-        <SlideSection>
+        {/* <SlideSection>
           <img src={MainImage} alt="main_img" />
           <article>
             <span className="slide_title">
@@ -367,7 +379,8 @@ const MainPage = () => {
             </span>
             <span className="slide_text">질병 치료를 넘어 환자의 마음까지 치유하겠습니다.</span>
           </article>
-        </SlideSection>
+        </SlideSection> */}
+        <MainSliderCarousel />
 
         <HospitalSection>
           <div className="exteralLinks">
@@ -407,7 +420,7 @@ const MainPage = () => {
           <div className="shortcutSlider">
             <ul>
               <li>
-                <Link to="/">
+                <Link to="/staff">
                   <img src={ShortcutExpert} />
                   <div className="textBox">
                     <strong>의료진 찾기</strong>
@@ -461,16 +474,16 @@ const MainPage = () => {
             </ul>
           </div>
           <div className="infoSlider">
-            <dl style={{ backgroundImage: "url(./assets/img/bg-sympathy-story.jpg)" }}>
+            <dl style={{ backgroundImage: "url(./img/bg-sympathy-story.jpg)" }}>
               <dt>공감Story</dt>
               <dd>
-                <div></div>
+                <InfoSliderCarousel category="의료진 이야기" />
               </dd>
             </dl>
-            <dl style={{ backgroundImage: "url(./assets/img/bg-health-info.jpg)" }}>
+            <dl style={{ backgroundImage: "url(./img/bg-health-info.jpg)" }}>
               <dt>건강정보</dt>
               <dd>
-                <div></div>
+                <InfoSliderCarousel category="질환/신체부위별 찾기" />
               </dd>
             </dl>
             <a href="https://yuhs.severance.healthcare/yuhs/history/museum/cheerupsev.do">

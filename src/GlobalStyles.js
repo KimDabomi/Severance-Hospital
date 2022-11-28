@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
@@ -31,7 +31,6 @@ img {
 
 a {
   font-family: 'NanumSquare';
-  font-weight: 700;
   text-decoration: none;
   color: black;
 }
