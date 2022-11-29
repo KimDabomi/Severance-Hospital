@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinAccept.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-11-28 17:35
+ * @ Last Update: 2022-11-29 17:20
  * @ Description: 약관동의 페이지
  */
 
@@ -16,6 +16,7 @@ import step01 from "../assets/img/ico-login-step1-on@2x.png";
 import step02 from "../assets/img/ico-login-step2-off@2x.png";
 import step03 from "../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../assets/img/ico-login-step4-off@2x.png";
+import warning from "../assets/img/ico-warning-mark@2x.png";
 
 const Container = styled.div`
   position: relative;
@@ -212,6 +213,17 @@ const Container = styled.div`
       cursor: pointer;
     }
   }
+  .box_tip {
+    dl {
+      dt {
+        img {
+          width: 20px;
+          float: left;
+          margin: 5px 5px 0 0;
+        }
+      }
+    }
+  }
   .checkBox {
     position: absolute;
     width: 1px;
@@ -251,6 +263,15 @@ const JoinAccept = memo(() => {
   const notAcceptBtnClick = e => {
     navigate('/join_way');
   };
+
+  const allAcceptBtnClick = e => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = e.checked;
+    });
+  };
+
 
   return (
     <Container>
@@ -340,6 +361,7 @@ const JoinAccept = memo(() => {
                     name="agree_all"
                     id="agree_all"
                     className="checkBox"
+                    onClick={allAcceptBtnClick}
                   />
                   <label for="agree_all">약관 전체 동의</label>
                 </div>
@@ -1366,6 +1388,7 @@ const JoinAccept = memo(() => {
           <div className="box_tip">
             <dl>
               <dt className="text-warning-mark">
+                <img src={warning} alt="warning" />
                 동의 거부 시 불이익에 관한 사항
               </dt>
               <dd>
