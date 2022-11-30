@@ -14,19 +14,6 @@
       "date": "2022-04-27T01:52:26Z"
     },
     {
-      "name": "주혜지",
-      "tel": "010-123-123",
-      "email": "123@gmail.com",
-      "register": "친절",
-      "hospital": "세브란스병원",
-      "dept": "가정의학과",
-      "staff": "",
-      "title": "123",
-      "content": "123",
-      "date": "2022-11-24T08:26:38.422Z",
-      "id": 4
-    },
-    {
       "name": "asfd",
       "tel": "010-asdf-asdf",
       "email": "asf@gmail.com",
@@ -133,10 +120,10 @@
   ],
   "staff": [
     {
-      "id":1,
+      "id": 1,
       "name": "오태원",
       "medicalSubject": "간암",
       "department": "간암최외과"
     }
-]
+  ]
 }

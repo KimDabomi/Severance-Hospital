@@ -68,6 +68,7 @@ textarea{
     font-size: 40px;
     padding: 73px 0 65px 0;
     box-sizing: border-box;
+    font-weight: bold;
 }
 //페이지 서브타이틀
 .pageSubtitle{
@@ -75,7 +76,7 @@ textarea{
     line-height: 34px;
     padding-left: 19px;
     position: relative;
-    font-weight: bold;
+    font-weight: 700;
     color: #222;
     margin: 47px 0 22px 18px;
     margin-left: 0px !important;
@@ -94,6 +95,24 @@ textarea{
         left: 0;
     }
 }
+//내용 들여쓰기 div
+.indent{margin-left: 20px;}
+//본문
+.articleBody{
+  padding: 35px 30px;
+  border-bottom: 1px solid #888;
+  table{
+    width: 100%;
+    border-spacing: 0;
+    overflow: hidden;
+    border-collapse: separate;
+    border: 0;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    border-left: 1px solid #ebebeb;
+  }
+}
+
 //공지사항
 .boxGuide{
     width: 100%;
@@ -200,8 +219,8 @@ textarea{
   background-color: #0094fb;
   color: #fff;
   border-radius: 25px;
-  min-width: 80px;
-  height: 40px;
+  min-width: 100px;
+  height: 50px;
   padding: 0 18px;
   font-size: 16px;
   display: inline-flex;
@@ -222,8 +241,8 @@ textarea{
   color: #0094fb;
   border: 2px solid #0094fb;
   border-radius: 25px;
-  min-width: 80px;
-  height: 40px;
+  min-width: 100px;
+  height: 50px;
   padding: 0 18px;
   font-size: 16px;
   display: inline-flex;
@@ -239,17 +258,56 @@ textarea{
   .marginleft{
     margin-left: 6px;
   }
+  //더보기 버튼
+  .btnMore{
+    padding: 0 39px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 25px;
+    color: #333;
+    border: 1px solid #dadada;
+    background-color: #fff;
+		display: inline-flex;
+		align-items: center;
+
+    &:after{
+      content: '';
+      margin-left: 6px;
+    	width: 15px;
+    	height: 9px;
+    	background: url(../img/ico-chevron-down-sm@2x.png) no-repeat;
+    	background-size: cover;
+    }
+  }
+	//검색버튼
+	.btnSearch{
+		background-color: #0094fb;
+		width: 60px; height:45px;
+    padding: 0 10px;
+		margin-left: 10px;
+		display: inline-flex;
+		align-items: center;
+		cursor: pointer;
+		border: 1px solid #0094fb;
+		border-radius: 3px;
+		justify-content: center;
+		i{
+			width: 22px;
+    	height: 26px;
+    	line-height: 26px;
+			background: url(../img/ico-search-white.png) no-repeat;
+		}
+	}
   
   /** 나의작성글 View 페이지 */
   .suggestionViewCont{
     border-top: 1px solid #888;
     border-bottom: 1px solid #888;
-
-    .subjectArea{
+  }
+  .subjectArea{
         padding: 15px 30px;
         border-bottom: 1px solid #e6e6e6;
     }
-  }
   .subject{
     font-weight: bold;
     line-height: 1.5;
@@ -265,7 +323,9 @@ textarea{
   .extendField{
     border-bottom: 1px solid #e6e6e6;
     padding: 15px 30px;
-
+    dl{
+      display: flex;
+    }
     dt{
         font-weight: bold;
         margin-right: 20px;
@@ -360,7 +420,47 @@ textarea{
       border-color: #0094fb;
     }
   }
+	.drugListCont{
+    display: flex;
+    flex-wrap: wrap;
 
+    .drugList{
+      width: calc(50% - 30px);
+      margin: 15px;
+      box-sizing: border-box;
+    }
+  }
+  .viewLink{
+    padding: 16px 20px;
+    display: block;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    &:hover{
+        color: #0094fb;
+        border-color: #0094fb;
+        font-weight: bold;
+    }
+  }
+
+	//검색결과 없을 때
+	.nodata{
+		margin: 138px 0 43px;
+    text-align: center;
+		.nodataIcon{
+			display: inline-flex;
+			width: 80px;
+    	height: 69px;
+    	line-height: 69px;
+    	background-image: url(../img/ico-nodata@2x.png);
+			background-size: cover;
+    	vertical-align: middle;
+			text-align: center;
+			margin-bottom: 25px;
+		}
+		p{margin: 4px 0;}
+	}
 `;
 
 export default GlobalStyles;

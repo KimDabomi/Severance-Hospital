@@ -15,6 +15,7 @@ import CustomerBoardView from './pages/CustomerBoard/CustomerBoardView';
 
 //의약품검색
 import DrugSearch from './pages/DrugSearch/DrugSearch';
+import DrugInfo from './pages/DrugSearch/DrugInfo';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
 
          {/* 의약품검색 페이지 라우팅 */}
          <Route path='/drug.do/*' element={<DrugSearch />}/>
+         <Route path='/drug.do/drug/id' element={<DrugInfo />}/>
       </Routes>
     </div>
   );
