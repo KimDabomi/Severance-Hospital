@@ -174,7 +174,7 @@ const TopBanner = memo(() => {
         </article>
 
         <div className="closeBox">
-          <input type="checkbox" id="close" className="topBannerCloseCheckbox" />
+          <input type="checkbox" defaultChecked="checked" id="close" className="topBannerCloseCheckbox" />
           <label htmlFor="close">
             <span className="closeText">오늘하루 열지않기</span>
           </label>
