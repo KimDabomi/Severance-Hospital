@@ -22,6 +22,8 @@ import InfoSliderCarousel from "../../components/InfoSliderCarousel";
 import MainSliderCarousel from "../../components/MainSliderCarousel";
 // 뉴스스라이더캐러셀
 import NewsSliderCarousel from "../../components/NewsSliderCarousel";
+// 하단 배너 슬라이더캐러셀
+import MktSliderCarousel from "../../components/MktSliderCarousel";
 
 /** 이미지 참조 */
 // 메인 슬라이드
@@ -477,7 +479,9 @@ const MainPage = () => {
           </div>
         </NewsSection>
 
-        <BannerSection />
+        <BannerSection>
+          <MktSliderCarousel />
+        </BannerSection>
       </Main>
 
       <Footer />
