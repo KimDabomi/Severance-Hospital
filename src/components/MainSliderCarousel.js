@@ -136,8 +136,8 @@ function InfoSliderCarousel() {
     infinite: true,
     fade: true,
     speed: 1000,
-    slideToShow: 1,
-    slideToScroll: 1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
     dots: true
