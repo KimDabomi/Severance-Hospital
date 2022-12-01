@@ -16,8 +16,9 @@ import Footer from '../../components/Footer';
 
 const DrugSearch = memo(() => {
     return (
-        <div className='pageCont'>
+        <div>
             <Header />
+            <div className='pageCont'>
             <h1 className='pageTitle'>의약품</h1>
 
             <nav className='tabMenu'>
@@ -29,6 +30,7 @@ const DrugSearch = memo(() => {
                 <Route path='tab-shape' element={<TabShape />} />
                 <Route path='tab-info' element={<TabInfo />} />
             </Routes>
+            </div>
             <Footer />
         </div>
     );

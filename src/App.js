@@ -17,6 +17,11 @@ import CustomerBoardView from './pages/CustomerBoard/CustomerBoardView';
 import DrugSearch from './pages/DrugSearch/DrugSearch';
 import DrugInfo from './pages/DrugSearch/DrugInfo';
 
+//뉴스홈
+import NewsMain from './pages/NewsHome/NewsMain';
+import NewsView from './pages/NewsHome/NewsView';
+import NoticeView from './pages/NewsHome/NoticeView';
+
 
 function App() {
   return (
@@ -39,6 +44,11 @@ function App() {
          {/* 의약품검색 페이지 라우팅 */}
          <Route path='/drug.do/*' element={<DrugSearch />}/>
          <Route path='/drug.do/drug/id' element={<DrugInfo />}/>
+
+         {/* 뉴스홈 페이지 라우팅 */}
+         <Route path='/news' element={<NewsMain />}/>
+         <Route path='/news/media.do' element={<NewsView />}/>
+         <Route path='/news/notice.do' element={<NoticeView />}/>
       </Routes>
     </div>
   );

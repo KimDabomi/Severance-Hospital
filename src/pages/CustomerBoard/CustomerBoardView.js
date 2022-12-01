@@ -68,6 +68,7 @@ const CustomerBoardView = memo(() => {
   }, []);
 
   return (
+    <div>
     <div className="pageCont">
       <Header />
       <CustomerBoardHeader />
@@ -119,7 +120,7 @@ const CustomerBoardView = memo(() => {
           </div>
         )
       )}
-
+    </div>
       <Footer />
     </div>
   );

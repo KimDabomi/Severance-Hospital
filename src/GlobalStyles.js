@@ -279,7 +279,28 @@ textarea{
     	background-size: cover;
     }
   }
+  //작은 더보기 버튼
+  .btnMoreLink{
+    padding: 0 15px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 25px;
+    color: #333;
+    border: 1px solid #dadada;
+    background-color: #fff;
+		display: inline-flex;
+		align-items: center;
+  }
 	//검색버튼
+  .searchBox {
+    display: flex;
+    -webkit-box-align: center;
+    padding: 15px 250px 15px 250px;
+    background: #f9f9f9;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-pack: center;
+  }
 	.btnSearch{
 		background-color: #0094fb;
 		width: 60px; height:45px;
@@ -461,6 +482,101 @@ textarea{
 		}
 		p{margin: 4px 0;}
 	}
+
+  /** 뉴스홈 */
+  //뉴스홈 헤더
+  .bgWhiteBlue{
+    background-color: #eef7fc;
+    margin-bottom: 40px;
+    padding: 40px;
+    height: 400px;
+    box-sizing:border-box;
+    margin-top: 73px;
+    }
+  .newsTopSlider{
+    display: flex;
+  }
+  .textArea{
+    position: relative;
+    margin-left: 40px;
+    h4{
+      font-size: 24px;line-height: 38px;font-weight: bold; margin-bottom:25px;
+    }
+    a{
+      position: absolute;
+      bottom: 0; color: #333;font-size: 14px;
+    }
+  }
+  //뉴스홈 content
+  .wideWrap{
+    padding: 100px 0;
+  }
+
+  /** 언론보도 */
+  //검색결과물
+  .bbsList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 15px;
+    .bbsItem{
+      flex: 0 0 calc(33.333333% - 30px);
+      width: calc(33.333333% - 30px);
+      max-width: calc(33.333333% - 30px);
+      margin: 15px;
+    }
+    .inner{
+      height: 90px;
+      padding: 14px 20px;
+      display: flex;
+      border-radius: 10px;
+      border: 1px solid #e6e6e6;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      border-radius: 10px;
+
+      &:hover{border-color: #0094fb;}
+    }
+    .bbssubjectArea{
+      max-height: 60px;
+      line-height: 30px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      height: 60px;
+      font-size: 18px;
+
+      strong:after{
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+        margin-top: -1px;
+        width: 14px;
+        height: 14px;
+        background: url(../img/ico-external-link@2x.png);
+        background-size: cover;
+      }
+    }
+  }
+  .infoArea{
+    margin-top: 12px;
+    .date{
+      color: #666;
+    }
+  }
+
+  // NEW 뉴 아이콘
+  .icoNew{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    background-image: url(../img/ico-new@2x.png);
+    background-size: cover;
+    vertical-align: middle;
+  }
 `;
 
 export default GlobalStyles;
