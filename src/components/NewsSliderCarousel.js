@@ -101,7 +101,6 @@ const StyledSlider = styled(Slider)`
 
 // 앞으로가기 버튼 스타일
 function NextArrow(props) {
-  console.log(props);
   const { className, style, onClick } = props;
   return (
     <div
