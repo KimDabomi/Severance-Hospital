@@ -34,6 +34,7 @@ const StyledSlider = styled(Slider)`
   height: 469px;
   margin: 0 auto;
   position: relative;
+  overflow: hidden;
 
   // arrow none
   .slick-prev::before,
@@ -50,10 +51,10 @@ const StyledSlider = styled(Slider)`
 
   .slick-slider {
   }
-
+  
   .slick-slide {
   }
-
+  
   .slick-list {
     margin-right: -30px;
   }

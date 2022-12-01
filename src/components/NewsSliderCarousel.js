@@ -34,7 +34,7 @@ const StyledSlider = styled(Slider)`
 
   /* slidesToShow 옵션으로 표시되는 모든 객체 묶음 */
   .slick-list {
-    width: 982px;
+    margin-right: -30px;
   }
 
   /* 개체의 트랙 */
@@ -160,6 +160,7 @@ function PrevArrow(props) {
     />
   );
 }
+
 
 function InfoSliderCarousel({ category, title, text }) {
   // 슬라이드 설정

@@ -250,13 +250,14 @@ const NewsSection = styled.section`
   padding: 80px 0;
   box-sizing: border-box;
   background-color: #003d7d;
-  
+
   .newsArticleBox {
     width: 1280px;
     height: 230px;
     margin: 0 auto;
     display: flex;
     align-items: flex-end;
+    position: relative;
 
     .news {
       width: 214px;
@@ -317,6 +318,14 @@ const NewsSection = styled.section`
       } */
     }
   }
+`;
+// 뉴스 슬라이드 오른쪽 넘치는 부분 가리는 박스
+const HiddenBox = styled.div`
+  width: 30px;
+  height: 230px;
+  background-color: #003d7d;
+  position: absolute;
+  right: -30px;
 `;
 
 /** 하단 배너 스타일 */
@@ -476,6 +485,8 @@ const MainPage = () => {
             </article>
 
             <NewsSliderCarousel />
+
+            <HiddenBox />
           </div>
         </NewsSection>
 
