@@ -55,7 +55,9 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-list {
+    margin-right: -30px;
   }
+
   .slick-track {
   }
 
@@ -134,11 +136,11 @@ function MktSliderCarousel() {
   // 슬라이드 설정
   const settings = {
     infinite: true,
-    speed: 1000,
+    speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     dots: true
   };
 
@@ -149,7 +151,7 @@ function MktSliderCarousel() {
           <img src={banner01} />
         </a>
       </article>
-      
+
       <article className="mktBannerArticle">
         <a className="mktBannerLink">
           <img src={banner02} />
@@ -197,7 +199,7 @@ function MktSliderCarousel() {
           <img src={banner09} />
         </a>
       </article>
-      
+
       <article className="mktBannerArticle">
         <a className="mktBannerLink">
           <img src={banner10} />
