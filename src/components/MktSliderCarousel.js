@@ -16,30 +16,52 @@ import "slick-carousel/slick/slick-theme.css";
 
 /** 이미지 참조 */
 // Mkt banner 슬라이드
-import first from "../assets/img/img_main_banner01.png";
-import second from "../assets/img/img_main_banner02.png";
+import banner01 from "../assets/img/img_main_banner01.png";
+import banner02 from "../assets/img/img_main_banner02.png";
+import banner03 from "../assets/img/img_main_banner04.png";
+import banner04 from "../assets/img/img_main_banner05.png";
+import banner05 from "../assets/img/img_main_banner08.png";
+import banner06 from "../assets/img/mainbanner_220117.png";
+import banner07 from "../assets/img/parking-banner210903.png";
+import banner08 from "../assets/img/뉴스위크-World’s-Best-Hospital2022-선정-배너.png";
+import banner09 from "../assets/img/세브란스병원_메인_온라인사본발급_210203.png";
+import banner10 from "../assets/img/img_main_banner_220804.png";
+import banner11 from "../assets/img/img_main_221116.png";
 
 // 슬라이드 영역 스타일
 const StyledSlider = styled(Slider)`
   width: 1006px;
-  height: 417px;
+  height: 469px;
   margin: 0 auto;
   position: relative;
 
+  // arrow none
   .slick-prev::before,
   .slick-next::before {
     opacity: 0;
     display: none;
   }
 
+  //슬라이더  컨텐츠
   .slick-slide div {
-    //슬라이더  컨텐츠
-    cursor: pointer;
+    width: 229px;
+    height: 417px;
+  }
+
+  .slick-slider {
+  }
+
+  .slick-slide {
+  }
+
+  .slick-list {
+  }
+  .slick-track {
   }
 
   .slick-dots {
     position: absolute;
-    bottom: 20px;
+    bottom: 0;
   }
 
   /* 비활성화된 동그라미 */
@@ -90,37 +112,31 @@ const StyledSlider = styled(Slider)`
     background-color: #ffd553;
   }
 
-  .mktBannerGroup {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    
-    .mktBannerList {
-      width: 229px;
+  .mktBannerArticle {
+    width: 229px;
+    height: 417px;
+
+    .mktBannerLink {
+      display: block;
+      width: 100%;
       height: 100%;
 
-      .mktBannerLink {
+      img {
         display: block;
-        width: 100%;
-        height: 100%;
-        img {
-          display: block;
-          width: 229px;
-          height: 417px;
-        }
+        width: 229px;
+        height: 417px;
       }
     }
   }
 `;
 
-function InfoSliderCarousel() {
+function MktSliderCarousel() {
   // 슬라이드 설정
   const settings = {
     infinite: true,
-    fade: true,
     speed: 1000,
-    slideToShow: 4,
-    slideToScroll: 1,
+    slidesToShow: 4,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
     dots: true
@@ -128,40 +144,73 @@ function InfoSliderCarousel() {
 
   return (
     <StyledSlider {...settings}>
-      <ul className="mktBannerGroup">
-        <li className="mktBannerList">
-          <a className="mktBannerLink">
-            <img src={first} />
-          </a>
-        </li>
-        <li className="mktBannerList">
-          <a className="mktBannerLink">
-            <img src={second} />
-          </a>
-        </li>
-        <li className="mktBannerList">
-          <a className="mktBannerLink">
-            <img src={second} />
-          </a>
-        </li>
-        <li className="mktBannerList">
-          <a className="mktBannerLink">
-            <img src={second} />
-          </a>
-        </li>
-        <li className="mktBannerList">
-          <a className="mktBannerLink">
-            <img src={second} />
-          </a>
-        </li>
-        <li className="mktBannerList">
-          <a className="mktBannerLink">
-            <img src={second} />
-          </a>
-        </li>
-      </ul>
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner01} />
+        </a>
+      </article>
+      
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner02} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner03} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner04} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner05} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner06} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner07} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner08} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner09} />
+        </a>
+      </article>
+      
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner10} />
+        </a>
+      </article>
+
+      <article className="mktBannerArticle">
+        <a className="mktBannerLink">
+          <img src={banner11} />
+        </a>
+      </article>
     </StyledSlider>
   );
 }
 
-export default InfoSliderCarousel;
+export default MktSliderCarousel;
