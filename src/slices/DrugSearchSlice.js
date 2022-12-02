@@ -1,7 +1,7 @@
 /**
  * @ File Name: DrugSearchSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-11-30 15:1:00
+ * @ Last Update: 2022-12-02 15:1:00
  * @ Description: 의약품 검색 페이지 slice
  */
 
@@ -11,16 +11,27 @@ import axios from 'axios';
 /** 비동기 처리 함수 구현 */
 export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", async (payload, { rejectWithValue }) => {
     let result = null;
+    let params = null;
+
+    //검색어가있다면
+    if(payload?.item_name){
+        params = {
+            serviceKey: process.env.REACT_APP_DRUG2_API_ENCODING_KEY,
+            // 검색명 : 품목명 
+            item_name: payload.item_name
+        }
+    }
 
     try {
         const response = await axios.get(process.env.REACT_APP_DRUG2_API_URL,{
             params: {
-                serviceKey: process.env.REACT_APP_DRUG2_API_ENCODING_KEY,
-                // 검색명 : 품목명 
-                item_name: payload.item_name
+                // serviceKey: process.env.REACT_APP_DRUG2_API_ENCODING_KEY
+                serviceKey:'9Txp23emmXEQZ6s5oSTPMJdjECCgEFXkggChxH9y1+bSZmRIADuyyebZZLCD5CzjT6csz3QziklzOwFAI5h4Cw==',
+                type: 'json',
+                page: payload.page ? payload.page:1
             }
         });
-        result = response.data;
+        result = response.data.body;
     } catch (err) {
         result = rejectWithValue(err.response);
     }
@@ -61,4 +72,4 @@ const DrugSearchSlice = createSlice({
     }
 })
 
-export default DrugSearchSlice;
+export default DrugSearchSlice.reducer;

@@ -15,7 +15,7 @@ import {
   getItem,
 } from '../../slices/CustomerBoardSlice';
 import dayjs from 'dayjs';
-
+import Spinner from '../../components/Spinner';
 import styled from 'styled-components';
 import CustomerBoardHeader from './CustomerHeader';
 import Header from '../../components/MainPageHeader';
@@ -69,58 +69,59 @@ const CustomerBoardView = memo(() => {
 
   return (
     <div>
-    <div className="pageCont">
-      <Header />
-      <CustomerBoardHeader />
-      <h4 className="pageSubtitle">고객의소리 게시판</h4>
+      <Spinner loading={loading} />
+      <div className="pageCont">
+        <Header />
+        <CustomerBoardHeader />
+        <h4 className="pageSubtitle">고객의소리 게시판</h4>
 
-      {error ? (
-        <h1> 에러발생함 </h1>
-      ) : (
-        item && (
-          <div className="suggestionViewCont">
-            <div className="subjectArea">
-              <h3 className="subject">{item.title}</h3>
-              <div className="articleInfo">
-                <span>{dayjs(new Date(item.date)).format('YYYY-MM-DD')}</span>
-                &nbsp;|&nbsp;<span>{item.name}</span>
+        {error ? (
+          <h1> 에러발생함 </h1>
+        ) : (
+          item && (
+            <div className="suggestionViewCont">
+              <div className="subjectArea">
+                <h3 className="subject">{item.title}</h3>
+                <div className="articleInfo">
+                  <span>{dayjs(new Date(item.date)).format('YYYY-MM-DD')}</span>
+                  &nbsp;|&nbsp;<span>{item.name}</span>
+                </div>
+              </div>
+              <div className="subjectArea extendField">
+                <dl className="flex">
+                  <dt>접수구분</dt>
+                  <p>{item.register}</p>
+                </dl>
+                <dl className="flex">
+                  <dt>기관</dt>
+                  <p>{item.hospital}</p>
+                </dl>
+                <dl className="flex">
+                  <dt>부서</dt>
+                  <p>{item.dept}</p>
+                </dl>
+              </div>
+              <div className="articleQarea">
+                <strong className="qnaTitle">Q</strong>
+                <p className='articleArea'>{item.content}</p>
+              </div>
+              <div className="buttonCont">
+                <NavLink className="buttonBlue" to="/customer.do">
+                  목록
+                </NavLink>
+                <button
+                  className="buttonBlue marginleft"
+                  type="button"
+                  data-id={item.id}
+                  onClick={onCustomerBoardDelete}
+                >
+                  삭제
+                </button>
               </div>
             </div>
-            <div className="subjectArea extendField">
-              <dl className="flex">
-                <dt>접수구분</dt>
-                <p>{item.register}</p>
-              </dl>
-              <dl className="flex">
-                <dt>기관</dt>
-                <p>{item.hospital}</p>
-              </dl>
-              <dl className="flex">
-                <dt>부서</dt>
-                <p>{item.dept}</p>
-              </dl>
-            </div>
-            <div className="articleQarea">
-              <strong className="qnaTitle">Q</strong>
-              <p className='articleArea'>{item.content}</p>
-            </div>
-      <div className="buttonCont">
-        <NavLink className="buttonBlue" to="/customer.do">
-          목록
-        </NavLink>
-        <button
-          className="buttonBlue marginleft"
-          type="button"
-          data-id={item.id}
-          onClick={onCustomerBoardDelete}
-        >
-          삭제
-        </button>
+          )
+        )}
       </div>
-          </div>
-        )
-      )}
-    </div>
       <Footer />
     </div>
   );
