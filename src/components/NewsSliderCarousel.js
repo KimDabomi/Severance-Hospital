@@ -49,7 +49,7 @@ const StyledSlider = styled(Slider)`
     align-items: flex-end;
   }
 
-  .newsBox {
+  /* .newsBox {
     width: 297px;
     height: 210px;
 
@@ -96,7 +96,7 @@ const StyledSlider = styled(Slider)`
       font-size: 16px;
       line-height: 16px;
     }
-  }
+  } */
 `;
 
 // 앞으로가기 버튼 스타일

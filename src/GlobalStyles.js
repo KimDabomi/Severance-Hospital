@@ -577,6 +577,60 @@ textarea{
     background-size: cover;
     vertical-align: middle;
   }
+
+  /** 메인페이지 뉴스 */
+  /* 박스 */
+  .newsBox {
+    width: 297px;
+    height: 210px;
+
+    background-color: white;
+
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 43px 30px 28px;
+    box-sizing: border-box;
+
+    position: relative;
+
+    /* 카테고리 (언론 보도) */
+    .newsCategory {
+      width: 78px;
+      height: 40px;
+      display: block;
+
+      position: absolute;
+      top: -10px;
+      left: 30px;
+
+      padding: 0 10px;
+      box-sizing: border-box;
+
+      background-color: #ac47d1;
+      color: white;
+
+      font-size: 14px;
+      line-height: 40px;
+      text-align: center;
+
+      white-space: nowrap;
+    }
+
+    /* 타이틀 */
+    .newsContentTitle {
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    /* 날짜 */
+    .newsDate {
+      display: block;
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
 `;
 
 export default GlobalStyles;
