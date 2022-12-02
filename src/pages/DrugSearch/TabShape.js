@@ -195,7 +195,7 @@ const DrugCont = styled.div`
 
 const TabShape = memo(() => {
   return (
-    <DrugCont className="pageCont">
+    <DrugCont>
       <fieldset>
         <form>
           <div className="drugOption">

@@ -5,22 +5,19 @@
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 const DrugCont = styled.div`
-  .searchBox {
-    display: flex;
-    -webkit-box-align: center;
-    padding: 15px 150px 15px 150px;
-    background: #f9f9f9;
-    justify-content: center;
-    align-items: center;
-    -webkit-box-pack: center;
-  }
+
 `;
 
 const TabInfo = memo(() => {
+  /** 닫기버튼 눌렸을 때 */
+  const closeClick = useCallback((e) =>{
+    document.querySelector('.popUpCont').style.display='none';
+  })
+
   return (
     <DrugCont>
       <form>
@@ -66,6 +63,17 @@ const TabInfo = memo(() => {
         {/* 페이지가 2페이지 이상일 경우 */}
         <div className="buttonContColumn">
           <Link className="btnMore">더보기</Link>
+        </div>
+      </div>
+
+      {/* 유효성검사 알람 팝업창 */}
+      <div className="popUpCont">
+        <div className="dimed"></div>
+        <div className="popUp">
+          <div className='alert'></div>
+          <div className='closeBtnCont'>
+            <button type="button" className='closeBtn' onClick={closeClick}>닫기</button>
+          </div>
         </div>
       </div>
     </DrugCont>

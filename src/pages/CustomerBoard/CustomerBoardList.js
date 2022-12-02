@@ -66,6 +66,7 @@ const CustomerBoardList = memo(() => {
 
 
   return (
+    <div>
     <CustomerBoardCont>
       <Header />
       <CustomerBoardHeader />
@@ -114,8 +115,9 @@ const CustomerBoardList = memo(() => {
         <NavLink className='buttonBlue' to="/suggest.do">글쓰기</NavLink>
         <Pagination count={10} className="paging" />
       </div>
-      <Footer />
     </CustomerBoardCont>
+      <Footer />
+    </div>
   );
 });
 

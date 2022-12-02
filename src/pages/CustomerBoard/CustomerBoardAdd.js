@@ -246,6 +246,7 @@ const CustomerBoardAdd = memo(() => {
   }
 
   return (
+    <div>
     <CustomerBoardAddCont>
       <Header />
       <CustomerBoardHeader />
@@ -480,7 +481,7 @@ const CustomerBoardAdd = memo(() => {
         </form>
       )}
       
-      <Footer />
+      
 
       {/* 유효성검사 알람 팝업창 */}
       <div className="popUpCont">
@@ -493,6 +494,8 @@ const CustomerBoardAdd = memo(() => {
         </div>
       </div>
     </CustomerBoardAddCont>
+    <Footer />
+    </div>
   );
 });
 

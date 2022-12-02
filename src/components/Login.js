@@ -1,7 +1,7 @@
 /**
  * @ File Name: Login.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-11-28 17:20
+ * @ Last Update: 2022-12-01 15:50
  * @ Description: 로그인 첫 페이지
  */
 
@@ -184,6 +184,7 @@ const Container = styled.div`
       padding: 2% 3%;
       font-size: 18px;
       margin-left: 25%;
+      cursor: pointer;
     }
   }
   .checkBox {
@@ -233,6 +234,9 @@ const Login = memo(() => {
     navigate("/mypage");
   };
 
+  const joinBtnClick = e => {
+    navigate('/join_way');
+  };
   return (
     <Container>
       <div>
@@ -325,7 +329,7 @@ const Login = memo(() => {
             지금 바로 회원가입을 하고 <br />
             나에게 딱 맞는 정보를 확인해 보세요!
           </p>
-          <button type="button">회원가입</button>
+          <button type="button" onClick={joinBtnClick}>회원가입</button>
         </div>
         {/* <footer>
           <Link to='/'>이용약관</Link>
