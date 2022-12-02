@@ -9,6 +9,13 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
+/** 이미지 참조 */
+// 전화 및 닫기버튼 이미지
+import TelYellow from "../assets/img/ico-tel-yellow@2x.png";
+import TelPrimary from "../assets/img/ico-tel-primary@2x.png";
+import CheckboxChecked from "../assets/img/ico-checkbox-checked.png";
+import CloseCircle from "../assets/img/ico-close-circle@2x.png";
+
 /** 상단 배너 스타일 */
 const TopBannerSection = styled.section`
   width: 100%;
@@ -43,7 +50,7 @@ const TopBannerSection = styled.section`
         width: 52px;
         height: 52px;
         margin-right: 15px;
-        background: url(./img/ico-tel-yellow@2x.png) no-repeat center / cover;
+        ${`backGround: url(${TelYellow}) no-repeat center /cover;`}
       }
 
       .title {
@@ -78,7 +85,7 @@ const TopBannerSection = styled.section`
         width: 52px;
         height: 52px;
         margin-right: 15px;
-        background: url(./img/ico-tel-primary@2x.png) no-repeat center / cover;
+        ${`backGround: url(${TelPrimary}) no-repeat center /cover;`}
       }
 
       .title {
@@ -114,7 +121,7 @@ const TopBannerSection = styled.section`
       }
 
       .topBannerCloseCheckbox[id="close"]:checked + label::before {
-        background: white url(./img/ico-checkbox-checked.png) no-repeat 45% center;
+        ${`backGround: white url(${CheckboxChecked}) no-repeat 45% center;`}
         background-size: 13px 10px;
       }
 
@@ -143,7 +150,7 @@ const TopBannerSection = styled.section`
           display: block;
           width: 26px;
           height: 26px;
-          background: url(./img/ico-close-circle@2x.png) no-repeat center / cover;
+          ${`backGround: url(${CloseCircle}) no-repeat center /cover;`}
         }
       }
     }

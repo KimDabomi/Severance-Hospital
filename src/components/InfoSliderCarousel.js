@@ -15,6 +15,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+/** 이미지 참조 */
+// 더보기 버튼 이미지
+import Plus from "../assets/img/ico-plus-sm-lightgray@2x.png";
+
 /** 슬라이드 전체 박스 스타일 */
 const SlideContainer = styled.div`
   width: 260px;
@@ -129,7 +133,7 @@ const PlusButton = styled.div`
   transform: translate(50%);
   z-index: 100;
 
-  background: #fff url(./img/ico-plus-sm-lightgray@2x.png) no-repeat center / cover;
+  ${`backGround: #fff url(${Plus}) no-repeat center /cover;`}
   background-size: 15px 15px;
 
   box-sizing: border-box;

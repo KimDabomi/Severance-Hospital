@@ -38,6 +38,12 @@ import ShortcutRecervation from "../../assets/img/ico-shortcut-reservation@2x.pn
 // 힘내요, 세브란스, 전공의 모집
 import Cheerup from "../../assets/img/main-cheerup.jpg";
 import Recruitment from "../../assets/img/img-recruitment.png";
+// 메인 페이지 HospitalSection 배경 이미지
+import BgMainPattern from "../../assets/img/bg-main-pattern.png";
+// 뉴스 페이지 더보기 버튼 이미지
+import BtnMorePlus from "../../assets/img/btn-more-plus.jpg";
+// mkt banner 배경 이미지
+import BgMktBanner from "../../assets/img/bg-mkt-banner.jpg";
 
 /** 메인 스타일 */
 const Main = styled.main`
@@ -88,7 +94,7 @@ const Main = styled.main`
 const HospitalSection = styled.section`
   width: 1920px;
   padding-bottom: 60px;
-  background: url(./img/bg-main-pattern.png) no-repeat center / cover;
+  ${`backGround: url(${BgMainPattern}) no-repeat center /cover;`}
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -279,7 +285,11 @@ const NewsSection = styled.section`
           display: block;
           width: 27px;
           height: 27px;
-          background: url(./img/btn-more-plus.jpg) no-repeat center / cover;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
 
@@ -334,7 +344,7 @@ const BannerSection = styled.section`
   height: 614px;
   padding: 65px 0 80px;
   box-sizing: border-box;
-  background: url(./img/bg-mkt-banner.jpg) no-repeat center / cover;
+  ${`backGround: url(${BgMktBanner}) no-repeat center /cover;`}
 `;
 
 const MainPage = () => {
@@ -474,7 +484,9 @@ const MainPage = () => {
             <article className="news">
               <h3>
                 <strong>NEWS</strong>
-                <Link to="/news_home" />
+                <Link to="/news_home">
+                  <img src={BtnMorePlus} />
+                </Link>
               </h3>
               <p>고객여러분께 가장 빠른 소식을 제공해 드리겠습니다.</p>
 
