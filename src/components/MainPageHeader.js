@@ -95,6 +95,7 @@ const GnbContainer = styled.div`
       display: flex;
       align-items: center;
       a {
+        font-weight: bold;
         img {
         }
         .allMenuIcon {

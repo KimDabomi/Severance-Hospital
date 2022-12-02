@@ -55,9 +55,11 @@ const StyledSlider = styled(Slider)`
 
     background-color: white;
 
-    display: flex;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
 
-    padding: 30px 30px 28px;
+    padding: 43px 30px 28px;
     box-sizing: border-box;
 
     position: relative;
@@ -93,8 +95,6 @@ const StyledSlider = styled(Slider)`
       display: block;
       font-size: 16px;
       line-height: 16px;
-      position: absolute;
-      bottom: 28px;
     }
   }
 `;
