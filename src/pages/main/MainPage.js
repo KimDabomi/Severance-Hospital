@@ -6,9 +6,10 @@
  */
 
 /** import */
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 
 /** 컴포넌트 참조 */
 // 헤더, 푸터
@@ -348,9 +349,20 @@ const BannerSection = styled.section`
 `;
 
 const MainPage = () => {
+  const COOKIE_KEY = "saebalHideModal";
+  const [cookies, setCookie] = useCookies([COOKIE_KEY]);
+  const [popup, setPopup] = useState(true);
+
+  // 새로고침시 최상단 이동
+  // useEffect(() => {
+  //   window.onbeforeunload = function pushRefresh() {
+  //     window.scrollTo(0, 0);
+  //   };
+  // }, []);
+
   return (
     <>
-      <TopBanner />
+      {cookies[COOKIE_KEY] || !popup ? null : <TopBanner onClose={setPopup} />}
 
       <MainPageHeader />
 

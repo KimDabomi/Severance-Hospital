@@ -6,8 +6,10 @@
  */
 
 /** import */
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import styled from "styled-components";
+import moment from "moment";
+import { useCookies } from "react-cookie";
 
 /** 이미지 참조 */
 // 전화 및 닫기버튼 이미지
@@ -157,7 +159,31 @@ const TopBannerSection = styled.section`
   }
 `;
 
-const TopBanner = memo(() => {
+const TopBanner = memo((props) => {
+  const { onClose } = props;
+
+  const [isChecked, setIsChecked] = useState(true);
+
+  const COOKIE_KEY = "saebalHideModal";
+  const [cookies, setCookie] = useCookies([COOKIE_KEY]);
+  
+  const hideModal = () => {
+    if (!isChecked) {
+      return;
+    }
+    const decade = moment();
+    decade.add(1, "d");
+    setCookie(COOKIE_KEY, "true", {
+      path: "/",
+      expires: decade.toDate()
+    });
+  };
+
+  const checkHandler = () => {
+    setIsChecked(!isChecked);
+    console.log(!isChecked);
+  };
+
   return (
     <TopBannerSection>
       <div className="topBannerContent">
@@ -181,11 +207,14 @@ const TopBanner = memo(() => {
         </article>
 
         <div className="closeBox">
-          <input type="checkbox" defaultChecked="checked" id="close" className="topBannerCloseCheckbox" />
+          <input type="checkbox" defaultChecked="checked" id="close" className="topBannerCloseCheckbox" onChange={checkHandler} />
           <label htmlFor="close">
             <span className="closeText">오늘하루 열지않기</span>
           </label>
-          <button type="button">
+          <button type="button" onClick={() => {
+            onClose(false);
+            hideModal();
+            }}>
             <i className="topBannerCloseIcon" />
           </button>
         </div>
