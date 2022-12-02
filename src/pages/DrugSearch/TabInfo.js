@@ -6,7 +6,7 @@
  */
 
 import React, { memo, useCallback } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/Spinner'
 import RegexHelper from '../../helper/RegexHelper';

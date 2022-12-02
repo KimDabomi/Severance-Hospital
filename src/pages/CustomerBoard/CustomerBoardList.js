@@ -16,6 +16,7 @@ import { useQueryString } from '../../hooks/useQueryString';
 
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import Spinner from '../../components/Spinner'
 import CustomerBoardHeader from './CustomerHeader';
 import { Pagination } from '@mui/material';
 
@@ -67,55 +68,56 @@ const CustomerBoardList = memo(() => {
 
   return (
     <div>
-    <CustomerBoardCont>
-      <Header />
-      <CustomerBoardHeader />
-      <h4 className="pageSubtitle">고객의소리 게시판</h4>
+      <Spinner loading={loading} />
+      <CustomerBoardCont>
+        <Header />
+        <CustomerBoardHeader />
+        <h4 className="pageSubtitle">고객의소리 게시판</h4>
 
-      {/* 조회결과 표시하기 */}
-      {error ? (
-        <h1>에러 발생함</h1>
-      ) : (
-        data && (
-          <table>
-            <thead>
-              <tr>
-                <th>글번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                //처리 결과는 존재하지만 0개인경우
-                data.length > 0 ? (
-                  data.map((v, i) => {
-                    return (
-                      <tr key={v.id}>
-                        <td>{v.id}</td>
-                        <td><NavLink to={`/suggestion/${v.id}`}>{v.title}</NavLink></td>
-                        <td>{v.name}</td>
-                        <td>{dayjs(new Date(v.date)).format('YYYY/MM/DD')}</td>
-                      </tr>
-                    );
-                  })
-                ) : (
-                  <tr>
-                    <td colSpan="4">글이 없습니다.</td>
-                  </tr>
-                )
-              }
-            </tbody>
-          </table>
-        )
-      )}
+        {/* 조회결과 표시하기 */}
+        {error ? (
+          <h1>에러 발생함</h1>
+        ) : (
+          data && (
+            <table>
+              <thead>
+                <tr>
+                  <th>글번호</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>작성일</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  //처리 결과는 존재하지만 0개인경우
+                  data.length > 0 ? (
+                    data.map((v, i) => {
+                      return (
+                        <tr key={v.id}>
+                          <td>{v.id}</td>
+                          <td><NavLink to={`/suggestion/${v.id}`}>{v.title}</NavLink></td>
+                          <td>{v.name}</td>
+                          <td>{dayjs(new Date(v.date)).format('YYYY/MM/DD')}</td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan="4">글이 없습니다.</td>
+                    </tr>
+                  )
+                }
+              </tbody>
+            </table>
+          )
+        )}
 
-      <div className='buttonContColumn'>
-        <NavLink className='buttonBlue' to="/suggest.do">글쓰기</NavLink>
-        <Pagination count={10} className="paging" />
-      </div>
-    </CustomerBoardCont>
+        <div className='buttonContColumn'>
+          <NavLink className='buttonBlue' to="/suggest.do">글쓰기</NavLink>
+          <Pagination count={10} className="paging" />
+        </div>
+      </CustomerBoardCont>
       <Footer />
     </div>
   );
