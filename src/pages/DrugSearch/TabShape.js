@@ -6,8 +6,9 @@
  */
 
 import React, { memo } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 
 const DrugCont = styled.div`
   .drugOption {
