@@ -6,8 +6,23 @@
  */
 
 /** import */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+/** SNS 아이콘 이미지 */
+import NP from "../assets/img/ico-sns-np@2x.png";
+import NB from "../assets/img/ico-sns-nb@2x.png";
+import YT from "../assets/img/ico-sns-yt@2x.png";
+import IG from "../assets/img/ico-sns-ig@2x.png";
+import FB from "../assets/img/ico-sns-fb@2x.png";
+import TT from "../assets/img/ico-sns-tt@2x.png";
+// SNS 아이콘 grayscale 이미지
+import NPGray from "../assets/img/ico-sns-gray-np@2x.png";
+import NBGray from "../assets/img/ico-sns-gray-nb@2x.png";
+import YTGray from "../assets/img/ico-sns-gray-yt@2x.png";
+import IGGray from "../assets/img/ico-sns-gray-ig@2x.png";
+import FBGray from "../assets/img/ico-sns-gray-fb@2x.png";
+import TTGray from "../assets/img/ico-sns-gray-tt@2x.png";
 
 /** 푸터 스타일 */
 const FooterContainer = styled.footer`
@@ -37,49 +52,55 @@ const FooterContainer = styled.footer`
         a {
           width: 30px;
           height: 30px;
+          transition: 0.2s ease-in-out;
         }
+      }
 
-        .npIcon {
-          background: url(./img/ico-sns-gray-np@2x.png) no-repeat center /cover;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            background: url(./img/ico-sns-np@2x.png) no-repeat center /cover;
-          }
+      .npIcon {
+        ${`backGround: url(${NPGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${NP}) no-repeat center /cover;`}
         }
-        .nbIcon {
-          background: url(./img/ico-sns-gray-nb@2x.png) no-repeat center /cover;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            background: url(./img/ico-sns-nb@2x.png) no-repeat center /cover;
-          }
+      }
+
+      .nbIcon {
+        ${`backGround: url(${NBGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${NB}) no-repeat center /cover;`}
         }
-        .ytIcon {
-          background: url(./img/ico-sns-gray-yt@2x.png) no-repeat center /cover;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            background: url(./img/ico-sns-yt@2x.png) no-repeat center /cover;
-          }
+      }
+
+      .ytIcon {
+        ${`backGround: url(${YTGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${YT}) no-repeat center /cover;`}
         }
-        .igIcon {
-          background: url(./img/ico-sns-gray-ig@2x.png) no-repeat center /cover;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            background: url(./img/ico-sns-ig@2x.png) no-repeat center /cover;
-          }
+      }
+
+      .igIcon {
+        ${`backGround: url(${IGGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${IG}) no-repeat center /cover;`}
         }
-        .fbIcon {
-          background: url(./img/ico-sns-gray-fb@2x.png) no-repeat center /cover;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            background: url(./img/ico-sns-fb@2x.png) no-repeat center /cover;
-          }
+      }
+
+      .fbIcon {
+        ${`backGround: url(${FBGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${FB}) no-repeat center /cover;`}
         }
-        .ttIcon {
-          background: url(./img/ico-sns-gray-tt@2x.png) no-repeat center /cover;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            background: url(./img/ico-sns-tt@2x.png) no-repeat center /cover;
-          }
+      }
+
+      .ttIcon {
+        ${`backGround: url(${TTGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${TT}) no-repeat center /cover;`}
         }
       }
     }
@@ -129,28 +150,22 @@ const Footer = () => {
       <div className="familySite">
         <ul className="snsLink">
           <li>
-            <a href="https://m.post.naver.com/my.naver?memberNo=19457070" target="_blank" rel="noopener noreferrer" className="npIcon">
-            </a>
+            <a href="https://m.post.naver.com/my.naver?memberNo=19457070" target="_blank" rel="noopener noreferrer" className="npIcon"></a>
           </li>
           <li>
-            <a href="https://blog.naver.com/meet_the_sev" target="_blank" rel="noopener noreferrer" className="nbIcon">
-            </a>
+            <a href="https://blog.naver.com/meet_the_sev" target="_blank" rel="noopener noreferrer" className="nbIcon"></a>
           </li>
           <li>
-            <a href="https://www.youtube.com/user/SeveranceHospital" target="_blank" rel="noopener noreferrer" className="ytIcon">
-            </a>
+            <a href="https://www.youtube.com/user/SeveranceHospital" target="_blank" rel="noopener noreferrer" className="ytIcon"></a>
           </li>
           <li>
-            <a href="https://www.instagram.com/severance_insta/" target="_blank" rel="noopener noreferrer" className="igIcon">
-            </a>
+            <a href="https://www.instagram.com/severance_insta/" target="_blank" rel="noopener noreferrer" className="igIcon"></a>
           </li>
           <li>
-            <a href="https://www.facebook.com/SeveranceFan" target="_blank" rel="noopener noreferrer" className="fbIcon">
-            </a>
+            <a href="https://www.facebook.com/SeveranceFan" target="_blank" rel="noopener noreferrer" className="fbIcon"></a>
           </li>
           <li>
-            <a href="https://twitter.com/iSEVERANCE" target="_blank" rel="noopener noreferrer" className="ttIcon">
-            </a>
+            <a href="https://twitter.com/iSEVERANCE" target="_blank" rel="noopener noreferrer" className="ttIcon"></a>
           </li>
         </ul>
       </div>
