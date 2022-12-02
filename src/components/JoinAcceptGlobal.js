@@ -1,8 +1,8 @@
 /**
- * @ File Name: JoinAccept.js
+ * @ File Name: JoinAcceptGlobal.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-01 17:10
- * @ Description: 약관동의 페이지
+ * @ Last Update: 2022-12-02 16:00
+ * @ Description: 해외거주 외국인 약관동의 페이지
  */
 
 import React, { memo, useEffect, useState } from "react";
@@ -129,7 +129,7 @@ const Container = styled.div`
         }
         .right {
           float: left;
-          margin: 13px 2%;
+          margin: 13px 9%;
           height: 20px;
         }
       }
@@ -377,13 +377,6 @@ const JoinAccept = memo(() => {
                 <div className="box">
                   <img src={step01} alt="step01" />
                   <p>약관동의 하기</p>
-                </div>
-              </li>
-              <img src={Right} alt="right" className="right" />
-              <li>
-                <div className="box">
-                  <img src={step02} alt="step02" />
-                  <p>본인인증 하기</p>
                 </div>
               </li>
               <img src={Right} alt="right" className="right" />
