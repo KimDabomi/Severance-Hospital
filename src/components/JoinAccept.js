@@ -20,7 +20,8 @@ import warning from "../assets/img/ico-warning-mark@2x.png";
 
 const Container = styled.div`
   position: relative;
-  .not_check_term,.not_check_private {
+  .not_check_term,
+  .not_check_private {
     display: none;
     position: fixed;
     width: 100%;
@@ -35,7 +36,7 @@ const Container = styled.div`
       width: 350px;
       height: 180px;
       margin: auto;
-      transform: translate(0,50%);
+      transform: translate(0, 50%);
       text-align: center;
       padding-top: 35px;
       box-sizing: border-box;
@@ -97,15 +98,16 @@ const Container = styled.div`
     border-bottom: 1px solid #ccc;
   }
   .accept_content {
-    margin-left: 2%;
+    margin-left: 3%;
     .steps {
       ol {
         li {
           .box {
             font-size: 16px;
             float: left;
-            border: 1px solid #ccc;
-            width: 20%;
+            border: 2px solid #e6e6e6;
+            width: 240px;
+            height: 50px;
             text-align: left;
             padding: 5px 0;
             box-sizing: border-box;
@@ -120,16 +122,17 @@ const Container = styled.div`
               margin-top: 4px;
             }
           }
-          &:first-child {
+          &:nth-of-type(1) {
             .box {
               color: rgb(0, 148, 251);
+              font-weight: bold;
               border: 2px solid rgb(0, 148, 251);
             }
           }
         }
         .right {
           float: left;
-          margin: 13px 2%;
+          margin: 13px 2.8%;
           height: 20px;
         }
       }
@@ -285,63 +288,76 @@ const Container = styled.div`
     background-color: #0094fb !important;
   }
 `;
+
 const JoinAccept = memo(() => {
   const navigate = useNavigate();
-  
+
   // 동의합니다 버튼을 눌렀을 때 회원가입 페이지로 이동
-  const acceptBtnClick = e => {
-    navigate('/join_us');
+  const acceptBtnClick = (e) => {
+    navigate("/join_certificate");
   };
 
   // 동의하지 않습니다 버튼을 눌렀을 때 회원가입 방법 선택 페이지로 이동
-  const notAcceptBtnClick = e => {
-    navigate('/join_way');
+  const notAcceptBtnClick = (e) => {
+    navigate("/join_way");
   };
 
   const [checkList, setCheckList] = useState([]);
 
   // 약관 전체 동의 체크박스 이벤트
-  const checkAll = e => {
-    e.target.checked ? setCheckList(['agree_term','agree_private','agree_marketing']) : setCheckList([]);
+  const checkAll = (e) => {
+    e.target.checked
+      ? setCheckList(["agree_term", "agree_private", "agree_marketing"])
+      : setCheckList([]);
   };
 
   // 체크박스 각 항목 이벤트
-  const check = e => {
-    e.target.checked ? setCheckList([...checkList,e.target.name]) : setCheckList(checkList.filter((choice) => choice !== e.target.name));
+  const check = (e) => {
+    e.target.checked
+      ? setCheckList([...checkList, e.target.name])
+      : setCheckList(checkList.filter((choice) => choice !== e.target.name));
   };
 
   // 필수 항목 미체크 시 팝업화면 띄우기
-  const notCheckTerm = e => {
-    document.querySelector('.not_check_term').style.display = 'block';
+  const notCheckTerm = (e) => {
+    document.querySelector(".not_check_term").style.display = "block";
   };
 
-  const notCheckPrivate = e => {
-    document.querySelector('.not_check_private').style.display = 'block';
+  const notCheckPrivate = (e) => {
+    document.querySelector(".not_check_private").style.display = "block";
   };
 
   // 팝업화면 닫기 버튼 클릭 이벤트
-  const closeBox = e => {
-    document.querySelector('.not_check_term').style.display = 'none';
-    document.querySelector('.not_check_private').style.display = 'none';
-  }
-
-
+  const closeBox = (e) => {
+    document.querySelector(".not_check_term").style.display = "none";
+    document.querySelector(".not_check_private").style.display = "none";
+  };
 
   return (
     <Container>
       <div>
-        <form className='not_check_term'>
-          <div class='popup'>
-            <p>이용약관에 동의를 해야 회원가입<br />
-            진행이 가능합니다.</p>
-            <button type='button' className='close' onClick={closeBox}>닫기</button>
+        <form className="not_check_term">
+          <div class="popup">
+            <p>
+              이용약관에 동의를 해야 회원가입
+              <br />
+              진행이 가능합니다.
+            </p>
+            <button type="button" className="close" onClick={closeBox}>
+              닫기
+            </button>
           </div>
         </form>
-        <form className='not_check_private'>
-          <div class='popup'>
-            <p>개인정보 수집·이용에 동의를 해야<br />
-            회원가입 진행이 가능합니다.</p>
-            <button type='button' className='close' onClick={closeBox}>닫기</button>
+        <form className="not_check_private">
+          <div class="popup">
+            <p>
+              개인정보 수집·이용에 동의를 해야
+              <br />
+              회원가입 진행이 가능합니다.
+            </p>
+            <button type="button" className="close" onClick={closeBox}>
+              닫기
+            </button>
           </div>
         </form>
         <div className="nav">
@@ -430,7 +446,7 @@ const JoinAccept = memo(() => {
                     id="agree_all"
                     className="checkBox"
                     onClick={checkAll}
-                    checked={checkList.length===3 ? true : false}
+                    checked={checkList.length === 3 ? true : false}
                   />
                   <label htmlFor="agree_all">약관 전체 동의</label>
                 </div>
@@ -441,7 +457,7 @@ const JoinAccept = memo(() => {
                     name="agree_term"
                     id="agree_term"
                     className="checkBox"
-                    checked={checkList.includes('agree_term') ? true : false}
+                    checked={checkList.includes("agree_term") ? true : false}
                     onClick={check}
                   />
                   <label htmlFor="agree_term">
@@ -1237,7 +1253,7 @@ const JoinAccept = memo(() => {
                     name="agree_private"
                     id="agree_private"
                     className="checkBox"
-                    checked={checkList.includes('agree_private') ? true : false}
+                    checked={checkList.includes("agree_private") ? true : false}
                     onClick={check}
                   />
                   <label htmlFor="agree_private">
@@ -1432,7 +1448,9 @@ const JoinAccept = memo(() => {
                     name="agree_marketing"
                     id="agree_marketing"
                     className="checkBox"
-                    checked={checkList.includes('agree_marketing') ? true : false}
+                    checked={
+                      checkList.includes("agree_marketing") ? true : false
+                    }
                     onClick={check}
                   />
                   <label htmlFor="agree_marketing">
@@ -1475,11 +1493,22 @@ const JoinAccept = memo(() => {
               id="agreeBtn"
               className="accept_btn"
               data-url="over"
-              onClick={!checkList.includes('agree_term') ? notCheckTerm : !checkList.includes('agree_private') ? notCheckPrivate : acceptBtnClick}
+              onClick={
+                !checkList.includes("agree_term")
+                  ? notCheckTerm
+                  : !checkList.includes("agree_private")
+                  ? notCheckPrivate
+                  : acceptBtnClick
+              }
             >
               동의합니다
             </button>
-            <button type="button" id="notAgreeBtn" className="not_accept_btn" onClick={notAcceptBtnClick}>
+            <button
+              type="button"
+              id="notAgreeBtn"
+              className="not_accept_btn"
+              onClick={notAcceptBtnClick}
+            >
               동의하지 않습니다
             </button>
           </div>

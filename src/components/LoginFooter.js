@@ -1,10 +1,9 @@
 /**
  * @ File Name: LoginFooter.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-11-25 15:00
+ * @ Last Update: 2022-12-02 17:20
  * @ Description: 로그인 페이지 푸터
  */
-
 
 import React from "react";
 import styled from "styled-components";
@@ -22,7 +21,6 @@ const FooterContainer = styled.footer`
   width: 100%;
   height: 214px;
   padding-bottom: 30px;
-  padding-left: 2%;
   box-sizing: border-box;
   float: left;
   margin-top: 100px;
@@ -32,7 +30,7 @@ const FooterContainer = styled.footer`
     width: 100%;
     height: 50px;
     border-bottom: 1px solid #e6e6e6;
-
+    padding-left: 2%;
     .snsLink {
       width: 1280px;
       margin: 0 auto;
@@ -61,6 +59,7 @@ const FooterContainer = styled.footer`
 
   /* 사이트 정보 스타일 */
   .siteInfo {
+    padding-left: 2%;
     width: 1280px;
     height: 130px;
     margin: 0 auto;
@@ -124,7 +123,6 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-
       <div className="siteInfo">
         <ul className="shortcut">
           <li>

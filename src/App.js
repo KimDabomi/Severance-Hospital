@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import JoinWay  from "./components/JoinWay";
 import JoinAccept from "./components/JoinAccept";
 import JoinAcceptGlobal from "./components/JoinAcceptGlobal";
-
+import JoinCertificate from "./components/JoinCertificate";
 import JoinUs  from "./components/JoinUs";
 
 //고객의소리
@@ -36,6 +36,7 @@ function App() {
         <Route path='/join_way' element={<JoinWay />} />
         <Route path='/join_accept' element={<JoinAccept />} />
         <Route path='/join_accept_global' element={<JoinAcceptGlobal />} />
+        <Route path='/join_certificate' element={<JoinCertificate />} />
         <Route path='/join_us' element={<JoinUs />} />
         
         {/* 고객의소리 페이지 라우팅*/}
