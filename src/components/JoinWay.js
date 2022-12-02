@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinWay.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-11-28 17:20
+ * @ Last Update: 2022-12-02 16:00
  * @ Description: 회원가입 방법 선택 페이지
  */
 
@@ -11,6 +11,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import loginImg from "../assets/img/logo@2x.png";
 import JoinAccept from "./JoinAccept";
+import JoinAcceptGlobal from "./JoinAcceptGlobal";
 import LoginFooter from "./LoginFooter";
 import localImg from "../assets/img/ico-login1@2x.png";
 import childImg from "../assets/img/ico-login2@2x.png";
@@ -202,13 +203,14 @@ const JoinWay = memo(() => {
             <p>내/외국인</p>
             <img src={childImg} alt="소아/청소년" />
           </Link>
-          <Link to="/join_accept" className="root_box">
+          <Link to="/join_accept_global" className="root_box">
             <h2>해외거주 외국인</h2>
             <p>Foreign membership</p>
             <img src={globalImg} alt="해외거주외국인" />
           </Link>
           <Routes>
             <Route path="/join_accept" element={<JoinAccept />} />
+            <Route path="/join_accept_global" element={<JoinAcceptGlobal />} />
           </Routes>
           <div className="root_box">
             <h2>SNS 회원가입</h2>
