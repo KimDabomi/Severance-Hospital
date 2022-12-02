@@ -128,12 +128,12 @@ const Header = () => {
       <UtilContainer>
         <ul>
           <li>
-            <Link to="/my_page">
+            <Link to="/login">
               <img src={loginIcon} alt="login_icon" />
             </Link>
           </li>
           <li>
-            <Link to="/join_page">
+            <Link to="/join_way">
               <img src={joinIcon} alt="join_icon" />
             </Link>
           </li>
