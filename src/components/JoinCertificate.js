@@ -1,16 +1,16 @@
 /*
  * @ File Name: JoinCertificate.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-01 17:40
+ * @ Last Update: 2022-12-03 16:35
  * @ Description: 본인인증 페이지
  */
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import Right from "../assets/img/ico-arrow-right-gray@2x.png";
-import loginImg from "../assets/img/logo@2x.png";
 import step01 from "../assets/img/ico-login-step1-off@2x.png";
 import step02 from "../assets/img/ico-login-step2-on@2x.png";
 import step03 from "../assets/img/ico-login-step3-off@2x.png";
@@ -21,39 +21,6 @@ import official from "../assets/img/img-login-Certified03.png";
 
 const Container = styled.div`
   position: relative;
-  .nav {
-    width: 1280px;
-    height: 84px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-
-    ul {
-      display: flex;
-      li {
-        display: flex;
-        align-items: center;
-        a {
-          font-weight: bold;
-          text-align: center;
-          font-size: 20px;
-          padding: 0 33px;
-          line-height: 84px;
-          img {
-            width: 200px;
-            margin-right: 100px;
-          }
-        }
-        &:nth-child(5) {
-          margin-left: 20px;
-        }
-        &:nth-child(6) {
-          margin-left: 20px;
-        }
-      }
-    }
-  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -67,7 +34,6 @@ const Container = styled.div`
     border-bottom: 1px solid #e6e6e6;
   }
   .steps {
-    margin-left: 3%;
     ol {
       li {
         .box {
@@ -77,7 +43,7 @@ const Container = styled.div`
           width: 240px;
           height: 50px;
           text-align: left;
-          padding: 5px 0;
+          padding: 6px 2px;
           box-sizing: border-box;
           border-radius: 30px;
           img {
@@ -100,8 +66,8 @@ const Container = styled.div`
       }
       .right {
         float: left;
-        margin: 13px 2.8%;
-        height: 20px;
+        margin: 13px 3.6%;
+        height: 25px;
       }
     }
   }
@@ -137,9 +103,10 @@ const Container = styled.div`
       padding: 5px 0;
       box-sizing: border-box;
       border-radius: 30px;
-      border: none;
+      border: 2px solid rgb(0, 148, 251);
       background-color: rgb(0, 148, 251);
       color: white;
+      cursor: pointer;
     }
     .ipin_btn {
       margin-left: 22%;
@@ -174,34 +141,15 @@ const Container = styled.div`
 `;
 
 const JoinCertificate = memo(() => {
+  const navigate = useNavigate();
+  const btnClick = e => {
+    navigate('/join_us');
+  };
+
   return (
     <Container>
       <div>
-        <div className="nav">
-          <ul>
-            <li>
-              <Link to="/login">
-                <img src={loginImg} alt="통합로그인센터" />
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
-            <li>
-              <Link to="/join_way">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/">아이디/비밀번호 찾기</Link>
-            </li>
-            <li>
-              <Link to="/">병원등록번호 조회</Link>
-            </li>
-            <li>
-              <Link to="/">이용정책</Link>
-            </li>
-          </ul>
-        </div>
-
+        <LoginHeader />
         <h1>회원가입</h1>
         <div className="steps">
           <ol>
@@ -244,13 +192,13 @@ const JoinCertificate = memo(() => {
           <div className="official">
             <img src={official} alt="officail" />
           </div>
-          <button type="button" className="ipin_btn">
+          <button type="button" className="ipin_btn" onClick={btnClick}>
             아이핀 인증
           </button>
-          <button type="button" className="phone_btn">
+          <button type="button" className="phone_btn" onClick={btnClick}>
             휴대폰 인증
           </button>
-          <button type="button" className="official_btn">
+          <button type="button" className="official_btn" onClick={btnClick}>
             범용 공인인증서
           </button>
         </div>

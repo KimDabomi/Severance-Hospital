@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinWay.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-02 16:00
+ * @ Last Update: 2022-12-03 16:20
  * @ Description: 회원가입 방법 선택 페이지
  */
 
@@ -9,9 +9,9 @@ import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import loginImg from "../assets/img/logo@2x.png";
 import JoinAccept from "./JoinAccept";
 import JoinAcceptGlobal from "./JoinAcceptGlobal";
+import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import localImg from "../assets/img/ico-login1@2x.png";
 import childImg from "../assets/img/ico-login2@2x.png";
@@ -22,47 +22,8 @@ import facebook from "../assets/img/ico-sns-facebook@2x.png";
 
 const Container = styled.div`
   position: relative;
-  .nav {
-    width: 1280px;
-    height: 84px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-
-    h1 {
-      .sevLogo {
-        width: 231px;
-        height: 40px;
-        object-fit: cover;
-      }
-    }
-    ul {
-      display: flex;
-
-      li {
-        display: flex;
-        align-items: center;
-        a {
-          font-weight: bold;
-          text-align: center;
-          font-size: 20px;
-          padding: 0 33px;
-          line-height: 84px;
-          img {
-            width: 200px;
-            margin-right: 100px;
-          }
-        }
-        &:nth-child(5) {
-          margin-left: 20px;
-        }
-        &:nth-child(6) {
-          margin-left: 20px;
-        }
-      }
-    }
-  }
+  letter-spacing: 0.02em;
+  line-height: 1.625;
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -71,22 +32,20 @@ const Container = styled.div`
   }
   p {
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
   }
   .ways {
-    padding-left: 2%;
-    box-sizing: border-box;
     .root_box {
       margin-top: 30px;
-      margin-right: 30px;
+      margin-right: 32.3px;
       padding: 2% 0;
       box-sizing: border-box;
       float: left;
-      width: 22.5%;
-      height: 230px;
-      border: 1px solid rgb(200, 200, 200);
+      width: 23.1%;
+      height: 235px;
+      border: 1px solid #e6e6e6;
       text-align: center;
-      &:last-child {
+      &:nth-child(4) {
         margin-right: 0;
       }
       h2 {
@@ -138,7 +97,7 @@ const Container = styled.div`
     }
   }
   .qna {
-    margin-right: 32%;
+    margin-right: 28.5%;
     height: 50px;
     line-height: 50px;
     p {
@@ -148,9 +107,9 @@ const Container = styled.div`
         float: right;
         margin-left: 10px;
         background-color: white;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6e6;
         padding: 10px 25px;
-        font-size: 14px;
+        font-size: 16px;
         border-radius: 30px;
       }
     }
@@ -160,31 +119,7 @@ const JoinWay = memo(() => {
   return (
     <Container>
       <div>
-        <div className="nav">
-          <ul>
-            <li>
-              <Link to="/login">
-                <img src={loginImg} alt="통합로그인센터" />
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
-            <li>
-              <Link to="/join_way">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/">아이디/비밀번호 찾기</Link>
-            </li>
-            <li>
-              <Link to="/">병원등록번호 조회</Link>
-            </li>
-            <li>
-              <Link to="/">이용정책</Link>
-            </li>
-          </ul>
-        </div>
-
+        <LoginHeader />
         <h1>회원가입</h1>
         <p>
           세브란스 홈페이지에 방문해주셔서 감사 드립니다. 통합 계정으로 모든

@@ -1,19 +1,17 @@
 /**
  * @ File Name: JoinAcceptGlobal.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-02 16:00
+ * @ Last Update: 2022-12-03 16:30
  * @ Description: 해외거주 외국인 약관동의 페이지
  */
 
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import Right from "../assets/img/ico-arrow-right-gray@2x.png";
-import loginImg from "../assets/img/logo@2x.png";
 import step01 from "../assets/img/ico-login-step1-on@2x.png";
-import step02 from "../assets/img/ico-login-step2-off@2x.png";
 import step03 from "../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../assets/img/ico-login-step4-off@2x.png";
 import warning from "../assets/img/ico-warning-mark@2x.png";
@@ -51,39 +49,6 @@ const Container = styled.div`
       }
     }
   }
-  .nav {
-    width: 1280px;
-    height: 84px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-
-    ul {
-      display: flex;
-      li {
-        display: flex;
-        align-items: center;
-        a {
-          font-weight: bold;
-          text-align: center;
-          font-size: 20px;
-          padding: 0 33px;
-          line-height: 84px;
-          img {
-            width: 200px;
-            margin-right: 100px;
-          }
-        }
-        &:nth-child(5) {
-          margin-left: 20px;
-        }
-        &:nth-child(6) {
-          margin-left: 20px;
-        }
-      }
-    }
-  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -97,7 +62,6 @@ const Container = styled.div`
     border-bottom: 1px solid #ccc;
   }
   .accept_content {
-    margin-left: 2%;
     .steps {
       ol {
         li {
@@ -107,7 +71,7 @@ const Container = styled.div`
             border: 1px solid #ccc;
             width: 20%;
             text-align: left;
-            padding: 5px 0;
+            padding: 6px 2px;
             box-sizing: border-box;
             border-radius: 30px;
             img {
@@ -129,8 +93,8 @@ const Container = styled.div`
         }
         .right {
           float: left;
-          margin: 13px 9%;
-          height: 20px;
+          margin: 13px 9.45%;
+          height: 25px;
         }
       }
     }
@@ -290,7 +254,7 @@ const JoinAccept = memo(() => {
   
   // 동의합니다 버튼을 눌렀을 때 회원가입 페이지로 이동
   const acceptBtnClick = e => {
-    navigate('/join_us');
+    navigate('/join_certificate');
   };
 
   // 동의하지 않습니다 버튼을 눌렀을 때 회원가입 방법 선택 페이지로 이동
@@ -344,31 +308,7 @@ const JoinAccept = memo(() => {
             <button type='button' className='close' onClick={closeBox}>닫기</button>
           </div>
         </form>
-        <div className="nav">
-          <ul>
-            <li>
-              <Link to="/login">
-                <img src={loginImg} alt="통합로그인센터" />
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
-            <li>
-              <Link to="/join_way">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/">아이디/비밀번호 찾기</Link>
-            </li>
-            <li>
-              <Link to="/">병원등록번호 조회</Link>
-            </li>
-            <li>
-              <Link to="/">이용정책</Link>
-            </li>
-          </ul>
-        </div>
-
+        <LoginHeader />
         <h1>회원가입</h1>
         <div className="accept_content">
           <div className="steps">

@@ -1,7 +1,7 @@
 /**
  * @ File Name: LoginFooter.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-02 17:20
+ * @ Last Update: 2022-12-03 15:30
  * @ Description: 로그인 페이지 푸터
  */
 
@@ -30,7 +30,6 @@ const FooterContainer = styled.footer`
     width: 100%;
     height: 50px;
     border-bottom: 1px solid #e6e6e6;
-    padding-left: 2%;
     .snsLink {
       width: 1280px;
       margin: 0 auto;
@@ -59,7 +58,6 @@ const FooterContainer = styled.footer`
 
   /* 사이트 정보 스타일 */
   .siteInfo {
-    padding-left: 2%;
     width: 1280px;
     height: 130px;
     margin: 0 auto;

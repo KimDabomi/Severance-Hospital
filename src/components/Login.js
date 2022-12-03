@@ -1,7 +1,7 @@
 /**
  * @ File Name: Login.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-01 15:50
+ * @ Last Update: 2022-12-01 16:20
  * @ Description: 로그인 첫 페이지
  */
 
@@ -9,7 +9,7 @@ import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import loginImg from "../assets/img/logo@2x.png";
+import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import naver from "../assets/img/ico-sns-naver@2x.png";
 import kakao from "../assets/img/ico-sns-kakao@2x.png";
@@ -17,47 +17,6 @@ import facebook from "../assets/img/ico-sns-facebook@2x.png";
 
 const Container = styled.div`
   position: relative;
-  .nav {
-    width: 1280px;
-    height: 84px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-
-    h1 {
-      .sevLogo {
-        width: 231px;
-        height: 40px;
-        object-fit: cover;
-      }
-    }
-    ul {
-      display: flex;
-
-      li {
-        display: flex;
-        align-items: center;
-        a {
-          font-weight: bold;
-          text-align: center;
-          font-size: 20px;
-          padding: 0 33px;
-          line-height: 84px;
-          img {
-            width: 200px;
-            margin-right: 100px;
-          }
-        }
-        &:nth-child(5) {
-          margin-left: 20px;
-        }
-        &:nth-child(6) {
-          margin-left: 20px;
-        }
-      }
-    }
-  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -66,37 +25,37 @@ const Container = styled.div`
   }
   .login_section {
     text-align: center;
-    margin-left: 2%;
-
+    width: 100%;
     a {
       display: block;
       float: left;
-      width: 48%;
+      width: 49.8%;
       height: 60px;
       line-height: 60px;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
-      border: 1px solid #eee;
+      border: 1px solid #ebebeb;
 
       &:first-child {
-        border-bottom: 3px solid rgb(255, 234, 169);
+        border-bottom: 3px solid #ffd553;
       }
       &:last-child {
         background-color: rgb(249, 249, 249);
+        font-weight: normal;
       }
     }
   }
   .login_input {
-    width: 48%;
+    width: 49%;
     margin-top: 120px;
     position: relative;
 
     .email_input,
     .password_input {
-      width: 55%;
+      width: 58%;
       height: 50px;
-      margin: 2% 0 0 12%;
-      border: 1px solid #ccc;
+      margin: 2% 0 0 9%;
+      border: 1px solid #ebebeb;
       padding-left: 3%;
       box-sizing: border-box;
       font-size: 18px;
@@ -120,10 +79,10 @@ const Container = styled.div`
     color: rgba(100, 100, 100);
   }
   .find {
-    padding: 4% 0 0 6%;
+    padding: 4% 0 0 5%;
     a {
       border: 1px solid rgb(100, 100, 100);
-      padding: 10px 5.6%;
+      padding: 15px 6.4%;
       box-sizing: border-box;
       border-radius: 4%;
       font-size: 16px;
@@ -136,7 +95,7 @@ const Container = styled.div`
   }
   .sns_login {
     position: absolute;
-    left: 53%;
+    left: 55%;
     top: 63%;
     width: 42%;
 
@@ -164,14 +123,14 @@ const Container = styled.div`
   }
   .go_join {
     position: absolute;
-    left: 53%;
+    left: 55%;
     top: 87%;
     width: 40%;
     h3 {
       font-size: 18px;
     }
     p {
-      margin-top: 20px;
+      margin-top: 10px;
       line-height: 1.5em;
       font-size: 16px;
       float: left;
@@ -183,7 +142,7 @@ const Container = styled.div`
       border-radius: 4%;
       padding: 2% 3%;
       font-size: 18px;
-      margin-left: 25%;
+      margin: 20px 0 0 27%;
       cursor: pointer;
     }
   }
@@ -240,30 +199,7 @@ const Login = memo(() => {
   return (
     <Container>
       <div>
-        <div className="nav">
-          <ul>
-            <li>
-              <Link to="/login">
-                <img src={loginImg} alt="통합로그인센터" />
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
-            <li>
-              <Link to="/join_way">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/">아이디/비밀번호 찾기</Link>
-            </li>
-            <li>
-              <Link to="/">병원등록번호 조회</Link>
-            </li>
-            <li>
-              <Link to="/">이용정책</Link>
-            </li>
-          </ul>
-        </div>
+        <LoginHeader />
         <h1>로그인</h1>
         <div className="login_section">
           <Link to="/login">세브란스 로그인</Link>
@@ -297,7 +233,7 @@ const Login = memo(() => {
             id="remember_id"
             className="checkBox"
           />
-          <label for="remember_id">아이디를 기억합니다.</label>
+          <label htmlFor="remember_id">아이디를 기억합니다.</label>
         </form>
         <div className="find">
           <Link to="/">아이디 찾기</Link>

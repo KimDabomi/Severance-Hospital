@@ -1,17 +1,16 @@
 /**
  * @ File Name: JoinAccept.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-01 17:10
+ * @ Last Update: 2022-12-03 16:30
  * @ Description: 약관동의 페이지
  */
 
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import Right from "../assets/img/ico-arrow-right-gray@2x.png";
-import loginImg from "../assets/img/logo@2x.png";
 import step01 from "../assets/img/ico-login-step1-on@2x.png";
 import step02 from "../assets/img/ico-login-step2-off@2x.png";
 import step03 from "../assets/img/ico-login-step3-off@2x.png";
@@ -52,39 +51,6 @@ const Container = styled.div`
       }
     }
   }
-  .nav {
-    width: 1280px;
-    height: 84px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-
-    ul {
-      display: flex;
-      li {
-        display: flex;
-        align-items: center;
-        a {
-          font-weight: bold;
-          text-align: center;
-          font-size: 20px;
-          padding: 0 33px;
-          line-height: 84px;
-          img {
-            width: 200px;
-            margin-right: 100px;
-          }
-        }
-        &:nth-child(5) {
-          margin-left: 20px;
-        }
-        &:nth-child(6) {
-          margin-left: 20px;
-        }
-      }
-    }
-  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -95,21 +61,20 @@ const Container = styled.div`
     width: 98%;
     margin: 0;
     border: 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e6e6e6;
   }
   .accept_content {
-    margin-left: 3%;
     .steps {
       ol {
         li {
           .box {
-            font-size: 16px;
+            font-size: 15px;
             float: left;
             border: 2px solid #e6e6e6;
             width: 240px;
             height: 50px;
             text-align: left;
-            padding: 5px 0;
+            padding: 6px 2px;
             box-sizing: border-box;
             border-radius: 30px;
             img {
@@ -132,8 +97,8 @@ const Container = styled.div`
         }
         .right {
           float: left;
-          margin: 13px 2.8%;
-          height: 20px;
+          margin: 12px 3.6%;
+          height: 25px;
         }
       }
     }
@@ -199,8 +164,8 @@ const Container = styled.div`
     color: rgb(100, 100, 100);
     height: 140px;
     width: 98%;
-    background-color: rgba(249, 249, 249);
-    padding: 30px 5% 30px 2%;
+    background-color: #f9f9f9;
+    padding: 26px 8px 29px 30px;
     box-sizing: border-box;
     margin-top: 20px;
     font-size: 18px;
@@ -208,9 +173,9 @@ const Container = styled.div`
   }
   .box_tip {
     float: left;
-    border: 1px solid rgb(230, 230, 230);
-    margin-top: 50px;
-    padding: 30px 5% 30px 2%;
+    border: 1px solid #e6e6e6;
+    margin-top: 40px;
+    padding: 17px 30px 18px;
     box-sizing: border-box;
     line-height: 2em;
     width: 98%;
@@ -224,9 +189,9 @@ const Container = styled.div`
     margin-top: 80px;
 
     .accept_btn {
-      font-size: 16px;
+      font-size: 18px;
       float: left;
-      border: 1px solid #ccc;
+      border: 1px solid rgb(0, 148, 251);
       padding: 15px 30px;
       box-sizing: border-box;
       border-radius: 30px;
@@ -235,7 +200,7 @@ const Container = styled.div`
       cursor: pointer;
     }
     .not_accept_btn {
-      font-size: 16px;
+      font-size: 18px;
       float: left;
       border: 2px solid rgb(0, 148, 251);
       padding: 15px 30px;
@@ -360,31 +325,7 @@ const JoinAccept = memo(() => {
             </button>
           </div>
         </form>
-        <div className="nav">
-          <ul>
-            <li>
-              <Link to="/login">
-                <img src={loginImg} alt="통합로그인센터" />
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
-            <li>
-              <Link to="/join_way">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/">아이디/비밀번호 찾기</Link>
-            </li>
-            <li>
-              <Link to="/">병원등록번호 조회</Link>
-            </li>
-            <li>
-              <Link to="/">이용정책</Link>
-            </li>
-          </ul>
-        </div>
-
+        <LoginHeader />
         <h1>회원가입</h1>
         <div className="accept_content">
           <div className="steps">
