@@ -25,8 +25,8 @@ export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", a
     try {
         const response = await axios.get(process.env.REACT_APP_DRUG2_API_URL,{
             params: {
-                // serviceKey: process.env.REACT_APP_DRUG2_API_ENCODING_KEY
-                serviceKey:'9Txp23emmXEQZ6s5oSTPMJdjECCgEFXkggChxH9y1+bSZmRIADuyyebZZLCD5CzjT6csz3QziklzOwFAI5h4Cw==',
+                serviceKey: process.env.REACT_APP_DRUG2_API_DECODING_KEY,
+                // serviceKey:'9Txp23emmXEQZ6s5oSTPMJdjECCgEFXkggChxH9y1+bSZmRIADuyyebZZLCD5CzjT6csz3QziklzOwFAI5h4Cw==',
                 type: 'json',
                 page: payload.page ? payload.page:1
             }

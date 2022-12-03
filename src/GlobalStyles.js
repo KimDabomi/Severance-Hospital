@@ -510,6 +510,7 @@ textarea{
   //뉴스홈 content
   .wideWrap{
     padding: 100px 0;
+    height: 500px;
   }
 
   /** 언론보도 */
@@ -592,15 +593,17 @@ textarea{
 
     padding: 43px 30px 28px;
     box-sizing: border-box;
-
+    
     position: relative;
+
+    &.newshome { border: 1px solid #e6e6e6; &:hover{border-color: #0094fb;}}
 
     /* 카테고리 (언론 보도) */
     .newsCategory {
       width: 78px;
       height: 40px;
       display: block;
-
+      
       position: absolute;
       top: -10px;
       left: 30px;

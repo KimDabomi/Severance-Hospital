@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsMain.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-01 15:1:00
+ * @ Last Update: 2022-12-03 
  * @ Description: 뉴스 메인 페이지
  */
 
@@ -10,6 +10,10 @@ import {Link} from 'react-router-dom';
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
 import corona from '../../assets/img/corona.jpg';
+
+import NewsHomeCarousel from '../../components/NewsHomeCarousel';
+import NewsHomeNoticeCarousel from '../../components/NewsHomeNoticeCarousel';
+
 
 const NewsMain = memo(() => {
   return (
@@ -26,34 +30,14 @@ const NewsMain = memo(() => {
                 </div>
             </div>
         </div>
-        {/* 공지사항 */}
-        <div className='wideWrap'>
-          <Link className='btnMoreLink' to="/news/notice.do">더보기</Link>
-          <article className="newsBox">
-            <span className='newsCategory'>카테고리</span>
-            <strong className='newsContentTitle'>뉴스제목</strong>
-            <span className='newsDate'>2022-22-22</span>
-          </article>
-          <article className="newsBox">
-            <span className='newsCategory'>카테고리</span>
-            <strong className='newsContentTitle'>뉴스제목</strong>
-            <span className='newsDate'>2022-22-22</span>
-          </article>
+
+        <div className="wideWrap">
+        <Link className="btnMoreLink" to="/news/notice.do">더보기</Link>
+        <NewsHomeNoticeCarousel />
         </div>
-        {/* 언론보도 */}
-        <div className='wideWrap'>
-        <Link className='btnMoreLink' to="/news/media.do">더보기</Link>
-          <article className="newsBox">
-            <span className='newsCategory'>카테고리</span>
-            <strong className='newsContentTitle'>뉴스제목</strong>
-            <span className='newsDate'>2022-22-22</span>
-          </article>
-          <article className="newsBox">
-            <span className='newsCategory'>카테고리</span>
-            <strong className='newsContentTitle'>뉴스제목</strong>
-            <span className='newsDate'>2022-22-22</span>
-          </article>
-        </div>
+        {/* <Link className="btnMoreLink" to="/news/media.do">더보기</Link> */}
+        {/* <NewsHomeCarousel /> */}
+        
       </div>
 
         <div className='snsNewsWrap' style={{backgroundColor: '#F6F6F6'}}>
