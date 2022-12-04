@@ -19,8 +19,9 @@ import Footer from '../../components/Footer';
 import CustomerBoardHeader from './CustomerHeader';
 
 const CustomerBoardAddCont = styled.div`
-  margin: auto;
-  max-width: 1280px;
+.pageCont{
+    padding-bottom: 0 !important;
+  }
   //동의 체크박스
   .agreeCont {
     margin-top: 20px;
@@ -255,7 +256,7 @@ const CustomerBoardAdd = memo(() => {
         {error ? (
           <h1>오류페이지</h1>
         ) : (
-          <form id='form' onSubmit={onCustomerBoardSubmit} >
+          <form id='form' onSubmit={onCustomerBoardSubmit} className='pageCont'>
             <h4 className="pageSubtitle">개인정보 수집 동의</h4>
 
             <div className="grayboxGuide">

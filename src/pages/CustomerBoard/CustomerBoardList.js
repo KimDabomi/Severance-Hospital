@@ -21,8 +21,9 @@ import CustomerBoardHeader from './CustomerHeader';
 import { Pagination } from '@mui/material';
 
 const CustomerBoardCont = styled.div`
-  margin: auto;
-  max-width: 1280px;
+  .pageCont{
+    padding-bottom: 0 !important;
+  }
 
   table {
     border: 1px solid #ddd;
@@ -51,6 +52,16 @@ const CustomerBoardCont = styled.div`
     .paging{
       margin: 50px 0 50px;
     }
+
+  //방문했던 페이지
+  .visited{
+    &:visited{
+      color: purple;
+    }
+    &:hover{
+      color: #0094fb;
+    }
+  }
 `;
 
 const CustomerBoardList = memo(() => {
@@ -67,11 +78,12 @@ const CustomerBoardList = memo(() => {
 
 
   return (
-    <div>
+    <div >
       <Spinner loading={loading} />
       <CustomerBoardCont>
         <Header />
         <CustomerBoardHeader />
+        <div className="pageCont">
         <h4 className="pageSubtitle">고객의소리 게시판</h4>
 
         {/* 조회결과 표시하기 */}
@@ -96,7 +108,7 @@ const CustomerBoardList = memo(() => {
                       return (
                         <tr key={v.id}>
                           <td>{v.id}</td>
-                          <td><NavLink to={`/suggestion/${v.id}`}>{v.title}</NavLink></td>
+                          <td><NavLink to={`/suggestion/${v.id}`} className='visited'>{v.title}</NavLink></td>
                           <td>{v.name}</td>
                           <td>{dayjs(new Date(v.date)).format('YYYY/MM/DD')}</td>
                         </tr>
@@ -116,6 +128,7 @@ const CustomerBoardList = memo(() => {
         <div className='buttonContColumn'>
           <NavLink className='buttonBlue' to="/suggest.do">글쓰기</NavLink>
           <Pagination count={10} className="paging" />
+        </div>
         </div>
       </CustomerBoardCont>
       <Footer />

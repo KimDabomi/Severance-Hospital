@@ -62,6 +62,12 @@ textarea{
     padding-bottom: 95px;
 
 }
+
+.bgAll{
+  backGround: url(../img/bg-pattern.png) no-repeat center/cover;
+  width: 100% !important;
+  /* background-color: pink; */
+}
 //페이지 상위 타이틀
 .pageTitle{
     text-align: center;
