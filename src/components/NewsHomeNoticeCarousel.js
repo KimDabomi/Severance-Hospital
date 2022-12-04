@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsHomeCarousel.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-03
+ * @ Last Update: 2022-12-04
  * @ Description: 뉴스 메인 페이지 슬라이드 컴포넌트
  */
 
@@ -19,42 +19,64 @@ import 'slick-carousel/slick/slick-theme.css';
 // 슬라이드 영역 스타일
 const StyledSlider = styled(Slider)`
   .slick-track {
-    position: relative;
-    left: 0;
-    top: 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
   }
-
-  .slick-slide{
-    width: 407px;
-    margin: 0 15px;
-    display: block;
-    float: left;
+  .slick-slide {
+    /* float: left; */
     height: 100%;
+    width: 407px !important;
     min-height: 1px;
-    background-color: pink;
   }
-
   .slick-dots {
-    bottom: 20px;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    margin: -3.5px;
+    /* padding-top: 30px; */
+
+    li{
+      display: list-item;
+      text-align: center;
+      margin: 0;
+    }
+
+    //비활성화된 도트
     button {
-      width: 10px;
-      height: 10px;
-      border: 2px solid $pt;
-      border-radius: 50%;
-      box-shadow: 1px 1px 3px rgba($bk, 0.6);
+      margin: 0;
+      padding: 3px 3.5px;
+      margin-top: 30px;
+      display: block;
+      width: 11px;
+      height: 11px;
+      background-color: #c2c2c2;
+      border-radius: 6px;
       &::before {
         display: none;
       }
     }
+    //활성화된 도트
+    .slick-active{
+      margin-right: 15px;
+      button{
+        margin: 0;
+        margin-top: 30px;
+        width: 30px;
+        background-color: #ac47d1;
+      }
+    }
+  }
 
-    .slick-active {
-            button {
-                background: $pt;
-            }
-        }
+  .newsBox {
+    border: 1px solid #e6e6e6;
+    width: 407px !important;
+    height: 204px !important;
+    margin-top: 20px;
+
+    &:hover {
+      border-color: #ac47d1;
+    }
   }
 `;
 
@@ -62,63 +84,61 @@ function NewsHomeNoticeCarousel() {
   // 슬라이드 설정
   const settings = {
     infinite: true,
-    // centerPadding: '60px',
+    dots: true /* 아래점 */,
+    // rows: 2,
     slidesToShow: 3,
+    slidesToScroll: 1,
     speed: 500,
-    rows: 1,
-    slidesPerRow: 2,
-    dots: true,
+    slidesPerRow: 2, //보여질 행의 수
   };
 
   return (
-    <StyledSlider {...settings}>
+    <div>
+    <StyledSlider {...settings} className='slick-slider'>
       {/* 언론보도 */}
       <article className="newsBox">
-        <span className="newsCategory">카테고리</span>
+        <span className="newsCategory">공지사항</span>
         <strong className="newsContentTitle">뉴스제목</strong>
         <span className="newsDate">2022-22-22</span>
       </article>
       <article className="newsBox">
-        <span className="newsCategory">카테고리</span>
+        <span className="newsCategory">공지사항</span>
         <strong className="newsContentTitle">뉴스제목</strong>
         <span className="newsDate">2022-22-22</span>
       </article>
       <article className="newsBox">
-        <span className="newsCategory">카테고리</span>
+        <span className="newsCategory">공지사항</span>
         <strong className="newsContentTitle">뉴스제목</strong>
         <span className="newsDate">2022-22-22</span>
       </article>
       <article className="newsBox">
-        <span className="newsCategory">카테고리</span>
+        <span className="newsCategory">공지사항</span>
         <strong className="newsContentTitle">뉴스제목</strong>
         <span className="newsDate">2022-22-22</span>
       </article>
       <article className="newsBox">
-        <span className="newsCategory">카테고리</span>
+        <span className="newsCategory">공지사항</span>
         <strong className="newsContentTitle">뉴스제목</strong>
         <span className="newsDate">2022-22-22</span>
       </article>
       <article className="newsBox">
-        <span className="newsCategory">카테고리</span>
+        <span className="newsCategory">공지사항</span>
         <strong className="newsContentTitle">뉴스제목</strong>
         <span className="newsDate">2022-22-22</span>
       </article>
-
-      {/* <ul className='slick-dots'>
-        <li className='slick-active'>
-          <button type='button'></button>
-        </li>
-        <li className='slick-active'>
-          <button type='button'></button>
-        </li>
-        <li className='slick-active'>
-          <button type='button'></button>
-        </li>
-        <li className='slick-active'>
-          <button type='button'></button>
-        </li>
-      </ul> */}
+      <article className="newsBox">
+        <span className="newsCategory">공지사항</span>
+        <strong className="newsContentTitle">뉴스제목</strong>
+        <span className="newsDate">2022-22-22</span>
+      </article>
+      <article className="newsBox">
+        <span className="newsCategory">공지사항</span>
+        <strong className="newsContentTitle">뉴스제목</strong>
+        <span className="newsDate">2022-22-22</span>
+      </article>
     </StyledSlider>
+    <Link className="btnMoreLink notice" to="/news/notice.do">더보기</Link>
+    </div>
   );
 }
 
