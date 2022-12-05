@@ -1,11 +1,11 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-02 15:1:00
+ * @ Last Update: 2022-12-05
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/Spinner'
@@ -25,6 +25,9 @@ const TabInfo = memo(() => {
 
 	//hook을 통해 slice가 관리하는 상태값 가져오기
 	const { data, loading, error } = useSelector((state) => state.DrugSearchSlice);
+
+	//페이지 번호
+	const page = useRef(1);
 
 	/** 닫기버튼 눌렸을 때 */
 	const closeClick = useCallback((e) => {
@@ -100,7 +103,7 @@ const TabInfo = memo(() => {
 						<ul className="drugListCont">
 							{/* // 검색 결과 표시 (최대12개)  */}
 							{data.items.map((v, i) => {
-								console.log(v);
+								// console.log(v);
 								return (
 									<li key={i} className="drugList">
 										<Link className="viewLink">
@@ -111,7 +114,7 @@ const TabInfo = memo(() => {
 							})}
 						</ul>
 						{/* // 페이지가 2페이지 이상일 경우 */}
-						{data.pageNo > 1 ?
+						{data.items.length > 12 ?
 							<div className="buttonContColumn">
 								<Link className="btnMore">더보기</Link>
 							</div>
