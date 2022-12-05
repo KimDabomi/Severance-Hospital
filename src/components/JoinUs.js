@@ -1,13 +1,12 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-03 16:45
+ * @ Last Update: 2022-12-05 18:10
  * @ Description: 회원가입 정보 입력 페이지
  */
 
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
@@ -18,6 +17,7 @@ import step03 from "../assets/img/ico-login-step3-on@2x.png";
 import step04 from "../assets/img/ico-login-step4-off@2x.png";
 import check from "../assets/img/ico-check-primary@2x.png";
 import warning from "../assets/img/ico-warning-mark@2x.png";
+import dropdown from "../assets/img/ico-chevron-down@2x.png";
 
 const Container = styled.div`
   position: relative;
@@ -83,6 +83,118 @@ const Container = styled.div`
       width: 100px;
       height: 42px;
     }
+    .sub_text {
+      font-size: 14px;
+      color: #999;
+      margin-left: 80%;
+      .require {
+        color: #f76117;
+        font-weight: bold;
+      }
+    }
+  }
+  table {
+    tr {
+      td {
+        ul {
+          li {
+            color: #f76117;
+            font-size: 14px;
+          }
+        }
+        img {
+          width: 20px;
+          float: left;
+          margin: 5px 8px 0 0;
+        }
+      }
+    }
+  }
+  .warn {
+    line-height: 2em;
+    color: #f76117;
+    font-weight: bold;
+  }
+  .no_excep {
+    color: black;
+    font-weight: normal;
+  }
+  .id_input,.password_input,.repassword_input,.name_input {
+    width: 355px;
+    max-width: 100%;
+    height: 45px;
+    border: 1px solid #dadada;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  .telno1_input,.telno2_input,.telno3_input,.pretelno1_input,.pretelno2_input,.pretelno3_input,.email_id_input,.email_domain_input,.email_domain,.year_input,.month_input,.date_input {
+    width: 180px;
+    max-width: 100%;
+    height: 45px;
+    border: 1px solid #dadada;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  .text {
+    margin: 0 8px;
+  }
+  .telno1_input,.pretelno1_input,.email_domain,.year_input,.month_input,.date_input {
+    width: 150px;
+    padding-right: 30px;
+    background: #fff url(${dropdown}) no-repeat right 12px center;
+    background-size: 17px auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    &:focus {
+      outline: 1px solid rgb(0, 148, 251);
+    }
+  }
+  .email_domain {
+    margin-left: 8px;
+  }
+  .year_input,.month_input,.date_input {
+    margin-right: 8px;
+  }
+  input[type=checkbox] {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #aaa;
+    vertical-align: middle;
+    border-radius: 0;
+    margin: 0 5px 0 0;
+    background-color: #fff;
+    content: '';
+  }
+  input[type=radio] {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #aaa;
+    vertical-align: middle;
+    border-radius: 0;
+    margin: 0 5px 0 0;
+    background-color: #fff;
+    content: '';
+  }
+  input:focus {outline: 1px solid rgb(0, 148, 251);}
+  .radioList {
+    label {
+      margin-right: 30px;
+    }
   }
   .phone_btn,
   .ipin_btn,
@@ -113,6 +225,7 @@ const Container = styled.div`
   }
   .submit_btn {
     margin-top: 70px;
+    transform: translate(650%,0);
   }
   .dafault_info,
   .legal_representative {
@@ -146,50 +259,25 @@ const Container = styled.div`
       }
     }
   }
+  .dup_btn {
+    background-color: #666;
+    color: #fff;
+    height: 45px;
+    padding: 0 24px;
+    margin-left: 9px;
+    font-size: 16px;
+    border: none;
+    border-radius: 2px;
+    font-weight: 100;
+  }
 `;
 
 const JoinUs = memo(() => {
-  const [name, setName] = useState("");
-  const [tel, setTel] = useState("");
-  const [sparetel, setSparetel] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const navigate = useNavigate();
 
-  const onNameHandler = (e) => {
-    setName(e.currentTarget.value);
-  };
-
-  const onTelHandler = (e) => {
-    setTel(e.currentTarget.value);
-  };
-
-  const onSparetelHandler = (e) => {
-    setSparetel(e.currentTarget.value);
-  };
-
-  const onEmailHandler = (e) => {
-    setEmail(e.currentTarget.value);
-  };
-
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
-  };
-
-  const onConfirmPasswordHandler = (e) => {
-    setConfirmPassword(e.currentTarget.value);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
-    } else {
-      navigate("/login");
-    }
-  };
+  const submitInfo = e => {
+    navigate('/join_complete');
+  }
 
   return (
     <Container>
@@ -228,7 +316,7 @@ const JoinUs = memo(() => {
           </ol>
         </div>
         <div className="dafault_info">
-          <h4>기본정보입력</h4>
+          <h4>기본정보입력<span className='sub_text'><span className="require">*</span>는 필수항목입니다.</span></h4>
           <table>
             <tbody>
               <tr>
@@ -252,8 +340,7 @@ const JoinUs = memo(() => {
                     />
                     <button
                       type="button"
-                      id="dupBtn"
-                      className="btn btn-input btn-default"
+                      className="dup_btn"
                     >
                       중복확인
                     </button>
@@ -262,9 +349,9 @@ const JoinUs = memo(() => {
                     <li>※ 6자 이상, 20자 이내로 설정이 가능합니다.</li>
                     <li>※ 한글/특수문자는 입력이 불가능합니다.</li>
                   </ul>
-                  <p>
-                    <img src={check} alt="check" />
-                    사용이 가능한 아이디입니다.
+                  <p className='warn'>
+                    <img src={warning} alt="warning" />
+                    아이디를 입력해주세요.
                   </p>
                 </td>
               </tr>
@@ -297,7 +384,7 @@ const JoinUs = memo(() => {
                       (ex. 111, 123, 321, aaa, abc 등)
                     </li>
                   </ul>
-                  <p>
+                  <p className='warn'>
                     <img src={warning} alt="warning" />
                     비밀번호 규격에 맞춰 입력해주세요.
                   </p>
@@ -321,7 +408,7 @@ const JoinUs = memo(() => {
                       pattern="(?=.*\d{1,20})(?=.*[~`!@#$%\^&amp;*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$"
                     />
                   </div>
-                  <p>
+                  <p className='warn'>
                     <img src={warning} alt="warning" />
                     비밀번호가 일치하지 않습니다.
                   </p>
@@ -402,7 +489,9 @@ const JoinUs = memo(() => {
                       />
                     </span>
                   </div>
-                  <p>예약 관련정보는 수신동의 여부와 관계없이 발송됩니다.</p>
+                  <p className='no_excep'>예약 관련정보는 수신동의 여부와 관계없이 발송됩니다.</p>
+                  <img src={warning} alt="warning" />
+                  <p className='warn'>연락처를 입력해주세요.</p>
                 </td>
               </tr>
               <tr>
@@ -490,7 +579,7 @@ const JoinUs = memo(() => {
                       <input
                         type="text"
                         name="emailDomainInput"
-                        id="emailDomainInput"
+                        id="email_domain_input"
                         className="email_domain_input"
                         title="이메일 도메인"
                       />
@@ -515,16 +604,20 @@ const JoinUs = memo(() => {
                     </span>
                   </div>
                   <div className="ckeckBox">
-                    <input
-                      type="checkbox"
-                      name="emailRecptnAgreAt"
-                      id="emailRecptnAgreAt"
-                      value="Y"
-                      data-parsley-multiple="emailRecptnAgreAt"
-                    />
                     <label htmlFor="emailRecptnAgreAt">
+                      <input
+                        type="checkbox"
+                        name="emailRecptnAgreAt"
+                        id="emailRecptnAgreAt"
+                        className="emailRecptnAgreAt"
+                        value="Y"
+                        data-parsley-multiple="emailRecptnAgreAt"
+                      />
                       이메일 수신동의합니다.
                     </label>
+                    <ul>
+                      <li>※ 회원가입 완료 및 예약 관련정보는 수신 동의 여부와 관계없이 발송됩니다.</li>
+                    </ul>
                   </div>
                 </td>
               </tr>
@@ -582,7 +675,7 @@ const JoinUs = memo(() => {
                 <td>
                   <div>
                     <span className="birthdate_input">
-                      <select className="yaer_input" id="birthYear" title="년">
+                      <select className="year_input" id="birthYear" title="년">
                         <option defaultValue="1900">1900년</option>
                         <option defaultValue="1901">1901년</option>
                         <option defaultValue="1902">1902년</option>
@@ -766,7 +859,7 @@ const JoinUs = memo(() => {
               </tr>
             </tbody>
           </table>
-          <button type="button" className="submit_btn">
+          <button type="button" className="submit_btn" onClick={submitInfo}>
             확인
           </button>
         </div>

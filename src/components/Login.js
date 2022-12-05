@@ -267,13 +267,6 @@ const Login = memo(() => {
           </p>
           <button type="button" onClick={joinBtnClick}>회원가입</button>
         </div>
-        {/* <footer>
-          <Link to='/'>이용약관</Link>
-          <Link to='/'>개인정보처리방침</Link>
-          <address>03722 서울특별시 서대문구 연세로 50-1</address>
-          <p>COPYRIGHT(C) SEVERANCE HOSPITAL. ALL RIGHTS RESERVED.</p>
-          <button type='button'>연세의료원 네트워크</button>
-        </footer> */}
         <LoginFooter />
       </div>
     </Container>
