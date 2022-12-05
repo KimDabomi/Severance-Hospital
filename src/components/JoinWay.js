@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinWay.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-03 16:20
+ * @ Last Update: 2022-12-05 22:44
  * @ Description: 회원가입 방법 선택 페이지
  */
 
@@ -19,6 +19,7 @@ import globalImg from "../assets/img/ico-login3@2x.png";
 import naver from "../assets/img/ico-sns-naver@2x.png";
 import kakao from "../assets/img/ico-sns-kakao@2x.png";
 import facebook from "../assets/img/ico-sns-facebook@2x.png";
+import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -120,7 +121,9 @@ const JoinWay = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <h1>회원가입</h1>
+        <div className='title'>
+          <h1>회원가입</h1>
+        </div>
         <p>
           세브란스 홈페이지에 방문해주셔서 감사 드립니다. 통합 계정으로 모든
           패밀리사이트를 이용할 수 있습니다.

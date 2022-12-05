@@ -1,7 +1,7 @@
 /*
  * @ File Name: JoinCertificate.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-03 16:35
+ * @ Last Update: 2022-12-05 22:48
  * @ Description: 본인인증 페이지
  */
 import React, { memo, useEffect, useState } from "react";
@@ -18,6 +18,7 @@ import step04 from "../assets/img/ico-login-step4-off@2x.png";
 import ipin from "../assets/img/img-login-Certified01.png";
 import phone from "../assets/img/img-login-Certified02.png";
 import official from "../assets/img/img-login-Certified03.png";
+import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -150,7 +151,9 @@ const JoinCertificate = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <h1>회원가입</h1>
+        <div className='title'>
+          <h1>회원가입</h1>
+        </div>
         <div className="steps">
           <ol>
             <li>

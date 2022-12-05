@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinAcceptGlobal.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-03 16:30
+ * @ Last Update: 2022-12-05 22:47
  * @ Description: 해외거주 외국인 약관동의 페이지
  */
 
@@ -15,6 +15,7 @@ import step01 from "../assets/img/ico-login-step1-on@2x.png";
 import step03 from "../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../assets/img/ico-login-step4-off@2x.png";
 import warning from "../assets/img/ico-warning-mark@2x.png";
+import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -309,7 +310,9 @@ const JoinAccept = memo(() => {
           </div>
         </form>
         <LoginHeader />
-        <h1>회원가입</h1>
+        <div className='title'>
+          <h1>회원가입</h1>
+        </div>
         <div className="accept_content">
           <div className="steps">
             <ol>

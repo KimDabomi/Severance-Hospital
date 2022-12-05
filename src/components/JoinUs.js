@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-05 18:10
+ * @ Last Update: 2022-12-05 22:45
  * @ Description: 회원가입 정보 입력 페이지
  */
 
@@ -18,6 +18,7 @@ import step04 from "../assets/img/ico-login-step4-off@2x.png";
 import check from "../assets/img/ico-check-primary@2x.png";
 import warning from "../assets/img/ico-warning-mark@2x.png";
 import dropdown from "../assets/img/ico-chevron-down@2x.png";
+import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -283,7 +284,9 @@ const JoinUs = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <h1>회원가입</h1>
+        <div className='title'>
+          <h1>회원가입</h1>
+        </div>
         <div className="steps">
           <ol>
             <li>

@@ -1,7 +1,7 @@
 /**
  * @ File Name: LoginHeader.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-03 15:60
+ * @ Last Update: 2022-12-05 22:40
  * @ Description: 로그인센터 헤더 네비게이션
  */
 
@@ -13,30 +13,64 @@ import styled from "styled-components";
 const Container = styled.div`
   .nav {
     width: 1280px;
-    height: 84px;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #e6e6e6;
-    padding-top: 33px;
-    box-sizing: border-box;
     ul {
       li {
         float: left;
+        &:hover {
+          a:after {
+            opacity: 1;
+            visibility: visible;
+            width: 64px;
+            height: 64px;
+            margin: -32px 0 0 -32px;
+          }
+        }
         a {
-          font-weight: bold;
-          text-align: center;
+          position: relative;
           font-size: 22px;
-          margin-right: 50px;
+          line-height: 100px;
+          text-align: center;
+          padding: 0 30px;
+          font-weight: bold;
+          display: block;
+          cursor: pointer;
+          &:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            width: 0;
+            height: 0;
+            margin: 0;
+            background-color: #d9edf8;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+          }
+        }
+        &:first-child {
+          margin: 30px 179px 0 -30px;
           img {
-            width: 200px;
-            margin-right: 289px;
+            width: 210px;
+          }
+          &:hover {
+            a:after {
+              visibility: hidden;
+            }
           }
         }
         &:last-child {
-            a {
-                margin-right: 0;
-            }
+          a {
+            padding-right: 0;
+          }
         }
       }
     }
@@ -49,7 +83,7 @@ const LoginHeader = memo(() => {
       <div className="nav">
         <ul>
           <li>
-            <Link to="/login">
+            <Link to="/">
               <img src={loginImg} alt="통합로그인센터" />
             </Link>
           </li>

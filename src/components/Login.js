@@ -1,7 +1,7 @@
 /**
  * @ File Name: Login.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-01 16:20
+ * @ Last Update: 2022-12-05 22:44
  * @ Description: 로그인 첫 페이지
  */
 
@@ -14,6 +14,7 @@ import LoginFooter from "./LoginFooter";
 import naver from "../assets/img/ico-sns-naver@2x.png";
 import kakao from "../assets/img/ico-sns-kakao@2x.png";
 import facebook from "../assets/img/ico-sns-facebook@2x.png";
+import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -23,6 +24,7 @@ const Container = styled.div`
     font-size: 40px;
     font-weight: bold;
   }
+  
   .login_section {
     text-align: center;
     width: 100%;
@@ -74,7 +76,7 @@ const Container = styled.div`
     }
   }
   .remember {
-    margin: 1% 0 0 6%;
+    margin: 1% 0 0 5%;
     font-size: 16px;
     color: rgba(100, 100, 100);
   }
@@ -200,7 +202,9 @@ const Login = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <h1>로그인</h1>
+        <div className='title'>
+          <h1>로그인</h1>
+        </div>
         <div className="login_section">
           <Link to="/login">세브란스 로그인</Link>
           <Link to="/login">본인인증 로그인</Link>
