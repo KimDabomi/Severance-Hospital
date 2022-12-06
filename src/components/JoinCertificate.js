@@ -1,7 +1,7 @@
 /*
  * @ File Name: JoinCertificate.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-05 22:48
+ * @ Last Update: 2022-12-06 11:40
  * @ Description: 본인인증 페이지
  */
 import React, { memo, useEffect, useState } from "react";
@@ -22,6 +22,10 @@ import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
+  .content {
+    background: url(${bg}) no-repeat center / cover;
+    height: 600px;
+  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -35,6 +39,8 @@ const Container = styled.div`
     border-bottom: 1px solid #e6e6e6;
   }
   .steps {
+    width: 1280px;
+    margin: auto;
     ol {
       li {
         .box {
@@ -72,34 +78,36 @@ const Container = styled.div`
       }
     }
   }
-  .ipin,
-  .phone,
-  .official {
-    width: 220px;
-    height: 210px;
-    border: 1px solid #e6e6e6;
-    float: left;
-    margin: 60px 30px 0 0;
-    position: relative;
-    img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-  .ipin {
-    margin-left: 22%;
-  }
-  .official {
-    margin-right: 20%;
-  }
   .ways {
+    width: 1280px;
+    margin: auto;
+    .ipin,
+    .phone,
+    .official {
+      width: 240px;
+      height: 210px;
+      border: 1px solid #e6e6e6;
+      float: left;
+      margin: 60px 20px 0 0;
+      position: relative;
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .ipin {
+      margin-left: 20%;
+    }
+    .official {
+      margin-right: 20%;
+    }
     button {
       float: left;
-      width: 220px;
+      width: 240px;
       height: 50px;
-      margin: 30px 32px 40px 0;
+      margin: 30px 22px 40px 0;
       font-size: 18px;
       padding: 5px 0;
       box-sizing: border-box;
@@ -110,17 +118,19 @@ const Container = styled.div`
       cursor: pointer;
     }
     .ipin_btn {
-      margin-left: 22%;
+      margin-left: 20%;
     }
     .official_btn {
       background-color: white;
       color: rgb(0, 148, 251);
       border: 2px solid rgb(0, 148, 251);
     }
-  }
-  .notice {
+    .notice {
+    width: 1280px;
+    margin: auto;
+    float: left;
     ul {
-      margin: 0 22%;
+      margin: 0 22% 50px; 
       li {
         margin-top: 5px;
         font-size: 14px;
@@ -139,85 +149,90 @@ const Container = styled.div`
       }
     }
   }
+  }
+  
 `;
 
 const JoinCertificate = memo(() => {
   const navigate = useNavigate();
-  const btnClick = e => {
-    navigate('/join_us');
+  const btnClick = (e) => {
+    navigate("/join_us");
   };
 
   return (
     <Container>
       <div>
         <LoginHeader />
-        <div className='title'>
-          <h1>회원가입</h1>
-        </div>
-        <div className="steps">
-          <ol>
-            <li>
-              <div className="box">
-                <img src={step01} alt="step01" />
-                <p>약관동의 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step02} alt="step02" />
-                <p>본인인증 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step03} alt="step03" />
-                <p>정보입력 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step04} alt="step04" />
-                <p>회원가입 완료</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-        <div className="ways">
-          <div className="ipin">
-            <img src={ipin} alt="ipin" />
+        <div className="content">
+          <div className="title">
+            <h1>회원가입</h1>
           </div>
-          <div className="phone">
-            <img src={phone} alt="phone" />
+          <div className="steps">
+            <ol>
+              <li>
+                <div className="box">
+                  <img src={step01} alt="step01" />
+                  <p>약관동의 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step02} alt="step02" />
+                  <p>본인인증 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step03} alt="step03" />
+                  <p>정보입력 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step04} alt="step04" />
+                  <p>회원가입 완료</p>
+                </div>
+              </li>
+            </ol>
           </div>
-          <div className="official">
-            <img src={official} alt="officail" />
+          <div className="ways">
+            <div className="ipin">
+              <img src={ipin} alt="ipin" />
+            </div>
+            <div className="phone">
+              <img src={phone} alt="phone" />
+            </div>
+            <div className="official">
+              <img src={official} alt="officail" />
+            </div>
+            <button type="button" className="ipin_btn" onClick={btnClick}>
+              아이핀 인증
+            </button>
+            <button type="button" className="phone_btn" onClick={btnClick}>
+              휴대폰 인증
+            </button>
+            <button type="button" className="official_btn" onClick={btnClick}>
+              범용 공인인증서
+            </button>
+            <div className="notice">
+            <ul>
+              <li>
+                아이디 또는 비밀번호 분실 등 본인 여부 확인이 필요한 경우를 위해
+                꼭 필요한 절차입니다.
+              </li>
+              <li>
+                허위 정보를 입력하시는 경우 추 후 정확한 본인확인이 불가능하며
+                아이디/비밀번호 분실 시 도움을 드리기가
+                <br />
+                <span>어렵습니다.</span>
+              </li>
+            </ul>
           </div>
-          <button type="button" className="ipin_btn" onClick={btnClick}>
-            아이핀 인증
-          </button>
-          <button type="button" className="phone_btn" onClick={btnClick}>
-            휴대폰 인증
-          </button>
-          <button type="button" className="official_btn" onClick={btnClick}>
-            범용 공인인증서
-          </button>
-        </div>
-        <div className="notice">
-          <ul>
-            <li>
-              아이디 또는 비밀번호 분실 등 본인 여부 확인이 필요한 경우를 위해
-              꼭 필요한 절차입니다.
-            </li>
-            <li>
-              허위 정보를 입력하시는 경우 추 후 정확한 본인확인이 불가능하며
-              아이디/비밀번호 분실 시 도움을 드리기가
-              <br />
-              <span>어렵습니다.</span>
-            </li>
-          </ul>
+          </div>
+          
         </div>
         <LoginFooter />
       </div>

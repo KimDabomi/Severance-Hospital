@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinComplete.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-05 22:45
+ * @ Last Update: 2022-12-06 12:00
  * @ Description: 이미 회원가입됨 안내 페이지
  */
 
@@ -12,7 +12,7 @@ import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import Right from "../assets/img/ico-arrow-right-gray@2x.png";
 import step01 from "../assets/img/ico-login-step1-off@2x.png";
-import step02 from "../assets/img/ico-login-step2-off@2x.png";
+import step02 from "../assets/img/ico-login-step2-on@2x.png";
 import step03 from "../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../assets/img/ico-login-step4-off@2x.png";
 import bg from "../assets/img/bg-pattern.png";
@@ -20,6 +20,10 @@ import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
+  .content {
+    background: url(${bg}) no-repeat center / cover;
+    height: 600px;
+  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -33,6 +37,8 @@ const Container = styled.div`
     border-bottom: 1px solid #e6e6e6;
   }
   .steps {
+    width: 1280px;
+    margin: auto;
     ol {
       li {
         .box {
@@ -55,7 +61,7 @@ const Container = styled.div`
             margin-top: 4px;
           }
         }
-        &:nth-of-type(4) {
+        &:nth-of-type(2) {
           .box {
             color: rgb(0, 148, 251);
             font-weight: bold;
@@ -76,25 +82,10 @@ const Container = styled.div`
     font-weight: bold;
     letter-spacing: 0.02em;
     line-height: 1.625;
-    &:before {
-      content: "";
-      display: block;
-      width: 100px;
-      height: 42px;
-    }
-    .sub_text {
-      font-size: 14px;
-      color: #999;
-      margin-left: 80%;
-      .require {
-        color: #f76117;
-        font-weight: bold;
-      }
-    }
   }
   .buttons {
     float: left;
-    margin-left: 19.5%;
+    margin-left: 30%;
     margin-top: 40px;
   }
   .find_id,
@@ -111,7 +102,7 @@ const Container = styled.div`
     background-color: rgb(0, 148, 251);
     color: white;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 8px;
   }
   .retry,
   .go_home {
@@ -125,7 +116,7 @@ const Container = styled.div`
     border-radius: 30px;
     background-color: white;
     color: rgb(0, 148, 251);
-    margin-right: 5px;
+    margin-right: 8px;
     cursor: pointer;
   }
   .box_tip {
@@ -135,8 +126,8 @@ const Container = styled.div`
     padding: 17px 30px 18px 35px;
     box-sizing: border-box;
     line-height: 2em;
-    width: 62%;
-    margin-left: 19%;
+    width: 40%;
+    margin-left: 30%;
   }
 `;
 
@@ -155,61 +146,63 @@ const JoinComplete = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <div className='title'>
-          <h1>회원가입</h1>
-        </div>
-        <div className="steps">
-          <ol>
-            <li>
-              <div className="box">
-                <img src={step01} alt="step01" />
-                <p>약관동의 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step02} alt="step02" />
-                <p>본인인증 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step03} alt="step03" />
-                <p>정보입력 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step04} alt="step04" />
-                <p>회원가입 완료</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-        <div className="box_tip">
-          <dl>
-            <dt>이미 회원가입이 되어 있습니다.</dt>
-            <dd>
-              아이디 찾기 또는 비밀번호 찾기를 이용하여 로그인 후 이용해주세요.
-            </dd>
-          </dl>
-        </div>
-        <div className="buttons">
-          <button type="button" className="find_id" onClick={goHome}>
-            아이디 찾기
-          </button>
-          <button type="button" className="find_password" onClick={goHome}>
-            비밀번호 찾기
-          </button>
-          <button type="button" className="retry" onClick={goJoinWay}>
-            다시시도 하기
-          </button>
-          <button type="button" className="go_home" onClick={goHome}>
-            홈으로 이동
-          </button>
+        <div className='content'>
+          <div className='title'>
+            <h1>회원가입</h1>
+          </div>
+          <div className="steps">
+            <ol>
+              <li>
+                <div className="box">
+                  <img src={step01} alt="step01" />
+                  <p>약관동의 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step02} alt="step02" />
+                  <p>본인인증 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step03} alt="step03" />
+                  <p>정보입력 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step04} alt="step04" />
+                  <p>회원가입 완료</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div className="box_tip">
+            <dl>
+              <dt>이미 회원가입이 되어 있습니다.</dt>
+              <dd>
+                아이디 찾기 또는 비밀번호 찾기를 이용하여 로그인 후 이용해주세요.
+              </dd>
+            </dl>
+          </div>
+          <div className="buttons">
+            <button type="button" className="find_id" onClick={goHome}>
+              아이디 찾기
+            </button>
+            <button type="button" className="find_password" onClick={goHome}>
+              비밀번호 찾기
+            </button>
+            <button type="button" className="retry" onClick={goJoinWay}>
+              다시시도 하기
+            </button>
+            <button type="button" className="go_home" onClick={goHome}>
+              홈으로 이동
+            </button>
+          </div>
         </div>
       </div>
       <LoginFooter />

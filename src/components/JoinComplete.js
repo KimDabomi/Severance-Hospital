@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinComplete.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-05 22:48
+ * @ Last Update: 2022-12-06. 11:50
  * @ Description: 회원가입 완료 페이지
  */
 
@@ -19,6 +19,10 @@ import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
+  .all_content {
+    background: url(${bg}) no-repeat center / cover;
+    height: 600px;
+  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -32,6 +36,8 @@ const Container = styled.div`
     border-bottom: 1px solid #e6e6e6;
   }
   .steps {
+    width: 1280px;
+    margin: auto;
     ol {
       li {
         .box {
@@ -91,24 +97,27 @@ const Container = styled.div`
       }
     }
   }
-  h5 {
-    font-size: 20px;
-    text-align: center;
-    margin: 120px 0 5px 0;
-    font-weight: bold;
-    .name {
-        color: rgb(0,148,251);
+  .content {
+    width: 1280px;
+    margin: auto;
+    h5 {
+      font-size: 20px;
+      text-align: center;
+      margin: 120px 0 5px 0;
+      font-weight: bold;
+      .name {
+        color: rgb(0, 148, 251);
+      }
     }
-  }
-  p {
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 80px;
-  }
-  button {
-    font-size: 16px;
-    font-weight: 100;
-      float: left;
+    p {
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    button {
+      margin-left: 45%;
+      font-size: 16px;
+      font-weight: 100;
       border: 1px solid rgb(0, 148, 251);
       padding: 10px 25px;
       box-sizing: border-box;
@@ -116,58 +125,66 @@ const Container = styled.div`
       background-color: rgb(0, 148, 251);
       color: white;
       cursor: pointer;
-      transform: translate(420%,0);
+    }
   }
 `;
 
 const JoinComplete = memo(() => {
   const navigate = useNavigate();
 
-  const goHome = e => {
-    navigate('/');
-  }
+  const goHome = (e) => {
+    navigate("/");
+  };
   return (
     <Container>
       <div>
         <LoginHeader />
-        <div className='title'>
-          <h1>회원가입</h1>
-        </div>
-        <div className="steps">
-          <ol>
-            <li>
-              <div className="box">
-                <img src={step01} alt="step01" />
-                <p>약관동의 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step02} alt="step02" />
-                <p>본인인증 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step03} alt="step03" />
-                <p>정보입력 하기</p>
-              </div>
-            </li>
-            <img src={Right} alt="right" className="right" />
-            <li>
-              <div className="box">
-                <img src={step04} alt="step04" />
-                <p>회원가입 완료</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-        <div className='content'>
-            <h5>환영합니다 <span className='name'>이름</span>님!</h5>
-            <p>세브란스 통합 계정으로 패밀리 사이트를 모두 이용하실 수 있습니다.</p>
-            <button type='button' className='go_home' onClick={goHome}>홈으로 이동</button>
+        <div className="all_content">
+          <div className="title">
+            <h1>회원가입</h1>
+          </div>
+          <div className="steps">
+            <ol>
+              <li>
+                <div className="box">
+                  <img src={step01} alt="step01" />
+                  <p>약관동의 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step02} alt="step02" />
+                  <p>본인인증 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step03} alt="step03" />
+                  <p>정보입력 하기</p>
+                </div>
+              </li>
+              <img src={Right} alt="right" className="right" />
+              <li>
+                <div className="box">
+                  <img src={step04} alt="step04" />
+                  <p>회원가입 완료</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div className="content">
+            <h5>
+              환영합니다 <span className="name">이름</span>님!
+            </h5>
+            <p>
+              세브란스 통합 계정으로 패밀리 사이트를 모두 이용하실 수 있습니다.
+            </p>
+            <button type="button" className="go_home" onClick={goHome}>
+              홈으로 이동
+            </button>
+          </div>
         </div>
       </div>
       <LoginFooter />

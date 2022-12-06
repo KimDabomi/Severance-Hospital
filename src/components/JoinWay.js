@@ -25,6 +25,10 @@ const Container = styled.div`
   position: relative;
   letter-spacing: 0.02em;
   line-height: 1.625;
+  .content {
+    background: url(${bg}) no-repeat center /cover;
+    height: 600px;
+  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -36,6 +40,8 @@ const Container = styled.div`
     font-size: 16px;
   }
   .ways {
+    width: 1280px;
+    margin: auto;
     .root_box {
       margin-top: 30px;
       margin-right: 32.3px;
@@ -121,67 +127,69 @@ const JoinWay = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <div className='title'>
-          <h1>회원가입</h1>
-        </div>
-        <p>
-          세브란스 홈페이지에 방문해주셔서 감사 드립니다. 통합 계정으로 모든
-          패밀리사이트를 이용할 수 있습니다.
-        </p>
-        <div className="ways">
-          <Link to="/join_accept" className="root_box">
-            <h2>내/외국인</h2>
-            <p>14세 이상</p>
-            <p>국내거주 내/외국인</p>
-            <img src={localImg} alt="내/외국인" />
-          </Link>
-          <Link to="/join_accept" className="root_box">
-            <h2>소아/청소년</h2>
-            <p>14세 미만</p>
-            <p>내/외국인</p>
-            <img src={childImg} alt="소아/청소년" />
-          </Link>
-          <Link to="/join_accept_global" className="root_box">
-            <h2>해외거주 외국인</h2>
-            <p>Foreign membership</p>
-            <img src={globalImg} alt="해외거주외국인" />
-          </Link>
-          <Routes>
-            <Route path="/join_accept" element={<JoinAccept />} />
-            <Route path="/join_accept_global" element={<JoinAcceptGlobal />} />
-          </Routes>
-          <div className="root_box">
-            <h2>SNS 회원가입</h2>
-            <p>
-              기존 사용하는 계정으로
-              <br />
-              간단하게 가입
-            </p>
-            <ul>
-              <li>
-                <Link to="/">
-                  <img src={naver} alt="naver" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/">
-                  <img src={kakao} alt="kakao" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/">
-                  <img src={facebook} alt="facebook" />
-                </Link>
-              </li>
-            </ul>
+        <div className='content'>
+          <div className='title'>
+            <h1>회원가입</h1>
           </div>
-          <div className="qna">
-            <p>
-              회원가입이 잘 안되나요?
-              <button type="button" className="qna_button">
-                회원가입 할 때 가장 많이 물어보는 질문은?
-              </button>
-            </p>
+          <p>
+            세브란스 홈페이지에 방문해주셔서 감사 드립니다. 통합 계정으로 모든
+            패밀리사이트를 이용할 수 있습니다.
+          </p>
+          <div className="ways">
+            <Link to="/join_accept" className="root_box">
+              <h2>내/외국인</h2>
+              <p>14세 이상</p>
+              <p>국내거주 내/외국인</p>
+              <img src={localImg} alt="내/외국인" />
+            </Link>
+            <Link to="/join_accept" className="root_box">
+              <h2>소아/청소년</h2>
+              <p>14세 미만</p>
+              <p>내/외국인</p>
+              <img src={childImg} alt="소아/청소년" />
+            </Link>
+            <Link to="/join_accept_global" className="root_box">
+              <h2>해외거주 외국인</h2>
+              <p>Foreign membership</p>
+              <img src={globalImg} alt="해외거주외국인" />
+            </Link>
+            <Routes>
+              <Route path="/join_accept" element={<JoinAccept />} />
+              <Route path="/join_accept_global" element={<JoinAcceptGlobal />} />
+            </Routes>
+            <div className="root_box">
+              <h2>SNS 회원가입</h2>
+              <p>
+                기존 사용하는 계정으로
+                <br />
+                간단하게 가입
+              </p>
+              <ul>
+                <li>
+                  <Link to="/">
+                    <img src={naver} alt="naver" />
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/">
+                    <img src={kakao} alt="kakao" />
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/">
+                    <img src={facebook} alt="facebook" />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="qna">
+              <p>
+                회원가입이 잘 안되나요?
+                <button type="button" className="qna_button">
+                  회원가입 할 때 가장 많이 물어보는 질문은?
+                </button>
+              </p>
+            </div>
           </div>
         </div>
         <LoginFooter />
