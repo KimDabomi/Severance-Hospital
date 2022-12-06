@@ -7,19 +7,17 @@
 
 import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import JoinAccept from "./JoinAccept";
-import JoinAcceptGlobal from "./JoinAcceptGlobal";
-import LoginHeader from "./LoginHeader";
-import LoginFooter from "./LoginFooter";
-import localImg from "../assets/img/ico-login1@2x.png";
-import childImg from "../assets/img/ico-login2@2x.png";
-import globalImg from "../assets/img/ico-login3@2x.png";
-import naver from "../assets/img/ico-sns-naver@2x.png";
-import kakao from "../assets/img/ico-sns-kakao@2x.png";
-import facebook from "../assets/img/ico-sns-facebook@2x.png";
-import bg from "../assets/img/bg-pattern.png";
+import LoginHeader from "../../components/LoginHeader";
+import LoginFooter from "../../components/LoginFooter";
+import localImg from "../../assets/img/ico-login1@2x.png";
+import childImg from "../../assets/img/ico-login2@2x.png";
+import globalImg from "../../assets/img/ico-login3@2x.png";
+import naver from "../../assets/img/ico-sns-naver@2x.png";
+import kakao from "../../assets/img/ico-sns-kakao@2x.png";
+import facebook from "../../assets/img/ico-sns-facebook@2x.png";
+import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -154,10 +152,6 @@ const JoinWay = memo(() => {
               <p>Foreign membership</p>
               <img src={globalImg} alt="해외거주외국인" />
             </Link>
-            <Routes>
-              <Route path="/join_accept" element={<JoinAccept />} />
-              <Route path="/join_accept_global" element={<JoinAcceptGlobal />} />
-            </Routes>
             <div className="root_box">
               <h2>SNS 회원가입</h2>
               <p>

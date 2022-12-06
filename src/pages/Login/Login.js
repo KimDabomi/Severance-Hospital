@@ -9,12 +9,12 @@ import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import LoginHeader from "./LoginHeader";
-import LoginFooter from "./LoginFooter";
-import naver from "../assets/img/ico-sns-naver@2x.png";
-import kakao from "../assets/img/ico-sns-kakao@2x.png";
-import facebook from "../assets/img/ico-sns-facebook@2x.png";
-import bg from "../assets/img/bg-pattern.png";
+import LoginHeader from "../../components/LoginHeader";
+import LoginFooter from "../../components/LoginFooter";
+import naver from "../../assets/img/ico-sns-naver@2x.png";
+import kakao from "../../assets/img/ico-sns-kakao@2x.png";
+import facebook from "../../assets/img/ico-sns-facebook@2x.png";
+import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;

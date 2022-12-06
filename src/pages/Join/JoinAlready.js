@@ -8,14 +8,14 @@
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import LoginHeader from "./LoginHeader";
-import LoginFooter from "./LoginFooter";
-import Right from "../assets/img/ico-arrow-right-gray@2x.png";
-import step01 from "../assets/img/ico-login-step1-off@2x.png";
-import step02 from "../assets/img/ico-login-step2-on@2x.png";
-import step03 from "../assets/img/ico-login-step3-off@2x.png";
-import step04 from "../assets/img/ico-login-step4-off@2x.png";
-import bg from "../assets/img/bg-pattern.png";
+import LoginHeader from "../../components/LoginHeader";
+import LoginFooter from "../../components/LoginFooter";
+import Right from "../../assets/img/ico-arrow-right-gray@2x.png";
+import step01 from "../../assets/img/ico-login-step1-off@2x.png";
+import step02 from "../../assets/img/ico-login-step2-on@2x.png";
+import step03 from "../../assets/img/ico-login-step3-off@2x.png";
+import step04 from "../../assets/img/ico-login-step4-off@2x.png";
+import bg from "../../assets/img/bg-pattern.png";
 
 
 const Container = styled.div`

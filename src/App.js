@@ -3,14 +3,14 @@ import { Link, Routes, Route } from "react-router-dom";
 
 import StaffSearch from "./pages/staff/StaffSearch";
 import MainPage from "./pages/main/MainPage";
-import Login from "./components/Login";
-import JoinWay  from "./components/JoinWay";
-import JoinAccept from "./components/JoinAccept";
-import JoinAcceptGlobal from "./components/JoinAcceptGlobal";
-import JoinCertificate from "./components/JoinCertificate";
-import JoinUs  from "./components/JoinUs";
-import JoinComplete from "./components/JoinComplete";
-import JoinAlready from "./components/JoinAlready"
+import Login from "./pages/Login/Login";
+import JoinWay  from "./pages/Join/JoinWay";
+import JoinAccept from "./pages/Join/JoinAccept";
+import JoinAcceptGlobal from "./pages/Join/JoinAcceptGlobal";
+import JoinCertificate from "./pages/Join/JoinCertificate";
+import JoinUs  from "./pages/Join/JoinUs";
+import JoinComplete from "./pages/Join/JoinComplete";
+import JoinAlready from "./pages/Join/JoinAlready"
 
 //고객의소리
 import CustomerBoardList from './pages/CustomerBoard/CustomerBoardList';
