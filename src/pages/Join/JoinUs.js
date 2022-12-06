@@ -22,13 +22,15 @@ import bg from "../../assets/img/bg-pattern.png";
 import {useFormik} from 'formik';
 
 const Container = styled.div`
+  width: 100%;
   .content {
-    background: url(${bg}) no-repeat center /cover;
-    height: 600px;
-    margin-bottom: 1400px;
-    width: 1280px;
+    width: 100%;
+    background: url(${bg}) no-repeat;
+    background-size: 100%;
     margin: auto;
     position: relative;
+    padding-bottom: 100px;
+    box-sizing: border-box;
   }
   h1 {
     text-align: center;
@@ -248,7 +250,8 @@ const Container = styled.div`
   .submit_btn {
     margin-top: 70px;
     position: absolute;
-    left: 45%;
+    left: 50%;
+    transform: translate(-50%);
   }
   .dafault_info,
   .legal_representative {
@@ -361,7 +364,6 @@ const JoinUs = memo(() => {
 
   return (
     <Container>
-      <div>
         <LoginHeader />
         <div className='content'>
           <div className='title'>
@@ -966,7 +968,7 @@ const JoinUs = memo(() => {
           <button type="button" className="submit_btn" onClick={submitInfo}>확인</button>
         </div>
         <LoginFooter />
-      </div>
+
     </Container>
   );
 });

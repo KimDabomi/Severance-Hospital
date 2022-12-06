@@ -33,7 +33,6 @@ const FooterContainer = styled.footer`
   flex-direction: column;
   align-items: center;
   margin-top: 100px;
-  position: relative;
   /* 사이트 바로가기 스타일 */
   .familySite {
     width: 1280px;
