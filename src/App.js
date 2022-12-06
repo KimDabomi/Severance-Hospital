@@ -26,6 +26,8 @@ import NewsMain from './pages/NewsHome/NewsMain';
 import NewsView from './pages/NewsHome/NewsView';
 import NoticeView from './pages/NewsHome/NoticeView';
 
+// 사이트맵
+import AllMenu from './pages/SiteMap/SiteMap';
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
       <Link to="main_page"></Link>
       <Routes>
         <Route path="/" exapt={true} element={<MainPage />} />
+        <Route path="/all_menu" element={<AllMenu />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/join_way' element={<JoinWay />} />

@@ -6,7 +6,7 @@
  */
 
 /** import */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useCookies } from "react-cookie";
@@ -348,7 +348,7 @@ const BannerSection = styled.section`
   ${`backGround: url(${BgMktBanner}) no-repeat center /cover;`}
 `;
 
-const MainPage = () => {
+const MainPage = memo(() => {
   const COOKIE_KEY = "saebalHideModal";
   const [cookies, setCookie] = useCookies([COOKIE_KEY]);
   const [popup, setPopup] = useState(true);
@@ -522,6 +522,6 @@ const MainPage = () => {
       <Footer />
     </>
   );
-};
+});
 
 export default MainPage;
