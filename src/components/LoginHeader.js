@@ -1,7 +1,7 @@
 /**
  * @ File Name: LoginHeader.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06 10:55
+ * @ Last Update: 2022-12-06 12:08
  * @ Description: 로그인센터 헤더 네비게이션
  */
 
@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: #fff;
   .nav {
     width: 1280px;
     height: 100px;
@@ -69,6 +68,15 @@ const Container = styled.div`
           }
         }
         &:last-child {
+          &:hover {
+            a:after {
+              opacity: 1;
+              visibility: visible;
+              width: 64px;
+              height: 64px;
+              margin: -32px 0 0 -16px;
+            }
+          }
           a {
             padding-right: 0;
           }
