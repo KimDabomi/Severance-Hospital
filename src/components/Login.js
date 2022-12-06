@@ -81,6 +81,7 @@ const Container = styled.div`
         border: 0;
         font-size: 22px;
         border-radius: 4%;
+        cursor: pointer;
       }
     }
     .remember {

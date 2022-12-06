@@ -118,6 +118,7 @@ const Container = styled.div`
         padding: 10px 25px;
         font-size: 16px;
         border-radius: 30px;
+        cursor: pointer;
       }
     }
   }

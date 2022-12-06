@@ -19,13 +19,16 @@ import check from "../assets/img/ico-check-primary@2x.png";
 import warning from "../assets/img/ico-warning-mark@2x.png";
 import dropdown from "../assets/img/ico-chevron-down@2x.png";
 import bg from "../assets/img/bg-pattern.png";
+import {useFormik} from 'formik';
 
 const Container = styled.div`
-  position: relative;
   .content {
     background: url(${bg}) no-repeat center /cover;
     height: 600px;
-    margin-bottom: 1250px;
+    margin-bottom: 1400px;
+    width: 1280px;
+    margin: auto;
+    position: relative;
   }
   h1 {
     text-align: center;
@@ -122,6 +125,17 @@ const Container = styled.div`
     line-height: 2em;
     color: #f76117;
     font-weight: bold;
+    img {
+      margin-top: 7px;
+    }
+  }
+  .check {
+    line-height: 2em;
+    color: rgb(0,148,251);
+    font-weight: bold;
+    img {
+      margin-top: 10px;
+    }
   }
   .no_excep {
     color: black;
@@ -233,7 +247,8 @@ const Container = styled.div`
   }
   .submit_btn {
     margin-top: 70px;
-    transform: translate(650%,0);
+    position: absolute;
+    left: 45%;
   }
   .dafault_info,
   .legal_representative {
@@ -277,7 +292,7 @@ const Container = styled.div`
     margin-left: 9px;
     font-size: 16px;
     border: none;
-    border-radius: 2px;
+    border-radius: 3px;
     font-weight: 100;
   }
 `;
@@ -288,6 +303,61 @@ const JoinUs = memo(() => {
   const submitInfo = e => {
     navigate('/join_complete');
   }
+
+  // /*
+  // ueFormik() hook => initialValues에 
+  // <form> value값과 submit할 때 호출되는 
+  // submit함수를 파라미터로 전달
+  // */
+  // const formik = useFormik({
+  //   initialValues: {
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //   },
+  //   onSubmit: values => {
+  //     alert(JSON.stringify(values, null, 2));
+  //   },
+  // });
+
+  // const [values, setValues] = React.useState({});
+ 
+  // const handleChange = e => {
+  //   setValues((prevValues) => {
+  //     ...prevValues,
+  //     // 업데이트 할 `values`의 키를 formik에게 알리기 위해 name prop을 사용
+  //     [event.target.name]: event.target.value
+  //   });
+  // };
+
+  // const validate = values => {
+  //   const errors = {}; //에러를 반환할 빈 객체
+
+  //   //firstName 값이 없다면
+  //   if(!values.firstName) { 
+  //       errors.firstName = 'Required'; //firstName키에 필수(Required)라는 문자열 저장
+  //   } else if (values.firstName.length > 15) {
+  //     //firstName 값의 길이가 15보다 크면
+  //     errors.firstName = "Must be 15 characters or less"; //15글자 이하여야된다는 문자열 저장
+  //   }
+
+  //   //lastName 값이 없다면
+  //   if (!values.lastName) {
+  //     errors.lastName = 'Required'; //lastName키에 필수(Required)문자열 저장
+  //   } else if(values.lastName.length > 20) {
+  //     //lastName 값의 길이가 20보다 크면
+  //     errors.lastName = "Must be 20 characters or less"; //20글자 이하여야된다는 문자열 저장
+  //   }
+
+  //   //email 값이 없다면
+  //   if (!values.email) {
+  //     errors.email = 'Required';
+  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  //     //email 값이 정규 표현식을 만족하지 못하면
+  //     errors.email = 'Invalid email address'; //잘못된 이메일 형식
+  //   }
+  //   return errors;
+  // }
 
   return (
     <Container>
@@ -366,6 +436,18 @@ const JoinUs = memo(() => {
                       <img src={warning} alt="warning" />
                       아이디를 입력해주세요.
                     </p>
+                    <p className='warn'>
+                      <img src={warning} alt="warning" />
+                      아이디는 6자 이상 20자 이내로 입력해주세요.
+                    </p>
+                    <p className='warn'>
+                      <img src={warning} alt="warning" />
+                      아이디를 중복체크해주세요.
+                    </p>
+                    <p className='check'>
+                      <img src={check} alt="check" />
+                      사용이 가능한 아이디입니다.
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -401,6 +483,10 @@ const JoinUs = memo(() => {
                       <img src={warning} alt="warning" />
                       비밀번호 규격에 맞춰 입력해주세요.
                     </p>
+                    <p className='check'>
+                      <img src={check} alt="check" />
+                      안전한 비밀번호입니다.
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -424,6 +510,10 @@ const JoinUs = memo(() => {
                     <p className='warn'>
                       <img src={warning} alt="warning" />
                       비밀번호가 일치하지 않습니다.
+                    </p>
+                    <p className='check'>
+                      <img src={check} alt="check" />
+                      비밀번호가 일치합니다.
                     </p>
                   </td>
                 </tr>
@@ -872,10 +962,8 @@ const JoinUs = memo(() => {
                 </tr>
               </tbody>
             </table>
-            <button type="button" className="submit_btn" onClick={submitInfo}>
-              확인
-            </button>
           </div>
+          <button type="button" className="submit_btn" onClick={submitInfo}>확인</button>
         </div>
         <LoginFooter />
       </div>
