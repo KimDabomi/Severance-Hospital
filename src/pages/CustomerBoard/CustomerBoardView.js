@@ -70,11 +70,10 @@ const CustomerBoardView = memo(() => {
   return (
     <div>
       <Spinner loading={loading} />
-      <div className="pageCont">
         <Header />
         <CustomerBoardHeader />
+      <div className="pageCont">
         <h4 className="pageSubtitle">고객의소리 게시판</h4>
-
         {error ? (
           <h1> 에러발생함 </h1>
         ) : (

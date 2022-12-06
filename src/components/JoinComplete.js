@@ -1,28 +1,25 @@
-/*
- * @ File Name: JoinCertificate.js
+/**
+ * @ File Name: JoinComplete.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06 11:40
- * @ Description: 본인인증 페이지
+ * @ Last Update: 2022-12-06. 11:50
+ * @ Description: 회원가입 완료 페이지
  */
+
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LoginFooter";
 import Right from "../assets/img/ico-arrow-right-gray@2x.png";
 import step01 from "../assets/img/ico-login-step1-off@2x.png";
-import step02 from "../assets/img/ico-login-step2-on@2x.png";
+import step02 from "../assets/img/ico-login-step2-off@2x.png";
 import step03 from "../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../assets/img/ico-login-step4-off@2x.png";
-import ipin from "../assets/img/img-login-Certified01.png";
-import phone from "../assets/img/img-login-Certified02.png";
-import official from "../assets/img/img-login-Certified03.png";
 import bg from "../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
-  .content {
+  .all_content {
     background: url(${bg}) no-repeat center / cover;
     height: 600px;
   }
@@ -33,7 +30,7 @@ const Container = styled.div`
     font-weight: bold;
   }
   hr {
-    width: 98%;
+    width: 100%;
     margin: 0;
     border: 0;
     border-bottom: 1px solid #e6e6e6;
@@ -63,7 +60,7 @@ const Container = styled.div`
             margin-top: 4px;
           }
         }
-        &:nth-of-type(2) {
+        &:nth-of-type(4) {
           .box {
             color: rgb(0, 148, 251);
             font-weight: bold;
@@ -78,92 +75,71 @@ const Container = styled.div`
       }
     }
   }
-  .ways {
-    width: 1280px;
-    margin: auto;
-    .ipin,
-    .phone,
-    .official {
-      width: 240px;
-      height: 210px;
-      border: 1px solid #e6e6e6;
-      float: left;
-      margin: 60px 20px 0 0;
-      position: relative;
-      img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+  h4 {
+    margin: 53px 0 13px 0;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    line-height: 1.625;
+    &:before {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 42px;
+    }
+    .sub_text {
+      font-size: 14px;
+      color: #999;
+      margin-left: 80%;
+      .require {
+        color: #f76117;
+        font-weight: bold;
       }
     }
-    .ipin {
-      margin-left: 20%;
+  }
+  .content {
+    width: 1280px;
+    margin: auto;
+    h5 {
+      font-size: 20px;
+      text-align: center;
+      margin: 120px 0 5px 0;
+      font-weight: bold;
+      .name {
+        color: rgb(0, 148, 251);
+      }
     }
-    .official {
-      margin-right: 20%;
+    p {
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 80px;
     }
     button {
-      float: left;
-      width: 240px;
-      height: 50px;
-      margin: 30px 22px 40px 0;
-      font-size: 18px;
-      padding: 5px 0;
+      margin-left: 45%;
+      font-size: 16px;
+      font-weight: 100;
+      border: 1px solid rgb(0, 148, 251);
+      padding: 10px 25px;
       box-sizing: border-box;
       border-radius: 30px;
-      border: 2px solid rgb(0, 148, 251);
       background-color: rgb(0, 148, 251);
       color: white;
       cursor: pointer;
     }
-    .ipin_btn {
-      margin-left: 20%;
-    }
-    .official_btn {
-      background-color: white;
-      color: rgb(0, 148, 251);
-      border: 2px solid rgb(0, 148, 251);
-    }
-    .notice {
-    width: 1280px;
-    margin: auto;
-    float: left;
-    ul {
-      margin: 0 22% 50px; 
-      li {
-        margin-top: 5px;
-        font-size: 14px;
-        &:before {
-          content: "";
-          display: block;
-          width: 4px;
-          height: 4px;
-          background-color: rgb(0, 148, 251);
-          float: left;
-          margin: 10px 5px 0 0;
-        }
-        span {
-          margin-left: 1.3%;
-        }
-      }
-    }
   }
-  }
-  
 `;
 
-const JoinCertificate = memo(() => {
+const JoinComplete = memo(() => {
   const navigate = useNavigate();
-  const btnClick = (e) => {
-    navigate("/join_us");
-  };
 
+  const goHome = (e) => {
+    navigate("/");
+  };
   return (
     <Container>
       <div>
         <LoginHeader />
-        <div className="content">
+        <div className="all_content">
           <div className="title">
             <h1>회원가입</h1>
           </div>
@@ -198,46 +174,22 @@ const JoinCertificate = memo(() => {
               </li>
             </ol>
           </div>
-          <div className="ways">
-            <div className="ipin">
-              <img src={ipin} alt="ipin" />
-            </div>
-            <div className="phone">
-              <img src={phone} alt="phone" />
-            </div>
-            <div className="official">
-              <img src={official} alt="officail" />
-            </div>
-            <button type="button" className="ipin_btn" onClick={btnClick}>
-              아이핀 인증
+          <div className="content">
+            <h5>
+              환영합니다 <span className="name">이름</span>님!
+            </h5>
+            <p>
+              세브란스 통합 계정으로 패밀리 사이트를 모두 이용하실 수 있습니다.
+            </p>
+            <button type="button" className="go_home" onClick={goHome}>
+              홈으로 이동
             </button>
-            <button type="button" className="phone_btn" onClick={btnClick}>
-              휴대폰 인증
-            </button>
-            <button type="button" className="official_btn" onClick={btnClick}>
-              범용 공인인증서
-            </button>
-            <div className="notice">
-            <ul>
-              <li>
-                아이디 또는 비밀번호 분실 등 본인 여부 확인이 필요한 경우를 위해
-                꼭 필요한 절차입니다.
-              </li>
-              <li>
-                허위 정보를 입력하시는 경우 추 후 정확한 본인확인이 불가능하며
-                아이디/비밀번호 분실 시 도움을 드리기가
-                <br />
-                <span>어렵습니다.</span>
-              </li>
-            </ul>
           </div>
-          </div>
-          
         </div>
-        <LoginFooter />
       </div>
+      <LoginFooter />
     </Container>
   );
 });
 
-export default JoinCertificate;
+export default JoinComplete;

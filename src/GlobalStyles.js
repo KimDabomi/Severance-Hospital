@@ -62,6 +62,12 @@ textarea{
     padding-bottom: 95px;
 
 }
+
+.bgAll{
+  backGround: url(../img/bg-pattern.png) no-repeat center/cover;
+  width: 100% !important;
+  /* background-color: pink; */
+}
 //페이지 상위 타이틀
 .pageTitle{
     text-align: center;
@@ -286,10 +292,16 @@ textarea{
     font-size: 16px;
     border-radius: 25px;
     color: #333;
-    border: 1px solid #dadada;
+    /* border: 1px solid #dadada; */
     background-color: #fff;
 		display: inline-flex;
 		align-items: center;
+    margin-top:20px;
+    margin-right: 10px;
+    float: right;
+
+    &.media{background-color: #0094fb; color: #fff;}
+    &.notice{background-color: #ac47d1; color: #fff;}
   }
 	//검색버튼
   .searchBox {
@@ -566,6 +578,25 @@ textarea{
       color: #666;
     }
   }
+  //뉴스메인페이지 sns소식
+  .tabContentCont{
+    display: flex;
+    .tabContent{
+      width: 50%;
+      margin: 15px;
+      box-sizing: border-box;
+    }
+    .contentBox{
+      background-color: #fff;
+      width: 100%;
+    }
+  }
+  .title3{
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+  }
 
   // NEW 뉴 아이콘
   .icoNew{
@@ -592,7 +623,7 @@ textarea{
 
     padding: 43px 30px 28px;
     box-sizing: border-box;
-
+    
     position: relative;
 
     /* 카테고리 (언론 보도) */
@@ -600,7 +631,7 @@ textarea{
       width: 78px;
       height: 40px;
       display: block;
-
+      
       position: absolute;
       top: -10px;
       left: 30px;

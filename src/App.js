@@ -9,6 +9,8 @@ import JoinAccept from "./components/JoinAccept";
 import JoinAcceptGlobal from "./components/JoinAcceptGlobal";
 import JoinCertificate from "./components/JoinCertificate";
 import JoinUs  from "./components/JoinUs";
+import JoinComplete from "./components/JoinComplete";
+import JoinAlready from "./components/JoinAlready"
 
 //고객의소리
 import CustomerBoardList from './pages/CustomerBoard/CustomerBoardList';
@@ -38,6 +40,8 @@ function App() {
         <Route path='/join_accept_global' element={<JoinAcceptGlobal />} />
         <Route path='/join_certificate' element={<JoinCertificate />} />
         <Route path='/join_us' element={<JoinUs />} />
+        <Route path='/join_complete' element={<JoinComplete />} />
+        <Route path='/join_already' element={<JoinAlready />} />
         
         {/* 고객의소리 페이지 라우팅*/}
         <Route path='/customer.do' element={<CustomerBoardList />}/>

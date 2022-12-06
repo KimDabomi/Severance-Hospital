@@ -12,9 +12,6 @@ import styled from 'styled-components';
 import boxGuideDecor from '../../assets/img/box-guide-decoration@2x.png'
 
 const CustomerHeaderCont = styled.div`
-        margin: auto;
-        max-width: 1280px;
-        
         .pageTitle{
             text-align: center;
             font-size: 40px;
@@ -23,9 +20,10 @@ const CustomerHeaderCont = styled.div`
         }
 
         .boxGuide{
-            width: 100%;
+            max-width: 1280px;
             height: 200px;
-            margin: 0 0 60px 0;
+            margin: auto;
+            /* margin: 0 0 60px 0; */
             padding: 20px 30px;
             box-sizing: border-box;
             border: 1px solid #e3e3e3;
@@ -55,7 +53,7 @@ const CustomerHeaderCont = styled.div`
 
 const Header = memo(() => {
     return (
-        <CustomerHeaderCont>
+        <CustomerHeaderCont  className='bgAll'>
             <h1 className='pageTitle'>고객의 소리</h1>
 
             <div className='boxGuide'>
