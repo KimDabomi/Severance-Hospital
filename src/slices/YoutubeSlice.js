@@ -19,10 +19,11 @@
                  part: 'snippet', 
                  type: 'video',
                  channelId: 'UCIqNAJC8l8rCAXOZPyfyG0Q', //세브란스병원 채널 id
-                 order: 'date' //최신순으로 정렬
+                 order: 'date', //최신순으로 정렬
+                 maxResults: 10 //가져올 수
              }
          });
-         result = response.data;
+         result = response.data.items;
      } catch (err) {
          result = rejectWithValue(err.response);
      }

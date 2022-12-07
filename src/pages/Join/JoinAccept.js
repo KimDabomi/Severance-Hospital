@@ -17,6 +17,7 @@ import step03 from "../../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../../assets/img/ico-login-step4-off@2x.png";
 import warning from "../../assets/img/ico-warning-mark@2x.png";
 import bg from "../../assets/img/bg-pattern.png";
+import checkbox from "../../assets/img/ico-checkbox-checked-white.png";
 
 const Container = styled.div`
   position: relative;
@@ -230,6 +231,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 파란색 체크박스
   .checkBox {
     position: absolute;
     width: 1px;
@@ -252,7 +255,7 @@ const Container = styled.div`
     content: "";
     border: 0;
     border-radius: 50%;
-    background: #959595 url(./img/ico-checkbox-checked-white.png) no-repeat 45%
+    background: #959595 url(${checkbox}) no-repeat 45%
       center !important;
     background-size: 11px 8px !important;
   }

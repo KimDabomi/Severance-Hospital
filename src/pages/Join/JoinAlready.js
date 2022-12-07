@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinComplete.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06 12:00
+ * @ Last Update: 2022-12- 07 09:40
  * @ Description: 이미 회원가입됨 안내 페이지
  */
 
@@ -20,9 +20,12 @@ import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
+  width: 100%;
   .content {
-    background: url(${bg}) no-repeat center / cover;
-    height: 600px;
+    background: url(${bg}) no-repeat;
+    background-size: 100%;
+    height: 500px;
+    width: 100%;
   }
   h1 {
     text-align: center;
@@ -83,52 +86,58 @@ const Container = styled.div`
     letter-spacing: 0.02em;
     line-height: 1.625;
   }
-  .buttons {
-    float: left;
-    margin-left: 30%;
-    margin-top: 40px;
+  .notice {
+    width: 1280px;
+    margin: auto;
+    .box_tip {
+      float: left;
+      border: 1px solid #e6e6e6;
+      padding: 17px 30px 18px 35px;
+      box-sizing: border-box;
+      line-height: 2em;
+      width: 770px;
+      margin: 40px 0 0 20%;
+    }
+    .buttons {
+      float: left;
+      margin: 40px 0 0 20%;
+      width: 1280px;
+      .find_id,
+      .find_password {
+        height: 50px;
+        width: 190px;
+        font-size: 18px;
+        font-weight: 100;
+        float: left;
+        border: 1px solid rgb(0, 148, 251);
+        padding: 10px 25px;
+        box-sizing: border-box;
+        border-radius: 30px;
+        background-color: rgb(0, 148, 251);
+        color: white;
+        cursor: pointer;
+        margin-right: 8px;
+      }
+      .retry,
+      .go_home {
+        height: 50px;
+        width: 180px;
+        font-size: 18px;
+        float: left;
+        border: 2px solid rgb(0, 148, 251);
+        padding: 10px 28px;
+        box-sizing: border-box;
+        border-radius: 30px;
+        background-color: white;
+        color: rgb(0, 148, 251);
+        margin-right: 8px;
+        cursor: pointer;
+      }
+    }
   }
-  .find_id,
-  .find_password {
-    height: 50px;
-    width: 190px;
-    font-size: 18px;
-    font-weight: 100;
-    float: left;
-    border: 1px solid rgb(0, 148, 251);
-    padding: 10px 25px;
-    box-sizing: border-box;
-    border-radius: 30px;
-    background-color: rgb(0, 148, 251);
-    color: white;
-    cursor: pointer;
-    margin-right: 8px;
-  }
-  .retry,
-  .go_home {
-    height: 50px;
-    width: 190px;
-    font-size: 18px;
-    float: left;
-    border: 2px solid rgb(0, 148, 251);
-    padding: 10px 28px;
-    box-sizing: border-box;
-    border-radius: 30px;
-    background-color: white;
-    color: rgb(0, 148, 251);
-    margin-right: 8px;
-    cursor: pointer;
-  }
-  .box_tip {
-    float: left;
-    border: 1px solid #e6e6e6;
-    margin-top: 40px;
-    padding: 17px 30px 18px 35px;
-    box-sizing: border-box;
-    line-height: 2em;
-    width: 40%;
-    margin-left: 30%;
-  }
+  
+  
+  
 `;
 
 const JoinComplete = memo(() => {
@@ -144,7 +153,6 @@ const JoinComplete = memo(() => {
 
   return (
     <Container>
-      <div>
         <LoginHeader />
         <div className='content'>
           <div className='title'>
@@ -181,30 +189,31 @@ const JoinComplete = memo(() => {
               </li>
             </ol>
           </div>
-          <div className="box_tip">
-            <dl>
-              <dt>이미 회원가입이 되어 있습니다.</dt>
-              <dd>
-                아이디 찾기 또는 비밀번호 찾기를 이용하여 로그인 후 이용해주세요.
-              </dd>
-            </dl>
-          </div>
-          <div className="buttons">
-            <button type="button" className="find_id" onClick={goHome}>
-              아이디 찾기
-            </button>
-            <button type="button" className="find_password" onClick={goHome}>
-              비밀번호 찾기
-            </button>
-            <button type="button" className="retry" onClick={goJoinWay}>
-              다시시도 하기
-            </button>
-            <button type="button" className="go_home" onClick={goHome}>
-              홈으로 이동
-            </button>
+          <div className='notice'>
+            <div className="box_tip">
+              <dl>
+                <dt>이미 회원가입이 되어 있습니다.</dt>
+                <dd>
+                  아이디 찾기 또는 비밀번호 찾기를 이용하여 로그인 후 이용해주세요.
+                </dd>
+              </dl>
+            </div>
+            <div className="buttons">
+              <button type="button" className="find_id" onClick={goHome}>
+                아이디 찾기
+              </button>
+              <button type="button" className="find_password" onClick={goHome}>
+                비밀번호 찾기
+              </button>
+              <button type="button" className="retry" onClick={goJoinWay}>
+                다시시도 하기
+              </button>
+              <button type="button" className="go_home" onClick={goHome}>
+                홈으로 이동
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       <LoginFooter />
     </Container>
   );
