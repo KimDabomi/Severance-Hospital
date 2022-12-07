@@ -75,7 +75,7 @@ const StyledSlider = styled(Slider)`
     margin-top: 20px;
 
     &:hover {
-      border-color: #ac47d1;
+      border-color: #0094fb;
     }
   }
 `;

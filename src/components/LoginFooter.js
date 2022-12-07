@@ -1,68 +1,125 @@
 /**
  * @ File Name: LoginFooter.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-03 15:30
+ * @ Last Update: 2022-12-06 10:55
  * @ Description: 로그인 페이지 푸터
  */
 
-import React from "react";
+/** import */
+import React, { useState } from "react";
 import styled from "styled-components";
 
-/** 이미지 참조 */
-import npImg from "../assets/img/ico-sns-gray-np@2x.png";
-import nbImg from "../assets/img/ico-sns-gray-nb@2x.png";
-import ytImg from "../assets/img/ico-sns-yt@2x.png";
-import igImg from "../assets/img/ico-sns-gray-ig@2x.png";
-import fbImg from "../assets/img/ico-sns-gray-fb@2x.png";
-import ttImg from "../assets/img/ico-sns-tt@2x.png";
+/** SNS 아이콘 이미지 */
+import NP from "../assets/img/ico-sns-np@2x.png";
+import NB from "../assets/img/ico-sns-nb@2x.png";
+import YT from "../assets/img/ico-sns-yt@2x.png";
+import IG from "../assets/img/ico-sns-ig@2x.png";
+import FB from "../assets/img/ico-sns-fb@2x.png";
+import TT from "../assets/img/ico-sns-tt@2x.png";
+// SNS 아이콘 grayscale 이미지
+import NPGray from "../assets/img/ico-sns-gray-np@2x.png";
+import NBGray from "../assets/img/ico-sns-gray-nb@2x.png";
+import YTGray from "../assets/img/ico-sns-gray-yt@2x.png";
+import IGGray from "../assets/img/ico-sns-gray-ig@2x.png";
+import FBGray from "../assets/img/ico-sns-gray-fb@2x.png";
+import TTGray from "../assets/img/ico-sns-gray-tt@2x.png";
 
-/** 푸터 스타일 블록 */
+/** 푸터 스타일 */
 const FooterContainer = styled.footer`
   width: 100%;
   height: 214px;
-  padding-bottom: 30px;
   box-sizing: border-box;
-  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 100px;
-
   /* 사이트 바로가기 스타일 */
   .familySite {
-    width: 100%;
+    width: 1280px;
     height: 50px;
-    border-bottom: 1px solid #e6e6e6;
-    .snsLink {
-      width: 1280px;
-      margin: 0 auto;
 
-      .snsImg {
-        width: 300px;
+    .snsLink {
+      width: 300px;
+      height: 50px;
+      display: flex;
+
+      li {
+        width: 50px;
         height: 50px;
         display: flex;
+        align-items: center;
 
-        li {
-          width: 50px;
-          height: 50px;
-          display: flex;
-          align-items: center;
+        a {
+          width: 30px;
+          height: 30px;
+          transition: 0.2s ease-in-out;
+        }
+      }
 
-          img {
-            width: 30px;
-            height: 30px;
-            filter: grayscale(1);
-            cursor: pointer;
-          }
+      .npIcon {
+        ${`backGround: url(${NPGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${NP}) no-repeat center /cover;`}
+        }
+      }
+
+      .nbIcon {
+        ${`backGround: url(${NBGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${NB}) no-repeat center /cover;`}
+        }
+      }
+
+      .ytIcon {
+        ${`backGround: url(${YTGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${YT}) no-repeat center /cover;`}
+        }
+      }
+
+      .igIcon {
+        ${`backGround: url(${IGGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${IG}) no-repeat center /cover;`}
+        }
+      }
+
+      .fbIcon {
+        ${`backGround: url(${FBGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${FB}) no-repeat center /cover;`}
+        }
+      }
+
+      .ttIcon {
+        ${`backGround: url(${TTGray}) no-repeat center /cover;`}
+
+        &:hover {
+          ${`backGround: url(${TT}) no-repeat center /cover;`}
         }
       }
     }
+  }
+
+  hr {
+    width: 100%;
+    height: 1px;
+    background-color: #e6e6e6;
+    border: none;
+    margin: 0;
   }
 
   /* 사이트 정보 스타일 */
   .siteInfo {
     width: 1280px;
     height: 130px;
-    margin: 0 auto;
 
-    .shortcut {
+    .siteInfoShortcut {
       display: flex;
       margin: 35px 0 24px;
 
@@ -71,16 +128,9 @@ const FooterContainer = styled.footer`
 
         a {
           font-size: 15px;
+          font-weight: normal;
           line-height: 24px;
           color: #333333;
-        }
-
-        &:nth-child(2) {
-          font-weight: bold;
-        }
-
-        &:nth-child(4) {
-          color: #0094fb;
         }
       }
     }
@@ -98,42 +148,55 @@ const Footer = () => {
   return (
     <FooterContainer>
       <div className="familySite">
-        <div className="snsLink">
-          <ul className="snsImg">
-            <li>
-              <img src={npImg} alt="naver_post_image" />
-            </li>
-            <li>
-              <img src={nbImg} alt="naver_blog_image" />
-            </li>
-            <li>
-              <img src={ytImg} alt="youtube_image" />
-            </li>
-            <li>
-              <img src={igImg} alt="instagram_image" />
-            </li>
-            <li>
-              <img src={fbImg} alt="facebook_image" />
-            </li>
-            <li>
-              <img src={ttImg} alt="twitter_image" />
-            </li>
-          </ul>
-        </div>
+        <ul className="snsLink">
+          <li>
+            <a href="https://m.post.naver.com/my.naver?memberNo=19457070" target="_blank" rel="noopener noreferrer" className="npIcon"></a>
+          </li>
+          <li>
+            <a href="https://blog.naver.com/meet_the_sev" target="_blank" rel="noopener noreferrer" className="nbIcon"></a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/user/SeveranceHospital" target="_blank" rel="noopener noreferrer" className="ytIcon"></a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/severance_insta/" target="_blank" rel="noopener noreferrer" className="igIcon"></a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/SeveranceFan" target="_blank" rel="noopener noreferrer" className="fbIcon"></a>
+          </li>
+          <li>
+            <a href="https://twitter.com/iSEVERANCE" target="_blank" rel="noopener noreferrer" className="ttIcon"></a>
+          </li>
+        </ul>
       </div>
+
+      <hr />
+
       <div className="siteInfo">
-        <ul className="shortcut">
+        <ul className="siteInfoShortcut">
           <li>
-            <a>이용약관</a>
+            <a href="https://member.severance.healthcare/member/policy/agreement.do" target="_black" rel="noopener noreferrer">
+              이용약관
+            </a>
           </li>
           <li>
-            <a>개인정보처리방침</a>
+            <a href="https://member.severance.healthcare/member/policy/agreement.do" target="_black" rel="noopener noreferrer">
+              <strong>개인정보처리방침</strong>
+            </a>
           </li>
           <li>
-            <a>고객의 소리</a>
+            <a
+              href="https://member.severance.healthcare/member/login.do?InitechEamNoCacheNonce=5ngpKay4RzLe2jDW51toSw%3D%3D%0A"
+              target="_black"
+              rel="noopener noreferrer"
+            >
+              고객의 소리
+            </a>
           </li>
           <li>
-            <a>병원소개</a>
+            <a href="https://sev.severance.healthcare/sev/about/about.do" target="_black" rel="noopener noreferrer" style={{ color: "#0094fb" }}>
+              병원소개
+            </a>
           </li>
         </ul>
         <address>03722 서울특별시 서대문구 연세로 50-1</address>

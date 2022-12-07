@@ -589,8 +589,66 @@ textarea{
     .contentBox{
       background-color: #fff;
       width: 100%;
+      height: 861px;
+      padding: 30px 3px 30px 30px;
+      box-sizing: border-box;
+
+      //유튜브 api표시되는 영역
+      .youtubeArticle{
+        overflow: scroll;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        .subjectArea{
+          height: 52px;
+          border: 0;
+          padding: 0;
+          padding-top:18px;
+          font-size: 16px;
+          /* font-weight: 500; */
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          //링크 아이콘
+          strong:after{
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 5px;
+            margin-top: -1px;
+            width: 14px;
+            height: 14px;
+            background: url(../img/ico-external-link@2x.png);
+            background-size: cover;
+        }
+        }
+      }
     }
   }
+  .thumbItem{
+    /* width: calc(50% - 30px); */
+    width: 50%;
+    padding-right:15px;
+    margin-bottom : 30px;
+    box-sizing: border-box;
+    height: 248.78px;
+    
+  }
+  .thumb{
+    width: 100%;
+    height: 178px;
+    background-color: black;
+    position: relative;
+    img{
+      width: 100%;
+      position: absolute;
+      top: 50%; transform: translate(0, -50%);
+    }
+  }
+
+
+
   .title3{
     font-size: 24px;
     margin-bottom: 20px;

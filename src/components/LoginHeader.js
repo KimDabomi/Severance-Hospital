@@ -1,7 +1,7 @@
 /**
  * @ File Name: LoginHeader.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-05 22:40
+ * @ Last Update: 2022-12-06 12:08
  * @ Description: 로그인센터 헤더 네비게이션
  */
 
@@ -14,10 +14,10 @@ const Container = styled.div`
   .nav {
     width: 1280px;
     height: 100px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e6e6e6;
     ul {
       li {
         float: left;
@@ -57,7 +57,7 @@ const Container = styled.div`
           }
         }
         &:first-child {
-          margin: 30px 179px 0 -30px;
+          margin: 30px 173px 0 -30px;
           img {
             width: 210px;
           }
@@ -68,12 +68,26 @@ const Container = styled.div`
           }
         }
         &:last-child {
+          &:hover {
+            a:after {
+              opacity: 1;
+              visibility: visible;
+              width: 64px;
+              height: 64px;
+              margin: -32px 0 0 -16px;
+            }
+          }
           a {
             padding-right: 0;
           }
         }
       }
     }
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #e6e6e6;
+    margin: 0;
   }
 `;
 
@@ -104,6 +118,7 @@ const LoginHeader = memo(() => {
           </li>
         </ul>
       </div>
+      <hr />
     </Container>
   );
 });

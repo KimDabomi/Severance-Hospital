@@ -5,11 +5,15 @@
  * @ Description: 메인 페이지 header
  */
 
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 
 /** 링크 */
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+/** 컴포넌트 참조 */
+import SiteMap from "../pages/SiteMap/SiteMap";
 
 /** 로고, 아이콘, 이미지 참조 */
 import sevLogo from "../assets/img/sev_logo@2x.png";
@@ -59,7 +63,7 @@ const UtilContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     span {
       font-size: 16px;
       font-weight: bold;
@@ -124,59 +128,69 @@ const MenuArticle = styled(Link)`
 `;
 
 const Header = () => {
-  return (
-    <HeaderContainer>
-      <UtilContainer>
-        <ul>
-          <li>
-            <Link to="/login">
-              <img src={loginIcon} alt="login_icon" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/join_way">
-              <img src={joinIcon} alt="join_icon" />
-            </Link>
-          </li>
-        </ul>
-        <div>
-          <span>KO</span>
-          <img src={chevronIcon} />
-        </div>
-      </UtilContainer>
+  const [onAllMenu, setOnAllMenu] = useState(false);
 
-      <GnbContainer>
-        <h1>
-          <Link to="/">
-            <img src={sevLogo} alt="header_logo" className="sevLogo" />
-          </Link>
-        </h1>
-        <ul>
-          <li>
-            <MenuArticle to="/">환자/보호자</MenuArticle>
-          </li>
-          <li>
-            <MenuArticle to="/">의료인</MenuArticle>
-          </li>
-          <li>
-            <MenuArticle to="/customer.do">공감 Story</MenuArticle>
-          </li>
-          <li>
-            <MenuArticle to="/drug.do">건강정보</MenuArticle>
-          </li>
-          <li>
-            <Link to="/all_maenu_page">
-              <img src={allMenuIcon} alt="all_menu_icon" className="allMenuIcon" />
+  console.log(onAllMenu);
+
+  const onAllMenuClick = (props) => {
+    setOnAllMenu(props);
+  };
+
+  return (
+    <>
+      <HeaderContainer>
+        <UtilContainer>
+          <ul>
+            <li>
+              <Link to="/login">
+                <img src={loginIcon} alt="login_icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/join_way">
+                <img src={joinIcon} alt="join_icon" />
+              </Link>
+            </li>
+          </ul>
+          <div>
+            <span>KO</span>
+            <img src={chevronIcon} />
+          </div>
+        </UtilContainer>
+
+        <GnbContainer>
+          <h1>
+            <Link to="/">
+              <img src={sevLogo} alt="header_logo" className="sevLogo" />
             </Link>
-          </li>
-          <li>
-            <Link to="/all_maenu_page">
-              <img src={searchIcon} alt="search_icon" className="searchIcon" />
-            </Link>
-          </li>
-        </ul>
-      </GnbContainer>
-    </HeaderContainer>
+          </h1>
+          <ul>
+            <li>
+              <MenuArticle to="/">환자/보호자</MenuArticle>
+            </li>
+            <li>
+              <MenuArticle to="/">의료인</MenuArticle>
+            </li>
+            <li>
+              <MenuArticle to="/customer.do">공감 Story</MenuArticle>
+            </li>
+            <li>
+              <MenuArticle to="/drug.do">건강정보</MenuArticle>
+            </li>
+            <li>
+              <Link to="/all_menu">
+                <img src={allMenuIcon} alt="all_menu_icon" className="allMenuIcon" />
+              </Link>
+            </li>
+            <li>
+              <a>
+                <img src={searchIcon} alt="search_icon" className="searchIcon" />
+              </a>
+            </li>
+          </ul>
+        </GnbContainer>
+      </HeaderContainer>
+    </>
   );
 };
 
