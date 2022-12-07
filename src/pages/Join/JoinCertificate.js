@@ -1,12 +1,11 @@
 /*
  * @ File Name: JoinCertificate.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06 11:40
+ * @ Last Update: 2022-12-07 15:30
  * @ Description: 본인인증 페이지
  */
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginHeader from "../../components/LoginHeader";
 import LoginFooter from "../../components/LoginFooter";
@@ -79,7 +78,7 @@ const Container = styled.div`
     }
   }
   .ways {
-    width: 1280px;
+    width: 800px;
     margin: auto;
     .ipin,
     .phone,
@@ -88,26 +87,25 @@ const Container = styled.div`
       height: 210px;
       border: 1px solid #e6e6e6;
       float: left;
-      margin: 60px 20px 0 0;
+      margin: 60px 30px 0 0;
       position: relative;
       img {
+        height: 90px;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
       }
     }
-    .ipin {
-      margin-left: 20%;
-    }
     .official {
-      margin-right: 20%;
+      margin-right: 0;
     }
     button {
       float: left;
       width: 240px;
       height: 50px;
-      margin: 30px 22px 40px 0;
+      line-height: 20px;
+      margin: 30px 30px 40px 0;
       font-size: 18px;
       padding: 5px 0;
       box-sizing: border-box;
@@ -118,39 +116,39 @@ const Container = styled.div`
       cursor: pointer;
     }
     .ipin_btn {
-      margin-left: 20%;
+      margin-left: 0;
     }
     .official_btn {
       background-color: white;
       color: rgb(0, 148, 251);
       border: 2px solid rgb(0, 148, 251);
+      margin-right: 0;
     }
     .notice {
-    width: 1280px;
-    margin: auto;
-    float: left;
-    ul {
-      margin: 0 22% 50px; 
-      li {
-        margin-top: 5px;
-        font-size: 14px;
-        &:before {
-          content: "";
-          display: block;
-          width: 4px;
-          height: 4px;
-          background-color: rgb(0, 148, 251);
-          float: left;
-          margin: 10px 5px 0 0;
-        }
-        span {
-          margin-left: 1.3%;
+      width: 800px;
+      margin: auto;
+      float: left;
+      ul {
+        margin: 0 auto 50px;
+        li {
+          margin-top: 5px;
+          font-size: 14px;
+          &:before {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 4px;
+            background-color: rgb(0, 148, 251);
+            float: left;
+            margin: 10px 5px 0 0;
+          }
+          span {
+            margin-left: 1.3%;
+          }
         }
       }
     }
   }
-  }
-  
 `;
 
 const JoinCertificate = memo(() => {
@@ -218,21 +216,20 @@ const JoinCertificate = memo(() => {
               범용 공인인증서
             </button>
             <div className="notice">
-            <ul>
-              <li>
-                아이디 또는 비밀번호 분실 등 본인 여부 확인이 필요한 경우를 위해
-                꼭 필요한 절차입니다.
-              </li>
-              <li>
-                허위 정보를 입력하시는 경우 추 후 정확한 본인확인이 불가능하며
-                아이디/비밀번호 분실 시 도움을 드리기가
-                <br />
-                <span>어렵습니다.</span>
-              </li>
-            </ul>
+              <ul>
+                <li>
+                  아이디 또는 비밀번호 분실 등 본인 여부 확인이 필요한 경우를
+                  위해 꼭 필요한 절차입니다.
+                </li>
+                <li>
+                  허위 정보를 입력하시는 경우 추 후 정확한 본인확인이 불가능하며
+                  아이디/비밀번호 분실 시 도움을 드리기가
+                  <br />
+                  <span>어렵습니다.</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          </div>
-          
         </div>
         <LoginFooter />
       </div>
