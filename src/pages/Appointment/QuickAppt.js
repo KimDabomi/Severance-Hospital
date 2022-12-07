@@ -124,13 +124,13 @@ const QuickAppt = memo(() => {
                     </div>
 
                     {/* 개인정보 수집·이용 동의 */}
-                    <div class="check-agree"><strong class="sub-tit text-title">개인정보 수집·이용 동의</strong>
+                    <div><strong>개인정보 수집·이용 동의</strong>
                         <p>본 정보는 간편예약 신청에만 이용됩니다. 개인정보 이용에 동의합니다.</p>
                         <ul>
                             <li>
-                                <span class="ckeck-item">
+                                <span>
                                     <input type="radio" name="agree" id="agree1" checked="" value="on" />
-                                    <label for="agree1">동의합니다.</label></span></li><li><span class="ckeck-item">
+                                    <label for="agree1">동의합니다.</label></span></li><li><span>
                                     <input type="radio" name="agree" id="agree2" value="on" />
                                     <label for="agree2">동의하지 않습니다.&nbsp;</label>
                                 </span>
