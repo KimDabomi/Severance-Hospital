@@ -496,7 +496,7 @@ const MainPage = memo(() => {
             <article className="news">
               <h3>
                 <strong>NEWS</strong>
-                <Link to="/news_home">
+                <Link to="/news">
                   <img src={BtnMorePlus} />
                 </Link>
               </h3>
