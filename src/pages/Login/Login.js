@@ -251,8 +251,8 @@ const Login = memo(() => {
               <label htmlFor="remember_id">아이디를 기억합니다.</label>
             </form>
             <div className="find">
-              <Link to="/">아이디 찾기</Link>
-              <Link to="/">비밀번호 찾기</Link>
+              <Link to="/find_id">아이디 찾기</Link>
+              <Link to="/find_password">비밀번호 찾기</Link>
             </div>
             <div className="sns_login">
               <h3>SNS 계정으로 로그인</h3>

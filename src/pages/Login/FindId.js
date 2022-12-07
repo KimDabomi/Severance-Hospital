@@ -6,6 +6,7 @@
  */
 
 import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginHeader from "../../components/LoginHeader";
 import LoginFooter from "../../components/LoginFooter";
@@ -19,7 +20,7 @@ const Container = styled.div`
   position: relative;
   .content {
     background: url(${bg}) no-repeat center / cover;
-    height: 600px;
+    height: 700px;
     hr {
       border: 0;
       border-bottom: 1px solid #e6e6e6;
@@ -40,7 +41,10 @@ const Container = styled.div`
   }
   .ways {
     width: 1050px;
+    display: flex;
+    flex-wrap: wrap;
     margin: auto;
+    justify-content: space-between;
     .ipin,
     .phone,
     .official,
@@ -67,7 +71,7 @@ const Container = styled.div`
       width: 240px;
       height: 50px;
       line-height: 20px;
-      margin: 30px 15px 40px 0;
+      margin: 30px 30px 40px 0;
       font-size: 18px;
       padding: 5px 0;
       box-sizing: border-box;
@@ -86,15 +90,19 @@ const Container = styled.div`
       color: rgb(0, 148, 251);
       border: 2px solid rgb(0, 148, 251);
     }
+    .certified_btn {
+        margin-right: 0;
+    }
     .notice {
       width: 1280px;
-      margin: auto;
       float: left;
       ul {
-        margin: 0 22% 50px;
         li {
           margin-top: 5px;
-          font-size: 14px;
+          font-size: 16px;
+          b {
+            font-weight: bold;
+          }
           &:before {
             content: "";
             display: block;
@@ -114,6 +122,23 @@ const Container = styled.div`
 `;
 
 const FindId = memo(() => {
+  const navigate = useNavigate();
+
+  const goIpin = e => {
+    navigate('/');
+  };
+
+  const goPhone = e => {
+    navigate('/');
+  };
+
+  const goOfficial = e => {
+    navigate('/');
+  };
+
+  const goCertified = e => {
+    navigate('/');
+  };
   return (
     <Container>
       <LoginHeader />
@@ -137,16 +162,16 @@ const FindId = memo(() => {
           <div className="certified">
             <img src={certified} alt="certified" />
           </div>
-          <button type="button" className="ipin_btn">
+          <button type="button" className="ipin_btn" onClick={goIpin}>
             아이핀 인증
           </button>
-          <button type="button" className="phone_btn">
+          <button type="button" className="phone_btn" onClick={goPhone}>
             휴대폰 인증
           </button>
-          <button type="button" className="official_btn">
+          <button type="button" className="official_btn" onClick={goOfficial}>
             범용 공인인증
           </button>
-          <button type="button" className="certified_btn">
+          <button type="button" className="certified_btn" onClick={goCertified}>
             해외거주 외국인 회원
             <br />
             이메일 인증
@@ -154,7 +179,7 @@ const FindId = memo(() => {
           <div className="notice">
             <ul>
               <li>
-                해외거주 외국인 회원 이메일 인증을 통해 아이디 찾기가
+                <b>해외거주 외국인 회원</b>은 이메일 인증을 통해 아이디 찾기가
                 가능합니다.
               </li>
             </ul>
