@@ -14,7 +14,6 @@ import styled from "styled-components";
 import BgAllmenu from "../../assets/img/bg-allmenu.png";
 import CloseWhite from "../../assets/img/ico-close-white@2x.png";
 
-
 /** 사이트맵 스타일 */
 const AllMenu = styled.div`
   width: 100%;
@@ -103,7 +102,7 @@ const Back = styled.div`
 
 const SiteMap = memo(() => {
   const navigate = useNavigate();
-  
+
   return (
     <AllMenu>
       <BackgroundDiv>
@@ -112,7 +111,7 @@ const SiteMap = memo(() => {
           <MenuCategoryLi>
             <MenuUl>
               <MenuLi className="menuTitle">
-                <Link to="/">의료진 찾기</Link>
+                <Link to="/staff">의료진 찾기</Link>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>
@@ -139,29 +138,18 @@ const SiteMap = memo(() => {
                 <Link to="/">예약</Link>
                 <ul>
                   <li>진료예약</li>
-                  <li>건강검진(헬스체크업)</li>
-                  <li>진료예약</li>
-                  <li>진료예약</li>
+                  <li>예약현황</li>
                 </ul>
               </MenuLi>
               <MenuLi>
                 <Link to="/">결과</Link>
-                <ul>
-                  <li>내원일자</li>
-                  <li>약처방정보</li>
-                  <li>진료예약</li>
-                  <li>진료예약</li>
-                </ul>
               </MenuLi>
               <MenuLi>
                 <Link to="/">이용안내</Link>
                 <ul>
-                  <li>주요전화번호</li>
                   <li>병원시설 안내</li>
                   <li>진료안내</li>
-                  <li>응급진료안내</li>
                   <li>병원생활 안내</li>
-                  <li>자주묻는 질문</li>
                 </ul>
               </MenuLi>
               <MenuLi>
@@ -183,8 +171,6 @@ const SiteMap = memo(() => {
               <MenuLi>
                 <Link to="/">진료의뢰</Link>
                 <ul>
-                  <li>진료의뢰 안내</li>
-                  <li>진료협력센터</li>
                   <li>협력병원 현황</li>
                   <li>협진병, 의원 현황</li>
                 </ul>
@@ -199,10 +185,7 @@ const SiteMap = memo(() => {
           <MenuCategoryLi>
             <MenuUl>
               <MenuLi className="menuTitle">
-                <Link to="/">공감 Story</Link>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/">고객의 소리</Link>
+                <Link to="/customer.do">고객의 소리</Link>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>
@@ -211,7 +194,7 @@ const SiteMap = memo(() => {
           <MenuCategoryLi>
             <MenuUl>
               <MenuLi className="menuTitle">
-                <Link to="/">건강정보</Link>
+                <Link to="/drug.do">건강정보</Link>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>
@@ -232,13 +215,17 @@ const SiteMap = memo(() => {
           <MenuCategoryLi>
             <MenuUl>
               <MenuLi className="menuTitle">
-                <Link to="/">뉴스</Link>
+                <Link to="/news">뉴스</Link>
               </MenuLi>
               <MenuLi>
-                <Link to="/">뉴스 홈</Link>
+                <Link to="/news">뉴스 홈</Link>
               </MenuLi>
               <MenuLi>
-                <Link to="/">공지/소식</Link>
+                <Link to="/news/notice.do">공지/소식</Link>
+                <ul>
+                  <li>공지사항</li>
+                  <li>언론보도</li>
+                </ul>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>
