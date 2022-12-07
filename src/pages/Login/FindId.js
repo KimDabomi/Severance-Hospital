@@ -1,7 +1,7 @@
 /**
  * @ File Name: FindId.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-07 15:50
+ * @ Last Update: 2022-12-07 17:30
  * @ Description: 아이디 찾기 페이지
  */
 
@@ -136,8 +136,8 @@ const FindId = memo(() => {
     navigate('/');
   };
 
-  const goCertified = e => {
-    navigate('/');
+  const goEmail = e => {
+    navigate('/find_id_email');
   };
   return (
     <Container>
@@ -171,9 +171,7 @@ const FindId = memo(() => {
           <button type="button" className="official_btn" onClick={goOfficial}>
             범용 공인인증
           </button>
-          <button type="button" className="certified_btn" onClick={goCertified}>
-            해외거주 외국인 회원
-            <br />
+          <button type="button" className="certified_btn" onClick={goEmail}>
             이메일 인증
           </button>
           <div className="notice">
