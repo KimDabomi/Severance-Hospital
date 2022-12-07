@@ -6,23 +6,34 @@
  */
 
 import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+/** 이미지 참조 */
 import BgAllmenu from "../../assets/img/bg-allmenu.png";
+import CloseWhite from "../../assets/img/ico-close-white@2x.png";
 
 /** 사이트맵 스타일 */
 const AllMenu = styled.div`
   width: 100%;
   height: 100vh;
+  position: relative;
 `;
 
 /** 사이트맵 배경 스타일 */
 const BackgroundDiv = styled.div`
+  min-width: 1280px;
   height: 100vh;
   margin: 0 auto;
-  ${`backGround: #0070e4 url(${BgAllmenu}) no-repeat center;`}
+
+  background: #0070e4 url(${BgAllmenu}) no-repeat center;
   background-position-y: -180px;
+
+  overflow-y: scroll;
+
+  position: sticky;
+  top: 0;
 
   a {
     color: white;
@@ -36,7 +47,7 @@ const SiteMapUl = styled.ul`
 
   position: absolute;
   top: 0;
-  left: 0;
+  left: -15px;
   right: 0;
 
   display: flex;
@@ -55,44 +66,80 @@ const MenuCategoryLi = styled.li`
 
 /** 메뉴 박스 스타일 */
 const MenuUl = styled.ul`
-  .menuTitle {
-    a {
-      font-size: 24px;
-      line-height: 24px;
-    }
+  padding-top: 5px;
+`;
+
+/** 메뉴 타이틀 스타일 */
+const MenuTitleDiv = styled.div`
+  padding-bottom: 20px;
+  line-height: 1;
+  border-bottom: 1px solid #127eef;
+
+  a {
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
   }
+`;
+
+/** 하위 메뉴 스타일 */
+const MenuLi = styled.li`
+  margin-top: 20px;
+  
   a {
     font-size: 22px;
     line-height: 36px;
   }
 `;
 
-/** 메뉴 타이틀, 하위 메뉴 스타일 */
-const MenuLi = styled.li`
+/** 하위 서브 메뉴 스타일 */
+const SubMenuUl = styled.ul``;
+
+/** 하위 서브 메뉴 스타일 */
+const SubMenuLi = styled.li`
+  color: white;
   font-size: 16px;
   line-height: 22px;
+  padding: 4px 20px 0;
+`;
+
+/** 뒤로가기 버튼 스타일 */
+const Back = styled.div`
+  width: 20px;
+  height: 20px;
+
+  position: absolute;
+  top: 30px;
+  right: 0;
+
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const SiteMap = memo(() => {
+  const navigate = useNavigate();
+
   return (
     <AllMenu>
       <BackgroundDiv>
         <SiteMapUl>
           {/* 1 */}
           <MenuCategoryLi>
-            <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">의료진 찾기</Link>
-              </MenuLi>
-            </MenuUl>
+            <MenuTitleDiv>
+              <Link to="/staff">의료진 찾기</Link>
+            </MenuTitleDiv>
           </MenuCategoryLi>
 
           {/* 2 */}
           <MenuCategoryLi>
+            <MenuTitleDiv>
+              <Link to="/">진료과 찾기</Link>
+            </MenuTitleDiv>
             <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">진료과 찾기</Link>
-              </MenuLi>
               <MenuLi>
                 <Link to="/">진료과</Link>
               </MenuLi>
@@ -101,79 +148,79 @@ const SiteMap = memo(() => {
 
           {/* 3 */}
           <MenuCategoryLi>
+            <MenuTitleDiv>
+              <Link to="/">환자/보호자</Link>
+            </MenuTitleDiv>
             <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">환자/보호자</Link>
-              </MenuLi>
               <MenuLi>
                 <Link to="/">예약</Link>
+                <SubMenuUl>
+                  <SubMenuLi>진료예약</SubMenuLi>
+                  <SubMenuLi>예약현황</SubMenuLi>
+                </SubMenuUl>
               </MenuLi>
               <MenuLi>
                 <Link to="/">결과</Link>
               </MenuLi>
               <MenuLi>
-                <Link to="/">증명서 및 의무기록</Link>
-              </MenuLi>
-              <MenuLi>
                 <Link to="/">이용안내</Link>
+                <SubMenuUl>
+                  <SubMenuLi>병원시설 안내</SubMenuLi>
+                  <SubMenuLi>진료안내</SubMenuLi>
+                  <SubMenuLi>병원생활 안내</SubMenuLi>
+                </SubMenuUl>
               </MenuLi>
               <MenuLi>
                 <Link to="/">오시는 길</Link>
+                <SubMenuUl>
+                  <SubMenuLi>위치 및 오시는 방법</SubMenuLi>
+                  <SubMenuLi>주차안내</SubMenuLi>
+                </SubMenuUl>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>
 
           {/* 4 */}
           <MenuCategoryLi>
+            <MenuTitleDiv>
+              <Link to="/">의료인</Link>
+            </MenuTitleDiv>
             <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">의료인</Link>
-              </MenuLi>
               <MenuLi>
                 <Link to="/">진료의뢰</Link>
+                <SubMenuUl>
+                  <SubMenuLi>협력병원 현황</SubMenuLi>
+                  <SubMenuLi>협진병, 의원 현황</SubMenuLi>
+                </SubMenuUl>
               </MenuLi>
             </MenuUl>
+            <Back onClick={() => navigate(-1)}>
+              <img src={CloseWhite} />
+            </Back>
           </MenuCategoryLi>
 
           {/* 5 */}
           <MenuCategoryLi>
-            <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">공감 Story</Link>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/">환자 이야기</Link>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/">의료진 이야기</Link>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/">고객의 소리</Link>
-              </MenuLi>
-            </MenuUl>
+            <MenuTitleDiv>
+              <Link to="/customer.do">고객의 소리</Link>
+            </MenuTitleDiv>
+            <MenuUl></MenuUl>
           </MenuCategoryLi>
 
           {/* 6 */}
           <MenuCategoryLi>
-            <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">건강정보</Link>
-              </MenuLi>
-            </MenuUl>
+            <MenuTitleDiv>
+              <Link to="/drug.do">건강정보</Link>
+            </MenuTitleDiv>
+            <MenuUl></MenuUl>
           </MenuCategoryLi>
 
           {/* 7 */}
           <MenuCategoryLi>
+            <MenuTitleDiv>
+              <Link to="/">병원소개</Link>
+            </MenuTitleDiv>
             <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">병원소개</Link>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/">병원개요</Link>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/">병원장 인사말</Link>
-              </MenuLi>
               <MenuLi>
                 <Link to="/">오시는 길</Link>
               </MenuLi>
@@ -182,15 +229,19 @@ const SiteMap = memo(() => {
 
           {/* 8 */}
           <MenuCategoryLi>
+            <MenuTitleDiv>
+              <Link to="/news">뉴스</Link>
+            </MenuTitleDiv>
             <MenuUl>
-              <MenuLi className="menuTitle">
-                <Link to="/">뉴스</Link>
+              <MenuLi>
+                <Link to="/news">뉴스 홈</Link>
               </MenuLi>
               <MenuLi>
-                <Link to="/">뉴스 홈</Link>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/">공지/소식</Link>
+                <Link to="/news/notice.do">공지/소식</Link>
+                <SubMenuUl>
+                  <SubMenuLi>공지사항</SubMenuLi>
+                  <SubMenuLi>언론보도</SubMenuLi>
+                </SubMenuUl>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>

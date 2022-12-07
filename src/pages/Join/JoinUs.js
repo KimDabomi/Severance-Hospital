@@ -404,6 +404,7 @@ const JoinUs = memo(() => {
             <h4>기본정보입력<span className='sub_text'><span className="require">*</span>는 필수항목입니다.</span></h4>
             <table>
               <tbody>
+                {/* 아이디 입력 */}
                 <tr>
                   <th>
                     <span className="require">*</span>아이디
@@ -452,6 +453,8 @@ const JoinUs = memo(() => {
                     </p>
                   </td>
                 </tr>
+
+                {/* 비밀번호 입력 */}
                 <tr>
                   <th>
                     <span className="require">*</span>비밀번호
@@ -491,6 +494,8 @@ const JoinUs = memo(() => {
                     </p>
                   </td>
                 </tr>
+
+                {/* 비밀번호 확인 */}
                 <tr>
                   <th>
                     <span className="require">*</span>비밀번호 확인
@@ -519,6 +524,8 @@ const JoinUs = memo(() => {
                     </p>
                   </td>
                 </tr>
+
+                {/* 연락처 입력 */}
                 <tr>
                   <th>
                     <span className="require">*</span>연락처
@@ -599,6 +606,8 @@ const JoinUs = memo(() => {
                     <p className='warn'>연락처를 입력해주세요.</p>
                   </td>
                 </tr>
+
+                {/* 예비연락처 입력 */}
                 <tr>
                   <th>예비연락처</th>
                   <td>
@@ -666,6 +675,8 @@ const JoinUs = memo(() => {
                     </div>
                   </td>
                 </tr>
+
+                {/* 이메일 입력 */}
                 <tr>
                   <th>E-mail</th>
                   <td>

@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
@@ -574,9 +574,9 @@ textarea{
   }
   .infoArea{
     margin-top: 12px;
-    .date{
-      color: #666;
-    }
+  }
+  .date{
+    color: #666;
   }
   //뉴스메인페이지 sns소식
   .tabContentCont{
@@ -596,9 +596,26 @@ textarea{
       //유튜브 api표시되는 영역
       .youtubeArticle{
         overflow: scroll;
+        overflow-x: hidden; //가로스크롤 없애기
         height: 100%;
         display: flex;
         flex-wrap: wrap;
+
+        ::-webkit-scrollbar{
+          width:5px;
+          background: white;
+          height: 100%;
+          margin: 0 auto;
+
+        }
+        ::-webkit-scrollbar-track{
+          width: 1px;
+          background: #dadada; //스크롤바의 색상
+        }
+        ::-webkit-scrollbar-thumb{
+          background: #888;
+          border-radius: 16px;
+        }
 
         .subjectArea{
           height: 52px;
@@ -621,11 +638,12 @@ textarea{
             height: 14px;
             background: url(../img/ico-external-link@2x.png);
             background-size: cover;
-        }
+          }
         }
       }
     }
   }
+  //유투브 썸네일박스 cont
   .thumbItem{
     /* width: calc(50% - 30px); */
     width: 50%;
@@ -633,8 +651,20 @@ textarea{
     margin-bottom : 30px;
     box-sizing: border-box;
     height: 248.78px;
+
+    //동영상 재생 아이콘
+  .icoMoviePlay{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 12px;
+    bottom: 18px;
+    background-image: url(../img/ico-movie-play-md@2x.png);
+    background-size: cover;
+  }
     
   }
+  //유투브 썸네일박스
   .thumb{
     width: 100%;
     height: 178px;
@@ -646,8 +676,72 @@ textarea{
       top: 50%; transform: translate(0, -50%);
     }
   }
+  
+  //페이스북영역
+  .facebookArticle{
+    overflow: scroll;
+    overflow-x: hidden; //가로스크롤 없애기
+    height: 100%;
 
+    ::-webkit-scrollbar{
+      width:5px;
+      background: white;
+      height: 100%;
+      margin: 0 auto;
+    }
+    ::-webkit-scrollbar-track{
+      width: 1px;
+      background: #dadada; //스크롤바의 색상
+    }
+    ::-webkit-scrollbar-thumb{
+      background: #888;
+      border-radius: 16px;
+    }
 
+    .thumbItem {
+      width: 100% !important;
+    }
+
+    a{
+      width: 100%; 
+      /* max-height: 270px; */
+     
+    }
+    dl{
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      height: 100%;
+      max-width: 100%;
+      /* direction: ltr; */
+      border-bottom: 1px solid #dadada;
+    }
+    dt{
+      position: relative;
+      padding-left: 62px;
+      line-height: 26px;
+      margin-bottom: 15px;
+
+      span{
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -25px;
+      }
+      strong{font-size: 18px;}
+      img{
+        border: 1px solid #e3e3e3;
+        width: 50px;
+              height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    dd{margin-bottom: 40px;height: 30px;}
+    
+  }
 
   .title3{
     font-size: 24px;
@@ -666,6 +760,7 @@ textarea{
     background-size: cover;
     vertical-align: middle;
   }
+
 
   /** 메인페이지 뉴스 */
   /* 박스 */

@@ -4,6 +4,10 @@ import { Link, Routes, Route } from "react-router-dom";
 import StaffSearch from "./pages/staff/StaffSearch";
 import MainPage from "./pages/main/MainPage";
 import Login from "./pages/Login/Login";
+import FindId from "./pages/Login/FindId"
+import FindIdEmail from "./pages/Login/FindIdEmail";
+import FindPassword from "./pages/Login/FindPassword"
+import FindPasswordEmail from "./pages/Login/FindPasswordEmail";
 import JoinWay  from "./pages/Join/JoinWay";
 import JoinAccept from "./pages/Join/JoinAccept";
 import JoinAcceptGlobal from "./pages/Join/JoinAcceptGlobal";
@@ -44,6 +48,10 @@ function App() {
         <Route path="/all_menu" element={<AllMenu />} />
 
         <Route path='/login' element={<Login />} />
+        <Route path='/find_id' element={<FindId />} />
+        <Route path='/find_id_email' element={<FindIdEmail />} />
+        <Route path='/find_password' element={<FindPassword />} />
+        <Route path='/find_password_email' element={<FindPasswordEmail />} />
         <Route path='/join_way' element={<JoinWay />} />
         <Route path='/join_accept' element={<JoinAccept />} />
         <Route path='/join_accept_global' element={<JoinAcceptGlobal />} />

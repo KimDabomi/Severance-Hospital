@@ -130,8 +130,6 @@ const MenuArticle = styled(Link)`
 const Header = () => {
   const [onAllMenu, setOnAllMenu] = useState(false);
 
-  console.log(onAllMenu);
-
   const onAllMenuClick = (props) => {
     setOnAllMenu(props);
   };
