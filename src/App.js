@@ -26,7 +26,7 @@ import NewsMain from './pages/NewsHome/NewsMain';
 import NewsView from './pages/NewsHome/NewsView';
 import NoticeView from './pages/NewsHome/NoticeView';
 
-
+import StaffProfile from "./pages/staff/StaffProfile";
 function App() {
   return (
     <div>
@@ -48,6 +48,7 @@ function App() {
         <Route path="/suggest.do" element={<CustomerBoardAdd/>}/>
         <Route path="/suggestion/:id" element={<CustomerBoardView/>}/>
         <Route path="/staff" element={<StaffSearch/>}/>
+        <Route path="/staff/*" element={<StaffProfile/>}/>
 
          {/* 의약품검색 페이지 라우팅 */}
          <Route path='/drug.do/*' element={<DrugSearch />}/>
