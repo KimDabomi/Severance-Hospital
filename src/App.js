@@ -4,10 +4,8 @@ import { Link, Routes, Route } from "react-router-dom";
 /** 메인 페이지 */
 // 메인
 import MainPage from "./pages/main/MainPage";
-<<<<<<< HEAD
 
 // 로그인, 아이디/비밀번호 찾기
-=======
 // 사이트맵
 import AllMenu from "./pages/SiteMap/SiteMap";
 
@@ -16,19 +14,14 @@ import AllMenu from "./pages/SiteMap/SiteMap";
 import Map from "./pages/Map/Map";
 
 import StaffSearch from "./pages/staff/StaffSearch";
->>>>>>> a352d5c7885c90c53f05645aef272adef7c036cb
 import Login from "./pages/Login/Login";
 import FindId from "./pages/Login/FindId";
 import FindIdEmail from "./pages/Login/FindIdEmail";
 import FindPassword from "./pages/Login/FindPassword";
 import FindPasswordEmail from "./pages/Login/FindPasswordEmail";
-<<<<<<< HEAD
 
 // 회원가입
-import JoinWay  from "./pages/Join/JoinWay";
-=======
 import JoinWay from "./pages/Join/JoinWay";
->>>>>>> a352d5c7885c90c53f05645aef272adef7c036cb
 import JoinAccept from "./pages/Join/JoinAccept";
 import JoinAcceptGlobal from "./pages/Join/JoinAcceptGlobal";
 import JoinCertificate from "./pages/Join/JoinCertificate";
@@ -71,7 +64,6 @@ function App() {
         <Route path="/" exapt={true} element={<MainPage />} />
         <Route path="/all_menu" element={<AllMenu />} />
 
-<<<<<<< HEAD
         {/* 로그인, 아이디/비밀번호 찾기 */}
         <Route path='/login' element={<Login />} />
         <Route path='/find_id' element={<FindId />} />
@@ -91,7 +83,6 @@ function App() {
         {/* 마이페이지 */}
         <Route path='details_edit' element={<DetailsEdit />} />
         
-=======
         {/* 오시는 길 페이지 */}
         <Route path="/map.do/*" element={<Map />} />
 
@@ -108,7 +99,6 @@ function App() {
         <Route path="/join_complete" element={<JoinComplete />} />
         <Route path="/join_already" element={<JoinAlready />} />
 
->>>>>>> a352d5c7885c90c53f05645aef272adef7c036cb
         {/* 고객의소리 페이지 라우팅*/}
         <Route path="/customer.do" element={<CustomerBoardList />} />
         <Route path="/suggest.do" element={<CustomerBoardAdd />} />
@@ -125,16 +115,13 @@ function App() {
         <Route path="/news/media.do" element={<NewsView />} />
         <Route path="/news/notice.do" element={<NoticeView />} />
 
-<<<<<<< HEAD
          {/* 마이페이지 라우팅 */}
          <Route path='/mysevrance' element={<MysevMain />}/>
 
          {/* 진료 예약 */}
          <Route path='/appointment_main/*' element={<AppointmentMain />}/>
-=======
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
->>>>>>> 51578a6a837fac7fba41f8750f00901aa2709253
       </Routes>
     </div>
   );

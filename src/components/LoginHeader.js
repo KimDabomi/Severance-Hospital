@@ -1,7 +1,7 @@
 /**
  * @ File Name: LoginHeader.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06 12:08
+ * @ Last Update: 2022-12-08 17:20
  * @ Description: 로그인센터 헤더 네비게이션
  */
 
