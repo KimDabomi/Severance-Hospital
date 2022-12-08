@@ -1,5 +1,5 @@
 /**
- * @ File Name: FindId.js
+ * @ File Name: FindPassword.js
  * @ Author: 김다보미 (cdabomi@nate.com)
  * @ Last Update: 2022-12-08 15:00
  * @ Description: 비밀번호 찾기 페이지

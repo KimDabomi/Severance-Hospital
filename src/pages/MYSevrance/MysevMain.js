@@ -36,7 +36,7 @@ const Div = styled.article`
     }
     &:nth-child(-n+3){
         height: 155px;
-    border: none;
+        border: none;
     }
     ::after{clear: both;}
   }
