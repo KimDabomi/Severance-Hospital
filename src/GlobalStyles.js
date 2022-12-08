@@ -60,7 +60,6 @@ textarea{
     margin: auto;
     max-width: 1280px;
     padding-bottom: 95px;
-
 }
 
 .bgAll{
@@ -275,6 +274,8 @@ textarea{
     background-color: #fff;
 		display: inline-flex;
 		align-items: center;
+
+    span{margin-left:5px;}
 
     &:after{
       content: '';
@@ -761,6 +762,15 @@ textarea{
     vertical-align: middle;
   }
 
+  /** 로그아웃 아이콘 */
+  .icoLogout{
+    width: 22px;
+    height: 21px;
+    line-height: 21px;
+    background-image: url(../img/ico-logout-white.png);
+    background-size: cover;
+  }
+
 
   /** 메인페이지 뉴스 */
   /* 박스 */
@@ -815,6 +825,29 @@ textarea{
       line-height: 16px;
     }
   }
+
+ /** h4 타이틀+가상선택자 */
+ .h4title {
+    padding-left: 18px;
+    margin: 65px 0 22px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 38px;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 20px;
+        top: 9px;
+        left: 0;
+        background-color: #0094fb;
+        border-radius: 3px;
+    }
+  }
 `;
+
+
 
 export default GlobalStyles;

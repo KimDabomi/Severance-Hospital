@@ -59,6 +59,18 @@ const TabInfo = memo(() => {
 		console.log('Tabinfo페이지 data', data);
 	}
 
+	/** 더보기 버튼 (페이지) 함수 */
+	const pagePlus = useCallback((e)=>{
+		console.log('더보기버튼 누름');
+		//페이지 번호 1증가
+		page.current ++;
+
+		//추가 검색 결과를 요청
+		dispatch(getDrugSearch({
+			pageNo: page.current
+		}));
+	})
+
 	return (
 		<DrugCont>
 			<Spinner loading={loading} />
@@ -114,9 +126,9 @@ const TabInfo = memo(() => {
 							})}
 						</ul>
 						{/* // 페이지가 2페이지 이상일 경우 */}
-						{data.items.length > 12 ?
+						{data.totalCount> 12 ?
 							<div className="buttonContColumn">
-								<Link className="btnMore">더보기</Link>
+								<Link className="btnMore" onClick={pagePlus}>더보기<span>({data.pageNo*12}/{data.totalCount})</span></Link>
 							</div>
 							: null
 						}

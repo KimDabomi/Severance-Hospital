@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsHomeCarousel.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-04
+ * @ Last Update: 2022-12-08
  * @ Description: 뉴스 메인 페이지 슬라이드 컴포넌트
  */
 
@@ -89,7 +89,6 @@ const StyledSlider = styled(Slider)`
 function NewsHomeCarousel() {
   // 슬라이드 설정
   const settings = {
-    infinite: true,
     dots: true /* 아래점 */,
     // rows: 2,
     slidesToShow: 3,
