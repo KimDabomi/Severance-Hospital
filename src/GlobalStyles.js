@@ -60,7 +60,6 @@ textarea{
     margin: auto;
     max-width: 1280px;
     padding-bottom: 95px;
-
 }
 
 .bgAll{
@@ -277,6 +276,8 @@ textarea{
     background-color: #fff;
 		display: inline-flex;
 		align-items: center;
+
+    span{margin-left:5px;}
 
     &:after{
       content: '';
@@ -761,6 +762,15 @@ textarea{
     background-image: url(../img/ico-new@2x.png);
     background-size: cover;
     vertical-align: middle;
+  }
+
+  /** 로그아웃 아이콘 */
+  .icoLogout{
+    width: 22px;
+    height: 21px;
+    line-height: 21px;
+    background-image: url(../img/ico-logout-white.png);
+    background-size: cover;
   }
 
 

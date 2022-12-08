@@ -1,16 +1,27 @@
 /**
- * @ File Name: LoginHeader.js
- * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-08 17:20
- * @ Description: 로그인센터 헤더 네비게이션
+ * @ File Name: MyPageHeader.js
+ * @ Author: 주혜지 (rosyjoo1999@gmail.com)
+ * @ Last Update: 2022-12-08 16:1:00
+ * @ Description: 마이페이지 헤더
  */
 
-import React, { memo } from "react";
-import loginImg from "../assets/img/logo@2x.png";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React, { memo } from 'react';
+import loginImg from '../assets/img/mylogo@2x.png';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import UtilArea from './UtilArea';
 
 const Container = styled.div`
+  .logo{
+    font-size: 16px;
+    float: left;
+    height: 35px;
+    width: 187.76px;
+    img{
+      width:100%;
+      /* height:100%; */
+    }
+  }
   .nav {
     width: 1280px;
     height: 100px;
@@ -22,15 +33,12 @@ const Container = styled.div`
       li {
         float: left;
         &:hover {
-          a {
-            color: #0054d1;
-            &:after {
-              opacity: 1;
-              visibility: visible;
-              width: 64px;
-              height: 64px;
-              margin: -32px 0 0 -32px;
-            }
+          a:after {
+            opacity: 1;
+            visibility: visible;
+            width: 64px;
+            height: 64px;
+            margin: -32px 0 0 -32px;
           }
         }
         a {
@@ -43,7 +51,7 @@ const Container = styled.div`
           display: block;
           cursor: pointer;
           &:after {
-            content: "";
+            content: '';
             position: absolute;
             z-index: -1;
             top: 50%;
@@ -57,17 +65,6 @@ const Container = styled.div`
             visibility: hidden;
             -webkit-transition-duration: 0.3s;
             transition-duration: 0.3s;
-          }
-        }
-        &:first-child {
-          margin: 30px 173px 0 -30px;
-          img {
-            width: 210px;
-          }
-          &:hover {
-            a:after {
-              visibility: hidden;
-            }
           }
         }
         &:last-child {
@@ -94,36 +91,34 @@ const Container = styled.div`
   }
 `;
 
-const LoginHeader = memo(() => {
+const MyPageHeader = memo(() => {
   return (
+    <div>
+    <UtilArea />
     <Container>
       <div className="nav">
-        <ul>
+        <Link to="/" className='logo'>
+          <img src={loginImg} alt="MY세브란스" />
+        </Link>
+        <ul className='gnbRight'>
           <li>
-            <Link to="/">
-              <img src={loginImg} alt="통합로그인센터" />
-            </Link>
+            <Link to="/">예약현황</Link>
           </li>
           <li>
-            <Link to="/login">로그인</Link>
+            <Link to="/">결과조회</Link>
           </li>
           <li>
-            <Link to="/join_way">회원가입</Link>
+            <Link to="/">나의 세브란스</Link>
           </li>
           <li>
-            <Link to="/">아이디/비밀번호 찾기</Link>
-          </li>
-          <li>
-            <Link to="/">병원등록번호 조회</Link>
-          </li>
-          <li>
-            <Link to="/">이용정책</Link>
+            <Link to="/">회원정보</Link>
           </li>
         </ul>
       </div>
       <hr />
     </Container>
+    </div>
   );
 });
 
-export default LoginHeader;
+export default MyPageHeader;
