@@ -1,8 +1,17 @@
 import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
-import StaffSearch from "./pages/staff/StaffSearch";
+/** 메인 페이지 */
+// 메인
 import MainPage from "./pages/main/MainPage";
+// 사이트맵
+import AllMenu from './pages/SiteMap/SiteMap';
+
+/** 오시는 길 */
+// 위치 및 오시는 방법
+import Map from './pages/Map/Map';
+
+import StaffSearch from "./pages/staff/StaffSearch";
 import Login from "./pages/Login/Login";
 import FindId from "./pages/Login/FindId"
 import FindIdEmail from "./pages/Login/FindIdEmail";
@@ -36,16 +45,17 @@ import StaffProfile from "./pages/staff/StaffProfile";
 // 진료 예약
 import AppointmentMain from "./pages/Appointment/AppointmentMain";
 
-// 사이트맵
-import AllMenu from './pages/SiteMap/SiteMap';
-
 function App() {
   return (
     <div>
       <Link to="main_page"></Link>
       <Routes>
+        {/* 메인 페이지 */}
         <Route path="/" exapt={true} element={<MainPage />} />
         <Route path="/all_menu" element={<AllMenu />} />
+
+        {/* 오시는 길 */}
+        <Route path="/map.do" element={<Map />} />
 
         <Route path='/login' element={<Login />} />
         <Route path='/find_id' element={<FindId />} />
