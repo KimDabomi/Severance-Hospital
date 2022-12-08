@@ -33,6 +33,9 @@ import NoticeView from './pages/NewsHome/NoticeView';
 // 의료인 정보
 import StaffProfile from "./pages/staff/StaffProfile";
 
+// 진료 예약
+import AppointmentMain from "./pages/Appointment/AppointmentMain";
+
 // 사이트맵
 import AllMenu from './pages/SiteMap/SiteMap';
 
@@ -72,6 +75,9 @@ function App() {
          <Route path='/news' element={<NewsMain />}/>
          <Route path='/news/media.do' element={<NewsView />}/>
          <Route path='/news/notice.do' element={<NoticeView />}/>
+
+         {/* 진료 예약 */}
+         <Route path='/appointment_main/*' element={<AppointmentMain />}/>
       </Routes>
     </div>
   );

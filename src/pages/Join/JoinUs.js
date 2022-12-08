@@ -19,7 +19,7 @@ import check from "../../assets/img/ico-check-primary@2x.png";
 import warning from "../../assets/img/ico-warning-mark@2x.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 import bg from "../../assets/img/bg-pattern.png";
-import {useFormik} from 'formik';
+// import {useFormik} from 'formik';
 
 const Container = styled.div`
   width: 100%;
