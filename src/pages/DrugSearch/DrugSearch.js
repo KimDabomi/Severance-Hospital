@@ -7,7 +7,7 @@
 
 
 import React, { memo } from 'react';
-import { NavLink, Routes, Route } from "react-router-dom";
+import { NavLink, Routes, Route, useLocation } from "react-router-dom";
 
 import TabShape from "./TabShape";
 import TabInfo from "./TabInfo";
@@ -15,6 +15,9 @@ import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
 
 const DrugSearch = memo(() => {
+    /** url의 경로 구조분해 */
+    const { pathname } = useLocation();
+
     return (
         <div>
             <Header />
@@ -22,11 +25,12 @@ const DrugSearch = memo(() => {
             <h1 className='pageTitle'>의약품</h1>
 
             <nav className='tabMenu'>
-                <NavLink to='tab-shape'>약모양으로 찾기</NavLink>
+                <NavLink to={pathname == "/drug.do" ? "/drug.do" : "/drug.do/tab-shape"}>약모양으로 찾기</NavLink>
                 <NavLink to='tab-info'>약정보 찾기</NavLink>
             </nav>
 
             <Routes>
+                <Route path="/" element={<TabShape />} />
                 <Route path='tab-shape' element={<TabShape />} />
                 <Route path='tab-info' element={<TabInfo />} />
             </Routes>

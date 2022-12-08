@@ -89,16 +89,11 @@ function App() {
         <Route path="/news/media.do" element={<NewsView />} />
         <Route path="/news/notice.do" element={<NoticeView />} />
 
-<<<<<<< HEAD
          {/* 마이페이지 라우팅 */}
          <Route path='/mysevrance' element={<MysevMain />}/>
 
          {/* 진료 예약 */}
          <Route path='/appointment_main/*' element={<AppointmentMain />}/>
-=======
-        {/* 진료 예약 */}
-        <Route path="/appointment_main/*" element={<AppointmentMain />} />
->>>>>>> 51578a6a837fac7fba41f8750f00901aa2709253
       </Routes>
     </div>
   );
