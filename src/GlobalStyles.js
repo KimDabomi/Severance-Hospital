@@ -123,7 +123,6 @@ textarea{
 //공지사항
 .boxGuide{
     width: 100%;
-    height: 200px;
     margin: 0 0 60px 0;
     padding: 20px 30px;
     box-sizing: border-box;
