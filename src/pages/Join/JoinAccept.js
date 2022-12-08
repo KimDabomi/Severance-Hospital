@@ -195,7 +195,7 @@ const Container = styled.div`
     float: left;
     margin-left: 39%;
     margin-top: 80px;
-
+    // 동의합니다 버튼
     .accept_btn {
       font-size: 18px;
       float: left;
@@ -207,6 +207,7 @@ const Container = styled.div`
       color: white;
       cursor: pointer;
     }
+    // 동의하지 않습니다 버튼
     .not_accept_btn {
       font-size: 18px;
       float: left;
