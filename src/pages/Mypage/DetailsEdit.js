@@ -11,6 +11,9 @@ const DetailsEdit = memo(() => {
     return (
         <Container>
             <MyPageHeader />
+            <div className='bgAll'>
+                
+            </div>
             <LoginFooter />
         </Container>
     );

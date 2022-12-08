@@ -50,10 +50,6 @@ const Container = styled.div`
       }
     }
   }
-  .all_content {
-    background: url(${bg}) no-repeat center /cover;
-    height: 600px;
-  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -302,7 +298,7 @@ const JoinAccept = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <div className='all_content'>
+        <div className='bgAll'>
           <form className='not_check_term'>
             <div class='popup'>
               <p>이용약관에 동의를 해야 회원가입<br />

@@ -18,9 +18,7 @@ import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
-  .content {
-    background: url(${bg}) no-repeat center / cover;
-    height: 700px;
+  .bgAll {
     hr {
       border: 0;
       border-bottom: 1px solid #e6e6e6;
@@ -212,7 +210,7 @@ const FindId = memo(() => {
   return (
     <Container>
       <LoginHeader />
-      <div className="content">
+      <div className="bgAll">
         <form className="no_id">
           <div class="popup">
             <p>아이디를 입력해 주세요.</p>

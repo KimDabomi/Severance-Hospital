@@ -23,15 +23,6 @@ import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   width: 100%;
-  .content {
-    width: 100%;
-    background: url(${bg}) no-repeat;
-    background-size: 100%;
-    margin: auto;
-    position: relative;
-    padding-bottom: 100px;
-    box-sizing: border-box;
-  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -365,7 +356,7 @@ const JoinUs = memo(() => {
   return (
     <Container>
         <LoginHeader />
-        <div className='content'>
+        <div className='bgAll'>
           <div className='title'>
             <h1>회원가입</h1>
           </div>

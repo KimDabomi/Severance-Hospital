@@ -23,10 +23,6 @@ const Container = styled.div`
   position: relative;
   letter-spacing: 0.02em;
   line-height: 1.625;
-  .content {
-    background: url(${bg}) no-repeat center /cover;
-    height: 600px;
-  }
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -126,7 +122,7 @@ const JoinWay = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <div className='content'>
+        <div className='bgAll'>
           <div className='title'>
             <h1>회원가입</h1>
           </div>
