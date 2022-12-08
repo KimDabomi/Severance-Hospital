@@ -46,6 +46,9 @@ import BtnMorePlus from "../../assets/img/btn-more-plus.jpg";
 // mkt banner 배경 이미지
 import BgMktBanner from "../../assets/img/bg-mkt-banner.jpg";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getList } from "../../slices/CustomerBoardSlice";
+
 /** 메인 스타일 */
 const Main = styled.main`
   width: 100%;
@@ -95,7 +98,7 @@ const Main = styled.main`
 const HospitalSection = styled.section`
   width: 1920px;
   padding-bottom: 60px;
-  ${`backGround: url(${BgMainPattern}) no-repeat center /cover;`}
+  background: url(${BgMainPattern}) no-repeat center /cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,6 +127,7 @@ const HospitalSection = styled.section`
 
           span {
             font-size: 24px;
+            font-weight: bold;
             color: white;
           }
 
@@ -345,7 +349,7 @@ const BannerSection = styled.section`
   height: 614px;
   padding: 65px 0 80px;
   box-sizing: border-box;
-  ${`backGround: url(${BgMktBanner}) no-repeat center /cover;`}
+  background: url(${BgMktBanner}) no-repeat center /cover;
 `;
 
 const MainPage = memo(() => {
@@ -359,6 +363,17 @@ const MainPage = memo(() => {
   //     window.scrollTo(0, 0);
   //   };
   // }, []);
+
+    /** 리덕스 관련 초기화 */
+    const dispatch = useDispatch();
+    const { data, loading, error } = useSelector(
+      (state) => state.CustomerBoardSlice
+    );
+  
+    /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+    useEffect(() => {
+      dispatch(getList());
+    }, []);
 
   return (
     <>
@@ -471,15 +486,15 @@ const MainPage = memo(() => {
           </div>
           <div className="infoSlider">
             <dl style={{ backgroundImage: "url(./img/bg-sympathy-story.jpg)" }}>
-              <dt>공감Story</dt>
+              <dt>고객의 소리</dt>
               <dd>
-                <InfoSliderCarousel category="의료진 이야기" />
+                <InfoSliderCarousel post={data} />
               </dd>
             </dl>
             <dl style={{ backgroundImage: "url(./img/bg-health-info.jpg)" }}>
               <dt>건강정보</dt>
               <dd>
-                <InfoSliderCarousel category="질환/신체부위별 찾기" />
+                <InfoSliderCarousel post={data} />
               </dd>
             </dl>
             <a href="https://yuhs.severance.healthcare/yuhs/history/museum/cheerupsev.do" className="infoSliderShortcut">

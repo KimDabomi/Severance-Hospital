@@ -128,7 +128,7 @@ const Container = styled.div`
   }
 `;
 
-const FindId = memo(() => {
+const FindIdEmail = memo(() => {
   const navigate = useNavigate();
 
   return (
@@ -201,4 +201,4 @@ const FindId = memo(() => {
   );
 });
 
-export default FindId;
+export default FindIdEmail;
