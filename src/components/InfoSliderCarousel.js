@@ -78,50 +78,6 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-// 앞으로가기 버튼 스타일
-// const NextButton = styled.div`
-//   width: 28px;
-//   height: 28px;
-
-//   position: absolute;
-//   bottom: 20px;
-//   left: 50%;
-//   transform: translate(-50%);
-//   z-index: 100;
-
-//   background: #fff url(./img/ico-chevron-right-sm-lightgray@2x.png) no-repeat center / cover;
-//   background-size: 8px 15px;
-
-//   border: 1px solid #eee;
-//   box-sizing: border-box;
-
-//   overflow: hidden;
-
-//   cursor: pointer;
-// `;
-
-// // 뒤로가기 버튼 스타일
-// const PrevButton = styled.div`
-//   width: 28px;
-//   height: 28px;
-
-//   position: absolute;
-//   bottom: 20px;
-//   left: 50%;
-//   transform: translate(-150%);
-//   z-index: 100;
-
-//   background: #fff url(./img/ico-chevron-left-sm-lightgray@2x.png) no-repeat center / cover;
-//   background-size: 8px 15px;
-
-//   box-sizing: border-box;
-//   border: 1px solid #eee;
-
-//   overflow: hidden;
-
-//   cursor: pointer;
-// `;
-
 // 더보기 버튼 스타일
 const PlusButton = styled.div`
   width: 28px;
@@ -214,7 +170,7 @@ function PrevArrow(props) {
   );
 }
 
-function InfoSliderCarousel({ category, title, text }) {
+function InfoSliderCarousel({ post }) {
   // 슬라이드 설정
   const settings = {
     infinite: true,
@@ -231,28 +187,35 @@ function InfoSliderCarousel({ category, title, text }) {
   return (
     <SlideContainer>
       <StyledSlider {...settings}>
-        <div className="postBox">
+        {/* <div className="postBox">
           <Link to="/test">
-            <span className="category">{category}</span>
+            <span className="category"></span>
             <span className="content">test post1</span>
           </Link>
-        </div>
-        <div className="postBox">
-          <Link to="/test">
-            <span className="category">{category}</span>
-            <span className="content">test post2</span>
-          </Link>
-        </div>
-        <div className="postBox">
-          <Link to="/test">
-            <span className="category">{category}</span>
-            <span className="content">test post3</span>
-          </Link>
-        </div>
+        </div> */}
+        {post ? (
+          post.map((v, i) => {
+            return (
+              <div className="postBox" key={i}>
+                <Link to={`/suggestion/${v.id}`} target="_blank">
+                  <span className="category">{v.register}</span>
+                  <span className="content">{v.title}</span>
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          <div className="postBox">
+            <Link to="/customer.do" target="_blank">
+              <span className="category">게시판</span>
+              <span className="content">등록된 게시글이 없습니다.</span>
+            </Link>
+          </div>
+        )}
       </StyledSlider>
 
       <PlusButton>
-        <a href="https://sev.severance.healthcare/sev/story/doctor.do" target="_black" rel="noopener noreferrer" />
+        <Link to="/customer.do" target="_black" rel="noopener noreferrer" />
       </PlusButton>
     </SlideContainer>
   );
