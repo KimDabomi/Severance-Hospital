@@ -64,7 +64,9 @@ textarea{
 }
 
 .bgAll{
-  backGround: url(../img/bg-pattern.png) no-repeat center/cover;
+  background: url(../img/bg-pattern.png) no-repeat;
+  background-position-x: 50%;
+  background-size: 1920px;
   width: 100% !important;
   /* background-color: pink; */
 }
@@ -815,29 +817,6 @@ textarea{
       line-height: 16px;
     }
   }
-
- /** h4 타이틀+가상선택자 */
- .h4title {
-    padding-left: 18px;
-    margin: 65px 0 22px;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 38px;
-    position: relative;
-
-    &:before {
-        content: '';
-        position: absolute;
-        width: 6px;
-        height: 20px;
-        top: 9px;
-        left: 0;
-        background-color: #0094fb;
-        border-radius: 3px;
-    }
-  }
 `;
-
-
 
 export default GlobalStyles;
