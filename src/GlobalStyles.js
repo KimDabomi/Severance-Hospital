@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
@@ -135,6 +135,23 @@ textarea{
             top: -3px;
         }
     }
+
+// 공지사항 텍스트 왼쪽 박스 모양
+.textLeftBoxShape {
+  margin: 4px 0;
+
+    li{
+      color: #333333;
+      font-size: 17px;
+      box-sizing: border-box;
+      list-style:square inside;
+      line-height: 1.5;
+      margin-top: 5px;
+
+      &::marker{color: #999999;}
+    }
+}
+    
 //회색공지사항
 .grayboxGuide{
     padding: 25px 30px;
