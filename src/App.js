@@ -3,11 +3,15 @@ import { Link, Routes, Route } from "react-router-dom";
 
 import StaffSearch from "./pages/staff/StaffSearch";
 import MainPage from "./pages/main/MainPage";
+
+// 로그인, 아이디/비밀번호 찾기
 import Login from "./pages/Login/Login";
 import FindId from "./pages/Login/FindId"
 import FindIdEmail from "./pages/Login/FindIdEmail";
 import FindPassword from "./pages/Login/FindPassword"
 import FindPasswordEmail from "./pages/Login/FindPasswordEmail";
+
+// 회원가입
 import JoinWay  from "./pages/Join/JoinWay";
 import JoinAccept from "./pages/Join/JoinAccept";
 import JoinAcceptGlobal from "./pages/Join/JoinAcceptGlobal";
@@ -15,6 +19,9 @@ import JoinCertificate from "./pages/Join/JoinCertificate";
 import JoinUs  from "./pages/Join/JoinUs";
 import JoinComplete from "./pages/Join/JoinComplete";
 import JoinAlready from "./pages/Join/JoinAlready"
+
+// 마이페이지
+import DetailsEdit from './pages/Mypage/DetailsEdit';
 
 //고객의소리
 import CustomerBoardList from './pages/CustomerBoard/CustomerBoardList';
@@ -47,11 +54,14 @@ function App() {
         <Route path="/" exapt={true} element={<MainPage />} />
         <Route path="/all_menu" element={<AllMenu />} />
 
+        {/* 로그인, 아이디/비밀번호 찾기 */}
         <Route path='/login' element={<Login />} />
         <Route path='/find_id' element={<FindId />} />
         <Route path='/find_id_email' element={<FindIdEmail />} />
         <Route path='/find_password' element={<FindPassword />} />
         <Route path='/find_password_email' element={<FindPasswordEmail />} />
+
+        {/* 회원가입 */}
         <Route path='/join_way' element={<JoinWay />} />
         <Route path='/join_accept' element={<JoinAccept />} />
         <Route path='/join_accept_global' element={<JoinAcceptGlobal />} />
@@ -59,6 +69,9 @@ function App() {
         <Route path='/join_us' element={<JoinUs />} />
         <Route path='/join_complete' element={<JoinComplete />} />
         <Route path='/join_already' element={<JoinAlready />} />
+
+        {/* 마이페이지 */}
+        <Route path='details_edit' element={<DetailsEdit />} />
         
         {/* 고객의소리 페이지 라우팅*/}
         <Route path='/customer.do' element={<CustomerBoardList />}/>

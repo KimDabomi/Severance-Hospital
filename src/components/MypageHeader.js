@@ -6,11 +6,42 @@
  */
 
 import React, { memo } from "react";
-import loginImg from "../assets/img/logo@2x.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import logoutImg from "../assets/img/ico-logout-white.png";
+import loginImg from "../assets/img/logo@2x (1).png";
 
 const Container = styled.div`
+  letter-spacing: 0.02em;
+  line-height: 1.625;
+  .top {
+    background-color: #0054d1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 40px;
+    color: white;
+    font-size: 15px;
+    text-align: right;
+    b {
+      font-weight: bold;
+    }
+    p {
+      display: block;
+      &:after {
+        content: '';
+        margin: 0 25px;
+        border: none;
+        border-right: 1px solid white;
+      }
+    }
+    a {
+      color: white;
+      &:last-child {
+        margin-left: 5px;
+      }
+    }
+  }
   .nav {
     width: 1280px;
     height: 100px;
@@ -57,12 +88,13 @@ const Container = styled.div`
             visibility: hidden;
             -webkit-transition-duration: 0.3s;
             transition-duration: 0.3s;
+            
           }
         }
         &:first-child {
-          margin: 30px 173px 0 -30px;
+          margin: 30px 478px 0 -30px;
           img {
-            width: 210px;
+            width: 190px;
           }
           &:hover {
             a:after {
@@ -97,6 +129,11 @@ const Container = styled.div`
 const LoginHeader = memo(() => {
   return (
     <Container>
+      <div className='top'>
+        <p><b>이름</b>님 반갑습니다.</p>
+        <Link to='/'><img src={logoutImg} alt="logoutImg" /></Link>
+        <Link to='/'>로그아웃</Link>
+      </div>
       <div className="nav">
         <ul>
           <li>
@@ -105,19 +142,16 @@ const LoginHeader = memo(() => {
             </Link>
           </li>
           <li>
-            <Link to="/login">로그인</Link>
+            <Link to="/">예약현황</Link>
           </li>
           <li>
-            <Link to="/join_way">회원가입</Link>
+            <Link to="/">결과조회</Link>
           </li>
           <li>
-            <Link to="/">아이디/비밀번호 찾기</Link>
+            <Link to="/">나의 세브란스</Link>
           </li>
           <li>
-            <Link to="/">병원등록번호 조회</Link>
-          </li>
-          <li>
-            <Link to="/">이용정책</Link>
+            <Link to="/">회원정보</Link>
           </li>
         </ul>
       </div>
