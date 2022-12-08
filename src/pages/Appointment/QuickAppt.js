@@ -6,7 +6,7 @@ import apptCalendar from '../../assets/img/icon-appt-calendar.png'
 const QuickApptCont = styled.div`
     padding-bottom: 95px;
     
-    // h4 스타일 적용
+    /* // h4 스타일 적용 + 가상 선택자
     h4 {
         padding-left: 18px;
         margin: 65px 0 22px;
@@ -25,7 +25,7 @@ const QuickApptCont = styled.div`
             background-color: #0094fb;
             border-radius: 3px;
         }
-    }
+    } */
 
     // list 파란점
     .apptList {
