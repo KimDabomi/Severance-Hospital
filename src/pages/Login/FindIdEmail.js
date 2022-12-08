@@ -1,7 +1,7 @@
 /**
  * @ File Name: FindIdEmail.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-07 17:30
+ * @ Last Update: 2022-12-08 12:40
  * @ Description: 아이디 찾기 이메일 인증 페이지
  */
 
@@ -22,7 +22,7 @@ const Container = styled.div`
       border: 0;
       border-bottom: 1px solid #e6e6e6;
       width: 800px;
-      margin: auto;
+      margin: 30px auto 0;
     }
   }
   h1 {
@@ -97,6 +97,7 @@ const Container = styled.div`
       font-weight: bold;
       margin-right: 15px;
     }
+    // 확인버튼
     .submit {
       background-color: rgb(0, 148, 251);
       color: #fff;
@@ -119,7 +120,7 @@ const Container = styled.div`
       text-align: left;
       font-size: 16px;
       vertical-align: middle;
-      margin: 0 10px 30px 0;
+      margin: 0 10px 0 0;
       &:focus {
         outline: 1px solid rgb(0, 148, 251);
       }
