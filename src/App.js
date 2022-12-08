@@ -30,6 +30,9 @@ import NewsMain from './pages/NewsHome/NewsMain';
 import NewsView from './pages/NewsHome/NewsView';
 import NoticeView from './pages/NewsHome/NoticeView';
 
+//마이페이지
+import MysevMain from './pages/MYSevrance/MysevMain';
+
 // 의료인 정보
 import StaffProfile from "./pages/staff/StaffProfile";
 
@@ -75,6 +78,9 @@ function App() {
          <Route path='/news' element={<NewsMain />}/>
          <Route path='/news/media.do' element={<NewsView />}/>
          <Route path='/news/notice.do' element={<NoticeView />}/>
+
+         {/* 마이페이지 라우팅 */}
+         <Route path='/mysevrance' element={<MysevMain />}/>
 
          {/* 진료 예약 */}
          <Route path='/appointment_main/*' element={<AppointmentMain />}/>

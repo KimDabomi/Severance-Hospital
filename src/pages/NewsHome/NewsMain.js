@@ -24,7 +24,7 @@ const NewsMain = memo(() => {
 	//hook을 통해 slice가 관리하는 상태값 가져오기
 	const { data, error } = useSelector((state) => state.YoutubeSlice);
 
-  //표시할 페이스북
+  //표시할 페이스북 데이터
   const facebook = [
   {
     date:'2022-09-21', 
@@ -60,7 +60,6 @@ const NewsMain = memo(() => {
   },
 ]
   
-
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(()=>{
     dispatch(getYoutube());
