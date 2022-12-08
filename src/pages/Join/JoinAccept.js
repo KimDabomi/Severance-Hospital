@@ -21,10 +21,6 @@ import checkbox from "../../assets/img/ico-checkbox-checked-white.png";
 
 const Container = styled.div`
   position: relative;
-  .all_content {
-    background: url(${bg}) no-repeat center /cover;
-    height: 600px;
-  }
   .not_check_term,
   .not_check_private {
     display: none;
@@ -313,7 +309,7 @@ const JoinAccept = memo(() => {
     <Container>
       <div>
         <LoginHeader />
-        <div className='all_content'>
+        <div className='bgAll'>
           <form className="not_check_term">
             <div class="popup">
               <p>

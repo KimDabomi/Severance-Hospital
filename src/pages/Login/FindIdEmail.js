@@ -15,9 +15,7 @@ import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 const Container = styled.div`
   position: relative;
-  .content {
-    background: url(${bg}) no-repeat center / cover;
-    height: 500px;
+  .bgAll {
     hr {
       border: 0;
       border-bottom: 1px solid #e6e6e6;
@@ -134,7 +132,7 @@ const FindIdEmail = memo(() => {
   return (
     <Container>
       <LoginHeader />
-      <div className="content">
+      <div className="bgAll">
         <h1>아이디 찾기</h1>
         <h3>이메일 인증</h3>
         <hr />

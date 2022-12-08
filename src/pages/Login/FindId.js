@@ -18,9 +18,7 @@ import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
-  .content {
-    background: url(${bg}) no-repeat center / cover;
-    height: 700px;
+  .bgAll {
     hr {
       border: 0;
       border-bottom: 1px solid #e6e6e6;
@@ -142,7 +140,7 @@ const FindId = memo(() => {
   return (
     <Container>
       <LoginHeader />
-      <div className="content">
+      <div className="bgAll">
         <h1>아이디 찾기</h1>
         <p>
           회원가입 시 입력한 회원님의 정보를 통해 아이디를 찾으실 수 있습니다.
