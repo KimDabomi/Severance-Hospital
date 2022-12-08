@@ -28,6 +28,7 @@ const Div = styled.article`
     height: 340px;
     border: 1px solid #e6e6e6;
     margin-bottom: 20px;
+    margin-right: 12px;
     background-color: #fff;
     padding: 26px 30px 30px;
     box-sizing: border-box;
@@ -35,10 +36,14 @@ const Div = styled.article`
         background-color: #eef7fc;
     }
     &:nth-child(-n+3){
+        /* background-color: red; */
         height: 155px;
         border: none;
     }
+    &:nth-child(3) {
+    background-color: transparent;
     ::after{clear: both;}
+    }
   }
 `;
 
@@ -49,7 +54,23 @@ const MysevMain = memo(() => {
       <div className="content">
         <div className="pageCont">
             <div className="gridItem">
-
+              <div className='titleWrap'>
+                <span>주혜지님</span>
+                <div className='btnCont'>
+                  <button type='button' className="btn">개인정보수정</button>
+                  <button type='button' className="btn">비밀번호변경</button>
+                </div>
+              </div>
+              <div className='inputGroup'>
+                <select className='formControl' title='병원등록번호'>
+                  <option value='3840864' selected>세브란스병원:3840864</option>
+                </select>
+                <span className='inputAddon'>
+                  <button type='button' className='editBtn'>
+                    <i className='icoMypageEdit'></i>설정
+                  </button>
+                </span>
+              </div>
             </div>
             <div className="gridItem"></div>
             <div className="gridItem"></div>
