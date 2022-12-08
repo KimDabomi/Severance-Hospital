@@ -1,11 +1,11 @@
 /**
  * @ File Name: FindId.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-07 17:30
+ * @ Last Update: 2022-12-08 15:00
  * @ Description: 비밀번호 찾기 페이지
  */
 
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginHeader from "../../components/LoginHeader";
@@ -56,9 +56,9 @@ const Container = styled.div`
       outline: 1px solid rgb(0, 148, 251);
     }
     &:after {
-        content: '';
-        display: block;
-        clear: both;
+      content: "";
+      display: block;
+      clear: both;
     }
   }
   .ways {
@@ -109,7 +109,7 @@ const Container = styled.div`
       border: 2px solid rgb(0, 148, 251);
     }
     .certified_btn {
-        margin-right: 0;
+      margin-right: 0;
     }
     .notice {
       width: 1280px;
@@ -137,30 +137,88 @@ const Container = styled.div`
       }
     }
   }
+  // 팝업창
+  .no_id {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding-top: 120px;
+      box-sizing: border-box;
+      z-index: 99999;
+      .popup {
+        background-color: #fff;
+        width: 350px;
+        height: 180px;
+        margin: auto;
+        transform: translate(0, 50%);
+        text-align: center;
+        padding-top: 35px;
+        box-sizing: border-box;
+        p {
+          text-align: left;
+          margin-left: 25%;
+        }
+        button {
+          margin-top: 25px;
+          background-color: rgb(0, 148, 251);
+          border: none;
+          color: white;
+          padding: 10px 25px;
+          font-size: 15px;
+          font-weight: 100;
+          border-radius: 3px;
+        }
+      }
+    }
 `;
 
 const FindId = memo(() => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [input, setInput] = useState([]);
 
-  const goIpin = e => {
-    navigate('/');
+  const goIpin = (e) => {
+    navigate("/");
   };
 
-  const goPhone = e => {
-    navigate('/');
+  const goPhone = (e) => {
+    navigate("/");
   };
 
-  const goOfficial = e => {
-    navigate('/');
+  const goOfficial = (e) => {
+    navigate("/");
   };
 
-  const goEmail = e => {
-    navigate('/find_password_email');
+  const goEmail = (e) => {
+    navigate("/find_password_email");
   };
+
+  const putInput = (e) => {
+    e.target.value
+      ? setInput([...input, e.target.value])
+      : setInput(input.filter((choice) => choice !== e.target.value));
+  };
+
+  const notInput = (e) => {
+    document.querySelector(".no_id").style.display = "block";
+  };
+  const closeBox = (e) => {
+    document.querySelector(".no_id").style.display = "none";
+  };
+
   return (
     <Container>
       <LoginHeader />
       <div className="content">
+        <form className="no_id">
+          <div class="popup">
+            <p>아이디를 입력해 주세요.</p>
+            <button type="button" className="close" onClick={closeBox}>닫기</button>
+          </div>
+        </form>
         <h1>비밀번호 찾기</h1>
         <p>
           회원가입 시 입력한 회원님의 정보를 통해 비밀번호를 재설정해주세요.
@@ -194,7 +252,12 @@ const FindId = memo(() => {
           <button type="button" className="official_btn" onClick={goOfficial}>
             범용 공인인증
           </button>
-          <button type="button" className="certified_btn" onClick={goEmail}>
+          <button
+            type="button"
+            className="certified_btn"
+            // onClick={!input.includes("id_input") ? notInput : goEmail}
+            onClick={goEmail}
+          >
             이메일 인증
           </button>
           <div className="notice">
