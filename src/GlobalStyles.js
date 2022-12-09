@@ -456,17 +456,21 @@ textarea{
 
   /** 의약품 검색페이지 */
   .formControl {
+    appearance: none;
     width: 100%;
     border-radius: 0;
     height: 45px;
     border: 1px solid #dadada;
     padding: 8px 15px;
-    background: #fff;
     text-align: left;
     font-size: 16px;
     line-height: 27px;
     vertical-align: middle;
     box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "NanumGothic", "malgungothic", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    //select태그의 화살표 css
+    background: #fff url('../img/ico-chevron-down@2x.png') no-repeat right 12px center;
+    background-size: 17px auto;
     &:focus {
       outline: none;
       border-color: #0094fb;
