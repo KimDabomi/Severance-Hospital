@@ -1,7 +1,7 @@
 /**
  * @ File Name: DetailsEdit.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-09 17:10
+ * @ Last Update: 2022-12-10 00:21
  * @ Description: 개인정보수정 페이지
  */
 
@@ -21,6 +21,7 @@ const Container = styled.div`
     font-size: 40px;
     font-weight: bold;
   }
+
   // 폼박스
   .success {
     display: none;
@@ -96,6 +97,7 @@ const Container = styled.div`
         font-size: 14px;
       }
     }
+
     // input 박스
     .telno1_input,.telno2_input,.telno3_input,
     .pretelno1_input,.pretelno2_input,.pretelno3_input,
@@ -118,6 +120,7 @@ const Container = styled.div`
     .text {
       margin: 0 8px;
     }
+
     // 셀렉트 박스
     select {
       width: 150px;
@@ -147,6 +150,8 @@ const Container = styled.div`
       content: "";
     }
   }
+
+  // 하단 버튼
   .buttons {
     width: 210px;
     margin: 60px auto;
@@ -231,7 +236,7 @@ const DetailsEdit = memo(() => {
       <div className="bgAll">
         <h1>개인정보수정</h1>
         <form className="success">
-            <div class="popup">
+            <div className="popup">
               <p>
                 성공하였습니다.
               </p>
@@ -479,8 +484,8 @@ const DetailsEdit = memo(() => {
         </div>
         <div className='cases'>
           <ul>
-            <li>비밀번호를 변경하려면 <a href='#'><b>비밀번호 변경하기></b></a></li>
-            <li>세브란스를 더 이상 이용하지 않는다면 <a href='#'><b>회원탈퇴 바로가기></b></a></li>
+            <li>비밀번호를 변경하려면 <a href='#'><b>비밀번호 변경하기&#62;</b></a></li>
+            <li>세브란스를 더 이상 이용하지 않는다면 <a href='#'><b>회원탈퇴 바로가기&#62;</b></a></li>
           </ul>
         </div>
       </div>

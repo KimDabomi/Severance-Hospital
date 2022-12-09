@@ -5,7 +5,7 @@ import apptCalendar from '../../assets/img/icon-appt-calendar.png'
 
 const InternetApptCont = styled.div`
     padding-bottom: 95px;
-
+    // h4 스타일 적용 + 가상 선택자
     h4 {
         padding-left: 18px;
         margin: 65px 0 22px;
@@ -25,7 +25,6 @@ const InternetApptCont = styled.div`
             border-radius: 3px;
         }
     }
-
     div {
         margin-left: 10px;
 
@@ -88,7 +87,7 @@ const InternetApptCont = styled.div`
 const InternetAppt = memo(() => {
     return (
         <InternetApptCont>
-            <h4>인터넷 진료예약 안내</h4>
+            <h4 className='h4title'>인터넷 진료예약 안내</h4>
             <div>
                 <div>
                     <ul>
