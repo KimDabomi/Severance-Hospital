@@ -1,7 +1,7 @@
 /**
  * @ File Name: MyPageHeader.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-08 16:1:00
+ * @ Last Update: 2022-12-08 17:1:00
  * @ Description: 마이페이지 헤더
  */
 
@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import UtilArea from './UtilArea';
 
 const Container = styled.div`
+  
   .logo{
     font-size: 16px;
     float: left;
@@ -21,9 +22,11 @@ const Container = styled.div`
       width:100%;
       /* height:100%; */
     }
+    &::after{clear: both;}
   }
   .nav {
-    width: 1280px;
+    max-width: 1280px;
+    margin: auto;
     height: 100px;
     margin: auto;
     display: flex;
@@ -32,6 +35,7 @@ const Container = styled.div`
     ul {
       li {
         float: left;
+        &::after{clear: both;}
         &:hover {
           a:after {
             opacity: 1;

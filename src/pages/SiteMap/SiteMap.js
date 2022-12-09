@@ -222,7 +222,7 @@ const SiteMap = memo(() => {
             </MenuTitleDiv>
             <MenuUl>
               <MenuLi>
-                <Link to="/">오시는 길</Link>
+                <Link to="/map.do">오시는 길</Link>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>
