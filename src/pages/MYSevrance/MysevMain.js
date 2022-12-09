@@ -21,12 +21,13 @@ const Div = styled.article`
   .pageCont {
     overflow: hidden;
     padding: 40px 0 0;
+    position: relative;
   }
 
   //그리드
   .gridItem {
     float: left;
-    position: relative;
+    
     width: calc(33% - 9px);
     height: 340px;
     border: 1px solid #e6e6e6;
@@ -54,11 +55,11 @@ const Div = styled.article`
     //후원/자원봉사
     &:nth-child(7) {
       position: absolute;
-      /* left: 0; */
-      top: 715px;
+      left: 0%;
+      top: 575px;
       background-color: #f9f9f9;
       border: none;
-      height: 224px;width: 413.39px;
+      height: 224px;
       .btnCont{
         display: flex;
         width: 100%;
@@ -75,10 +76,9 @@ const Div = styled.article`
     //나의작성글
     &:nth-child(8) {
       position: absolute;
-      left: 734px;
-      top: 715px;
-      height: 224px;width: 413.39px;
-
+      left: 33.3%;
+      top: 575px;
+      height: 224px;
       .btnCont{
         display: flex;
         width: 100%;
