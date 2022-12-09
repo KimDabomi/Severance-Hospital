@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsMain.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-07
+ * @ Last Update: 2022-12-09
  * @ Description: 뉴스 메인 페이지
  */
 
@@ -66,6 +66,9 @@ const NewsMain = memo(() => {
   if(data){
     console.log(data);
   }
+
+  //페이징 후 화면을 맨 위로 올리기
+  window.scrollTo(0,0);
   },[])
 
   //unescape처리함수

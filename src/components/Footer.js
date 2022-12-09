@@ -27,7 +27,7 @@ import TTGray from "../assets/img/ico-sns-gray-tt@2x.png";
 /** 푸터 스타일 */
 const FooterContainer = styled.footer`
   width: 100%;
-  height: 214px;
+  height: 215px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -147,6 +147,7 @@ const FooterContainer = styled.footer`
 const Footer = () => {
   return (
     <FooterContainer>
+      <hr />
       <div className="familySite">
         <ul className="snsLink">
           <li>
@@ -169,7 +170,6 @@ const Footer = () => {
           </li>
         </ul>
       </div>
-
       <hr />
 
       <div className="siteInfo">
