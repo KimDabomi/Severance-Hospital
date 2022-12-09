@@ -18,7 +18,6 @@ import step04 from "../../assets/img/ico-login-step4-off@2x.png";
 import check from "../../assets/img/ico-check-primary@2x.png";
 import warning from "../../assets/img/ico-warning-mark@2x.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
-import bg from "../../assets/img/bg-pattern.png";
 // import {useFormik} from 'formik';
 
 const Container = styled.div`
@@ -134,6 +133,8 @@ const Container = styled.div`
     color: black;
     font-weight: normal;
   }
+
+  // 인풋박스
   .id_input,.password_input,.repassword_input,.name_input {
     width: 355px;
     max-width: 100%;
@@ -163,6 +164,8 @@ const Container = styled.div`
   .text {
     margin: 0 8px;
   }
+
+  // 셀렉트박스
   .telno1_input,.pretelno1_input,.email_domain,.year_input,.month_input,.date_input {
     width: 150px;
     padding-right: 30px;
@@ -211,6 +214,8 @@ const Container = styled.div`
       margin-right: 30px;
     }
   }
+
+  // 버튼
   .phone_btn,
   .ipin_btn,
   .submit_btn {
