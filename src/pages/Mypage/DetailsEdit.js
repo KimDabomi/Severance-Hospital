@@ -21,6 +21,7 @@ const Container = styled.div`
     font-size: 40px;
     font-weight: bold;
   }
+
   // 폼박스
   .success {
     display: none;
@@ -96,6 +97,7 @@ const Container = styled.div`
         font-size: 14px;
       }
     }
+
     // input 박스
     .telno1_input,.telno2_input,.telno3_input,
     .pretelno1_input,.pretelno2_input,.pretelno3_input,
@@ -118,6 +120,7 @@ const Container = styled.div`
     .text {
       margin: 0 8px;
     }
+
     // 셀렉트 박스
     select {
       width: 150px;
@@ -147,6 +150,8 @@ const Container = styled.div`
       content: "";
     }
   }
+
+  // 하단 버튼
   .buttons {
     width: 210px;
     margin: 60px auto;

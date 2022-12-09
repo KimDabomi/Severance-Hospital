@@ -20,8 +20,9 @@ import checkbox from "../../assets/img/ico-checkbox-checked-white.png";
 
 const Container = styled.div`
   position: relative;
-  .not_check_term,
-  .not_check_private {
+
+  // 필수 항목 미체크 시 나타나는 폼박스
+  .not_check_term,.not_check_private {
     display: none;
     position: fixed;
     width: 100%;
@@ -40,6 +41,8 @@ const Container = styled.div`
       text-align: center;
       padding-top: 35px;
       box-sizing: border-box;
+
+      // 닫기버튼
       button {
         margin-top: 25px;
         background-color: rgb(0, 148, 251);
@@ -64,9 +67,12 @@ const Container = styled.div`
     border: 0;
     border-bottom: 1px solid #e6e6e6;
   }
+
   .accept_content {
     width: 1280px;
     margin: auto;
+    
+    // 상단 회원가입 단계
     .steps {
       ol {
         li {
@@ -105,19 +111,26 @@ const Container = styled.div`
         }
       }
     }
+
     .agreementForm {
       float: left;
       margin-top: 50px;
+
+      // 약관 전체 동의
       .agree_all {
         font-size: 18px;
         font-weight: bold;
         margin-bottom: 30px;
       }
+
+      // 약관 제목
       .agree_title {
         margin-top: 50px;
         font-size: 16px;
         font-weight: bold;
       }
+
+      // 약관 내용
       .agree_content {
         color: rgb(100, 100, 100);
         height: 240px;
@@ -139,16 +152,15 @@ const Container = styled.div`
           margin-bottom: 20px;
           margin-top: 50px;
         }
-        p,
-        ul,
-        li,
-        h6 {
+        p,ul,li,h6 {
           font-size: 16px;
           line-height: 1.5em;
         }
         h6 {
           margin: 5px 0;
         }
+
+        // 약관 내용 중 넘버링 된 것
         .agree_num {
           li {
             font-size: 16px;
@@ -163,6 +175,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 하단 경고 박스
   .gray_box {
     color: rgb(100, 100, 100);
     height: 140px;
@@ -186,10 +200,13 @@ const Container = styled.div`
       font-weight: bold;
     }
   }
+
+  // 동의/비동의 버튼
   .btn_section {
     float: left;
     margin-left: 39%;
     margin-top: 80px;
+
     // 동의합니다 버튼
     .accept_btn {
       font-size: 18px;
@@ -228,7 +245,7 @@ const Container = styled.div`
     }
   }
 
-  // 파란색 체크박스
+  // 파란색 동그라미 체크박스
   .checkBox {
     position: absolute;
     width: 1px;

@@ -17,7 +17,6 @@ import globalImg from "../../assets/img/ico-login3@2x.png";
 import naver from "../../assets/img/ico-sns-naver@2x.png";
 import kakao from "../../assets/img/ico-sns-kakao@2x.png";
 import facebook from "../../assets/img/ico-sns-facebook@2x.png";
-import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -33,6 +32,8 @@ const Container = styled.div`
     text-align: center;
     font-size: 16px;
   }
+
+  // 회원가입 방법 박스
   .ways {
     width: 1280px;
     margin: auto;
@@ -97,6 +98,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 자주 묻는 질문 버튼
   .qna {
     margin-right: 28.5%;
     height: 50px;
@@ -117,6 +120,7 @@ const Container = styled.div`
     }
   }
 `;
+
 const JoinWay = memo(() => {
   return (
     <Container>

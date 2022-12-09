@@ -15,7 +15,6 @@ import step01 from "../../assets/img/ico-login-step1-on@2x.png";
 import step03 from "../../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../../assets/img/ico-login-step4-off@2x.png";
 import warning from "../../assets/img/ico-warning-mark@2x.png";
-import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -62,9 +61,13 @@ const Container = styled.div`
     border: 0;
     border-bottom: 1px solid #ccc;
   }
+
+  // 이용약관
   .accept_content {
     width: 1280px;
     margin: auto;
+
+    // 상단 회원가입 단계
     .steps {
       ol {
         li {
@@ -101,19 +104,26 @@ const Container = styled.div`
         }
       }
     }
+
     .agreementForm {
       float: left;
       margin-top: 50px;
+
+      // 약관 전체 동의
       .agree_all {
         font-size: 18px;
         font-weight: bold;
         margin-bottom: 30px;
       }
+
+      // 약관 제목
       .agree_title {
         margin-top: 50px;
         font-size: 16px;
         font-weight: bold;
       }
+
+      // 약관 내용
       .agree_content {
         color: rgb(100, 100, 100);
         height: 240px;
@@ -135,16 +145,15 @@ const Container = styled.div`
           margin-bottom: 20px;
           margin-top: 50px;
         }
-        p,
-        ul,
-        li,
-        h6 {
+        p,ul,li,h6 {
           font-size: 16px;
           line-height: 1.5em;
         }
         h6 {
           margin: 5px 0;
         }
+
+        // 약관 내용 중 넘버링 된 내용
         .agree_num {
           li {
             font-size: 16px;
@@ -159,6 +168,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 하단 경고 박스
   .gray_box {
     color: rgb(100, 100, 100);
     height: 140px;
@@ -182,11 +193,14 @@ const Container = styled.div`
       font-weight: bold;
     }
   }
+
+  // 동의/비동의 버튼
   .btn_section {
     float: left;
     margin-left: 39%;
     margin-top: 80px;
 
+    // 동의 버튼
     .accept_btn {
       font-size: 16px;
       float: left;
@@ -198,6 +212,8 @@ const Container = styled.div`
       color: white;
       cursor: pointer;
     }
+
+    // 비동의 버튼
     .not_accept_btn {
       font-size: 16px;
       float: left;
@@ -222,6 +238,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 파란색 동그라미 체크박스
   .checkBox {
     position: absolute;
     width: 1px;
@@ -252,6 +270,7 @@ const Container = styled.div`
     background-color: #0094fb !important;
   }
 `;
+
 const JoinAccept = memo(() => {
   const navigate = useNavigate();
   
@@ -300,7 +319,7 @@ const JoinAccept = memo(() => {
         <LoginHeader />
         <div className='bgAll'>
           <form className='not_check_term'>
-            <div class='popup'>
+            <div className='popup'>
               <p>이용약관에 동의를 해야 회원가입<br />
               진행이 가능합니다.</p>
               <button type='button' className='close' onClick={closeBox}>닫기</button>

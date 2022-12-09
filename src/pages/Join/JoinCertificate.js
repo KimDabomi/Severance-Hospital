@@ -17,7 +17,6 @@ import step04 from "../../assets/img/ico-login-step4-off@2x.png";
 import ipin from "../../assets/img/img-login-Certified01.png";
 import phone from "../../assets/img/img-login-Certified02.png";
 import official from "../../assets/img/img-login-Certified03.png";
-import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -33,6 +32,8 @@ const Container = styled.div`
     border: 0;
     border-bottom: 1px solid #e6e6e6;
   }
+
+  // 상단 회원가입 단계
   .steps {
     width: 1280px;
     margin: auto;
@@ -73,12 +74,12 @@ const Container = styled.div`
       }
     }
   }
+
+  // 인증방법
   .ways {
     width: 800px;
     margin: auto;
-    .ipin,
-    .phone,
-    .official {
+    .ipin,.phone,.official {
       width: 240px;
       height: 210px;
       border: 1px solid #e6e6e6;
@@ -96,6 +97,8 @@ const Container = styled.div`
     .official {
       margin-right: 0;
     }
+
+    // 인증 방법 버튼
     button {
       float: left;
       width: 240px;
@@ -120,6 +123,8 @@ const Container = styled.div`
       border: 2px solid rgb(0, 148, 251);
       margin-right: 0;
     }
+
+    // 하단 주의사항
     .notice {
       width: 800px;
       margin: auto;

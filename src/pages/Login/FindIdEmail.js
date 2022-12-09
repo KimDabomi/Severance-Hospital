@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginHeader from "../../components/LoginHeader";
 import LoginFooter from "../../components/LoginFooter";
-import bg from "../../assets/img/bg-pattern.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 const Container = styled.div`
@@ -34,6 +33,8 @@ const Container = styled.div`
     margin: 0 auto 30px;
     font-size: 24px;
   }
+
+  // 이메일 정보 입력
   .email_details {
     width: 800px;
     margin: auto;
@@ -88,6 +89,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 인증코드
   .code {
     width: 800px;
     margin: 0 auto;
