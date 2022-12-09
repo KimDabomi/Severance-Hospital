@@ -254,8 +254,9 @@ const Container = styled.div`
       font-size: 16px;
       color: #333;
       border-top: 1px solid #aaa;
-      width: 100%;
+      width: 1280px;
       text-align: left;
+      margin: auto;
       tr {
         border-bottom: 1px solid #e6e6e6;
         padding: 13px 20px;
