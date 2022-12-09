@@ -8,6 +8,7 @@
 /** import */
 import React, { memo } from "react";
 import { NavLink, Routes, Route, useLocation } from "react-router-dom";
+import styled from "styled-components";
 
 // 헤더 푸터
 import Header from "../../components/MainPageHeader";
@@ -17,9 +18,69 @@ import Content1 from "./Content1";
 // 오시는 방법
 import Content2 from "./Content2";
 
-/** 이미지 import */
+/** 이미지 */
 // 공지사항 박스 아이콘
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
+
+/** 탭메뉴 스타일 */
+const TabMenuNav = styled.nav`
+  width: 100%;
+  height: 57px;
+  position: relative;
+  margin-bottom: 60px;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #ebebeb;
+    background-color: #f9f9f9;
+  }
+
+  ul {
+    font-size: 18px;
+    display: flex;
+
+    li {
+      flex: 1;
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 1px;
+        height: 55px;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -1px;
+          right: 0;
+          bottom: -1px;
+          left: 0;
+          z-index: 100;
+          border: 1px solid transparent;
+          border-bottom: 3px solid transparent;
+        }
+
+        &.active {
+          background-color: white;
+          font-weight: bold;
+        }
+
+        &.active::before {
+          border-color: #ebebeb;
+          border-bottom-color: #ffd553;
+        }
+      }
+    }
+  }
+`;
 
 const Map = memo(() => {
   /** url의 경로 구조분해 */
@@ -43,12 +104,21 @@ const Map = memo(() => {
           </div>
 
           {/* 탭 기본 구조 */}
-          <nav className="tabMenu">
-            {/* 경로가 /map.do와 /map.do/tab_content1일때, 모두 active 활성화 */}
-            <NavLink to={pathname == "/map.do" ? "/map.do" : "/map.do/tab_content1"}>약도 및 주소 안내</NavLink>
-
-            <NavLink to="tab_content2">오시는 방법</NavLink>
-          </nav>
+          <TabMenuNav>
+            <ul>
+              <li>
+                {/* 경로가 /map.do와 /map.do/tab_content1일때, 모두 active 활성화 */}
+                <NavLink to={pathname == "/map.do" ? "/map.do" : "/map.do/tab_content1"}>
+                  <span>약도 및 주소 안내</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="tab_content2">
+                  <span>오시는 방법</span>
+                </NavLink>
+              </li>
+            </ul>
+          </TabMenuNav>
 
           <Routes>
             {/* 경로가 /map.do일때, 기본값 */}
