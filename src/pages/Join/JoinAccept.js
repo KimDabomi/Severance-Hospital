@@ -16,7 +16,6 @@ import step02 from "../../assets/img/ico-login-step2-off@2x.png";
 import step03 from "../../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../../assets/img/ico-login-step4-off@2x.png";
 import warning from "../../assets/img/ico-warning-mark@2x.png";
-import bg from "../../assets/img/bg-pattern.png";
 import checkbox from "../../assets/img/ico-checkbox-checked-white.png";
 
 const Container = styled.div`
