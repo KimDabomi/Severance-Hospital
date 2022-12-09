@@ -6,6 +6,7 @@
  */
 
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/MyPageHeader';
 
@@ -20,11 +21,13 @@ const Div = styled.article`
   .pageCont {
     overflow: hidden;
     padding: 40px 0 0;
+    position: relative;
   }
 
   //그리드
   .gridItem {
     float: left;
+    
     width: calc(33% - 9px);
     height: 340px;
     border: 1px solid #e6e6e6;
@@ -37,7 +40,6 @@ const Div = styled.article`
       background-color: #eef7fc;
     }
     &:nth-child(-n + 3) {
-      /* background-color: red; */
       height: 155px;
       border: none;
     }
@@ -46,6 +48,64 @@ const Div = styled.article`
       ::after {
         clear: both;
       }
+    }
+    &:nth-child(6) {
+      height: 584px;
+    }
+    //후원/자원봉사
+    &:nth-child(7) {
+      position: absolute;
+      left: 0%;
+      top: 575px;
+      background-color: #f9f9f9;
+      border: none;
+      height: 224px;
+      .btnCont{
+        display: flex;
+        width: 100%;
+      }
+      .btn{
+        width: 50%;
+        height: 110px;
+        font-weight: 700;
+        padding: 0 19px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+    }
+    //나의작성글
+    &:nth-child(8) {
+      position: absolute;
+      left: 33.3%;
+      top: 575px;
+      height: 224px;
+      .btnCont{
+        display: flex;
+        width: 100%;
+      }
+      .btn{
+        width: 50%;
+        height: 110px;
+        font-weight: 700;
+        padding: 15px 20px;
+        font-size: 16px;
+        box-sizing: border-box;
+        border: none; border-radius: 0;
+        background-color: #eef7fc;
+
+        p{
+          font-size: 18px;margin: 8px 0;
+        }
+        .count{
+          text-align: right; font-size: 18px; margin: 8px 0;
+          a{
+            font-size: 30px;
+            text-decoration: underline;
+            margin-right: 10px;
+          }
+        }
+      }
+      
     }
   }
 
@@ -67,22 +127,22 @@ const Div = styled.article`
   //개인정보 개인정보수정,비밀번호변경 버튼
   .btnCont {
     margin-top: 5px;
-    .btn {
-      &:nth-child(2) {
-        margin-left: 8px;
-      }
-      color: #333;
-      border: 1px solid #959595;
-      background-color: #fff;
-      min-width: 65px;
-      height: 30px;
-      padding: 0 10px;
-      font-size: 14px;
-      border-radius: 3px;
-      box-sizing: border-box;
-      align-items: center;
-      overflow: hidden;
+  }
+  .btn {
+    &:nth-child(2) {
+      margin-left: 8px;
     }
+    color: #333;
+    border: 1px solid #959595;
+    background-color: #fff;
+    min-width: 65px;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    align-items: center;
+    overflow: hidden;
   }
   //폼,설정버튼
   .inputGroup {
@@ -128,6 +188,67 @@ const Div = styled.article`
     //진료예약, 검진예약
     p {
       margin: 4px 0;
+    }
+  }
+  //나의 건강체크
+  .dataWrap {
+    margin: 55px 0;
+    display: flex;
+    .data {
+      width: 33.3%;
+      display: flex;
+      flex-direction: column;
+      p {
+        padding: 0 10px 25px;
+        margin: 4px 0;
+        text-align: center;
+      }
+      .btn {
+        margin: auto;
+        width: 75%;
+      }
+    }
+  }
+
+  //결과조회
+  .bgPrimary {
+    .titleWrap {
+      color: #fff;
+    }
+  }
+  .linkWrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    a {
+      color: #fff;
+      display: block;
+      width: 50%;
+      text-align: center;
+      margin-top: 20px;
+      &:first-child::before {
+        background: url(../img/main-ico-btn01@2x.png) no-repeat center top;
+        background-size: 100%;
+      }
+      &:nth-child(2)::before {
+        background: url(../img/main-ico-btn02@2x.png) no-repeat center top;
+        background-size: 100%;
+      }
+      &:nth-child(3)::before {
+        background: url(../img/main-ico-btn03@2x.png) no-repeat center top;
+        background-size: 100%;
+      }
+      &:nth-child(4)::before {
+        background: url(../img/main-ico-btn04@2x.png) no-repeat center top;
+        background-size: 100%;
+      }
+      &::before {
+        content: '';
+        width: 60px;
+        height: 60px;
+        display: block;
+        margin: 0 auto 10px;
+      }
     }
   }
 `;
@@ -184,7 +305,7 @@ const MysevMain = memo(() => {
           </div>
           {/* 나의 건강체크 */}
           <div className="gridItem">
-          <div className="titleWrap">
+            <div className="titleWrap">
               <span>나의 건강체크</span>
               <div className="btnCont">
                 <button type="button" className="btn">
@@ -192,11 +313,88 @@ const MysevMain = memo(() => {
                 </button>
               </div>
             </div>
+            <div className="dataWrap">
+              <div className="data">
+                <p>등록된 데이터가 없습니다.</p>
+                <button type="button" className="btn">
+                  체중 등록
+                </button>
+              </div>
+              <div className="data">
+                <p>등록된 데이터가 없습니다.</p>
+                <button type="button" className="btn">
+                  혈압 등록
+                </button>
+              </div>
+              <div className="data">
+                <p>등록된 데이터가 없습니다.</p>
+                <button type="button" className="btn">
+                  혈당 등록
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="gridItem"></div>
-          <div className="gridItem"></div>
-          <div className="gridItem"></div>
-          <div className="gridItem"></div>
+          {/* 결과조회 */}
+          <div className="gridItem bgPrimary">
+            <div className="titleWrap">
+              <span>결과조회</span>
+              <div className="btnCont">
+                <p>본인인증이 필요한 서비스입니다.</p>
+              </div>
+            </div>
+            <div className="linkWrap">
+              <Link>검사결과</Link>
+              <Link>약처방정보</Link>
+              <Link>내원일자</Link>
+              <Link>입퇴원내역</Link>
+            </div>
+          </div>
+          {/* 진료 및 검진예약 일정*/}
+          <div className="gridItem">
+            <div className="titleWrap">
+              <span>결과조회</span>
+            </div>
+            <div className='resDataCont'>
+              <div className='nodata'>
+                <i className='nodataIcon'></i>
+                <p>예약된 일정이 없습니다.</p>
+              </div>
+            </div>
+          </div>
+          {/* 후원 자원봉사 */}
+          <div className="gridItem">
+            <div className="titleWrap">
+              <span>나의 후원/자원봉사</span>
+            </div>
+            <div className='inputGroup'>
+              <div className="btnCont">
+                <button type="button" className="btn">
+                  후원하기
+                </button>
+                <button type="button" className="btn">
+                  자원봉사<br></br>신청내역
+                </button>
+              </div>
+            </div>
+          </div>
+          {/* 나의 작성글 */}
+          <div className="gridItem">
+          <div className="titleWrap">
+              <span>나의 작성글</span>
+            </div>
+            <div className='inputGroup'>
+              <div className="btnCont">
+                <div  className="btn">
+                  <p>칭찬합니다</p>
+                  <div className='count'><Link className='textPrimary'>0</Link><span>건</span></div>
+                </div>
+                <div className="btn">
+                  <p>건의합니다</p>
+                  <div className='count'><Link className='textPrimary'>0</Link><span>건</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Div>

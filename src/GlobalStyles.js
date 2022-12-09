@@ -48,6 +48,9 @@ body{
     color: #333;
     letter-spacing: 0.02em;
     line-height: 1.625;
+    //단어단위로 줄바꿈
+    word-break: keep-all;
+    word-wrap: break-word;
 }
 
 textarea{
@@ -846,7 +849,17 @@ textarea{
       font-size: 16px;
       line-height: 16px;
     }
+
   }
+  /* 강조 */
+  //글자색
+  .textPrimary{
+    color: #0094fb !important;
+  }
+  //배경색
+  .bgPrimary {
+  background-color: #0094fb !important;
+}
 `;
 
 export default GlobalStyles;

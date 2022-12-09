@@ -18,22 +18,6 @@
             box-sizing: border-box;
         }
  
-        .boxGuide{
-            max-width: 1280px;
-            height: 200px;
-            /* margin: 0 0 60px 0; */
-            padding: 20px 30px;
-            box-sizing: border-box;
-            border: 1px solid #e3e3e3;
-            position: relative;
-            img{
-                position: absolute;
-                width: 41px;
-                height: 7px;
-                top: -3px;
-            }
-        }
- 
         ul{
             margin: 4px 0;
             li{
@@ -51,7 +35,7 @@
  
  const Header = memo(() => {
      return (
-         <ApptHeaderCont  className='bgAll'>
+         <ApptHeaderCont className='bgAll'>
              <h1 className='pageTitle'>진료 예약 안내</h1>
  
              <div className='boxGuide'>
