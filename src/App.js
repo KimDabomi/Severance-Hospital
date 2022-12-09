@@ -30,7 +30,7 @@ import JoinComplete from "./pages/Join/JoinComplete";
 import JoinAlready from "./pages/Join/JoinAlready";
 
 // 마이페이지
-import DetailsEdit from './pages/Mypage/DetailsEdit';
+import DetailsEdit from "./pages/Mypage/DetailsEdit";
 
 //고객의소리
 import CustomerBoardList from "./pages/CustomerBoard/CustomerBoardList";
@@ -47,7 +47,7 @@ import NewsView from "./pages/NewsHome/NewsView";
 import NoticeView from "./pages/NewsHome/NoticeView";
 
 //마이페이지
-import MysevMain from './pages/MYSevrance/MysevMain';
+import MysevMain from "./pages/MYSevrance/MysevMain";
 
 // 의료인 정보
 import StaffProfile from "./pages/staff/StaffProfile";
@@ -65,24 +65,24 @@ function App() {
         <Route path="/all_menu" element={<AllMenu />} />
 
         {/* 로그인, 아이디/비밀번호 찾기 */}
-        <Route path='/login' element={<Login />} />
-        <Route path='/find_id' element={<FindId />} />
-        <Route path='/find_id_email' element={<FindIdEmail />} />
-        <Route path='/find_password' element={<FindPassword />} />
-        <Route path='/find_password_email' element={<FindPasswordEmail />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/find_id" element={<FindId />} />
+        <Route path="/find_id_email" element={<FindIdEmail />} />
+        <Route path="/find_password" element={<FindPassword />} />
+        <Route path="/find_password_email" element={<FindPasswordEmail />} />
 
         {/* 회원가입 */}
-        <Route path='/join_way' element={<JoinWay />} />
-        <Route path='/join_accept' element={<JoinAccept />} />
-        <Route path='/join_accept_global' element={<JoinAcceptGlobal />} />
-        <Route path='/join_certificate' element={<JoinCertificate />} />
-        <Route path='/join_us' element={<JoinUs />} />
-        <Route path='/join_complete' element={<JoinComplete />} />
-        <Route path='/join_already' element={<JoinAlready />} />
+        <Route path="/join_way" element={<JoinWay />} />
+        <Route path="/join_accept" element={<JoinAccept />} />
+        <Route path="/join_accept_global" element={<JoinAcceptGlobal />} />
+        <Route path="/join_certificate" element={<JoinCertificate />} />
+        <Route path="/join_us" element={<JoinUs />} />
+        <Route path="/join_complete" element={<JoinComplete />} />
+        <Route path="/join_already" element={<JoinAlready />} />
 
         {/* 마이페이지 */}
-        <Route path='details_edit' element={<DetailsEdit />} />
-        
+        <Route path="details_edit" element={<DetailsEdit />} />
+
         {/* 오시는 길 페이지 */}
         <Route path="/map.do/*" element={<Map />} />
 
@@ -115,11 +115,11 @@ function App() {
         <Route path="/news/media.do" element={<NewsView />} />
         <Route path="/news/notice.do" element={<NoticeView />} />
 
-         {/* 마이페이지 라우팅 */}
-         <Route path='/mysevrance' element={<MysevMain />}/>
+        {/* 마이페이지 라우팅 */}
+        <Route path="/mysevrance" element={<MysevMain />} />
 
-         {/* 진료 예약 */}
-         <Route path='/appointment_main/*' element={<AppointmentMain />}/>
+        {/* 진료 예약 */}
+        <Route path="/appointment_main/*" element={<AppointmentMain />} />
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
       </Routes>
