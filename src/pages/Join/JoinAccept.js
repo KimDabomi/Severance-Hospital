@@ -310,7 +310,7 @@ const JoinAccept = memo(() => {
         <LoginHeader />
         <div className='bgAll'>
           <form className="not_check_term">
-            <div class="popup">
+            <div className="popup">
               <p>
                 이용약관에 동의를 해야 회원가입
                 <br />
@@ -322,7 +322,7 @@ const JoinAccept = memo(() => {
             </div>
           </form>
           <form className="not_check_private">
-            <div class="popup">
+            <div className="popup">
               <p>
                 개인정보 수집·이용에 동의를 해야
                 <br />

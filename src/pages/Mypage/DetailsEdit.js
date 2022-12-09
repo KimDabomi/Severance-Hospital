@@ -1,7 +1,7 @@
 /**
  * @ File Name: DetailsEdit.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-09 17:10
+ * @ Last Update: 2022-12-10 00:21
  * @ Description: 개인정보수정 페이지
  */
 
@@ -231,7 +231,7 @@ const DetailsEdit = memo(() => {
       <div className="bgAll">
         <h1>개인정보수정</h1>
         <form className="success">
-            <div class="popup">
+            <div className="popup">
               <p>
                 성공하였습니다.
               </p>
@@ -479,8 +479,8 @@ const DetailsEdit = memo(() => {
         </div>
         <div className='cases'>
           <ul>
-            <li>비밀번호를 변경하려면 <a href='#'><b>비밀번호 변경하기></b></a></li>
-            <li>세브란스를 더 이상 이용하지 않는다면 <a href='#'><b>회원탈퇴 바로가기></b></a></li>
+            <li>비밀번호를 변경하려면 <a href='#'><b>비밀번호 변경하기&#62;</b></a></li>
+            <li>세브란스를 더 이상 이용하지 않는다면 <a href='#'><b>회원탈퇴 바로가기&#62;</b></a></li>
           </ul>
         </div>
       </div>

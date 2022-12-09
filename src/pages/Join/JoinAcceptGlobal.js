@@ -307,7 +307,7 @@ const JoinAccept = memo(() => {
             </div>
           </form>
           <form className='not_check_private'>
-            <div class='popup'>
+            <div className='popup'>
               <p>개인정보 수집·이용에 동의를 해야<br />
               회원가입 진행이 가능합니다.</p>
               <button type='button' className='close' onClick={closeBox}>닫기</button>
