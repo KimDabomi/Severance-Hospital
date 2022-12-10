@@ -150,7 +150,6 @@ const RowTableStyle = styled.div`
 const Number = memo(() => {
   return (
     <>
-      <Header />
       {/* 배경 이미지 (GlobalStyles) */}
       <div className="bgAll">
         {/* 페이지 기본 구조 */}
@@ -445,7 +444,6 @@ const Number = memo(() => {
           </IndentDiv>
         </div>
       </div>
-      <Footer />
     </>
   );
 });
