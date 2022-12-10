@@ -8,6 +8,7 @@
 /** import */
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 /** SNS 아이콘 이미지 */
 import NP from "../assets/img/ico-sns-np@2x.png";
@@ -185,13 +186,9 @@ const Footer = () => {
             </a>
           </li>
           <li>
-            <a
-              href="https://member.severance.healthcare/member/login.do?InitechEamNoCacheNonce=5ngpKay4RzLe2jDW51toSw%3D%3D%0A"
-              target="_black"
-              rel="noopener noreferrer"
-            >
+            <Link to="/customer.do" target="_black" rel="noopener noreferrer">
               고객의 소리
-            </a>
+            </Link>
           </li>
           <li>
             <a href="https://sev.severance.healthcare/sev/about/about.do" target="_black" rel="noopener noreferrer" style={{ color: "#0094fb" }}>
