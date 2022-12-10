@@ -2,17 +2,13 @@
  * @ File Name: Number.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
  * @ Last Update: 2022-12-11 15:02:00
- * @ Description: 이용안내 주요전화번호 페이지
+ * @ Description: 주요전화번호 페이지
  */
 
 /** import */
 import React, { memo } from "react";
 import { NavLink, Routes, Route, useLocation } from "react-router-dom";
 import styled from "styled-components";
-
-// 헤더 푸터
-import Header from "../../components/MainPageHeader";
-import Footer from "../../components/Footer";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
