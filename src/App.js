@@ -13,6 +13,10 @@ import AllMenu from "./pages/SiteMap/SiteMap";
 // 약도 및 주소 안내, 오시는 방법
 import Map from "./pages/Map/Map";
 
+/** 이용안내 */
+// 주요전화번호
+import Number from "./pages/Guide/Number";
+
 import StaffSearch from "./pages/staff/StaffSearch";
 import Login from "./pages/Login/Login";
 import FindId from "./pages/Login/FindId";
@@ -62,9 +66,12 @@ function App() {
       <Routes>
         {/* 메인 페이지 */}
         <Route path="/" exapt={true} element={<MainPage />} />
-        
+
         {/* 사이트맵 */}
         <Route path="/all_menu" element={<AllMenu />} />
+
+        {/* 이용안내 */}
+        <Route path="/number" element={<Number />} />
 
         {/* 로그인, 아이디/비밀번호 찾기 */}
         <Route path="/login" element={<Login />} />
