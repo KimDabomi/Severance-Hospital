@@ -457,7 +457,7 @@ const MainPage = memo(() => {
                 </Link>
               </li>
               <li>
-                <Link to="/">
+                <Link to="/appointment_main">
                   <img src={ShortcutCalendar} />
                   <div className="textBox">
                     <strong>진료 예약</strong>

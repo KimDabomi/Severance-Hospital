@@ -62,6 +62,8 @@ function App() {
       <Routes>
         {/* 메인 페이지 */}
         <Route path="/" exapt={true} element={<MainPage />} />
+        
+        {/* 사이트맵 */}
         <Route path="/all_menu" element={<AllMenu />} />
 
         {/* 로그인, 아이디/비밀번호 찾기 */}
