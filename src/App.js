@@ -1,22 +1,20 @@
+/** import */
 import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
-/** 메인 페이지 */
 // 메인
 import MainPage from "./pages/main/MainPage";
 
-// 로그인, 아이디/비밀번호 찾기
 // 사이트맵
 import AllMenu from "./pages/SiteMap/SiteMap";
 
-/** 오시는 길 페이지 */
-// 약도 및 주소 안내, 오시는 방법
+// 오시는 길
 import Map from "./pages/Map/Map";
 
 /** 이용안내 */
-// 주요전화번호
-import Number from "./pages/Guide/Number";
+import Guide from "./pages/Guide/Guide";
 
+// 로그인, 아이디/비밀번호 찾기
 import StaffSearch from "./pages/staff/StaffSearch";
 import Login from "./pages/Login/Login";
 import FindId from "./pages/Login/FindId";
@@ -68,10 +66,13 @@ function App() {
         <Route path="/" exapt={true} element={<MainPage />} />
 
         {/* 사이트맵 */}
-        <Route path="/all_menu" element={<AllMenu />} />
+        <Route path="/all_menu" exapt={true} element={<AllMenu />} />
 
         {/* 이용안내 */}
-        <Route path="/number" element={<Number />} />
+        <Route path="/guide/*" element={<Guide />} />
+
+        {/* 오시는 길 페이지 */}
+        <Route path="/map.do/*" element={<Map />} />
 
         {/* 로그인, 아이디/비밀번호 찾기 */}
         <Route path="/login" element={<Login />} />
@@ -92,14 +93,14 @@ function App() {
         {/* 마이페이지 */}
         <Route path="details_edit" element={<DetailsEdit />} />
 
-        {/* 오시는 길 페이지 */}
-        <Route path="/map.do/*" element={<Map />} />
-
+        {/* 로그인, 아이디/비밀번호 찾기 */}
         <Route path="/login" element={<Login />} />
         <Route path="/find_id" element={<FindId />} />
         <Route path="/find_id_email" element={<FindIdEmail />} />
         <Route path="/find_password" element={<FindPassword />} />
         <Route path="/find_password_email" element={<FindPasswordEmail />} />
+
+        {/* 회원가입 */}
         <Route path="/join_way" element={<JoinWay />} />
         <Route path="/join_accept" element={<JoinAccept />} />
         <Route path="/join_accept_global" element={<JoinAcceptGlobal />} />
