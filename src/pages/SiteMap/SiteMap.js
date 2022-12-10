@@ -153,7 +153,7 @@ const SiteMap = memo(() => {
             </MenuTitleDiv>
             <MenuUl>
               <MenuLi>
-                <Link to="/">예약</Link>
+                <Link to="/appointment_main">예약</Link>
                 <SubMenuUl>
                   <SubMenuLi>진료예약</SubMenuLi>
                   <SubMenuLi>예약현황</SubMenuLi>
@@ -163,7 +163,7 @@ const SiteMap = memo(() => {
                 <Link to="/">결과</Link>
               </MenuLi>
               <MenuLi>
-                <Link to="/">이용안내</Link>
+                <Link to="/guide/number.do">이용안내</Link>
                 <SubMenuUl>
                   <SubMenuLi>병원시설 안내</SubMenuLi>
                   <SubMenuLi>진료안내</SubMenuLi>
@@ -171,7 +171,7 @@ const SiteMap = memo(() => {
                 </SubMenuUl>
               </MenuLi>
               <MenuLi>
-                <Link to="/">오시는 길</Link>
+                <Link to="/map.do">오시는 길</Link>
                 <SubMenuUl>
                   <SubMenuLi>위치 및 오시는 방법</SubMenuLi>
                   <SubMenuLi>주차안내</SubMenuLi>

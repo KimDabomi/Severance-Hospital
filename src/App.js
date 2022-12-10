@@ -1,6 +1,6 @@
 /** import */
 import React from "react";
-import { Link, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // 메인
 import MainPage from "./pages/main/MainPage";
@@ -60,7 +60,6 @@ import AppointmentMain from "./pages/Appointment/AppointmentMain";
 function App() {
   return (
     <div>
-      <Link to="main_page"></Link>
       <Routes>
         {/* 메인 페이지 */}
         <Route path="/" exapt={true} element={<MainPage />} />
