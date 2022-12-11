@@ -72,7 +72,7 @@ const ButtonBoxDiv = styled.div`
 `;
 
 /** 텍스트 들여쓰기 스타일 */
-const IndentUl = styled.ul`
+const IndentDiv = styled.div`
   margin-left: 18px;
 `;
 
@@ -80,7 +80,9 @@ const Content1 = memo(() => {
   return (
     <div>
       <StyledH4>약도</StyledH4>
-      <img src={LocationMap} />
+      <IndentDiv>
+        <img src={LocationMap} />
+      </IndentDiv>
 
       <ButtonBoxDiv>
         <a
@@ -100,13 +102,15 @@ const Content1 = memo(() => {
       </ButtonBoxDiv>
 
       <StyledH4>주소 안내</StyledH4>
-      <IndentUl>
-        <li>03722 서울특별시 서대문구 연세로 50-1 세브란스병원</li>
-        <li>Severance Hospital 50-1 Yonsei-ro, Seodaemun-gu, Seoul 03722, Republic of Korea</li>
-        <li>
-          [대표전화] 진료예약 : <strong>1599-1004</strong> / 세브란스 체크업(건강검진) : <strong>1588-7757</strong>
-        </li>
-      </IndentUl>
+      <IndentDiv>
+        <ul>
+          <li>03722 서울특별시 서대문구 연세로 50-1 세브란스병원</li>
+          <li>Severance Hospital 50-1 Yonsei-ro, Seodaemun-gu, Seoul 03722, Republic of Korea</li>
+          <li>
+            [대표전화] 진료예약 : <strong>1599-1004</strong> / 세브란스 체크업(건강검진) : <strong>1588-7757</strong>
+          </li>
+        </ul>
+      </IndentDiv>
     </div>
   );
 });

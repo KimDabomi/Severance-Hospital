@@ -34,6 +34,47 @@ const Container = styled.div`
     border: 0;
     border-bottom: 1px solid #e6e6e6;
   }
+  h4 {
+    margin: 53px 0 13px 0;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    line-height: 1.625;
+    &:before {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 42px;
+    }
+    .sub_text {
+      font-size: 14px;
+      color: #999;
+      margin-left: 80%;
+      .require {
+        color: #f76117;
+        font-weight: bold;
+      }
+    }
+  }
+  table {
+    tr {
+      td {
+        ul {
+          li {
+            color: #f76117;
+            font-size: 14px;
+          }
+        }
+        img {
+          width: 20px;
+          float: left;
+          margin: 5px 8px 0 0;
+        }
+      }
+    }
+  }
+
+  // 상단 회원가입 단계
   .steps {
     width: 1280px;
     margin: auto;
@@ -74,45 +115,8 @@ const Container = styled.div`
       }
     }
   }
-  h4 {
-    margin: 53px 0 13px 0;
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 0.02em;
-    line-height: 1.625;
-    &:before {
-      content: "";
-      display: block;
-      width: 100px;
-      height: 42px;
-    }
-    .sub_text {
-      font-size: 14px;
-      color: #999;
-      margin-left: 80%;
-      .require {
-        color: #f76117;
-        font-weight: bold;
-      }
-    }
-  }
-  table {
-    tr {
-      td {
-        ul {
-          li {
-            color: #f76117;
-            font-size: 14px;
-          }
-        }
-        img {
-          width: 20px;
-          float: left;
-          margin: 5px 8px 0 0;
-        }
-      }
-    }
-  }
+
+  // 유효성 검사 부적합 메세지
   .warn {
     line-height: 2em;
     color: #f76117;
@@ -121,6 +125,8 @@ const Container = styled.div`
       margin-top: 7px;
     }
   }
+
+  // 유효성 검사 적합 메세지
   .check {
     line-height: 2em;
     color: rgb(0,148,251);
@@ -129,6 +135,8 @@ const Container = styled.div`
       margin-top: 10px;
     }
   }
+
+  // 예약메일 무조건 발송 메세지
   .no_excep {
     color: black;
     font-weight: normal;
@@ -196,6 +204,8 @@ const Container = styled.div`
     background-color: #fff;
     content: '';
   }
+
+  // 라디오 버튼
   input[type=radio] {
     box-sizing: border-box;
     display: inline-block;
@@ -208,17 +218,18 @@ const Container = styled.div`
     background-color: #fff;
     content: '';
   }
-  input:focus {outline: 1px solid rgb(0, 148, 251);}
   .radioList {
     label {
       margin-right: 30px;
     }
   }
 
+  // 인풋 포커스 효과
+  input:focus {outline: 1px solid rgb(0, 148, 251);}
+  
+
   // 버튼
-  .phone_btn,
-  .ipin_btn,
-  .submit_btn {
+  .phone_btn,.ipin_btn,.submit_btn {
     float: left;
     height: 50px;
     font-size: 18px;
@@ -249,8 +260,9 @@ const Container = styled.div`
     left: 50%;
     transform: translate(-50%);
   }
-  .dafault_info,
-  .legal_representative {
+
+  // 테이블 레이아웃
+  .dafault_info,.legal_representative {
     width: 1280px;
     margin: auto;
     table {
@@ -284,6 +296,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 중복확인 버튼
   .dup_btn {
     background-color: #666;
     color: #fff;

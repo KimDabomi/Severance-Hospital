@@ -15,7 +15,6 @@ import step01 from "../../assets/img/ico-login-step1-off@2x.png";
 import step02 from "../../assets/img/ico-login-step2-on@2x.png";
 import step03 from "../../assets/img/ico-login-step3-off@2x.png";
 import step04 from "../../assets/img/ico-login-step4-off@2x.png";
-import bg from "../../assets/img/bg-pattern.png";
 
 
 const Container = styled.div`
@@ -33,6 +32,15 @@ const Container = styled.div`
     border: 0;
     border-bottom: 1px solid #e6e6e6;
   }
+  h4 {
+    margin: 53px 0 13px 0;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    line-height: 1.625;
+  }
+
+  // 상단 회원가입 단계
   .steps {
     width: 1280px;
     margin: auto;
@@ -73,13 +81,8 @@ const Container = styled.div`
       }
     }
   }
-  h4 {
-    margin: 53px 0 13px 0;
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 0.02em;
-    line-height: 1.625;
-  }
+  
+  // 안내 메세지
   .notice {
     width: 1280px;
     margin: auto;
@@ -92,6 +95,8 @@ const Container = styled.div`
       width: 770px;
       margin: 40px 0 0 20%;
     }
+
+    // 버튼 4개
     .buttons {
       float: left;
       margin: 40px 0 0 20%;

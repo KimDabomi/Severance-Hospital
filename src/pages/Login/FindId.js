@@ -14,7 +14,6 @@ import ipin from "../../assets/img/img-login-Certified01.png";
 import phone from "../../assets/img/img-login-Certified02.png";
 import official from "../../assets/img/img-login-Certified03.png";
 import certified from "../../assets/img/img-login-Certified04.png";
-import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -37,16 +36,15 @@ const Container = styled.div`
     margin: auto;
     margin-bottom: 20px;
   }
+
+  // 인증 방법 박스
   .ways {
     width: 1050px;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
     justify-content: space-between;
-    .ipin,
-    .phone,
-    .official,
-    .certified {
+    .ipin,.phone,.official,.certified {
       width: 240px;
       height: 210px;
       border: 1px solid #e6e6e6;
@@ -64,6 +62,8 @@ const Container = styled.div`
     .certified {
       margin-right: 0;
     }
+
+    // 인증 버튼
     button {
       float: left;
       width: 240px;
@@ -82,8 +82,7 @@ const Container = styled.div`
     .ipin_btn {
       margin-left: 0;
     }
-    .official_btn,
-    .certified_btn {
+    .official_btn,.certified_btn {
       background-color: white;
       color: rgb(0, 148, 251);
       border: 2px solid rgb(0, 148, 251);

@@ -14,7 +14,6 @@ import LoginFooter from "../../components/LoginFooter";
 import naver from "../../assets/img/ico-sns-naver@2x.png";
 import kakao from "../../assets/img/ico-sns-kakao@2x.png";
 import facebook from "../../assets/img/ico-sns-facebook@2x.png";
-import bg from "../../assets/img/bg-pattern.png";
 
 const Container = styled.div`
   position: relative;
@@ -24,6 +23,8 @@ const Container = styled.div`
     font-size: 40px;
     font-weight: bold;
   }
+
+  // 로그인 방법 선택
   .login_section {
     text-align: center;
     width: 1280px;
@@ -47,6 +48,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 로그인 인풋
   .login_ways {
     width: 1280px;
     margin: auto;
@@ -153,6 +156,8 @@ const Container = styled.div`
       }
     }
   }
+
+  // 파란색 동그라미 체크박스
   .checkBox {
     position: absolute;
     width: 1px;

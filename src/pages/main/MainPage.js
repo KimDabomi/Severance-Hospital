@@ -10,6 +10,11 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useCookies } from "react-cookie";
+import moment from "moment";
+
+// 리덕스
+import { useDispatch, useSelector } from "react-redux";
+import { getList } from "../../slices/CustomerBoardSlice";
 
 /** 컴포넌트 참조 */
 // 헤더, 푸터
@@ -27,6 +32,11 @@ import NewsSliderCarousel from "../../components/NewsSliderCarousel";
 import MktSliderCarousel from "../../components/MktSliderCarousel";
 
 /** 이미지 참조 */
+// 전화 및 닫기버튼 이미지
+import TelYellow from "../../assets/img/ico-tel-yellow@2x.png";
+import TelPrimary from "../../assets/img/ico-tel-primary@2x.png";
+import CheckboxChecked from "../../assets/img/ico-checkbox-checked.png";
+import CloseCircle from "../../assets/img/ico-close-circle@2x.png";
 // 메인 슬라이드
 // import MainImage from "../../assets/img/img-visual-patient1.jpg";
 // 병원 바로가기 아이콘
@@ -46,8 +56,193 @@ import BtnMorePlus from "../../assets/img/btn-more-plus.jpg";
 // mkt banner 배경 이미지
 import BgMktBanner from "../../assets/img/bg-mkt-banner.jpg";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getList } from "../../slices/CustomerBoardSlice";
+/** 상단 배너 스타일 */
+const TopBannerSection = styled.section`
+  width: 100%;
+  height: 90px;
+  background-color: #0054d1;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0;
+  white-space: nowrap;
+
+  /* top banner를 닫았을 때 위치 (화면 밖) */
+  margin-top: -90px;
+
+  /* top banner의 처음 위치 (화면 안) */
+  &.startPoint {
+    margin-top: 0;
+  }
+
+  /* 페이지 이동 혹은 새로고침 시, top banner를 닫았을 때, 위치에서 실행되는 애니메이션 */
+  &.openAni {
+    // 애니메이션 설정
+    animation-name: "openAni";
+    animation-duration: 0.3s;
+    animation-delay: 0.7s;
+    animation-direction: alternate;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+
+    @keyframes openAni {
+      0% {
+        margin-top: -90px;
+      }
+      100% {
+        margin-top: 0;
+      }
+    }
+  }
+
+  /* top banner의 처음 위치에서 닫을 때 실행할 애니메이션 */
+  &.closeAni {
+    // 애니메이션 설정
+    animation-name: "closeAni";
+    animation-duration: 0.3s;
+    animation-direction: alternate;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+
+    @keyframes closeAni {
+      0% {
+        margin-top: 0;
+      }
+      100% {
+        margin-top: -90px;
+      }
+    }
+  }
+
+  .topBannerContent {
+    width: 1280px;
+    height: 100%;
+    padding: 16px 0 19px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+
+    span {
+      font-size: 16px;
+      color: white;
+      font-weight: 700;
+      line-height: 55px;
+    }
+
+    .firstItem {
+      display: flex;
+      align-items: center;
+
+      .telYellow {
+        display: block;
+        width: 52px;
+        height: 52px;
+        margin-right: 15px;
+        background: url(${TelYellow}) no-repeat center / cover;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .tel {
+        font-size: 40px;
+        margin: 0 5px;
+      }
+
+      .telOverseas {
+        font-weight: normal;
+      }
+    }
+
+    hr {
+      width: 55px;
+      height: 1px;
+      margin: 26px 0;
+      background-color: #e6e6e6;
+      border: none;
+      rotate: 90deg;
+    }
+
+    .secondItem {
+      display: flex;
+      align-items: center;
+
+      .telPrimary {
+        display: block;
+        width: 52px;
+        height: 52px;
+        margin-right: 15px;
+        background: url(${TelPrimary}) no-repeat center / cover;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .tel {
+        font-size: 40px;
+        margin: 0 5px;
+      }
+
+      .telOverseas {
+        font-weight: normal;
+      }
+    }
+
+    .closeBox {
+      display: flex;
+      margin-left: auto;
+
+      .topBannerCloseCheckbox[type="checkbox"] {
+        display: none;
+      }
+
+      .topBannerCloseCheckbox[type="checkbox"] + label::before {
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        border: 1px solid #aaa;
+        box-sizing: border-box;
+        background-color: white;
+        content: "";
+      }
+
+      .topBannerCloseCheckbox[id="close"]:checked + label::before {
+        background: white url(${CheckboxChecked}) no-repeat 45% center;
+        background-size: 13px 10px;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+
+        .closeText {
+          font-size: 16px;
+          font-weight: normal;
+          line-height: normal;
+          margin: 0 5px;
+        }
+      }
+
+      button {
+        background: inherit;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        overflow: visible;
+        cursor: pointer;
+
+        .topBannerCloseIcon {
+          display: block;
+          width: 26px;
+          height: 26px;
+          background: url(${CloseCircle}) no-repeat center / cover;
+        }
+      }
+    }
+  }
+`;
 
 /** 메인 스타일 */
 const Main = styled.main`
@@ -58,47 +253,11 @@ const Main = styled.main`
   /* overflow-x: hidden; */
 `;
 
-/** 이미지 슬라이드 스타일 */
-// const SlideSection = styled.section`
-//   width: 100%;
-//   position: relative;
-
-//   img {
-//     display: block;
-//     max-width: 1920px;
-//     height: auto;
-//     margin: 0 auto;
-//   }
-
-//   article {
-//     position: absolute;
-//     top: 50%;
-//     left: 320px;
-//     transform: translate(0, -50%);
-
-//     .slide_title {
-//       font-size: 66px;
-//       line-height: 72px;
-//       font-family: "NanumSquare";
-//       color: white;
-//     }
-
-//     .slide_text {
-//       font-size: 24px;
-//       line-height: 32px;
-//       font-family: "NanumSquare";
-//       color: white;
-//       display: block;
-//       margin-top: 15px;
-//     }
-//   }
-// `;
-
 /** 카테고리별 병원 바로가기 스타일 */
 const HospitalSection = styled.section`
   width: 1920px;
   padding-bottom: 60px;
-  background: url(${BgMainPattern}) no-repeat center /cover;
+  background: url(${BgMainPattern}) no-repeat center / cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -349,35 +508,116 @@ const BannerSection = styled.section`
   height: 614px;
   padding: 65px 0 80px;
   box-sizing: border-box;
-  background: url(${BgMktBanner}) no-repeat center /cover;
+  background: url(${BgMktBanner}) no-repeat center / cover;
 `;
 
 const MainPage = memo(() => {
-  const COOKIE_KEY = "saebalHideModal";
-  const [cookies, setCookie] = useCookies([COOKIE_KEY]);
-  const [popup, setPopup] = useState(true);
+  // top banner를 숨기기 위한 쿠키 이름
+  const COOKIE_KEY1 = "HideTopBanner";
+  // top banner의 체크박스 체크 유무 상태값
+  const [isChecked, setIsChecked] = useState(true);
 
-  // 새로고침시 최상단 이동
-  // useEffect(() => {
-  //   window.onbeforeunload = function pushRefresh() {
-  //     window.scrollTo(0, 0);
-  //   };
-  // }, []);
+  // top banner의 열림, 닫힘 여부 확인을 위한 쿠키 이름
+  const COOKIE_KEY2 = "OpenCloseTopBanner";
 
-    /** 리덕스 관련 초기화 */
-    const dispatch = useDispatch();
-    const { data, loading, error } = useSelector(
-      (state) => state.CustomerBoardSlice
-    );
-  
-    /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
-    useEffect(() => {
-      dispatch(getList());
-    }, []);
+  // 쿠키 사용
+  const [cookies, setCookie, removeCookie] = useCookies();
+
+  // top banner의 열림, 닫힘 쿠키값(OpenCloseTopBanner)에 따라 애니메이션 적용 여부 상태값
+  const [openCloseAni, setOpenCloseAni] = useState("startPoint");
+
+  // top banner의 열림, 닫힘 스타일(마진)을 클래스이름으로 변경하는 상태값
+  const [startPoint, setStartPoint] = useState();
+
+  // 체크박스 체크 유무에 따라 HideTopBanner 쿠키 설정
+  const hideTopBanner = useCallback(() => {
+    if (!isChecked) {
+      return;
+    }
+    const decade = moment();
+    decade.add(1, "d");
+    setCookie(COOKIE_KEY1, "true", {
+      path: "/",
+      expires: decade.toDate()
+    });
+  });
+
+  // top banner의 체크박스 체크 유무 핸들러
+  const checkHandler = useCallback(() => {
+    setIsChecked(!isChecked);
+  });
+
+  // 닫힘 버튼을 눌렀을 때, OpenCloseTopBanner 쿠키 설정
+  const openTopBanner = useCallback(() => {
+    setStartPoint("startPoint closeAni");
+    setCookie(COOKIE_KEY2, "true", {
+      path: "/"
+    });
+  });
+
+  // 페이지 첫 로드 시, 최상단 이동 및 OpenCloseTopBanner 쿠키 제거
+  useEffect(() => {
+    window.onbeforeunload = function pushRefresh() {
+      window.scrollTo(0, 0);
+    };
+
+    if (cookies[COOKIE_KEY2]) {
+      setOpenCloseAni("openAni");
+      removeCookie(COOKIE_KEY2, "true", {
+        path: "/"
+      });
+    }
+  }, []);
+
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.CustomerBoardSlice);
+
+  /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+  useEffect(() => {
+    dispatch(getList());
+  }, []);
 
   return (
     <>
-      {cookies[COOKIE_KEY] || !popup ? null : <TopBanner onClose={setPopup} />}
+      <TopBannerSection className={cookies[COOKIE_KEY1] || cookies[COOKIE_KEY2] ? startPoint : openCloseAni}>
+        <div className="topBannerContent">
+          <article className="firstItem">
+            <i className="telYellow" />
+            <span className="title">진료예약</span>
+            <a href="tel:1599-1004">
+              <span className="tel">1599-1004</span>
+            </a>
+            <span className="telOverseas">해외 수신번호(+82-2-2228-1004)</span>
+          </article>
+
+          <hr />
+
+          <article className="secondItem">
+            <i className="telPrimary" />
+            <span className="title">건강검진예약</span>
+            <a href="tel:1588-7757">
+              <span className="tel">1588-7757</span>
+            </a>
+          </article>
+
+          <div className="closeBox">
+            <input type="checkbox" defaultChecked="checked" id="close" className="topBannerCloseCheckbox" onChange={checkHandler} />
+            <label htmlFor="close">
+              <span className="closeText">오늘하루 열지않기</span>
+            </label>
+            <button
+              type="button"
+              onClick={() => {
+                hideTopBanner();
+                openTopBanner();
+              }}
+            >
+              <i className="topBannerCloseIcon" />
+            </button>
+          </div>
+        </div>
+      </TopBannerSection>
 
       <MainPageHeader />
 
@@ -457,7 +697,7 @@ const MainPage = memo(() => {
                 </Link>
               </li>
               <li>
-                <Link to="/">
+                <Link to="/appointment_main">
                   <img src={ShortcutCalendar} />
                   <div className="textBox">
                     <strong>진료 예약</strong>
