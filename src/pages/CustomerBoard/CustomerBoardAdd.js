@@ -1,11 +1,11 @@
 /**
  * @ File Name: CustomerBoardAdd.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-11-25 15:1:00
+ * @ Last Update: 2022-12-11 15:1:00
  * @ Description: 고객의 소리 글쓰기 페이지
  */
 
-import React, { memo, useCallback, useState, useReducer } from 'react';
+import React, { memo, useCallback, useState, useReducer, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { postItem } from '../../slices/CustomerBoardSlice';
@@ -163,6 +163,11 @@ const CustomerBoardAdd = memo(() => {
 
   /** 저장 완료 후 목록으로 되돌아가기위한 페이지 강제 이동 함수 생성 */
   const navigate = useNavigate();
+
+  //페이지 렌더 후 화면을 맨 위로 올리기
+  useEffect(()=>{
+  window.scrollTo(0,0);
+  },[])
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();

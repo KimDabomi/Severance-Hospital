@@ -31,6 +31,7 @@ import JoinAlready from "./pages/Join/JoinAlready";
 
 // 마이페이지
 import DetailsEdit from './pages/Mypage/DetailsEdit';
+import ISevrance from './pages/MYSevrance/ISevrance';
 
 //고객의소리
 import CustomerBoardList from "./pages/CustomerBoard/CustomerBoardList";
@@ -117,6 +118,7 @@ function App() {
 
          {/* 마이페이지 라우팅 */}
          <Route path='/mysevrance' element={<MysevMain />}/>
+         <Route path='/mysevrance/iseverance/mywriting' element={<ISevrance />} />
 
          {/* 진료 예약 */}
          <Route path='/appointment_main/*' element={<AppointmentMain />}/>

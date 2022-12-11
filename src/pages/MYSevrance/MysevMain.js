@@ -1,12 +1,12 @@
 /**
  * @ File Name: MysevMain.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-08 15:1:00
- * @ Description: 의약품 검색 상세페이지
+ * @ Last Update: 2022-12-09 17:54:00
+ * @ Description: 마이세브란스 메인페이지
  */
 
 import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Routes,Route } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/MyPageHeader';
 
@@ -386,11 +386,11 @@ const MysevMain = memo(() => {
               <div className="btnCont">
                 <div  className="btn">
                   <p>칭찬합니다</p>
-                  <div className='count'><Link className='textPrimary'>0</Link><span>건</span></div>
+                  <div className='count'><Link to='/mysevrance/iseverance/mywriting' className='textPrimary'>0</Link><span>건</span></div>
                 </div>
                 <div className="btn">
                   <p>건의합니다</p>
-                  <div className='count'><Link className='textPrimary'>0</Link><span>건</span></div>
+                  <div className='count'><Link to='/mysevrance/iseverance/mywriting' className='textPrimary'>0</Link><span>건</span></div>
                 </div>
               </div>
             </div>

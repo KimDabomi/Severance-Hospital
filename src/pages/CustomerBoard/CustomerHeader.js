@@ -1,7 +1,7 @@
 /**
  * @ File Name: Header.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-11-25 15:1:00
+ * @ Last Update: 2022-12-11 19:14
  * @ Description: 고객의 소리 헤더 component
  */
 
@@ -12,28 +12,11 @@ import styled from 'styled-components';
 import boxGuideDecor from '../../assets/img/box-guide-decoration@2x.png'
 
 const CustomerHeaderCont = styled.div`
-        .pageTitle{
-            text-align: center;
-            font-size: 40px;
-            padding: 73px 0 65px 0;
-            box-sizing: border-box;
-        }
+        
 
         .boxGuide{
             max-width: 1280px;
-            height: 200px;
             margin: auto;
-            /* margin: 0 0 60px 0; */
-            padding: 20px 30px;
-            box-sizing: border-box;
-            border: 1px solid #e3e3e3;
-            position: relative;
-            img{
-                position: absolute;
-                width: 41px;
-                height: 7px;
-                top: -3px;
-            }
         }
 
         ul{

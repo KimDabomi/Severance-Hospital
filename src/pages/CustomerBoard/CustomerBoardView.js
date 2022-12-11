@@ -36,6 +36,9 @@ const CustomerBoardView = memo(() => {
   /** 데이터 가져오기 */
   useEffect(() => {
     dispatch(getCurrentData());
+
+    //페이지 렌더 후 화면을 맨 위로 올리기
+    window.scrollTo(0,0);
   }, []);
 
   /** 데이터 값 변경에 따른 사이드 이펙트 처리 */

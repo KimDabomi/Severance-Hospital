@@ -1,7 +1,7 @@
 /**
  * @ File Name: CustomerBoardList.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-11-25 15:1:00
+ * @ Last Update: 2022-12-11 15:1:00
  * @ Description: 고객의 소리 게시판 페이지
  */
 
@@ -74,6 +74,9 @@ const CustomerBoardList = memo(() => {
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(() => {
     dispatch(getList());
+
+    //페이지 렌더 후 화면을 맨 위로 올리기
+    window.scrollTo(0,0);
   }, []);
 
 

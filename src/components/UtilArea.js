@@ -8,7 +8,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import logoutimg from '../assets/img/ico-logout-white.png';
+import logoutimg from '../assets/img/ico-logout-white.png';
 
 const Div = styled.div`
   height: 40px;
@@ -37,6 +37,13 @@ const Div = styled.div`
       margin-top:7px; 
       margin-right: 7px;
     }
+    .icoLogout{
+    width: 22px;
+    height: 21px;
+    line-height: 21px;
+    ${`backGround: url(${logoutimg}) no-repeat center /cover;`}
+    background-size: cover;
+  }
   }
 `;
 
