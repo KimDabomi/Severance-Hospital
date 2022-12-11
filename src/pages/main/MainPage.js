@@ -65,10 +65,52 @@ const TopBannerSection = styled.section`
   justify-content: center;
   letter-spacing: 0;
   white-space: nowrap;
-  transition: 0.3s ease;
 
-  &.close {
-    margin-top: -90px;
+  /* top banner를 닫았을 때 위치 (화면 밖) */
+  margin-top: -90px;
+
+  /* top banner의 처음 위치 (화면 안) */
+  &.startPoint {
+    margin-top: 0;
+  }
+
+  /* 페이지 이동 혹은 새로고침 시, top banner를 닫았을 때, 위치에서 실행되는 애니메이션 */
+  &.openAni {
+    // 애니메이션 설정
+    animation-name: "openAni";
+    animation-duration: 0.3s;
+    animation-delay: 0.7s;
+    animation-direction: alternate;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+
+    @keyframes openAni {
+      0% {
+        margin-top: -90px;
+      }
+      100% {
+        margin-top: 0;
+      }
+    }
+  }
+
+  /* top banner의 처음 위치에서 닫을 때 실행할 애니메이션 */
+  &.closeAni {
+    // 애니메이션 설정
+    animation-name: "closeAni";
+    animation-duration: 0.3s;
+    animation-direction: alternate;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+
+    @keyframes closeAni {
+      0% {
+        margin-top: 0;
+      }
+      100% {
+        margin-top: -90px;
+      }
+    }
   }
 
   .topBannerContent {
@@ -95,7 +137,7 @@ const TopBannerSection = styled.section`
         width: 52px;
         height: 52px;
         margin-right: 15px;
-        ${`backGround: url(${TelYellow}) no-repeat center /cover;`}
+        background: url(${TelYellow}) no-repeat center / cover;
       }
 
       .title {
@@ -130,7 +172,7 @@ const TopBannerSection = styled.section`
         width: 52px;
         height: 52px;
         margin-right: 15px;
-        ${`backGround: url(${TelPrimary}) no-repeat center /cover;`}
+        background: url(${TelPrimary}) no-repeat center / cover;
       }
 
       .title {
@@ -166,7 +208,7 @@ const TopBannerSection = styled.section`
       }
 
       .topBannerCloseCheckbox[id="close"]:checked + label::before {
-        ${`backGround: white url(${CheckboxChecked}) no-repeat 45% center;`}
+        background: white url(${CheckboxChecked}) no-repeat 45% center;
         background-size: 13px 10px;
       }
 
@@ -195,7 +237,7 @@ const TopBannerSection = styled.section`
           display: block;
           width: 26px;
           height: 26px;
-          ${`backGround: url(${CloseCircle}) no-repeat center /cover;`}
+          background: url(${CloseCircle}) no-repeat center / cover;
         }
       }
     }
@@ -210,42 +252,6 @@ const Main = styled.main`
   align-items: center;
   /* overflow-x: hidden; */
 `;
-
-/** 이미지 슬라이드 스타일 */
-// const SlideSection = styled.section`
-//   width: 100%;
-//   position: relative;
-
-//   img {
-//     display: block;
-//     max-width: 1920px;
-//     height: auto;
-//     margin: 0 auto;
-//   }
-
-//   article {
-//     position: absolute;
-//     top: 50%;
-//     left: 320px;
-//     transform: translate(0, -50%);
-
-//     .slide_title {
-//       font-size: 66px;
-//       line-height: 72px;
-//       font-family: "NanumSquare";
-//       color: white;
-//     }
-
-//     .slide_text {
-//       font-size: 24px;
-//       line-height: 32px;
-//       font-family: "NanumSquare";
-//       color: white;
-//       display: block;
-//       margin-top: 15px;
-//     }
-//   }
-// `;
 
 /** 카테고리별 병원 바로가기 스타일 */
 const HospitalSection = styled.section`
@@ -506,33 +512,62 @@ const BannerSection = styled.section`
 `;
 
 const MainPage = memo(() => {
-  const COOKIE_KEY = "HideTopBanner";
-  const [cookies, setCookie] = useCookies([COOKIE_KEY]);
-  const [topBanner, setTopBanner] = useState(true);
+  // top banner를 숨기기 위한 쿠키 이름
+  const COOKIE_KEY1 = "HideTopBanner";
+  // top banner의 체크박스 체크 유무 상태값
   const [isChecked, setIsChecked] = useState(true);
 
+  // top banner의 열림, 닫힘 여부 확인을 위한 쿠키 이름
+  const COOKIE_KEY2 = "OpenCloseTopBanner";
+
+  // 쿠키 사용
+  const [cookies, setCookie, removeCookie] = useCookies();
+
+  // top banner의 열림, 닫힘 쿠키값(OpenCloseTopBanner)에 따라 애니메이션 적용 여부 상태값
+  const [openCloseAni, setOpenCloseAni] = useState("startPoint");
+
+  // top banner의 열림, 닫힘 스타일(마진)을 클래스이름으로 변경하는 상태값
+  const [startPoint, setStartPoint] = useState();
+
+  // 체크박스 체크 유무에 따라 HideTopBanner 쿠키 설정
   const hideTopBanner = useCallback(() => {
     if (!isChecked) {
       return;
     }
     const decade = moment();
     decade.add(1, "d");
-    setCookie(COOKIE_KEY, "true", {
+    setCookie(COOKIE_KEY1, "true", {
       path: "/",
       expires: decade.toDate()
     });
   });
 
+  // top banner의 체크박스 체크 유무 핸들러
   const checkHandler = useCallback(() => {
     setIsChecked(!isChecked);
   });
 
-  // 새로고침시 최상단 이동
-  const up = useCallback(() => {
+  // 닫힘 버튼을 눌렀을 때, OpenCloseTopBanner 쿠키 설정
+  const openTopBanner = useCallback(() => {
+    setStartPoint("startPoint closeAni");
+    setCookie(COOKIE_KEY2, "true", {
+      path: "/"
+    });
+  });
+
+  // 페이지 첫 로드 시, 최상단 이동 및 OpenCloseTopBanner 쿠키 제거
+  useEffect(() => {
     window.onbeforeunload = function pushRefresh() {
       window.scrollTo(0, 0);
     };
-  });
+
+    if (cookies[COOKIE_KEY2]) {
+      setOpenCloseAni("openAni");
+      removeCookie(COOKIE_KEY2, "true", {
+        path: "/"
+      });
+    }
+  }, []);
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
@@ -545,7 +580,7 @@ const MainPage = memo(() => {
 
   return (
     <>
-      <TopBannerSection className={cookies[COOKIE_KEY] || !topBanner ? "close" : null} onLoad={up()}>
+      <TopBannerSection className={cookies[COOKIE_KEY1] || cookies[COOKIE_KEY2] ? startPoint : openCloseAni}>
         <div className="topBannerContent">
           <article className="firstItem">
             <i className="telYellow" />
@@ -574,8 +609,8 @@ const MainPage = memo(() => {
             <button
               type="button"
               onClick={() => {
-                setTopBanner(false);
                 hideTopBanner();
+                openTopBanner();
               }}
             >
               <i className="topBannerCloseIcon" />
