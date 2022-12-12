@@ -80,7 +80,6 @@ const Container = styled.div`
         border: 0;
         font-size: 22px;
         border-radius: 4%;
-        cursor: pointer;
       }
     }
     .remember {
@@ -152,7 +151,6 @@ const Container = styled.div`
         padding: 2% 3%;
         font-size: 18px;
         margin: 20px 0 0 26%;
-        cursor: pointer;
       }
     }
   }

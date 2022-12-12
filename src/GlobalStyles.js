@@ -1,6 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
+/**이미지 import*/
+//select form뒤 화살표 이미지
+import icoChevronDown from './assets/img/ico-chevron-down-sm@2x.png';
+//nodata 이미지
+import nodata from './assets/img/ico-nodata@2x.png';
+//링크아이콘 이미지
+import iconExternal from './assets/img/ico-external-link@2x.png';
+
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
 ${reset}
@@ -79,6 +87,7 @@ textarea{
     padding: 73px 0 65px 0;
     box-sizing: border-box;
     font-weight: bold;
+    font-family: "NanumSquare", "malgungothic", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 //페이지 서브타이틀
 .pageSubtitle{
@@ -226,6 +235,9 @@ textarea{
 
 /** 버튼 관련 */
 //버튼컨테이너 flex-column
+button {
+  cursor: pointer;
+}
 .buttonContColumn{
     display: flex;
     flex-direction: column;
@@ -303,7 +315,7 @@ textarea{
       margin-left: 6px;
     	width: 15px;
     	height: 9px;
-    	background: url(../img/ico-chevron-down-sm@2x.png) no-repeat;
+    	${`background: url(${icoChevronDown}) no-repeat;`}
     	background-size: cover;
     }
   }
@@ -459,7 +471,6 @@ textarea{
 
   /** 의약품 검색페이지 */
   .formControl {
-    appearance: none;
     width: 100%;
     border-radius: 0;
     height: 45px;
@@ -467,13 +478,20 @@ textarea{
     padding: 8px 15px;
     text-align: left;
     font-size: 16px;
-    line-height: 27px;
     vertical-align: middle;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "NanumGothic", "malgungothic", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    max-width: 100%;
+    line-height: normal;
+    padding-right: 30px;
+
     //select태그의 화살표 css
-    background: #fff url('../img/ico-chevron-down@2x.png') no-repeat right 12px center;
-    background-size: 17px auto;
+    &.selectCss{
+      appearance: none;
+      padding-right: 30px;
+      ${`background: #fff url(${icoChevronDown}) no-repeat right 12px center;`}
+      background-size: 17px auto;
+    }
+   
     &:focus {
       outline: none;
       border-color: #0094fb;
@@ -512,7 +530,7 @@ textarea{
 			width: 80px;
     	height: 69px;
     	line-height: 69px;
-    	background-image: url(../img/ico-nodata@2x.png);
+    	${`background-image: url(${nodata});`}
 			background-size: cover;
     	vertical-align: middle;
 			text-align: center;
@@ -593,7 +611,7 @@ textarea{
         margin-top: -1px;
         width: 14px;
         height: 14px;
-        background: url(../img/ico-external-link@2x.png);
+        ${`background: url(${iconExternal});`}
         background-size: cover;
       }
     }
@@ -662,7 +680,7 @@ textarea{
             margin-top: -1px;
             width: 14px;
             height: 14px;
-            background: url(../img/ico-external-link@2x.png);
+            ${`background: url(${iconExternal});`}
             background-size: cover;
           }
         }

@@ -125,7 +125,6 @@ const Container = styled.div`
       border-radius: 30px;
       background-color: rgb(0, 148, 251);
       color: white;
-      cursor: pointer;
     }
   }
 `;

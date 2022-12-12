@@ -1,26 +1,34 @@
 /**
  * @ File Name: MysevMain.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-09 17:54:00
+ * @ Last Update: 2022-12-12 17:54:00
  * @ Description: 마이세브란스 메인페이지
  */
 
 import React, { memo } from 'react';
-import { Link,Routes,Route } from 'react-router-dom';
+import { Link,Routes,Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/MyPageHeader';
+import Footer from '../../components/Footer';
+//이미지 import 
+import mybgPattern from '../../assets/img/mybg-pattern.png'
+import myEdit from '../../assets/img/ico-mypage-edit@2x.png'
+import mybtn1 from '../../assets/img/main-ico-btn01@2x.png'
+import mybtn2 from '../../assets/img/main-ico-btn02@2x.png'
+import mybtn3 from '../../assets/img/main-ico-btn03@2x.png'
+import mybtn4 from '../../assets/img/main-ico-btn04@2x.png'
 
 const Div = styled.article`
   .content {
     min-height: calc(100vh - 345px);
     min-width: 1025px;
     display: block;
-    background: url(../img/mybg-pattern.png) no-repeat center top;
+    ${`background: url(${mybgPattern}) no-repeat center top;`}
     overflow: hidden;
   }
   .pageCont {
     overflow: hidden;
-    padding: 40px 0 0;
+    padding: 40px 0 95px !important;
     position: relative;
   }
 
@@ -173,7 +181,7 @@ const Div = styled.article`
           width: 19px;
           height: 19px;
           line-height: 19px;
-          background: url(../img/ico-mypage-edit@2x.png);
+          ${`background: url(${myEdit});`}
           display: inline-block;
           background-repeat: no-repeat;
           background-position: center center;
@@ -227,19 +235,19 @@ const Div = styled.article`
       text-align: center;
       margin-top: 20px;
       &:first-child::before {
-        background: url(../img/main-ico-btn01@2x.png) no-repeat center top;
+        ${`background: url(${mybtn1}) no-repeat center top;`}
         background-size: 100%;
       }
       &:nth-child(2)::before {
-        background: url(../img/main-ico-btn02@2x.png) no-repeat center top;
+        ${`background: url(${mybtn2}) no-repeat center top;`}
         background-size: 100%;
       }
       &:nth-child(3)::before {
-        background: url(../img/main-ico-btn03@2x.png) no-repeat center top;
+        ${`background: url(${mybtn3}) no-repeat center top;`}
         background-size: 100%;
       }
       &:nth-child(4)::before {
-        background: url(../img/main-ico-btn04@2x.png) no-repeat center top;
+        ${`background: url(${mybtn4}) no-repeat center top;`}
         background-size: 100%;
       }
       &::before {
@@ -254,6 +262,17 @@ const Div = styled.article`
 `;
 
 const MysevMain = memo(() => {
+  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
+  const navigate = useNavigate();
+
+  const goDetailsEdit = e => {
+    navigate('/details_edit');
+  };
+
+  const goChangePw = e => {
+    navigate('/change_passward');
+  };
+
   return (
     <Div>
       <MyPageHeader />
@@ -264,16 +283,16 @@ const MysevMain = memo(() => {
             <div className="titleWrap">
               <span>주혜지님</span>
               <div className="btnCont">
-                <button type="button" className="btn">
+                <button type="button" className="btn" onClick={goDetailsEdit}>
                   개인정보수정
                 </button>
-                <button type="button" className="btn">
+                <button type="button" className="btn" onClick={goChangePw}>
                   비밀번호변경
                 </button>
               </div>
             </div>
             <div className="inputGroup">
-              <select className="formControl" title="병원등록번호">
+              <select className="formControl selectCss" title="병원등록번호">
                 <option value="3840864" defaultValue>
                   세브란스병원: 3840864
                 </option>
@@ -368,11 +387,14 @@ const MysevMain = memo(() => {
             </div>
             <div className='inputGroup'>
               <div className="btnCont">
-                <button type="button" className="btn">
+                <button type="button" className="btn" ><a href='https://secure.donus.org/severance/pay/step1' target="_blank" rel="noopener noreferrer">
                   후원하기
+                </a>
                 </button>
                 <button type="button" className="btn">
-                  자원봉사<br></br>신청내역
+                <a>
+                자원봉사<br></br>신청내역
+                </a>
                 </button>
               </div>
             </div>
@@ -397,6 +419,7 @@ const MysevMain = memo(() => {
           </div>
         </div>
       </div>
+      <Footer/>
     </Div>
   );
 });
