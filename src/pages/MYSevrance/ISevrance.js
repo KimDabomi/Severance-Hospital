@@ -1,7 +1,7 @@
 /**
  * @ File Name: ISevrance.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-09 17:54:00
+ * @ Last Update: 2022-12-12 16:30:00
  * @ Description: 나의 작성글 페이지
  */
 

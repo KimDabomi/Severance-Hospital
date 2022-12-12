@@ -1,7 +1,7 @@
 /**
  * @ File Name: UtilArea.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-08 18:1:00
+ * @ Last Update: 2022-12-12 16:35:00
  * @ Description: utilArea 헤더 위에 파란색 컴포넌트
  */
 
@@ -54,7 +54,7 @@ const UtilArea = memo(() => {
               <span><strong>userid</strong>님 반갑습니다.</span>
               <span id='pad'>&nbsp;|&nbsp;</span>
               <i className='icoLogout'></i>
-              <Link to=''>
+              <Link to='/login'>
                 로그아웃
               </Link>
             </div>
