@@ -166,7 +166,6 @@ const Container = styled.div`
         border: 2px solid rgb(0, 148, 251);
         background-color: rgb(0, 148, 251);
         color: white;
-        cursor: pointer;
         margin-right: 10px;
       }
       .re_input {
@@ -180,7 +179,6 @@ const Container = styled.div`
         border: 2px solid rgb(0, 148, 251);
         background-color: white;
         color: rgb(0, 148, 251);
-        cursor: pointer;
       }
     }
     .cases {
@@ -218,7 +216,7 @@ const DetailsEdit = memo(() => {
   const navigate = useNavigate();
 
   const clickReInput = e => {
-    navigate('/');
+    navigate('/mysevrance');
   };
 
   const clickEdit = (e) => {
@@ -227,7 +225,7 @@ const DetailsEdit = memo(() => {
 
   const closeBox = (e) => {
     document.querySelector(".success").style.display = "none";
-    navigate('/');
+    navigate('/mysevrance');
   };
 
   return (
