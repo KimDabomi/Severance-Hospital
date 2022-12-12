@@ -1,7 +1,7 @@
 /**
  * @ File Name: CustomerBoardAdd.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-11 15:1:00
+ * @ Last Update: 2022-12-12 15:15:00
  * @ Description: 고객의 소리 글쓰기 페이지
  */
 
@@ -320,7 +320,7 @@ const CustomerBoardAdd = memo(() => {
                   </th>
                   <td>
                     <div className='formControlCont'>
-                      <select name="tel1" className="formControl Width175">
+                      <select name="tel1" className="formControl Width175 selectCss">
                         <option value="010">010</option>
                         <option value="011">011</option>
                         <option value="016">016</option>
@@ -358,7 +358,7 @@ const CustomerBoardAdd = memo(() => {
                         placeholder="직접입력"
                         className="formControl Width175"
                       />&nbsp;
-                      <select name="email3" onChange={inputEmail} className="formControl Width175">
+                      <select name="email3" onChange={inputEmail} className="formControl Width175 selectCss">
                         <option value="">직접입력</option>
                         <option value="gmail.com" readOnly>
                           gmail.com
@@ -400,7 +400,7 @@ const CustomerBoardAdd = memo(() => {
                     <span className="orange">* </span>병원/기관
                   </th>
                   <td>
-                    <select name="hospital" className="formControl Width360" onChange={
+                    <select name="hospital" className="formControl Width360 selectCss" onChange={
                       hospitalSelect
                     }>
                       <option value="">병원/대학을 선택하세요.</option>
@@ -423,7 +423,7 @@ const CustomerBoardAdd = memo(() => {
                 <tr>
                   <th>부서</th>
                   <td>
-                    <select name="dept" className="formControl Width360">
+                    <select name="dept" className="formControl Width360 selectCss">
                       {
                         department == null ? (
                           <option value="">부서를 선택하세요.</option>

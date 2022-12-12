@@ -1,6 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
+/**이미지 import*/
+//select form뒤 화살표 이미지
+import icoChevronDown from './assets/img/ico-chevron-down-sm@2x.png';
+//nodata 이미지
+import nodata from './assets/img/ico-nodata@2x.png';
+
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
 ${reset}
@@ -303,7 +309,7 @@ textarea{
       margin-left: 6px;
     	width: 15px;
     	height: 9px;
-    	background: url(../img/ico-chevron-down-sm@2x.png) no-repeat;
+    	${`background: url(${icoChevronDown}) no-repeat;`}
     	background-size: cover;
     }
   }
@@ -470,10 +476,13 @@ textarea{
     line-height: 27px;
     vertical-align: middle;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "NanumGothic", "malgungothic", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
     //select태그의 화살표 css
-    background: #fff url('../img/ico-chevron-down@2x.png') no-repeat right 12px center;
+    &.selectCss{
+       ${`background: #fff url (${icoChevronDown}) no-repeat right 12px center;`}
     background-size: 17px auto;
+    }
+   
     &:focus {
       outline: none;
       border-color: #0094fb;
@@ -512,7 +521,7 @@ textarea{
 			width: 80px;
     	height: 69px;
     	line-height: 69px;
-    	background-image: url(../img/ico-nodata@2x.png);
+    	${`background-image: url(${nodata});`}
 			background-size: cover;
     	vertical-align: middle;
 			text-align: center;
