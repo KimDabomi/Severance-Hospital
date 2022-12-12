@@ -13,8 +13,8 @@ import styled from "styled-components";
 // 공지사항 박스 아이콘
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 
-/** 서브 타이틀 h4 스타일 */
-const StyledH4 = styled.h4`
+/** 타이틀1 스타일 */
+const Title1 = styled.h4`
   padding-left: 18px;
   margin: 65px 0 22px;
   font-size: 24px;
@@ -38,9 +38,43 @@ const StyledH4 = styled.h4`
   }
 `;
 
-/** 텍스트 들여쓰기 스타일 */
-const IndentDiv = styled.div`
+/** 들여쓰기1 스타일 */
+const Indent1 = styled.div`
   margin-left: 18px;
+`;
+
+/** 타이틀2 스타일 */
+const Title2 = styled.h4`
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 34px;
+
+  padding-left: 19px;
+  margin: 47px 0 22px 18px;
+
+  color: #222;
+  position: relative;
+
+  &:before {
+    content: "";
+    width: 11px;
+    height: 11px;
+
+    position: absolute;
+    top: 11.5px;
+    left: 0;
+
+    border: 3px solid #0094fb;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    margin-right: 8px;
+  }
+`;
+
+/** 들여쓰기2 스타일 */
+const Indent2 = styled.div`
+  margin-left: 37px;
 `;
 
 /** 테이블 스타일 */
@@ -159,8 +193,8 @@ const Number = memo(() => {
             </ul>
           </div>
 
-          <StyledH4>대표전화, 진료예약 안내</StyledH4>
-          <IndentDiv>
+          <Title1>대표전화, 진료예약 안내</Title1>
+          <Indent1>
             <ColTableStyle>
               <table>
                 <tbody>
@@ -196,10 +230,10 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </ColTableStyle>
-          </IndentDiv>
+          </Indent1>
 
-          <StyledH4>접수 및 외래 안내</StyledH4>
-          <IndentDiv>
+          <Title1>접수 및 외래 안내</Title1>
+          <Indent1>
             <RowTableStyle>
               <table>
                 <tbody>
@@ -236,10 +270,10 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </RowTableStyle>
-          </IndentDiv>
+          </Indent1>
 
-          <StyledH4>전문진료센터 및 클리닉</StyledH4>
-          <IndentDiv>
+          <Title1>전문진료센터 및 클리닉</Title1>
+          <Indent1>
             <RowTableStyle>
               <table>
                 <tbody>
@@ -270,10 +304,10 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </RowTableStyle>
-          </IndentDiv>
+          </Indent1>
 
-          <StyledH4>본원 진료과 접수</StyledH4>
-          <IndentDiv>
+          <Title1>본원 진료과 접수</Title1>
+          <Indent1>
             <RowTableStyle>
               <table>
                 <tbody>
@@ -364,10 +398,10 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </RowTableStyle>
-          </IndentDiv>
+          </Indent1>
 
-          <StyledH4>재활병원</StyledH4>
-          <IndentDiv>
+          <Title1>재활병원</Title1>
+          <Indent1>
             <RowTableStyle>
               <table>
                 <tbody>
@@ -386,10 +420,10 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </RowTableStyle>
-          </IndentDiv>
+          </Indent1>
 
-          <StyledH4>안과병원</StyledH4>
-          <IndentDiv>
+          <Title1>안과병원</Title1>
+          <Indent1>
             <RowTableStyle>
               <table>
                 <tbody>
@@ -402,10 +436,10 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </RowTableStyle>
-          </IndentDiv>
+          </Indent1>
 
-          <StyledH4>심장혈관병원</StyledH4>
-          <IndentDiv>
+          <Title1>심장혈관병원</Title1>
+          <Indent1>
             <RowTableStyle>
               <table>
                 <tbody>
@@ -430,10 +464,10 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </RowTableStyle>
-          </IndentDiv>
+          </Indent1>
 
-          <StyledH4>치과대학병원</StyledH4>
-          <IndentDiv>
+          <Title1>치과대학병원</Title1>
+          <Indent1>
             <RowTableStyle>
               <table>
                 <tbody>
@@ -452,7 +486,75 @@ const Number = memo(() => {
                 </tbody>
               </table>
             </RowTableStyle>
-          </IndentDiv>
+          </Indent1>
+
+          <Title2>각 진료과 접수</Title2>
+          <Indent2>
+            <RowTableStyle>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>보존과</th>
+                    <td>02) 2228 - 8700 ~ 3</td>
+                    <th>보철과</th>
+                    <td>02) 2228 - 8720, 8727, 8730</td>
+                  </tr>
+                  <tr>
+                    <th>구강악안면외과</th>
+                    <td>02) 2228 - 8750 ~ 2, 8755</td>
+                    <th>교정과</th>
+                    <td>02) 2228 - 8780 ~ 1</td>
+                  </tr>
+                  <tr>
+                    <th>소아치과</th>
+                    <td>02) 2228 - 8800 ~ 2</td>
+                    <th>치주과</th>
+                    <td>02) 2228 - 8820 ~ 2</td>
+                  </tr>
+                  <tr>
+                    <th>영상치의학과</th>
+                    <td>02) 2228 - 8860 ~ 1</td>
+                    <th>구강내과</th>
+                    <td>02) 2228 - 8880 ~ 2</td>
+                  </tr>
+                  <tr>
+                    <th>통합진료과</th>
+                    <td>02) 2228 - 8980 ~ 1</td>
+                    <th />
+                    <td />
+                  </tr>
+                </tbody>
+              </table>
+            </RowTableStyle>
+          </Indent2>
+
+          <Title2>특수 클리닉</Title2>
+          <Indent2>
+            <RowTableStyle>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>성인교정클리닉</th>
+                    <td>02) 2228 - 8956</td>
+                    <th>악안면교정클리닉</th>
+                    <td>02) 2228 - 8955</td>
+                  </tr>
+                  <tr>
+                    <th>임플란트클리닉</th>
+                    <td>02) 2228 - 8940 ~ 2</td>
+                    <th>제1특수(장애인)클리닉</th>
+                    <td>02) 2228 - 8961 ~ 2</td>
+                  </tr>
+                  <tr>
+                    <th>턱관절 및 안안면 통증클리닉</th>
+                    <td>02) 2228 - 8886</td>
+                    <th>시니어클리닉</th>
+                    <td>02) 2228 - 8930</td>
+                  </tr>
+                </tbody>
+              </table>
+            </RowTableStyle>
+          </Indent2>
         </div>
       </div>
     </>
