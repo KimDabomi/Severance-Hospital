@@ -109,10 +109,10 @@ const MyPageHeader = memo(() => {
             <Link to="/">예약현황</Link>
           </li>
           <li>
-            <Link to="/">결과조회</Link>
+            <Link to="/resultinquiry">결과조회</Link>
           </li>
           <li>
-            <Link to="/">나의 세브란스</Link>
+            <Link to="/mysevrance">나의 세브란스</Link>
           </li>
           <li>
             <Link to="/">회원정보</Link>

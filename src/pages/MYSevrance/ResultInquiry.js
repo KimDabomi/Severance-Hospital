@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
 import styled from "styled-components";
-import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 
 const Container = styled.div`
   width: 1280px;
@@ -61,15 +60,13 @@ const Container = styled.div`
 const DetailsEdit = memo(() => {
   const navigate = useNavigate();
   
-  const goMain = e => {
-    navigate('/mysevrance');
-  };
 
   return (
     <Container>
       <MyPageHeader />
       <div className="bgAll">
-        <h1>비밀번호변경</h1>
+        <h1>본인인증</h1>
+        <p>개인 의료 정보가 포함된 병원정보 이용을 위해서는 본인인증이 필요합니다.</p>
       </div>
       <LoginFooter />
     </Container>
