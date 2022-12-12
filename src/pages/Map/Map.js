@@ -136,7 +136,7 @@ const Map = memo(() => {
             <ul>
               <li>
                 {/* 경로가 /map.do와 /map.do/tab_content1일때, 모두 active 활성화 */}
-                <NavLink to={pathname == "/map.do" ? "/map.do" : "/map.do/tab_content1"}>
+                <NavLink to={pathname === "/map.do" ? "/map.do" : "/map.do/tab_content1"}>
                   <span>약도 및 주소 안내</span>
                 </NavLink>
               </li>
