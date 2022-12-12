@@ -384,7 +384,7 @@ const MysevMain = memo(() => {
                 </a>
                 </button>
                 <button type="button" className="btn">
-                <a href='https://myseverance.severance.healthcare/myseverance/iseverance/myvolunteer.do' target="_blank" rel="noopener noreferrer">
+                <a>
                 자원봉사<br></br>신청내역
                 </a>
                 </button>

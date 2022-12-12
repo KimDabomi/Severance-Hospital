@@ -6,6 +6,8 @@ import reset from "styled-reset";
 import icoChevronDown from './assets/img/ico-chevron-down-sm@2x.png';
 //nodata 이미지
 import nodata from './assets/img/ico-nodata@2x.png';
+//링크아이콘 이미지
+import iconExternal from './assets/img/ico-external-link@2x.png';
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
@@ -466,7 +468,6 @@ textarea{
 
   /** 의약품 검색페이지 */
   .formControl {
-    appearance: none;
     width: 100%;
     border-radius: 0;
     height: 45px;
@@ -474,14 +475,18 @@ textarea{
     padding: 8px 15px;
     text-align: left;
     font-size: 16px;
-    line-height: 27px;
     vertical-align: middle;
     box-sizing: border-box;
+    max-width: 100%;
+    line-height: normal;
+    padding-right: 30px;
 
     //select태그의 화살표 css
     &.selectCss{
-       ${`background: #fff url (${icoChevronDown}) no-repeat right 12px center;`}
-    background-size: 17px auto;
+      appearance: none;
+      padding-right: 30px;
+      ${`background: #fff url(${icoChevronDown}) no-repeat right 12px center;`}
+      background-size: 17px auto;
     }
    
     &:focus {
@@ -603,7 +608,7 @@ textarea{
         margin-top: -1px;
         width: 14px;
         height: 14px;
-        background: url(../img/ico-external-link@2x.png);
+        ${`background: url(${iconExternal});`}
         background-size: cover;
       }
     }
@@ -672,7 +677,7 @@ textarea{
             margin-top: -1px;
             width: 14px;
             height: 14px;
-            background: url(../img/ico-external-link@2x.png);
+            ${`background: url(${iconExternal});`}
             background-size: cover;
           }
         }
