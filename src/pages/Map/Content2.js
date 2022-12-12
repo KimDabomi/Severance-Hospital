@@ -9,13 +9,17 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
-/** 서브 타이틀 h4 스타일 */
-const StyledH4 = styled.h4`
+/** 타이틀 h4태그 스타일 */
+// 타이틀1
+const Title1H4 = styled.h4`
   padding-left: 18px;
   margin: 65px 0 22px;
+
   font-size: 24px;
   font-weight: bold;
   line-height: 38px;
+
+  color: #222;
   position: relative;
 
   &:first-child {
@@ -66,10 +70,12 @@ const TextBoxDl = styled.dl`
           content: "";
           width: 4px;
           height: 4px;
-          background-color: #0094fb;
+
           position: absolute;
-          top: 11px;
+          top: 0.7em;
           left: 0;
+
+          background-color: #0094fb;
         }
       }
     }
@@ -79,7 +85,7 @@ const TextBoxDl = styled.dl`
 const Content2 = memo(() => {
   return (
     <div>
-      <StyledH4>버스</StyledH4>
+      <Title1H4>버스</Title1H4>
       <TextBoxDl>
         <dt>정류장명 : 세브란스병원앞, 연세대학교앞 하차</dt>
         <dd>
@@ -92,7 +98,7 @@ const Content2 = memo(() => {
         </dd>
       </TextBoxDl>
 
-      <StyledH4>자가용</StyledH4>
+      <Title1H4>자가용</Title1H4>
       <TextBoxDl>
         <dd>
           <ul>
@@ -116,7 +122,7 @@ const Content2 = memo(() => {
         </dd>
       </TextBoxDl>
 
-      <StyledH4>지하철</StyledH4>
+      <Title1H4>지하철</Title1H4>
       <TextBoxDl>
         <dt>2호선</dt>
         <dd>
@@ -134,7 +140,7 @@ const Content2 = memo(() => {
         </dd>
       </TextBoxDl>
 
-      <StyledH4>철도</StyledH4>
+      <Title1H4>철도</Title1H4>
       <TextBoxDl>
         <dt>신촌기차역</dt>
         <dd>
@@ -155,7 +161,7 @@ const Content2 = memo(() => {
         </dd>
       </TextBoxDl>
 
-      <StyledH4>비행기</StyledH4>
+      <Title1H4>비행기</Title1H4>
       <TextBoxDl>
         <dt>인천국제공항</dt>
         <dd>

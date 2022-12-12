@@ -22,6 +22,34 @@ import Content2 from "./Content2";
 // 공지사항 박스 아이콘
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 
+/** 리스트 스타일 */
+// ul태그
+const ListStyleUl = styled.ul`
+  margin: 4px 0;
+
+  li {
+    padding-left: 12px;
+    margin-top: 5px;
+    position: relative;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+
+      position: absolute;
+      top: 0.7em;
+      left: 0;
+
+      background-color: #0094fb;
+    }
+  }
+`;
+
 /** 탭메뉴 스타일 */
 const TabMenuNav = styled.nav`
   width: 100%;
@@ -97,10 +125,10 @@ const Map = memo(() => {
           <h1 className="pageTitle">위치 및 오시는 방법</h1>
           <div className="boxGuide">
             <img src={boxGuideDecor} alt="boxGuideDecor" />
-            <ul className="textLeftBoxShape">
+            <ListStyleUl>
               <li>누구나 쉽게 찾아오시도록 병원 위치 및 교통수단별 안내 드립니다.</li>
               <li>지하철과 연계하여 바로 오실 수 있도록 셔틀버스를 운영하고 있으며, 노약자 및 임산부를 위하여 원내순환 전기차를 운영하고 있습니다.</li>
-            </ul>
+            </ListStyleUl>
           </div>
 
           {/* 탭 기본 구조 */}
