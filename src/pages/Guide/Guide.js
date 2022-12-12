@@ -14,6 +14,8 @@ import Header from "../../components/MainPageHeader";
 import Footer from "../../components/Footer";
 // 주요전화번호
 import Number from "./Number";
+// 층별시설안내
+import Facility from "./Facility";
 
 const Guide = memo(() => {
   return (
@@ -22,6 +24,7 @@ const Guide = memo(() => {
 
       <Routes>
         <Route path="/number.do" element={<Number />} />
+        <Route path="/facility.do" element={<Facility />} />
       </Routes>
 
       <Footer />
