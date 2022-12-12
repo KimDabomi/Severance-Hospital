@@ -165,7 +165,7 @@ const SiteMap = memo(() => {
               <MenuLi>
                 <Link to="/guide/number.do">이용안내</Link>
                 <SubMenuUl>
-                  <SubMenuLi>병원시설 안내</SubMenuLi>
+                <Link to="/guide/facility.do"><SubMenuLi>병원시설 안내</SubMenuLi></Link>
                   <SubMenuLi>진료안내</SubMenuLi>
                   <SubMenuLi>병원생활 안내</SubMenuLi>
                 </SubMenuUl>
