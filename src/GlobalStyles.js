@@ -85,6 +85,7 @@ textarea{
     padding: 73px 0 65px 0;
     box-sizing: border-box;
     font-weight: bold;
+    font-family: "NanumSquare", "malgungothic", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 //페이지 서브타이틀
 .pageSubtitle{

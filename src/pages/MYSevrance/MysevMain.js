@@ -1,7 +1,7 @@
 /**
  * @ File Name: MysevMain.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-09 17:54:00
+ * @ Last Update: 2022-12-12 17:54:00
  * @ Description: 마이세브란스 메인페이지
  */
 
@@ -9,6 +9,7 @@ import React, { memo } from 'react';
 import { Link,Routes,Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/MyPageHeader';
+import Footer from '../../components/Footer';
 //이미지 import 
 import mybgPattern from '../../assets/img/mybg-pattern.png'
 import myEdit from '../../assets/img/ico-mypage-edit@2x.png'
@@ -27,7 +28,7 @@ const Div = styled.article`
   }
   .pageCont {
     overflow: hidden;
-    padding: 40px 0 0;
+    padding: 40px 0 95px !important;
     position: relative;
   }
 
@@ -410,6 +411,7 @@ const MysevMain = memo(() => {
           </div>
         </div>
       </div>
+      <Footer/>
     </Div>
   );
 });
