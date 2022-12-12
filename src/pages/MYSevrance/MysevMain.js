@@ -262,8 +262,16 @@ const Div = styled.article`
 `;
 
 const MysevMain = memo(() => {
-   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
-   const navigate = useNavigate();
+  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
+  const navigate = useNavigate();
+
+  const goDetailsEdit = e => {
+    navigate('/details_edit');
+  };
+
+  const goChangePw = e => {
+    navigate('/change_passward');
+  };
 
   return (
     <Div>
@@ -275,10 +283,10 @@ const MysevMain = memo(() => {
             <div className="titleWrap">
               <span>주혜지님</span>
               <div className="btnCont">
-                <button type="button" className="btn">
+                <button type="button" className="btn" onClick={goDetailsEdit}>
                   개인정보수정
                 </button>
-                <button type="button" className="btn">
+                <button type="button" className="btn" onClick={goChangePw}>
                   비밀번호변경
                 </button>
               </div>

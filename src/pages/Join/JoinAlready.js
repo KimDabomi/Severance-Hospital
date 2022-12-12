@@ -114,7 +114,6 @@ const Container = styled.div`
         border-radius: 30px;
         background-color: rgb(0, 148, 251);
         color: white;
-        cursor: pointer;
         margin-right: 8px;
       }
       .retry,
@@ -130,7 +129,6 @@ const Container = styled.div`
         background-color: white;
         color: rgb(0, 148, 251);
         margin-right: 8px;
-        cursor: pointer;
       }
     }
   }

@@ -210,7 +210,6 @@ const Container = styled.div`
       border-radius: 30px;
       background-color: rgb(0, 148, 251);
       color: white;
-      cursor: pointer;
     }
 
     // 비동의 버튼
@@ -224,7 +223,6 @@ const Container = styled.div`
       background-color: white;
       color: rgb(0, 148, 251);
       margin-left: 10px;
-      cursor: pointer;
     }
   }
   .box_tip {

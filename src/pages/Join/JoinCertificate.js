@@ -112,7 +112,6 @@ const Container = styled.div`
       border: 2px solid rgb(0, 148, 251);
       background-color: rgb(0, 148, 251);
       color: white;
-      cursor: pointer;
     }
     .ipin_btn {
       margin-left: 0;
