@@ -7,7 +7,6 @@
 
 /** import */
 import React, { memo } from "react";
-import { NavLink, Routes, Route, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 /** 이미지 */
