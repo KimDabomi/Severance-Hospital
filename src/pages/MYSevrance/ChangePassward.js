@@ -58,7 +58,7 @@ const Container = styled.div`
   }
 `;
 
-const DetailsEdit = memo(() => {
+const ChangePassward = memo(() => {
   const navigate = useNavigate();
   
   const goMain = e => {
@@ -92,4 +92,4 @@ const DetailsEdit = memo(() => {
   );
 });
 
-export default DetailsEdit;
+export default ChangePassward;
