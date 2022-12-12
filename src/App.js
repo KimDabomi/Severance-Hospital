@@ -31,10 +31,6 @@ import JoinUs from "./pages/Join/JoinUs";
 import JoinComplete from "./pages/Join/JoinComplete";
 import JoinAlready from "./pages/Join/JoinAlready";
 
-// 마이페이지
-import DetailsEdit from './pages/Mypage/DetailsEdit';
-import ISevrance from './pages/MYSevrance/ISevrance';
-
 //고객의소리
 import CustomerBoardList from "./pages/CustomerBoard/CustomerBoardList";
 import CustomerBoardAdd from "./pages/CustomerBoard/CustomerBoardAdd";
@@ -51,6 +47,9 @@ import NoticeView from "./pages/NewsHome/NoticeView";
 
 //마이페이지
 import MysevMain from "./pages/MYSevrance/MysevMain";
+import DetailsEdit from './pages/MYSevrance/DetailsEdit';
+import ISevrance from './pages/MYSevrance/ISevrance';
+import ChangePassward from './pages/MYSevrance/ChangePassward';
 
 // 의료인 정보
 import StaffProfile from "./pages/staff/StaffProfile";
@@ -90,9 +89,6 @@ function App() {
         <Route path="/join_complete" element={<JoinComplete />} />
         <Route path="/join_already" element={<JoinAlready />} />
 
-        {/* 마이페이지 */}
-        <Route path="details_edit" element={<DetailsEdit />} />
-
         {/* 로그인, 아이디/비밀번호 찾기 */}
         <Route path="/login" element={<Login />} />
         <Route path="/find_id" element={<FindId />} />
@@ -126,8 +122,10 @@ function App() {
         <Route path="/news/notice.do" element={<NoticeView />} />
 
          {/* 마이페이지 라우팅 */}
-         <Route path='/mysevrance' element={<MysevMain />}/>
-         <Route path='/mysevrance/iseverance/mywriting' element={<ISevrance />} />
+        <Route path='/mysevrance' element={<MysevMain />}/>
+        <Route path='/mysevrance/iseverance/mywriting' element={<ISevrance />} />
+        <Route path="/details_edit" element={<DetailsEdit />} />
+        <Route path='/change_passward' element={<ChangePassward />} />
 
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />

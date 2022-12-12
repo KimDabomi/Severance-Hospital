@@ -217,7 +217,6 @@ const Container = styled.div`
       border-radius: 30px;
       background-color: rgb(0, 148, 251);
       color: white;
-      cursor: pointer;
     }
     // 동의하지 않습니다 버튼
     .not_accept_btn {
@@ -230,7 +229,6 @@ const Container = styled.div`
       background-color: white;
       color: rgb(0, 148, 251);
       margin-left: 10px;
-      cursor: pointer;
     }
   }
   .box_tip {

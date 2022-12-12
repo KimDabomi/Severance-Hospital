@@ -239,7 +239,6 @@ const Container = styled.div`
     border: 2px solid rgb(0, 148, 251);
     background-color: rgb(0, 148, 251);
     color: white;
-    cursor: pointer;
     margin-right: 10px;
   }
   .official_btn {
@@ -252,7 +251,6 @@ const Container = styled.div`
     border: 2px solid rgb(0, 148, 251);
     background-color: white;
     color: rgb(0, 148, 251);
-    cursor: pointer;
   }
   .submit_btn {
     margin-top: 70px;

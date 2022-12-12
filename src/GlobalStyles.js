@@ -235,6 +235,9 @@ textarea{
 
 /** 버튼 관련 */
 //버튼컨테이너 flex-column
+button {
+  cursor: pointer;
+}
 .buttonContColumn{
     display: flex;
     flex-direction: column;
