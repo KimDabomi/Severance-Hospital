@@ -6,7 +6,7 @@
  */
 
 /** import */
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 
 /** 이미지 */
@@ -61,6 +61,12 @@ const ListStyleUl = styled.ul`
 
       background-color: #0094fb;
     }
+
+    span {
+      font-size: 16px;
+      line-height: 16px;
+      color: #0094fb;
+    }
   }
 `;
 
@@ -68,7 +74,7 @@ const ListStyleUl = styled.ul`
 // 타이틀1
 const Title1H3 = styled.h3`
   padding-left: 18px;
-  margin: 65px 0 40px;
+  margin: 65px 0 22px;
 
   font-size: 24px;
   font-weight: bold;
@@ -78,7 +84,7 @@ const Title1H3 = styled.h3`
   position: relative;
 
   &:first-child {
-    margin-top: 0;
+    margin: 0 0 40px;
   }
 
   &:before {
@@ -99,7 +105,108 @@ const Indent1 = styled.div`
   margin-left: 18px;
 `;
 
+/** 콘텐츠 영역 스타일 */
+// section 태그
+const FloorSection = styled.section`
+  width: 1010px;
+
+  img {
+    margin-top: 24px;
+  }
+`;
+
+/** 탭 메뉴 스타일 */
+// nav태그
+const TabMenuNav = styled.nav`
+  margin-bottom: 60px;
+  overflow: hidden;
+  background-color: #eef7fc;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 18px;
+
+    li {
+      width: 20%;
+      position: relative;
+      z-index: 10;
+
+      a {
+        width: 100%;
+        height: 55px;
+        display: block;
+
+        text-align: center;
+
+        border: 1px solid white;
+        box-sizing: border-box;
+
+        span {
+          line-height: 55px;
+        }
+      }
+
+      &.active::before {
+        content: "";
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        right: 1px;
+        bottom: 1px;
+        z-index: -10;
+        border: 2px solid #0094fb;
+        background-color: white;
+      }
+
+      &.active span {
+        font-weight: bold;
+        color: #0094fb;
+      }
+    }
+  }
+`;
+
+/** 탭 콘텐츠 스타일 */
+const TabContent = styled.div`
+  display: none;
+
+  &.active {
+    display: block;
+  }
+`;
+
 const Facility = memo(() => {
+  // 탭메뉴 선택한 탭 인덱스 상태값
+  const [selectTab, setSelectTab] = useState(19);
+
+  // 탭메뉴
+  const tabMenu = () => {
+    const result = [];
+    for (let i = 19; i >= 10; i--) {
+      result.push(
+        <li key={i} className={selectTab === i ? "active" : ""} onClick={() => setSelectTab(i)}>
+          <a href={`#floor${i}`}>
+            <span>{i}층</span>
+          </a>
+        </li>
+      );
+    }
+    return result;
+  };
+
+  // 탭메뉴 콘텐츠 JSON
+  const textArr = {
+    "191병동, 192병동": sev19,
+    "181병동, 182병동": sev18,
+    "171병동, 172병동": sev17,
+    "161병동, 162병동": sev16,
+    "151병동, 152병동": sev15,
+    "141병동, 142병동": sev14,
+    "131병동, 132병동": sev13,
+    "121병동, 122병동": sev12
+  };
+
   return (
     <>
       {/* 배경 이미지 (GlobalStyles) */}
@@ -108,6 +215,7 @@ const Facility = memo(() => {
         <div className="pageCont">
           {/* 페이지 타이틀 */}
           <h1 className="pageTitle">층별 시설</h1>
+          {/* 페이지 공지사항 */}
           <div className="boxGuide">
             <img src={boxGuideDecor} alt="boxGuideDecor" />
             <ListStyleUl>
@@ -115,12 +223,11 @@ const Facility = memo(() => {
             </ListStyleUl>
           </div>
 
-          {/* @todo: 층별 네비게이션 만들기 */}
           {/* @todo: 이미지 alt 속성 모두 적용하기 */}
-          <section>
+          <FloorSection>
             <Title1H3>전체 층별 안내</Title1H3>
             <Indent1>
-              <img src={floormap} />
+              <img src={floormap} alt="전체 층별 안내" />
             </Indent1>
 
             <Title1H3>20층</Title1H3>
@@ -128,16 +235,42 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>200병동, 세브란스 VIP 건강증진센터</li>
               </ListStyleUl>
-              <img src={sev20} />
+              <img src={sev20} alt="20층" />
             </Indent1>
 
-            {/* @todo: 조건부 이미지 전환 */}
             <Title1H3>19~10층</Title1H3>
             <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev19} />
+              <TabMenuNav>
+                <ul>{tabMenu()}</ul>
+              </TabMenuNav>
+
+              {/* 탭메뉴 콘텐츠 JSON을 통해 태그 생성 */}
+              {Object.entries(textArr).map((floor, i) => {
+                return (
+                  <TabContent key={i} className={19 - selectTab === i ? "active" : ""}>
+                    <ListStyleUl>
+                      <li>{floor[0]}</li>
+                    </ListStyleUl>
+                    <img src={floor[1]} alt={`${19 - i}층`} />
+                  </TabContent>
+                );
+              })}
+
+              {/* 탭메뉴 콘텐츠 JSON에 없는 나머지 콘텐츠 */}
+              <TabContent className={selectTab === 11 ? "active" : ""}>
+                <ListStyleUl>
+                  <li>
+                    111병동, 112병동, <span>수면다원검사실, 뇌전증검사실, 뇌졸중집중치료실</span>
+                  </li>
+                </ListStyleUl>
+                <img src={sev11} alt="11층" />
+              </TabContent>
+              <TabContent className={selectTab === 10 ? "active" : ""}>
+                <ListStyleUl>
+                  <li>101병동, 102병동</li>
+                </ListStyleUl>
+                <img src={sev10} alt="10층" />
+              </TabContent>
             </Indent1>
 
             <Title1H3>9층</Title1H3>
@@ -145,7 +278,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev09} />
+              <img src={sev09} alt="20층" />
             </Indent1>
 
             <Title1H3>8층</Title1H3>
@@ -153,7 +286,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev08} />
+              <img src={sev08} alt="20층" />
             </Indent1>
 
             <Title1H3>7층</Title1H3>
@@ -161,7 +294,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev07} />
+              <img src={sev07} alt="20층" />
             </Indent1>
 
             <Title1H3>6층</Title1H3>
@@ -169,7 +302,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev06} />
+              <img src={sev06} alt="20층" />
             </Indent1>
 
             <Title1H3>5층</Title1H3>
@@ -177,7 +310,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev05} />
+              <img src={sev05} alt="20층" />
             </Indent1>
 
             <Title1H3>4층</Title1H3>
@@ -185,7 +318,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev04} />
+              <img src={sev04} alt="20층" />
             </Indent1>
 
             <Title1H3>3층</Title1H3>
@@ -193,7 +326,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev03} />
+              <img src={sev03} alt="20층" />
             </Indent1>
 
             <Title1H3>2층</Title1H3>
@@ -201,7 +334,7 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev02} />
+              <img src={sev02} alt="20층" />
             </Indent1>
 
             <Title1H3>1층</Title1H3>
@@ -209,9 +342,9 @@ const Facility = memo(() => {
               <ListStyleUl>
                 <li>191병동, 192병동</li>
               </ListStyleUl>
-              <img src={sev01} />
+              <img src={sev01} alt="20층" />
             </Indent1>
-          </section>
+          </FloorSection>
         </div>
       </div>
     </>
