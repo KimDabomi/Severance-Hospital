@@ -9,7 +9,7 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/MyPageHeader';
-import Footer from '../../components/Footer';
+import LoginFooter from "../../components/LoginFooter";
 import mypattern from '../../assets/img/mybg-pattern.png';
 
 const Div = styled.article`
@@ -75,7 +75,7 @@ const ISevrance = memo(() => {
         </div> */}
       </div>
       </div>
-      <Footer />
+      <LoginFooter />
     </Div>
   );
 });
