@@ -7,6 +7,7 @@
 
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
 import styled from "styled-components";
@@ -482,7 +483,7 @@ const DetailsEdit = memo(() => {
         </div>
         <div className='cases'>
           <ul>
-            <li>비밀번호를 변경하려면 <a href='#'><b>비밀번호 변경하기&#62;</b></a></li>
+            <li>비밀번호를 변경하려면 <Link to='/change_passward'><b>비밀번호 변경하기&#62;</b></Link></li>
             <li>세브란스를 더 이상 이용하지 않는다면 <a href='#'><b>회원탈퇴 바로가기&#62;</b></a></li>
           </ul>
         </div>
