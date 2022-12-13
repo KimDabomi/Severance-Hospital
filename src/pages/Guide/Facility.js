@@ -7,6 +7,7 @@
 
 /** import */
 import React, { memo, useState } from "react";
+import { Link } from "react-scroll";
 import styled from "styled-components";
 
 /** 이미지 */
@@ -83,7 +84,7 @@ const Title1H3 = styled.h3`
   color: #222;
   position: relative;
 
-  &:first-child {
+  &.firstTitle {
     margin: 0 0 40px;
   }
 
@@ -108,8 +109,12 @@ const Indent1 = styled.div`
 /** 콘텐츠 영역 스타일 */
 // section 태그
 const FloorSection = styled.section`
+  width: 1280px;
+  position: relative;
+`;
+// section 태그
+const ContentSection = styled.section`
   width: 1010px;
-
   img {
     margin-top: 24px;
   }
@@ -150,18 +155,22 @@ const TabMenuNav = styled.nav`
       &.active::before {
         content: "";
         position: absolute;
-        top: 1px;
-        left: 1px;
-        right: 1px;
-        bottom: 1px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
         z-index: -10;
         border: 2px solid #0094fb;
         background-color: white;
       }
 
-      &.active span {
-        font-weight: bold;
-        color: #0094fb;
+      &.active a {
+        border-color: transparent;
+
+        span {
+          font-weight: bold;
+          color: #0094fb;
+        }
       }
     }
   }
@@ -176,9 +185,51 @@ const TabContent = styled.div`
   }
 `;
 
+/** 콘텐츠 바로가기 네비게이션 스타일 */
+// nav태그
+const ContentNav = styled.nav`
+  width: 240px;
+  float: right;
+
+  position: sticky;
+  top: 10px;
+
+  box-sizing: border-box;
+
+  ul {
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    padding: 17px 11px;
+    line-height: 1.5;
+
+    li {
+      margin-top: 7px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      a {
+        display: block;
+        padding: 7px 20px;
+        border-radius: 2px;
+        cursor: pointer;
+
+        &.active {
+          background-color: #0094fb;
+          color: white;
+        }
+      }
+    }
+  }
+`;
+
 const Facility = memo(() => {
   // 탭메뉴 선택한 탭 인덱스 상태값
   const [selectTab, setSelectTab] = useState(19);
+
+  // 선택한 네비게이션 인덱스 상태값
+  const [selectNav, setSelectNav] = useState();
 
   // 탭메뉴
   const tabMenu = () => {
@@ -223,127 +274,220 @@ const Facility = memo(() => {
             </ListStyleUl>
           </div>
 
+          {/* @todo: 네비게이션 만들기 */}
           {/* @todo: 이미지 alt 속성 모두 적용하기 */}
           <FloorSection>
-            <Title1H3>전체 층별 안내</Title1H3>
-            <Indent1>
-              <img src={floormap} alt="전체 층별 안내" />
-            </Indent1>
+            {/* 콘텐츠 바로가기 네비게이션 */}
+            <ContentNav>
+              <ul>
+                <li>
+                  <Link to="content1" spy={true} smooth={true}>
+                    <span>전체 층별 안내</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content2" spy={true} smooth={true}>
+                    <span>20층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content3" spy={true} smooth={true}>
+                    <span>19~10층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content4" spy={true} smooth={true}>
+                    <span>9층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content5" spy={true} smooth={true}>
+                    <span>8층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content6" spy={true} smooth={true}>
+                    <span>7층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content7" spy={true} smooth={true}>
+                    <span>6층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content8" spy={true} smooth={true}>
+                    <span>5층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content9" spy={true} smooth={true}>
+                    <span>4층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content10" spy={true} smooth={true}>
+                    <span>3층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content11" spy={true} smooth={true}>
+                    <span>2층</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="content12" spy={true} smooth={true}>
+                    <span>1층</span>
+                  </Link>
+                </li>
+              </ul>
+            </ContentNav>
 
-            <Title1H3>20층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>200병동, 세브란스 VIP 건강증진센터</li>
-              </ListStyleUl>
-              <img src={sev20} alt="20층" />
-            </Indent1>
+            <ContentSection>
+              <article id="content1">
+                <Title1H3 className="firstTitle">전체 층별 안내</Title1H3>
+                <Indent1>
+                  <img src={floormap} alt="전체 층별 안내" />
+                </Indent1>
+              </article>
 
-            <Title1H3>19~10층</Title1H3>
-            <Indent1>
-              <TabMenuNav>
-                <ul>{tabMenu()}</ul>
-              </TabMenuNav>
+              <article id="content2">
+                <Title1H3>20층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>200병동, 세브란스 VIP 건강증진센터</li>
+                  </ListStyleUl>
+                  <img src={sev20} alt="20층" />
+                </Indent1>
+              </article>
 
-              {/* 탭메뉴 콘텐츠 JSON을 통해 태그 생성 */}
-              {Object.entries(textArr).map((floor, i) => {
-                return (
-                  <TabContent key={i} className={19 - selectTab === i ? "active" : ""}>
-                    <ListStyleUl>
-                      <li>{floor[0]}</li>
-                    </ListStyleUl>
-                    <img src={floor[1]} alt={`${19 - i}층`} />
-                  </TabContent>
-                );
-              })}
+              <article id="content3">
+              <Title1H3>19~10층</Title1H3>
+              <Indent1>
+                <TabMenuNav>
+                  <ul>{tabMenu()}</ul>
+                </TabMenuNav>
 
-              {/* 탭메뉴 콘텐츠 JSON에 없는 나머지 콘텐츠 */}
-              <TabContent className={selectTab === 11 ? "active" : ""}>
-                <ListStyleUl>
-                  <li>
-                    111병동, 112병동, <span>수면다원검사실, 뇌전증검사실, 뇌졸중집중치료실</span>
-                  </li>
-                </ListStyleUl>
-                <img src={sev11} alt="11층" />
-              </TabContent>
-              <TabContent className={selectTab === 10 ? "active" : ""}>
-                <ListStyleUl>
-                  <li>101병동, 102병동</li>
-                </ListStyleUl>
-                <img src={sev10} alt="10층" />
-              </TabContent>
-            </Indent1>
+                {/* 탭메뉴 콘텐츠 JSON을 통해 태그 생성 */}
+                {Object.entries(textArr).map((floor, i) => {
+                  return (
+                    <TabContent key={i} id="content3" className={19 - selectTab === i ? "active" : ""}>
+                      <ListStyleUl>
+                        <li>{floor[0]}</li>
+                      </ListStyleUl>
+                      <img src={floor[1]} alt={`${19 - i}층`} />
+                    </TabContent>
+                  );
+                })}
 
-            <Title1H3>9층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev09} alt="20층" />
-            </Indent1>
+                {/* 탭메뉴 콘텐츠 JSON에 없는 나머지 콘텐츠 */}
+                <TabContent id="content3" className={selectTab === 11 ? "active" : ""}>
+                  <ListStyleUl>
+                    <li>
+                      111병동, 112병동, <span>수면다원검사실, 뇌전증검사실, 뇌졸중집중치료실</span>
+                    </li>
+                  </ListStyleUl>
+                  <img src={sev11} alt="11층" />
+                </TabContent>
+                <TabContent id="content3" className={selectTab === 10 ? "active" : ""}>
+                  <ListStyleUl>
+                    <li>101병동, 102병동</li>
+                  </ListStyleUl>
+                  <img src={sev10} alt="10층" />
+                </TabContent>
+              </Indent1>
+              </article>
 
-            <Title1H3>8층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev08} alt="20층" />
-            </Indent1>
+              <article id="content4">
+                <Title1H3>9층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev09} alt="9층" />
+                </Indent1>
+              </article>
 
-            <Title1H3>7층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev07} alt="20층" />
-            </Indent1>
+              <article id="content5">
+                <Title1H3>8층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev08} alt="8층" />
+                </Indent1>
+              </article>
 
-            <Title1H3>6층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev06} alt="20층" />
-            </Indent1>
+              <article id="content6">
+                <Title1H3>7층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev07} alt="7층" />
+                </Indent1>
+              </article>
 
-            <Title1H3>5층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev05} alt="20층" />
-            </Indent1>
+              <article id="content7">
+                <Title1H3>6층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev06} alt="6층" />
+                </Indent1>
+              </article>
 
-            <Title1H3>4층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev04} alt="20층" />
-            </Indent1>
+              <article id="content8">
+                <Title1H3>5층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev05} alt="5층" />
+                </Indent1>
+              </article>
 
-            <Title1H3>3층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev03} alt="20층" />
-            </Indent1>
+              <article id="content9">
+                <Title1H3>4층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev04} alt="4층" />
+                </Indent1>
+              </article>
 
-            <Title1H3>2층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev02} alt="20층" />
-            </Indent1>
+              <article id="content10">
+                <Title1H3>3층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev03} alt="3층" />
+                </Indent1>
+              </article>
 
-            <Title1H3>1층</Title1H3>
-            <Indent1>
-              <ListStyleUl>
-                <li>191병동, 192병동</li>
-              </ListStyleUl>
-              <img src={sev01} alt="20층" />
-            </Indent1>
+              <article id="content11">
+                <Title1H3>2층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev02} alt="2층" />
+                </Indent1>
+              </article>
+
+              <article id="content12">
+                <Title1H3>1층</Title1H3>
+                <Indent1>
+                  <ListStyleUl>
+                    <li>191병동, 192병동</li>
+                  </ListStyleUl>
+                  <img src={sev01} alt="1층" />
+                </Indent1>
+              </article>
+            </ContentSection>
           </FloorSection>
         </div>
       </div>
