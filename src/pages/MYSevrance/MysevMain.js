@@ -9,7 +9,7 @@ import React, { memo } from 'react';
 import { Link,Routes,Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/MyPageHeader';
-import Footer from '../../components/Footer';
+import LoginFooter from "../../components/LoginFooter";
 //이미지 import 
 import mybgPattern from '../../assets/img/mybg-pattern.png'
 import myEdit from '../../assets/img/ico-mypage-edit@2x.png'
@@ -28,7 +28,7 @@ const Div = styled.article`
   }
   .pageCont {
     overflow: hidden;
-    padding: 40px 0 95px !important;
+    padding: 40px 0 0 !important;
     position: relative;
   }
 
@@ -419,7 +419,7 @@ const MysevMain = memo(() => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <LoginFooter/>
     </Div>
   );
 });
