@@ -13,6 +13,7 @@ const NewsView = memo(() => {
   return (
     <div>
       <Header />
+      <div className='bgAll'>
       <div className="pageCont">
         <h1 className="pageTitle">언론보도</h1>
         {/* 검색form */}
@@ -52,6 +53,7 @@ const NewsView = memo(() => {
 				<div className="buttonContColumn">
           <Link className="btnMore">더보기</Link>
         </div>
+      </div>
       </div>
       <Footer />
     </div>

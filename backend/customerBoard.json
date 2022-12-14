@@ -125,5 +125,19 @@
       "medicalSubject": "간암",
       "department": "간암최외과"
     }
+  ],
+  "news" : [
+    {
+      "id":1,
+      "title": "[동아일보] 가슴 한 쪽 쿡쿡 쑤시면 폐렴, 밤에 콜록콜록땐 천식 의심",
+      "date": "2022-12-12",
+      "link": "https://www.donga.com/news/article/all/20221210/116933061/1"
+    },
+    {
+      "id":2,
+      "title": "[뉴시스] 당뇨동반 남성, 결핵완치 후 재발 가능성 더 높다.",
+      "date": "2022-12-14",
+      "link": "https://www.donga.com/news/article/all/20221210/116933061/1"
+    }
   ]
 }
