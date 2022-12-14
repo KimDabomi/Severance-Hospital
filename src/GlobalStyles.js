@@ -74,7 +74,7 @@ textarea{
 }
 
 .bgAll{
-  background: url(../img/bg-pattern.png) no-repeat;
+  background: url(../img/bg-pattern.png) no-repeat center top;
   background-position-x: 50%;
   background-size: 1920px;
   width: 100% !important;
@@ -547,7 +547,7 @@ button {
     padding: 40px;
     height: 400px;
     box-sizing:border-box;
-    margin-top: 73px;
+    /* margin-top: 73px; */
     }
   .newsTopSlider{
     display: flex;
