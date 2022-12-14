@@ -9,6 +9,7 @@
 import React, { memo, useState } from "react";
 import { Link } from "react-scroll";
 import styled from "styled-components";
+import { useActiveMenu } from "react-active-menu";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -115,6 +116,7 @@ const FloorSection = styled.section`
 // section 태그
 const ContentSection = styled.section`
   width: 1010px;
+
   img {
     margin-top: 24px;
   }
@@ -220,8 +222,28 @@ const ContentNav = styled.nav`
           color: white;
         }
       }
+      button {
+        width: 100%;
+        text-align: left;
+        padding: 7px 20px;
+        border-radius: 2px;
+        border: none;
+        background-color: white;
+        font-size: 16px;
+    letter-spacing: 0.02em;
+
+        &.active {
+          background-color: #0094fb;
+          color: white;
+        }
+      }
     }
   }
+`;
+
+/** 콘텐츠 스타일 */
+// article태그
+const ContentArticle = styled.article`
 `;
 
 const Facility = memo(() => {
@@ -258,6 +280,9 @@ const Facility = memo(() => {
     "121병동, 122병동": sev12
   };
 
+  // 스크롤
+  const { activeId, registerContainer, registerSection, registerTrigger } = useActiveMenu({ smooth: true });
+
   return (
     <>
       {/* 배경 이미지 (GlobalStyles) */}
@@ -281,77 +306,77 @@ const Facility = memo(() => {
             <ContentNav>
               <ul>
                 <li>
-                  <Link to="content1" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content1")} type="button">
                     <span>전체 층별 안내</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content2" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content2")} type="button">
                     <span>20층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content3" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content3")} type="button">
                     <span>19~10층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content4" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content4")} type="button">
                     <span>9층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content5" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content5")} type="button">
                     <span>8층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content6" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content6")} type="button">
                     <span>7층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content7" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content7")} type="button">
                     <span>6층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content8" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content8")} type="button">
                     <span>5층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content9" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content9")} type="button">
                     <span>4층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content10" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content10")} type="button">
                     <span>3층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content11" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content11")} type="button">
                     <span>2층</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="content12" spy={true} smooth={true}>
+                  <button ref={registerTrigger("content12")} type="button">
                     <span>1층</span>
-                  </Link>
+                  </button>
                 </li>
               </ul>
             </ContentNav>
 
             <ContentSection>
-              <article id="content1">
+              <ContentArticle ref={registerSection("content1")}>
                 <Title1H3 className="firstTitle">전체 층별 안내</Title1H3>
                 <Indent1>
                   <img src={floormap} alt="전체 층별 안내" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content2">
+              <ContentArticle ref={registerSection("content2")}>
                 <Title1H3>20층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -359,46 +384,46 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev20} alt="20층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content3">
-              <Title1H3>19~10층</Title1H3>
-              <Indent1>
-                <TabMenuNav>
-                  <ul>{tabMenu()}</ul>
-                </TabMenuNav>
+              <ContentArticle ref={registerSection("content3")}>
+                <Title1H3>19~10층</Title1H3>
+                <Indent1>
+                  <TabMenuNav>
+                    <ul>{tabMenu()}</ul>
+                  </TabMenuNav>
 
-                {/* 탭메뉴 콘텐츠 JSON을 통해 태그 생성 */}
-                {Object.entries(textArr).map((floor, i) => {
-                  return (
-                    <TabContent key={i} id="content3" className={19 - selectTab === i ? "active" : ""}>
-                      <ListStyleUl>
-                        <li>{floor[0]}</li>
-                      </ListStyleUl>
-                      <img src={floor[1]} alt={`${19 - i}층`} />
-                    </TabContent>
-                  );
-                })}
+                  {/* 탭메뉴 콘텐츠 JSON을 통해 태그 생성 */}
+                  {Object.entries(textArr).map((floor, i) => {
+                    return (
+                      <TabContent key={i} ref={registerSection("content3")} className={19 - selectTab === i ? "active" : ""}>
+                        <ListStyleUl>
+                          <li>{floor[0]}</li>
+                        </ListStyleUl>
+                        <img src={floor[1]} alt={`${19 - i}층`} />
+                      </TabContent>
+                    );
+                  })}
 
-                {/* 탭메뉴 콘텐츠 JSON에 없는 나머지 콘텐츠 */}
-                <TabContent id="content3" className={selectTab === 11 ? "active" : ""}>
-                  <ListStyleUl>
-                    <li>
-                      111병동, 112병동, <span>수면다원검사실, 뇌전증검사실, 뇌졸중집중치료실</span>
-                    </li>
-                  </ListStyleUl>
-                  <img src={sev11} alt="11층" />
-                </TabContent>
-                <TabContent id="content3" className={selectTab === 10 ? "active" : ""}>
-                  <ListStyleUl>
-                    <li>101병동, 102병동</li>
-                  </ListStyleUl>
-                  <img src={sev10} alt="10층" />
-                </TabContent>
-              </Indent1>
-              </article>
+                  {/* 탭메뉴 콘텐츠 JSON에 없는 나머지 콘텐츠 */}
+                  <TabContent ref={registerSection("content3")} className={selectTab === 11 ? "active" : ""}>
+                    <ListStyleUl>
+                      <li>
+                        111병동, 112병동, <span>수면다원검사실, 뇌전증검사실, 뇌졸중집중치료실</span>
+                      </li>
+                    </ListStyleUl>
+                    <img src={sev11} alt="11층" />
+                  </TabContent>
+                  <TabContent ref={registerSection("content3")} className={selectTab === 10 ? "active" : ""}>
+                    <ListStyleUl>
+                      <li>101병동, 102병동</li>
+                    </ListStyleUl>
+                    <img src={sev10} alt="10층" />
+                  </TabContent>
+                </Indent1>
+              </ContentArticle>
 
-              <article id="content4">
+              <ContentArticle ref={registerSection("content4")}>
                 <Title1H3>9층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -406,9 +431,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev09} alt="9층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content5">
+              <ContentArticle ref={registerSection("content5")}>
                 <Title1H3>8층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -416,9 +441,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev08} alt="8층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content6">
+              <ContentArticle ref={registerSection("content6")}>
                 <Title1H3>7층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -426,9 +451,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev07} alt="7층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content7">
+              <ContentArticle ref={registerSection("content7")}>
                 <Title1H3>6층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -436,9 +461,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev06} alt="6층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content8">
+              <ContentArticle ref={registerSection("content8")}>
                 <Title1H3>5층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -446,9 +471,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev05} alt="5층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content9">
+              <ContentArticle ref={registerSection("content9")}>
                 <Title1H3>4층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -456,9 +481,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev04} alt="4층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content10">
+              <ContentArticle ref={registerSection("content10")}>
                 <Title1H3>3층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -466,9 +491,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev03} alt="3층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content11">
+              <ContentArticle ref={registerSection("content11")}>
                 <Title1H3>2층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -476,9 +501,9 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev02} alt="2층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
 
-              <article id="content12">
+              <ContentArticle ref={registerSection("content12")}>
                 <Title1H3>1층</Title1H3>
                 <Indent1>
                   <ListStyleUl>
@@ -486,7 +511,7 @@ const Facility = memo(() => {
                   </ListStyleUl>
                   <img src={sev01} alt="1층" />
                 </Indent1>
-              </article>
+              </ContentArticle>
             </ContentSection>
           </FloorSection>
         </div>
