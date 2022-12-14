@@ -1,7 +1,7 @@
 /**
  * @ File Name: OutpatientInfo.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-14
+ * @ Last Update: 2022-12-14 20:10
  * @ Description: 외래이용안내 페이지
  */
 
