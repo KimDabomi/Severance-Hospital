@@ -1,7 +1,7 @@
 /**
  * @ File Name: DrugSearchSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-05
+ * @ Last Update: 2022-12-14
  * @ Description: 의약품 검색 페이지 slice
  */
 
@@ -15,21 +15,23 @@ export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", a
 
     //검색어가있다면
     if(payload?.item_name){
+        // console.log('슬라이스페이로드',payload);
         params = {
             serviceKey: process.env.REACT_APP_DRUG2_API_ENCODING_KEY,
             // 검색명 : 품목명 
             item_name: payload.item_name,
-
+            page: payload.page ? payload.page:1
         }
     }
 
     try {
+        console.log('슬라이스페이로드',payload);
         const response = await axios.get(process.env.REACT_APP_DRUG2_API_URL,{
             params: {
                 serviceKey: process.env.REACT_APP_DRUG2_API_DECODING_KEY,
                 // serviceKey:'9Txp23emmXEQZ6s5oSTPMJdjECCgEFXkggChxH9y1+bSZmRIADuyyebZZLCD5CzjT6csz3QziklzOwFAI5h4Cw==',
                 type: 'json', //epdlxjvhaot
-                pageNo: 1, //페이지번호
+                pageNo: payload.pageNo, //페이지번호
                 numOfRows: 12, //한 페이지 결과 수
             }
         });

@@ -76,13 +76,6 @@ function App() {
         {/* 오시는 길 페이지 */}
         <Route path="/map.do/*" element={<Map />} />
 
-        {/* 로그인, 아이디/비밀번호 찾기 */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/find_id" element={<FindId />} />
-        <Route path="/find_id_email" element={<FindIdEmail />} />
-        <Route path="/find_password" element={<FindPassword />} />
-        <Route path="/find_password_email" element={<FindPasswordEmail />} />
-
         {/* 회원가입 */}
         <Route path="/join_way" element={<JoinWay />} />
         <Route path="/join_accept" element={<JoinAccept />} />
@@ -98,15 +91,6 @@ function App() {
         <Route path="/find_id_email" element={<FindIdEmail />} />
         <Route path="/find_password" element={<FindPassword />} />
         <Route path="/find_password_email" element={<FindPasswordEmail />} />
-
-        {/* 회원가입 */}
-        <Route path="/join_way" element={<JoinWay />} />
-        <Route path="/join_accept" element={<JoinAccept />} />
-        <Route path="/join_accept_global" element={<JoinAcceptGlobal />} />
-        <Route path="/join_certificate" element={<JoinCertificate />} />
-        <Route path="/join_us" element={<JoinUs />} />
-        <Route path="/join_complete" element={<JoinComplete />} />
-        <Route path="/join_already" element={<JoinAlready />} />
 
         {/* 고객의소리 페이지 라우팅*/}
         <Route path="/customer.do" element={<CustomerBoardList />} />
@@ -136,6 +120,7 @@ function App() {
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
         {/* 온라인 예약 */}
         <Route path="/apptSelect" element={<ApptSelect />} />
+        
       </Routes>
     </div>
   );

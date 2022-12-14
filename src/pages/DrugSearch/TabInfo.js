@@ -1,7 +1,7 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-05
+ * @ Last Update: 2022-12-14
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
@@ -61,7 +61,7 @@ const TabInfo = memo(() => {
 
 	/** 더보기 버튼 (페이지) 함수 */
 	const pagePlus = useCallback((e)=>{
-		console.log('더보기버튼 누름');
+		console.log('더보기버튼 누름', page);
 		//페이지 번호 1증가
 		page.current ++;
 

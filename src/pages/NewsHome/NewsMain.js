@@ -12,11 +12,19 @@ import Footer from '../../components/Footer';
 import corona from '../../assets/img/corona.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import { getYoutube } from '../../slices/YoutubeSlice';
+import styled from 'styled-components';
 
 import NewsHomeCarousel from '../../components/NewsHomeCarousel';
 import NewsHomeNoticeCarousel from '../../components/NewsHomeNoticeCarousel';
 
 import facebookImg from '../../assets/img/facebook-thumb-sev.jpg'
+
+const Div = styled.div`
+  .bgWhiteBlue{
+    /* margin-top: 73px; */
+  }
+  
+`
 
 const NewsMain = memo(() => {
   //dispatch함수 생성
@@ -78,8 +86,9 @@ const NewsMain = memo(() => {
   }
 
   return (
-    <div>
+    <Div>
       <Header />
+      <div className='bgAll'>
       <div className="pageCont">
         <div className="bgWhiteBlue">
           <div className="newsTopSlider">
@@ -179,8 +188,9 @@ const NewsMain = memo(() => {
           </div>
         </div>
       </div>
+      </div>
       <Footer />
-    </div>
+    </Div>
   );
 });
 
