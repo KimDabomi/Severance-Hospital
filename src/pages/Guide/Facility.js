@@ -224,13 +224,16 @@ const ContentNav = styled.nav`
       }
       button {
         width: 100%;
-        text-align: left;
-        padding: 7px 20px;
-        border-radius: 2px;
-        border: none;
-        background-color: white;
+
         font-size: 16px;
+        text-align: left;
         letter-spacing: 0.02em;
+
+        padding: 7px 20px;
+        border: none;
+        border-radius: 2px;
+
+        background-color: white;
 
         &.active {
           background-color: #0094fb;
