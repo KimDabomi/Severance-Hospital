@@ -58,6 +58,7 @@ import StaffProfile from "./pages/staff/StaffProfile";
 
 // 진료 예약
 import AppointmentMain from "./pages/Appointment/AppointmentMain";
+import ApptSelect from "./pages/Appointment/ApptSelect";
 
 function App() {
   return (
@@ -117,6 +118,9 @@ function App() {
 
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
+        {/* 온라인 예약 */}
+        <Route path="/apptSelect" element={<ApptSelect />} />
+        
       </Routes>
     </div>
   );
