@@ -16,10 +16,6 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 
 /** 컴포넌트 참조 */
-// 헤더, 푸터
-import MainPageHeader from "../../components/MainPageHeader";
-import Footer from "../../components/Footer";
-
 
 const OutpatientInfo = memo(() => {
   // top banner를 숨기기 위한 쿠키 이름
@@ -86,8 +82,6 @@ const OutpatientInfo = memo(() => {
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   return (
     <>
-      <MainPageHeader />
-      <Footer />
     </>
   );
 });
