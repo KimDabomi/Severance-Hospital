@@ -1,7 +1,7 @@
 /**
  * @ File Name: DetailsEdit.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-10 00:21
+ * @ Last Update: 2022-12-14 14:15
  * @ Description: 개인정보수정 페이지
  */
 
@@ -484,7 +484,7 @@ const DetailsEdit = memo(() => {
         <div className='cases'>
           <ul>
             <li>비밀번호를 변경하려면 <Link to='/change_passward'><b>비밀번호 변경하기&#62;</b></Link></li>
-            <li>세브란스를 더 이상 이용하지 않는다면 <a href='#'><b>회원탈퇴 바로가기&#62;</b></a></li>
+            <li>세브란스를 더 이상 이용하지 않는다면 <Link to='withdraw'><b>회원탈퇴 바로가기&#62;</b></Link></li>
           </ul>
         </div>
       </div>
