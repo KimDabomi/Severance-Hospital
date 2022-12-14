@@ -17,9 +17,9 @@ import Number from "./Number";
 // 층별시설안내
 import Facility from "./Facility";
 // 입원생활
-import Hospitalization from "./Hospitalization";
+// import Hospitalization from "./Hospitalization";
 // 수술실 이용안내
-import OperatingRoom from "./OperatingRoom";
+// import OperatingRoom from "./OperatingRoom";
 // 외래이용안내
 import OutpatientInfo from "./OutpatientInfo";
 
@@ -32,8 +32,8 @@ const Guide = memo(() => {
         <Route path="/number.do" element={<Number />} />
         <Route path="/facility.do" element={<Facility />} />
         <Route path="/outpatient_info" element={<OutpatientInfo />} />
-        <Route path="/hospitalization.do" element={<Hospitalization />} />
-        <Route path="/operating-room.do" element={<OperatingRoom />} />
+        {/* <Route path="/hospitalization.do" element={<Hospitalization />} />
+        <Route path="/operating-room.do" element={<OperatingRoom />} /> */}
       </Routes>
 
       <Footer />
