@@ -1,19 +1,14 @@
 /**
- * @ File Name: OutpatientInfo.js
+ * @ File Name: PaymentRefund.js
  * @ Author: 김다보미 (cdabomi@nate.com)
  * @ Last Update: 2022-12-14 21:17
  * @ Description: 진료비 수납 및 환불 페이지
  */
 
-import React, { memo, useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { memo } from "react";
 import styled from "styled-components";
 // 이미지
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
-import ambulatoryInfo from "../../assets/img/img-outpatient.png";
-import contRight from "../../assets/img/ico-pdf-down@2x.png";
-// 리덕스
-import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 1280px;

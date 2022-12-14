@@ -24,6 +24,8 @@ import Hospitalization from "./Hospitalization";
 import OutpatientInfo from "./OutpatientInfo";
 // 진료비 수납 및 환불
 import PaymentRefund from "./PaymentRefund";
+// 비급여진료비 조회
+import Unsupported from "./Unsupported";
 
 const Guide = memo(() => {
   return (
@@ -37,6 +39,7 @@ const Guide = memo(() => {
         <Route path="/hospitalization.do" element={<Hospitalization />} />
         {/* <Route path="/operating-room.do" element={<OperatingRoom />} /> */}
         <Route path="/payment_refund" element={<PaymentRefund />} />
+        <Route path="/unsupported" element={<Unsupported />} />
       </Routes>
 
       <Footer />
