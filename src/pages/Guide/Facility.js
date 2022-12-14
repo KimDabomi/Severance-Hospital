@@ -230,7 +230,7 @@ const ContentNav = styled.nav`
         border: none;
         background-color: white;
         font-size: 16px;
-    letter-spacing: 0.02em;
+        letter-spacing: 0.02em;
 
         &.active {
           background-color: #0094fb;
@@ -243,8 +243,7 @@ const ContentNav = styled.nav`
 
 /** 콘텐츠 스타일 */
 // article태그
-const ContentArticle = styled.article`
-`;
+const ContentArticle = styled.article``;
 
 const Facility = memo(() => {
   // 탭메뉴 선택한 탭 인덱스 상태값
