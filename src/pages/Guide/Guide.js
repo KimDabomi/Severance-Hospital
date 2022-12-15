@@ -19,7 +19,7 @@ import Facility from "./Facility";
 // 입원생활
 import Hospitalization from "./Hospitalization";
 // 수술실 이용안내
-// import OperatingRoom from "./OperatingRoom";
+import OperatingRoom from "./OperatingRoom";
 // 외래이용안내
 import OutpatientInfo from "./OutpatientInfo";
 // 진료비 수납 및 환불
@@ -37,7 +37,7 @@ const Guide = memo(() => {
         <Route path="/facility.do" element={<Facility />} />
         <Route path="/outpatient_info" element={<OutpatientInfo />} />
         <Route path="/hospitalization.do" element={<Hospitalization />} />
-        {/* <Route path="/operating-room.do" element={<OperatingRoom />} /> */}
+        <Route path="/operating-room.do" element={<OperatingRoom />} />
         <Route path="/payment_refund" element={<PaymentRefund />} />
         <Route path="/unsupported" element={<Unsupported />} />
       </Routes>
