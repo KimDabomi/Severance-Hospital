@@ -12,6 +12,7 @@ import TabShape from './TabShape';
 import TabInfo from './TabInfo';
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import TopButton from '../../components/TopButton';
 
 const DrugSearch = memo(() => {
   /** url의 경로 구조분해 */
@@ -19,6 +20,7 @@ const DrugSearch = memo(() => {
 
   return (
     <div>
+      <TopButton />
       <Header />
       <div className="bgAll">
         <div className="pageCont">
