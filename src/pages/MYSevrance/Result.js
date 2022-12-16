@@ -15,8 +15,10 @@ import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 // 캘린더
 import Calendar from "react-calendar";
-import moment from "react-calendar";
+import moment from "moment";
 import "react-calendar/dist/Calendar.css"; // css import
+import prev from "../../assets/img/ico-arrow-left-white@2x.png";
+import next from "../../assets/img/ico-arrow-right-white@2x.png";
 
 const Container = styled.div`
   h1 {
@@ -85,6 +87,80 @@ const Container = styled.div`
         width: 640px;
         height: 360px;
         border: none;
+        // 오늘 날짜
+        .react-calendar__tile--now {
+          background-color: #e6e6e6 !important;
+          color: #333;
+          border-radius: 50%;
+        }
+        // 상단 년월
+        .react-calendar__navigation__label {
+          span {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 0;
+          }
+        }
+        .react-calendar__navigation {
+          display: block;
+          text-align: center;
+          position: relative;
+        }
+
+        // 요일섹션
+        .react-calendar__month-view__weekdays {
+          abbr {
+            font-size: 16px;
+            text-decoration: none;
+          }
+        }
+        // 날짜 하나하나  모양
+        .react-calendar__tile {
+          padding: 17px;
+        }
+        .react-calendar__month-view__days__day {
+          width: 50px;
+        }
+        // 날짜 hover,focus
+        .react-calendar__tile:enabled:hover,
+        .react-calendar__tile:enabled:focus,
+        .react-calendar__tile--active {
+          background-color: transparent;
+          color: #333;
+        }
+        // 년도 이동 버튼 삭제
+        .react-calendar__navigation__prev2-button,
+        .react-calendar__navigation__next2-button {
+          display: none;
+        }
+        // 월 이동 버튼
+        .react-calendar__navigation__prev-button {
+          display: block;
+          margin: 0 5px;
+          height: 25px;
+          border-radius: 20px;
+          text-indent: -9999px;
+          position: absolute;
+          left: 28%;
+          bottom: 35%;
+          display: block;
+          background: url(${prev}) right /cover;
+          background-color: #dadada;
+        }
+        .react-calendar__navigation__next-button {
+          
+          width: 25px;
+          margin: 0 5px;
+          height: 25px;
+          border-radius: 20px;
+          text-indent: -9999px;
+          position: absolute;
+          right: 28%;
+          bottom: 35%;
+          display: block;
+          background: url(${next}) left /cover;
+          background-color: #dadada;
+        }
       }
 
       // 색깔별 표시 설명
@@ -171,22 +247,22 @@ const Container = styled.div`
       padding-left: 19px;
       li {
         margin-top: 5px;
-          font-size: 16px;
-          b {
-            font-weight: bold;
-          }
-          &:before {
-            content: "";
-            display: block;
-            width: 4px;
-            height: 4px;
-            background-color: rgb(0, 148, 251);
-            float: left;
-            margin: 10px 5px 0 0;
-          }
-          span {
-            margin-left: 1.3%;
-          }
+        font-size: 16px;
+        b {
+          font-weight: bold;
+        }
+        &:before {
+          content: "";
+          display: block;
+          width: 4px;
+          height: 4px;
+          background-color: rgb(0, 148, 251);
+          float: left;
+          margin: 10px 5px 0 0;
+        }
+        span {
+          margin-left: 1.3%;
+        }
       }
     }
   }
@@ -220,7 +296,12 @@ const ResultInquiry = memo(() => {
           {/* 왼쪽박스 */}
           <div className="left">
             <div className="calendar_box">
-              <Calendar onChange={onChange} value={value} className='calendar' />
+              <Calendar
+                onChange={onChange}
+                value={value}
+                className="calendar"
+                formatDay={(locale, date) => moment(date).format("DD")}
+              />
               <div className="disc">
                 <ul>
                   <li className="today">
@@ -246,7 +327,6 @@ const ResultInquiry = memo(() => {
           </div>
         </div>
 
-        
         <div className="info">
           <h4>이용안내</h4>
           <ul>
