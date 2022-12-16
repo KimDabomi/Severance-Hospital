@@ -51,6 +51,7 @@ import DetailsEdit from './pages/MYSevrance/DetailsEdit';
 import ISevrance from './pages/MYSevrance/ISevrance';
 import ChangePassward from './pages/MYSevrance/ChangePassward';
 import ResultInquiry from './pages/MYSevrance/ResultInquiry';
+import Result from './pages/MYSevrance/Result';
 import Withdraw from './pages/MYSevrance/Withdraw';
 
 // 의료인 정보
@@ -118,6 +119,7 @@ function App() {
         <Route path="/details_edit" element={<DetailsEdit />} />
         <Route path='/change_passward' element={<ChangePassward />} />
         <Route path='/resultinquiry' element={<ResultInquiry />} />
+        <Route path='/result' element={<Result />} />
         <Route path='/withdraw' element={<Withdraw />} />
 
         {/* 진료 예약 */}
