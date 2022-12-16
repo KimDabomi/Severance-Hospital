@@ -160,44 +160,94 @@ const VideoSection = styled.section`
 /** 영상 제목 스타일 */
 const VideoTitleSection = styled.section`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  text-align: center;
 
   p {
+    width: 400px;
     font-size: 18px;
     font-weight: bold;
     margin-top: 24px;
   }
 `;
 
-/** 단계 블록 스타일 */
+/** 단계 박스 스타일 */
 // div태그
 const StepDiv = styled.div`
-  margin-bottom: 26px;
+  width: 100%;
+  margin-bottom: 22px;
+
   ol {
     display: flex;
-
+    justify-content: space-between;
   }
 
   li {
     width: 270px;
-    margin: 15px 25px;
-    border: 1px solid #e6e6e6;
-    border-radius: 10px;
-    background-color: orange;
+    text-align: center;
 
     padding: 20px 30px 24px;
+    margin-left: 50px;
 
-    span {
-      display: flex;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+
+    position: relative;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &::before {
+      content: "";
+      width: 35px;
+      height: 1px;
+
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translate(-50%);
+
+      background-color: #0094fb;
+    }
+
+    &::after {
+      content: "";
+      width: 12.5px;
+      height: 12.5px;
+      display: block;
+
+      position: absolute;
+      top: 50%;
+      right: -30px;
+      transform: rotate(135deg);
+
+      overflow: hidden;
+      border-top: 2px solid #e6e6e6;
+      border-left: 2px solid #e6e6e6;
+      margin-top: -10px;
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+
+    h5 {
+      font-size: 14px;
+      color: #0094fb;
+      font-weight: bold;
+      margin: 4px 0;
+    }
+
+    p {
       width: 100%;
+      height: 52px;
       margin-top: 12px;
-      min-height: 52px;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
+      line-height: 52px;
+    }
+
+    .step4 {
+      color: #f76117;
     }
   }
 `;
@@ -279,89 +329,89 @@ const Number = memo(() => {
                   allowFullScreen
                 ></iframe>
               </VideoSection>
-              
+
               <VideoTitleSection>
                 <p>VR 수술실 가는길</p>
                 <p>알쓸신의 - 수술실 1편</p>
                 <p>알쓸신의 - 수술실 2편</p>
               </VideoTitleSection>
-
-              <Title2H4>입원환자</Title2H4>
-              <Indent2>
-                <StepDiv>
-                  <ol>
-                    <li>
-                      <h5>STEP 1</h5>
-                      <p>병실 → 수술전 처치실</p>
-                    </li>
-                    <li>
-                      <h5>STEP 1</h5>
-                      <p>병실 → 수술전 처치실</p>
-                    </li>
-                    <li>
-                      <h5>STEP 1</h5>
-                      <p>병실 → 수술전 처치실</p>
-                    </li>
-                    <li>
-                      <h5>STEP 1</h5>
-                      <p>병실 → 수술전 처치실</p>
-                    </li>
-                  </ol>
-                </StepDiv>
-              </Indent2>
-
-              <Indent2>
-                <SubTitleH5>수술전 처치실 입실</SubTitleH5>
-                <ListStyleUl>
-                  <li>수술실이 준비되면 이송 직원이 병실로 환자를 모시러 갑니다.</li>
-                  <li>환자가 수술실에 도착하면 수술전처치실에 입실하여 수술전 상태를 확인하고 수술에 필요한 처치를 받게 됩니다.</li>
-                </ListStyleUl>
-                <SubTitleH5>수술 진행</SubTitleH5>
-                <ListStyleUl>
-                  <li>해당 수술실에 들어오면 마취, 수술준비 및 피부소독 후 수술이 시작됩니다.</li>
-                  <li>직접적인 수술 시간외에 마취 및 수술준비로 보통 1시간에서 3시간정도 더 소요됩니다.</li>
-                  <li>수술마다 소요되는 시간이 다르고, 같은 수술이라도 환자의 상태 등 여러 가지 요소에 의해 수술 소요시 간은 달라질 수 있습니다.</li>
-                  <li>수술 자체에 걸리는 시간은 예상은 할 수 있으나 주치의사만이 판단이 가능합니다.</li>
-                </ListStyleUl>
-                <SubTitleH5>회복실 이동</SubTitleH5>
-                <ListStyleUl>
-                  <li>수술 종료 후 전신 마취 환자가 마취에서 깨어나 의식이 돌아올 때까지 회복실에 머물며 처치를 받게 됩니다.</li>
-                  <li>
-                    회복실 간호사와 마취과 의사가 상주하여 마취 후 합병증 예방 및 치료가 신속하고 효과적으로 행해 질 수 있도록 집중적인 처치를 하게 되고
-                    환자상태가 안정되면 병실로 이동하게 됩니다.
-                  </li>
-                  <li>회복에 걸리는 시간은 환자마다 차이가 있습니다.</li>
-                </ListStyleUl>
-                <SubTitleH5>병실 이동</SubTitleH5>
-                <ListStyleUl>
-                  <li>회복실에서 병실로 이동하기 직전 가족 대기실로 안내 방송을 합니다.</li>
-                  <li>수술 후 중환자실로 이동 하는 환자 및 국소마취 수술 환자는 수술이 끝난 후 회복실을 거치지 않고 바로 병실로 이동합니다.</li>
-                </ListStyleUl>
-                <SubTitleH5>가족 대기</SubTitleH5>
-                <ListStyleUl>
-                  <li>환자가 전처치실로 입실하면 가족들은 수술실 옆 ‘가족 대기실’에서 대기하게 됩니다.</li>
-                  <li>가족대기실에는 수술진행안내 현황판이 설치되어 있어 환자의 수술 진행 상황을 알려드립니다.</li>
-                  <li>수술 환자가 병실로 이동하기 전 안내 방송을 통해 병실이동을 알려 드립니다.</li>
-                  <li>방송을 들으신 보호자가 수술실 앞으로 오시면 환자와 함께 병실로 이동 하게 됩니다.</li>
-                </ListStyleUl>
-              </Indent2>
-              <Title2H4>통원 수술 환자</Title2H4>
-              <Indent2>
-                <ListStyleUl>
-                  <li>통원수술은 입원하지 않고 당일 내원하여 수술을 받고 회복후 귀가하게 됩니다.</li>
-                  <li>통원 수술 환자는 예약된 시간에 맞추어 본관 5층 ‘통원 수술실’이라고 표시된 곳으로 들어오신 후 직원의 안내에 따라 입실합니다.</li>
-                  <li>환자의 입실 후에는 가족들은 ‘가족 대기실’에서 대기하게 됩니다.</li>
-                  <li>유아, 소아</li>
-                  <SubListStyleDiv>
-                    <ul>
-                      <li>유·소아가 수술을 마치고 마취에서 깨어나면 상황에 따라 보호자 한 분이 회복실에 입실 하실 수 있습니다.</li>
-                      <li>보호자분 입실이 필요할 경우 안내하여 드립니다.</li>
-                    </ul>
-                  </SubListStyleDiv>
-                  <li>의사의 퇴원결정이 나면 수납하신후 귀가하게 됩니다.</li>
-                </ListStyleUl>
-              </Indent2>
             </Indent1>
+
+            <Title2H4>입원환자</Title2H4>
+            <Indent2>
+              <StepDiv>
+                <ol>
+                  <li>
+                    <h5>STEP 1</h5>
+                    <p>병실 → 수술전 처치실</p>
+                  </li>
+                  <li>
+                    <h5>STEP 2</h5>
+                    <p>수술실</p>
+                  </li>
+                  <li>
+                    <h5>STEP 3</h5>
+                    <p>회복실</p>
+                  </li>
+                  <li>
+                    <h5>STEP 4</h5>
+                    <p className="step4">병실 또는 중환자실</p>
+                  </li>
+                </ol>
+              </StepDiv>
+            </Indent2>
+
+            <Indent2>
+              <SubTitleH5>수술전 처치실 입실</SubTitleH5>
+              <ListStyleUl>
+                <li>수술실이 준비되면 이송 직원이 병실로 환자를 모시러 갑니다.</li>
+                <li>환자가 수술실에 도착하면 수술전처치실에 입실하여 수술전 상태를 확인하고 수술에 필요한 처치를 받게 됩니다.</li>
+              </ListStyleUl>
+              <SubTitleH5>수술 진행</SubTitleH5>
+              <ListStyleUl>
+                <li>해당 수술실에 들어오면 마취, 수술준비 및 피부소독 후 수술이 시작됩니다.</li>
+                <li>직접적인 수술 시간외에 마취 및 수술준비로 보통 1시간에서 3시간정도 더 소요됩니다.</li>
+                <li>수술마다 소요되는 시간이 다르고, 같은 수술이라도 환자의 상태 등 여러 가지 요소에 의해 수술 소요시 간은 달라질 수 있습니다.</li>
+                <li>수술 자체에 걸리는 시간은 예상은 할 수 있으나 주치의사만이 판단이 가능합니다.</li>
+              </ListStyleUl>
+              <SubTitleH5>회복실 이동</SubTitleH5>
+              <ListStyleUl>
+                <li>수술 종료 후 전신 마취 환자가 마취에서 깨어나 의식이 돌아올 때까지 회복실에 머물며 처치를 받게 됩니다.</li>
+                <li>
+                  회복실 간호사와 마취과 의사가 상주하여 마취 후 합병증 예방 및 치료가 신속하고 효과적으로 행해 질 수 있도록 집중적인 처치를 하게 되고
+                  환자상태가 안정되면 병실로 이동하게 됩니다.
+                </li>
+                <li>회복에 걸리는 시간은 환자마다 차이가 있습니다.</li>
+              </ListStyleUl>
+              <SubTitleH5>병실 이동</SubTitleH5>
+              <ListStyleUl>
+                <li>회복실에서 병실로 이동하기 직전 가족 대기실로 안내 방송을 합니다.</li>
+                <li>수술 후 중환자실로 이동 하는 환자 및 국소마취 수술 환자는 수술이 끝난 후 회복실을 거치지 않고 바로 병실로 이동합니다.</li>
+              </ListStyleUl>
+              <SubTitleH5>가족 대기</SubTitleH5>
+              <ListStyleUl>
+                <li>환자가 전처치실로 입실하면 가족들은 수술실 옆 ‘가족 대기실’에서 대기하게 됩니다.</li>
+                <li>가족대기실에는 수술진행안내 현황판이 설치되어 있어 환자의 수술 진행 상황을 알려드립니다.</li>
+                <li>수술 환자가 병실로 이동하기 전 안내 방송을 통해 병실이동을 알려 드립니다.</li>
+                <li>방송을 들으신 보호자가 수술실 앞으로 오시면 환자와 함께 병실로 이동 하게 됩니다.</li>
+              </ListStyleUl>
+            </Indent2>
+            <Title2H4>통원 수술 환자</Title2H4>
+            <Indent2>
+              <ListStyleUl>
+                <li>통원수술은 입원하지 않고 당일 내원하여 수술을 받고 회복후 귀가하게 됩니다.</li>
+                <li>통원 수술 환자는 예약된 시간에 맞추어 본관 5층 ‘통원 수술실’이라고 표시된 곳으로 들어오신 후 직원의 안내에 따라 입실합니다.</li>
+                <li>환자의 입실 후에는 가족들은 ‘가족 대기실’에서 대기하게 됩니다.</li>
+                <li>유아, 소아</li>
+                <SubListStyleDiv>
+                  <ul>
+                    <li>유·소아가 수술을 마치고 마취에서 깨어나면 상황에 따라 보호자 한 분이 회복실에 입실 하실 수 있습니다.</li>
+                    <li>보호자분 입실이 필요할 경우 안내하여 드립니다.</li>
+                  </ul>
+                </SubListStyleDiv>
+                <li>의사의 퇴원결정이 나면 수납하신후 귀가하게 됩니다.</li>
+              </ListStyleUl>
+            </Indent2>
           </section>
         </div>
       </div>

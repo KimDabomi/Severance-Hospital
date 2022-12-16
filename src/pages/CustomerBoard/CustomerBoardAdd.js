@@ -1,7 +1,7 @@
 /**
  * @ File Name: CustomerBoardAdd.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-12 15:15:00
+ * @ Last Update: 2022-12-14 15:15:00
  * @ Description: 고객의 소리 글쓰기 페이지
  */
 
@@ -189,7 +189,7 @@ const CustomerBoardAdd = memo(() => {
     const regex = RegexHelper.getInstance();
 
     try {
-      // regex.check(document.querySelector('#agree'),'개인정보 수집·이용에 동의하지 않을 경우 접수 불가합니다.')
+      regex.check(document.getElementsByName('agree'),'개인정보 수집·이용에 동의하지 않을 경우 접수 불가합니다.')
       regex.value(document.querySelector('#name'), '이름을 입력해주세요.')
       regex.value(document.querySelector('#tel2'), '연락처를 입력해주세요.')
       regex.value(document.querySelector('#tel3'), '연락처를 입력해주세요.')

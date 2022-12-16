@@ -29,8 +29,7 @@ export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", a
         const response = await axios.get(process.env.REACT_APP_DRUG2_API_URL,{
             params: {
                 serviceKey: process.env.REACT_APP_DRUG2_API_DECODING_KEY,
-                // serviceKey:'9Txp23emmXEQZ6s5oSTPMJdjECCgEFXkggChxH9y1+bSZmRIADuyyebZZLCD5CzjT6csz3QziklzOwFAI5h4Cw==',
-                type: 'json', //epdlxjvhaot
+                type: 'json', //데이터포맷
                 pageNo: payload.pageNo, //페이지번호
                 numOfRows: 12, //한 페이지 결과 수
             }
