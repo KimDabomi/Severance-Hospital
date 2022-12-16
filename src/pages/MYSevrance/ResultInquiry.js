@@ -1,8 +1,8 @@
 /**
  * @ File Name: ResultInquiry.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-12 18:05
- * @ Description: 결과조회 페이지
+ * @ Last Update: 2022-12-16 14:50
+ * @ Description: 결과조회 본인인증 페이지
  */
 
 import React, { memo } from "react";
@@ -15,8 +15,6 @@ import phone from "../../assets/img/img-login-Certified02.png";
 import official from "../../assets/img/img-login-Certified03.png";
 
 const Container = styled.div`
-  width: 1280px;
-  margin: auto;
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -168,8 +166,12 @@ const Container = styled.div`
 const ResultInquiry = memo(() => {
   const navigate = useNavigate();
 
-  const goLogin = e => {
-    navigate('/login');
+  const goLogin = (e) => {
+    navigate("/login");
+  };
+
+  const goResult = (e) => {
+    navigate('/result');
   };
 
   return (
@@ -191,13 +193,13 @@ const ResultInquiry = memo(() => {
           <div className="official">
             <img src={official} alt="officail" />
           </div>
-          <button type="button" className="ipin_btn">
+          <button type="button" className="ipin_btn" onClick={goResult}>
             아이핀 인증
           </button>
-          <button type="button" className="phone_btn">
+          <button type="button" className="phone_btn" onClick={goResult}>
             휴대폰 인증
           </button>
-          <button type="button" className="official_btn">
+          <button type="button" className="official_btn" onClick={goResult}>
             범용 공인인증서
           </button>
         </div>

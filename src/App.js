@@ -46,11 +46,12 @@ import NoticeView from "./pages/NewsHome/NoticeView";
 
 //마이페이지
 import MysevMain from "./pages/MYSevrance/MysevMain";
-import DetailsEdit from "./pages/MYSevrance/DetailsEdit";
-import ISevrance from "./pages/MYSevrance/ISevrance";
-import ChangePassward from "./pages/MYSevrance/ChangePassward";
-import ResultInquiry from "./pages/MYSevrance/ResultInquiry";
-import Withdraw from "./pages/MYSevrance/Withdraw";
+import DetailsEdit from './pages/MYSevrance/DetailsEdit';
+import ISevrance from './pages/MYSevrance/ISevrance';
+import ChangePassward from './pages/MYSevrance/ChangePassward';
+import ResultInquiry from './pages/MYSevrance/ResultInquiry';
+import Result from './pages/MYSevrance/Result';
+import Withdraw from './pages/MYSevrance/Withdraw';
 
 // 의료인 정보
 import StaffProfile from "./pages/staff/StaffProfile";
@@ -114,9 +115,10 @@ function App() {
         <Route path="/mysevrance" element={<MysevMain />} />
         <Route path="/mysevrance/iseverance/mywriting" element={<ISevrance />} />
         <Route path="/details_edit" element={<DetailsEdit />} />
-        <Route path="/change_passward" element={<ChangePassward />} />
-        <Route path="/resultinquiry" element={<ResultInquiry />} />
-        <Route path="/withdraw" element={<Withdraw />} />
+        <Route path='/change_passward' element={<ChangePassward />} />
+        <Route path='/resultinquiry' element={<ResultInquiry />} />
+        <Route path='/result' element={<Result />} />
+        <Route path='/withdraw' element={<Withdraw />} />
 
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
