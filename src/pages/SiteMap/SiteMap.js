@@ -220,9 +220,12 @@ const SiteMap = memo(() => {
           {/* 7 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
-              <Link to="/">병원소개</Link>
+              <Link to="/about_sev">병원소개</Link>
             </MenuTitleDiv>
             <MenuUl>
+              <MenuLi>
+                <Link to="/introduction">병원개요</Link>
+              </MenuLi>
               <MenuLi>
                 <Link to="/map.do">오시는 길</Link>
               </MenuLi>
