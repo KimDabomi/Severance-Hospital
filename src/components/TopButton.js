@@ -54,7 +54,7 @@ const TopButton = memo(() => {
   
     return (
     <Div>
-      <a className="topButton" onClick={()=>clickEvent} ref={topBtn}>
+      <a className="topButton" onClick={clickEvent} ref={topBtn}>
         TOP
       </a>
     </Div>
