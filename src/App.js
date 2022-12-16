@@ -2,17 +2,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-// 메인
+/** 메인 */
 import MainPage from "./pages/main/MainPage";
-
-// 사이트맵
+/** 사이트맵 */
 import AllMenu from "./pages/SiteMap/SiteMap";
-
-// 오시는 길
+/** 오시는 길 */
 import Map from "./pages/Map/Map";
-
 /** 이용안내 */
 import Guide from "./pages/Guide/Guide";
+/** 의료인 */
+import Cooperation from "./pages/MedicalStaff/Cooperation";
 
 // 로그인, 아이디/비밀번호 찾기
 import StaffSearch from "./pages/staff/StaffSearch";
@@ -47,11 +46,11 @@ import NoticeView from "./pages/NewsHome/NoticeView";
 
 //마이페이지
 import MysevMain from "./pages/MYSevrance/MysevMain";
-import DetailsEdit from './pages/MYSevrance/DetailsEdit';
-import ISevrance from './pages/MYSevrance/ISevrance';
-import ChangePassward from './pages/MYSevrance/ChangePassward';
-import ResultInquiry from './pages/MYSevrance/ResultInquiry';
-import Withdraw from './pages/MYSevrance/Withdraw';
+import DetailsEdit from "./pages/MYSevrance/DetailsEdit";
+import ISevrance from "./pages/MYSevrance/ISevrance";
+import ChangePassward from "./pages/MYSevrance/ChangePassward";
+import ResultInquiry from "./pages/MYSevrance/ResultInquiry";
+import Withdraw from "./pages/MYSevrance/Withdraw";
 
 // 의료인 정보
 import StaffProfile from "./pages/staff/StaffProfile";
@@ -68,17 +67,16 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* 메인 페이지 */}
+        {/* 메인 */}
         <Route path="/" exapt={true} element={<MainPage />} />
-
         {/* 사이트맵 */}
         <Route path="/all_menu" exapt={true} element={<AllMenu />} />
-
         {/* 이용안내 */}
         <Route path="/guide/*" element={<Guide />} />
-
-        {/* 오시는 길 페이지 */}
+        {/* 오시는 길 */}
         <Route path="/map.do/*" element={<Map />} />
+        {/* 의료인 */}
+        <Route path="/cooperation/*" element={<Cooperation />} />
 
         {/* 회원가입 */}
         <Route path="/join_way" element={<JoinWay />} />
@@ -112,13 +110,13 @@ function App() {
         <Route path="/news/media.do" element={<NewsView />} />
         <Route path="/news/notice.do" element={<NoticeView />} />
 
-         {/* 마이페이지 라우팅 */}
-        <Route path='/mysevrance' element={<MysevMain />}/>
-        <Route path='/mysevrance/iseverance/mywriting' element={<ISevrance />} />
+        {/* 마이페이지 라우팅 */}
+        <Route path="/mysevrance" element={<MysevMain />} />
+        <Route path="/mysevrance/iseverance/mywriting" element={<ISevrance />} />
         <Route path="/details_edit" element={<DetailsEdit />} />
-        <Route path='/change_passward' element={<ChangePassward />} />
-        <Route path='/resultinquiry' element={<ResultInquiry />} />
-        <Route path='/withdraw' element={<Withdraw />} />
+        <Route path="/change_passward" element={<ChangePassward />} />
+        <Route path="/resultinquiry" element={<ResultInquiry />} />
+        <Route path="/withdraw" element={<Withdraw />} />
 
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
@@ -126,8 +124,8 @@ function App() {
         <Route path="/apptSelect" element={<ApptSelect />} />
 
         {/* 병원개요 */}
-        <Route path='/about_sev' element={<AboutSev />} />
-        <Route path='/introduction' element={<Introduction />} />
+        <Route path="/about_sev" element={<AboutSev />} />
+        <Route path="/introduction" element={<Introduction />} />
       </Routes>
     </div>
   );

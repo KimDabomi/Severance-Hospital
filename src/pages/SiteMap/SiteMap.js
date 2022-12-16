@@ -85,7 +85,7 @@ const MenuTitleDiv = styled.div`
 /** 하위 메뉴 스타일 */
 const MenuLi = styled.li`
   margin-top: 20px;
-  
+
   a {
     font-size: 22px;
     line-height: 36px;
@@ -165,11 +165,19 @@ const SiteMap = memo(() => {
               <MenuLi>
                 <Link to="/guide/number.do">이용안내</Link>
                 <SubMenuUl>
-                <Link to="/guide/facility.do"><SubMenuLi>병원시설 안내</SubMenuLi></Link>
+                  <Link to="/guide/facility.do">
+                    <SubMenuLi>병원시설 안내</SubMenuLi>
+                  </Link>
                   <SubMenuLi>진료안내</SubMenuLi>
-                  <Link to="/guide/outpatient_info"> <SubMenuLi>외래이용 안내</SubMenuLi></Link>
-                  <Link to="/guide/hospitalization.do"> <SubMenuLi>입원생활 안내</SubMenuLi></Link>
-                  <Link to="/guide/operating-room.do"> <SubMenuLi>수술실 이용 안내</SubMenuLi></Link>
+                  <Link to="/guide/outpatient_info">
+                    <SubMenuLi>외래이용 안내</SubMenuLi>
+                  </Link>
+                  <Link to="/guide/hospitalization.do">
+                    <SubMenuLi>입원생활 안내</SubMenuLi>
+                  </Link>
+                  <Link to="/guide/operating-room.do">
+                    <SubMenuLi>수술실 이용 안내</SubMenuLi>
+                  </Link>
                 </SubMenuUl>
               </MenuLi>
               <MenuLi>
@@ -185,19 +193,23 @@ const SiteMap = memo(() => {
           {/* 4 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
-              <Link to="/">의료인</Link>
+              <Link to="/cooperation/hospital.do">의료인</Link>
             </MenuTitleDiv>
             <MenuUl>
               <MenuLi>
-                <Link to="/">진료의뢰</Link>
+                <Link to="/cooperation/hospital.do">진료의뢰</Link>
                 <SubMenuUl>
-                  <SubMenuLi>협력병원 현황</SubMenuLi>
-                  <SubMenuLi>협진병, 의원 현황</SubMenuLi>
+                  <Link to="/cooperation/hospital.do">
+                    <SubMenuLi>협력병원 현황</SubMenuLi>
+                  </Link>
+                  <Link to="/cooperation/doctor.do">
+                    <SubMenuLi>협진병, 의원 현황</SubMenuLi>
+                  </Link>
                 </SubMenuUl>
               </MenuLi>
             </MenuUl>
             <Back onClick={() => navigate(-1)}>
-              <img src={CloseWhite} />
+              <img src={CloseWhite} alt="닫기 버튼" />
             </Back>
           </MenuCategoryLi>
 

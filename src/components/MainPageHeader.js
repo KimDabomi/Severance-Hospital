@@ -167,7 +167,7 @@ const Header = () => {
               <MenuArticle to="/">환자/보호자</MenuArticle>
             </li>
             <li>
-              <MenuArticle to="/">의료인</MenuArticle>
+              <MenuArticle to="/cooperation/hospital.do">의료인</MenuArticle>
             </li>
             <li>
               <MenuArticle to="/customer.do">공감 Story</MenuArticle>
