@@ -1,13 +1,15 @@
 /**
- * @ File Name: Hospital.js
+ * @ File Name: Doctor.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
- * @ Last Update: 2022-12-16 15:02:00
- * @ Description: 협력병원 현황 페이지
+ * @ Last Update: 2022-12-18 15:02:00
+ * @ Description: 협진병, 의원 현황 페이지
  */
 
 /** import */
-import React, { memo, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import styled from "styled-components";
+import { Pagination } from "@mui/material";
+import { Link } from "react-router-dom";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -15,6 +17,8 @@ import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 // 지도 전체
 import Region from "../../assets/img/img-region.png";
 import Blank from "../../assets/img/blank.png";
+// 검색 아이콘
+import Search from "../../assets/img/ico-search-white.png";
 
 /** 리스트 스타일 */
 // ul태그
@@ -117,7 +121,7 @@ const MapListArticle = styled.article`
     flex-wrap: wrap;
 
     li {
-      width: 170px;
+      width: 39%; // 170px
       height: 26px;
       margin: 15px 0 !important;
       padding-left: 12px;
@@ -144,11 +148,122 @@ const MapListArticle = styled.article`
   }
 `;
 
-const Doctor = memo(() => {
+/** 검색 스타일 */
+const SearchSection = styled.section`
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+
+  input {
+    width: 100%;
+    height: 45px;
+
+    border: 1px solid #dadada;
+    padding: 8px 15px;
+    box-sizing: border-box;
+
+    font-size: 16px;
+    line-height: 27px;
+
+    &:focus {
+      border: none;
+      outline: 1px solid #0094fb;
+    }
+  }
+
+  button {
+    width: 60px;
+    height: 45px;
+
+    font-size: 16px;
+    margin-left: 10px;
+
+    color: #fff;
+    background-color: #0094fb;
+
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      width: 22px;
+      height: 26px;
+      background: url(${Search}) no-repeat;
+    }
+  }
+`;
+
+/** 검색 결과 블록 스타일 */
+const PartnerListBoxSection = styled.section`
+  margin-top: 30px;
+
+  ul {
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 2.3437%;
+
+    li {
+      width: 31.7708%;
+
+      border: 1px solid #c2c2c2;
+      border-radius: 8px;
+      box-sizing: border-box;
+
+      &:hover {
+        border-color: #0094fb;
+      }
+
+      &:hover a {
+        font-weight: bold;
+        color: #0094fb;
+      }
+    }
+
+    a {
+      width: 100%;
+      height: 60px;
+      display: block;
+
+      padding: 16px 20px;
+      box-sizing: border-box;
+
+      text-align: center;
+      color: #333;
+    }
+  }
+`;
+
+/** 페이지 블록 스타일 */
+const PaginationDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+`;
+
+const Hospital = memo(() => {
   // background 이미지의 위치 변경을 위한 상태값
   const [bgPosition, setBgPosition] = useState(-9168);
   // active
   const [activeList, setActiveList] = useState(1);
+
+  // 검색 결과 리스트 출력
+  const searchList = useCallback(() => {
+    const result = [];
+    for (let i = 0; i < 12; i++) {
+      result.push(
+        <li key={i}>
+          <Link to="/">{i}</Link>
+        </li>
+      );
+    }
+    return result;
+  }, []);
 
   return (
     <>
@@ -157,7 +272,7 @@ const Doctor = memo(() => {
       <section className="boxGuide">
         <img src={boxGuideDecor} alt="boxGuideDecor" />
         <ListStyleUl>
-          <li>전국 세브란스병원 협진병,의원 회원 현황입니다.</li>
+          <li>전국 세브란스병원 협진병, 의원 회원 현황입니다.</li>
         </ListStyleUl>
       </section>
 
@@ -534,23 +649,24 @@ const Doctor = memo(() => {
       </PartnerHospitalBoxSection>
 
       {/* 검색 */}
-      <section>
-        <input></input>
+      <SearchSection>
+        <input type="text" id="srchKwd" placeholder="협진병의원명 또는 지역을 입력해주세요." title="협력병원명 또는 지역을 검색"></input>
         <button>
           <i></i>
         </button>
-      </section>
+      </SearchSection>
 
-      {/* 검색 리스트 */}
-      <section>
-        <ul>
-          <li></li>
-        </ul>
-      </section>
+      {/* 검색 결과 리스트 */}
+      <PartnerListBoxSection>
+        <ul>{searchList()}</ul>
+      </PartnerListBoxSection>
 
-      {/* page number */}
+      {/* Pagination */}
+      <PaginationDiv>
+        <Pagination count={10} className="pagination" />
+      </PaginationDiv>
     </>
   );
 });
 
-export default Doctor;
+export default Hospital;
