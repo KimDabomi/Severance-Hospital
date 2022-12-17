@@ -21,12 +21,18 @@ const Cooperation = memo(() => {
   return (
     <>
       <Header />
+      {/* 배경 이미지 (GlobalStyles) */}
+      <div className="bgAll">
+        {/* 페이지 기본 구조 */}
+        <div className="pageCont">
 
-      <Routes>
-        <Route path="/hospital.do" element={<Hospital />} />
-        <Route path="/doctor.do" element={<Doctor />} />
-      </Routes>
-
+          <Routes>
+            <Route path="/hospital.do" element={<Hospital />} />
+            <Route path="/doctor.do" element={<Doctor />} />
+          </Routes>
+          
+        </div>
+      </div>
       <Footer />
     </>
   );
