@@ -8,56 +8,58 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import TopButton from '../../components/TopButton';
 
 const NoticeView = memo(() => {
-    return (
-        <div>
+  return (
+    <div>
+      <TopButton />
       <Header />
-          <div className='bgAll'>
-      <div className="pageCont">
-        <h1 className="pageTitle">공지사항</h1>
-        {/* 검색form */}
-        <form>
-          <div>
-            <div className="searchBox">
-              <input
-                type="text"
-                name="itemName"
-                placeholder="검색어를 입력해 주세요"
-                className="formControl"
-              />
-              <span>
-                <button type="submit" className="btnSearch">
-                  <i></i>
-                </button>
-              </span>
+      <div className="bgAll">
+        <div className="pageCont">
+          <h1 className="pageTitle">공지사항</h1>
+          {/* 검색form */}
+          <form>
+            <div>
+              <div className="searchBox">
+                <input
+                  type="text"
+                  name="itemName"
+                  placeholder="검색어를 입력해 주세요"
+                  className="formControl"
+                />
+                <span>
+                  <button type="submit" className="btnSearch">
+                    <i></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+
+          {/* 검색결과 */}
+          <div className="bbsList">
+            <div className="bbsItem">
+              <Link className="inner">
+                <div className="bbssubjectArea">
+                  <strong>title</strong>
+                </div>
+                <div className="infoArea">
+                  <span className="date">2022-11-30</span>
+                </div>
+              </Link>
             </div>
           </div>
-        </form>
 
-        {/* 검색결과 */}
-        <div className="bbsList">
-          <div className="bbsItem">
-            <Link className="inner">
-              <div className="bbssubjectArea">
-                <strong>title</strong>
-              </div>
-              <div className="infoArea">
-                <span className="date">2022-11-30</span>
-              </div>
-            </Link>
+          {/* 더보기버튼 */}
+          <div className="buttonContColumn">
+            <Link className="btnMore">더보기</Link>
           </div>
         </div>
-
-				{/* 더보기버튼 */}
-				<div className="buttonContColumn">
-          <Link className="btnMore">더보기</Link>
-        </div>
-      </div>
       </div>
       <Footer />
     </div>
-    );
+  );
 });
 
 export default NoticeView;

@@ -39,7 +39,7 @@ const TopButton = memo(() => {
 
   //스크롤 일정 내렸을 때 나타나기
   window.addEventListener('scroll',function(){
-    if(this.scrollY > 200){
+    if(this.scrollY > 250){
       topBtn.current.style.opacity = '1';
     }else{
       topBtn.current.style.opacity = '0';

@@ -10,6 +10,7 @@ import { Link,Routes,Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/MyPageHeader';
 import LoginFooter from "../../components/LoginFooter";
+import TopButton from '../../components/TopButton';
 //이미지 import 
 import mybgPattern from '../../assets/img/mybg-pattern.png'
 import myEdit from '../../assets/img/ico-mypage-edit@2x.png'
@@ -275,6 +276,7 @@ const MysevMain = memo(() => {
 
   return (
     <Div>
+      <TopButton />
       <MyPageHeader />
       <div className="content">
         <div className="pageCont">
