@@ -15,6 +15,7 @@ import Spinner from '../../components/Spinner';
 import styled from 'styled-components';
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import TopButton from '../../components/TopButton';
 
 import CustomerBoardHeader from './CustomerHeader';
 
@@ -254,6 +255,7 @@ const CustomerBoardAdd = memo(() => {
   return (
     <div>
       <Spinner loading={loading} />
+      <TopButton />
       <CustomerBoardAddCont>
         <Header />
         <CustomerBoardHeader />

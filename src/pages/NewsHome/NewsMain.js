@@ -9,6 +9,7 @@ import React, { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import TopButton from '../../components/TopButton';
 import corona from '../../assets/img/corona.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import { getYoutube } from '../../slices/YoutubeSlice';
@@ -87,6 +88,7 @@ const NewsMain = memo(() => {
 
   return (
     <Div>
+      <TopButton />
       <Header />
       <div className='bgAll'>
       <div className="pageCont">
