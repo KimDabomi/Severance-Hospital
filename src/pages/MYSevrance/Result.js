@@ -1,7 +1,7 @@
 /**
  * @ File Name: Result.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-16 14:50
+ * @ Last Update: 2022-12-19 16:30
  * @ Description: 결과조회 페이지
  */
 
@@ -93,7 +93,7 @@ const Container = styled.div`
           border-radius: 40px;
           max-width: 40px;
           height: 40px;
-          margin: 0 0 0 25px;
+          margin: 0 23px 0 25px;
         }
         // 상단 년월
         .react-calendar__navigation__label {
@@ -115,7 +115,7 @@ const Container = styled.div`
 
         // 요일섹션
         .react-calendar__month-view__weekdays {
-            margin-bottom: 15px;
+          margin-bottom: 15px;
 
           abbr {
             font-size: 16px;
@@ -125,15 +125,19 @@ const Container = styled.div`
         // 주말
         .react-calendar__month-view__weekdays__weekday {
           &:last-child {
-            color: rgb(0,148,251);
+            color: rgb(0, 148, 251);
           }
           &:first-child {
             color: #f76117;
           }
         }
         .react-calendar__month-view__days__day--weekend {
-          color: rgb(0,148,251) !important;
-          &:first-child,&:nth-child(8),&:nth-child(15),&:nth-child(22),&:nth-child(29) {
+          color: rgb(0, 148, 251) !important;
+          &:first-child,
+          &:nth-child(8),
+          &:nth-child(15),
+          &:nth-child(22),
+          &:nth-child(29) {
             color: #f76117 !important;
           }
         }
@@ -170,7 +174,7 @@ const Container = styled.div`
           left: 31%;
           bottom: 35%;
           display: block;
-          background: url(${prev}) right /cover;
+          background: url(${prev}) right / cover;
           background-color: #dadada;
           overflow: hidden;
           min-width: 25px;
@@ -186,7 +190,7 @@ const Container = styled.div`
           right: 31%;
           bottom: 35%;
           display: block;
-          background: url(${next}) left /cover;
+          background: url(${next}) left / cover;
           background-color: #dadada;
           min-width: 25px;
         }

@@ -5,19 +5,19 @@
  * @ Description: 마이세브란스 메인페이지
  */
 
-import React, { memo } from 'react';
-import { Link,Routes,Route, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import MyPageHeader from '../../components/MyPageHeader';
+import React, { memo } from "react";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
-import TopButton from '../../components/TopButton';
-//이미지 import 
-import mybgPattern from '../../assets/img/mybg-pattern.png'
-import myEdit from '../../assets/img/ico-mypage-edit@2x.png'
-import mybtn1 from '../../assets/img/main-ico-btn01@2x.png'
-import mybtn2 from '../../assets/img/main-ico-btn02@2x.png'
-import mybtn3 from '../../assets/img/main-ico-btn03@2x.png'
-import mybtn4 from '../../assets/img/main-ico-btn04@2x.png'
+import TopButton from "../../components/TopButton";
+//이미지 import
+import mybgPattern from "../../assets/img/mybg-pattern.png";
+import myEdit from "../../assets/img/ico-mypage-edit@2x.png";
+import mybtn1 from "../../assets/img/main-ico-btn01@2x.png";
+import mybtn2 from "../../assets/img/main-ico-btn02@2x.png";
+import mybtn3 from "../../assets/img/main-ico-btn03@2x.png";
+import mybtn4 from "../../assets/img/main-ico-btn04@2x.png";
 
 const Div = styled.article`
   .content {
@@ -36,7 +36,7 @@ const Div = styled.article`
   //그리드
   .gridItem {
     float: left;
-    
+
     width: calc(33% - 9px);
     height: 340px;
     border: 1px solid #e6e6e6;
@@ -69,11 +69,11 @@ const Div = styled.article`
       background-color: #f9f9f9;
       border: none;
       height: 224px;
-      .btnCont{
+      .btnCont {
         display: flex;
         width: 100%;
       }
-      .btn{
+      .btn {
         width: 50%;
         height: 110px;
         font-weight: 700;
@@ -88,33 +88,36 @@ const Div = styled.article`
       left: 33.3%;
       top: 575px;
       height: 224px;
-      .btnCont{
+      .btnCont {
         display: flex;
         width: 100%;
       }
-      .btn{
+      .btn {
         width: 50%;
         height: 110px;
         font-weight: 700;
         padding: 15px 20px;
         font-size: 16px;
         box-sizing: border-box;
-        border: none; border-radius: 0;
+        border: none;
+        border-radius: 0;
         background-color: #eef7fc;
 
-        p{
-          font-size: 18px;margin: 8px 0;
+        p {
+          font-size: 18px;
+          margin: 8px 0;
         }
-        .count{
-          text-align: right; font-size: 18px; margin: 8px 0;
-          a{
+        .count {
+          text-align: right;
+          font-size: 18px;
+          margin: 8px 0;
+          a {
             font-size: 30px;
             text-decoration: underline;
             margin-right: 10px;
           }
         }
       }
-      
     }
   }
 
@@ -126,9 +129,9 @@ const Div = styled.article`
 
     span {
       font-size: 24px;
-      font-family: 'NanumSquare', 'malgungothic', 'Helvetica Neue', Arial,
-        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+      font-family: "NanumSquare", "malgungothic", "Helvetica Neue", Arial,
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
       line-height: 38px;
       font-weight: bold;
     }
@@ -159,9 +162,9 @@ const Div = styled.article`
     width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
-    font-family: -apple-system, BlinkMacSystemFont, 'NanumGothic',
-      'malgungothic', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
-      'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-family: -apple-system, BlinkMacSystemFont, "NanumGothic",
+      "malgungothic", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
     .inputAddon {
       padding-left: 10px;
@@ -252,7 +255,7 @@ const Div = styled.article`
         background-size: 100%;
       }
       &::before {
-        content: '';
+        content: "";
         width: 60px;
         height: 60px;
         display: block;
@@ -266,12 +269,12 @@ const MysevMain = memo(() => {
   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
   const navigate = useNavigate();
 
-  const goDetailsEdit = e => {
-    navigate('/details_edit');
+  const goDetailsEdit = (e) => {
+    navigate("/details_edit");
   };
 
-  const goChangePw = e => {
-    navigate('/change_passward');
+  const goChangePw = (e) => {
+    navigate("/change_passward");
   };
 
   return (
@@ -364,10 +367,10 @@ const MysevMain = memo(() => {
               </div>
             </div>
             <div className="linkWrap">
-              <Link>검사결과</Link>
-              <Link>약처방정보</Link>
-              <Link>내원일자</Link>
-              <Link>입퇴원내역</Link>
+              <Link to="/result">검사결과</Link>
+              <Link to="/result">약처방정보</Link>
+              <Link to="/result">내원일자</Link>
+              <Link to="/result">입퇴원내역</Link>
             </div>
           </div>
           {/* 진료 및 검진예약 일정*/}
@@ -375,9 +378,9 @@ const MysevMain = memo(() => {
             <div className="titleWrap">
               <span>결과조회</span>
             </div>
-            <div className='resDataCont'>
-              <div className='nodata'>
-                <i className='nodataIcon'></i>
+            <div className="resDataCont">
+              <div className="nodata">
+                <i className="nodataIcon"></i>
                 <p>예약된 일정이 없습니다.</p>
               </div>
             </div>
@@ -387,41 +390,62 @@ const MysevMain = memo(() => {
             <div className="titleWrap">
               <span>나의 후원/자원봉사</span>
             </div>
-            <div className='inputGroup'>
+            <div className="inputGroup">
               <div className="btnCont">
-                <button type="button" className="btn" ><a href='https://secure.donus.org/severance/pay/step1' target="_blank" rel="noopener noreferrer">
-                  후원하기
-                </a>
+                <button type="button" className="btn">
+                  <a
+                    href="https://secure.donus.org/severance/pay/step1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    후원하기
+                  </a>
                 </button>
                 <button type="button" className="btn">
-                <a>
-                자원봉사<br></br>신청내역
-                </a>
+                  <a>
+                    자원봉사<br></br>신청내역
+                  </a>
                 </button>
               </div>
             </div>
           </div>
           {/* 나의 작성글 */}
           <div className="gridItem">
-          <div className="titleWrap">
+            <div className="titleWrap">
               <span>나의 작성글</span>
             </div>
-            <div className='inputGroup'>
+            <div className="inputGroup">
               <div className="btnCont">
-                <div  className="btn">
+                <div className="btn">
                   <p>칭찬합니다</p>
-                  <div className='count'><Link to='/mysevrance/iseverance/mywriting' className='textPrimary'>0</Link><span>건</span></div>
+                  <div className="count">
+                    <Link
+                      to="/mysevrance/iseverance/mywriting"
+                      className="textPrimary"
+                    >
+                      0
+                    </Link>
+                    <span>건</span>
+                  </div>
                 </div>
                 <div className="btn">
                   <p>건의합니다</p>
-                  <div className='count'><Link to='/mysevrance/iseverance/mywriting' className='textPrimary'>0</Link><span>건</span></div>
+                  <div className="count">
+                    <Link
+                      to="/mysevrance/iseverance/mywriting"
+                      className="textPrimary"
+                    >
+                      0
+                    </Link>
+                    <span>건</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <LoginFooter/>
+      <LoginFooter />
     </Div>
   );
 });
