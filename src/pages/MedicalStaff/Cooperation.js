@@ -16,6 +16,10 @@ import Footer from "../../components/Footer";
 import Hospital from "./Hospital";
 // 협진병, 의원 현황
 import Doctor from "./Doctor";
+// 협력병원 현황 상세
+import HospitalDetail from "./HospitalDetail";
+// 협진병, 의원 현황 상세
+import DoctorDetail from "./DoctorDetail";
 
 const Cooperation = memo(() => {
   return (
@@ -29,6 +33,8 @@ const Cooperation = memo(() => {
           <Routes>
             <Route path="/hospital.do" element={<Hospital />} />
             <Route path="/doctor.do" element={<Doctor />} />
+            <Route path="/hospital-detail.do" element={<HospitalDetail />} />
+            <Route path="/doctor-detail.do" element={<DoctorDetail />} />
           </Routes>
           
         </div>
