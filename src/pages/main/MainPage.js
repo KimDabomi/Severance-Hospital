@@ -30,6 +30,8 @@ import MainSliderCarousel from "../../components/MainSliderCarousel";
 import NewsSliderCarousel from "../../components/NewsSliderCarousel";
 // 하단 배너 슬라이더캐러셀
 import MktSliderCarousel from "../../components/MktSliderCarousel";
+// 페이지 최상단 이동 버튼
+import TopButton from "../../components/TopButton";
 
 /** 이미지 참조 */
 // 전화 및 닫기버튼 이미지
@@ -250,7 +252,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 `;
 
 /** 카테고리별 병원 바로가기 스타일 */
@@ -580,6 +582,7 @@ const MainPage = memo(() => {
 
   return (
     <>
+      <TopButton />
       <TopBannerSection className={cookies[COOKIE_KEY1] || cookies[COOKIE_KEY2] ? startPoint : openCloseAni}>
         <div className="topBannerContent">
           <article className="firstItem">

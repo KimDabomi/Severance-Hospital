@@ -31,7 +31,7 @@ const Meta = (props) => {
         font-family: 'NanumGothicBold';
         font-family: 'NanumGothicExtraBold'; */}
         <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet"></link>
-        
+
         {/* 나눔스퀘어
         font-family: 'NanumSquareLight';
         font-family: 'NanumSquare';

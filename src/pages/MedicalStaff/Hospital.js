@@ -258,7 +258,7 @@ const Hospital = memo(() => {
     for (let i = 0; i < 12; i++) {
       result.push(
         <li key={i}>
-          <Link to="/">{i}</Link>
+          <Link to="/cooperation/hospital-detail.do">{i}</Link>
         </li>
       );
     }
