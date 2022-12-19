@@ -16,6 +16,7 @@ import { useQueryString } from '../../hooks/useQueryString';
 
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import TopButton from '../../components/TopButton';
 import Spinner from '../../components/Spinner'
 import CustomerBoardHeader from './CustomerHeader';
 import { Pagination } from '@mui/material';
@@ -83,6 +84,7 @@ const CustomerBoardList = memo(() => {
   return (
     <div >
       <Spinner loading={loading} />
+      <TopButton />
       <CustomerBoardCont>
         <Header />
         <CustomerBoardHeader />

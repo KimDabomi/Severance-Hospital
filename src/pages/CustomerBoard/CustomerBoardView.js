@@ -20,6 +20,7 @@ import styled from 'styled-components';
 import CustomerBoardHeader from './CustomerHeader';
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import TopButton from '../../components/TopButton';
 
 const CustomerBoardView = memo(() => {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ const CustomerBoardView = memo(() => {
   return (
     <div>
       <Spinner loading={loading} />
+      <TopButton />
         <Header />
         <CustomerBoardHeader />
       <div className="pageCont">
