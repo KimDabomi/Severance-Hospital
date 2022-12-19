@@ -6,7 +6,7 @@
  */
 
 /** import */
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -15,6 +15,7 @@ import styled from "styled-components";
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 // 집 아이콘
 import home from "../../assets/img/ico-lg-home-blue@2x.png";
+import homeGray from "../../assets/img/ico-lg-home-gray@2x.png";
 // 주소 아이콘
 import address from "../../assets/img/ico-education-adress@2x.png";
 // 전화 아이콘
@@ -98,6 +99,10 @@ const DetailDataStyle = styled.section`
 
         background: url(${home}) no-repeat center / cover;
       }
+
+      .grayIcon {
+        background: url(${homeGray}) no-repeat center / cover;
+      }
     }
   }
 
@@ -162,7 +167,10 @@ const MapStyle = styled.div`
 `;
 
 const HospitalDetail = memo(() => {
+  // KAKAO MAP OPEN API
   const { kakao } = window;
+  // a태그 url 상태값 (임시)
+  const [url, setUrl] = useState();
 
   useEffect(() => {
     // 주소-좌표 변환 객체를 생성합니다
@@ -217,8 +225,8 @@ const HospitalDetail = memo(() => {
         <h4>
           <span>(신)제일병원</span>
           {/* @todo: url data 적용 */}
-          <a href="http://www.kyungheehp.co.kr" target="_black" rel="noopener noreferrer">
-            <i />
+          <a href={url} target="_black" rel="noopener noreferrer">
+            <i className={url ? "" : "grayIcon"} />
           </a>
         </h4>
 
