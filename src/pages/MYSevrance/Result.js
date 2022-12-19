@@ -1,7 +1,7 @@
 /**
  * @ File Name: Result.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-16 14:50
+ * @ Last Update: 2022-12-19 16:30
  * @ Description: 결과조회 페이지
  */
 
@@ -90,8 +90,10 @@ const Container = styled.div`
         // 오늘 날짜
         .react-calendar__tile--now {
           background-color: #e6e6e6 !important;
-          color: #333;
-          border-radius: 50%;
+          border-radius: 40px;
+          max-width: 40px;
+          height: 40px;
+          margin: 0 23px 0 25px;
         }
         // 상단 년월
         .react-calendar__navigation__label {
@@ -99,6 +101,10 @@ const Container = styled.div`
             font-size: 24px;
             font-weight: bold;
             padding: 0;
+          }
+          &:hover {
+            background-color: #fff;
+            cursor: text;
           }
         }
         .react-calendar__navigation {
@@ -109,14 +115,37 @@ const Container = styled.div`
 
         // 요일섹션
         .react-calendar__month-view__weekdays {
+          margin-bottom: 15px;
+
           abbr {
             font-size: 16px;
             text-decoration: none;
           }
         }
+        // 주말
+        .react-calendar__month-view__weekdays__weekday {
+          &:last-child {
+            color: rgb(0, 148, 251);
+          }
+          &:first-child {
+            color: #f76117;
+          }
+        }
+        .react-calendar__month-view__days__day--weekend {
+          color: rgb(0, 148, 251) !important;
+          &:first-child,
+          &:nth-child(8),
+          &:nth-child(15),
+          &:nth-child(22),
+          &:nth-child(29) {
+            color: #f76117 !important;
+          }
+        }
+
         // 날짜 하나하나  모양
         .react-calendar__tile {
-          padding: 17px;
+          margin-bottom: 15px;
+          font-size: 16px;
         }
         .react-calendar__month-view__days__day {
           width: 50px;
@@ -135,31 +164,35 @@ const Container = styled.div`
         }
         // 월 이동 버튼
         .react-calendar__navigation__prev-button {
-          display: block;
-          margin: 0 5px;
-          height: 25px;
-          border-radius: 20px;
-          text-indent: -9999px;
-          position: absolute;
-          left: 28%;
-          bottom: 35%;
-          display: block;
-          background: url(${prev}) right /cover;
-          background-color: #dadada;
-        }
-        .react-calendar__navigation__next-button {
-          
+          display: inline-block;
           width: 25px;
           margin: 0 5px;
           height: 25px;
-          border-radius: 20px;
+          border-radius: 50%;
           text-indent: -9999px;
           position: absolute;
-          right: 28%;
+          left: 31%;
           bottom: 35%;
           display: block;
-          background: url(${next}) left /cover;
+          background: url(${prev}) right / cover;
           background-color: #dadada;
+          overflow: hidden;
+          min-width: 25px;
+        }
+        .react-calendar__navigation__next-button {
+          display: inline-block;
+          width: 25px;
+          margin: 0 5px;
+          height: 25px;
+          border-radius: 50%;
+          text-indent: -9999px;
+          position: absolute;
+          right: 31%;
+          bottom: 35%;
+          display: block;
+          background: url(${next}) left / cover;
+          background-color: #dadada;
+          min-width: 25px;
         }
       }
 
@@ -300,7 +333,8 @@ const ResultInquiry = memo(() => {
                 onChange={onChange}
                 value={value}
                 className="calendar"
-                formatDay={(locale, date) => moment(date).format("DD")}
+                formatDay={(locale, date) => moment(date).format("D")}
+                calendarType="US"
               />
               <div className="disc">
                 <ul>
