@@ -216,6 +216,7 @@ const HospitalDetail = memo(() => {
       <DetailDataStyle>
         <h4>
           <span>경희요양병원</span>
+          {/* @todo: url data 적용 */}
           <a href="http://www.kyungheehp.co.kr" target="_black" rel="noopener noreferrer">
             <i />
           </a>
