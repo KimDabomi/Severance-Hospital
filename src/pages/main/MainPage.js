@@ -583,6 +583,7 @@ const MainPage = memo(() => {
   return (
     <>
       <TopButton />
+
       <TopBannerSection className={cookies[COOKIE_KEY1] || cookies[COOKIE_KEY2] ? startPoint : openCloseAni}>
         <div className="topBannerContent">
           <article className="firstItem">

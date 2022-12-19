@@ -13,6 +13,8 @@ import styled from "styled-components";
 // 헤더 푸터
 import Header from "../../components/MainPageHeader";
 import Footer from "../../components/Footer";
+// 페이지 최상단 이동 버튼
+import TopButton from "../../components/TopButton";
 // 약도 및 주소 안내
 import Content1 from "./Content1";
 // 오시는 방법
@@ -116,7 +118,9 @@ const Map = memo(() => {
 
   return (
     <>
+      <TopButton />
       <Header />
+
       {/* 배경 이미지 (GlobalStyles) */}
       <div className="bgAll">
         {/* 페이지 기본 구조 */}
@@ -158,6 +162,7 @@ const Map = memo(() => {
           </Routes>
         </div>
       </div>
+
       <Footer />
     </>
   );
