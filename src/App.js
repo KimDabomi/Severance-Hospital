@@ -31,6 +31,7 @@ import JoinComplete from "./pages/Join/JoinComplete";
 import JoinAlready from "./pages/Join/JoinAlready";
 
 //고객의소리
+import CustomerBoardMain from './pages/CustomerBoard/CustomerMain';
 import CustomerBoardList from "./pages/CustomerBoard/CustomerBoardList";
 import CustomerBoardAdd from "./pages/CustomerBoard/CustomerBoardAdd";
 import CustomerBoardView from "./pages/CustomerBoard/CustomerBoardView";
@@ -97,15 +98,15 @@ function App() {
         <Route path="/find_password_email" element={<FindPasswordEmail />} />
 
         {/* 고객의소리 페이지 라우팅*/}
-        <Route path="/customer.do" element={<CustomerBoardList />} />
+        <Route path="/customer.do/*" element={<CustomerBoardMain />} />
+        {/* <Route path="/customer.do" element={<CustomerBoardList />} />
         <Route path="/suggest.do" element={<CustomerBoardAdd />} />
-        <Route path="/suggestion/:id" element={<CustomerBoardView />} />
+        <Route path="/suggestion/:id" element={<CustomerBoardView />} /> */}
         <Route path="/staff" element={<StaffSearch />} />
         <Route path="/staff/*" element={<StaffProfile />} />
 
         {/* 의약품검색 페이지 라우팅 */}
         <Route path="/drug.do/*" element={<DrugSearchMain />} />
-        {/* <Route path="/drug.do/drug/:id" element={<DrugInfo />} /> */}
 
         {/* 뉴스홈 페이지 라우팅 */}
         <Route path="/news" element={<NewsMain />} />
