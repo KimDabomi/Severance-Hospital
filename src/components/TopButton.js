@@ -14,7 +14,7 @@ const Div = styled.div`
     box-sizing: border-box;
     position: fixed;
     bottom: 15px;
-    right: 15px;
+    right: 30px;
     margin-left: 0;
     position: fixed;
     z-index: 100;
