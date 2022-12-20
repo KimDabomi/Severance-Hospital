@@ -58,6 +58,12 @@ import BtnMorePlus from "../../assets/img/btn-more-plus.jpg";
 // mkt banner 배경 이미지
 import BgMktBanner from "../../assets/img/bg-mkt-banner.jpg";
 
+/** Container */
+const Container = styled.main`
+  width: 100%;
+  overflow-x: hidden;
+`;
+
 /** 상단 배너 스타일 */
 const TopBannerSection = styled.section`
   width: 100%;
@@ -581,7 +587,7 @@ const MainPage = memo(() => {
   }, []);
 
   return (
-    <>
+    <Container>
       <TopButton />
 
       <TopBannerSection className={cookies[COOKIE_KEY1] || cookies[COOKIE_KEY2] ? startPoint : openCloseAni}>
@@ -626,15 +632,6 @@ const MainPage = memo(() => {
       <MainPageHeader />
 
       <Main>
-        {/* <SlideSection>
-          <img src={MainImage} alt="main_img" />
-          <article>
-            <span className="slide_title">
-              <strong>공감,</strong> 또 하나의 치료
-            </span>
-            <span className="slide_text">질병 치료를 넘어 환자의 마음까지 치유하겠습니다.</span>
-          </article>
-        </SlideSection> */}
         <MainSliderCarousel />
 
         <HospitalSection>
@@ -779,7 +776,7 @@ const MainPage = memo(() => {
       </Main>
 
       <Footer />
-    </>
+    </Container>
   );
 });
 
