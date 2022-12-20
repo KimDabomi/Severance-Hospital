@@ -6,25 +6,25 @@
  */
 
 import React, { memo } from 'react';
-import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import DrugSearch from './DrugSearch';
-import TabShape from './TabShape';
-import TabInfo from './TabInfo';
 import DrugInfo from './DrugInfo';
 import Header from '../../components/MainPageHeader';
 import Footer from '../../components/Footer';
+import TopButton from '../../components/TopButton';
 
 const DrugSearchMain = memo(() => {
   return (
     <div>
+      <TopButton />
       <Header />
       <div className="bgAll">
         <div className="pageCont">
           <Routes>
             <Route path="/*" element={<DrugSearch />} />
-			<Route path="/tab-info/:id" element={<DrugInfo />} />
-			<Route path="/tab-shape/:id" element={<DrugInfo />} />
+            <Route path="/tab-info/:id" element={<DrugInfo />} />
+            <Route path="/tab-shape/:id" element={<DrugInfo />} />
           </Routes>
         </div>
       </div>

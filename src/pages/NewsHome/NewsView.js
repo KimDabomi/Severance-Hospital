@@ -13,8 +13,6 @@ import TopButton from '../../components/TopButton';
 const NewsView = memo(() => {
   return (
     <div>
-      <TopButton />
-      <Header />
       <div className='bgAll'>
       <div className="pageCont">
         <h1 className="pageTitle">언론보도</h1>
@@ -57,7 +55,6 @@ const NewsView = memo(() => {
         </div>
       </div>
       </div>
-      <Footer />
     </div>
   );
 });

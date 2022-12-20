@@ -13,8 +13,7 @@ import RegexHelper from '../../helper/RegexHelper';
 
 import Spinner from '../../components/Spinner';
 import styled from 'styled-components';
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
+
 import TopButton from '../../components/TopButton';
 
 import CustomerBoardHeader from './CustomerHeader';
@@ -48,7 +47,7 @@ const CustomerBoardAddCont = styled.div`
       content: '';
       border: 0;
       border-radius: 50%;
-      background: #959595 url(./img/ico-checkbox-checked-white.png) no-repeat 45% center !important;
+      background: #959595 url(../../img/ico-checkbox-checked-white.png) no-repeat 45% center !important;
       background-size: 11px 8px !important;
     }
     .checkBox:checked + label::before {
@@ -190,7 +189,7 @@ const CustomerBoardAdd = memo(() => {
     const regex = RegexHelper.getInstance();
 
     try {
-      // regex.check(document.getElementByName('agree'),'개인정보 수집·이용에 동의하지 않을 경우 접수 불가합니다.')
+      regex.check(document.getElementsByName('agree'),'개인정보 수집·이용에 동의하지 않을 경우 접수 불가합니다.')
       regex.value(document.querySelector('#name'), '이름을 입력해주세요.')
       regex.value(document.querySelector('#tel2'), '연락처를 입력해주세요.')
       regex.value(document.querySelector('#tel3'), '연락처를 입력해주세요.')
@@ -229,7 +228,7 @@ const CustomerBoardAdd = memo(() => {
     ).then((result) => {
       // console.log(result);
       //처리가 완료된 후 상세 페이지로 이동
-      navigate(`/suggestion/${result.payload.id}`);
+      navigate(`customer/suggestion/${result.payload.id}`);
     });
   }, []);
 
@@ -257,7 +256,6 @@ const CustomerBoardAdd = memo(() => {
       <Spinner loading={loading} />
       <TopButton />
       <CustomerBoardAddCont>
-        <Header />
         <CustomerBoardHeader />
 
         {error ? (
@@ -298,7 +296,7 @@ const CustomerBoardAdd = memo(() => {
                 id='agree'
                 name="agree"
                 className="checkBox"
-                required
+                
               />
               <label htmlFor="agree">개인정보 수집·이용에 동의합니다.</label>
             </p>
@@ -503,7 +501,6 @@ const CustomerBoardAdd = memo(() => {
           </div>
         </div>
       </CustomerBoardAddCont>
-      <Footer />
     </div>
   );
 });

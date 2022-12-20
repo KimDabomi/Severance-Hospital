@@ -86,7 +86,6 @@ const CustomerBoardList = memo(() => {
       <Spinner loading={loading} />
       <TopButton />
       <CustomerBoardCont>
-        <Header />
         <CustomerBoardHeader />
         <div className="pageCont">
         <h4 className="pageSubtitle">고객의소리 게시판</h4>
@@ -113,7 +112,7 @@ const CustomerBoardList = memo(() => {
                       return (
                         <tr key={v.id}>
                           <td>{v.id}</td>
-                          <td><NavLink to={`/suggestion/${v.id}`} className='visited'>{v.title}</NavLink></td>
+                          <td><NavLink to={`/customer.do/suggestion/${v.id}`} className='visited'>{v.title}</NavLink></td>
                           <td>{v.name}</td>
                           <td>{dayjs(new Date(v.date)).format('YYYY/MM/DD')}</td>
                         </tr>
@@ -131,12 +130,11 @@ const CustomerBoardList = memo(() => {
         )}
 
         <div className='buttonContColumn'>
-          <NavLink className='buttonBlue' to="/suggest.do">글쓰기</NavLink>
+          <NavLink className='buttonBlue' to="/customer.do/suggest.do">글쓰기</NavLink>
           <Pagination count={10} className="paging" />
         </div>
         </div>
       </CustomerBoardCont>
-      <Footer />
     </div>
   );
 });
