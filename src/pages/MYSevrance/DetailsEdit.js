@@ -14,7 +14,6 @@ import styled from "styled-components";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 const Container = styled.div`
-  width: 1280px;
   margin: auto;
   h1 {
     text-align: center;

@@ -13,8 +13,7 @@ import styled from "styled-components";
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 
 const Container = styled.div`
-  width: 1280px;
-  margin: auto;
+
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -22,10 +21,12 @@ const Container = styled.div`
     font-weight: bold;
   }
   h4 {
+    width: 1280px;
     font-size: 20px;
     line-height: 30px;
     font-weight: bold;
     margin-bottom: 20px !important;
+    margin: auto;
   }
   .boxGuide {
     max-width: 1280px;
