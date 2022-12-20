@@ -30,6 +30,7 @@ const Div = styled.div`
     color: #333;
     transition: all 0.3s ease;
     cursor: pointer;
+    opacity: 0;
   }
 `;
 
