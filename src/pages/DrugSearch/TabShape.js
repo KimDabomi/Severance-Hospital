@@ -8,6 +8,7 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import TopButton from '../../components/TopButton';
 
 
 const DrugCont = styled.div`
@@ -197,6 +198,7 @@ const DrugCont = styled.div`
 const TabShape = memo(() => {
   return (
     <DrugCont>
+      <TopButton />
       <fieldset>
         <form>
           <div className="drugOption">

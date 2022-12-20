@@ -6,7 +6,7 @@
  */
 
 import React, { memo, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/Spinner'
 import RegexHelper from '../../helper/RegexHelper';
@@ -14,6 +14,9 @@ import RegexHelper from '../../helper/RegexHelper';
 import { useSelector, useDispatch } from 'react-redux';
 // Slice에 정의된 액션함수들 참조
 import { getDrugSearch } from '../../slices/DrugSearchSlice';
+import TopButton from '../../components/TopButton';
+import DrugInfo from './DrugInfo';
+
 
 const DrugCont = styled.div`
 
@@ -50,6 +53,7 @@ const TabInfo = memo(() => {
 			return;
 		}
 
+		//검색어를 slice에 전달
 		dispatch(getDrugSearch({
 			item_name: document.querySelector('#itemName').value
 		}));
@@ -71,8 +75,15 @@ const TabInfo = memo(() => {
 		}));
 	})
 
+	// 출력하는 함수
+	const renderFunc = (e)=> {
+		return (<h1>안녕하세요</h1>);
+	};
+	
+
 	return (
 		<DrugCont>
+			<TopButton />
 			<Spinner loading={loading} />
 
 			<form>
@@ -118,14 +129,14 @@ const TabInfo = memo(() => {
 								// console.log(v);
 								return (
 									<li key={i} className="drugList">
-										<Link className="viewLink">
+										<Link className="viewLink" to={`${v.ITEM_SEQ}`}>
 											{v.ITEM_NAME}
 										</Link>
 									</li>
 								)
 							})}
 						</ul>
-						{/* // 페이지가 2페이지 이상일 경우 */}
+						{/* // 페이지가 2페이지 이상일 경우 더보기 버튼*/}
 						{data.totalCount> 12 ?
 							<div className="buttonContColumn">
 								<Link className="btnMore" onClick={pagePlus}>더보기<span>({data.pageNo*12}/{data.totalCount})</span></Link>
@@ -142,6 +153,7 @@ const TabInfo = memo(() => {
 				)
 			)
 			}
+	
 		</DrugCont>
 	);
 });

@@ -47,7 +47,7 @@ export const getDrugItem = createAsyncThunk("DrugSearchSlice/getDrugItem", async
 
     //환경설정 파일에 정의된 URL에서 ':id' 부분을 찾아 payload를 통해 전달된 일련번호로 치환
     //어떤 항목을 수정할지 판별할 id가 필요
-    const URL = process.env.REACT_APP_API_DEPARTMENT_ADD.replace(':id',payload.id);
+    const URL = process.env.REACT_APP_DRUG2_API_URL.replace(':id',payload.id);
 
     try {
         const response = await axios.get(URL);

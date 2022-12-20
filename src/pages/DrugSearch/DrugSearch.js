@@ -10,9 +10,6 @@ import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
 
 import TabShape from './TabShape';
 import TabInfo from './TabInfo';
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
-import TopButton from '../../components/TopButton';
 
 const DrugSearch = memo(() => {
   /** url의 경로 구조분해 */
@@ -20,10 +17,6 @@ const DrugSearch = memo(() => {
 
   return (
     <div>
-      <TopButton />
-      <Header />
-      <div className="bgAll">
-        <div className="pageCont">
           <h1 className="pageTitle">의약품</h1>
 
           <nav className="tabMenu">
@@ -40,9 +33,6 @@ const DrugSearch = memo(() => {
             <Route path="tab-shape" element={<TabShape />} />
             <Route path="tab-info" element={<TabInfo />} />
           </Routes>
-        </div>
-      </div>
-      <Footer />
     </div>
   );
 });
