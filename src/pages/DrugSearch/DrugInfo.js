@@ -1,20 +1,48 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-11-28 15:1:00
+ * @ Last Update: 2022-12-18 19:1:00
  * @ Description: 의약품 검색 상세페이지
  */
 
-import React, { memo } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
+import React, { memo, useEffect, useMemo, useCallback } from 'react';
+import { Link, useParams, useNavigate, Routes,Route } from 'react-router-dom';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { getDrugItem } from '../../slices/DrugSearchSlice';
+
+import Spinner from '../../components/Spinner';
 
 const DrugInfo = memo(() => {
+  /** path파라미터 받기 */
+  const { id } = useParams();
+  console.log('id=', id);
+
+  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
+  const navigate = useNavigate();
+
+  //dispatch함수 생성
+  const dispatch = useDispatch();
+  //hook을 통해 slice가 관리하는 상태값 가져오기
+  const { data, loading, error } = useSelector(
+    (state) => state.DrugSearchSlice
+  );
+
+  /** 데이터 가져오기 */
+  useEffect(()=>{
+    dispatch(getDrugItem({id:id}));
+  },[]);
+
+  if(data){
+    console.log(data);
+  }
+
+
+
+
   return (
     <div>
-      <Header />
-      <div className="pageCont">
+      <Spinner loading={loading} />
         <h1 className="pageTitle">의약품 정보</h1>
         <hr />
         <div className="subjectArea">
@@ -56,8 +84,6 @@ const DrugInfo = memo(() => {
           </button>
         </div>
       </div>
-      <Footer />
-    </div>
   );
 });
 
