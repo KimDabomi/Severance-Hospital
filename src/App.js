@@ -90,7 +90,7 @@ function App() {
         <Route path="/join_already" element={<JoinAlready />} />
 
         {/* 로그인, 아이디/비밀번호 찾기 */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login/*" element={<Login />} />
         <Route path="/find_id" element={<FindId />} />
         <Route path="/find_id_email" element={<FindIdEmail />} />
         <Route path="/find_password" element={<FindPassword />} />

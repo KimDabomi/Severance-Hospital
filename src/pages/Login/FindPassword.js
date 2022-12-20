@@ -1,7 +1,7 @@
 /**
  * @ File Name: FindPassword.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-08 15:00
+ * @ Last Update: 2022-12-20 18:00
  * @ Description: 비밀번호 찾기 페이지
  */
 
@@ -179,18 +179,6 @@ const FindId = memo(() => {
   const navigate = useNavigate();
   const [input, setInput] = useState([]);
 
-  const goIpin = (e) => {
-    navigate("/");
-  };
-
-  const goPhone = (e) => {
-    navigate("/");
-  };
-
-  const goOfficial = (e) => {
-    navigate("/");
-  };
-
   const goEmail = (e) => {
     navigate("/find_password_email");
   };
@@ -242,13 +230,13 @@ const FindId = memo(() => {
           <div className="certified">
             <img src={certified} alt="certified" />
           </div>
-          <button type="button" className="ipin_btn" onClick={goIpin}>
+          <button type="button" className="ipin_btn" onClick={goEmail}>
             아이핀 인증
           </button>
-          <button type="button" className="phone_btn" onClick={goPhone}>
+          <button type="button" className="phone_btn" onClick={goEmail}>
             휴대폰 인증
           </button>
-          <button type="button" className="official_btn" onClick={goOfficial}>
+          <button type="button" className="official_btn" onClick={goEmail}>
             범용 공인인증
           </button>
           <button
