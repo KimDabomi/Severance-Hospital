@@ -16,7 +16,7 @@ import {
 } from '../../slices/CustomerBoardSlice';
 import dayjs from 'dayjs';
 import Spinner from '../../components/Spinner';
-import styled from 'styled-components';
+
 import CustomerBoardHeader from './CustomerHeader';
 import TopButton from '../../components/TopButton';
 

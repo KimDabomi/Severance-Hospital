@@ -32,19 +32,13 @@ import JoinAlready from "./pages/Join/JoinAlready";
 
 //고객의소리
 import CustomerBoardMain from './pages/CustomerBoard/CustomerMain';
-import CustomerBoardList from "./pages/CustomerBoard/CustomerBoardList";
-import CustomerBoardAdd from "./pages/CustomerBoard/CustomerBoardAdd";
-import CustomerBoardView from "./pages/CustomerBoard/CustomerBoardView";
 
 //의약품검색
 import DrugSearchMain from './pages/DrugSearch/DrugSearchMain';
-import DrugSearch from "./pages/DrugSearch/DrugSearch";
-import DrugInfo from "./pages/DrugSearch/DrugInfo";
 
 //뉴스홈
-import NewsMain from "./pages/NewsHome/NewsMain";
-import NewsView from "./pages/NewsHome/NewsView";
-import NoticeView from "./pages/NewsHome/NoticeView";
+import NewsAllMain from "./pages/NewsHome/NewsAllMain";
+
 
 //마이페이지
 import MysevMain from "./pages/MYSevrance/MysevMain";
@@ -99,9 +93,7 @@ function App() {
 
         {/* 고객의소리 페이지 라우팅*/}
         <Route path="/customer.do/*" element={<CustomerBoardMain />} />
-        {/* <Route path="/customer.do" element={<CustomerBoardList />} />
-        <Route path="/suggest.do" element={<CustomerBoardAdd />} />
-        <Route path="/suggestion/:id" element={<CustomerBoardView />} /> */}
+
         <Route path="/staff" element={<StaffSearch />} />
         <Route path="/staff/*" element={<StaffProfile />} />
 
@@ -109,9 +101,9 @@ function App() {
         <Route path="/drug.do/*" element={<DrugSearchMain />} />
 
         {/* 뉴스홈 페이지 라우팅 */}
-        <Route path="/news" element={<NewsMain />} />
-        <Route path="/news/media.do" element={<NewsView />} />
-        <Route path="/news/notice.do" element={<NoticeView />} />
+        <Route path="/news/*" element={<NewsAllMain />} />
+        {/* <Route path="/news/media.do" element={<NewsView />} />
+        <Route path="/news/notice.do" element={<NoticeView />} /> */}
 
         {/* 마이페이지 라우팅 */}
         <Route path="/mysevrance" element={<MysevMain />} />

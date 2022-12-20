@@ -30,13 +30,11 @@ const CustomerBoardMain = memo(() => {
       <TopButton />
       <CustomerBoardCont>
         <Header />
-        <div className="pageCont">
           <Routes>
             <Route path="/" element={<CustomerBoardList />} />
             <Route path="suggest.do" element={<CustomerBoardAdd />} />
             <Route path="suggestion/:id" element={<CustomerBoardView />} />
           </Routes>
-        </div>
       </CustomerBoardCont>
       <Footer />
     </div>

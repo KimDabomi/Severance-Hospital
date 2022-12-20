@@ -13,8 +13,6 @@ import TopButton from '../../components/TopButton';
 const NoticeView = memo(() => {
   return (
     <div>
-      <TopButton />
-      <Header />
       <div className="bgAll">
         <div className="pageCont">
           <h1 className="pageTitle">공지사항</h1>
@@ -57,7 +55,6 @@ const NoticeView = memo(() => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 });
