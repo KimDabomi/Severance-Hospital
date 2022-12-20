@@ -160,7 +160,7 @@ const SiteMap = memo(() => {
                 </SubMenuUl>
               </MenuLi>
               <MenuLi>
-                <Link to="/">결과</Link>
+                <Link to="/resultinquiry">결과</Link>
               </MenuLi>
               <MenuLi>
                 <Link to="/guide/number.do">이용안내</Link>
@@ -181,13 +181,6 @@ const SiteMap = memo(() => {
                   <Link to="/guide/unsupported">
                     <SubMenuLi>비급여진료비 안내</SubMenuLi>
                   </Link>
-                </SubMenuUl>
-              </MenuLi>
-              <MenuLi>
-                <Link to="/map.do">오시는 길</Link>
-                <SubMenuUl>
-                  <SubMenuLi>위치 및 오시는 방법</SubMenuLi>
-                  <SubMenuLi>주차안내</SubMenuLi>
                 </SubMenuUl>
               </MenuLi>
             </MenuUl>
@@ -243,6 +236,8 @@ const SiteMap = memo(() => {
               </MenuLi>
               <MenuLi>
                 <Link to="/map.do">오시는 길</Link>
+                <SubMenuUl>
+                </SubMenuUl>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>

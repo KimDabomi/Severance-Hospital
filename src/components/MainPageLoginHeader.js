@@ -1,15 +1,15 @@
 /**
- * @ File Name: MainPageHeader.js
+ * @ File Name: MainPageLoginHeader.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
- * @ Last Update: 2022-11-25 15:02:00
- * @ Description: 메인 페이지 header
+ * @ Last Update: 2022-12-19 15:02:00
+ * @ Description: 메인 페이지 login header
  */
 
 import React, { useState } from "react";
 import styled from "styled-components";
 
 /** 링크 */
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 /** 컴포넌트 참조 */
@@ -17,11 +17,15 @@ import SiteMap from "../pages/SiteMap/SiteMap";
 
 /** 로고, 아이콘, 이미지 참조 */
 import sevLogo from "../assets/img/sev_logo@2x.png";
-import loginIcon from "../assets/img/ico-top-login@2x.png";
-import joinIcon from "../assets/img/ico-top-join@2x.png";
 import allMenuIcon from "../assets/img/ico-allmenu.png";
 import searchIcon from "../assets/img/ico-search.png";
 import chevronIcon from "../assets/img/ico-chevron-down-xs-bold@2x.png";
+// 로그아웃 시, 최상단 아이콘
+import loginIcon from "../assets/img/ico-top-login@2x.png";
+import joinIcon from "../assets/img/ico-top-join@2x.png";
+// 로그인 시, 최상단 아이콘
+import myPageIcon from "../assets/img/ico-top-mypage.png";
+import logoutIcon from "../assets/img/ico-top-logout.png";
 
 /** 헤더 스타일 */
 const HeaderContainer = styled.header`
@@ -140,19 +144,19 @@ const Header = () => {
         <UtilContainer>
           <ul>
             <li>
-              <Link to="/login">
-                <img src={loginIcon} alt="login_icon" />
+              <Link to="mysevrance">
+                <img src={myPageIcon} alt="login_icon" />
               </Link>
             </li>
             <li>
-              <Link to="/join_way">
-                <img src={joinIcon} alt="join_icon" />
+              <Link to="/">
+                <img src={logoutIcon} alt="join_icon" />
               </Link>
             </li>
           </ul>
           <div>
             <span>KO</span>
-            <img src={chevronIcon} />
+            <img src={chevronIcon} alt="dropdown_icon" />
           </div>
         </UtilContainer>
 

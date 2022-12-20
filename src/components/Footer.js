@@ -191,9 +191,9 @@ const Footer = () => {
             </Link>
           </li>
           <li>
-            <a href="https://sev.severance.healthcare/sev/about/about.do" target="_black" rel="noopener noreferrer" style={{ color: "#0094fb" }}>
+            <Link to="/about_sev" target="_black" rel="noopener noreferrer" style={{ color: "#0094fb" }}>
               병원소개
-            </a>
+            </Link>
           </li>
         </ul>
         <address>03722 서울특별시 서대문구 연세로 50-1</address>

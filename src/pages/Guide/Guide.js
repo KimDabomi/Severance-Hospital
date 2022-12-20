@@ -12,6 +12,8 @@ import { Routes, Route } from "react-router-dom";
 // 헤더 푸터
 import Header from "../../components/MainPageHeader";
 import Footer from "../../components/Footer";
+// 페이지 최상단 이동 버튼
+import TopButton from "../../components/TopButton";
 // 주요전화번호
 import Number from "./Number";
 // 층별시설안내
@@ -30,6 +32,7 @@ import Unsupported from "./Unsupported";
 const Guide = memo(() => {
   return (
     <>
+      <TopButton />
       <Header />
 
       <Routes>
