@@ -68,7 +68,7 @@ const Search = memo(() => {
         <>
             <ControlContainer >
                 <input type='text' name='keyword' className='controll' onSubmit={onSearchSubmit} placeholder='의료진 또는 질병명을 입력해주세요' />
-                <button type='submit' className='controll clickable' ><i>검색(아이콘 자리)</i></button>
+                <button type='submit' className='btnSearch' ><i></i></button>
             </ControlContainer>
 
             {

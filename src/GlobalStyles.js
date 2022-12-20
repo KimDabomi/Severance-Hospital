@@ -3,11 +3,11 @@ import reset from "styled-reset";
 
 /**이미지 import*/
 //select form뒤 화살표 이미지
-import icoChevronDown from './assets/img/ico-chevron-down-sm@2x.png';
+import icoChevronDown from "./assets/img/ico-chevron-down-sm@2x.png";
 //nodata 이미지
-import nodata from './assets/img/ico-nodata@2x.png';
+import nodata from "./assets/img/ico-nodata@2x.png";
 //링크아이콘 이미지
-import iconExternal from './assets/img/ico-external-link@2x.png';
+import iconExternal from "./assets/img/ico-external-link@2x.png";
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
