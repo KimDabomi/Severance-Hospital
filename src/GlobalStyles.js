@@ -814,8 +814,7 @@ button {
     background-size: cover;
   }
 
-
-  /** 메인페이지 뉴스 */
+  /** 메인페이지 뉴스 */  
   /* 박스 */
   .newsBox {
     width: 297px;

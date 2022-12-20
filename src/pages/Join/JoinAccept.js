@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinAccept.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06 11:20
+ * @ Last Update: 2022-12-20 16:20
  * @ Description: 약관동의 페이지
  */
 
@@ -32,6 +32,7 @@ const Container = styled.div`
     background-color: rgba(0, 0, 0, 0.7);
     padding-top: 120px;
     box-sizing: border-box;
+    z-index: 99999;
     .popup {
       background-color: #fff;
       width: 350px;

@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinComplete.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06. 11:50
+ * @ Last Update: 2022-12-20 16:20
  * @ Description: 회원가입 완료 페이지
  */
 
@@ -14,7 +14,7 @@ import Right from "../../assets/img/ico-arrow-right-gray@2x.png";
 import step01 from "../../assets/img/ico-login-step1-off@2x.png";
 import step02 from "../../assets/img/ico-login-step2-off@2x.png";
 import step03 from "../../assets/img/ico-login-step3-off@2x.png";
-import step04 from "../../assets/img/ico-login-step4-off@2x.png";
+import step04 from "../../assets/img/ico-login-step4-on@2x.png";
 
 const Container = styled.div`
   position: relative;
