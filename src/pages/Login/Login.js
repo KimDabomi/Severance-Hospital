@@ -112,8 +112,6 @@ const Login = memo(() => {
         </div>
         <Routes>
           <Route path="/" element={<Way01 />} />
-
-          {/* 약도 및 주소 안내, 오시는 방법 페이지 */}
           <Route path="way01" element={<Way01 />} />
           <Route path="way02" element={<Way02 />} />
         </Routes>

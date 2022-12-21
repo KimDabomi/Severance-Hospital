@@ -42,7 +42,7 @@ const Guide = memo(() => {
         <Route path="/hospitalization.do" element={<Hospitalization />} />
         <Route path="/operating-room.do" element={<OperatingRoom />} />
         <Route path="/payment_refund" element={<PaymentRefund />} />
-        <Route path="/unsupported" element={<Unsupported />} />
+        <Route path="/unsupported/*" element={<Unsupported />} />
       </Routes>
 
       <Footer />
