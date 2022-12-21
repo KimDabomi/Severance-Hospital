@@ -20,8 +20,6 @@ import { getList } from "../../slices/CustomerBoardSlice";
 // 헤더, 푸터
 import MainPageHeader from "../../components/MainPageHeader";
 import Footer from "../../components/Footer";
-// 상단 배너
-import TopBanner from "../../components/TopBanner";
 // 인포슬라이더캐러셀
 import InfoSliderCarousel from "../../components/InfoSliderCarousel";
 // 메인슬라이더캐러셀
@@ -470,34 +468,6 @@ const NewsSection = styled.section`
         line-height: 26px;
         color: white;
       }
-
-      /* .btns {
-        margin-top: 15px;
-        .left_btn {
-          display: block;
-          width: 60px;
-          height: 60px;
-          background: url(./img/btn-left-white.png) no-repeat center / cover;
-          border: none;
-          float: left;
-        }
-        .right_btn {
-          display: block;
-          float: left;
-          width: 60px;
-          height: 60px;
-          margin-left: 20px;
-          background: url(./img/btn-right-white.png) no-repeat center / cover;
-          border: none;
-
-          &::after {
-            content: "";
-            float: none;
-            display: block;
-            clear: both;
-          }
-        }
-      } */
     }
   }
 `;

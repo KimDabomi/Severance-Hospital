@@ -75,12 +75,6 @@ const TabInfo = memo(() => {
 		}));
 	})
 
-	// 출력하는 함수
-	const renderFunc = (e)=> {
-		return (<h1>안녕하세요</h1>);
-	};
-	
-
 	return (
 		<DrugCont>
 			<TopButton />
