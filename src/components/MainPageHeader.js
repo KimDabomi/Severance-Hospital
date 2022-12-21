@@ -293,6 +293,7 @@ const GnbContainer = styled.div`
       object-fit: cover;
     }
   }
+
   ul {
     display: flex;
 
@@ -305,7 +306,39 @@ const GnbContainer = styled.div`
       }
 
       a {
+        position: relative;
         font-weight: bold;
+
+        &:hover {
+          color: #0054d1;
+        }
+
+        &::after {
+          content: "";
+          width: 8px;
+          height: 8px;
+
+          position: absolute;
+          top: 24px;
+
+          display: inline-block;
+          margin-left: 7px;
+
+          background-color: #ffd553;
+          border-radius: 50%;
+
+          opacity: 0;
+          visibility: hidden;
+
+          transform: translateY(20px);
+          transition-duration: 0.3s;
+        }
+
+        &:hover::after {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
 
         .allMenuIcon {
           height: 20px;
