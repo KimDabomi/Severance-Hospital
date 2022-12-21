@@ -20,12 +20,12 @@ const SiteMapContainer = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  
+
   z-index: 9999;
 
   background: #0070e4 url(${BgAllmenu}) no-repeat center;
   background-position-y: -180px;
-  
+
   overflow-y: auto;
   display: none;
 
@@ -124,173 +124,173 @@ const SiteMap = forwardRef(({}, ref) => {
 
   return (
     <SiteMapContainer ref={ref}>
-        <SiteMapUl>
-          <SiteMapCloseButton onClick={closeSiteMap}>
-            <img src={CloseWhite} alt="닫기 버튼" />
-          </SiteMapCloseButton>
+      <SiteMapUl>
+        <SiteMapCloseButton onClick={closeSiteMap}>
+          <img src={CloseWhite} alt="닫기 버튼" />
+        </SiteMapCloseButton>
 
-          {/* 1 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/staff">의료진 찾기</Link>
-            </MenuTitleDiv>
-          </MenuCategoryLi>
+        {/* 1 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/staff">의료진 찾기</Link>
+          </MenuTitleDiv>
+        </MenuCategoryLi>
 
-          {/* 2 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/">진료과 찾기</Link>
-            </MenuTitleDiv>
+        {/* 2 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/">진료과 찾기</Link>
+          </MenuTitleDiv>
 
-            <MenuUl>
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/">진료과</Link>
-              </MenuLi>
-            </MenuUl>
-          </MenuCategoryLi>
+          <MenuUl>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/">진료과</Link>
+            </MenuLi>
+          </MenuUl>
+        </MenuCategoryLi>
 
-          {/* 3 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/">환자/보호자</Link>
-            </MenuTitleDiv>
+        {/* 3 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/">환자/보호자</Link>
+          </MenuTitleDiv>
 
-            <MenuUl>
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/appointment_main">예약</Link>
+          <MenuUl>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/appointment_main">예약</Link>
 
-                <SubMenuUl>
-                  {/* 서브타이틀 하위 목록 */}
-                  <SubMenuLi>진료예약</SubMenuLi>
-                  <SubMenuLi>예약현황</SubMenuLi>
-                </SubMenuUl>
-              </MenuLi>
+              <SubMenuUl>
+                {/* 서브타이틀 하위 목록 */}
+                <SubMenuLi>진료예약</SubMenuLi>
+                <SubMenuLi>예약현황</SubMenuLi>
+              </SubMenuUl>
+            </MenuLi>
 
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/resultinquiry">결과</Link>
-              </MenuLi>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/resultinquiry">결과</Link>
+            </MenuLi>
 
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/guide/number.do">이용안내</Link>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/guide/number.do">이용안내</Link>
 
-                <SubMenuUl>
-                  {/* 서브타이틀 하위 목록 */}
-                  <Link to="/guide/facility.do">
-                    <SubMenuLi>병원시설 안내</SubMenuLi>
-                  </Link>
-                  <Link to="/guide/outpatient_info">
-                    <SubMenuLi>외래이용 안내</SubMenuLi>
-                  </Link>
-                  <Link to="/guide/hospitalization.do">
-                    <SubMenuLi>입원생활 안내</SubMenuLi>
-                  </Link>
-                  <Link to="/guide/operating-room.do">
-                    <SubMenuLi>수술실 이용 안내</SubMenuLi>
-                  </Link>
-                  <Link to="/guide/unsupported">
-                    <SubMenuLi>비급여진료비 안내</SubMenuLi>
-                  </Link>
-                </SubMenuUl>
-              </MenuLi>
-            </MenuUl>
-          </MenuCategoryLi>
+              <SubMenuUl>
+                {/* 서브타이틀 하위 목록 */}
+                <Link to="/guide/facility.do">
+                  <SubMenuLi>병원시설 안내</SubMenuLi>
+                </Link>
+                <Link to="/guide/outpatient_info">
+                  <SubMenuLi>외래이용 안내</SubMenuLi>
+                </Link>
+                <Link to="/guide/hospitalization.do">
+                  <SubMenuLi>입원생활 안내</SubMenuLi>
+                </Link>
+                <Link to="/guide/operating-room.do">
+                  <SubMenuLi>수술실 이용 안내</SubMenuLi>
+                </Link>
+                <Link to="/guide/unsupported">
+                  <SubMenuLi>비급여진료비 안내</SubMenuLi>
+                </Link>
+              </SubMenuUl>
+            </MenuLi>
+          </MenuUl>
+        </MenuCategoryLi>
 
-          {/* 4 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/cooperation/hospital.do">의료인</Link>
-            </MenuTitleDiv>
+        {/* 4 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/cooperation/hospital.do">의료인</Link>
+          </MenuTitleDiv>
 
-            <MenuUl>
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/cooperation/hospital.do">진료의뢰</Link>
+          <MenuUl>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/cooperation/hospital.do">진료의뢰</Link>
 
-                <SubMenuUl>
-                  {/* 서브타이틀 하위 목록 */}
-                  <Link to="/cooperation/hospital.do">
-                    <SubMenuLi>협력병원 현황</SubMenuLi>
-                  </Link>
-                  <Link to="/cooperation/doctor.do">
-                    <SubMenuLi>협진병, 의원 현황</SubMenuLi>
-                  </Link>
-                </SubMenuUl>
-              </MenuLi>
-            </MenuUl>
-          </MenuCategoryLi>
+              <SubMenuUl>
+                {/* 서브타이틀 하위 목록 */}
+                <Link to="/cooperation/hospital.do">
+                  <SubMenuLi>협력병원 현황</SubMenuLi>
+                </Link>
+                <Link to="/cooperation/doctor.do">
+                  <SubMenuLi>협진병, 의원 현황</SubMenuLi>
+                </Link>
+              </SubMenuUl>
+            </MenuLi>
+          </MenuUl>
+        </MenuCategoryLi>
 
-          {/* 5 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/customer.do">고객의 소리</Link>
-            </MenuTitleDiv>
-            <MenuUl></MenuUl>
-          </MenuCategoryLi>
+        {/* 5 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/customer.do">고객의 소리</Link>
+          </MenuTitleDiv>
+          <MenuUl></MenuUl>
+        </MenuCategoryLi>
 
-          {/* 6 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/drug.do">건강정보</Link>
-            </MenuTitleDiv>
-            <MenuUl></MenuUl>
-          </MenuCategoryLi>
+        {/* 6 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/drug.do">건강정보</Link>
+          </MenuTitleDiv>
+          <MenuUl></MenuUl>
+        </MenuCategoryLi>
 
-          {/* 7 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/about_sev">병원소개</Link>
-            </MenuTitleDiv>
+        {/* 7 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/about_sev">병원소개</Link>
+          </MenuTitleDiv>
 
-            <MenuUl>
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/introduction">병원개요</Link>
-              </MenuLi>
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/map.do">오시는 길</Link>
-                <SubMenuUl></SubMenuUl>
-              </MenuLi>
-            </MenuUl>
-          </MenuCategoryLi>
+          <MenuUl>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/introduction">병원개요</Link>
+            </MenuLi>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/map.do">오시는 길</Link>
+              <SubMenuUl></SubMenuUl>
+            </MenuLi>
+          </MenuUl>
+        </MenuCategoryLi>
 
-          {/* 8 */}
-          <MenuCategoryLi>
-            <MenuTitleDiv>
-              {/* 메인 타이틀 */}
-              <Link to="/news">뉴스</Link>
-            </MenuTitleDiv>
+        {/* 8 */}
+        <MenuCategoryLi>
+          <MenuTitleDiv>
+            {/* 메인 타이틀 */}
+            <Link to="/news">뉴스</Link>
+          </MenuTitleDiv>
 
-            <MenuUl>
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/news">뉴스 홈</Link>
-              </MenuLi>
+          <MenuUl>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/news">뉴스 홈</Link>
+            </MenuLi>
 
-              <MenuLi>
-                {/* 서브타이틀 */}
-                <Link to="/news/notice.do">공지/소식</Link>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/news/notice.do">공지/소식</Link>
 
-                <SubMenuUl>
-                  {/* 서브타이틀 하위 목록 */}
-                  <SubMenuLi>공지사항</SubMenuLi>
-                  <SubMenuLi>언론보도</SubMenuLi>
-                </SubMenuUl>
-              </MenuLi>
-            </MenuUl>
-          </MenuCategoryLi>
-        </SiteMapUl>
+              <SubMenuUl>
+                {/* 서브타이틀 하위 목록 */}
+                <SubMenuLi>공지사항</SubMenuLi>
+                <SubMenuLi>언론보도</SubMenuLi>
+              </SubMenuUl>
+            </MenuLi>
+          </MenuUl>
+        </MenuCategoryLi>
+      </SiteMapUl>
     </SiteMapContainer>
   );
 });
