@@ -6,9 +6,9 @@
  */
 
 /** import */
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 /** components */
 import SiteMap from "./SiteMap";
@@ -368,6 +368,9 @@ const MenuArticle = styled(Link)`
 `;
 
 const Header = () => {
+  // 경로 변경 시, useEffect 동작을 위한 location
+  const location = useLocation();
+
   // 사이트맵
   const siteMap = useRef();
 
@@ -377,7 +380,7 @@ const Header = () => {
   // 사이트맵 열기
   const showSiteMap = useCallback((e) => {
     siteMap.current.style.display = "block";
-    // document.querySelector("body").style.overflow = "hidden";
+    document.querySelector("body").style.overflow = "hidden";
   }, []);
 
   // 검색 모달 열기
@@ -389,6 +392,12 @@ const Header = () => {
   const closeModal = useCallback((e) => {
     searchModal.current.style.display = "none";
   }, []);
+
+  // URL 경로 이동 시, 사이트맵을 닫고 해당 페이지의 스크롤을 활성화 시킨다.
+  useEffect(() => {
+    siteMap.current.style.display = "none";
+    document.querySelector("body").style.overflow = "visible";
+  }, [location.pathname]);
 
   return (
     <>
