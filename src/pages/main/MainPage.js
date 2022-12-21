@@ -72,6 +72,9 @@ const TopBannerSection = styled.section`
   letter-spacing: 0;
   white-space: nowrap;
 
+  position: relative;
+  z-index: 4000;
+
   /* top banner를 닫았을 때 위치 (화면 밖) */
   margin-top: -90px;
 
