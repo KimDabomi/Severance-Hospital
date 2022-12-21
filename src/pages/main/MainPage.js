@@ -699,13 +699,13 @@ const MainPage = memo(() => {
             <dl style={{ backgroundImage: "url(./img/bg-sympathy-story.jpg)" }}>
               <dt>고객의 소리</dt>
               <dd>
-                <InfoSliderCarousel post={data} />
+                <InfoSliderCarousel customer={data} carousel={'customer'} />
               </dd>
             </dl>
             <dl style={{ backgroundImage: "url(./img/bg-health-info.jpg)" }}>
-              <dt>건강정보</dt>
+              <dt>공지사항</dt>
               <dd>
-                <InfoSliderCarousel post={data} />
+                <InfoSliderCarousel notice={null} carousel={'notice'} />
               </dd>
             </dl>
             <a href="https://yuhs.severance.healthcare/yuhs/history/museum/cheerupsev.do" className="infoSliderShortcut">
