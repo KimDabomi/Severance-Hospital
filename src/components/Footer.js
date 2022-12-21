@@ -181,8 +181,7 @@ const Footer = () => {
             </Link>
           </li>
           <li>
-            <Link to="/policy
-            /privacy.do" target="_black" rel="noopener noreferrer">
+            <Link to="/policy/privacy.do" target="_black" rel="noopener noreferrer">
               <strong>개인정보처리방침</strong>
             </Link>
           </li>
