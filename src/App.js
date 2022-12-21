@@ -4,8 +4,6 @@ import { Routes, Route } from "react-router-dom";
 
 /** 메인 */
 import MainPage from "./pages/main/MainPage";
-/** 사이트맵 */
-import AllMenu from "./pages/SiteMap/SiteMap";
 /** 오시는 길 */
 import Map from "./pages/Map/Map";
 /** 이용안내 */
@@ -66,8 +64,6 @@ function App() {
       <Routes>
         {/* 메인 */}
         <Route path="/" exapt={true} element={<MainPage />} />
-        {/* 사이트맵 */}
-        <Route path="/all_menu" exapt={true} element={<AllMenu />} />
         {/* 이용안내 */}
         <Route path="/guide/*" element={<Guide />} />
         {/* 오시는 길 */}
