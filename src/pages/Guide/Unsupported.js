@@ -12,6 +12,7 @@ import Tab01 from "./Tab01";
 import Tab02 from "./Tab02";
 import Tab03 from "./Tab03";
 import Tab04 from "./Tab04";
+import TopButton from "../../components/TopButton";
 // 이미지
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 
@@ -119,6 +120,7 @@ const Unsupported = memo(() => {
 
   return (
     <Container>
+      <TopButton />
       <div className="bgAll">
         <h1>비급여진료비</h1>
         <div className="boxGuide">

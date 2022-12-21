@@ -1,12 +1,14 @@
 /**
  * @ File Name: OutpatientInfo.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-14 20:10
+ * @ Last Update: 2022-12-21 21:00
  * @ Description: 외래이용안내 페이지
  */
 
 import React, { memo } from "react";
 import styled from "styled-components";
+import TopButton from "../../components/TopButton";
+
 // 이미지
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 import ambulatoryInfo from "../../assets/img/img-outpatient.png";
@@ -158,6 +160,7 @@ const Container = styled.div`
 const OutpatientInfo = memo(() => {
   return (
     <Container>
+      <TopButton />
       <div className="bgAll">
         <h1>외래이용안내</h1>
         <div className="boxGuide">
