@@ -1,7 +1,7 @@
 /**
  * @ File Name: InfoSliderCarousel.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
- * @ Last Update: 2022-11-26 15:02:00
+ * @ Last Update: 2022-12-21 15:02:00
  * @ Description: Slick 슬라이드
  */
 
@@ -170,7 +170,7 @@ function PrevArrow(props) {
   );
 }
 
-function InfoSliderCarousel({ post }) {
+function InfoSliderCarousel({ customer, notice, carousel }) {
   // 슬라이드 설정
   const settings = {
     infinite: true,
@@ -187,17 +187,31 @@ function InfoSliderCarousel({ post }) {
   return (
     <SlideContainer>
       <StyledSlider {...settings}>
-        {/* <div className="postBox">
-          <Link to="/test">
-            <span className="category"></span>
-            <span className="content">test post1</span>
-          </Link>
-        </div> */}
-        {post ? (
-          post.map((v, i) => {
+        {carousel === "customer" ? (
+          customer ? (
+            customer.map((v, i) => {
+              return (
+                <div className="postBox" key={i}>
+                  <Link to={`/customer.do/suggestion/${v.id}`} target="_blank">
+                    <span className="category">{v.register}</span>
+                    <span className="content">{v.title}</span>
+                  </Link>
+                </div>
+              );
+            })
+          ) : (
+            <div className="postBox">
+              <Link to="/customer.do" target="_blank">
+                <span className="category">게시판</span>
+                <span className="content">등록된 게시글이 없습니다.</span>
+              </Link>
+            </div>
+          )
+        ) : notice ? (
+          notice.map((v, i) => {
             return (
               <div className="postBox" key={i}>
-                <Link to={`/suggestion/${v.id}`} target="_blank">
+                <Link to={`/news/notice.do`} target="_blank">
                   <span className="category">{v.register}</span>
                   <span className="content">{v.title}</span>
                 </Link>
@@ -206,7 +220,7 @@ function InfoSliderCarousel({ post }) {
           })
         ) : (
           <div className="postBox">
-            <Link to="/customer.do" target="_blank">
+            <Link to="/news/notice.do" target="_blank">
               <span className="category">게시판</span>
               <span className="content">등록된 게시글이 없습니다.</span>
             </Link>
@@ -215,7 +229,11 @@ function InfoSliderCarousel({ post }) {
       </StyledSlider>
 
       <PlusButton>
-        <Link to="/customer.do" target="_black" rel="noopener noreferrer" />
+        {carousel === "customer" ? (
+          <Link to="/customer.do" target="_black" rel="noopener noreferrer" />
+        ) : (
+          <Link to="/news/notice.do" target="_black" rel="noopener noreferrer" />
+        )}
       </PlusButton>
     </SlideContainer>
   );
