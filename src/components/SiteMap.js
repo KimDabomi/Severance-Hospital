@@ -14,29 +14,20 @@ import BgAllmenu from "../assets/img/bg-allmenu.png";
 import CloseWhite from "../assets/img/ico-close-white@2x.png";
 
 /** 사이트맵 스타일 */
-const AllMenu = styled.div`
-  width: 100%;
-  height: 100vh;
-
-  position: absolute;
+const SiteMapContainer = styled.div`
+  position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
+  
   z-index: 9999;
-
-  display: none;
-`;
-
-/** 사이트맵 배경 스타일 */
-const BackgroundDiv = styled.div`
-  min-width: 1280px;
-  height: 100vh;
-  margin: 0 auto;
 
   background: #0070e4 url(${BgAllmenu}) no-repeat center;
   background-position-y: -180px;
-
-  position: sticky;
-  top: 0;
+  
+  overflow-y: auto;
+  display: none;
 
   a {
     color: white;
@@ -47,6 +38,7 @@ const BackgroundDiv = styled.div`
 const SiteMapUl = styled.ul`
   width: 1310px;
   margin: 0 auto;
+  padding: 0 60px 60px;
 
   position: absolute;
   top: 0;
@@ -113,7 +105,7 @@ const SiteMapCloseButton = styled.div`
 
   position: absolute;
   top: 30px;
-  right: 0;
+  right: 60px;
 
   cursor: pointer;
 
@@ -131,8 +123,7 @@ const SiteMap = forwardRef(({}, ref) => {
   }, []);
 
   return (
-    <AllMenu ref={ref}>
-      <BackgroundDiv>
+    <SiteMapContainer ref={ref}>
         <SiteMapUl>
           <SiteMapCloseButton onClick={closeSiteMap}>
             <img src={CloseWhite} alt="닫기 버튼" />
@@ -300,8 +291,7 @@ const SiteMap = forwardRef(({}, ref) => {
             </MenuUl>
           </MenuCategoryLi>
         </SiteMapUl>
-      </BackgroundDiv>
-    </AllMenu>
+    </SiteMapContainer>
   );
 });
 
