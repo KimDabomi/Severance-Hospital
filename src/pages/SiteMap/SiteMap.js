@@ -30,8 +30,6 @@ const BackgroundDiv = styled.div`
   background: #0070e4 url(${BgAllmenu}) no-repeat center;
   background-position-y: -180px;
 
-  overflow-y: scroll;
-
   position: sticky;
   top: 0;
 
@@ -130,6 +128,7 @@ const SiteMap = memo(() => {
           {/* 1 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/staff">의료진 찾기</Link>
             </MenuTitleDiv>
           </MenuCategoryLi>
@@ -137,10 +136,13 @@ const SiteMap = memo(() => {
           {/* 2 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/">진료과 찾기</Link>
             </MenuTitleDiv>
+
             <MenuUl>
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/">진료과</Link>
               </MenuLi>
             </MenuUl>
@@ -149,26 +151,36 @@ const SiteMap = memo(() => {
           {/* 3 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/">환자/보호자</Link>
             </MenuTitleDiv>
+
             <MenuUl>
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/appointment_main">예약</Link>
+
                 <SubMenuUl>
+                  {/* 서브타이틀 하위 목록 */}
                   <SubMenuLi>진료예약</SubMenuLi>
                   <SubMenuLi>예약현황</SubMenuLi>
                 </SubMenuUl>
               </MenuLi>
+
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/resultinquiry">결과</Link>
               </MenuLi>
+
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/guide/number.do">이용안내</Link>
+
                 <SubMenuUl>
+                  {/* 서브타이틀 하위 목록 */}
                   <Link to="/guide/facility.do">
                     <SubMenuLi>병원시설 안내</SubMenuLi>
                   </Link>
-                  <SubMenuLi>진료안내</SubMenuLi>
                   <Link to="/guide/outpatient_info">
                     <SubMenuLi>외래이용 안내</SubMenuLi>
                   </Link>
@@ -189,12 +201,17 @@ const SiteMap = memo(() => {
           {/* 4 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/cooperation/hospital.do">의료인</Link>
             </MenuTitleDiv>
+
             <MenuUl>
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/cooperation/hospital.do">진료의뢰</Link>
+
                 <SubMenuUl>
+                  {/* 서브타이틀 하위 목록 */}
                   <Link to="/cooperation/hospital.do">
                     <SubMenuLi>협력병원 현황</SubMenuLi>
                   </Link>
@@ -212,6 +229,7 @@ const SiteMap = memo(() => {
           {/* 5 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/customer.do">고객의 소리</Link>
             </MenuTitleDiv>
             <MenuUl></MenuUl>
@@ -220,6 +238,7 @@ const SiteMap = memo(() => {
           {/* 6 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/drug.do">건강정보</Link>
             </MenuTitleDiv>
             <MenuUl></MenuUl>
@@ -228,16 +247,19 @@ const SiteMap = memo(() => {
           {/* 7 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/about_sev">병원소개</Link>
             </MenuTitleDiv>
+
             <MenuUl>
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/introduction">병원개요</Link>
               </MenuLi>
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/map.do">오시는 길</Link>
-                <SubMenuUl>
-                </SubMenuUl>
+                <SubMenuUl></SubMenuUl>
               </MenuLi>
             </MenuUl>
           </MenuCategoryLi>
@@ -245,15 +267,22 @@ const SiteMap = memo(() => {
           {/* 8 */}
           <MenuCategoryLi>
             <MenuTitleDiv>
+              {/* 메인 타이틀 */}
               <Link to="/news">뉴스</Link>
             </MenuTitleDiv>
+
             <MenuUl>
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/news">뉴스 홈</Link>
               </MenuLi>
+
               <MenuLi>
+                {/* 서브타이틀 */}
                 <Link to="/news/notice.do">공지/소식</Link>
+
                 <SubMenuUl>
+                  {/* 서브타이틀 하위 목록 */}
                   <SubMenuLi>공지사항</SubMenuLi>
                   <SubMenuLi>언론보도</SubMenuLi>
                 </SubMenuUl>
