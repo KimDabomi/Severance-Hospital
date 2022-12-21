@@ -854,10 +854,10 @@ const Header = () => {
                     <MenuTitle>진료의뢰</MenuTitle>
                     <SubMenuUl>
                       <SubMenuList>
-                        <SubMenuTitlte>협력병원현황</SubMenuTitlte>
+                        <SubMenuTitlte>협력병원 현황</SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
-                        <SubMenuTitlte>외래이용</SubMenuTitlte>
+                        <SubMenuTitlte>협진병, 의원 현황</SubMenuTitlte>
                       </SubMenuList>
                     </SubMenuUl>
                   </MenuList>
