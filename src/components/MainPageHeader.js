@@ -377,7 +377,7 @@ const Header = () => {
   // 사이트맵 열기
   const showSiteMap = useCallback((e) => {
     siteMap.current.style.display = "block";
-    document.querySelector("body").style.overflow = "hidden";
+    // document.querySelector("body").style.overflow = "hidden";
   }, []);
 
   // 검색 모달 열기
