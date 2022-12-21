@@ -521,6 +521,12 @@ button {
     }
   }
 
+  //알약검색 이미지
+  .drugImageSlider{
+    width: 100%;
+    img{width: 100%;}
+  }
+
 	//검색결과 없을 때
 	.nodata{
 		margin: 138px 0 43px;
@@ -814,8 +820,7 @@ button {
     background-size: cover;
   }
 
-
-  /** 메인페이지 뉴스 */
+  /** 메인페이지 뉴스 */  
   /* 박스 */
   .newsBox {
     width: 297px;

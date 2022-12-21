@@ -31,18 +31,14 @@ import JoinComplete from "./pages/Join/JoinComplete";
 import JoinAlready from "./pages/Join/JoinAlready";
 
 //고객의소리
-import CustomerBoardList from "./pages/CustomerBoard/CustomerBoardList";
-import CustomerBoardAdd from "./pages/CustomerBoard/CustomerBoardAdd";
-import CustomerBoardView from "./pages/CustomerBoard/CustomerBoardView";
+import CustomerBoardMain from './pages/CustomerBoard/CustomerMain';
 
 //의약품검색
-import DrugSearch from "./pages/DrugSearch/DrugSearch";
-import DrugInfo from "./pages/DrugSearch/DrugInfo";
+import DrugSearchMain from './pages/DrugSearch/DrugSearchMain';
 
 //뉴스홈
-import NewsMain from "./pages/NewsHome/NewsMain";
-import NewsView from "./pages/NewsHome/NewsView";
-import NoticeView from "./pages/NewsHome/NoticeView";
+import NewsAllMain from "./pages/NewsHome/NewsAllMain";
+
 
 //마이페이지
 import MysevMain from "./pages/MYSevrance/MysevMain";
@@ -89,27 +85,25 @@ function App() {
         <Route path="/join_already" element={<JoinAlready />} />
 
         {/* 로그인, 아이디/비밀번호 찾기 */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login/*" element={<Login />} />
         <Route path="/find_id" element={<FindId />} />
         <Route path="/find_id_email" element={<FindIdEmail />} />
         <Route path="/find_password" element={<FindPassword />} />
         <Route path="/find_password_email" element={<FindPasswordEmail />} />
 
         {/* 고객의소리 페이지 라우팅*/}
-        <Route path="/customer.do" element={<CustomerBoardList />} />
-        <Route path="/suggest.do" element={<CustomerBoardAdd />} />
-        <Route path="/suggestion/:id" element={<CustomerBoardView />} />
+        <Route path="/customer.do/*" element={<CustomerBoardMain />} />
+
         <Route path="/staff" element={<StaffSearch />} />
         <Route path="/staff/*" element={<StaffProfile />} />
 
         {/* 의약품검색 페이지 라우팅 */}
-        <Route path="/drug.do/*" element={<DrugSearch />} />
-        <Route path="/drug.do/drug/id" element={<DrugInfo />} />
+        <Route path="/drug.do/*" element={<DrugSearchMain />} />
 
         {/* 뉴스홈 페이지 라우팅 */}
-        <Route path="/news" element={<NewsMain />} />
-        <Route path="/news/media.do" element={<NewsView />} />
-        <Route path="/news/notice.do" element={<NoticeView />} />
+        <Route path="/news/*" element={<NewsAllMain />} />
+        {/* <Route path="/news/media.do" element={<NewsView />} />
+        <Route path="/news/notice.do" element={<NoticeView />} /> */}
 
         {/* 마이페이지 라우팅 */}
         <Route path="/mysevrance" element={<MysevMain />} />

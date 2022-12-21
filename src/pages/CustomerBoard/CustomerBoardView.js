@@ -16,10 +16,8 @@ import {
 } from '../../slices/CustomerBoardSlice';
 import dayjs from 'dayjs';
 import Spinner from '../../components/Spinner';
-import styled from 'styled-components';
+
 import CustomerBoardHeader from './CustomerHeader';
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
 import TopButton from '../../components/TopButton';
 
 const CustomerBoardView = memo(() => {
@@ -75,7 +73,6 @@ const CustomerBoardView = memo(() => {
     <div>
       <Spinner loading={loading} />
       <TopButton />
-        <Header />
         <CustomerBoardHeader />
       <div className="pageCont">
         <h4 className="pageSubtitle">고객의소리 게시판</h4>
@@ -126,7 +123,6 @@ const CustomerBoardView = memo(() => {
           )
         )}
       </div>
-      <Footer />
     </div>
   );
 });

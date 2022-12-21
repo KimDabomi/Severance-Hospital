@@ -7,9 +7,6 @@
 
 import React, { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
-import TopButton from '../../components/TopButton';
 import corona from '../../assets/img/corona.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import { getYoutube } from '../../slices/YoutubeSlice';
@@ -88,8 +85,6 @@ const NewsMain = memo(() => {
 
   return (
     <Div>
-      <TopButton />
-      <Header />
       <div className='bgAll'>
       <div className="pageCont">
         <div className="bgWhiteBlue">
@@ -117,18 +112,6 @@ const NewsMain = memo(() => {
           <NewsHomeCarousel />
         </div>
       </div>
-
-      {/* 각 페이지 링크로 이동 */}
-      {/* <div className="iconListBox">
-        <ul className='iconSlider'>
-          <li>
-            <Link>
-            <i className='icoNews'></i>
-            <span className='textIcon'>언론보도</span>
-            </Link>
-          </li>
-        </ul>
-      </div> */}
 
       <div className="snsNewsWrap" style={{ backgroundColor: '#F6F6F6' }}>
         <h1 className="pageTitle">SNS소식</h1>
@@ -191,7 +174,6 @@ const NewsMain = memo(() => {
         </div>
       </div>
       </div>
-      <Footer />
     </Div>
   );
 });

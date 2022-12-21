@@ -1,57 +1,49 @@
 /**
  * @ File Name: DrugSearchSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-14
+ * @ Last Update: 2022-12-21
  * @ Description: 의약품 검색 페이지 slice
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-/** 비동기 처리 함수 구현 */
+/** 의약품 낱알식별 openAPI */
 export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", async (payload, { rejectWithValue }) => {
     let result = null;
-    let params = null;
-
-    //검색어가있다면
-    if(payload?.item_name){
-        // console.log('슬라이스페이로드',payload);
-        params = {
-            serviceKey: process.env.REACT_APP_DRUG2_API_ENCODING_KEY,
-            // 검색명 : 품목명 
-            item_name: payload.item_name,
-            page: payload.page ? payload.page:1
-        }
-    }
 
     try {
-        console.log('슬라이스페이로드',payload);
         const response = await axios.get(process.env.REACT_APP_DRUG2_API_URL,{
             params: {
                 serviceKey: process.env.REACT_APP_DRUG2_API_DECODING_KEY,
                 type: 'json', //데이터포맷
-                pageNo: payload.pageNo, //페이지번호
+                pageNo: payload?.pageNo, //페이지번호
                 numOfRows: 12, //한 페이지 결과 수
+                item_seq: payload.item_seq
             }
         });
         result = response.data.body;
+        console.log('낱알식별 result: ',result);
     } catch (err) {
         result = rejectWithValue(err.response);
     }
     return result;
 });
 
-/** 단일 데이터 조회를 위한 비동기 함수 */
-export const getDrugItem = createAsyncThunk("DrugSearchSlice/getDrugItem", async (payload, {rejectWithValue}) => {
+/** e약은요 openAPI */
+export const getDrugDetail = createAsyncThunk("DrugSearchSlice/getDrugDetail", async (payload, { rejectWithValue }) => {
     let result = null;
 
-    //환경설정 파일에 정의된 URL에서 ':id' 부분을 찾아 payload를 통해 전달된 일련번호로 치환
-    //어떤 항목을 수정할지 판별할 id가 필요
-    const URL = process.env.REACT_APP_API_DEPARTMENT_ADD.replace(':id',payload.id);
-
     try {
-        const response = await axios.get(URL);
-        result = response.data;
+        const response = await axios.get(process.env.REACT_APP_DRUG_API_URL,{
+            params: {
+                serviceKey: process.env.REACT_APP_DRUG_API_ENCODING_KEY,
+                type: 'json', //데이터포맷
+                itemSeq: payload.itemSeq
+            }
+        });
+        result = response.data.body;
+        console.log('e약은요 result: ',result);
     } catch (err) {
         result = rejectWithValue(err.response);
     }
@@ -69,6 +61,7 @@ const DrugSearchSlice = createSlice({
     },
     // 외부 action 및 비동기 action (Ajax용)
     extraReducers: {
+        /** 낱알식별 액션함수 */
         [getDrugSearch.pending]: (state, { payload }) => {
             return { ...state, loading: true }
         },
@@ -88,7 +81,29 @@ const DrugSearchSlice = createSlice({
                     message: payload?.statusText ? payload.statusText : 'Server Error'
                 }
             }
-        }
+        },
+
+        /** e약은요 액션함수 */
+        [getDrugDetail.pending]: (state, { payload }) => {
+            return { ...state, loading: true }
+        },
+        [getDrugDetail.fulfilled]: (state, { payload }) => {
+            return {
+                data: payload,
+                loading: false,
+                error: null
+            }
+        },
+        [getDrugDetail.rejected]: (state, { payload }) => {
+            return {
+                ...state,
+                loading: false,
+                error: {
+                    code: payload?.status ? payload.status : 500,
+                    message: payload?.statusText ? payload.statusText : 'Server Error'
+                }
+            }
+        },
     }
 })
 

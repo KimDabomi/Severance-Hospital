@@ -1,7 +1,7 @@
 /**
  * @ File Name: Withdraw.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-14 16:30
+ * @ Last Update: 2022-12-20 18:15
  * @ Description: 회원탈퇴 페이지
  */
 
@@ -14,8 +14,7 @@ import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 import radioChecked from "../../assets/img/ico-radio-checked.png";
 
 const Container = styled.div`
-  width: 1280px;
-  margin: auto;
+
   h1 {
     text-align: center;
     padding: 70px 0;
@@ -106,7 +105,11 @@ const Container = styled.div`
       }
     }
   }
+
+  // 탈퇴이유 선택
   .select {
+    width: 1280px;
+    margin: auto;
     h4 {
       margin: 47px 0 22px 0;
       position: relative;
