@@ -5,11 +5,13 @@
  * @ Description: 메인 페이지 header
  */
 
+/** import */
 import React, { useCallback, useRef } from "react";
 import styled from "styled-components";
-
-/** 링크 */
 import { Link } from "react-router-dom";
+
+/** components */
+import SiteMap from "./SiteMap";
 
 /** 이미지 참조 */
 // 로고, 아이콘, 이미지
@@ -30,7 +32,7 @@ import checkboxCheckedWhite from "../assets/img/ico-checkbox-checked-white.png";
 /** 검색 모달 스타일 */
 const SearchModalDiv = styled.div`
   opacity: 1;
-  visibility: hidden;
+  display: none;
   transition-duration: 0.3s;
   overflow-y: hidden;
 
@@ -333,28 +335,40 @@ const MenuArticle = styled(Link)`
 `;
 
 const Header = () => {
-  const modal = useRef();
+  // 사이트맵
+  const siteMap = useRef();
 
-  const showModal = useCallback((e) => {
-    modal.current.style.visibility = "visible";
-    // document.querySelector('body').style.overflow = 'hidden';
+  // 검색 모달
+  const searchModal = useRef();
+
+  // 사이트맵 열기
+  const showSiteMap = useCallback((e) => {
+    siteMap.current.style.display = "block";
+    document.querySelector("body").style.overflow = "hidden";
   }, []);
 
+  // 검색 모달 열기
+  const showModal = useCallback((e) => {
+    searchModal.current.style.display = "block";
+  }, []);
+
+  // 검색 모달 닫기
   const closeModal = useCallback((e) => {
-    modal.current.style.visibility = "hidden";
-    // document.querySelector('body').style.overflow = 'visible';
+    searchModal.current.style.display = "none";
   }, []);
 
   return (
     <>
-      <SearchModalDiv ref={modal}>
+      <SiteMap ref={siteMap} />
+
+      <SearchModalDiv ref={searchModal}>
         <div className="popupBg">
           <div className="popup">
-            <button className="modalCloseButton" onClick={closeModal}></button>
+            <button type="button" className="modalCloseButton" onClick={closeModal}></button>
 
             <div className="radio">
               <span>
-                <input type="radio" name="radio" id="radio1" />
+                <input type="radio" name="radio" id="radio1" defaultChecked="checked" />
                 <label htmlFor="radio1">통합검색</label>
               </span>
               <span>
@@ -467,9 +481,7 @@ const Header = () => {
               <MenuArticle to="/drug.do">건강정보</MenuArticle>
             </li>
             <li>
-              <Link to="/all_menu">
-                <img src={allMenuIcon} alt="all_menu_icon" className="allMenuIcon" />
-              </Link>
+              <img src={allMenuIcon} alt="all_menu_icon" className="allMenuIcon" onClick={showSiteMap} />
             </li>
             <li>
               <img src={searchIcon} alt="search_icon" className="searchIcon" onClick={showModal} />
