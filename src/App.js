@@ -10,6 +10,8 @@ import Map from "./pages/Map/Map";
 import Guide from "./pages/Guide/Guide";
 /** 의료인 */
 import Cooperation from "./pages/MedicalStaff/Cooperation";
+/** 이용약관, 개인정보처리방침 */
+import Policy from "./pages/Policy/Policy";
 
 // 로그인, 아이디/비밀번호 찾기
 import StaffSearch from "./pages/staff/StaffSearch";
@@ -29,23 +31,22 @@ import JoinComplete from "./pages/Join/JoinComplete";
 import JoinAlready from "./pages/Join/JoinAlready";
 
 //고객의소리
-import CustomerBoardMain from './pages/CustomerBoard/CustomerMain';
+import CustomerBoardMain from "./pages/CustomerBoard/CustomerMain";
 
 //의약품검색
-import DrugSearchMain from './pages/DrugSearch/DrugSearchMain';
+import DrugSearchMain from "./pages/DrugSearch/DrugSearchMain";
 
 //뉴스홈
 import NewsAllMain from "./pages/NewsHome/NewsAllMain";
 
-
 //마이페이지
 import MysevMain from "./pages/MYSevrance/MysevMain";
-import DetailsEdit from './pages/MYSevrance/DetailsEdit';
-import ISevrance from './pages/MYSevrance/ISevrance';
-import ChangePassward from './pages/MYSevrance/ChangePassward';
-import ResultInquiry from './pages/MYSevrance/ResultInquiry';
-import Result from './pages/MYSevrance/Result';
-import Withdraw from './pages/MYSevrance/Withdraw';
+import DetailsEdit from "./pages/MYSevrance/DetailsEdit";
+import ISevrance from "./pages/MYSevrance/ISevrance";
+import ChangePassward from "./pages/MYSevrance/ChangePassward";
+import ResultInquiry from "./pages/MYSevrance/ResultInquiry";
+import Result from "./pages/MYSevrance/Result";
+import Withdraw from "./pages/MYSevrance/Withdraw";
 
 // 의료인 정보
 import StaffProfile from "./pages/staff/StaffProfile";
@@ -70,6 +71,8 @@ function App() {
         <Route path="/map.do/*" element={<Map />} />
         {/* 의료인 */}
         <Route path="/cooperation/*" element={<Cooperation />} />
+        {/* 이용약관, 개인정보처리방침 */}
+        <Route path="/policy/*" element={<Policy />} />
 
         {/* 회원가입 */}
         <Route path="/join_way" element={<JoinWay />} />
@@ -105,10 +108,10 @@ function App() {
         <Route path="/mysevrance" element={<MysevMain />} />
         <Route path="/mysevrance/iseverance/mywriting" element={<ISevrance />} />
         <Route path="/details_edit" element={<DetailsEdit />} />
-        <Route path='/change_passward' element={<ChangePassward />} />
-        <Route path='/resultinquiry' element={<ResultInquiry />} />
-        <Route path='/result' element={<Result />} />
-        <Route path='/withdraw' element={<Withdraw />} />
+        <Route path="/change_passward" element={<ChangePassward />} />
+        <Route path="/resultinquiry" element={<ResultInquiry />} />
+        <Route path="/result" element={<Result />} />
+        <Route path="/withdraw" element={<Withdraw />} />
 
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
