@@ -1,7 +1,7 @@
 /**
  * @ File Name: FindPassword.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-20 18:00
+ * @ Last Update: 2022-12-221 14:30
  * @ Description: 비밀번호 찾기 페이지
  */
 
@@ -14,6 +14,7 @@ import ipin from "../../assets/img/img-login-Certified01.png";
 import phone from "../../assets/img/img-login-Certified02.png";
 import official from "../../assets/img/img-login-Certified03.png";
 import certified from "../../assets/img/img-login-Certified04.png";
+import RegexHelper from "../../helper/RegexHelper";
 
 const Container = styled.div`
   position: relative;
@@ -177,24 +178,25 @@ const Container = styled.div`
 
 const FindId = memo(() => {
   const navigate = useNavigate();
-  const [input, setInput] = useState([]);
 
   const goEmail = (e) => {
+    //입력값에 대한 유효성 검사
+    const regex = RegexHelper.getInstance();
+
+    try {
+      regex.value(document.querySelector('.id_input'), '이름을 입력해주세요.');
+    } catch (e) {
+      document.querySelector(".no_id").style.display = "block";
+      return;
+    }
     navigate("/find_password_email");
   };
 
-  const putInput = (e) => {
-    e.target.value
-      ? setInput([...input, e.target.value])
-      : setInput(input.filter((choice) => choice !== e.target.value));
-  };
-
-  const notInput = (e) => {
-    document.querySelector(".no_id").style.display = "block";
-  };
   const closeBox = (e) => {
     document.querySelector(".no_id").style.display = "none";
   };
+
+
 
   return (
     <Container>
