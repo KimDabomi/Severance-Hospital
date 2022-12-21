@@ -6,12 +6,12 @@
  */
 
 /** import */
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 
 /** components */
-import SiteMap from "./SiteMap";
+import SiteMapContainer from "./SiteMap";
 
 /** 이미지 참조 */
 // 로고, 아이콘, 이미지
@@ -28,6 +28,10 @@ import closeWhite from "../assets/img/ico-close-white@2x.png";
 // 검색 모달 -> 라디오 버튼 체크 아이콘
 import checkboxCheckedBlack from "../assets/img/ico-checkbox-checked-black.png";
 import checkboxCheckedWhite from "../assets/img/ico-checkbox-checked-white.png";
+// 메뉴 이미지
+import menuBG from "../assets/img/bg-lnb.png";
+import menuArt from "../assets/img/img-lnb-artwork.png";
+import menuClose from "../assets/img/ico-close.png";
 
 /** 검색 모달 스타일 */
 const SearchModalDiv = styled.div`
@@ -224,6 +228,14 @@ const SearchModalDiv = styled.div`
   }
 `;
 
+/** 헤더 컨테이너 스타일 */
+const Container = styled.div`
+  position: relative;
+  z-index: 5000;
+
+  background-color: #fff;
+`;
+
 /** 헤더 스타일 */
 const HeaderContainer = styled.header`
   width: 100%;
@@ -340,6 +352,16 @@ const GnbContainer = styled.div`
           transform: translateY(0);
         }
 
+        &.active {
+          color: #0054d1;
+        }
+
+        &.active::after {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
         .allMenuIcon {
           height: 20px;
         }
@@ -359,17 +381,207 @@ const GnbContainer = styled.div`
   }
 `;
 
-/** 메인 네비게이션 텍스트 스타일 */
-const MenuArticle = styled(Link)`
+/** 메인 네비게이션 텍스트 링크 스타일 */
+const MenuLink = styled(Link)`
   text-align: center;
   font-size: 26px;
   padding: 0 33px;
   line-height: 84px;
 `;
 
+/** 메인 네비게이션 텍스트 스타일 */
+const MenuA = styled.a`
+  text-align: center;
+  font-size: 26px;
+  padding: 0 33px;
+  line-height: 84px;
+`;
+
+/** 메뉴 스타일 */
+// 메뉴 뒷 배경
+const Background = styled.div`
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 450;
+
+  background-color: #000;
+
+  transition-duration: 0.3s;
+  transition-property: opacity;
+
+  visibility: hidden;
+  opacity: 0.7;
+
+  &.active {
+    visibility: visible;
+  }
+`;
+// 메뉴 박스
+const MenuContainer = styled.div`
+  height: 380px;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+
+  visibility: hidden;
+  overflow-x: hidden;
+
+  &.active {
+    visibility: visible;
+  }
+
+  .menu {
+    width: 1280px;
+
+    position: relative;
+    top: 0;
+    bottom: 0;
+  }
+`;
+// 메뉴 이미지 섹션
+const MenuImgSection = styled.section`
+  width: 294px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 300;
+
+  padding-top: 50px;
+  box-sizing: border-box;
+
+  font-size: 18px;
+  line-height: 30px;
+
+  &::before {
+    content: "";
+    width: 4000px;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #f9f9f9 url(${menuBG}) no-repeat right 0;
+  }
+
+  img {
+    position: relative;
+    z-index: 400;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 30px;
+
+    position: relative;
+
+    &:nth-child(2) {
+      font-size: 24px;
+      margin-top: 30px;
+    }
+
+    span {
+      color: #0054d1;
+    }
+  }
+
+  &::after {
+    content: "";
+    width: 4000px;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    background-color: #fff;
+  }
+`;
+// 메뉴 큰 항목 리스트 섹션
+const MenuListSection = styled.section`
+  position: relative;
+  z-index: 500;
+
+  margin-left: 294px;
+  padding: 30px 0 40px 26px;
+
+  font-size: 20px;
+`;
+// 메뉴 ul태그
+const MenuUl = styled.ul`
+  display: flex;
+`;
+// 메뉴 각 리스트
+const MenuList = styled.li`
+  width: 20%;
+  padding: 30px 0 0 30px;
+  font-size: 20px;
+`;
+// 메뉴 메인 제목
+const MenuTitle = styled.h4`
+  font-weight: bold;
+  line-height: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+`;
+// 서브 메뉴 ul태그
+const SubMenuUl = styled.ul`
+  margin-top: 15px;
+  font-size: 17px;
+  box-sizing: border-box;
+`;
+// 서브 메뉴 각 리스트
+const SubMenuList = styled.li`
+  line-height: 22px;
+  color: #444;
+  padding: 4px 0;
+  padding-right: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+`;
+// 서브 메뉴 제목
+const SubMenuTitlte = styled.h4``;
+// 메뉴 닫기 버튼
+const MenuCloseButton = styled.button`
+  position: absolute;
+  right: 0;
+  top: 12px;
+  padding: 2px;
+  z-index: 500;
+  border: 0;
+  background-color: transparent;
+
+  i {
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    display: block;
+    background: url(${menuClose}) no-repeat center / cover;
+  }
+`;
+
 const Header = () => {
   // 경로 변경 시, useEffect 동작을 위한 location
   const location = useLocation();
+
+  const [menuContent, setMenuContent] = useState("환자/보호자");
+
+  // 메뉴
+  const menu = useRef();
+  const menuBG = useRef();
+  const menuFirst = useRef();
+  const menuSecond = useRef();
 
   // 사이트맵
   const siteMap = useRef();
@@ -381,6 +593,38 @@ const Header = () => {
   const showSiteMap = useCallback((e) => {
     siteMap.current.style.display = "block";
     document.querySelector("body").style.overflow = "hidden";
+  }, []);
+
+  // 메뉴 열기
+  const menuToggle = useCallback((e) => {
+    // console.log(e.target.innerHTML);
+    // console.log(menu.current.classList[2]);
+    // console.log(menuChose1.current.innerHTML);
+    // console.log(menuChose1.current.classList[2]);
+    // console.log(menuBG);
+
+    menu.current.classList.add("active");
+    menuBG.current.classList.add("active");
+    if (e === "환자/보호자") {
+      menuFirst.current.classList.toggle("active");
+      menuSecond.current.classList.remove("active");
+      if (menuFirst.current.classList[2] !== "active") {
+        menu.current.classList.remove("active");
+        menuBG.current.classList.remove("active");
+      }
+    } else if (e === "close") {
+      menu.current.classList.remove("active");
+      menuBG.current.classList.remove("active");
+      menuFirst.current.classList.remove("active");
+      menuSecond.current.classList.remove("active");
+    } else {
+      menuSecond.current.classList.toggle("active");
+      menuFirst.current.classList.remove("active");
+      if (menuSecond.current.classList[2] !== "active") {
+        menu.current.classList.remove("active");
+        menuBG.current.classList.remove("active");
+      }
+    }
   }, []);
 
   // 검색 모달 열기
@@ -397,140 +641,242 @@ const Header = () => {
   useEffect(() => {
     siteMap.current.style.display = "none";
     document.querySelector("body").style.overflow = "visible";
+    menu.current.classList.remove("active");
+    menuBG.current.classList.remove("active");
+    menuFirst.current.classList.remove("active");
+    menuSecond.current.classList.remove("active");
   }, [location.pathname]);
 
   return (
     <>
-      <SiteMap ref={siteMap} />
+      <SiteMapContainer ref={siteMap} />
+      <Container>
+        <SearchModalDiv ref={searchModal}>
+          <div className="popupBg">
+            <div className="popup">
+              <button type="button" className="modalCloseButton" onClick={closeModal}></button>
 
-      <SearchModalDiv ref={searchModal}>
-        <div className="popupBg">
-          <div className="popup">
-            <button type="button" className="modalCloseButton" onClick={closeModal}></button>
+              <div className="radio">
+                <span>
+                  <input type="radio" name="radio" id="radio1" defaultChecked="checked" />
+                  <label htmlFor="radio1">통합검색</label>
+                </span>
+                <span>
+                  <input type="radio" name="radio" id="radio2" />
+                  <label htmlFor="radio2">의료진 검색</label>
+                </span>
+                <span>
+                  <input type="radio" name="radio" id="radio3" />
+                  <label htmlFor="radio3">진료과 탐색</label>
+                </span>
+              </div>
 
-            <div className="radio">
-              <span>
-                <input type="radio" name="radio" id="radio1" defaultChecked="checked" />
-                <label htmlFor="radio1">통합검색</label>
-              </span>
-              <span>
-                <input type="radio" name="radio" id="radio2" />
-                <label htmlFor="radio2">의료진 검색</label>
-              </span>
-              <span>
-                <input type="radio" name="radio" id="radio3" />
-                <label htmlFor="radio3">진료과 탐색</label>
-              </span>
-            </div>
+              <div className="search">
+                <input type="text" placeholder="검색어를 입력해주세요" title="검색어 입력"></input>
+                <button>
+                  <i />
+                </button>
+              </div>
 
-            <div className="search">
-              <input type="text" placeholder="검색어를 입력해주세요" title="검색어 입력"></input>
-              <button>
-                <i />
-              </button>
-            </div>
-
-            <div className="hashTag">
-              <ul>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #코로나
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #면회제한
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #오시는 길
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #비급여진료비
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #증명서발급
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #제중원
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #건강검진
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #입찰
-                  </a>
-                </li>
-                <li>
-                  <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
-                    #채용
-                  </a>
-                </li>
-              </ul>
+              <div className="hashTag">
+                <ul>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #코로나
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #면회제한
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #오시는 길
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #비급여진료비
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #증명서발급
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #제중원
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #건강검진
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #입찰
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search/result?keyword=%EC%BD%94%EB%A1%9C%EB%82%98&m_site_cd=sev&language=ko" target="_black" rel="noopener noreferrer">
+                      #채용
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </SearchModalDiv>
+        </SearchModalDiv>
 
-      <HeaderContainer>
-        <UtilContainer>
-          <ul>
-            <li>
-              <Link to="/login">
-                <img src={loginIcon} alt="login_icon" />
+        <HeaderContainer>
+          <UtilContainer>
+            <ul>
+              <li>
+                <Link to="/login">
+                  <img src={loginIcon} alt="login_icon" />
+                </Link>
+              </li>
+              <li>
+                <Link to="/join_way">
+                  <img src={joinIcon} alt="join_icon" />
+                </Link>
+              </li>
+            </ul>
+            <div>
+              <span>KO</span>
+              <img src={chevronIcon} />
+            </div>
+          </UtilContainer>
+
+          <GnbContainer>
+            <h1>
+              <Link to="/">
+                <img src={sevLogo} alt="header_logo" className="sevLogo" />
               </Link>
-            </li>
-            <li>
-              <Link to="/join_way">
-                <img src={joinIcon} alt="join_icon" />
-              </Link>
-            </li>
-          </ul>
-          <div>
-            <span>KO</span>
-            <img src={chevronIcon} />
+            </h1>
+            <ul>
+              <li>
+                <MenuA
+                  href="#"
+                  onClick={() => {
+                    menuToggle("환자/보호자");
+                    setMenuContent("환자/보호자");
+                  }}
+                  ref={menuFirst}
+                >
+                  환자/보호자
+                </MenuA>
+              </li>
+              <li>
+                <MenuA
+                  href="#"
+                  onClick={() => {
+                    menuToggle("의료인");
+                    setMenuContent("의료인");
+                  }}
+                  ref={menuSecond}
+                >
+                  의료인
+                </MenuA>
+              </li>
+              <li>
+                <MenuLink to="/customer.do">공감 Story</MenuLink>
+              </li>
+              <li>
+                <MenuLink to="/drug.do">건강정보</MenuLink>
+              </li>
+              <li>
+                <img src={allMenuIcon} alt="all_menu_icon" className="allMenuIcon" onClick={showSiteMap} />
+              </li>
+              <li>
+                <img src={searchIcon} alt="search_icon" className="searchIcon" onClick={showModal} />
+              </li>
+            </ul>
+          </GnbContainer>
+        </HeaderContainer>
+
+        <MenuContainer ref={menu}>
+          <div className="menu">
+            <MenuImgSection>
+              <img src={menuArt} />
+              <p>
+                THE <strong>FIRST</strong>, THE <strong>BEST</strong>
+              </p>
+              <p>
+                환자가 만족하는 병원 <span>세브란스</span>입니다.
+              </p>
+            </MenuImgSection>
+
+            <MenuListSection>
+              {menuContent === "환자/보호자" ? (
+                <MenuUl>
+                  <MenuList>
+                    <MenuTitle>예약</MenuTitle>
+                    <SubMenuUl>
+                      <SubMenuList>
+                        <SubMenuTitlte>진료예약</SubMenuTitlte>
+                      </SubMenuList>
+                      <SubMenuList>
+                        <SubMenuTitlte>예약현황</SubMenuTitlte>
+                      </SubMenuList>
+                    </SubMenuUl>
+                  </MenuList>
+                  <MenuList>
+                    <MenuTitle>결과</MenuTitle>
+                  </MenuList>
+                  <MenuList>
+                    <MenuTitle>이용안내</MenuTitle>
+                    <SubMenuUl>
+                      <SubMenuList>
+                        <SubMenuTitlte>병원시설</SubMenuTitlte>
+                      </SubMenuList>
+                      <SubMenuList>
+                        <SubMenuTitlte>외래이용</SubMenuTitlte>
+                      </SubMenuList>
+                      <SubMenuList>
+                        <SubMenuTitlte>입원생활</SubMenuTitlte>
+                      </SubMenuList>
+                      <SubMenuList>
+                        <SubMenuTitlte>수술실 이용</SubMenuTitlte>
+                      </SubMenuList>
+                      <SubMenuList>
+                        <SubMenuTitlte>비급여진료비</SubMenuTitlte>
+                      </SubMenuList>
+                    </SubMenuUl>
+                  </MenuList>
+                </MenuUl>
+              ) : (
+                <MenuUl>
+                  <MenuList>
+                    <MenuTitle>진료의뢰</MenuTitle>
+                    <SubMenuUl>
+                      <SubMenuList>
+                        <SubMenuTitlte>협력병원현황</SubMenuTitlte>
+                      </SubMenuList>
+                      <SubMenuList>
+                        <SubMenuTitlte>외래이용</SubMenuTitlte>
+                      </SubMenuList>
+                    </SubMenuUl>
+                  </MenuList>
+                </MenuUl>
+              )}
+            </MenuListSection>
+            <MenuCloseButton
+              type="button"
+              onClick={() => {
+                menuToggle("close");
+              }}
+            >
+              <i />
+            </MenuCloseButton>
           </div>
-        </UtilContainer>
+        </MenuContainer>
+      </Container>
 
-        <GnbContainer>
-          <h1>
-            <Link to="/">
-              <img src={sevLogo} alt="header_logo" className="sevLogo" />
-            </Link>
-          </h1>
-          <ul>
-            <li>
-              <MenuArticle to="/appointment_main">환자/보호자</MenuArticle>
-            </li>
-            <li>
-              <MenuArticle to="/cooperation/hospital.do">의료인</MenuArticle>
-            </li>
-            <li>
-              <MenuArticle to="/customer.do">공감 Story</MenuArticle>
-            </li>
-            <li>
-              <MenuArticle to="/drug.do">건강정보</MenuArticle>
-            </li>
-            <li>
-              <img src={allMenuIcon} alt="all_menu_icon" className="allMenuIcon" onClick={showSiteMap} />
-            </li>
-            <li>
-              <img src={searchIcon} alt="search_icon" className="searchIcon" onClick={showModal} />
-            </li>
-          </ul>
-        </GnbContainer>
-      </HeaderContainer>
+      <Background ref={menuBG} />
     </>
   );
 };
