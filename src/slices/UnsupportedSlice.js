@@ -5,21 +5,21 @@
  * @ Description: 비급여진료비 안내 페이지 slice
  */
 
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 /** 비동기 처리 함수 구현 */
 export const getUnsupported = createAsyncThunk("UnsupportedSlice/getUnsupported", async (payload, { rejectWithValue }) => {
     let result = null;
-    // let params = null;
+    let params = null;
 
-    // if(payload?.npayKorNm){
-    //     params = {
-    //         serviceKey: process.env.REACT_APP_UNSUPPORTED_API_ENCODING_KEY,
-    //         npayKorNm: payload.npayKorNm,
-    //         page: payload.page ? payload.page:1
-    //     }
-    // }
+    if(payload?.npayKorNm){
+        params = {
+            serviceKey: process.env.REACT_APP_UNSUPPORTED_API_ENCODING_KEY,
+            npayKorNm: payload.npayKorNm,
+            page: payload.page ? payload.page:1
+        }
+    }
 
     try {
         const response = await axios.get(process.env.REACT_APP_UNSUPPORTED_API_URL,{
@@ -31,6 +31,7 @@ export const getUnsupported = createAsyncThunk("UnsupportedSlice/getUnsupported"
             }
         });
         result = response.data.body;
+        console.log(result);
     } catch (err) {
         result = rejectWithValue(err.response);
     }

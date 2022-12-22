@@ -3,6 +3,7 @@ import StaffSearchSlice from "./slices/StaffSearchSlice";
 import CustomerBoardSlice from './slices/CustomerBoardSlice';
 import DrugSearchSlice from './slices/DrugSearchSlice';
 import YoutubeSlice from './slices/YoutubeSlice';
+import UnsupportedSlice from './slices/UnsupportedSlice';
 
 /** Slice 참조 */
 
@@ -12,7 +13,8 @@ const store = configureStore({
     StaffSearchSlice: StaffSearchSlice,
     CustomerBoardSlice:CustomerBoardSlice,
     DrugSearchSlice:DrugSearchSlice,
-    YoutubeSlice:YoutubeSlice
+    YoutubeSlice:YoutubeSlice,
+    UnsupportedSlice:UnsupportedSlice
   }
 });
 
