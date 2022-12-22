@@ -1,13 +1,13 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-21 16:15
+ * @ Last Update: 2022-12-22 18:15
  * @ Description: 회원가입 정보 입력 페이지
  */
 
-import React, { memo, useEffect, useState } from "react";
+import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import {useForm} from "react-hook-form";
+import {useForm,useWatch} from "react-hook-form";
 import styled from "styled-components";
 import LoginHeader from "../../components/LoginHeader";
 import LoginFooter from "../../components/LoginFooter";
@@ -19,7 +19,6 @@ import step04 from "../../assets/img/ico-login-step4-off@2x.png";
 import check from "../../assets/img/ico-check-primary@2x.png";
 import warning from "../../assets/img/ico-warning-mark@2x.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
-import RegexHelper from '../../helper/RegexHelper';
 
 
 const Container = styled.div`
@@ -124,7 +123,7 @@ const Container = styled.div`
     color: #f76117;
     font-weight: bold;
     img {
-      margin-top: 7px;
+      margin-top: 6px;
     }
   }
 
@@ -262,7 +261,7 @@ const Container = styled.div`
   }
 
   // 테이블 레이아웃
-  .dafault_info,.legal_representative {
+  .dafault_info{
     width: 1280px;
     margin: auto;
     table {
@@ -309,86 +308,27 @@ const Container = styled.div`
     border-radius: 3px;
     font-weight: 100;
   }
-
-  .id_value,.id_length,.id_dbcheck,.id_ok,.pw_rule,.pw_ok,.pw_incorrect,.pw_correct,.tel_value{
-    display: none;
-  }
 `;
 
 const JoinUs = memo(() => {
   const navigate = useNavigate();
-  const {register, watch, handleSubmit, formState: { error }} = useForm({
-    mode: 'onSubmit'
+  const {register,handleSubmit,watch,formState: { errors,isSubmitting },control} = useForm({
+    mode: 'onChange'
   });
 
   const onSubmit = data => {
     console.log(data);
+    navigate('/join_complete');
   }
-  
+  const onError = error => {
+    console.log(error);
+  }
+  const watching = useWatch({
+    control,
+    name: ["userid", "password"]
+  });
+  console.log(watching);
 
-  // const submitInfo = e => {
-  
-  //   //입력값에 대한 유효성 검사
-  //   const regex = RegexHelper.getInstance();
-
-  //   // 아이디 입력 여부
-  //   try {
-  //     regex.value(document.querySelector('.id_input'));
-  //   } catch (e) {
-  //     document.querySelector(".id_value").style.display = "inline";
-  //     document.querySelector(".id_length").style.display = "none";
-  //     document.querySelector(".id_dbcheck").style.display = "none";
-  //     document.querySelector(".id_ok").style.display = "none";
-  //     return;
-  //   }
-    
-  //   // 아이디 형식
-  //   try {
-  //     regex.minLength(document.querySelector('.id_input'),6);
-  //     regex.maxLength(document.querySelector('.id_input'),20);
-  //     regex.field(document.querySelector('.id_input'),/^[a-z0-9_]$/);
-  //   } catch (e) {
-  //     if (e) {
-  //       document.querySelector(".id_value").style.display = "none";
-  //       document.querySelector(".id_length").style.display = "inline";
-  //       document.querySelector(".id_dbcheck").style.display = "none";
-  //     } else {
-  //       document.querySelector(".id_ok").style.display = "inline";
-  //     }
-    
-  //     return;
-  //   }
-
-  //   // 비밀번호 입력 여부
-  //   try {
-  //     regex.value(document.querySelector('.password_input'));
-  //     regex.minLength(document.querySelector('.password_input'),8);
-  //     regex.maxLength(document.querySelector('.password_input'),20);
-  //     regex.field(document.querySelector('.password_input'),/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/);
-  //   } catch (e) {
-  //     document.querySelector(".pw_rule").style.display = "inline";
-  //     return;
-  //   }
-
-  //   // 비밀번호 확인
-  //   try {
-  //     regex.compareTo(document.querySelector('.password_input').value,document.querySelector('.repassword_input').value);
-  //   } catch (e) {
-  //     document.querySelector(".pw_incorrect").style.display = "inline";
-  //     return;
-  //   }
-
-  //   // 전화번호 입력 여부
-  //   try {
-  //     regex.value(document.querySelector('.tel_input'));
-  //   } catch (e) {
-  //     document.querySelector(".tel_value").style.display = "inline";
-  //     return;
-  //   }
-
-
-  //   navigate('/join_complete');
-  // }
 
   return (
     <Container>
@@ -428,7 +368,7 @@ const JoinUs = memo(() => {
               </li>
             </ol>
           </div>
-          <form className="dafault_info" onSubmit={handleSubmit(onSubmit)}>
+          <form className="dafault_info" onSubmit={handleSubmit(onSubmit,onError)}>
             <h4>기본정보입력<span className='sub_text'><span className="require">*</span>는 필수항목입니다.</span></h4>
             <table>
               <tbody>
@@ -444,14 +384,7 @@ const JoinUs = memo(() => {
                         name="mberId"
                         id="mberId"
                         className="id_input"
-                        title="아이디 입력"
-                        data-parsley-group="dupId"
-                        data-parsley-error-message="형식에 맞게 아이디를 입력해 주세요."
-                        pattern="^[a-z0-9_]{6,20}$"
-                        autoComplete="new-password"
-                        data-parsley-id="5"
-                        required
-                        {...register('id_input',{
+                        {...register('userid',{
                           required: '아이디를 입력해주세요.',
                           minLength: {
                             value: 6,
@@ -462,12 +395,11 @@ const JoinUs = memo(() => {
                             message: '아이디는 6자 이상 20자 이내로 입력해주세요.'
                           },
                           pattern: {
-                            value: /^[a-z0-9_]{6,20}$/,
+                            value: /^[a-zA-Z0-9]*$/,
                             message: '한글/특수문자는 입력이 불가능합니다.'
                           }
                         })}
                       />
-                      {error.id_input && <p>{error.id_input.message}</p>}
                       <button
                         type="button"
                         className="dup_btn"
@@ -479,26 +411,8 @@ const JoinUs = memo(() => {
                       <li>※ 6자 이상, 20자 이내로 설정이 가능합니다.</li>
                       <li>※ 한글/특수문자는 입력이 불가능합니다.</li>
                     </ul>
-                    <p className='warn'>
-                      <span className='id_value'>
-                      <img src={warning} alt="warning" />
-                      아이디를 입력해주세요.</span>
-                    </p>
-                    <p className='warn'>
-                      <span className='id_length'>
-                      <img src={warning} alt="warning" />
-                      아이디는 6자 이상 20자 이내로 입력해주세요.</span>
-                    </p>
-                    <p className='warn'>
-                      <span className='id_dbcheck'>
-                      <img src={warning} alt="warning" />
-                      아이디를 중복체크해주세요.</span>
-                    </p>
-                    <p className='check'>
-                      <span className='id_ok'>
-                      <img src={check} alt="check" />
-                      사용이 가능한 아이디입니다.</span>
-                    </p>
+                    {errors.userid && (<p className="warn"><img src={warning} alt="warning" />{errors.userid.message}</p>)}
+                    {!errors.userid && (<p className="check"><img src={check} alt="check" />사용이 가능한 아이디입니다.</p>)}
                   </td>
                 </tr>
 
@@ -515,13 +429,21 @@ const JoinUs = memo(() => {
                         name="password"
                         id="password"
                         className="password_input"
-                        title="비밀번호 입력"
-                        data-parsley-group="password"
-                        data-parsley-error-message="비밀번호를 입력해 주세요."
-                        pattern="(?=.*\d{1,20})(?=.*[~`!@#$%\^&amp;*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$"
-                        data-parsley-id="7"
-                        required
-                        {...register('pw_input')}
+                        {...register('password',{
+                          required: '비밀번호를 입력해주세요.',
+                          minLength: {
+                            value: 8,
+                            message: '비밀번호 규격에 맞춰 입력해주세요.'
+                          },
+                          maxLength: {
+                            value: 20,
+                            message: '비밀번호 규격에 맞춰 입력해주세요.'
+                          },
+                          pattern: {
+                            value: /(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/,
+                            message: '비밀번호 규격에 맞춰 입력해주세요.'
+                          }
+                        })}
                       />
                     </div>
                     <ul>
@@ -533,16 +455,8 @@ const JoinUs = memo(() => {
                         (ex. 111, 123, 321, aaa, abc 등)
                       </li>
                     </ul>
-                    <p className='warn'>
-                      <span className='pw_rule'>
-                      <img src={warning} alt="warning" />
-                      비밀번호 규격에 맞춰 입력해주세요.</span>
-                    </p>
-                    <p className='check'>
-                      <span className='pw_ok'>
-                      <img src={check} alt="check" />
-                      안전한 비밀번호입니다.</span>
-                    </p>
+                    {errors.password && (<p className="warn"><img src={warning} alt="warning" />{errors.password.message}</p>)}
+                    {!errors.password && (<p className="check"><img src={check} alt="check" />안전한 비밀번호입니다.</p>)}
                   </td>
                 </tr>
 
@@ -559,23 +473,18 @@ const JoinUs = memo(() => {
                         name="repassword"
                         id="repassword"
                         className="repassword_input"
-                        title="비밀번호 재입력"
-                        data-parsley-error-message="비밀번호를 한번 더 입력해 주세요."
-                        pattern="(?=.*\d{1,20})(?=.*[~`!@#$%\^&amp;*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$"
-                        required
-                        {...register('repw_input')}
+                        {...register('repassword',{
+                          required: true,
+                          validate: (val) => {
+                            if (watch('password') != val) {
+                              return "비밀번호가 일치하지 않습니다.";
+                            }
+                          }
+                        })}
                       />
+                      {errors.repassword && (<p className="warn"><img src={warning} alt="warning" />{errors.repassword.message}</p>)}
+                      {!errors.repassword && (<p className="check"><img src={check} alt="check" />비밀번호가 일치합니다.</p>)}
                     </div>
-                    <p className='warn'>
-                      <span className='pw_incorrect'>
-                      <img src={warning} alt="warning" />
-                      비밀번호가 일치하지 않습니다.</span>
-                    </p>
-                    <p className='check'>
-                      <span className='pw_correct'>
-                      <img src={check} alt="check" />
-                      비밀번호가 일치합니다.</span>
-                    </p>
                   </td>
                 </tr>
 
@@ -629,14 +538,9 @@ const JoinUs = memo(() => {
                           name="telno2"
                           id="telno2"
                           className="telno2_input"
-                          title="연락처 가운데 네자리"
-                          maxLength="4"
-                          data-parsley-group="phone"
-                          data-parsley-error-message="연락처를 입력해주세요."
-                          data-parsley-type="number"
-                          data-parsley-id="13"
-                          required
-                          {...register('tel_input1')}
+                          {...register('tel2',{
+                            required: true
+                          })}
                         />
                       </span>
                       <span className="text">-</span>
@@ -646,23 +550,15 @@ const JoinUs = memo(() => {
                           name="telno3"
                           id="telno3"
                           className="telno3_input"
-                          title="연락처 마지막 네자리"
-                          maxLength="4"
-                          data-parsley-group="phone"
-                          data-parsley-error-message="연락처를 입력해주세요."
-                          data-parsley-type="number"
-                          data-parsley-id="15"
-                          required
-                          {...register('tel_input2')}
+                          {...register('tel3',{
+                            required: '연락처를 입력해주세요.',
+                          })}
                         />
+                        
                       </span>
                     </div>
                     <p className='no_excep'>예약 관련정보는 수신동의 여부와 관계없이 발송됩니다.</p>
-                    <p className='warn'>
-                      <span className='tel_value'>
-                      <img src={warning} alt="warning" />
-                      연락처를 입력해주세요.</span>
-                    </p>
+                    {errors.tel3 && (<p className="warn"><img src={warning} alt="warning" />{errors.tel3.message}</p>)}
                   </td>
                 </tr>
 
@@ -797,8 +693,6 @@ const JoinUs = memo(() => {
                 </tr>
               </tbody>
             </table>
-          </form>
-          <form className="legal_representative">
             <h4>법정대리인 정보입력</h4>
             <table>
               <tbody>
@@ -1033,8 +927,9 @@ const JoinUs = memo(() => {
                 </tr>
               </tbody>
             </table>
+            <button type="submit" className="submit_btn" disabled={isSubmitting}>확인</button>
           </form>
-          <button type="submit" className="submit_btn">확인</button>
+          
         </div>
         <LoginFooter />
 
