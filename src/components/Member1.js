@@ -224,61 +224,6 @@ const Popup = styled.div`
       }
     }
   }
-
-  /* .dimed {
-    position: fixed;
-    top: 150px;
-    left: 30px;
-
-    box-shadow: #000000b3 0 0 0 9999px;
-    z-index: 100;
-  }
-
-  .popUp {
-    width: 360px;
-    height: 182px;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 101;
-    transform: translate(-50%, -50%);
-
-    font-size: 16px;
-    text-align: center;
-
-    background-color: #fff;
-    padding: 30px;
-    box-sizing: border-box;
-  }
-
-  .alert {
-    height: 50%;
-    word-wrap: break-word;
-  }
-
-  .closeBtnCont {
-    height: 50%;
-    position: relative;
-
-    padding-top: 20px;
-    box-sizing: border-box;
-
-    .closeBtn {
-      width: 80px;
-      height: 40px;
-      min-width: 80px;
-
-      color: white;
-      font-size: 16px;
-
-      background-color: #0094fb;
-      padding: 0 19px;
-
-      border: none;
-      border-radius: 3px;
-    }
-  } */
 `;
 
 const tp333 = memo(() => {
