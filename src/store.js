@@ -15,7 +15,7 @@ const store = configureStore({
     DrugSearchSlice:DrugSearchSlice,
     YoutubeSlice:YoutubeSlice,
     UnsupportedSlice:UnsupportedSlice
-  }
+  },
 });
 
 export default store;
