@@ -18,16 +18,20 @@ import box02 from "../assets/img/ico-box-02.png";
 const Member = styled.div`
   width: 305px;
   height: 803px;
-
   position: relative;
   margin: 0 10px;
 
   background: #f9f9f9 url(${bgBox02}) no-repeat right 34px;
-
-  border: 1px solid #e6e6e6;
-  box-sizing: border-box;
-
   display: block;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e6e6e6;
+    box-sizing: border-box;
+  }
 
   a {
     display: block;
@@ -72,8 +76,11 @@ const Login = styled.div`
   width: 305px;
   height: 803px;
 
-  position: relative;
-  margin: 0 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 
   background: #fff;
   border: 1px solid #e6e6e6;
