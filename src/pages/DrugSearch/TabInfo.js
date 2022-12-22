@@ -5,7 +5,7 @@
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
-import React, { memo, useCallback, useRef } from 'react';
+import React, { memo, useCallback, useRef, useEffect } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/Spinner'
@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 // Slice에 정의된 액션함수들 참조
 import { getDrugSearch } from '../../slices/DrugSearchSlice';
 import TopButton from '../../components/TopButton';
-import DrugInfo from './DrugInfo';
 
 
 const DrugCont = styled.div``;
@@ -41,8 +40,11 @@ const TabInfo = memo(() => {
   const onDrugInfoSubmit = useCallback((e) => {
     e.preventDefault();
 
-    //입력값에 대한 유효성 검사
-    const regex = RegexHelper.getInstance();
+		//검색을 새로했으니 페이지 초기화
+		page.current = 1;
+
+		//입력값에 대한 유효성 검사
+		const regex = RegexHelper.getInstance();
 
     try {
       regex.value(
@@ -58,13 +60,19 @@ const TabInfo = memo(() => {
 
 		//검색어를 slice에 전달
 		dispatch(getDrugSearch({
-			item_name: document.querySelector('#itemName').value
+			item_name: document.querySelector('#itemName').value,
+			pageNo: page.current
 		}));
 	}, []);
 
-  if (data) {
-    console.log("Tabinfo페이지 data", data);
-  }
+	//페이지가 로드되었을 때 정보리셋
+	useEffect(()=>{
+		dispatch(getDrugSearch({item_name:'감자'}));
+	  },[]);
+
+	if (data) {
+		console.log('Tabinfo페이지 data', data);
+	}
 
   /** 더보기 버튼 (페이지) 함수 */
   const pagePlus = useCallback((e) => {
@@ -72,19 +80,12 @@ const TabInfo = memo(() => {
     //페이지 번호 1증가
     page.current++;
 
-    //추가 검색 결과를 요청
-    dispatch(
-      getDrugSearch({
-        pageNo: page.current,
-      })
-    );
-  });
-
-	// 출력하는 함수
-	const renderFunc = (e)=> {
-		return (<h1>안녕하세요</h1>);
-	};
-	
+		//추가 검색 결과를 요청
+		dispatch(getDrugSearch({
+			pageNo: page.current,
+			item_name:document.querySelector('#itemName').value
+		}));
+	})
 
 	return (
 		<DrugCont>
@@ -131,7 +132,7 @@ const TabInfo = memo(() => {
 			{error ? (
 				<h1>에러발생함</h1>
 			) : (
-				data && data.items.length > 0 ? (
+				data && data.items ? (
 					<div>
 						<ul className="drugListCont">
 							{/* // 검색 결과 표시 (최대12개)  */}
@@ -146,8 +147,8 @@ const TabInfo = memo(() => {
 								)
 							})}
 						</ul>
-						{/* // 페이지가 2페이지 이상일 경우 더보기 버튼*/}
-						{data.totalCount> 12 ?
+						{/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
+						{data.totalCount > page.current*12 ?
 							<div className="buttonContColumn">
 								<Link className="btnMore" onClick={pagePlus}>더보기<span>({data.pageNo*12}/{data.totalCount})</span></Link>
 							</div>

@@ -11,6 +11,16 @@ import axios from 'axios';
 /** 의약품 낱알식별 openAPI */
 export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", async (payload, { rejectWithValue }) => {
     let result = null;
+    let params = null; //검색어
+
+    //payload객체가 null이나 undefined가 아니고 그 안의 keyword값이 존재한다면?
+    if(payload?.item_name){
+        console.log('검색어 :',payload?.item_name);
+    //     //axios에 설정할 qeurysting 데이터 구성
+    //     params = {
+    //         item_name: payload?.item_name
+    //     }
+    }
 
     try {
         const response = await axios.get(process.env.REACT_APP_DRUG2_API_URL,{
@@ -19,7 +29,8 @@ export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", a
                 type: 'json', //데이터포맷
                 pageNo: payload?.pageNo, //페이지번호
                 numOfRows: 12, //한 페이지 결과 수
-                item_seq: payload.item_seq
+                item_seq: payload.item_seq,
+                item_name: payload?.item_name
             }
         });
         result = response.data.body;
@@ -59,6 +70,11 @@ const DrugSearchSlice = createSlice({
         loading: false, //로딩여부
         error: null //에러정보
     },
+    reducers: {
+        getCurrentData: (state, action) => {
+            return state;
+        },
+    },
     // 외부 action 및 비동기 action (Ajax용)
     extraReducers: {
         /** 낱알식별 액션함수 */
@@ -66,6 +82,14 @@ const DrugSearchSlice = createSlice({
             return { ...state, loading: true }
         },
         [getDrugSearch.fulfilled]: (state, { payload }) => {
+            // action함수의 meta에는 API에 요청시 전송한 파라미터가 포함되어 있다.
+            // 1페이지 이후의 검색 결과는 기존 데이터를 덧붙여야 한다.
+            if (payload.pageNo > 1) {
+                // payload.items = state.data.concat(payload.items);
+                console.log('슬라이스 concat',payload.items);
+                console.log('슬라이스 state',state.data);
+            }
+            
             return {
                 data: payload,
                 loading: false,
@@ -107,4 +131,5 @@ const DrugSearchSlice = createSlice({
     }
 })
 
+export const { getCurrentData } = DrugSearchSlice.actions;
 export default DrugSearchSlice.reducer;
