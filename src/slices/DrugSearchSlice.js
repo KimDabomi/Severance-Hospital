@@ -11,7 +11,6 @@ import axios from 'axios';
 /** 의약품 낱알식별 openAPI */
 export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", async (payload, { rejectWithValue }) => {
     let result = null;
-    let params = null; //검색어
 
     //payload객체가 null이나 undefined가 아니고 그 안의 keyword값이 존재한다면?
     if(payload?.item_name){

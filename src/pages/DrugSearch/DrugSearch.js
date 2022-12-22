@@ -1,5 +1,5 @@
 /**
- * @ File Name: CustomerBoardView.js
+ * @ File Name: DrugSearch.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
  * @ Last Update: 2022-12-13 16:1:00
  * @ Description: 의약품 검색 메인페이지
