@@ -231,6 +231,18 @@ const Div = styled.div`
       color: #fff; */
     }
   }
+
+  //이전다음 버튼
+  .buttonCont{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding-bottom: 30px;
+  }
+  .buttonWhite{
+    border-color: #959595 !important;
+    color: #333 !important;
+  }
 `;
 
 const HJstep3 = memo(() => {
@@ -274,6 +286,16 @@ const HJstep3 = memo(() => {
             15:20
           </span>
         </div>
+
+        {/* 이전 다음 버튼 */}
+        <div className="buttonCont">
+            <button type="submit" className="buttonWhite">
+              이전
+            </button>
+            <button type="reset" className="buttonBlue marginleft">
+              다음
+            </button>
+          </div>
 
       </div>
     </Div>

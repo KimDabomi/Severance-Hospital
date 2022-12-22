@@ -54,7 +54,9 @@ import StaffProfile from "./pages/staff/StaffProfile";
 // 진료 예약
 import AppointmentMain from "./pages/Appointment/AppointmentMain";
 import ApptSelect from "./pages/Appointment/ApptSelect";
+
 import HJstep3 from "./pages/Appointment/HJstep3";
+import HJstep4 from "./pages/Appointment/HJstep4";
 
 // 병원개요
 import AboutSev from "./pages/AboutSevrance/AboutSev";
@@ -121,6 +123,7 @@ function App() {
 
         {/* 온라인 예약 - 혜지 */}
         <Route path="/hjstep3" element={<HJstep3 />} />
+        <Route path="/hjstep4" element={<HJstep4 />} />
 
         {/* 병원개요 */}
         <Route path="/about_sev" element={<AboutSev />} />
