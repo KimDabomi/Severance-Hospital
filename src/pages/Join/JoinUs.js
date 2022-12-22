@@ -7,6 +7,7 @@
 
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {useForm} from "react-hook-form";
 import styled from "styled-components";
 import LoginHeader from "../../components/LoginHeader";
 import LoginFooter from "../../components/LoginFooter";
@@ -316,67 +317,78 @@ const Container = styled.div`
 
 const JoinUs = memo(() => {
   const navigate = useNavigate();
+  const {register, watch, handleSubmit, formState: { error }} = useForm({
+    mode: 'onSubmit'
+  });
 
-  const submitInfo = e => {
-  
-    //입력값에 대한 유효성 검사
-    const regex = RegexHelper.getInstance();
-
-    // 아이디 입력 여부
-    try {
-      regex.value(document.querySelector('.id_input'));
-    } catch (e) {
-      document.querySelector(".id_value").style.display = "inline";
-      document.querySelector(".id_length").style.display = "none";
-      document.querySelector(".id_dbcheck").style.display = "none";
-      document.querySelector(".id_ok").style.display = "none";
-      return;
-    }
-    
-    // 아이디 형식
-    try {
-      regex.minLength(document.querySelector('.id_input'),6);
-      regex.maxLength(document.querySelector('.id_input'),20);
-    } catch (e) {
-      document.querySelector(".id_value").style.display = "none";
-      document.querySelector(".id_length").style.display = "inline";
-      document.querySelector(".id_dbcheck").style.display = "none";
-      document.querySelector(".id_ok").style.display = "none";
-      return;
-    }
-
-    // 비밀번호 입력 여부
-    try {
-      regex.value(document.querySelector('.password_input'));
-      regex.minLength(document.querySelector('.password_input'),8);
-      regex.maxLength(document.querySelector('.password_input'),20);
-      regex.field(document.querySelector('.password_input'),/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/);
-    } catch (e) {
-      document.querySelector(".pw_rule").style.display = "inline";
-      return;
-    }
-
-    // 비밀번호 확인
-    try {
-      regex.compareTo(document.querySelector('.password_input').value,document.querySelector('.repassword_input').value);
-    } catch (e) {
-      document.querySelector(".pw_incorrect").style.display = "inline";
-      return;
-    }
-
-    // 전화번호 입력 여부
-    try {
-      regex.value(document.querySelector('.tel_input'));
-    } catch (e) {
-      document.querySelector(".tel_value").style.display = "inline";
-      return;
-    }
-    
-
-    
-
-    navigate('/join_complete');
+  const onSubmit = data => {
+    console.log(data);
   }
+  
+
+  // const submitInfo = e => {
+  
+  //   //입력값에 대한 유효성 검사
+  //   const regex = RegexHelper.getInstance();
+
+  //   // 아이디 입력 여부
+  //   try {
+  //     regex.value(document.querySelector('.id_input'));
+  //   } catch (e) {
+  //     document.querySelector(".id_value").style.display = "inline";
+  //     document.querySelector(".id_length").style.display = "none";
+  //     document.querySelector(".id_dbcheck").style.display = "none";
+  //     document.querySelector(".id_ok").style.display = "none";
+  //     return;
+  //   }
+    
+  //   // 아이디 형식
+  //   try {
+  //     regex.minLength(document.querySelector('.id_input'),6);
+  //     regex.maxLength(document.querySelector('.id_input'),20);
+  //     regex.field(document.querySelector('.id_input'),/^[a-z0-9_]$/);
+  //   } catch (e) {
+  //     if (e) {
+  //       document.querySelector(".id_value").style.display = "none";
+  //       document.querySelector(".id_length").style.display = "inline";
+  //       document.querySelector(".id_dbcheck").style.display = "none";
+  //     } else {
+  //       document.querySelector(".id_ok").style.display = "inline";
+  //     }
+    
+  //     return;
+  //   }
+
+  //   // 비밀번호 입력 여부
+  //   try {
+  //     regex.value(document.querySelector('.password_input'));
+  //     regex.minLength(document.querySelector('.password_input'),8);
+  //     regex.maxLength(document.querySelector('.password_input'),20);
+  //     regex.field(document.querySelector('.password_input'),/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/);
+  //   } catch (e) {
+  //     document.querySelector(".pw_rule").style.display = "inline";
+  //     return;
+  //   }
+
+  //   // 비밀번호 확인
+  //   try {
+  //     regex.compareTo(document.querySelector('.password_input').value,document.querySelector('.repassword_input').value);
+  //   } catch (e) {
+  //     document.querySelector(".pw_incorrect").style.display = "inline";
+  //     return;
+  //   }
+
+  //   // 전화번호 입력 여부
+  //   try {
+  //     regex.value(document.querySelector('.tel_input'));
+  //   } catch (e) {
+  //     document.querySelector(".tel_value").style.display = "inline";
+  //     return;
+  //   }
+
+
+  //   navigate('/join_complete');
+  // }
 
   return (
     <Container>
@@ -416,7 +428,7 @@ const JoinUs = memo(() => {
               </li>
             </ol>
           </div>
-          <div className="dafault_info">
+          <form className="dafault_info" onSubmit={handleSubmit(onSubmit)}>
             <h4>기본정보입력<span className='sub_text'><span className="require">*</span>는 필수항목입니다.</span></h4>
             <table>
               <tbody>
@@ -439,7 +451,23 @@ const JoinUs = memo(() => {
                         autoComplete="new-password"
                         data-parsley-id="5"
                         required
+                        {...register('id_input',{
+                          required: '아이디를 입력해주세요.',
+                          minLength: {
+                            value: 6,
+                            message: '아이디는 6자 이상 20자 이내로 입력해주세요.'
+                          },
+                          maxLength: {
+                            value: 20,
+                            message: '아이디는 6자 이상 20자 이내로 입력해주세요.'
+                          },
+                          pattern: {
+                            value: /^[a-z0-9_]{6,20}$/,
+                            message: '한글/특수문자는 입력이 불가능합니다.'
+                          }
+                        })}
                       />
+                      {error.id_input && <p>{error.id_input.message}</p>}
                       <button
                         type="button"
                         className="dup_btn"
@@ -493,6 +521,7 @@ const JoinUs = memo(() => {
                         pattern="(?=.*\d{1,20})(?=.*[~`!@#$%\^&amp;*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$"
                         data-parsley-id="7"
                         required
+                        {...register('pw_input')}
                       />
                     </div>
                     <ul>
@@ -534,6 +563,7 @@ const JoinUs = memo(() => {
                         data-parsley-error-message="비밀번호를 한번 더 입력해 주세요."
                         pattern="(?=.*\d{1,20})(?=.*[~`!@#$%\^&amp;*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$"
                         required
+                        {...register('repw_input')}
                       />
                     </div>
                     <p className='warn'>
@@ -606,6 +636,7 @@ const JoinUs = memo(() => {
                           data-parsley-type="number"
                           data-parsley-id="13"
                           required
+                          {...register('tel_input1')}
                         />
                       </span>
                       <span className="text">-</span>
@@ -622,6 +653,7 @@ const JoinUs = memo(() => {
                           data-parsley-type="number"
                           data-parsley-id="15"
                           required
+                          {...register('tel_input2')}
                         />
                       </span>
                     </div>
@@ -765,8 +797,8 @@ const JoinUs = memo(() => {
                 </tr>
               </tbody>
             </table>
-          </div>
-          <div className="legal_representative">
+          </form>
+          <form className="legal_representative">
             <h4>법정대리인 정보입력</h4>
             <table>
               <tbody>
@@ -1001,8 +1033,8 @@ const JoinUs = memo(() => {
                 </tr>
               </tbody>
             </table>
-          </div>
-          <button type="button" className="submit_btn" onClick={submitInfo}>확인</button>
+          </form>
+          <button type="submit" className="submit_btn">확인</button>
         </div>
         <LoginFooter />
 

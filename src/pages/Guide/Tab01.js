@@ -1,7 +1,7 @@
 /**
  * @ File Name: Tab01.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-22 13:00
+ * @ Last Update: 2022-12-22 15:45
  * @ Description: 비급여진료비-행위 페이지
  */
 
@@ -17,7 +17,7 @@ import search from "../../assets/img/ico-search-white.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 // 슬라이스
-import { getUnsupported } from "../../slices/UnsupportedSlice";
+import { getCode } from "../../slices/UnsupportedSlice";
 
 const Container = styled.div`
   .no_keyword,.min_length {
@@ -182,7 +182,7 @@ const Tab01 = memo(() => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUnsupported());
+    dispatch(getCode());
   }, [dispatch]);
 
   const clickSearch = useCallback((e) => {
@@ -206,7 +206,7 @@ const Tab01 = memo(() => {
 
     //검색어를 slice에 전달
     dispatch(
-      getUnsupported({
+      getCode({
         npayKorNm: document.querySelector(".keyword").value,
       })
     );
