@@ -22,19 +22,33 @@ const ProfileContainer = styled.div`
   margin: auto;
   max-width: 1280px;
   position: relative;
-  bottom: 680px;
+  bottom: 650px;
+  div {
+    h1 {
+        margin-bottom: ;
+        
+        .sevLogo {
+          width: 231px;
+          height: 40px;
+          object-fit: cover;
+        }
+      }
+
+    button {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.4);
+      min-width: 100px;
+      height: 50px;
+      padding: 0 28px;
+      font-size: 18px;
+      border-radius: 25px;
+      border: none;
+    }
+  }
 `;
 
 const Profile = styled.div`
     padding-bottom: 90px;
-
-    h1 {
-      .sevLogo {
-        width: 231px;
-        height: 40px;
-        object-fit: cover;
-      }
-    }
     
     h3 {
         font-size: 24px;
@@ -69,10 +83,10 @@ const Profile = styled.div`
 `;
 
 const ProfileView = styled.div`
-    top: 90px;
+    /* top: 90px; */
     width: 590px;
-    height: 620px;
-    padding: 30px;
+    height: 580px;
+    padding: 30px 30px 0 30px;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.5);
 `;
@@ -121,11 +135,19 @@ const StaffProfile = memo(() => {
         {/* 의료진 사진 */}
         <img src={staffsample} alt="의료진 사진"></img>
         <ProfileContainer>
-        <h1>
-          <Link to="/">
-            <img src={sevLogo} alt="header_logo" className="sevLogo" />
-          </Link>
-        </h1>
+          <div>
+            <h1>
+              <Link to="/">
+                <img src={sevLogo} alt="header_logo" className="sevLogo" />
+              </Link>
+            </h1>
+            <Link to="/staff">
+              <button type="button" class="">
+                <i class=""></i>
+                <span class="">의료진</span>
+              </button>
+            </Link>
+          </div>
         <Profile>
           <ProfileView>
           <ProfileName>
