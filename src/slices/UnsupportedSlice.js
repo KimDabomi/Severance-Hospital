@@ -1,7 +1,7 @@
 /**
  * @ File Name: UnsupportedSlice.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-21 21:00
+ * @ Last Update: 2022-12-22 15:45
  * @ Description: 비급여진료비 안내 페이지 slice
  */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
