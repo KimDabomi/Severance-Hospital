@@ -203,6 +203,7 @@ const Popup = styled.div`
       max-height: 570px;
       display: block;
       padding: 30px;
+      text-align: center;
     }
 
     footer {
