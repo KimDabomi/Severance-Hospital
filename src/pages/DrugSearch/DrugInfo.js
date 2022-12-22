@@ -5,11 +5,11 @@
  * @ Description: 의약품 검색 상세페이지
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getDrugSearch, getDrugDetail } from '../../slices/DrugSearchSlice';
+import { getCurrentData, getDrugSearch, getDrugDetail } from '../../slices/DrugSearchSlice';
 
 import Spinner from '../../components/Spinner';
 
@@ -26,13 +26,36 @@ const DrugInfo = memo(() => {
   );
 
   /** 데이터 가져오기 */
-  useEffect(() => {
-    dispatch(getDrugSearch({ item_seq: id })); 
-    dispatch(getDrugDetail({ itemSeq: id }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getDrugSearch({ item_seq: id })); 
+  //   dispatch(getDrugDetail({ itemSeq: id }));
+  // }, []);
+
+
+  /** 데이터 가져오기 */
+  useEffect(()=>{
+    dispatch(getCurrentData());
+  },[]);
+
+  /** 데이터 값 변경에 따른 사이드 이펙트 처리 */
+  const item = useMemo(()=>{
+    if(data){
+        // return data.items.find((v,i)=> v.item_seq == id || v.itemSeq == id);
+        dispatch(getDrugSearch({item_seq:id}));
+    }else{
+        //새로고침할 때 오류
+        //새로고침시 현재 데이터만 다시 로드
+        dispatch(getDrugSearch({item_seq:id}));
+    }
+},[])
+
 
   if (data) {
     console.log('Drugdata : ',data);
+  }
+
+  if (item) {
+    console.log('ITEM : ',item);
   }
 
   return (
