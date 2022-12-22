@@ -10,7 +10,7 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import RegexHelper from "../../helper/RegexHelper";
-import Spinner from '../../components/Spinner'
+import Spinner from "../../components/Spinner";
 
 // 이미지
 import search from "../../assets/img/ico-search-white.png";
@@ -168,15 +168,14 @@ const Container = styled.div`
 `;
 
 const Unsupported = memo(() => {
-  const today = dayjs(new Date());
-  const today1 = today.format("YYYY. MM. DD");
+  const today = dayjs(new Date()).format("YYYY. MM. DD");
 
-  //hook을 통해 slice가 관리하는 상태값 가져오기
+  // hook을 통해 slice가 관리하는 상태값 가져오기
   const { data, loading, error } = useSelector(
     (state) => state.UnsupportedSlice
   );
 
-  //dispatch함수 생성
+  // dispatch함수 생성
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -213,113 +212,106 @@ const Unsupported = memo(() => {
     <Container>
       <Spinner loading={loading} />
       <div className="bgAll">
-        <form className="no_keyword">
+        <div className="no_keyword">
           <div className="popup">
             <p>검색어를 입력해주세요.</p>
             <button type="button" className="close" onClick={closeBox}>
               닫기
             </button>
           </div>
-        </form>
-        <form>
+        </div>
+        {/* 검색어 입력창 */}
+        <form className="search_box">
           <fieldset>
-            {/* 검색어 입력창 */}
-            <div className="search_box">
-              <div className="dropdown">
-                <select
-                  className="category"
-                  title="검색 카테고리"
-                  data-id="상세항목 전체보기"
-                >
-                  <option data-id="전체" data-code="">
-                    전체
-                  </option>
-                  <option data-id="제1장 기본진료료" data-code="NF020100">
-                    제1장 기본진료료
-                  </option>
-                  <option data-id="제2장 검사료" data-code="NF020200">
-                    제2장 검사료
-                  </option>
-                  <option
-                    data-id="제3장 영상진단 및 방사선 치료료"
-                    data-code="NF020300"
-                  >
-                    제3장 영상진단 및 방사선 치료료
-                  </option>
-                  <option data-id="제6장 마취료" data-code="NF020600">
-                    제6장 마취료
-                  </option>
-                  <option
-                    data-id="제7장 이학요법료(물리치료료)"
-                    data-code="NF020700"
-                  >
-                    제7장 이학요법료(물리치료료)
-                  </option>
-                  <option data-id="제8장 정신요법료" data-code="NF020800">
-                    제8장 정신요법료
-                  </option>
-                  <option
-                    data-id="제9장 처치 및 수술료 등"
-                    data-code="NF020900"
-                  >
-                    제9장 처치 및 수술료 등
-                  </option>
-                  <option
-                    data-id="제10장 치과처치, 수술료"
-                    data-code="NF021000"
-                  >
-                    제10장 치과처치, 수술료
-                  </option>
-                  <option data-id="제18장 치과의 보철료" data-code="NF021800">
-                    제18장 치과의 보철료
-                  </option>
-                  <option
-                    data-id="제20장 치과의 교정치료료"
-                    data-code="NF022000"
-                  >
-                    제20장 치과의 교정치료료
-                  </option>
-                  <option data-id="기타" data-code="NF029900">
-                    기타
-                  </option>
-                </select>
-              </div>
-              <div className="keyword_input">
-                <input
-                  type="text"
-                  className="keyword"
-                  id="srchKwd"
-                  placeholder="항목명칭 또는 구분을 입력해주세요"
-                  title="항목명칭 또는 구분 입력 검색"
-                />
-                <span className="search_btn">
-                  <button type="submit" className="searchBtn">
-                    <img src={search} alt="search" />
-                  </button>
-                </span>
-              </div>
-            </div>
-
-            {/* 목록수조절 */}
-            <div className="list_select">
-              <label htmlFor="pagePerNum" className="label">
-                목록수조절
-              </label>
-              <select name="pagePerNum" id="pagePerNum" className="list_num">
-                <option defaultValue="20" selected="">
-                  20개
+            <div className="dropdown">
+              <select
+                className="category"
+                title="검색 카테고리"
+                data-id="상세항목 전체보기"
+              >
+                <option data-id="전체" data-code="">
+                  전체
                 </option>
-                <option defaultValue="50">50개</option>
-                <option defaultValue="100">100개</option>
+                <option data-id="제1장 기본진료료" data-code="NF020100">
+                  제1장 기본진료료
+                </option>
+                <option data-id="제2장 검사료" data-code="NF020200">
+                  제2장 검사료
+                </option>
+                <option
+                  data-id="제3장 영상진단 및 방사선 치료료"
+                  data-code="NF020300"
+                >
+                  제3장 영상진단 및 방사선 치료료
+                </option>
+                <option data-id="제6장 마취료" data-code="NF020600">
+                  제6장 마취료
+                </option>
+                <option
+                  data-id="제7장 이학요법료(물리치료료)"
+                  data-code="NF020700"
+                >
+                  제7장 이학요법료(물리치료료)
+                </option>
+                <option data-id="제8장 정신요법료" data-code="NF020800">
+                  제8장 정신요법료
+                </option>
+                <option data-id="제9장 처치 및 수술료 등" data-code="NF020900">
+                  제9장 처치 및 수술료 등
+                </option>
+                <option data-id="제10장 치과처치, 수술료" data-code="NF021000">
+                  제10장 치과처치, 수술료
+                </option>
+                <option data-id="제18장 치과의 보철료" data-code="NF021800">
+                  제18장 치과의 보철료
+                </option>
+                <option data-id="제20장 치과의 교정치료료" data-code="NF022000">
+                  제20장 치과의 교정치료료
+                </option>
+                <option data-id="기타" data-code="NF029900">
+                  기타
+                </option>
               </select>
-              <p>{`※ 수가 기준일 : ${today1}`} </p>
+            </div>
+            <div className="keyword_input">
+              <input
+                type="text"
+                className="keyword"
+                id="srchKwd"
+                placeholder="항목명칭 또는 구분을 입력해주세요"
+                title="항목명칭 또는 구분 입력 검색"
+              />
+              <span className="search_btn">
+                <button
+                  type="submit"
+                  className="searchBtn"
+                  onClick={clickSearch}
+                >
+                  <img src={search} alt="search" />
+                </button>
+              </span>
             </div>
           </fieldset>
         </form>
 
+        {/* 목록수조절 */}
+        <div className="list_select">
+          <label htmlFor="pagePerNum" className="label">
+            목록수조절
+          </label>
+          <select name="pagePerNum" id="pagePerNum" className="list_num">
+            <option defaultValue="20" selected="">
+              20개
+            </option>
+            <option defaultValue="50">50개</option>
+            <option defaultValue="100">100개</option>
+          </select>
+          <p>{`※ 수가 기준일 : ${today}`} </p>
+        </div>
+
         {error ? (
           <h1>에러발생함</h1>
-        ) : (
+        ) : data && data.items.length > 0 ? (
           <>
             <div className="table_box">
               <table>
@@ -366,6 +358,45 @@ const Unsupported = memo(() => {
               </table>
             </div>
           </>
+        ) : (
+          // 검색결과가 없을 때
+          <div className="table_box no_result">
+            <table>
+              <thead>
+                <tr>
+                  <th rowSpan="2">중분류</th>
+                  <th rowSpan="2">소분류</th>
+                  <th colSpan="2">진료비용항목</th>
+                  <th colSpan="6">항목별 가격정보(단위:원)</th>
+                  <th rowSpan="2">
+                    최종
+                    <br />
+                    변경일
+                  </th>
+                  <th rowSpan="2">특이사항</th>
+                </tr>
+                <tr>
+                  <th>코드</th>
+                  <th>명칭</th>
+                  <th>구분</th>
+                  <th>비용</th>
+                  <th>최저비용</th>
+                  <th>최고비용</th>
+                  <th>
+                    치료재료대
+                    <br />
+                    포함여부
+                  </th>
+                  <th>
+                    약제비
+                    <br />
+                    포함여부
+                  </th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         )}
       </div>
     </Container>
