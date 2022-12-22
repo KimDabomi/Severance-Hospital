@@ -52,6 +52,9 @@ const Container = styled.div`
       padding-left: 10px;
       margin-right: 10px;
       border: 1px solid #e6e6e6;
+      &:focus {
+        outline: 1px solid rgb(0, 148, 251);
+      }
     }
     // 검색버튼
     .searchBtn {
@@ -127,7 +130,7 @@ const Container = styled.div`
 `;
 
 
-const Unsupported = memo(() => {
+const Tab04 = memo(() => {
   const today = dayjs(new Date());
   const today1 = today.format("YYYY. MM. DD");
 
@@ -283,4 +286,4 @@ const Unsupported = memo(() => {
   );
 });
 
-export default Unsupported;
+export default Tab04;

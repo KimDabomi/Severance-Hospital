@@ -20,7 +20,7 @@ import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 import { getUnsupported } from "../../slices/UnsupportedSlice";
 
 const Container = styled.div`
-  .no_keyword {
+  .no_keyword,.min_length {
     display: none;
     position: fixed;
     width: 100%;
@@ -93,6 +93,9 @@ const Container = styled.div`
       padding-left: 10px;
       margin-right: 10px;
       border: 1px solid #e6e6e6;
+      &:focus {
+        outline: 1px solid rgb(0, 148, 251);
+      }
     }
     // 검색버튼
     .searchBtn {
@@ -167,7 +170,7 @@ const Container = styled.div`
   }
 `;
 
-const Unsupported = memo(() => {
+const Tab01 = memo(() => {
   const today = dayjs(new Date()).format("YYYY. MM. DD");
 
   // hook을 통해 slice가 관리하는 상태값 가져오기
@@ -187,14 +190,19 @@ const Unsupported = memo(() => {
 
     //입력값에 대한 유효성 검사
     const regex = RegexHelper.getInstance();
-
     try {
       regex.value(document.querySelector(".keyword"));
-      regex.minLength(document.querySelector(".keyword"), 2);
     } catch (e) {
       document.querySelector(".no_keyword").style.display = "block";
       return;
     }
+    try {
+      regex.minLength(document.querySelector(".keyword"), 2);
+    } catch (e) {
+      document.querySelector(".min_length").style.display = "block";
+      return;
+    }
+
 
     //검색어를 slice에 전달
     dispatch(
@@ -206,6 +214,7 @@ const Unsupported = memo(() => {
 
   const closeBox = (e) => {
     document.querySelector(".no_keyword").style.display = "none";
+    document.querySelector(".min_length").style.display = "none";
   };
 
   return (
@@ -215,6 +224,15 @@ const Unsupported = memo(() => {
         <div className="no_keyword">
           <div className="popup">
             <p>검색어를 입력해주세요.</p>
+            <button type="button" className="close" onClick={closeBox}>
+              닫기
+            </button>
+          </div>
+        </div>
+        <div className="min_length">
+          <div className="popup">
+            <p>항목명칭 또는 구분을 2글자 이상 입력해<br />
+            주세요.</p>
             <button type="button" className="close" onClick={closeBox}>
               닫기
             </button>
@@ -300,7 +318,7 @@ const Unsupported = memo(() => {
             목록수조절
           </label>
           <select name="pagePerNum" id="pagePerNum" className="list_num">
-            <option defaultValue="20" selected="">
+            <option defaultValue="20" select="">
               20개
             </option>
             <option defaultValue="50">50개</option>
@@ -310,7 +328,7 @@ const Unsupported = memo(() => {
         </div>
 
         {error ? (
-          <h1>에러발생함</h1>
+          <p>에러발생함</p>
         ) : data && data.items.length > 0 ? (
           <>
             <div className="table_box">
@@ -351,7 +369,7 @@ const Unsupported = memo(() => {
                   {data &&
                     data.map((v, i) => (
                       <tr key={i}>
-                        <td>{v.pageNo}</td>
+                        <td>{v.divCd2Nm}</td>
                       </tr>
                     ))}
                 </tbody>
@@ -403,4 +421,4 @@ const Unsupported = memo(() => {
   );
 });
 
-export default Unsupported;
+export default Tab01;

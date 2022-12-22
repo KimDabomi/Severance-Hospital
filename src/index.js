@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 /** test */
-/**/
+/*
 import App from "./App";
-/*/
-import App from './Test';
+*/
+import App from './test';
 /**/
 
 /** 라우터 */
