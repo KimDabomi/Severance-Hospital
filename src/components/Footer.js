@@ -176,14 +176,14 @@ const Footer = () => {
       <div className="siteInfo">
         <ul className="siteInfoShortcut">
           <li>
-            <a href="https://member.severance.healthcare/member/policy/agreement.do" target="_black" rel="noopener noreferrer">
+            <Link to="/policy/agreement.do" target="_black" rel="noopener noreferrer">
               이용약관
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="https://member.severance.healthcare/member/policy/agreement.do" target="_black" rel="noopener noreferrer">
+            <Link to="/policy/privacy.do" target="_black" rel="noopener noreferrer">
               <strong>개인정보처리방침</strong>
-            </a>
+            </Link>
           </li>
           <li>
             <Link to="/customer.do" target="_black" rel="noopener noreferrer">

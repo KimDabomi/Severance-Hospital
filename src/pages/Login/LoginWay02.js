@@ -1,7 +1,7 @@
 /**
  * @ File Name: LoginWay02.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-20 17:10
+ * @ Last Update: 2022-12-20 17:40
  * @ Description: 본인인증 로그인 페이지
  */
 
@@ -79,7 +79,7 @@ const Container = styled.div`
         margin: 0 auto 50px;
         li {
           margin-top: 5px;
-          font-size: 14px;
+          font-size: 16px;
           &:before {
             content: "";
             display: block;
@@ -97,23 +97,16 @@ const Container = styled.div`
     }
 
     // 자주묻는질문
-    .qna {
-      margin-right: 28.5%;
+    .qna_button {
+      width: 780px;
       height: 50px;
-      line-height: 50px;
-      p {
-        margin: 50px 0 0 0;
-        float: right;
-        button {
-          float: right;
-          margin-left: 10px;
-          background-color: white;
-          border: 1px solid #e6e6e6;
-          padding: 10px 25px;
-          font-size: 16px;
-          border-radius: 30px;
-        }
-      }
+      line-height: 40px;
+      text-align: center;
+      background-color: white;
+      border: 1px solid #e6e6e6;
+      font-size: 16px;
+      border-radius: 30px;
+      color: #333;
     }
   }
 `;
@@ -220,11 +213,9 @@ const LoginWay02 = memo(() => {
             </ul>
           </div>
           <div className="qna">
-            <p>
-              <button type="button" className="qna_button">
-                본인인증에서 가장 많이 물어보는 질문은?
-              </button>
-            </p>
+            <button type="button" className="qna_button">
+              본인인증에서 가장 많이 물어보는 질문은?
+            </button>
           </div>
         </div>
       </div>

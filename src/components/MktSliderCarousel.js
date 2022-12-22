@@ -8,6 +8,7 @@
 /** import */
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // slick
 import Slider from "react-slick";
@@ -172,9 +173,9 @@ function MktSliderCarousel() {
       </article>
 
       <article className="mktBannerArticle">
-        <a className="mktBannerLink">
+        <Link to="/guide/unsupported" className="mktBannerLink">
           <img src={banner05} />
-        </a>
+        </Link>
       </article>
 
       <article className="mktBannerArticle">

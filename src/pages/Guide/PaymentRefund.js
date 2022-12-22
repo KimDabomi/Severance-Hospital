@@ -1,12 +1,14 @@
 /**
  * @ File Name: PaymentRefund.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-14 21:17
+ * @ Last Update: 2022-12-21 21:00
  * @ Description: 진료비 수납 및 환불 페이지
  */
 
 import React, { memo } from "react";
 import styled from "styled-components";
+import TopButton from "../../components/TopButton";
+
 // 이미지
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 
@@ -126,6 +128,7 @@ const Container = styled.div`
 const OutpatientInfo = memo(() => {
   return (
     <Container>
+      <TopButton />
       <div className="bgAll">
         <h1>진료비 수납 및 환불</h1>
         <div className="boxGuide">

@@ -1,12 +1,12 @@
 /**
  * @ File Name: InfoSliderCarousel.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
- * @ Last Update: 2022-11-26 15:02:00
+ * @ Last Update: 2022-12-21 15:02:00
  * @ Description: Slick 슬라이드
  */
 
 /** import */
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -170,7 +170,7 @@ function PrevArrow(props) {
   );
 }
 
-function InfoSliderCarousel({ post }) {
+function InfoSliderCarousel({ customer, notice, carousel }) {
   // 슬라이드 설정
   const settings = {
     infinite: true,
@@ -184,38 +184,72 @@ function InfoSliderCarousel({ post }) {
     prevArrow: <PrevArrow />
   };
 
-  return (
-    <SlideContainer>
-      <StyledSlider {...settings}>
-        {/* <div className="postBox">
-          <Link to="/test">
-            <span className="category"></span>
-            <span className="content">test post1</span>
-          </Link>
-        </div> */}
-        {post ? (
-          post.map((v, i) => {
-            return (
-              <div className="postBox" key={i}>
-                <Link to={`/suggestion/${v.id}`} target="_blank">
-                  <span className="category">{v.register}</span>
-                  <span className="content">{v.title}</span>
-                </Link>
-              </div>
-            );
-          })
-        ) : (
-          <div className="postBox">
+  const noPost = useCallback(() => {
+    let array = [];
+
+    if (carousel === "customer") {
+      for (let i = 0; i < 2; i++) {
+        array.push(
+          <div key={i} className="postBox">
             <Link to="/customer.do" target="_blank">
-              <span className="category">게시판</span>
+              <span className="category">고객의 소리</span>
               <span className="content">등록된 게시글이 없습니다.</span>
             </Link>
           </div>
-        )}
+        );
+      }
+    } else {
+      for (let i = 0; i < 2; i++) {
+        array.push(
+          <div key={i} className="postBox">
+            <Link to="/news/notice.do" target="_blank">
+              <span className="category">공지사항</span>
+              <span className="content">등록된 게시글이 없습니다.</span>
+            </Link>
+          </div>
+        );
+      }
+    }
+
+    return array;
+  }, []);
+
+  return (
+    <SlideContainer>
+      <StyledSlider {...settings}>
+        {carousel === "customer"
+          ? customer
+            ? customer.map((v, i) => {
+                return (
+                  <div className="postBox" key={i}>
+                    <Link to={`/customer.do/suggestion/${v.id}`} target="_blank">
+                      <span className="category">{v.register}</span>
+                      <span className="content">{v.title}</span>
+                    </Link>
+                  </div>
+                );
+              })
+            : noPost()
+          : notice
+          ? notice.map((v, i) => {
+              return (
+                <div className="postBox" key={i}>
+                  <Link to={`/news/notice.do`} target="_blank">
+                    <span className="category">{v.register}</span>
+                    <span className="content">{v.title}</span>
+                  </Link>
+                </div>
+              );
+            })
+          : noPost()}
       </StyledSlider>
 
       <PlusButton>
-        <Link to="/customer.do" target="_black" rel="noopener noreferrer" />
+        {carousel === "customer" ? (
+          <Link to="/customer.do" target="_black" rel="noopener noreferrer" />
+        ) : (
+          <Link to="/news/notice.do" target="_black" rel="noopener noreferrer" />
+        )}
       </PlusButton>
     </SlideContainer>
   );

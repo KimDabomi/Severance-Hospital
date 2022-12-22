@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-06 11:45
+ * @ Last Update: 2022-12-21 16:15
  * @ Description: 회원가입 정보 입력 페이지
  */
 
@@ -18,7 +18,8 @@ import step04 from "../../assets/img/ico-login-step4-off@2x.png";
 import check from "../../assets/img/ico-check-primary@2x.png";
 import warning from "../../assets/img/ico-warning-mark@2x.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
-// import {useFormik} from 'formik';
+import RegexHelper from '../../helper/RegexHelper';
+
 
 const Container = styled.div`
   width: 100%;
@@ -307,69 +308,75 @@ const Container = styled.div`
     border-radius: 3px;
     font-weight: 100;
   }
+
+  .id_value,.id_length,.id_dbcheck,.id_ok,.pw_rule,.pw_ok,.pw_incorrect,.pw_correct,.tel_value{
+    display: none;
+  }
 `;
 
 const JoinUs = memo(() => {
   const navigate = useNavigate();
 
   const submitInfo = e => {
+  
+    //입력값에 대한 유효성 검사
+    const regex = RegexHelper.getInstance();
+
+    // 아이디 입력 여부
+    try {
+      regex.value(document.querySelector('.id_input'));
+    } catch (e) {
+      document.querySelector(".id_value").style.display = "inline";
+      document.querySelector(".id_length").style.display = "none";
+      document.querySelector(".id_dbcheck").style.display = "none";
+      document.querySelector(".id_ok").style.display = "none";
+      return;
+    }
+    
+    // 아이디 형식
+    try {
+      regex.minLength(document.querySelector('.id_input'),6);
+      regex.maxLength(document.querySelector('.id_input'),20);
+    } catch (e) {
+      document.querySelector(".id_value").style.display = "none";
+      document.querySelector(".id_length").style.display = "inline";
+      document.querySelector(".id_dbcheck").style.display = "none";
+      document.querySelector(".id_ok").style.display = "none";
+      return;
+    }
+
+    // 비밀번호 입력 여부
+    try {
+      regex.value(document.querySelector('.password_input'));
+      regex.minLength(document.querySelector('.password_input'),8);
+      regex.maxLength(document.querySelector('.password_input'),20);
+      regex.field(document.querySelector('.password_input'),/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/);
+    } catch (e) {
+      document.querySelector(".pw_rule").style.display = "inline";
+      return;
+    }
+
+    // 비밀번호 확인
+    try {
+      regex.compareTo(document.querySelector('.password_input').value,document.querySelector('.repassword_input').value);
+    } catch (e) {
+      document.querySelector(".pw_incorrect").style.display = "inline";
+      return;
+    }
+
+    // 전화번호 입력 여부
+    try {
+      regex.value(document.querySelector('.tel_input'));
+    } catch (e) {
+      document.querySelector(".tel_value").style.display = "inline";
+      return;
+    }
+    
+
+    
+
     navigate('/join_complete');
   }
-
-  // /*
-  // ueFormik() hook => initialValues에 
-  // <form> value값과 submit할 때 호출되는 
-  // submit함수를 파라미터로 전달
-  // */
-  // const formik = useFormik({
-  //   initialValues: {
-  //     firstName: '',
-  //     lastName: '',
-  //     email: '',
-  //   },
-  //   onSubmit: values => {
-  //     alert(JSON.stringify(values, null, 2));
-  //   },
-  // });
-
-  // const [values, setValues] = React.useState({});
- 
-  // const handleChange = e => {
-  //   setValues((prevValues) => {
-  //     ...prevValues,
-  //     // 업데이트 할 `values`의 키를 formik에게 알리기 위해 name prop을 사용
-  //     [event.target.name]: event.target.value
-  //   });
-  // };
-
-  // const validate = values => {
-  //   const errors = {}; //에러를 반환할 빈 객체
-
-  //   //firstName 값이 없다면
-  //   if(!values.firstName) { 
-  //       errors.firstName = 'Required'; //firstName키에 필수(Required)라는 문자열 저장
-  //   } else if (values.firstName.length > 15) {
-  //     //firstName 값의 길이가 15보다 크면
-  //     errors.firstName = "Must be 15 characters or less"; //15글자 이하여야된다는 문자열 저장
-  //   }
-
-  //   //lastName 값이 없다면
-  //   if (!values.lastName) {
-  //     errors.lastName = 'Required'; //lastName키에 필수(Required)문자열 저장
-  //   } else if(values.lastName.length > 20) {
-  //     //lastName 값의 길이가 20보다 크면
-  //     errors.lastName = "Must be 20 characters or less"; //20글자 이하여야된다는 문자열 저장
-  //   }
-
-  //   //email 값이 없다면
-  //   if (!values.email) {
-  //     errors.email = 'Required';
-  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-  //     //email 값이 정규 표현식을 만족하지 못하면
-  //     errors.email = 'Invalid email address'; //잘못된 이메일 형식
-  //   }
-  //   return errors;
-  // }
 
   return (
     <Container>
@@ -428,10 +435,10 @@ const JoinUs = memo(() => {
                         title="아이디 입력"
                         data-parsley-group="dupId"
                         data-parsley-error-message="형식에 맞게 아이디를 입력해 주세요."
-                        required=""
                         pattern="^[a-z0-9_]{6,20}$"
                         autoComplete="new-password"
                         data-parsley-id="5"
+                        required
                       />
                       <button
                         type="button"
@@ -445,20 +452,24 @@ const JoinUs = memo(() => {
                       <li>※ 한글/특수문자는 입력이 불가능합니다.</li>
                     </ul>
                     <p className='warn'>
+                      <span className='id_value'>
                       <img src={warning} alt="warning" />
-                      아이디를 입력해주세요.
+                      아이디를 입력해주세요.</span>
                     </p>
                     <p className='warn'>
+                      <span className='id_length'>
                       <img src={warning} alt="warning" />
-                      아이디는 6자 이상 20자 이내로 입력해주세요.
+                      아이디는 6자 이상 20자 이내로 입력해주세요.</span>
                     </p>
                     <p className='warn'>
+                      <span className='id_dbcheck'>
                       <img src={warning} alt="warning" />
-                      아이디를 중복체크해주세요.
+                      아이디를 중복체크해주세요.</span>
                     </p>
                     <p className='check'>
+                      <span className='id_ok'>
                       <img src={check} alt="check" />
-                      사용이 가능한 아이디입니다.
+                      사용이 가능한 아이디입니다.</span>
                     </p>
                   </td>
                 </tr>
@@ -479,9 +490,9 @@ const JoinUs = memo(() => {
                         title="비밀번호 입력"
                         data-parsley-group="password"
                         data-parsley-error-message="비밀번호를 입력해 주세요."
-                        required=""
                         pattern="(?=.*\d{1,20})(?=.*[~`!@#$%\^&amp;*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$"
                         data-parsley-id="7"
+                        required
                       />
                     </div>
                     <ul>
@@ -494,12 +505,14 @@ const JoinUs = memo(() => {
                       </li>
                     </ul>
                     <p className='warn'>
+                      <span className='pw_rule'>
                       <img src={warning} alt="warning" />
-                      비밀번호 규격에 맞춰 입력해주세요.
+                      비밀번호 규격에 맞춰 입력해주세요.</span>
                     </p>
                     <p className='check'>
+                      <span className='pw_ok'>
                       <img src={check} alt="check" />
-                      안전한 비밀번호입니다.
+                      안전한 비밀번호입니다.</span>
                     </p>
                   </td>
                 </tr>
@@ -519,17 +532,19 @@ const JoinUs = memo(() => {
                         className="repassword_input"
                         title="비밀번호 재입력"
                         data-parsley-error-message="비밀번호를 한번 더 입력해 주세요."
-                        required=""
                         pattern="(?=.*\d{1,20})(?=.*[~`!@#$%\^&amp;*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$"
+                        required
                       />
                     </div>
                     <p className='warn'>
+                      <span className='pw_incorrect'>
                       <img src={warning} alt="warning" />
-                      비밀번호가 일치하지 않습니다.
+                      비밀번호가 일치하지 않습니다.</span>
                     </p>
                     <p className='check'>
+                      <span className='pw_correct'>
                       <img src={check} alt="check" />
-                      비밀번호가 일치합니다.
+                      비밀번호가 일치합니다.</span>
                     </p>
                   </td>
                 </tr>
@@ -589,8 +604,8 @@ const JoinUs = memo(() => {
                           data-parsley-group="phone"
                           data-parsley-error-message="연락처를 입력해주세요."
                           data-parsley-type="number"
-                          required=""
                           data-parsley-id="13"
+                          required
                         />
                       </span>
                       <span className="text">-</span>
@@ -605,14 +620,17 @@ const JoinUs = memo(() => {
                           data-parsley-group="phone"
                           data-parsley-error-message="연락처를 입력해주세요."
                           data-parsley-type="number"
-                          required=""
                           data-parsley-id="15"
+                          required
                         />
                       </span>
                     </div>
                     <p className='no_excep'>예약 관련정보는 수신동의 여부와 관계없이 발송됩니다.</p>
-                    <img src={warning} alt="warning" />
-                    <p className='warn'>연락처를 입력해주세요.</p>
+                    <p className='warn'>
+                      <span className='tel_value'>
+                      <img src={warning} alt="warning" />
+                      연락처를 입력해주세요.</span>
+                    </p>
                   </td>
                 </tr>
 
@@ -628,7 +646,6 @@ const JoinUs = memo(() => {
                           className="pretelno1_input"
                           title="예비연락처 맨 앞자리"
                           data-parsley-group="phone"
-                          required=""
                           data-parsley-id="11"
                         >
                           <option defaultValue="010">010</option>

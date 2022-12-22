@@ -5,30 +5,18 @@
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
-<<<<<<< HEAD
-import React, { memo, useCallback, useRef } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import Spinner from "../../components/Spinner";
-import RegexHelper from "../../helper/RegexHelper";
-=======
 import React, { memo, useCallback, useRef } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/Spinner'
 import RegexHelper from '../../helper/RegexHelper';
->>>>>>> 4dae67fa4efdf137b12812a327c80c1a248a5616
 //상태값을 로드하기 위한 hook과 action함수를 dispatch할 hook참조
 import { useSelector, useDispatch } from "react-redux";
 // Slice에 정의된 액션함수들 참조
-<<<<<<< HEAD
-import { getDrugSearch } from "../../slices/DrugSearchSlice";
-=======
 import { getDrugSearch } from '../../slices/DrugSearchSlice';
 import TopButton from '../../components/TopButton';
 import DrugInfo from './DrugInfo';
 
->>>>>>> 4dae67fa4efdf137b12812a327c80c1a248a5616
 
 const DrugCont = styled.div``;
 
@@ -68,20 +56,11 @@ const TabInfo = memo(() => {
       return;
     }
 
-<<<<<<< HEAD
-    dispatch(
-      getDrugSearch({
-        item_name: document.querySelector("#itemName").value,
-      })
-    );
-  }, []);
-=======
 		//검색어를 slice에 전달
 		dispatch(getDrugSearch({
 			item_name: document.querySelector('#itemName').value
 		}));
 	}, []);
->>>>>>> 4dae67fa4efdf137b12812a327c80c1a248a5616
 
   if (data) {
     console.log("Tabinfo페이지 data", data);
@@ -101,11 +80,6 @@ const TabInfo = memo(() => {
     );
   });
 
-<<<<<<< HEAD
-  return (
-    <DrugCont>
-      <Spinner loading={loading} />
-=======
 	// 출력하는 함수
 	const renderFunc = (e)=> {
 		return (<h1>안녕하세요</h1>);
@@ -116,8 +90,6 @@ const TabInfo = memo(() => {
 		<DrugCont>
 			<TopButton />
 			<Spinner loading={loading} />
->>>>>>> 4dae67fa4efdf137b12812a327c80c1a248a5616
-
       <form>
         <fieldset>
           <div>
@@ -156,44 +128,6 @@ const TabInfo = memo(() => {
         </div>
       </div>
 
-<<<<<<< HEAD
-      {error ? (
-        <h1>에러발생함</h1>
-      ) : data && data.items.length > 0 ? (
-        <div>
-          <ul className="drugListCont">
-            {/* // 검색 결과 표시 (최대12개)  */}
-            {data.items.map((v, i) => {
-              // console.log(v);
-              return (
-                <li key={i} className="drugList">
-                  <Link className="viewLink">{v.ITEM_NAME}</Link>
-                </li>
-              );
-            })}
-          </ul>
-          {/* // 페이지가 2페이지 이상일 경우 */}
-          {data.totalCount > 12 ? (
-            <div className="buttonContColumn">
-              <Link className="btnMore" onClick={pagePlus}>
-                더보기
-                <span>
-                  ({data.pageNo * 12}/{data.totalCount})
-                </span>
-              </Link>
-            </div>
-          ) : null}
-        </div>
-      ) : (
-        // 검색결과없을 때
-        <div className="nodata">
-          <i className="nodataIcon"></i>
-          <p>선택한 조건에 맞는 의약품 검색결과가 없습니다.</p>
-        </div>
-      )}
-    </DrugCont>
-  );
-=======
 			{error ? (
 				<h1>에러발생함</h1>
 			) : (
@@ -232,7 +166,6 @@ const TabInfo = memo(() => {
 	
 		</DrugCont>
 	);
->>>>>>> 4dae67fa4efdf137b12812a327c80c1a248a5616
 });
 
 export default TabInfo;

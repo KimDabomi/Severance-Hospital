@@ -1,17 +1,19 @@
 /**
  * @ File Name: DetailsEdit.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-14 14:15
+ * @ Last Update: 2022-12-20 18:15
  * @ Description: 개인정보수정 페이지
  */
 
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Routes,Route,Link } from "react-router-dom";
 import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
 import styled from "styled-components";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
+import Withdraw from "./Withdraw";
+import ChangePassward from "./ChangePassward";
 
 const Container = styled.div`
   margin: auto;
@@ -182,10 +184,14 @@ const Container = styled.div`
       }
     }
     .cases {
+      &:before {
+        content: '';
+        display: block;
+        clear: both;
+      }
       width: 1280px;
-      margin: 60px auto;
+      margin: 180px auto 0;
       background-color: #f9f9f9;
-      float: left;
       padding: 25px;
       ul {
         li {
@@ -230,6 +236,10 @@ const DetailsEdit = memo(() => {
 
   return (
     <Container>
+      <Routes>
+        <Route path='/change_password' element={<ChangePassward />} />
+        <Route path='/withdraw' element={<Withdraw />} />
+      </Routes>
       <MyPageHeader />
       <div className="bgAll">
         <h1>개인정보수정</h1>
@@ -483,7 +493,7 @@ const DetailsEdit = memo(() => {
         <div className='cases'>
           <ul>
             <li>비밀번호를 변경하려면 <Link to='/change_passward'><b>비밀번호 변경하기&#62;</b></Link></li>
-            <li>세브란스를 더 이상 이용하지 않는다면 <Link to='withdraw'><b>회원탈퇴 바로가기&#62;</b></Link></li>
+            <li>세브란스를 더 이상 이용하지 않는다면 <Link to='/withdraw'><b>회원탈퇴 바로가기&#62;</b></Link></li>
           </ul>
         </div>
       </div>
