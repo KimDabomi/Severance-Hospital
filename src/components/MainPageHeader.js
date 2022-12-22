@@ -2,7 +2,7 @@
  * @ File Name: MainPageHeader.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
  * @ Last Update: 2022-11-25 15:02:00
- * @ Description: 메인 페이지 header
+ * @ Description: Sevrance Hospital Header
  */
 
 /** import */
@@ -575,27 +575,25 @@ const Header = () => {
   // 경로 변경 시, useEffect 동작을 위한 location
   const location = useLocation();
 
+  // 선택한 메뉴 카테고리 상태값
   const [menuContent, setMenuContent] = useState("환자/보호자");
 
+  /** ref */
   // 메뉴
   const menu = useRef();
+  // 메뉴 배경
   const menuBG = useRef();
+  // 메뉴 환자/보호자 카테고리
   const menuFirst = useRef();
+  // 메뉴 의료인 카테고리
   const menuSecond = useRef();
-
   // 사이트맵
   const siteMap = useRef();
-
   // 검색 모달
   const searchModal = useRef();
 
-  // 사이트맵 열기
-  const showSiteMap = useCallback((e) => {
-    siteMap.current.style.display = "block";
-    document.querySelector("body").style.overflow = "hidden";
-  }, []);
-
-  // 메뉴 열기
+  /** 이벤트 */
+  // 메뉴 열기 (임시)
   const menuToggle = useCallback((e) => {
     // console.log(e.target.innerHTML);
     // console.log(menu.current.classList[2]);
@@ -605,9 +603,11 @@ const Header = () => {
 
     menu.current.classList.add("active");
     menuBG.current.classList.add("active");
+
     if (e === "환자/보호자") {
       menuFirst.current.classList.toggle("active");
       menuSecond.current.classList.remove("active");
+
       if (menuFirst.current.classList[2] !== "active") {
         menu.current.classList.remove("active");
         menuBG.current.classList.remove("active");
@@ -620,11 +620,18 @@ const Header = () => {
     } else {
       menuSecond.current.classList.toggle("active");
       menuFirst.current.classList.remove("active");
+
       if (menuSecond.current.classList[2] !== "active") {
         menu.current.classList.remove("active");
         menuBG.current.classList.remove("active");
       }
     }
+  }, []);
+
+  // 사이트맵 열기
+  const showSiteMap = useCallback((e) => {
+    siteMap.current.style.display = "block";
+    document.querySelector("body").style.overflow = "hidden";
   }, []);
 
   // 검색 모달 열기
@@ -638,6 +645,7 @@ const Header = () => {
   }, []);
 
   // URL 경로 이동 시, 사이트맵을 닫고 해당 페이지의 스크롤을 활성화 시킨다.
+  // 또한, 메뉴관련 태그의 className 'active'를 모두 제거한다.
   useEffect(() => {
     siteMap.current.style.display = "none";
     document.querySelector("body").style.overflow = "visible";
@@ -864,6 +872,7 @@ const Header = () => {
                 </MenuUl>
               )}
             </MenuListSection>
+
             <MenuCloseButton
               type="button"
               onClick={() => {
