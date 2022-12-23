@@ -11,8 +11,10 @@ import staffsample from '../../assets/img/staff-sample.png';
 import staffsampleBg from '../../assets/img/staff-sample-bg.png';
 import sevLogo from "../../assets/img/sev_logo@2x.png";
 
+import searchIcon from "../../assets/img/ico-search-white.png";
 
 const FirsDiv = styled.div`
+  width: 100%;
   position: absolute;
   // 배경이미지
   background: url(${staffsampleBg}) no-repeat;
@@ -22,8 +24,11 @@ const ProfileContainer = styled.div`
   margin: auto;
   max-width: 1280px;
   position: relative;
-  bottom: 650px;
-  div {
+  bottom: 660px;
+  .proheader {
+    display: flex;
+    justify-content: space-between;
+
     h1 {
         margin-bottom: ;
         
@@ -35,14 +40,23 @@ const ProfileContainer = styled.div`
       }
 
     button {
+      display: flex;
+      
       color: #fff;
       background-color: rgba(0, 0, 0, 0.4);
       min-width: 100px;
       height: 50px;
-      padding: 0 28px;
+      padding: 14px 28px 0 28px;
       font-size: 18px;
       border-radius: 25px;
       border: none;
+
+      i {
+        margin-left: 10px;
+        width: 22px;
+        height: 26px;
+        background: url(${searchIcon}) no-repeat;
+      }
     }
   }
 `;
@@ -135,7 +149,7 @@ const StaffProfile = memo(() => {
         {/* 의료진 사진 */}
         <img src={staffsample} alt="의료진 사진"></img>
         <ProfileContainer>
-          <div>
+          <div className='proheader'>
             <h1>
               <Link to="/">
                 <img src={sevLogo} alt="header_logo" className="sevLogo" />
@@ -143,8 +157,8 @@ const StaffProfile = memo(() => {
             </h1>
             <Link to="/staff">
               <button type="button" class="">
-                <i class=""></i>
                 <span class="">의료진</span>
+                <i></i>
               </button>
             </Link>
           </div>
@@ -232,7 +246,7 @@ const StaffProfile = memo(() => {
             </ProfileTable>
 
             <div class="btn">
-              <a href='의료진 주소'>
+              <a href='/apptSelect'>
                 예약하기
               </a>
             </div>
