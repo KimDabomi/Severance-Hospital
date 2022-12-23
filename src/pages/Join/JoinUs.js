@@ -325,7 +325,7 @@ const JoinUs = memo(() => {
   }
   const watching = useWatch({
     control,
-    name: ["userid", "password"]
+    name: ["userid", "password","repassword","tel2","tel3"]
   });
   console.log(watching);
 

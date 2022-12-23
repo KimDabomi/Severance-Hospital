@@ -20,6 +20,7 @@ import FindId from "./pages/Login/FindId";
 import FindIdEmail from "./pages/Login/FindIdEmail";
 import FindPassword from "./pages/Login/FindPassword";
 import FindPasswordEmail from "./pages/Login/FindPasswordEmail";
+import NewPassword from "./pages/Login/NewPassword";
 
 // 회원가입
 import JoinWay from "./pages/Join/JoinWay";
@@ -90,6 +91,7 @@ function App() {
         <Route path="/find_id_email" element={<FindIdEmail />} />
         <Route path="/find_password" element={<FindPassword />} />
         <Route path="/find_password_email" element={<FindPasswordEmail />} />
+        <Route path="/new_password" element={<NewPassword />} />
 
         {/* 고객의소리 페이지 라우팅*/}
         <Route path="/customer.do/*" element={<CustomerBoardMain />} />
