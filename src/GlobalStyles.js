@@ -259,7 +259,7 @@ button {
   border-radius: 25px;
   min-width: 100px;
   height: 50px;
-  padding: 0 18px;
+  padding: 0 28px;
   font-size: 16px;
   display: inline-flex;
   align-items: center;
@@ -281,7 +281,7 @@ button {
   border-radius: 25px;
   min-width: 100px;
   height: 50px;
-  padding: 0 18px;
+  padding: 0 28px;
   font-size: 16px;
   display: inline-flex;
   align-items: center;
