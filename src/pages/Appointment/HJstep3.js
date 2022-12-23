@@ -215,9 +215,11 @@ const Div = styled.div`
     padding: 15px;
     display: flex;
     flex-wrap: wrap;
+    /* overflow: hidden; */
 
     .radios {
       width: 60px;
+      height: 30px;
       margin: 4px;
       text-align: center;
       position: relative;
@@ -227,7 +229,6 @@ const Div = styled.div`
         height: 100%;
         display: block;
         position: absolute;
-        background-color: white;
         line-height: 29px;
       }
 
@@ -255,6 +256,24 @@ const Div = styled.div`
 
       }
 
+    }
+  }
+
+  /* 예약가능시간없을 떄 */
+  .timeNoResults{
+    background-color: #fff;
+    align-items: center;
+    min-height: 167px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #e6e6e6;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    p{
+      font-size: 16px;
     }
   }
 
@@ -306,7 +325,7 @@ const HJstep3 = memo(() => {
           </div>
         </div>
 
-        {/* 예약 가능한 시간 */}
+        {/* 예약 가능한 시간이 있을 때 */}
         <div className="timeResults">
           <span className="radios">
             <input
@@ -317,16 +336,21 @@ const HJstep3 = memo(() => {
             />
             <label htmlFor="Time1">15:20</label>
           </span>
-          
           <span className="radios">
             <input
               type="radio"
               name="certFormResTime"
               value="15:20"
-              id="Time2"
+              id="Time1"
             />
-            <label htmlFor="Time2">15:20</label>
+            <label htmlFor="Time1">15:20</label>
           </span>
+        </div>
+
+        {/* 예약가능한 시간이 없을 때 */}
+        <div className="timeNoResults">
+          <p>선택하신 월에는 모든 예약이 완료 되었습니다.
+              다음달을 확인해 주세요.</p>
         </div>
 
         {/* 이전 다음 버튼 */}
