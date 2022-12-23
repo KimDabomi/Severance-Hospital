@@ -247,17 +247,13 @@ const Member1 = memo(() => {
 
   /** Login태그의 display를 변경한다. */
   const switchDisplay = useCallback((e) => {
-    e.target.dataset.intro === "member"
-      ? (login.current.style.display = "block")
-      : (login.current.style.display = "none");
+    e.target.dataset.intro === "member" ? (login.current.style.display = "block") : (login.current.style.display = "none");
   }, []);
 
   /** 팝업 */
   // 팝업 열기
   const openPopup = useCallback((e) => {
-    e.target.dataset.intro === "loginPopup"
-      ? (loginPopup.current.style.visibility = "visible")
-      : (joinPopup.current.style.visibility = "visible");
+    e.target.dataset.intro === "loginPopup" ? (loginPopup.current.style.visibility = "visible") : (joinPopup.current.style.visibility = "visible");
   }, []);
 
   // 팝업 닫기
@@ -297,10 +293,7 @@ const Member1 = memo(() => {
 
           <ul>
             <li>회원예약은 세브란스병원 로그인 후 이용하실 수 있습니다.</li>
-            <li>
-              회원이 아닌 분은 회원가입 후 이용 또는 비회원 예약을 이용하시기
-              바랍니다.
-            </li>
+            <li>회원이 아닌 분은 회원가입 후 이용 또는 비회원 예약을 이용하시기 바랍니다.</li>
           </ul>
 
           <button type="button" className="backBtn" onClick={switchDisplay}>
