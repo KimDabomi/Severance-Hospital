@@ -809,7 +809,7 @@ const Header = () => {
         <MenuContainer ref={menu}>
           <div className="menu">
             <MenuImgSection>
-              <img src={menuArt} />
+              <img src={menuArt} alt="artwork" />
               <p>
                 THE <strong>FIRST</strong>, THE <strong>BEST</strong>
               </p>
@@ -822,10 +822,14 @@ const Header = () => {
               {menuContent === "환자/보호자" ? (
                 <MenuUl>
                   <MenuList>
-                    <MenuTitle>예약</MenuTitle>
+                    <MenuTitle>
+                      <Link to="/appointment_main">예약</Link>
+                    </MenuTitle>
                     <SubMenuUl>
                       <SubMenuList>
-                        <SubMenuTitlte>진료예약</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/appointment_main">진료예약</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
                         <SubMenuTitlte>예약현황</SubMenuTitlte>
@@ -833,25 +837,39 @@ const Header = () => {
                     </SubMenuUl>
                   </MenuList>
                   <MenuList>
-                    <MenuTitle>결과</MenuTitle>
+                    <MenuTitle>
+                      <Link to="/result">결과</Link>
+                    </MenuTitle>
                   </MenuList>
                   <MenuList>
-                    <MenuTitle>이용안내</MenuTitle>
+                    <MenuTitle>
+                      <Link to="/guide/number.do">이용안내</Link>
+                    </MenuTitle>
                     <SubMenuUl>
                       <SubMenuList>
-                        <SubMenuTitlte>병원시설</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/guide/facility.do">병원시설</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
-                        <SubMenuTitlte>외래이용</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/guide/outpatient_info">외래이용</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
-                        <SubMenuTitlte>입원생활</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/guide/hospitalization.do">입원생활</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
-                        <SubMenuTitlte>수술실 이용</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/guide/operating-room.do">수술실 이용</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
-                        <SubMenuTitlte>비급여진료비</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/guide/unsupported">비급여진료비</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                     </SubMenuUl>
                   </MenuList>
@@ -859,13 +877,19 @@ const Header = () => {
               ) : (
                 <MenuUl>
                   <MenuList>
-                    <MenuTitle>진료의뢰</MenuTitle>
+                    <MenuTitle>
+                      <Link to="/cooperation/hospital.do">진료의뢰</Link>
+                    </MenuTitle>
                     <SubMenuUl>
                       <SubMenuList>
-                        <SubMenuTitlte>협력병원 현황</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/cooperation/hospital.do">협력병원 현황</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
-                        <SubMenuTitlte>협진병, 의원 현황</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/cooperation/doctor.do">협진병, 의원 현황</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                     </SubMenuUl>
                   </MenuList>
