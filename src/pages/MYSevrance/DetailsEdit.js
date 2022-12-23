@@ -1,7 +1,7 @@
 /**
  * @ File Name: DetailsEdit.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-20 18:15
+ * @ Last Update: 2022-12-23 11:45
  * @ Description: 개인정보수정 페이지
  */
 
@@ -13,7 +13,7 @@ import LoginFooter from "../../components/LoginFooter";
 import styled from "styled-components";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 import Withdraw from "./Withdraw";
-import ChangePassward from "./ChangePassward";
+import ChangePassword from "./ChangePassword";
 
 const Container = styled.div`
   margin: auto;
@@ -237,7 +237,7 @@ const DetailsEdit = memo(() => {
   return (
     <Container>
       <Routes>
-        <Route path='/change_password' element={<ChangePassward />} />
+        <Route path='/change_password' element={<ChangePassword />} />
         <Route path='/withdraw' element={<Withdraw />} />
       </Routes>
       <MyPageHeader />

@@ -1,7 +1,7 @@
 /**
  * @ File Name: FindPasswordEmail.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-20 18:00
+ * @ Last Update: 2022-12-23 11:30
  * @ Description: 비밀번호 찾기 이메일 인증 페이지
  */
 
@@ -19,7 +19,7 @@ const Container = styled.div`
       border: 0;
       border-bottom: 1px solid #e6e6e6;
       width: 800px;
-      margin: 20px auto 0;
+      margin: 30px auto 0;
     }
   }
   h1 {
@@ -30,90 +30,175 @@ const Container = styled.div`
   }
   h3 {
     width: 800px;
-    margin: auto;
-    font-size: 16px;
+    margin: 0 auto 30px;
+    font-size: 24px;
   }
-  .content {
-    width: 800px;
-    margin: 20px auto;
 
-    // 인풋박스
-    input {
-      width: 580px;
-      display: block;
-      margin: 10px auto;
-      height: 40px;
+  // 이메일 정보 입력
+  .email_details {
+    width: 800px;
+    margin: auto;
+    margin-bottom: 0;
+    .text {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .text_email {
+      font-weight: bold;
+      margin-right: 30px;
+    }
+    /* 인증버튼 */
+    .certificate {
+      background-color: #666;
+      color: #fff;
+      height: 45px;
+      padding: 0 27px;
+      margin-left: 5px;
+      font-size: 16px;
+      border: none;
+      border-radius: 3px;
+      font-weight: 100;
+      vertical-align: middle;
+    }
+    input,
+    .email_domain {
+      width: 210px;
+      max-width: 100%;
+      height: 45px;
       border: 1px solid #dadada;
       padding: 8px 15px;
       box-sizing: border-box;
       text-align: left;
       font-size: 16px;
       vertical-align: middle;
+      margin: 30px 10px 30px 0;
       &:focus {
         outline: 1px solid rgb(0, 148, 251);
       }
     }
-    // 주의사항
-    ul {
-      width: 580px;
-      margin: 0 auto 20px;
-      li {
-        margin-left: 20px;
-        letter-spacing: 0.02em;
-        line-height: 1.625;
-        color: #f76117;
-        font-size: 14px;
+    .email_domain {
+      width: 150px;
+      padding-right: 30px;
+      background: #fff url(${dropdown}) no-repeat right 12px center;
+      background-size: 17px auto;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      &:focus {
+        outline: 1px solid rgb(0, 148, 251);
       }
+    }
+  }
+
+  // 인증코드
+  .code {
+    width: 800px;
+    margin: 0 auto;
+    .text_code {
+      font-weight: bold;
+      margin-right: 15px;
     }
     // 확인버튼
-    .button_box {
-      width: 250px;
-      margin: 40px auto;
-      .submit {
-        width: 100%;
+    .submit {
+      background-color: rgb(0, 148, 251);
+      color: #fff;
+      height: 45px;
+      padding: 0 27px;
+      margin-left: 5px;
+      font-size: 16px;
+      border: none;
+      border-radius: 3px;
+      font-weight: 100;
+      vertical-align: middle;
+    }
+    .code_input {
+      width: 295px;
+      max-width: 100%;
+      height: 45px;
+      border: 1px solid #dadada;
+      padding: 8px 15px;
+      box-sizing: border-box;
+      text-align: left;
+      font-size: 16px;
+      vertical-align: middle;
+      margin: 0 10px 0 0;
+      &:focus {
+        outline: 1px solid rgb(0, 148, 251);
       }
     }
-    
   }
 `;
 
 const FindPasswordEmail = memo(() => {
   const navigate = useNavigate();
 
-  const submit = e => {
-    navigate('/');
-  };
+  const goChange = e => {
+    navigate('/change_password_email');
+  }
 
   return (
     <Container>
       <LoginHeader />
       <div className="bgAll">
         <h1>비밀번호 찾기</h1>
-        <h3>새로 사용할 비밀번호를 입력해 주세요.</h3>
+        <h3>이메일 인증</h3>
         <hr />
-        <div className="content">
+        <div className="email_details">
+          <span className="text_email">이메일</span>
+          <span className="email_input">
+            <input
+              type="text"
+              name="emailId"
+              id="emailId"
+              className="email_id_input"
+              title="이메일 아이디"
+            />
+          </span>
+          <span className="text">@</span>
+          <span className="email_input">
+            <input
+              type="text"
+              name="emailDomainInput"
+              id="email_domain_input"
+              className="email_domain_input"
+              title="이메일 도메인"
+            />
+          </span>
+          <span className="email_input">
+            <span className="input_group">
+              <select
+                name="emailDomain"
+                id="emailDomain"
+                className="email_domain"
+                title="이메일 도메인"
+              >
+                <option defaultValue="">직접입력</option>
+                <option defaultValue="gmail.com">gmail.com</option>
+                <option defaultValue="naver.com">naver.com</option>
+                <option defaultValue="daum.net">daum.net</option>
+                <option defaultValue="nate.com">nate.com</option>
+                <option defaultValue="kakao.com">kakao.com</option>
+                <option defaultValue="yahoo.com">yahoo.com</option>
+              </select>
+            </span>
+          </span>
+          <button className="certificate" type="button">
+            인증
+          </button>
+        </div>
+        <div className="code">
+          <span className="text_code">인증코드</span>
           <input
             type="text"
-            className="new_password"
-            placeholder="새로운 비밀번호를 입력해 주세요."
+            name="codeInput"
+            id="codeInput"
+            className="code_input"
+            title="인증코드"
           />
-          <ul>
-            <li>※ 8자 이상 ~ 20자 이내로 설정해주세요.</li>
-            <li>※ 영문, 숫자, 특수문자를 모두 포함해주세요.</li>
-            <li>※ 비밀번호 예시: password121!</li>
-            <li>
-              ※ 문자열이 3자리 이상 연속되거나 동일하지 않게 해주세요. (ex. 111,
-              123, 321, aaa, abc 등)
-            </li>
-          </ul>
-          <input
-            type="text"
-            className="new_password_check"
-            placeholder="비밀번호를 한번 더 입력해 주세요."
-          />
-          <div className='button_box'>
-            <button className="submit buttonBlue" onClick={submit}>확인</button>
-          </div>
+          <button className="submit" type="button" onClick={goChange}>
+            확인
+          </button>
+          <hr />
         </div>
       </div>
       <LoginFooter />
