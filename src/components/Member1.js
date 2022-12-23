@@ -5,6 +5,7 @@
  * @ Description: 예약 페이지의 임시 컴포넌트
  */
 
+/** import */
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
