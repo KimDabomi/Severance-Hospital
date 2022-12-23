@@ -29,8 +29,6 @@ const ProfileContainer = styled.div`
     justify-content: space-between;
 
     h1 {
-      margin-bottom: ;
-
       .sevLogo {
         width: 231px;
         height: 40px;
