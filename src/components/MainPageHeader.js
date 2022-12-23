@@ -837,7 +837,9 @@ const Header = () => {
                     </SubMenuUl>
                   </MenuList>
                   <MenuList>
-                    <MenuTitle><Link to="/result">결과</Link></MenuTitle>
+                    <MenuTitle>
+                      <Link to="/result">결과</Link>
+                    </MenuTitle>
                   </MenuList>
                   <MenuList>
                     <MenuTitle>
