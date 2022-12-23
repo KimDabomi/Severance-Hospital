@@ -65,7 +65,8 @@ import AboutSev from "./pages/AboutSevrance/AboutSev";
 import Introduction from "./pages/AboutSevrance/Introduction";
 
 // 예약 페이지 테스트 컴포턴트 페이지
-import Member1 from "./components/Member1";
+import Member1 from "./pages/Appointment/Member1";
+import Reserve1 from "./pages/Appointment/Reserve1";
 
 function App() {
   return (
@@ -81,7 +82,10 @@ function App() {
         <Route path="/cooperation/*" element={<Cooperation />} />
         {/* 이용약관, 개인정보처리방침 */}
         <Route path="/policy/*" element={<Policy />} />
+
+        {/* 예약 페이지 컴포턴트 */}
         <Route path="/member1" exapt={true} element={<Member1 />} />
+        <Route path="/reserve1" exapt={true} element={<Reserve1 />} />
 
         {/* 회원가입 */}
         <Route path="/join_way" element={<JoinWay />} />
