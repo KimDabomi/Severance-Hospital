@@ -274,7 +274,7 @@ const MysevMain = memo(() => {
   };
 
   const goChangePw = (e) => {
-    navigate("/change_passward");
+    navigate("/change_password");
   };
 
   return (

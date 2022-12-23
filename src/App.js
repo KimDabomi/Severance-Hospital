@@ -45,7 +45,7 @@ import NewsAllMain from "./pages/NewsHome/NewsAllMain";
 import MysevMain from "./pages/MYSevrance/MysevMain";
 import DetailsEdit from "./pages/MYSevrance/DetailsEdit";
 import ISevrance from "./pages/MYSevrance/ISevrance";
-import ChangePassward from "./pages/MYSevrance/ChangePassward";
+import ChangePassword from "./pages/MYSevrance/ChangePassword";
 import ResultInquiry from "./pages/MYSevrance/ResultInquiry";
 import Result from "./pages/MYSevrance/Result";
 import Withdraw from "./pages/MYSevrance/Withdraw";
@@ -119,7 +119,7 @@ function App() {
         <Route path="/mysevrance" element={<MysevMain />} />
         <Route path="/mysevrance/iseverance/mywriting" element={<ISevrance />} />
         <Route path="/details_edit" element={<DetailsEdit />} />
-        <Route path="/change_passward" element={<ChangePassward />} />
+        <Route path="/change_password" element={<ChangePassword />} />
         <Route path="/resultinquiry" element={<ResultInquiry />} />
         <Route path="/result" element={<Result />} />
         <Route path="/withdraw" element={<Withdraw />} />

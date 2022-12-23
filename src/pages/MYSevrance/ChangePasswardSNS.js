@@ -2,7 +2,7 @@
  * @ File Name: ChangePassward.js
  * @ Author: 김다보미 (cdabomi@nate.com)
  * @ Last Update: 2022-12-12 18:05
- * @ Description: 비밀번호변경 페이지
+ * @ Description: SNS 회원 비밀번호변경 페이지
  */
 
 import React, { memo } from "react";
