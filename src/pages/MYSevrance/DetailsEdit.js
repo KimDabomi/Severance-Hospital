@@ -1,7 +1,7 @@
 /**
  * @ File Name: DetailsEdit.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-23 11:45
+ * @ Last Update: 2022-12-23 14:00
  * @ Description: 개인정보수정 페이지
  */
 
