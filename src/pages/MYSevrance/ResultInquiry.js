@@ -171,7 +171,7 @@ const ResultInquiry = memo(() => {
   };
 
   const goResult = (e) => {
-    navigate('/result');
+    navigate('/user_info/result');
   };
 
   return (

@@ -1,11 +1,12 @@
 /**
  * @ File Name: ChangePassword.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-23 12:30
+ * @ Last Update: 2022-12-23 13:20
  * @ Description: 비밀번호변경 페이지
  */
 
 import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, useWatch } from "react-hook-form";
 import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
@@ -170,9 +171,15 @@ const Container = styled.div`
 `;
 
 const ChangePassword = memo(() => {
+  const navigate = useNavigate();
+
   const closeBox = e => {
     document.querySelector('.complete').style.display = 'none';
   };
+  
+  const goHome = e => {
+    navigate('/mysevrance');
+  }
 
   const {
     register,
@@ -302,7 +309,7 @@ const ChangePassword = memo(() => {
             >
               비밀번호변경
             </button>
-            <button type="button" className="cancel buttonBlue">
+            <button type="button" className="cancel buttonBlue" onClick={goHome}>
                 취소
             </button>
           </div>
