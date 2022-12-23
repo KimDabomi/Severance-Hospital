@@ -11,6 +11,8 @@ import styled from "styled-components";
 import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
 import TopButton from "../../components/TopButton";
+// 서브라우팅
+import UserInfo from "./UserInfo";
 //이미지 import
 import mybgPattern from "../../assets/img/mybg-pattern.png";
 import myEdit from "../../assets/img/ico-mypage-edit@2x.png";
@@ -279,6 +281,10 @@ const MysevMain = memo(() => {
 
   return (
     <Div>
+      {/* 서브라우팅 */}
+      <Routes>
+        <Route path="/user_info/*" element={<UserInfo />} />
+      </Routes>
       <TopButton />
       <MyPageHeader />
       <div className="content">
@@ -288,11 +294,11 @@ const MysevMain = memo(() => {
             <div className="titleWrap">
               <span>주혜지님</span>
               <div className="btnCont">
-                <button type="button" className="btn" onClick={goDetailsEdit}>
-                  개인정보수정
+                <button type="button" className="btn">
+                  <Link to='/user_info/details_edit'>개인정보수정</Link>
                 </button>
-                <button type="button" className="btn" onClick={goChangePw}>
-                  비밀번호변경
+                <button type="button" className="btn">
+                  <Link to='/user_info/change_password'>비밀번호변경</Link>
                 </button>
               </div>
             </div>
@@ -367,10 +373,10 @@ const MysevMain = memo(() => {
               </div>
             </div>
             <div className="linkWrap">
-              <Link to="/result">검사결과</Link>
-              <Link to="/result">약처방정보</Link>
-              <Link to="/result">내원일자</Link>
-              <Link to="/result">입퇴원내역</Link>
+              <Link to="/user_info/resultinquiry">검사결과</Link>
+              <Link to="/user_info/resultinquiry">약처방정보</Link>
+              <Link to="/user_info/resultinquiry">내원일자</Link>
+              <Link to="/user_info/resultinquiry">입퇴원내역</Link>
             </div>
           </div>
           {/* 진료 및 검진예약 일정*/}
