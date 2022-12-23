@@ -822,10 +822,14 @@ const Header = () => {
               {menuContent === "환자/보호자" ? (
                 <MenuUl>
                   <MenuList>
-                    <MenuTitle>예약</MenuTitle>
+                    <MenuTitle>
+                      <Link to="/appointment_main">예약</Link>
+                    </MenuTitle>
                     <SubMenuUl>
                       <SubMenuList>
-                        <SubMenuTitlte>진료예약</SubMenuTitlte>
+                        <SubMenuTitlte>
+                          <Link to="/appointment_main">진료예약</Link>
+                        </SubMenuTitlte>
                       </SubMenuList>
                       <SubMenuList>
                         <SubMenuTitlte>예약현황</SubMenuTitlte>
@@ -833,7 +837,7 @@ const Header = () => {
                     </SubMenuUl>
                   </MenuList>
                   <MenuList>
-                    <MenuTitle>결과</MenuTitle>
+                    <MenuTitle><Link to="/result">결과</Link></MenuTitle>
                   </MenuList>
                   <MenuList>
                     <MenuTitle>
