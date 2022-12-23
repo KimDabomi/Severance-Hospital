@@ -74,6 +74,17 @@ const Collapse = memo(({title, department}) => {
 
         const currentDepartment = e.target;
 
+        // 스스로에게 active클래스에 대한 적용 여부 변경
+        currentDepartment.classList.toggle('active');
+
+        // 선택된 병원 제외하고 active 클래스 제거
+        document.querySelectorAll('.collapse-department').forEach((v3, i3) => {
+            if(v3 !== currentDepartment) {
+                v3.classList.remove('active');
+            }
+        });
+
+        /** active 클래스 적용되어있다면 해당 병원 data 받아와서  보여주기 */
 
     }, []);
 

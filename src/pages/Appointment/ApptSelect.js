@@ -80,23 +80,9 @@ const ApptSelectCont = styled.div`
 `;
 
 const content = [{
-    title: '병원A',
-    department: ['진료과A','진료과B','진료과C','진료과D','진료과E'],
-
-}, 
-// {
-//     title: 'B',
-//     content: 'B'
-// }, {
-//     title: 'C',
-//     content: 'C'
-// }, {
-//     title: 'D',
-//     content: 'D'
-// }, {
-//     title: 'E',
-//     content: 'E'
-// }
+    title: '세브란스병원',
+    department: ['연세암병원','심장혈관병원','어린이병원','안과병원','재활병원'],
+},
 ]
 
 const ApptSelect = memo(() => {
@@ -104,7 +90,7 @@ const ApptSelect = memo(() => {
     return (
         <ApptSelectCont>
             <div className='step1Cont'>
-                <h1>진료과선택</h1>
+                <h1>병원선택</h1>
                 <div className='selectCont'>
                     {content.map(({title, department}, i) => <Collapse 
                         key={i} title={title} department={department}
