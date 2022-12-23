@@ -166,14 +166,16 @@ const SiteMap = forwardRef(({}, ref) => {
 
               <SubMenuUl>
                 {/* 서브타이틀 하위 목록 */}
-                <SubMenuLi>진료예약</SubMenuLi>
+                <Link to="/appointment_main">
+                  <SubMenuLi>진료예약</SubMenuLi>
+                </Link>
                 <SubMenuLi>예약현황</SubMenuLi>
               </SubMenuUl>
             </MenuLi>
 
             <MenuLi>
               {/* 서브타이틀 */}
-              <Link to="/resultinquiry">결과</Link>
+              <Link to="/result">결과</Link>
             </MenuLi>
 
             <MenuLi>
@@ -183,19 +185,19 @@ const SiteMap = forwardRef(({}, ref) => {
               <SubMenuUl>
                 {/* 서브타이틀 하위 목록 */}
                 <Link to="/guide/facility.do">
-                  <SubMenuLi>병원시설 안내</SubMenuLi>
+                  <SubMenuLi>병원시설</SubMenuLi>
                 </Link>
                 <Link to="/guide/outpatient_info">
-                  <SubMenuLi>외래이용 안내</SubMenuLi>
+                  <SubMenuLi>외래이용</SubMenuLi>
                 </Link>
                 <Link to="/guide/hospitalization.do">
-                  <SubMenuLi>입원생활 안내</SubMenuLi>
+                  <SubMenuLi>입원생활</SubMenuLi>
                 </Link>
                 <Link to="/guide/operating-room.do">
-                  <SubMenuLi>수술실 이용 안내</SubMenuLi>
+                  <SubMenuLi>수술실 이용</SubMenuLi>
                 </Link>
                 <Link to="/guide/unsupported">
-                  <SubMenuLi>비급여진료비 안내</SubMenuLi>
+                  <SubMenuLi>비급여진료비</SubMenuLi>
                 </Link>
               </SubMenuUl>
             </MenuLi>
@@ -231,9 +233,14 @@ const SiteMap = forwardRef(({}, ref) => {
         <MenuCategoryLi>
           <MenuTitleDiv>
             {/* 메인 타이틀 */}
-            <Link to="/customer.do">고객의 소리</Link>
+            <Link to="/customer.do">공감 Story</Link>
           </MenuTitleDiv>
-          <MenuUl></MenuUl>
+          <MenuUl>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/customer.do">고객의 소리</Link>
+            </MenuLi>
+          </MenuUl>
         </MenuCategoryLi>
 
         {/* 6 */}
@@ -242,7 +249,12 @@ const SiteMap = forwardRef(({}, ref) => {
             {/* 메인 타이틀 */}
             <Link to="/drug.do">건강정보</Link>
           </MenuTitleDiv>
-          <MenuUl></MenuUl>
+          <MenuUl>
+            <MenuLi>
+              {/* 서브타이틀 */}
+              <Link to="/drug.do">의약품</Link>
+            </MenuLi>
+          </MenuUl>
         </MenuCategoryLi>
 
         {/* 7 */}
