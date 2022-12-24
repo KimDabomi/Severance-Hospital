@@ -207,12 +207,12 @@ const MemberReserveBox = styled.div`
       dt {
         font-size: 16px;
         font-weight: bold;
-        label {
-        }
+      }
 
-        &:last-child {
-          margin-top: 15px;
-        }
+      .name {
+      }
+      .tel {
+        margin-top: 15px;
       }
 
       dd {
@@ -460,16 +460,18 @@ const Reserve1 = memo(() => {
             {/* 본인 정보 입력 */}
             <p className="agree">1. 본인 정보 입력</p>
             <dl>
-              <dt>
+              <dt className="name">
                 <label>성명</label>
               </dt>
               <dd>
                 <input type="text" name="certForm_rsvctmNm" id="userName" data-error-message="성명을 입력해주세요." defaultValue="박다윗" readOnly />
               </dd>
-              <dt>
+              <dt className="tel">
                 <label>연락처</label>
               </dt>
-              <dd></dd>
+              <dd>
+                
+              </dd>
             </dl>
 
             {/* 개인정보 동의 */}
