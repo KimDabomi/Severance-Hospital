@@ -5,15 +5,15 @@
  * @ Description: 온라인예약페이지 예약step3
  */
 
-import React, { memo, useState } from 'react';
-import styled from 'styled-components';
+import React, { memo, useState } from "react";
+import styled from "styled-components";
 
 // 캘린더
-import Calendar from 'react-calendar';
-import moment from 'moment';
-import 'react-calendar/dist/Calendar.css'; // css import
-import prev from '../../assets/img/ico-arrow-left-white@2x.png';
-import next from '../../assets/img/ico-arrow-right-white@2x.png';
+import Calendar from "react-calendar";
+import moment from "moment";
+import "react-calendar/dist/Calendar.css"; // css import
+import prev from "../../assets/img/ico-arrow-left-white@2x.png";
+import next from "../../assets/img/ico-arrow-right-white@2x.png";
 
 const Div = styled.div`
   .reserveBox {
@@ -36,9 +36,9 @@ const Div = styled.div`
     font-size: 20px;
     font-weight: 700;
     text-align: center;
-    font-family: 'NanumSquare', 'malgungothic', 'Helvetica Neue', Arial,
-      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-      'Noto Color Emoji';
+    font-family: "NanumSquare", "malgungothic", "Helvetica Neue", Arial,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
   }
 
   // 캘린더
@@ -182,7 +182,7 @@ const Div = styled.div`
           letter-spacing: 0.02em;
           line-height: 1.625;
           &:before {
-            content: '';
+            content: "";
             display: inline-block;
             margin-top: 7px;
             margin-right: 8px;
@@ -224,7 +224,7 @@ const Div = styled.div`
       text-align: center;
       position: relative;
 
-      label{
+      label {
         width: 100%;
         height: 100%;
         display: block;
@@ -232,9 +232,11 @@ const Div = styled.div`
         line-height: 29px;
       }
 
-      input:checked + label {color: white;}
+      input:checked + label {
+        color: white;
+      }
 
-      [type='radio'] {
+      [type="radio"] {
         appearance: none;
         position: absolute;
         display: block;
@@ -251,16 +253,14 @@ const Div = styled.div`
         //라디오 선택됐을 때
         &:checked {
           border-color: #0094fb;
-          background: #0094fb;   
+          background: #0094fb;
         }
-
       }
-
     }
   }
 
   /* 예약가능시간없을 떄 */
-  .timeNoResults{
+  .timeNoResults {
     background-color: #fff;
     align-items: center;
     min-height: 167px;
@@ -272,7 +272,7 @@ const Div = styled.div`
     align-items: center;
     text-align: center;
     box-sizing: border-box;
-    p{
+    p {
       font-size: 16px;
     }
   }
@@ -306,7 +306,7 @@ const HJstep3 = memo(() => {
             onChange={onChange}
             value={value}
             className="calendar"
-            formatDay={(locale, date) => moment(date).format('D')}
+            formatDay={(locale, date) => moment(date).format("D")}
             calendarType="US"
           />
 
@@ -349,8 +349,9 @@ const HJstep3 = memo(() => {
 
         {/* 예약가능한 시간이 없을 때 */}
         <div className="timeNoResults">
-          <p>선택하신 월에는 모든 예약이 완료 되었습니다.
-              다음달을 확인해 주세요.</p>
+          <p>
+            선택하신 월에는 모든 예약이 완료 되었습니다. 다음달을 확인해 주세요.
+          </p>
         </div>
 
         {/* 이전 다음 버튼 */}

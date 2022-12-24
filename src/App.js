@@ -57,6 +57,10 @@ import HJAttp from './pages/Appointment/HJAppt';
 import HJstep3 from "./pages/Appointment/HJstep3";
 import HJstep4 from "./pages/Appointment/HJstep4";
 
+// 예약 현황
+import ApptStatusMain from "./pages/ApptStatus/ApptStatusMain";
+import ApptHistory from "./pages/ApptStatus/ApptHistory";
+
 // 병원개요
 import AboutSev from "./pages/AboutSevrance/AboutSev";
 import Introduction from "./pages/AboutSevrance/Introduction";
@@ -130,6 +134,10 @@ function App() {
         <Route path="/hjattp" element={<HJAttp />} />
         <Route path="/hjstep3" element={<HJstep3 />} />
         <Route path="/hjstep4" element={<HJstep4 />} />
+
+        {/* 예약 현황 */}
+        <Route path="/appt_status_main/*" element={<ApptStatusMain />} />
+        <Route path="/appt_history" element={<ApptHistory />} />
 
         {/* 병원개요 */}
         <Route path="/about_sev" element={<AboutSev />} />
