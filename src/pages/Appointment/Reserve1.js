@@ -20,8 +20,9 @@ import radiocheck from "../../assets/img/ico-radio-checked.png";
 const Cnt = styled.div`
   display: flex;
 `;
-/** 회원 예약 박스 스타일 */
-const ReserveLogin = styled.div`
+
+/** 회원 정보 박스 스타일 */
+const MemberDataBox = styled.div`
   width: 305px;
   height: 803px;
 
@@ -96,7 +97,7 @@ const ReserveLogin = styled.div`
 `;
 
 /** 회원 예약 박스 스타일 */
-const Member = styled.div`
+const MemberReserveCover = styled.div`
   width: 305px;
   height: 803px;
   position: relative;
@@ -153,7 +154,7 @@ const Member = styled.div`
 `;
 
 /** 회원 예약 양식 */
-const ReserveBox = styled.div`
+const MemberReserveBox = styled.div`
   width: 305px;
   height: 803px;
 
@@ -179,6 +180,7 @@ const ReserveBox = styled.div`
 
   .form {
     text-align: left;
+
     .radios {
       background-color: #f9f9f9;
       padding: 17px 20px 20px;
@@ -213,32 +215,32 @@ const ReserveBox = styled.div`
       .agreeSelect {
         padding-top: 40px;
 
-        span:last-child {
+        .agreeRadio:last-child {
           padding-left: 15px;
         }
 
         label {
-          font-size: 13px;
+          font-size: 14px;
         }
 
         input[type="radio"] {
-          width: 1.25em;
-          height: 1.25em;
+          width: 20px;
+          height: 20px;
 
           vertical-align: middle;
           appearance: none;
+          margin: -2px 5px 0 0;
 
-          border: 1px solid gray;
-          background-color: white;
+          background-color: #fff;
+          border: 1px solid #aaa;
           border-radius: 50%;
-
-          margin: -3px 5px 0 0;
+          box-sizing: border-box;
         }
 
         input[type="radio"]:checked {
           border: 1px solid black;
-          background: #fff url(${radiocheck}) no-repeat center center;
-          background-size: 11px 11px;
+          background: #fff url(${radiocheck}) no-repeat center;
+          background-size: 10px 10px;
         }
       }
     }
@@ -337,12 +339,12 @@ const Reserve1 = memo(() => {
 
   /** ref */
   const agreePopup = useRef();
-  const reserve = useRef();
-  const member = useRef();
+  const memberReserveBox = useRef();
+  const memberReserveCover = useRef();
 
-  /** Login태그의 display를 변경한다. */
+  /** 회원 예약 커버의 display를 변경한다. */
   const switchDisplay = useCallback((e) => {
-    e.target.dataset.intro === "member" ? (reserve.current.style.display = "block") : (reserve.current.style.display = "none");
+    e.target.dataset.intro === "cover" ? (memberReserveBox.current.style.display = "block") : (memberReserveBox.current.style.display = "none");
   }, []);
 
   /** 팝업 */
@@ -363,8 +365,8 @@ const Reserve1 = memo(() => {
 
   return (
     <Cnt>
-      {/* 회원 정보 */}
-      <ReserveLogin>
+      {/* 회원 정보 박스 */}
+      <MemberDataBox>
         <p className="title">회원 정보</p>
         <p className="username">
           <span>박다윗</span> 님
@@ -383,19 +385,19 @@ const Reserve1 = memo(() => {
             <button type="button">과거 진료이력 확인</button>
           </Link>
         </div>
-      </ReserveLogin>
+      </MemberDataBox>
 
-      {/* 회원 예약 */}
-      <Member ref={member}>
-        <a href="#reserve" data-intro="member" onClick={switchDisplay}>
+      {/* 회원 예약 커버 */}
+      <MemberReserveCover ref={memberReserveCover}>
+        <a href="#reserve" data-intro="cover" onClick={switchDisplay}>
           <div className="iconCont">
             <i />
             <span>회원 예약</span>
           </div>
         </a>
 
-        {/* 회원 예약 로그인, 회원가입 */}
-        <ReserveBox ref={reserve}>
+        {/* 회원 예약 양식 */}
+        <MemberReserveBox ref={memberReserveBox}>
           <p className="title">회원 예약</p>
           <div className="form">
             <div className="radios">
@@ -410,8 +412,8 @@ const Reserve1 = memo(() => {
               </span>
             </div>
 
+            {/* 본인 정보 입력 */}
             <p className="agree">1. 본인 정보 입력</p>
-
             <dl>
               <dt>
                 <label>성명</label>
@@ -419,27 +421,27 @@ const Reserve1 = memo(() => {
               <dd>
                 <input type="text" name="certForm_rsvctmNm" id="u_name" data-error-message="성명을 입력해주세요." defaultValue="박다윗" />
               </dd>
-
               <dt>
                 <label>연락처</label>
               </dt>
               <dd></dd>
             </dl>
 
+            {/* 개인정보 동의 */}
             <div className="agreeBox">
               <p>개인정보 수집·이용 동의</p>
               <p>개인정보는 병원정보 조회를 위해서만 사용합니다. 개인정보 이용에 동의합니다.</p>
 
               <form className="agreeSelect">
-                <span className="radioItem">
+                <span className="agreeRadio">
                   <label>
-                    <input type="radio" id="mdAgree1" name="agree" />
+                    <input type="radio" id="agree1" name="agree" />
                     동의합니다.
                   </label>
                 </span>
-                <span className="radioItem">
+                <span className="agreeRadio">
                   <label>
-                    <input type="radio" id="mdAgree2" name="agree" />
+                    <input type="radio" id="agree2" name="agree" />
                     동의하지 않습니다.
                   </label>
                 </span>
@@ -447,31 +449,17 @@ const Reserve1 = memo(() => {
             </div>
           </div>
 
+          {/* 이전, 다음 버튼 */}
           <div className="btns">
-            <button type="button" data-intro="loginPopup" onClick={switchDisplay}>
+            <button type="button" onClick={switchDisplay}>
               이전
             </button>
-            <button type="button" data-intro="joinPopup" onClick={openPopup}>
+            <button type="button" onClick={openPopup}>
               다음
             </button>
           </div>
-        </ReserveBox>
-      </Member>
-
-      {/* 로그인 팝업
-      <Popup ref={loginPopup}>
-        <div className="popupCont">
-          <p>로그인 페이지로 이동하시겠습니까?</p>
-          <footer>
-            <Link to="/login">
-              <button type="button">확인</button>
-            </Link>
-            <button type="button" className="cancelBtn" onClick={closePopup}>
-              취소
-            </button>
-          </footer>
-        </div>
-      </Popup> */}
+        </MemberReserveBox>
+      </MemberReserveCover>
 
       {/* 회원가입 팝업 */}
       <Popup ref={agreePopup}>
