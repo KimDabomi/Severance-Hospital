@@ -838,7 +838,7 @@ const Header = () => {
                   </MenuList>
                   <MenuList>
                     <MenuTitle>
-                      <Link to="/result">결과</Link>
+                      <Link to="/user_info/resultinquiry">결과</Link>
                     </MenuTitle>
                   </MenuList>
                   <MenuList>
