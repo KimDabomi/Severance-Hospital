@@ -67,24 +67,26 @@ const ReserveLogin = styled.div`
     margin: 0 20px;
     box-sizing: border-box;
 
-    button {
-      width: 100%;
-      height: 50px;
-      margin-top: 20px;
+    a {
+      button {
+        width: 100%;
+        height: 50px;
+        margin-top: 20px;
 
-      font-size: 18px;
+        font-size: 18px;
 
-      border: 2px solid transparent;
-      border-color: #959595;
-      border-radius: 25px;
-      background-color: #fff;
-      box-sizing: border-box;
+        border: 2px solid transparent;
+        border-color: #959595;
+        border-radius: 25px;
+        background-color: #fff;
+        box-sizing: border-box;
 
-      color: #0094fb;
-      border-color: #0094fb;
-      background-color: #fff;
+        color: #0094fb;
+        border-color: #0094fb;
+        background-color: #fff;
+      }
 
-      &:first-child {
+      &:first-child button {
         color: #333;
         border-color: #959595;
         background-color: #fff;
@@ -195,7 +197,7 @@ const ReserveBox = styled.div`
       font-weight: bold;
     }
 
-    .boxsCF {
+    .agreeBox {
       background-color: #f9f9f9;
       padding: 15px 20px;
 
@@ -203,7 +205,7 @@ const ReserveBox = styled.div`
         font-weight: bold;
         padding-bottom: 15px;
       }
-      p:nth-child(2) {
+      p:last-child {
         font-size: 14px;
       }
 
@@ -219,18 +221,21 @@ const ReserveBox = styled.div`
           font-size: 13px;
         }
 
-        [type="radio"] {
+        input[type="radio"] {
+          width: 1.25em;
+          height: 1.25em;
+
           vertical-align: middle;
           appearance: none;
+
           border: 1px solid gray;
           background-color: white;
           border-radius: 50%;
-          width: 1.25em;
-          height: 1.25em;
+
           margin: -3px 5px 0 0;
         }
 
-        [type="radio"]:checked {
+        input[type="radio"]:checked {
           border: 1px solid black;
           background: #fff url(${radiocheck}) no-repeat center center;
           background-size: 11px 11px;
@@ -331,29 +336,29 @@ const Reserve1 = memo(() => {
   const location = useLocation();
 
   /** ref */
-  const joinPopup = useRef();
-  const login = useRef();
+  const agreePopup = useRef();
+  const reserve = useRef();
   const member = useRef();
 
   /** Login태그의 display를 변경한다. */
   const switchDisplay = useCallback((e) => {
-    e.target.dataset.intro === "member" ? (login.current.style.display = "block") : (login.current.style.display = "none");
+    e.target.dataset.intro === "member" ? (reserve.current.style.display = "block") : (reserve.current.style.display = "none");
   }, []);
 
   /** 팝업 */
   // 팝업 열기
   const openPopup = useCallback((e) => {
-    joinPopup.current.style.visibility = "visible";
+    agreePopup.current.style.visibility = "visible";
   }, []);
 
   // 팝업 닫기
   const closePopup = useCallback((e) => {
-    joinPopup.current.style.visibility = "hidden";
+    agreePopup.current.style.visibility = "hidden";
   }, []);
 
   // URL 경로 이동 시, 팝업을 닫는다.
   useEffect(() => {
-    joinPopup.current.style.visibility = "hidden";
+    agreePopup.current.style.visibility = "hidden";
   }, [location.pathname]);
 
   return (
@@ -365,24 +370,32 @@ const Reserve1 = memo(() => {
           <span>박다윗</span> 님
         </p>
         <div className="btns">
-          <button type="button">로그아웃</button>
-          <button type="button">MY세브란스</button>
-          <button type="button">예약 현황 조회</button>
-          <button type="button">과거 진료이력 확인</button>
+          <Link to="/">
+            <button type="button">로그아웃</button>
+          </Link>
+          <Link to="/mysevrance">
+            <button type="button">MY세브란스</button>
+          </Link>
+          <Link to="/reserve-status">
+            <button type="button">예약 현황 조회</button>
+          </Link>
+          <Link to="/user_info/resultinquiry">
+            <button type="button">과거 진료이력 확인</button>
+          </Link>
         </div>
       </ReserveLogin>
 
       {/* 회원 예약 */}
       <Member ref={member}>
         <a href="#reserve" data-intro="member" onClick={switchDisplay}>
-          <div className="iconCont">``
+          <div className="iconCont">
             <i />
             <span>회원 예약</span>
           </div>
         </a>
 
         {/* 회원 예약 로그인, 회원가입 */}
-        <ReserveBox ref={login}>
+        <ReserveBox ref={reserve}>
           <p className="title">회원 예약</p>
           <div className="form">
             <div className="radios">
@@ -413,7 +426,7 @@ const Reserve1 = memo(() => {
               <dd></dd>
             </dl>
 
-            <div className="boxsCF">
+            <div className="agreeBox">
               <p>개인정보 수집·이용 동의</p>
               <p>개인정보는 병원정보 조회를 위해서만 사용합니다. 개인정보 이용에 동의합니다.</p>
 
@@ -461,11 +474,13 @@ const Reserve1 = memo(() => {
       </Popup> */}
 
       {/* 회원가입 팝업 */}
-      <Popup ref={joinPopup}>
+      <Popup ref={agreePopup}>
         <div className="popupCont">
           <p>개인정보 수집·이용 조회 제공에 동의해야 예약이 가능합니다.</p>
           <footer>
-            <button type="button" onClick={closePopup}>닫기</button>
+            <button type="button" onClick={closePopup}>
+              닫기
+            </button>
           </footer>
         </div>
       </Popup>
