@@ -466,7 +466,7 @@ const MenuImgSection = styled.section`
 
   &::before {
     content: "";
-    width: 4000px;
+    width: 6000px;
 
     position: absolute;
     top: 0;
@@ -498,7 +498,7 @@ const MenuImgSection = styled.section`
 
   &::after {
     content: "";
-    width: 4000px;
+    width: 6000px;
 
     position: absolute;
     top: 0;
