@@ -175,7 +175,7 @@ const SiteMap = forwardRef(({}, ref) => {
 
             <MenuLi>
               {/* 서브타이틀 */}
-              <Link to="/result">결과</Link>
+              <Link to="/user_info/resultinquiry">결과</Link>
             </MenuLi>
 
             <MenuLi>
