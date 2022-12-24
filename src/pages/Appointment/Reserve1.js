@@ -199,6 +199,51 @@ const MemberReserveBox = styled.div`
       font-weight: bold;
     }
 
+    dl {
+      padding: 18px 20px 20px;
+      box-sizing: border-box;
+      font-size: 14px;
+
+      dt {
+        font-size: 16px;
+        font-weight: bold;
+        label {
+        }
+
+        &:last-child {
+          margin-top: 15px;
+        }
+      }
+
+      dd {
+        margin-top: 6px;
+
+        #userName {
+          width: 100%;
+          height: 40px;
+
+          font-size: 14px;
+          line-height: 27px;
+          text-align: center;
+
+          color: #c2c2c2;
+          background-color: #f9f9f9;
+
+          opacity: 1;
+
+          border: 1px solid #dadada;
+          border-collapse: collapse;
+
+          padding: 8px 15px;
+          box-sizing: border-box;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+
     .agreeBox {
       background-color: #f9f9f9;
       padding: 15px 20px;
@@ -419,7 +464,7 @@ const Reserve1 = memo(() => {
                 <label>성명</label>
               </dt>
               <dd>
-                <input type="text" name="certForm_rsvctmNm" id="u_name" data-error-message="성명을 입력해주세요." defaultValue="박다윗" />
+                <input type="text" name="certForm_rsvctmNm" id="userName" data-error-message="성명을 입력해주세요." defaultValue="박다윗" readOnly />
               </dd>
               <dt>
                 <label>연락처</label>
