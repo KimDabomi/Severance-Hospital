@@ -368,8 +368,8 @@ const ApptHistory = memo(() => {
     navigate("/apptSelect");
   };
 
-  const onApptConfirm = () => {
-    navigate("/");
+  const onApptDetail = () => {
+    navigate("/appt_detail");
   };
 
   const [value, onChange] = useState(new Date());
@@ -429,6 +429,7 @@ const ApptHistory = memo(() => {
           <div className="right">
             <div className="inner">
               {/* 예약데이터가 있는가 ? 예약상태 : 예약없음 */}
+              {/* 현재 임시로 true로 넣어둠 */}
               {true ? (
                 /* 데이터 있을 때 박스 */
                 <Isdata>
@@ -440,7 +441,7 @@ const ApptHistory = memo(() => {
                       </span>
                     </p>
                   </div>
-
+                  
                   <div>
                     <ul>
                       <li>
@@ -454,10 +455,11 @@ const ApptHistory = memo(() => {
                       </li>
                       <li>진료장소 : 본관 4층 가정의학과 {/* 데이터 */}</li>
                     </ul>
-                    <button type="button" onClick={onApptConfirm}>위치 및 상세</button>
+                    <button type="button" onClick={onApptDetail}>위치 및 상세</button>
                   </div>
                 </Isdata>
               ) : (
+                /* 데이터 없을 때 박스 */
                 <div className="no-data">
                   <p>예약내역이 없습니다.</p>
                   <br />
