@@ -52,6 +52,9 @@ import StaffProfile from "./pages/staff/StaffProfile";
 // 진료 예약
 import AppointmentMain from "./pages/Appointment/AppointmentMain";
 import ApptSelect from "./pages/Appointment/ApptSelect";
+// 의료진 예약
+import Drstep1 from "./pages/Appointment/Drstep1";
+import Drstep2 from "./pages/Appointment/Drstep2";
 
 import HJstep3 from "./pages/Appointment/HJstep3";
 import HJstep4 from "./pages/Appointment/HJstep4";
@@ -120,6 +123,11 @@ function App() {
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
         {/* 온라인 예약 */}
         <Route path="/apptSelect" element={<ApptSelect />} />
+        
+        {/* 온라인 예약 - 다보미, 의료진 예약 스텝1,2 */}
+        <Route path="/drstep1" element={<Drstep1 />} />
+        <Route path="/drstep2" element={<Drstep2 />} />
+        
 
         {/* 온라인 예약 - 혜지 */}
         <Route path="/hjstep3" element={<HJstep3 />} />
