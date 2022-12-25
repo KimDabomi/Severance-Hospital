@@ -213,10 +213,6 @@ const Container = styled.div`
       width: 640px;
       background-color: #f9f9f9;
       .inner {
-        background: url(${noResult}) no-repeat center top;
-        background-size: 66px;
-        padding-top: 80px;
-        margin: 138px 0 43px;
         p {
           text-align: center;
         }
@@ -224,6 +220,13 @@ const Container = styled.div`
         .buttonBlue {
           margin-top: 50px;
           margin-left: 41%;
+        }
+
+        .no-data {
+          background: url(${noResult}) no-repeat center top;
+          background-size: 66px;
+          padding-top: 80px;
+          margin: 138px 0 43px;
         }
       }
     }
@@ -276,11 +279,97 @@ const Container = styled.div`
   }
 `;
 
+const Isdata = styled.div`
+  width: 600px;
+  height: 224px;
+  margin: 20px 30px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  display: flex;
+
+    div:nth-of-type(1) {
+      font-size: 18px;
+      width: 20%;
+      padding: 30px 40px;
+      
+      p{
+        
+        height: 100%;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 4px 0;
+
+        span {
+          text-align: left;
+          color: #0094fb;
+        }
+      }
+    } 
+
+    div:nth-of-type(2) {
+      font-size: 16px;
+      width: 65%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 25px 10px 25px 30px;
+      border-left: 1px solid #e6e6e6;
+
+      ul {
+        margin: 5px 0;
+
+        li {
+          padding-left: 12px;
+          margin-top: 5px;
+          position: relative;
+
+          &:first-child {
+            margin-top: 0;
+          }
+
+          &:before {
+            content: "";
+            width: 4px;
+            height: 4px;
+
+            position: absolute;
+            top: 0.7em;
+            left: 0;
+
+            background-color: #0094fb;
+          }
+        }
+      }
+
+      button {
+        margin-top: 15px;
+        color: #333;
+        border-color: #959595;
+        background-color: #fff;
+        border: 1px solid;
+        border-radius: 3px;
+        min-width: 65px;
+        height: 30px;
+        padding: 0 14px;
+        font-size: 14px;
+      }
+    } 
+`;
+
 const ApptHistory = memo(() => {
   const navigate = useNavigate();
 
   const onApptButton = () => {
-    navigate('/apptSelect')
+    navigate("/apptSelect");
+  };
+
+  const onApptConfirm = () => {
+    navigate("/");
   };
 
   const [value, onChange] = useState(new Date());
@@ -315,31 +404,72 @@ const ApptHistory = memo(() => {
                 formatDay={(locale, date) => moment(date).format("D")}
                 calendarType="US"
               />
-                <div className="checkBox">
-                    <span>
-                        <input type="radio" name="res_type" value="all" className=""  />
-                        <label for="ch-all">전체</label>
-                    </span>
-                    <span>
-                        <input type="radio" name="res_type" value="1" className="" />
-                        <label for="ch-1">본인</label>
-                    </span>
-                    <span>
-                        <input type="radio" name="res_type" value="2" className="" />
-                        <label for="ch-2">대리</label>
-                    </span>
-                </div>
+              <div className="checkBox">
+                <span>
+                  <input
+                    type="radio"
+                    name="res_type"
+                    value="all"
+                    className=""
+                  />
+                  <label for="ch-all">전체</label>
+                </span>
+                <span>
+                  <input type="radio" name="res_type" value="1" className="" />
+                  <label for="ch-1">본인</label>
+                </span>
+                <span>
+                  <input type="radio" name="res_type" value="2" className="" />
+                  <label for="ch-2">대리</label>
+                </span>
+              </div>
             </div>
           </div>
           {/* 오른쪽 박스 */}
           <div className="right">
             <div className="inner">
-              <div className="no-data">
-                <p>예약내역이 없습니다.</p>
-                <button type="button" className="buttonBlue" onClick={onApptButton}>
+              {/* 예약데이터가 있는가 ? 예약상태 : 예약없음 */}
+              {true ? (
+                /* 데이터 있을 때 박스 */
+                <Isdata>
+                  <div>
+                    <p>예약일
+                    <br />
+                      <span>
+                        {/* 예약날짜 + 예약시간 데이터 */}2022-12-25 15:30
+                      </span>
+                    </p>
+                  </div>
+
+                  <div>
+                    <ul>
+                      <li>
+                        예약구분 : 진료예약 {/* 데이터 */}
+                      </li>
+                      <li>
+                        환자성명 : 오태원(1234567) {/* 데이터(데이터) */}
+                      </li>
+                      <li>
+                        진료과 : 가정의학과(HM), 김지혜(의사) {/* 데이터 */}
+                      </li>
+                      <li>진료장소 : 본관 4층 가정의학과 {/* 데이터 */}</li>
+                    </ul>
+                    <button type="button" onClick={onApptConfirm}>위치 및 상세</button>
+                  </div>
+                </Isdata>
+              ) : (
+                <div className="no-data">
+                  <p>예약내역이 없습니다.</p>
+                  <br />
+                  <button
+                    type="button"
+                    className="buttonBlue"
+                    onClick={onApptButton}
+                  >
                     진료예약
-                </button>
-              </div>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -347,12 +477,25 @@ const ApptHistory = memo(() => {
         <div className="info">
           <h4>이용안내</h4>
           <ul>
-            <li>인터넷으로 진료예약을 하셨거나, 진료비 수납이 안된 경우, 예약변경 및 취소가 가능합니다.</li>
-            <li>예약과 관련된 검사가 있거나 기타 사유로 인터넷예약변경이 불가능할 경우, 전화예약센터를 이용해 주십시오.</li>
-            <li>인터넷진료예약의 예약변경 및 취소는 예약일전일까지 가능합니다.</li>
-            <li>예약시간 20분전까지 내원하시어 원무과에 접수해야 합니다. (진료비수납*접수창구)</li>
+            <li>
+              인터넷으로 진료예약을 하셨거나, 진료비 수납이 안된 경우, 예약변경
+              및 취소가 가능합니다.
+            </li>
+            <li>
+              예약과 관련된 검사가 있거나 기타 사유로 인터넷예약변경이 불가능할
+              경우, 전화예약센터를 이용해 주십시오.
+            </li>
+            <li>
+              인터넷진료예약의 예약변경 및 취소는 예약일전일까지 가능합니다.
+            </li>
+            <li>
+              예약시간 20분전까지 내원하시어 원무과에 접수해야 합니다.
+              (진료비수납*접수창구)
+            </li>
             <li>진료예약조회 및 변경/취소는 본인인 경우만 가능합니다.</li>
-            <li>치과대학병원 재진의 예약/예약변경은 진료과로 전화 문의바랍니다.</li>
+            <li>
+              치과대학병원 재진의 예약/예약변경은 진료과로 전화 문의바랍니다.
+            </li>
             <li>세브란스병원 · 연세암병원 · 치과대학병원 : 1599-1004</li>
           </ul>
         </div>
