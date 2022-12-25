@@ -466,7 +466,7 @@ const MenuImgSection = styled.section`
 
   &::before {
     content: "";
-    width: 4000px;
+    width: 6000px;
 
     position: absolute;
     top: 0;
@@ -498,7 +498,7 @@ const MenuImgSection = styled.section`
 
   &::after {
     content: "";
-    width: 4000px;
+    width: 6000px;
 
     position: absolute;
     top: 0;
@@ -838,7 +838,7 @@ const Header = () => {
                   </MenuList>
                   <MenuList>
                     <MenuTitle>
-                      <Link to="/result">결과</Link>
+                      <Link to="/user_info/resultinquiry">결과</Link>
                     </MenuTitle>
                   </MenuList>
                   <MenuList>

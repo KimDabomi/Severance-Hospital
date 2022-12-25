@@ -5,15 +5,15 @@
  * @ Description: 온라인예약페이지 예약step3
  */
 
-import React, { memo, useState } from 'react';
-import styled from 'styled-components';
+import React, { memo, useState } from "react";
+import styled from "styled-components";
 
 // 캘린더
-import Calendar from 'react-calendar';
-import moment from 'moment';
-import 'react-calendar/dist/Calendar.css'; // css import
-import prev from '../../assets/img/ico-arrow-left-white@2x.png';
-import next from '../../assets/img/ico-arrow-right-white@2x.png';
+import Calendar from "react-calendar";
+import moment from "moment";
+import "react-calendar/dist/Calendar.css"; // css import
+import prev from "../../assets/img/ico-arrow-left-white@2x.png";
+import next from "../../assets/img/ico-arrow-right-white@2x.png";
 
 const Div = styled.div`
   .reserveBox {
@@ -36,9 +36,9 @@ const Div = styled.div`
     font-size: 20px;
     font-weight: 700;
     text-align: center;
-    font-family: 'NanumSquare', 'malgungothic', 'Helvetica Neue', Arial,
-      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-      'Noto Color Emoji';
+    font-family: "NanumSquare", "malgungothic", "Helvetica Neue", Arial,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
   }
 
   // 캘린더
@@ -182,7 +182,7 @@ const Div = styled.div`
           letter-spacing: 0.02em;
           line-height: 1.625;
           &:before {
-            content: '';
+            content: "";
             display: inline-block;
             margin-top: 7px;
             margin-right: 8px;
@@ -211,35 +211,80 @@ const Div = styled.div`
     }
   }
   //예약가능시간
-  .timeResults{
+  .timeResults {
     padding: 15px;
-    
-    span{
-      display: block;
-      border: 1px solid #e6e6e6;
-      height: 30px;
-      width: 60px;
-      line-height: 29px;
-      background: #fff;
-      border-radius: 3px;
-      font-size: 14px;
-      text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    /* overflow: hidden; */
 
-      //클릭했을 때
-      /* border-color: #0094fb;
-      background: #0094fb;
-      color: #fff; */
+    .radios {
+      width: 60px;
+      height: 30px;
+      margin: 4px;
+      text-align: center;
+      position: relative;
+
+      label {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        line-height: 29px;
+      }
+
+      input:checked + label {
+        color: white;
+      }
+
+      [type="radio"] {
+        appearance: none;
+        position: absolute;
+        display: block;
+        border: 1px solid #e6e6e6;
+        height: 30px;
+        width: 60px;
+
+        border-radius: 3px;
+        font-size: 14px;
+        text-align: center;
+        margin: 0;
+        background: #fff;
+
+        //라디오 선택됐을 때
+        &:checked {
+          border-color: #0094fb;
+          background: #0094fb;
+        }
+      }
+    }
+  }
+
+  /* 예약가능시간없을 떄 */
+  .timeNoResults {
+    background-color: #fff;
+    align-items: center;
+    min-height: 167px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #e6e6e6;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    p {
+      font-size: 16px;
     }
   }
 
   //이전다음 버튼
-  .buttonCont{
+  .buttonCont {
     position: absolute;
     width: 100%;
     bottom: 0;
     padding-bottom: 30px;
   }
-  .buttonWhite{
+  .buttonWhite {
     border-color: #959595 !important;
     color: #333 !important;
   }
@@ -261,7 +306,7 @@ const HJstep3 = memo(() => {
             onChange={onChange}
             value={value}
             className="calendar"
-            formatDay={(locale, date) => moment(date).format('D')}
+            formatDay={(locale, date) => moment(date).format("D")}
             calendarType="US"
           />
 
@@ -280,23 +325,44 @@ const HJstep3 = memo(() => {
           </div>
         </div>
 
-        {/* 예약 가능한 시간 */}
-        <div className='timeResults'>
+        {/* 예약 가능한 시간이 있을 때 */}
+        <div className="timeResults">
           <span className="radios">
-            15:20
+            <input
+              type="radio"
+              name="certFormResTime"
+              value="15:20"
+              id="Time1"
+            />
+            <label htmlFor="Time1">15:20</label>
           </span>
+          <span className="radios">
+            <input
+              type="radio"
+              name="certFormResTime"
+              value="15:20"
+              id="Time1"
+            />
+            <label htmlFor="Time1">15:20</label>
+          </span>
+        </div>
+
+        {/* 예약가능한 시간이 없을 때 */}
+        <div className="timeNoResults">
+          <p>
+            선택하신 월에는 모든 예약이 완료 되었습니다. 다음달을 확인해 주세요.
+          </p>
         </div>
 
         {/* 이전 다음 버튼 */}
         <div className="buttonCont">
-            <button type="submit" className="buttonWhite">
-              이전
-            </button>
-            <button type="reset" className="buttonBlue marginleft">
-              다음
-            </button>
-          </div>
-
+          <button type="submit" className="buttonWhite">
+            이전
+          </button>
+          <button type="reset" className="buttonBlue marginleft">
+            다음
+          </button>
+        </div>
       </div>
     </Div>
   );

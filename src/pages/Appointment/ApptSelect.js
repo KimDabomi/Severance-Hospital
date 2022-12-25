@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Collapse from '../../components/Collpase';
 
 const ApptSelectCont = styled.div`
+    height: 803px;
     .step1Cont {
         margin-left: 50px;
         margin-top: 50px;
@@ -30,6 +31,7 @@ const ApptSelectCont = styled.div`
 
         .telInfo {
             padding-top: 16px;
+            padding-bottom: 16px;
             text-align: center;
             dt {
                 font-weight: bold;
@@ -43,26 +45,45 @@ const ApptSelectCont = styled.div`
                 }
             }
         }
+
+        .listInfo {
+            padding-top: 21px;
+            margin: 0 20px;
+            border-top: 1px solid #ededed;
+
+            ul {
+                /* 리스트 스타일 ListStyleUl > li */
+                li {
+                padding-left: 12px;
+                margin-top: 5px;
+                position: relative;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+
+                    &::before {
+                        content: "";
+                        width: 4px;
+                        height: 4px;
+
+                        position: absolute;
+                        top: 0.7em;
+                        left: 0;
+
+                        background-color: #0094fb;
+                    }
+                }
+            }
+        }
     }
 `;
 
 const content = [{
-    title: 'A',
-    content: ['A','B','C','D','E'],
-
-}, {
-    title: 'B',
-    content: 'B'
-}, {
-    title: 'C',
-    content: 'C'
-}, {
-    title: 'D',
-    content: 'D'
-}, {
-    title: 'E',
-    content: 'E'
-}]
+    title: '세브란스병원',
+    department: ['연세암병원','심장혈관병원','어린이병원','안과병원','재활병원'],
+},
+]
 
 const ApptSelect = memo(() => {
 
@@ -71,7 +92,9 @@ const ApptSelect = memo(() => {
             <div className='step1Cont'>
                 <h1>병원선택</h1>
                 <div className='selectCont'>
-                    {content.map(({title, content}, i) => <Collapse key={i} title={title} content={content} />)}
+                    {content.map(({title, department}, i) => <Collapse 
+                        key={i} title={title} department={department}
+                    />)}
                 </div>
                 <div className='telInfo'>
                     <dl>
@@ -81,6 +104,14 @@ const ApptSelect = memo(() => {
                         <dd>토요일 08:00~13:00</dd>
                         <dd></dd>
                     </dl>
+                </div>
+                <div className='listInfo'>
+                    <ul>
+                        <li>회원 및 비회원 모두 예약이 가능합니다.</li>
+                        <li>
+                        대리예약은 환자 정보 추가 입력 후 예약을 이용하시면 됩니다.
+                        </li>
+                    </ul>
                 </div>
             </div>
         </ApptSelectCont>

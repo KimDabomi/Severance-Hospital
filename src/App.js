@@ -56,15 +56,21 @@ import ApptSelect from "./pages/Appointment/ApptSelect";
 import Drstep1 from "./pages/Appointment/Drstep1";
 import Drstep2 from "./pages/Appointment/Drstep2";
 
+import HJAttp from './pages/Appointment/HJAppt';
 import HJstep3 from "./pages/Appointment/HJstep3";
 import HJstep4 from "./pages/Appointment/HJstep4";
+
+// 예약 현황
+import ApptStatusMain from "./pages/ApptStatus/ApptStatusMain";
+import ApptHistory from "./pages/ApptStatus/ApptHistory";
 
 // 병원개요
 import AboutSev from "./pages/AboutSevrance/AboutSev";
 import Introduction from "./pages/AboutSevrance/Introduction";
 
 // 예약 페이지 테스트 컴포턴트 페이지
-import Member1 from "./components/Member1";
+import Member1 from "./pages/Appointment/Member1";
+import Reserve1 from "./pages/Appointment/Reserve1";
 
 function App() {
   return (
@@ -80,7 +86,10 @@ function App() {
         <Route path="/cooperation/*" element={<Cooperation />} />
         {/* 이용약관, 개인정보처리방침 */}
         <Route path="/policy/*" element={<Policy />} />
+
+        {/* 예약 페이지 컴포턴트 */}
         <Route path="/member1" exapt={true} element={<Member1 />} />
+        <Route path="/reserve1" exapt={true} element={<Reserve1 />} />
 
         {/* 회원가입 */}
         <Route path="/join_way" element={<JoinWay />} />
@@ -130,8 +139,13 @@ function App() {
         
 
         {/* 온라인 예약 - 혜지 */}
+        <Route path="/hjattp" element={<HJAttp />} />
         <Route path="/hjstep3" element={<HJstep3 />} />
         <Route path="/hjstep4" element={<HJstep4 />} />
+
+        {/* 예약 현황 */}
+        <Route path="/appt_status_main/*" element={<ApptStatusMain />} />
+        <Route path="/appt_history" element={<ApptHistory />} />
 
         {/* 병원개요 */}
         <Route path="/about_sev" element={<AboutSev />} />

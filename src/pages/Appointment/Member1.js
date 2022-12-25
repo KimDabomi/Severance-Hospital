@@ -12,8 +12,8 @@ import styled from "styled-components";
 
 /** 이미지 */
 // 회원 예약 이미지
-import bgBox02 from "../assets/img/bg-box-02.png";
-import box02 from "../assets/img/ico-box-02.png";
+import bgBox02 from "../../assets/img/bg-box-02.png";
+import box02 from "../../assets/img/ico-box-02.png";
 
 /** 회원 예약 박스 스타일 */
 const Member = styled.div`
@@ -235,7 +235,7 @@ const Popup = styled.div`
   }
 `;
 
-const tp333 = memo(() => {
+const Member1 = memo(() => {
   // 경로 변경 시, useEffect 동작을 위한 location
   const location = useLocation();
 
@@ -335,4 +335,4 @@ const tp333 = memo(() => {
   );
 });
 
-export default tp333;
+export default Member1;
