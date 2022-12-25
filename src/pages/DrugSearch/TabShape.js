@@ -5,11 +5,10 @@
  * @ Description: 의약품 검색 약모양으로찾기 탭
  */
 
-import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import TopButton from '../../components/TopButton';
-
+import React, { memo } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import TopButton from "../../components/TopButton";
 
 const DrugCont = styled.div`
   .drugOption {
@@ -650,25 +649,29 @@ const TabShape = memo(() => {
       </fieldset>
 
       {/* 검색결과없을 때 */}
-      <div className='nodata'>
-            <i className='nodataIcon'></i>
-            <p>선택한 조건에 맞는 의약품 검색결과가 없습니다.</p>
+      <div className="nodata">
+        <i className="nodataIcon"></i>
+        <p>선택한 조건에 맞는 의약품 검색결과가 없습니다.</p>
       </div>
 
       {/* 검색 결과 표시 (최대12개)*/}
       <div>
-        <ul className='drugListCont'>
-          <li className='drugList'>
-            <Link className='viewLink' to={`/drug.do/tab-shape?id=&page=`}>검색결과 약 이름</Link>
+        <ul className="drugListCont">
+          <li className="drugList">
+            <Link className="viewLink" to={`/drug.do/tab-shape?id=&page=`}>
+              검색결과 약 이름
+            </Link>
           </li>
-          <li className='drugList'>
-            <Link className='viewLink' to={`/drug.do/tab-shape?id=&page=`}>검색결과 약 이름</Link>
+          <li className="drugList">
+            <Link className="viewLink" to={`/drug.do/tab-shape?id=&page=`}>
+              검색결과 약 이름
+            </Link>
           </li>
         </ul>
 
         {/* 페이지가 2페이지 이상일 경우 */}
-        <div className='buttonContColumn'>
-          <Link className='btnMore'>더보기</Link>
+        <div className="buttonContColumn">
+          <Link className="btnMore">더보기</Link>
         </div>
       </div>
     </DrugCont>
