@@ -1,7 +1,7 @@
 /**
  * @ File Name: Drstep1.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-22
+ * @ Last Update: 2022-12-26 15:35
  * @ Description: 의료진 예약 step 1
  */
 
@@ -11,7 +11,7 @@ import styled from "styled-components";
 // 이미지
 import DrChoice from "../../assets/img/img-doctor-search-default.png";
 import search from "../../assets/img/ico-search-white.png";
-import profile from '../../assets/img/442888.png';
+import profile from "../../assets/img/442888.png";
 
 const Container = styled.div`
   width: 630px;
@@ -86,8 +86,8 @@ const Container = styled.div`
         input[type="radio"] {
           display: none;
         }
-        input[type="radio"]:defaultchecked + label {
-          background: #0094fb;
+        input[type="radio"]:checked + label {
+          background-color: #0094fb;
           color: #fff;
           border-color: #0094fb;
         }
@@ -142,40 +142,45 @@ const Container = styled.div`
     position: relative;
     .card {
       li {
-        .doctor_profile {
-          float: left;
-          width: 170px;
-          height: 200px;
-          background-color: #fff;
-          border: 1px solid #e6e6e6;
-          border-radius: 10px;
-          text-align: center;
-          padding: 20px 10px;
-          position: relative;
-          overflow: hidden;        
-          margin-right: 10px;
-          img {
-            position: absolute;
-            top: 10%;
-            left: 20%;
-            width: 115px;
-            height: 115px;
-            border-radius: 50%;
-            display: block;
-            float: left;
+        a {
+          &:focus {
+            outline: 1px solid #0094fb;
+            border-radius: 10px;
           }
-          dl {
-            position: absolute;
-            top: 60%;
-            dt {
-              a {
+          .doctor_profile {
+            float: left;
+            width: 170px;
+            height: 200px;
+            background-color: #fff;
+            border: 1px solid #e6e6e6;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px 10px;
+            position: relative;
+            overflow: hidden;
+            margin-right: 10px;
+            img {
+              position: absolute;
+              top: 10%;
+              left: 20%;
+              width: 115px;
+              height: 115px;
+              border-radius: 50%;
+              display: block;
+              float: left;
+            }
+            dl {
+              position: absolute;
+              top: 60%;
+              dt {
                 font-size: 18px;
                 font-weight: bold;
+
+                margin-bottom: 10px;
               }
-              margin-bottom: 10px;
-            }
-            dd {
-              font-size: 16px;
+              dd {
+                font-size: 16px;
+              }
             }
           }
         }
@@ -203,7 +208,6 @@ const Container = styled.div`
         border-radius: 50px;
       }
     }
-    
   }
 
   // 검색결과 없을 때
@@ -444,46 +448,43 @@ const Drstep1 = memo(() => {
         <div className="doctor_list_wrap">
           <ul className="card">
             <li>
-              <div
-                className="doctor_profile"
-                data-empno="0116821"
-                data-nm="김다함"
-              >
-                <img src={profile} alt="프로필 사진" />
-                <dl>
-                  <dt>
-                    <a href="#" title="자세히 보기">
-                      김다함
-                    </a>
-                  </dt>
-                  <dd className="decs-multi">
-                    <span>
-                      갑상선 결절 및 암, 갑상선 기능 이상 및 관련 대사 이상{" "}
-                    </span>
-                  </dd>
-                </dl>
-              </div>
+              <a href="#" title="자세히 보기">
+                <div
+                  className="doctor_profile"
+                  data-empno="0116821"
+                  data-nm="김다함"
+                >
+                  <img src={profile} alt="프로필 사진" />
+                  <dl>
+                    <dt>김다함</dt>
+                    <dd className="decs-multi">
+                      <span>
+                        갑상선 결절 및 암, 갑상선 기능 이상 및 관련 대사 이상{" "}
+                      </span>
+                    </dd>
+                  </dl>
+                </div>
+              </a>
             </li>
             <li>
-              <div
-                className="doctor_profile"
-                data-empno="0115442"
-                data-nm="김다희"
-              >
-                <img src={profile} alt="김다희 닥터 프로필 사진" />
-                <dl>
-                  <dt>
-                    <a href="#" title="자세히 보기">
-                      김다희
-                    </a>
-                  </dt>
-                  <dd className="decs-multi">
-                    <span>
-                      후두 및 음성질환, 소아 이비인후과, 침샘종양두경부질환, 두경부암
-                    </span>
-                  </dd>
-                </dl>
-              </div>
+              <a href="#" title="자세히 보기">
+                <div
+                  className="doctor_profile"
+                  data-empno="0115442"
+                  data-nm="김다희"
+                >
+                  <img src={profile} alt="김다희 닥터 프로필 사진" />
+                  <dl>
+                    <dt>김다희</dt>
+                    <dd className="decs-multi">
+                      <span>
+                        후두 및 음성질환, 소아 이비인후과, 침샘종양두경부질환,
+                        두경부암
+                      </span>
+                    </dd>
+                  </dl>
+                </div>
+              </a>
             </li>
           </ul>
           {/* 버튼그룹 */}
@@ -493,7 +494,7 @@ const Drstep1 = memo(() => {
             </button>
           </div>
         </div>
-        
+
         {/* 검색 결과 없을 때 */}
         <div className="no_data">
           <p>검색 결과가 존재하지 않습니다.</p>
