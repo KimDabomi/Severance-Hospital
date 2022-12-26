@@ -11,6 +11,7 @@ import styled from "styled-components";
 // 이미지
 import DrChoice from "../../assets/img/img-doctor-search-default.png";
 import search from "../../assets/img/ico-search-white.png";
+import profile from '../../assets/img/442888.png';
 
 const Container = styled.div`
   width: 630px;
@@ -85,7 +86,7 @@ const Container = styled.div`
         input[type="radio"] {
           display: none;
         }
-        input[type="radio"]:checked + label {
+        input[type="radio"]:defaultchecked + label {
           background: #0094fb;
           color: #fff;
           border-color: #0094fb;
@@ -122,7 +123,7 @@ const Container = styled.div`
       display: block;
       background-color: #fff;
       color: #333;
-      border: 1px solid #959595;
+      border: 2px solid #959595;
       width: 100px;
       height: 50px;
       padding: 0 28px;
@@ -131,10 +132,79 @@ const Container = styled.div`
       justify-content: center;
       box-sizing: border-box;
       margin: 40px auto 20px;
+      border-radius: 50px;
     }
   }
 
   // 검색결과 의사목록
+  .doctor_list_wrap {
+    height: 470px;
+    position: relative;
+    .card {
+      li {
+        .doctor_profile {
+          float: left;
+          width: 170px;
+          height: 200px;
+          background-color: #fff;
+          border: 1px solid #e6e6e6;
+          border-radius: 10px;
+          text-align: center;
+          padding: 20px 10px;
+          position: relative;
+          overflow: hidden;        
+          margin-right: 10px;
+          img {
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            display: block;
+            float: left;
+          }
+          dl {
+            position: absolute;
+            top: 60%;
+            dt {
+              a {
+                font-size: 18px;
+                font-weight: bold;
+              }
+              margin-bottom: 10px;
+            }
+            dd {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+    .buttons {
+      clear: both;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%);
+      .pre_btn {
+        display: block;
+        background-color: #fff;
+        color: #333;
+        border: 2px solid #959595;
+        width: 100px;
+        height: 50px;
+        padding: 0 28px;
+        font-size: 18px;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        margin: 40px auto 20px;
+        border-radius: 50px;
+      }
+    }
+    
+  }
 
   // 검색결과 없을 때
   .no_data {
@@ -152,7 +222,7 @@ const Container = styled.div`
       display: block;
       background-color: #fff;
       color: #333;
-      border: 1px solid #959595;
+      border: 2px solid #959595;
       width: 100px;
       height: 50px;
       padding: 0 28px;
@@ -173,6 +243,7 @@ const Drstep1 = memo(() => {
         <p>진료예약 - STEP1</p>
       </div>
       <div className="content">
+        {/* 검색창 */}
         <div>
           <input
             type="text"
@@ -187,6 +258,7 @@ const Drstep1 = memo(() => {
             </button>
           </span>
         </div>
+        {/* 자음선택 */}
         <div className="search_doctor">
           <ul className="doctor_fstName">
             <li className="all">
@@ -195,10 +267,10 @@ const Drstep1 = memo(() => {
                 name="choSung"
                 id="sortAll2"
                 defaultValue=""
-                checked="checked"
+                defaultChecked="checked"
                 data-ignore=""
               />
-              <label for="sortAll2">ALL</label>
+              <label htmlFor="sortAll2">ALL</label>
             </li>
             <li>
               <input
@@ -209,7 +281,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-1">ㄱ</label>
+              <label htmlFor="sort2-1">ㄱ</label>
             </li>
             <li>
               <input
@@ -220,7 +292,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-2">ㄴ</label>
+              <label htmlFor="sort2-2">ㄴ</label>
             </li>
             <li>
               <input
@@ -231,7 +303,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-3">ㄷ</label>
+              <label htmlFor="sort2-3">ㄷ</label>
             </li>
             <li>
               <input
@@ -242,7 +314,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-4">ㄹ</label>
+              <label htmlFor="sort2-4">ㄹ</label>
             </li>
             <li>
               <input
@@ -253,7 +325,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-5">ㅁ</label>
+              <label htmlFor="sort2-5">ㅁ</label>
             </li>
             <li>
               <input
@@ -264,7 +336,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-6">ㅂ</label>
+              <label htmlFor="sort2-6">ㅂ</label>
             </li>
             <li>
               <input
@@ -275,7 +347,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-7">ㅅ</label>
+              <label htmlFor="sort2-7">ㅅ</label>
             </li>
             <li>
               <input
@@ -286,7 +358,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-8">ㅇ</label>
+              <label htmlFor="sort2-8">ㅇ</label>
             </li>
             <li>
               <input
@@ -297,7 +369,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-9">ㅈ</label>
+              <label htmlFor="sort2-9">ㅈ</label>
             </li>
             <li>
               <input
@@ -308,7 +380,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-10">ㅊ</label>
+              <label htmlFor="sort2-10">ㅊ</label>
             </li>
             <li>
               <input
@@ -319,7 +391,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-11">ㅋ</label>
+              <label htmlFor="sort2-11">ㅋ</label>
             </li>
             <li>
               <input
@@ -330,7 +402,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-12">ㅌ</label>
+              <label htmlFor="sort2-12">ㅌ</label>
             </li>
             <li>
               <input
@@ -341,7 +413,7 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-13">ㅍ</label>
+              <label htmlFor="sort2-13">ㅍ</label>
             </li>
             <li>
               <input
@@ -352,10 +424,11 @@ const Drstep1 = memo(() => {
                 data-ignore=""
                 disabled=""
               />
-              <label for="sort2-14">ㅎ</label>
+              <label htmlFor="sort2-14">ㅎ</label>
             </li>
           </ul>
         </div>
+        {/* 검색 전 화면 */}
         <div className="intro">
           <div className="dr_choice">
             <img src={DrChoice} alt="DrChoice" />
@@ -367,96 +440,61 @@ const Drstep1 = memo(() => {
             이전
           </button>
         </div>
-
+        {/* 검색 후 화면 */}
         <div className="doctor_list_wrap">
-          <div className="docotor-lists staffList">
-            <ul className="card">
-              <li>
-                <div
-                  className="doctor_profile on2"
-                  data-empno="0116821"
-                  data-nm="김다함"
-                  data-deptcode="M5"
-                  data-cliniccode=""
-                  data-resyn="Y"
-                >
-                  <div className="card-view" data-module-card="conts">
-                    <div>
-                      <div className="thumb-circle">
-                        <img
-                          src={DrChoice}
-                          alt="프로필 사진"
-                          onerror="imgError(this);"
-                          className="mCS_img_loaded"
-                        />
-                      </div>
-                      <dl>
-                        <dt>
-                          <a href="#none" title="자세히 보기">
-                            김다함
-                          </a>
-                        </dt>
-                        <dd className="decs-multi">
-                          <span>
-                            갑상선 결절 및 암, 갑상선 기능 이상 및 관련 대사
-                            이상
-                          </span>
-                        </dd>
-                        <dd className="sr-only">자세히보기</dd>
-                      </dl>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div
-                  className="doctor_profile"
-                  data-empno="0115442"
-                  data-nm="김다희"
-                  data-deptcode="EN"
-                  data-cliniccode=""
-                  data-resyn="Y"
-                >
-                  <div className="card_view" data-module-card="conts">
-                    <div>
-                      <div className="thumb_circle">
-                        <img
-                          src={DrChoice}
-                          alt="김다희 닥터 프로필 사진"
-                          onerror="imgError(this);"
-                          className="mCS_img_loaded"
-                        />
-                      </div>
-                      <dl>
-                        <dt>
-                          <a href="#none" title="자세히 보기">
-                            김다희
-                          </a>
-                        </dt>
-                        <dd className="decs-multi">
-                          <span>
-                            후두 및 음성질환, 소아 이비인후과, 침샘종양
-                            두경부질환, 두경부암
-                          </span>
-                        </dd>
-                        <dd className="sr-only">자세히보기</dd>
-                      </dl>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className="btn_wrap">
+          <ul className="card">
+            <li>
+              <div
+                className="doctor_profile"
+                data-empno="0116821"
+                data-nm="김다함"
+              >
+                <img src={profile} alt="프로필 사진" />
+                <dl>
+                  <dt>
+                    <a href="#" title="자세히 보기">
+                      김다함
+                    </a>
+                  </dt>
+                  <dd className="decs-multi">
+                    <span>
+                      갑상선 결절 및 암, 갑상선 기능 이상 및 관련 대사 이상{" "}
+                    </span>
+                  </dd>
+                </dl>
+              </div>
+            </li>
+            <li>
+              <div
+                className="doctor_profile"
+                data-empno="0115442"
+                data-nm="김다희"
+              >
+                <img src={profile} alt="김다희 닥터 프로필 사진" />
+                <dl>
+                  <dt>
+                    <a href="#" title="자세히 보기">
+                      김다희
+                    </a>
+                  </dt>
+                  <dd className="decs-multi">
+                    <span>
+                      후두 및 음성질환, 소아 이비인후과, 침샘종양두경부질환, 두경부암
+                    </span>
+                  </dd>
+                </dl>
+              </div>
+            </li>
+          </ul>
+          {/* 버튼그룹 */}
+          <div className="buttons">
             <button type="button" className="pre_btn" data-view="choose-type">
               이전
             </button>
-            <button type="button" className="next_btn" data-view="staff2">
-              다음
-            </button>
           </div>
         </div>
-
+        
+        {/* 검색 결과 없을 때 */}
         <div className="no_data">
           <p>검색 결과가 존재하지 않습니다.</p>
           <button type="button" className="pre_btn" data-view="choose-type">
