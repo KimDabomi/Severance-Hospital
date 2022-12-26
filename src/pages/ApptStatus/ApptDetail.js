@@ -1,5 +1,5 @@
-import React, { memo } from "react";
-import { useCallback, Link, Routes, Route, useNavigate } from "react-router-dom";
+import React, { memo, useCallback } from "react";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 
 import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
@@ -99,7 +99,36 @@ const ButtonCont = styled.div`
             font-size: 16px;
             border-radius: 3px;
         }
+        .popUp {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
 
+            .alert {
+                
+            }
+
+            .confirmBtnCont {
+                margin-left: 60px;
+                .confirmBtn {
+                    border-radius: 3px;
+                    background-color: #0094fb;
+                    color: white;
+                }
+            }
+
+            .closeBtnCont {
+                padding-top: 0px;
+                margin-right: 60px;
+                .closeBtn {
+                    width: 82px;
+                    height: 44px;
+                    background-color: #666;
+                    color: #fff;
+        
+                }
+            }
+        }
 `;
 
 /** 들여쓰기 스타일 */
@@ -182,8 +211,14 @@ const ApptDetail = memo(() => {
 
     // 예약취소 버튼 클릭 이벤트: 모달창 띄움
     const onApptCancel = () => {
-
+        document.querySelector('.popUpCont').style.display = 'block';
     };
+
+    /** 닫기버튼 눌렸을 때 */
+    const closeClick = useCallback((e) => {
+        document.querySelector('.popUpCont').style.display = 'none';
+    })
+
 
     
 
@@ -226,6 +261,21 @@ const ApptDetail = memo(() => {
                 <ButtonCont>
                     <button type="button" onClick={onApptChange}>예약변경</button>
                     <button type="button" onClick={onApptCancel}>예약취소</button>
+
+
+                    <div className="popUpCont">
+                        <div className="dimed"></div>
+                        <div className="popUp">
+                            <div className='alert'>정말로 진료예약을 취소하시겠습니까?</div>
+                            <div className="confirmBtnCont">
+                                <button type="button" className='confirmBtn' onClick={closeClick}>확인</button>
+                            </div>
+                            <div className='closeBtnCont'>
+                                <button type="button" className='closeBtn' onClick={closeClick}>취소</button>
+                            </div>
+                        </div>
+                    </div>
+                   
                 </ButtonCont>
 
                 {/* 예약자 데이터 받아와야 함 */}
