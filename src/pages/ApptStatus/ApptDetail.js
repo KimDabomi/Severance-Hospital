@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 
 import MyPageHeader from "../../components/MyPageHeader";
@@ -198,6 +198,21 @@ const ImgBox = styled.div`
 
 const ApptDetail = memo(() => {
 
+    // /** 리덕스 관련 초기화 */
+    // const dispatch = useDispatch();
+    // const { data, loading, error } = useSelector((state) => state.슬라이스이름);
+    // console.log(data);
+
+    // /** 최초 마운트시 리덕스를 통해 목록을 조회한다. */
+    // // 화면 새로고침에 대한 상태값이 변경된다면 데이터를 새로 로드함
+    // useEffect(() => {
+    //     dispatch(
+    //         데이터조회함수({
+    //             params: params,
+    //         })
+    //     );
+    // }, []);
+
     const navigate = useNavigate();
 
     const onApptReturn = () => {
@@ -216,8 +231,23 @@ const ApptDetail = memo(() => {
 
     /** 닫기버튼 눌렸을 때 */
     const closeClick = useCallback((e) => {
+        e.preventDefault();
+
         document.querySelector('.popUpCont').style.display = 'none';
     })
+
+    /** 예약취소팝업 확인버튼 눌렸을 때 */
+    const onClickConfirm = useCallback((e) => {
+        e.preventDefault();
+
+        /** 진료예약현황데이터 취소로 바꾸는 이벤트 */
+
+        
+
+
+        document.querySelector('.popUpCont').style.display = 'none';
+    })
+    
 
 
     
@@ -268,7 +298,7 @@ const ApptDetail = memo(() => {
                         <div className="popUp">
                             <div className='alert'>정말로 진료예약을 취소하시겠습니까?</div>
                             <div className="confirmBtnCont">
-                                <button type="button" className='confirmBtn' onClick={closeClick}>확인</button>
+                                <button type="button" className='confirmBtn' onClick={onClickConfirm}>확인</button>
                             </div>
                             <div className='closeBtnCont'>
                                 <button type="button" className='closeBtn' onClick={closeClick}>취소</button>
