@@ -1,7 +1,7 @@
 /**
  * @ File Name: DrugSearchSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-21
+ * @ Last Update: 2022-12-26
  * @ Description: 의약품 검색 페이지 slice
  */
 
@@ -47,18 +47,45 @@ export const getDrugDetail = createAsyncThunk("DrugSearchSlice/getDrugDetail", a
     try {
         const response = await axios.get(process.env.REACT_APP_DRUG_API_URL,{
             params: {
-                serviceKey: process.env.REACT_APP_DRUG_API_ENCODING_KEY,
+                serviceKey: process.env.REACT_APP_DRUG_API_DECODING_KEY || process.env.REACT_APP_DRUG_API_ENCODING_KEY,
                 type: 'json', //데이터포맷
-                itemSeq: payload.itemSeq
+                pageNo: payload?.pageNo, //페이지번호
+                numOfRows: 12, //한 페이지 결과 수
+                itemSeq: payload?.itemSeq,
+                itemName: payload?.itemName,
             }
         });
         result = response.data.body;
-        console.log('e약은요 result: ',result);
+        console.log('e약은요 result: ',response.data.body);
     } catch (err) {
         result = rejectWithValue(err.response);
     }
     return result;
 });
+
+/** e약은요 단일행 데이터 조회 */
+export const getDrugDetailItem = createAsyncThunk("DrugSearchSlice/getDrugDetail", async (payload, { rejectWithValue }) => {
+    let result = null;
+
+    try {
+        const response = await axios.get(process.env.REACT_APP_DRUG_API_URL,{
+            params: {
+                serviceKey: process.env.REACT_APP_DRUG_API_DECODING_KEY || process.env.REACT_APP_DRUG_API_ENCODING_KEY,
+                type: 'json', //데이터포맷
+                pageNo: payload?.pageNo, //페이지번호
+                numOfRows: 12, //한 페이지 결과 수
+                itemSeq: payload?.itemSeq,
+                itemName: payload?.itemName,
+            }
+        });
+        result = response.data.body;
+        console.log('e약은요 result: ',response.data.body);
+    } catch (err) {
+        result = rejectWithValue(err.response);
+    }
+    return result;
+});
+
 
 /** slice 정의 */
 const DrugSearchSlice = createSlice({

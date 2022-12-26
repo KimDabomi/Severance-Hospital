@@ -1,7 +1,7 @@
 /**
  * @ File Name: DrugInfo.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-21 19:1:00
+ * @ Last Update: 2022-12-26 19:1:00
  * @ Description: 의약품 검색 상세페이지
  */
 
@@ -40,12 +40,14 @@ const DrugInfo = memo(() => {
   /** 데이터 값 변경에 따른 사이드 이펙트 처리 */
   const item = useMemo(()=>{
     if(data){
-        // return data.items.find((v,i)=> v.item_seq == id || v.itemSeq == id);
-        dispatch(getDrugSearch({item_seq:id}));
+      console.log('druginfo data',data);
+        return data.items.find((v,i)=> v.item_seq == id || v.itemSeq == id);
+        // dispatch(getDrugSearch({item_seq:id}));
+        // dispatch(getDrugDetail({itemSeq:id}));
     }else{
         //새로고침할 때 오류
         //새로고침시 현재 데이터만 다시 로드
-        dispatch(getDrugSearch({item_seq:id}));
+        // dispatch(getDrugDetail({itemSeq:id}));
     }
 },[])
 
@@ -67,36 +69,44 @@ const DrugInfo = memo(() => {
       {error ? (
         <h1>에러발생함</h1>
       ) : (
-        data && (
+        item && (
           <>
             <div className="subjectArea">
-              <h3 className="subject">{data.items[0].ITEM_NAME}</h3>
+              <h3 className="subject">{item.ITEM_NAME || item.itemName}</h3>
             </div>
             <div className="extendField">
               <dl>
                 <dt>제조(수입) 업체명</dt>
-                <dd>{data.items[0].ENTP_NAME}</dd>
+                <dd>{item.ENTP_NAME || item.entpName}</dd>
               </dl>
             </div>
             {/* 게시물 본문 */}
             <div className="articleBody">
               {/* 이미지 */}
               <div className="drugImageSlider">
-                <img className='item' src={data.items[0].ITEM_IMAGE} alt='알약이미지' />
+                {/* 이미지가 있을 때만 이미지 표시 */}
+                {item.ITEM_IMAGE || item.itemImage && (
+                  <img className='item' src={item.ITEM_IMAGE || item.itemImage} alt='알약이미지' />
+                )}
               </div>
               <h4 className="pageSubtitle">효능효과</h4>
               <div className="indent">
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내
+              <p dangerouslySetInnerHTML={{__html: item.efcyQesitm}}></p>
               </div>
               <h4 className="pageSubtitle">용법용량</h4>
               <div className="indent">
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내
+              <p dangerouslySetInnerHTML={{__html: item.useMethodQesitm}}></p>
+              <p dangerouslySetInnerHTML={{__html: item.atpnWarnQesitm}}></p>
               </div>
               <table></table>
               <h4 className="pageSubtitle">사용상 주의사항</h4>
               <div className="indent">
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내
+              <p dangerouslySetInnerHTML={{__html: item.atpnQesitm}}></p>
+              <p dangerouslySetInnerHTML={{__html: item.intrcQesitm}}></p>
+              <p dangerouslySetInnerHTML={{__html: item.seQesitm}}></p>
+              <p dangerouslySetInnerHTML={{__html: item.depositMethodQesitm}}></p>
               </div>
+              <table></table>
             </div>
           </>
         )
