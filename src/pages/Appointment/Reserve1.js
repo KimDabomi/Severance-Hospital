@@ -15,6 +15,7 @@ import styled from "styled-components";
 import bgBox02 from "../../assets/img/bg-box-02.png";
 import box02 from "../../assets/img/ico-box-02.png";
 import radiocheck from "../../assets/img/ico-radio-checked.png";
+import chevron from "../../assets/img/ico-chevron-down@2x.png";
 
 /** 임시 cont */
 const Cnt = styled.div`
@@ -190,6 +191,35 @@ const MemberReserveBox = styled.div`
       span {
         line-height: 20px;
         vertical-align: middle;
+
+        &:last-child {
+          margin-left: 26px;
+        }
+
+        label {
+          font-size: 16px;
+          font-weight: bold;
+
+          input[type="radio"] {
+            width: 20px;
+            height: 20px;
+
+            vertical-align: middle;
+            appearance: none;
+            margin: -2px 5px 0 0;
+
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 50%;
+            box-sizing: border-box;
+          }
+
+          input[type="radio"]:checked {
+            border: 1px solid black;
+            background: #fff url(${radiocheck}) no-repeat center;
+            background-size: 10px 10px;
+          }
+        }
       }
     }
 
@@ -207,15 +237,15 @@ const MemberReserveBox = styled.div`
       dt {
         font-size: 16px;
         font-weight: bold;
-        label {
-        }
-
-        &:last-child {
-          margin-top: 15px;
-        }
       }
 
-      dd {
+      .name {
+      }
+      .tel {
+        margin-top: 15px;
+      }
+
+      .nameInput {
         margin-top: 6px;
 
         #userName {
@@ -242,6 +272,68 @@ const MemberReserveBox = styled.div`
           }
         }
       }
+
+      .telInput {
+        width: 100%;
+        height: 40px;
+
+        font-size: 14px;
+        line-height: 27px;
+        text-align: center;
+        display: flex;
+
+        margin-top: 6px;
+
+        select {
+          width: 30%;
+
+          border: 1px solid #dadada;
+          border-radius: 0;
+
+          padding: 8px 15px;
+          padding-right: 30px;
+          box-sizing: border-box;
+
+          text-align: left;
+          appearance: none;
+
+          background: #fff url(${chevron}) no-repeat right 12px center;
+          background-size: 17px auto;
+
+          &:focus {
+            outline: none;
+            border: 1px solid #0094fb;
+          }
+        }
+
+        input {
+          width: 30%;
+
+          text-align: left;
+          line-height: 27px;
+          vertical-align: middle;
+          box-sizing: border-box;
+          border: 1px solid #dadada;
+          border-radius: 0;
+          padding: 8px 15px;
+          background: #fff;
+
+          &:focus {
+            outline: none;
+            border: 1px solid #0094fb;
+          }
+        }
+
+        span {
+          width: 5%;
+          text-align: center;
+          height: 40px;
+          line-height: 40px;
+          color: #aaaaaa;
+
+          box-sizing: border-box;
+        }
+      }
     }
 
     .agreeBox {
@@ -249,6 +341,7 @@ const MemberReserveBox = styled.div`
       padding: 15px 20px;
 
       p:first-child {
+        font-size: 16px;
         font-weight: bold;
         padding-bottom: 15px;
       }
@@ -447,29 +540,62 @@ const Reserve1 = memo(() => {
           <div className="form">
             <div className="radios">
               <span>
-                <input type="radio" name="radio" id="radio1" />
-                <label htmlFor="radio1">본인 예약</label>
+                <label htmlFor="radio1">
+                  <input type="radio" name="radio" id="radio1" />
+                  본인 예약
+                </label>
               </span>
-
               <span>
-                <input type="radio" name="radio" id="radio2" />
-                <label htmlFor="radio2">대리 예약</label>
+                <label htmlFor="radio2">
+                  <input type="radio" name="radio" id="radio2" />
+                  대리 예약
+                </label>
               </span>
             </div>
 
             {/* 본인 정보 입력 */}
             <p className="agree">1. 본인 정보 입력</p>
             <dl>
-              <dt>
+              <dt className="name">
                 <label>성명</label>
               </dt>
-              <dd>
+              <dd className="nameInput">
                 <input type="text" name="certForm_rsvctmNm" id="userName" data-error-message="성명을 입력해주세요." defaultValue="박다윗" readOnly />
               </dd>
-              <dt>
+              <dt className="tel">
                 <label>연락처</label>
               </dt>
-              <dd></dd>
+              <dd className="telInput">
+                <select>
+                  <option selected>010</option>
+                  <option>011</option>
+                  <option>016</option>
+                  <option>017</option>
+                  <option>018</option>
+                  <option>019</option>
+                  <option>070</option>
+                  <option>02(서울)</option>
+                  <option>031(경기)</option>
+                  <option>032(인천)</option>
+                  <option>033(강원)</option>
+                  <option>041(충남)</option>
+                  <option>042(대전)</option>
+                  <option>043(충북)</option>
+                  <option>051(부산)</option>
+                  <option>052(울산)</option>
+                  <option>053(대구)</option>
+                  <option>054(경북)</option>
+                  <option>055(경남)</option>
+                  <option>061(전남)</option>
+                  <option>062(광주)</option>
+                  <option>063(전북)</option>
+                  <option>064(제주)</option>
+                </select>
+                <span>-</span>
+                <input type="tel" title="연락처 두번째 3자리 또는 4자리 입력" name="certForm_rsvctmCttpc_m" maxlength="4" data-minlength="3" />
+                <span>-</span>
+                <input type="tel" title="연락처 마지막 4자리 입력" name="certForm_rsvctmCttpc_m" maxlength="4" data-minlength="4" />
+              </dd>
             </dl>
 
             {/* 개인정보 동의 */}

@@ -66,9 +66,9 @@ const TabInfo = memo(() => {
 	}, []);
 
 	//페이지가 로드되었을 때 정보리셋
-	useEffect(()=>{
-		dispatch(getDrugSearch({item_name:'감자'}));
-	  },[]);
+	// useEffect(()=>{
+	// 	dispatch(getDrugSearch({item_name:''}));
+	//   },[]);
 
 	if (data) {
 		console.log('Tabinfo페이지 data', data);

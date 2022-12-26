@@ -84,9 +84,9 @@ const DrugSearchSlice = createSlice({
             // action함수의 meta에는 API에 요청시 전송한 파라미터가 포함되어 있다.
             // 1페이지 이후의 검색 결과는 기존 데이터를 덧붙여야 한다.
             if (payload.pageNo > 1) {
-                // payload.items = state.data.concat(payload.items);
-                console.log('슬라이스 concat',payload.items);
-                console.log('슬라이스 state',state.data);
+                payload.items = state.data.items.concat(payload.items);
+                // console.log('슬라이스 concat',payload.items);
+                // console.log('슬라이스 state',state);
             }
             
             return {
