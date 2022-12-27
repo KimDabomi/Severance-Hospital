@@ -22,7 +22,7 @@ export const getCode = createAsyncThunk(
           numOfRows: 20,
         }
       );
-      result = response.data.body;
+      result = response.data;
     } catch (err) {
       console.error(err);
       result = rejectWithValue(err.response);
@@ -46,7 +46,7 @@ export const getCode2 = createAsyncThunk(
           numOfRows: 20,
         }
       );
-      result = response.data.body;
+      result = response.data;
     } catch (err) {
       result = rejectWithValue(err.response);
     }
@@ -63,13 +63,13 @@ export const getPayHos = createAsyncThunk(
 
     try {
       const response = await axios.get(
-        process.env.REACT_APP_UNSUPPORTED_API_PAY_HOS_URL_EN,
+        process.env.REACT_APP_UNSUPPORTED_API_PAY_HOS_URL ,
         {
           pageNo: 1,
           numOfRows: 20,
         }
       );
-      result = response.data.body;
+      result = response.data;
     } catch (err) {
       result = rejectWithValue(err.response);
     }
