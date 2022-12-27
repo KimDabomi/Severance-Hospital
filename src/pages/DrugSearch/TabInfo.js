@@ -1,7 +1,7 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-26
+ * @ Last Update: 2022-12-27
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
@@ -58,23 +58,11 @@ const TabInfo = memo(() => {
       return;
     }
 
-		//검색어를 slice에 전달
-    //낱알식별
-		// dispatch(getDrugSearch({
-		// 	item_name: document.querySelector('#itemName').value,
-		// 	pageNo: page.current
-		// }));
-
 		dispatch(getDrugDetail({
 			itemName: document.querySelector('#itemName').value,
 			pageNo: page.current
 		}));
 	}, []);
-
-	// // 페이지가 로드되었을 때 정보리셋
-	// useEffect(()=>{
-	// 	dispatch(getDrugSearch({item_name:'asdf'}));
-	//   },[]);
 
 	if (data) {
 		console.log('Tabinfo페이지 data', data);
@@ -87,7 +75,7 @@ const TabInfo = memo(() => {
     page.current++;
 
 		//추가 검색 결과를 요청
-		dispatch(getDrugSearch({
+		dispatch(getDrugDetail({
 			pageNo: page.current,
 			item_name:document.querySelector('#itemName').value
 		}));
