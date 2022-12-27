@@ -7,7 +7,6 @@
 
 import React, { memo, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import RegexHelper from "../../helper/RegexHelper";
 import Spinner from "../../components/Spinner";
@@ -17,7 +16,7 @@ import search from "../../assets/img/ico-search-white.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 // 슬라이스
-import { getCode } from "../../slices/UnsupportedSlice";
+import { getCode,getCode2,getPayHos } from "../../slices/UnsupportedSlice";
 
 const Container = styled.div`
   .no_keyword,.min_length {
@@ -171,8 +170,6 @@ const Container = styled.div`
 `;
 
 const Tab01 = memo(() => {
-  const today = dayjs(new Date()).format("YYYY. MM. DD");
-
   // hook을 통해 slice가 관리하는 상태값 가져오기
   const { data, loading, error } = useSelector(
     (state) => state.UnsupportedSlice
@@ -182,8 +179,9 @@ const Tab01 = memo(() => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCode());
+    dispatch(getPayHos());
   }, [dispatch]);
+  console.log(data);
 
   const clickSearch = useCallback((e) => {
     e.preventDefault();
@@ -207,7 +205,7 @@ const Tab01 = memo(() => {
     //검색어를 slice에 전달
     dispatch(
       getCode({
-        npayKorNm: document.querySelector(".keyword").value,
+        npayKorNm: document.querySelector(".keyword").value
       })
     );
   }, []);
@@ -220,7 +218,7 @@ const Tab01 = memo(() => {
   return (
     <Container>
       <Spinner loading={loading} />
-      <div className="bgAll">
+      <>
         <div className="no_keyword">
           <div className="popup">
             <p>검색어를 입력해주세요.</p>
@@ -324,12 +322,12 @@ const Tab01 = memo(() => {
             <option defaultValue="50">50개</option>
             <option defaultValue="100">100개</option>
           </select>
-          <p>{`※ 수가 기준일 : ${today}`} </p>
+          <p>※ 수가 기준일 : 2022.12.19</p>
         </div>
 
         {error ? (
           <p>에러발생함</p>
-        ) : data && data.items.length > 0 ? (
+        ) : (
           <>
             <div className="table_box">
               <table>
@@ -366,57 +364,31 @@ const Tab01 = memo(() => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data &&
-                    data.map((v, i) => (
+                  {data && data.item.map((v, i) => {
+                    return (
                       <tr key={i}>
-                        <td>{v.divCd2Nm}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{v.npayKorNm}</td>
+                        <td></td>
+                        <td>{v.middAvgAll}원</td>
+                        <td>O</td>
+                        <td>O</td>
+                        <td>X</td>
+                        <td>X</td>
+                        <td></td>
+                        <td></td>
                       </tr>
-                    ))}
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
           </>
-        ) : (
-          // 검색결과가 없을 때
-          <div className="table_box no_result">
-            <table>
-              <thead>
-                <tr>
-                  <th rowSpan="2">중분류</th>
-                  <th rowSpan="2">소분류</th>
-                  <th colSpan="2">진료비용항목</th>
-                  <th colSpan="6">항목별 가격정보(단위:원)</th>
-                  <th rowSpan="2">
-                    최종
-                    <br />
-                    변경일
-                  </th>
-                  <th rowSpan="2">특이사항</th>
-                </tr>
-                <tr>
-                  <th>코드</th>
-                  <th>명칭</th>
-                  <th>구분</th>
-                  <th>비용</th>
-                  <th>최저비용</th>
-                  <th>최고비용</th>
-                  <th>
-                    치료재료대
-                    <br />
-                    포함여부
-                  </th>
-                  <th>
-                    약제비
-                    <br />
-                    포함여부
-                  </th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        )}
-      </div>
+        )
+      }
+      </>
     </Container>
   );
 });
