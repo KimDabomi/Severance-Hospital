@@ -1,12 +1,12 @@
 /**
  * @ File Name: DrugInfo.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-26 19:1:00
+ * @ Last Update: 2022-12-27 19:1:00
  * @ Description: 의약품 검색 상세페이지
  */
 
 import React, { memo, useEffect, useMemo } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentData, getDrugSearch, getDrugDetail } from '../../slices/DrugSearchSlice';
@@ -16,7 +16,9 @@ import Spinner from '../../components/Spinner';
 const DrugInfo = memo(() => {
   /** path파라미터 받기 */
   const { id } = useParams();
-  console.log('id=', id);
+  // console.log('id=', id);
+
+  const { pathname } = useLocation();
 
   //dispatch함수 생성
   const dispatch = useDispatch();
@@ -40,25 +42,24 @@ const DrugInfo = memo(() => {
   /** 데이터 값 변경에 따른 사이드 이펙트 처리 */
   const item = useMemo(()=>{
     if(data){
-      console.log('druginfo data',data);
-        return data.items.find((v,i)=> v.item_seq == id || v.itemSeq == id);
+      // console.log('druginfo data',data);
+        return data.items.find((v,i)=> v.itemSeq == id || v.ITEM_SEQ == id);
         // dispatch(getDrugSearch({item_seq:id}));
         // dispatch(getDrugDetail({itemSeq:id}));
     }else{
         //새로고침할 때 오류
         //새로고침시 현재 데이터만 다시 로드
-        // dispatch(getDrugDetail({itemSeq:id}));
+        if(pathname == '/drug.do/tab-info/*'){
+          dispatch(getDrugDetail({itemSeq:id}));
+          console.log('탭인포 새로고침');
+        }else{
+          dispatch(getDrugSearch({item_seq:id}));
+          console.log('탭셰잎 새로고침');
+        }
     }
 },[])
 
-
-  if (data) {
-    console.log('Drugdata : ',data);
-  }
-
-  if (item) {
-    console.log('ITEM : ',item);
-  }
+// if(item){console.log(item)};
 
   return (
     <div>
@@ -85,8 +86,11 @@ const DrugInfo = memo(() => {
               {/* 이미지 */}
               <div className="drugImageSlider">
                 {/* 이미지가 있을 때만 이미지 표시 */}
-                {item.ITEM_IMAGE || item.itemImage && (
-                  <img className='item' src={item.ITEM_IMAGE || item.itemImage} alt='알약이미지' />
+                {item.ITEM_IMAGE&& (
+                  <img className='item' src={item.ITEM_IMAGE} alt='알약이미지' />
+                )}
+                {item.itemImage && (
+                  <img className='item' src={item.itemImage} alt='알약이미지' />
                 )}
               </div>
               <h4 className="pageSubtitle">효능효과</h4>
