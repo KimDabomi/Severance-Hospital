@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 /** test */
-// import App from "./App";
 
-
-import App from './App';
-
+import App from "./App";
+/*
+import App from './test';
+/**/
 
 /** 라우터 */
 import { BrowserRouter } from "react-router-dom";

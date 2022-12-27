@@ -5,12 +5,25 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import Collapse from '../../components/Collpase';
+import logoappt from '../../assets/logo-appt.png';
+
+import Reserve1 from './Reserve1';
+import HJAttp from './HJAppt';
+import Drstep1 from './Drstep1';
+import Drstep2 from './Drstep2';
+import HJstep3 from './HJstep3';
+import HJstep4 from './HJstep4';
+
+const ApptHeader = styled.div`
+    
+`;
 
 const ApptSelectCont = styled.div`
+    display: flex;
     height: 803px;
     .step1Cont {
         margin-left: 50px;
-        margin-top: 50px;
+        /* margin-top: 50px; */
         width: 305px;
         height: 100%;
         background: #fff;
@@ -88,6 +101,8 @@ const content = [{
 const ApptSelect = memo(() => {
 
     return (
+        <div>
+        
         <ApptSelectCont>
             <div className='step1Cont'>
                 <h1>병원선택</h1>
@@ -114,7 +129,15 @@ const ApptSelect = memo(() => {
                     </ul>
                 </div>
             </div>
+            <Reserve1 />
+            <HJAttp />
+        <Drstep1 />
+        <Drstep2 />
+        <HJstep3 />
+        <HJstep4 />
         </ApptSelectCont>
+
+        </div>
     );
 });
 
