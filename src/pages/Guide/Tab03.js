@@ -7,7 +7,6 @@
 
 import React, { memo } from "react";
 import styled from "styled-components";
-import dayjs from "dayjs";
 // 이미지
 import search from "../../assets/img/ico-search-white.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
@@ -131,14 +130,9 @@ const Container = styled.div`
 
 
 const Tab03 = memo(() => {
-  const today = dayjs(new Date());
-  const today1 = today.format("YYYY. MM. DD");
-
   return (
     <Container>
-      <div className="bgAll">
-        
-
+      <>
         {/* 검색어 입력창 */}
         <div className="search_box">
           <div className="dropdown">
@@ -219,7 +213,7 @@ const Tab03 = memo(() => {
             <option defaultValue="50">50개</option>
             <option defaultValue="100">100개</option>
           </select>
-          <p>{`※ 수가 기준일 : ${today1}`} </p>
+          <p>※ 수가 기준일 : 2022.11.22</p>
         </div>
 
         {/* 테이블 */}
@@ -281,7 +275,7 @@ const Tab03 = memo(() => {
             </tbody>
           </table>
         </div>
-      </div>
+      </>
     </Container>
   );
 });

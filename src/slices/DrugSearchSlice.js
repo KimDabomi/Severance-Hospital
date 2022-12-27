@@ -1,25 +1,16 @@
 /**
  * @ File Name: DrugSearchSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-26
+ * @ Last Update: 2022-12-27
  * @ Description: 의약품 검색 페이지 slice
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-/** 의약품 낱알식별 openAPI */
+/** 의약품 낱알식별 openAPI - tab-shape */
 export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", async (payload, { rejectWithValue }) => {
     let result = null;
-
-    //payload객체가 null이나 undefined가 아니고 그 안의 keyword값이 존재한다면?
-    if(payload?.item_name){
-        console.log('검색어 :',payload?.item_name);
-    //     //axios에 설정할 qeurysting 데이터 구성
-    //     params = {
-    //         item_name: payload?.item_name
-    //     }
-    }
 
     try {
         const response = await axios.get(process.env.REACT_APP_DRUG2_API_URL,{
@@ -40,7 +31,7 @@ export const getDrugSearch = createAsyncThunk("DrugSearchSlice/getDrugSearch", a
     return result;
 });
 
-/** e약은요 openAPI */
+/** e약은요 openAPI - tab-info*/
 export const getDrugDetail = createAsyncThunk("DrugSearchSlice/getDrugDetail", async (payload, { rejectWithValue }) => {
     let result = null;
 
@@ -138,6 +129,9 @@ const DrugSearchSlice = createSlice({
             return { ...state, loading: true }
         },
         [getDrugDetail.fulfilled]: (state, { payload }) => {
+            if (payload.pageNo > 1) {
+                payload.items = state.data.items.concat(payload.items);
+            }
             return {
                 data: payload,
                 loading: false,

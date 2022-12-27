@@ -474,7 +474,7 @@ const JoinUs = memo(() => {
                         id="repassword"
                         className="repassword_input"
                         {...register('repassword',{
-                          required: true,
+                          required: "비밀번호가 일치하지 않습니다.",
                           validate: (val) => {
                             if (watch('password') != val) {
                               return "비밀번호가 일치하지 않습니다.";
