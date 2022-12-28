@@ -489,6 +489,7 @@ const Reserve1 = memo(() => {
   // 팝업 열기
   const openPopup = useCallback((e) => {
     agreePopup.current.style.visibility = "visible";
+
   }, []);
 
   // 팝업 닫기

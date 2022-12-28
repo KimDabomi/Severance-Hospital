@@ -15,6 +15,7 @@ import Tab04 from "./Tab04";
 import TopButton from "../../components/TopButton";
 // 이미지
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
+import bgImg from "../../assets/img/bg-pattern.png";
 
 
 const Container = styled.div`
@@ -67,6 +68,14 @@ const Container = styled.div`
         }
       }
     }
+  }
+
+  // 배경사진
+  .bg_all {
+    background: url(${bgImg}) no-repeat center top;
+    background-position-x: 50%;
+    background-size: 1920px;
+    width: 100% !important;
   }
 `;
 
@@ -121,7 +130,7 @@ const Unsupported = memo(() => {
   return (
     <Container>
       <TopButton />
-      <div className="bgAll">
+      <div className="bg_all">
         <h1>비급여진료비</h1>
         <div className="boxGuide">
           <img src={boxGuideDecor} alt="boxGuideDecor" />
