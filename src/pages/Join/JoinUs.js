@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-22 18:15
+ * @ Last Update: 2022-12-28 15:25
  * @ Description: 회원가입 정보 입력 페이지
  */
 
@@ -469,7 +469,7 @@ const JoinUs = memo(() => {
                     <div>
                       <input
                         type="password"
-                        autoComplete="new-password"
+                        autoComplete="repassword"
                         name="repassword"
                         id="repassword"
                         className="repassword_input"
@@ -484,6 +484,26 @@ const JoinUs = memo(() => {
                       />
                       {errors.repassword && (<p className="warn"><img src={warning} alt="warning" />{errors.repassword.message}</p>)}
                       {!errors.repassword && (<p className="check"><img src={check} alt="check" />비밀번호가 일치합니다.</p>)}
+                    </div>
+                  </td>
+                </tr>
+
+                {/* 아이디 입력 */}
+                <tr>
+                  <th>
+                    <span className="require">*</span>이름
+                  </th>
+                  <td>
+                    <div>
+                      <input
+                        type="text"
+                        name="mberId"
+                        id="mberId"
+                        className="id_input"
+                        {...register('name',{
+                          required: true
+                        })}
+                      />
                     </div>
                   </td>
                 </tr>
