@@ -1,7 +1,7 @@
 /**
  * @ File Name: Result.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-19 16:30
+ * @ Last Update: 2022-12-28 16:50
  * @ Description: 결과조회 페이지
  */
 
@@ -11,7 +11,6 @@ import MyPageHeader from "../../components/MyPageHeader";
 import LoginFooter from "../../components/LoginFooter";
 import styled from "styled-components";
 import noResult from "../../assets/img/ico-nodata@2x.png";
-import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 // 캘린더
 import Calendar from "react-calendar";
@@ -46,26 +45,6 @@ const Container = styled.div`
         color: #333;
         letter-spacing: 0.02em;
         line-height: 1.625;
-      }
-    }
-    // 병원번호 드롭다운
-    .dropdown {
-      .hosp_no_list {
-        font-size: 16px;
-        color: #333;
-        letter-spacing: 0.02em;
-        line-height: 1.625;
-        width: 260px;
-        padding: 8px 20px;
-        border: 1px solid #ccc;
-        background: #fff url(${dropdown}) no-repeat right 12px center;
-        background-size: 17px auto;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        &:focus {
-          outline: 1px solid rgb(0, 148, 251);
-        }
       }
     }
   }
@@ -316,13 +295,6 @@ const ResultInquiry = memo(() => {
           <div className="title">
             <span className="name">김다보미님</span>
             <span className="text">검사결과입니다.</span>
-          </div>
-          <div className="dropdown">
-            <select className="hosp_no_list" title="병원등록 번호">
-              <option defaultValue="2" data-id="10722356" selected="">
-                세브란스병원: 10722356
-              </option>
-            </select>
           </div>
         </div>
         <div className="content">

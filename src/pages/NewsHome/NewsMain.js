@@ -150,7 +150,7 @@ const NewsMain = memo(() => {
               <div className="youtubeArticle">
                 {data && 
                   data.map((v,i)=>{
-                    console.log(v);
+                    // console.log(v);
                     const id = v.id.videoId;
                     const link = 'https://www.youtube.com/watch?v=';
                     const youtubeLink = link + id;

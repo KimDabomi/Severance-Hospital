@@ -2,15 +2,70 @@
 이미지 버튼 누르면 diplay:none 처리후, 로그인/회원가입 버튼css diplay:block 처리
 이전 버튼 누르면 로그인/회원가입 버튼css display:none처리후 다시 이미지 버튼 diplay:block
 */
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Collapse from '../../components/Collpase';
+import logoappt from '../../assets/img/logo-appt.png';
+
+import Reserve1 from './Reserve1';
+import HJAttp from './HJAppt';
+import Drstep1 from './Drstep1';
+import Drstep2 from './Drstep2';
+import HJstep3 from './HJstep3';
+import HJstep4 from './HJstep4';
+
+const ApptHeader = styled.div`
+    width: 1280px;
+    height: 97px;
+    margin-left: 20px;
+
+    
+    .apptHeaderDiv1 {
+    
+        display: flex;
+        justify-content: space-between;
+        div {
+            &:first-child {
+            width: 370px;
+        }
+            padding: 31px 0 28px 28px;
+
+            img {
+                width: 370px;
+                height: 40px;
+                object-fit: cover;
+            }
+        }
+
+
+        div {
+            width: 180px;
+
+            button {
+                margin-top: 15px;
+                background-color: rgba(0, 0, 0, 0);
+                border: 1px solid rgba(0, 0, 0, 0);
+                height: 26px;
+                font-size: 16px;
+                padding: 0px;
+            }
+
+            span {
+                color: #dadada;
+                margin: 0 5px;
+            }
+        }
+    }
+    
+`;
 
 const ApptSelectCont = styled.div`
+    display: flex;
     height: 803px;
     .step1Cont {
         margin-left: 50px;
-        margin-top: 50px;
+        /* margin-top: 50px; */
         width: 305px;
         height: 100%;
         background: #fff;
@@ -87,8 +142,37 @@ const content = [{
 
 const ApptSelect = memo(() => {
 
+    const navigate = useNavigate();
+
+    /** 로그아웃 버튼 */
+    const onClickLogout = useCallback((e) => {
+        e.preventDefault();
+
+
+
+        navigate("/apptSelect")
+    });
+
     return (
+        <>
+        <ApptHeader>
+            <div className='apptHeaderDiv1'>
+                <div>
+                    <Link to='/apptSelect'>
+                        <img src={logoappt} alt="온라인예약 로고" />
+                    </Link>
+                </div>
+                <div>
+                    <button onClick={onClickLogout}>로그아웃</button>
+                    <span>|</span>
+                    <Link to='/mysevrance'>
+                        MY세브란스
+                    </Link>
+                </div>
+            </div>
+        </ApptHeader>
         <ApptSelectCont>
+            
             <div className='step1Cont'>
                 <h1>병원선택</h1>
                 <div className='selectCont'>
@@ -114,7 +198,15 @@ const ApptSelect = memo(() => {
                     </ul>
                 </div>
             </div>
+            <Reserve1 />
+            <HJAttp />
+            {/* <Drstep1 />
+            <Drstep2 />
+            <HJstep3 />
+            <HJstep4 /> */}
         </ApptSelectCont>
+
+        </>
     );
 });
 

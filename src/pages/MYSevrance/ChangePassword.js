@@ -1,7 +1,7 @@
 /**
  * @ File Name: ChangePassword.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-23 13:20
+ * @ Last Update: 2022-12-28 15:25
  * @ Description: 비밀번호변경 페이지
  */
 

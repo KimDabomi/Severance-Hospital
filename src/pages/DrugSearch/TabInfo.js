@@ -1,7 +1,7 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-22
+ * @ Last Update: 2022-12-27
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
@@ -13,7 +13,7 @@ import RegexHelper from '../../helper/RegexHelper';
 //상태값을 로드하기 위한 hook과 action함수를 dispatch할 hook참조
 import { useSelector, useDispatch } from "react-redux";
 // Slice에 정의된 액션함수들 참조
-import { getDrugSearch } from '../../slices/DrugSearchSlice';
+import { getDrugSearch,getDrugDetail } from '../../slices/DrugSearchSlice';
 import TopButton from '../../components/TopButton';
 
 
@@ -58,17 +58,11 @@ const TabInfo = memo(() => {
       return;
     }
 
-		//검색어를 slice에 전달
-		dispatch(getDrugSearch({
-			item_name: document.querySelector('#itemName').value,
+		dispatch(getDrugDetail({
+			itemName: document.querySelector('#itemName').value,
 			pageNo: page.current
 		}));
 	}, []);
-
-	//페이지가 로드되었을 때 정보리셋
-	useEffect(()=>{
-		dispatch(getDrugSearch({item_name:'감자'}));
-	  },[]);
 
 	if (data) {
 		console.log('Tabinfo페이지 data', data);
@@ -81,7 +75,7 @@ const TabInfo = memo(() => {
     page.current++;
 
 		//추가 검색 결과를 요청
-		dispatch(getDrugSearch({
+		dispatch(getDrugDetail({
 			pageNo: page.current,
 			item_name:document.querySelector('#itemName').value
 		}));
@@ -140,8 +134,8 @@ const TabInfo = memo(() => {
 								// console.log(v);
 								return (
 									<li key={i} className="drugList">
-										<Link className="viewLink" to={`${v.ITEM_SEQ}`}>
-											{v.ITEM_NAME}
+										<Link className="viewLink" to={`${v.ITEM_SEQ || v.itemSeq}`}>
+											{v.ITEM_NAME || v.itemName}
 										</Link>
 									</li>
 								)

@@ -6,9 +6,6 @@
  */
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
-import TopButton from '../../components/TopButton';
 
 const NoticeView = memo(() => {
   return (
@@ -38,7 +35,7 @@ const NoticeView = memo(() => {
           {/* 검색결과 */}
           <div className="bbsList">
             <div className="bbsItem">
-              <Link className="inner">
+              <Link className="inner" to='id'>
                 <div className="bbssubjectArea">
                   <strong>title</strong>
                 </div>

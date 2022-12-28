@@ -20,7 +20,7 @@ import FindId from "./pages/Login/FindId";
 import FindIdEmail from "./pages/Login/FindIdEmail";
 import FindPassword from "./pages/Login/FindPassword";
 import FindPasswordEmail from "./pages/Login/FindPasswordEmail";
-import ChangePasswordEmail from "./pages/Login/ChangePasswordEmail"
+import ChangePasswordEmail from "./pages/Login/ChangePasswordEmail";
 import NewPassword from "./pages/Login/NewPassword";
 
 // 회원가입
@@ -56,13 +56,14 @@ import ApptSelect from "./pages/Appointment/ApptSelect";
 import Drstep1 from "./pages/Appointment/Drstep1";
 import Drstep2 from "./pages/Appointment/Drstep2";
 
-import HJAttp from './pages/Appointment/HJAppt';
+import HJAttp from "./pages/Appointment/HJAppt";
 import HJstep3 from "./pages/Appointment/HJstep3";
 import HJstep4 from "./pages/Appointment/HJstep4";
 
 // 예약 현황
 import ApptStatusMain from "./pages/ApptStatus/ApptStatusMain";
 import ApptHistory from "./pages/ApptStatus/ApptHistory";
+import ApptDetail from "./pages/ApptStatus/ApptDetail";
 
 // 병원개요
 import AboutSev from "./pages/AboutSevrance/AboutSev";
@@ -106,7 +107,10 @@ function App() {
         <Route path="/find_id_email" element={<FindIdEmail />} />
         <Route path="/find_password" element={<FindPassword />} />
         <Route path="/find_password_email" element={<FindPasswordEmail />} />
-        <Route path="/change_password_email" element={<ChangePasswordEmail />} />
+        <Route
+          path="/change_password_email"
+          element={<ChangePasswordEmail />}
+        />
         <Route path="/new_password" element={<NewPassword />} />
 
         {/* 고객의소리 페이지 라우팅*/}
@@ -125,18 +129,20 @@ function App() {
 
         {/* 마이페이지 라우팅 */}
         <Route path="/mysevrance/*" element={<MysevMain />} />
-        <Route path="/mysevrance/iseverance/mywriting" element={<ISevrance />} />
+        <Route
+          path="/mysevrance/iseverance/mywriting"
+          element={<ISevrance />}
+        />
         <Route path="/user_info/*" element={<UserInfo />} />
 
         {/* 진료 예약 */}
         <Route path="/appointment_main/*" element={<AppointmentMain />} />
         {/* 온라인 예약 */}
         <Route path="/apptSelect" element={<ApptSelect />} />
-        
+
         {/* 온라인 예약 - 다보미, 의료진 예약 스텝1,2 */}
         <Route path="/drstep1" element={<Drstep1 />} />
         <Route path="/drstep2" element={<Drstep2 />} />
-        
 
         {/* 온라인 예약 - 혜지 */}
         <Route path="/hjattp" element={<HJAttp />} />
@@ -146,6 +152,7 @@ function App() {
         {/* 예약 현황 */}
         <Route path="/appt_status_main/*" element={<ApptStatusMain />} />
         <Route path="/appt_history" element={<ApptHistory />} />
+        <Route path="/appt_detail" element={<ApptDetail />} />
 
         {/* 병원개요 */}
         <Route path="/about_sev" element={<AboutSev />} />

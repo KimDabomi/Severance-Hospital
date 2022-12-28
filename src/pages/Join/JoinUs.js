@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-22 18:15
+ * @ Last Update: 2022-12-28 15:25
  * @ Description: 회원가입 정보 입력 페이지
  */
 
