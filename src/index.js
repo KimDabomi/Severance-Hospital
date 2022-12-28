@@ -2,11 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 /** test */
+<<<<<<< HEAD
 import App from "./App";
 
 
 // import App from './test';
 
+=======
+
+import App from "./App";
+/*
+import App from './test';
+/**/
+>>>>>>> b3f6f6a12f4731e29a965872620cbc10b12d3404
 
 /** 라우터 */
 import { BrowserRouter } from "react-router-dom";
