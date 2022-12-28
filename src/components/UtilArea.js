@@ -6,8 +6,9 @@
  */
 
 import React, { memo } from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+/** 이미지 참조 */
 import logoutimg from '../assets/img/ico-logout-white.png';
 
 const Div = styled.div`

@@ -1,12 +1,14 @@
 /**
  * @ File Name: TopButton.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-19 16:1:00
+ * @ Last Update: 2022-12-28 16:1:00
  * @ Description: 탑버튼
  */
 
-import React, { memo, useCallback, useRef, useEffect } from 'react';
+import React, { memo, useCallback, useRef } from 'react';
+import {Link} from 'react-router-dom'
 import styled from 'styled-components';
+/** 이미지 참조 */
 import buttonimg from '../assets/img/ico-chevron-up@2x.png';
 
 const Div = styled.div`
@@ -35,33 +37,32 @@ const Div = styled.div`
 `;
 
 const TopButton = memo(() => {
+  // DOM선택을 위한 ref
   const topBtn = useRef();
 
-
-    //스크롤 일정 내렸을 때 나타나기
-    window.addEventListener('scroll', function () {
-      if (topBtn.current) {
-
-        if(this.scrollY > 250){
-          topBtn.current.style.opacity = '1';
-        }else {
-          topBtn.current.style.opacity = '0';
-        } 
-
+  //스크롤 일정 내렸을 때 나타나기
+  window.addEventListener('scroll', function () {
+    if (topBtn.current) {
+      if (this.scrollY > 250) {
+        topBtn.current.style.opacity = '1';
+      } else {
+        topBtn.current.style.opacity = '0';
       }
-    });
+    }
+  });
 
   //클릭했을 때 실행되는 이벤트
   const clickEvent = useCallback((e) => {
     e.preventDefault();
+    //부드럽게 올라가게
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   return (
     <Div>
-      <a className="topButton" onClick={clickEvent} ref={topBtn}>
+      <Link className="topButton" to="#/" onClick={clickEvent} ref={topBtn}>
         TOP
-      </a>
+      </Link>
     </Div>
   );
 });

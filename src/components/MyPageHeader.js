@@ -6,24 +6,29 @@
  */
 
 import React, { memo } from 'react';
-import loginImg from '../assets/img/mylogo@2x.png';
+/** 링크참조 */
 import { Link } from 'react-router-dom';
+/** 이미지 참조 */
+import loginImg from '../assets/img/mylogo@2x.png';
+/** 컴포넌트 참조 */
 import styled from 'styled-components';
 import UtilArea from './UtilArea';
 
 const Container = styled.div`
-  
-  .logo{
+  /* 세브란스로고 */
+  .logo {
     font-size: 16px;
     float: left;
     height: 35px;
     width: 187.76px;
-    img{
-      width:100%;
-      /* height:100%; */
+    img {
+      width: 100%;
     }
-    &::after{clear: both;}
+    &::after {
+      clear: both;
+    }
   }
+  /* 네비게이션 */
   .nav {
     max-width: 1280px;
     margin: auto;
@@ -35,7 +40,9 @@ const Container = styled.div`
     ul {
       li {
         float: left;
-        &::after{clear: both;}
+        &::after {
+          clear: both;
+        }
         &:hover {
           a:after {
             opacity: 1;
@@ -98,29 +105,29 @@ const Container = styled.div`
 const MyPageHeader = memo(() => {
   return (
     <div>
-    <UtilArea />
-    <Container>
-      <div className="nav">
-        <Link to="/" className='logo'>
-          <img src={loginImg} alt="MY세브란스" />
-        </Link>
-        <ul className='gnbRight'>
-          <li>
-            <Link to="/">예약현황</Link>
-          </li>
-          <li>
-            <Link to="/resultinquiry">결과조회</Link>
-          </li>
-          <li>
-            <Link to="/mysevrance">나의 세브란스</Link>
-          </li>
-          <li>
-            <Link to="/">회원정보</Link>
-          </li>
-        </ul>
-      </div>
-      <hr />
-    </Container>
+      <UtilArea />
+      <Container>
+        <div className="nav">
+          <Link to="/" className="logo">
+            <img src={loginImg} alt="MY세브란스" />
+          </Link>
+          <ul className="gnbRight">
+            <li>
+              <Link to="/">예약현황</Link>
+            </li>
+            <li>
+              <Link to="/resultinquiry">결과조회</Link>
+            </li>
+            <li>
+              <Link to="/mysevrance">나의 세브란스</Link>
+            </li>
+            <li>
+              <Link to="/">회원정보</Link>
+            </li>
+          </ul>
+        </div>
+        <hr />
+      </Container>
     </div>
   );
 });

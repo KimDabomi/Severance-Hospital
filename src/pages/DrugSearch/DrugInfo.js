@@ -1,12 +1,12 @@
 /**
  * @ File Name: DrugInfo.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-26 19:1:00
+ * @ Last Update: 2022-12-28 19:1:00
  * @ Description: 의약품 검색 상세페이지
  */
 
 import React, { memo, useEffect, useMemo } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentData, getDrugSearch, getDrugDetail } from '../../slices/DrugSearchSlice';
@@ -18,18 +18,15 @@ const DrugInfo = memo(() => {
   const { id } = useParams();
   console.log('id=', id);
 
+    /** url의 경로 구조분해 */
+    const { pathname } = useLocation();
+
   //dispatch함수 생성
   const dispatch = useDispatch();
   //hook을 통해 slice가 관리하는 상태값 가져오기
   const { data, loading, error } = useSelector(
     (state) => state.DrugSearchSlice
   );
-
-  /** 데이터 가져오기 */
-  // useEffect(() => {
-  //   dispatch(getDrugSearch({ item_seq: id })); 
-  //   dispatch(getDrugDetail({ itemSeq: id }));
-  // }, []);
 
 
   /** 데이터 가져오기 */
@@ -41,20 +38,25 @@ const DrugInfo = memo(() => {
   const item = useMemo(()=>{
     if(data){
       console.log('druginfo data',data);
-        return data.items.find((v,i)=> v.item_seq == id || v.itemSeq == id);
+        return data.items.find((v,i)=> v.ITEM_SEQ == id || v.itemSeq == id);
         // dispatch(getDrugSearch({item_seq:id}));
         // dispatch(getDrugDetail({itemSeq:id}));
     }else{
-        //새로고침할 때 오류
         //새로고침시 현재 데이터만 다시 로드
-        // dispatch(getDrugDetail({itemSeq:id}));
+        //url에 따라 다른 api처리
+        if(pathname.substring(9,18) == `tab-shape`){
+          console.log(pathname.substring(9,18));
+          dispatch(getDrugSearch({item_seq:id}));
+        }else{
+          dispatch(getDrugDetail({itemSeq:id}));
+        }
     }
-},[])
+},[data])
 
 
-  if (data) {
-    console.log('Drugdata : ',data);
-  }
+  // if (data) {
+  //   console.log('Drugdata : ',data);
+  // }
 
   if (item) {
     console.log('ITEM : ',item);
@@ -85,8 +87,11 @@ const DrugInfo = memo(() => {
               {/* 이미지 */}
               <div className="drugImageSlider">
                 {/* 이미지가 있을 때만 이미지 표시 */}
-                {item.ITEM_IMAGE || item.itemImage && (
-                  <img className='item' src={item.ITEM_IMAGE || item.itemImage} alt='알약이미지' />
+                {item.ITEM_IMAGE && (
+                  <img className='item' src={item.ITEM_IMAGE} alt='알약이미지' />
+                )}
+                {item.itemImage && (
+                  <img className='item' src={item.itemImage} alt='알약이미지' />
                 )}
               </div>
               <h4 className="pageSubtitle">효능효과</h4>

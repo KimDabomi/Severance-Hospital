@@ -13,6 +13,7 @@ import TopButton from '../../components/TopButton';
 import NewsView from "./NewsView";
 import NewsMain from './NewsMain'
 import NoticeView from "./NoticeView";
+import NoticeInfo from './NoticeInfo';
 
 const NewsAllMain = memo(() => {
 
@@ -25,6 +26,7 @@ const NewsAllMain = memo(() => {
             <Route path="/*" element={<NewsMain />} />
             <Route path="media.do" element={<NewsView />} />
             <Route path="notice.do" element={<NoticeView />} />
+            <Route path="notice.do/id" element={<NoticeInfo />} />
         </Routes>
       </div>
       <Footer />

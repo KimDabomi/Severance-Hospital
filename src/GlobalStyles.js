@@ -379,6 +379,7 @@ button {
     font-weight: bold;
     line-height: 1.5;
     font-size: 24px;
+    font-family: "NanumSquare", "malgungothic", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
   .articleInfo{
     margin-top: 15px;
