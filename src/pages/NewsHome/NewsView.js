@@ -6,9 +6,6 @@
  */
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
-import TopButton from '../../components/TopButton';
 
 const NewsView = memo(() => {
   return (

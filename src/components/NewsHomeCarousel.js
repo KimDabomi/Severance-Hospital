@@ -10,7 +10,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-// slick
+/** Slider관련 참조 */
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -30,6 +30,7 @@ const StyledSlider = styled(Slider)`
     width: 407px !important;
     min-height: 1px;
   }
+  //슬라이드 도트
   .slick-dots {
     width: 100%;
     display: flex !important;
@@ -90,7 +91,6 @@ function NewsHomeCarousel() {
   // 슬라이드 설정
   const settings = {
     dots: true /* 아래점 */,
-    // rows: 2,
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,

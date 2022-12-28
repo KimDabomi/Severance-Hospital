@@ -1,15 +1,15 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-11-28 15:1:00
+ * @ Last Update: 2022-12-28 15:1:00
  * @ Description: 의약품 검색 약모양으로찾기 탭
  */
 
 import React, { memo, useCallback, useRef, useEffect } from 'react';
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import TopButton from "../../components/TopButton";
-import Spinner from '../../components/Spinner'
+// import RegexHelper from '../../helper/RegexHelper';
 
 //상태값을 로드하기 위한 hook과 action함수를 dispatch할 hook참조
 import { useSelector, useDispatch } from "react-redux";
@@ -199,18 +199,12 @@ const DrugCont = styled.div`
   .division3 {
     background: url(../img/ico-drug-division3.png);
   }
-
-  .drugListCont{
-    padding-top: 30px;
-  }
 `;
 
 const TabShape = memo(() => {
 
   //dispatch함수 생성
   const dispatch = useDispatch();
-  /** url의 경로 구조분해 */
-  const { pathname } = useLocation();
 
   //hook을 통해 slice가 관리하는 상태값 가져오기
   const { data, loading, error } = useSelector(
@@ -220,10 +214,11 @@ const TabShape = memo(() => {
   //페이지 번호
   const page = useRef(1);
 
+
   /** 닫기버튼 눌렸을 때 */
-  const closeClick = useCallback((e) => {
-    document.querySelector(".popUpCont").style.display = "none";
-  });
+  // const closeClick = useCallback((e) => {
+  //   document.querySelector(".popUpCont").style.display = "none";
+  // });
 
   /** <form>의 submit버튼이 눌러졌을 때 호출될 이벤트 핸들러 */
   const onDrugInfoSubmit = useCallback((e) => {
@@ -232,20 +227,8 @@ const TabShape = memo(() => {
 		//검색을 새로했으니 페이지 초기화
 		page.current = 1;
 
-		// //입력값에 대한 유효성 검사
+		//입력값에 대한 유효성 검사
 		// const regex = RegexHelper.getInstance();
-
-    // try {
-    //   regex.value(
-    //     document.querySelector("#itemName"),
-    //     "검색어를 입력해주세요."
-    //   );
-    // } catch (e) {
-    //   // e.selector.focus();
-    //   document.querySelector(".popUpCont").style.display = "block";
-    //   document.querySelector(".alert").innerHTML = e.message;
-    //   return;
-    // }
 
 		//검색어를 slice에 전달
 		dispatch(getDrugSearch({
@@ -256,8 +239,12 @@ const TabShape = memo(() => {
 
 	// 페이지가 로드되었을 때 정보리셋
 	useEffect(()=>{
-		dispatch(getDrugSearch({item_name:'검색결과없음'}));
+		dispatch(getDrugSearch({item_name:'검색어없음'}));
 	  },[]);
+
+	if (data) {
+		console.log('Tabinfo페이지 data', data);
+	}
 
   /** 더보기 버튼 (페이지) 함수 */
   const pagePlus = useCallback((e) => {
@@ -728,7 +715,7 @@ const TabShape = memo(() => {
       </fieldset>
 
       {/* 유효성검사 알람 팝업창 */}
-      <div className="popUpCont">
+      {/* <div className="popUpCont">
         <div className="dimed"></div>
         <div className="popUp">
           <div className="alert"></div>
@@ -738,21 +725,20 @@ const TabShape = memo(() => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {error ? (
 				<h1>에러발생함</h1>
 			) : (
-        data && data.items ? (
-          <div>
-            <Spinner loading={loading} />
+				data && data.items ? (
+					<div>
 						<ul className="drugListCont">
 							{/* // 검색 결과 표시 (최대12개)  */}
 							{data.items.map((v, i) => {
 								// console.log(v);
 								return (
 									<li key={i} className="drugList">
-										<Link className="viewLink" to={ pathname == '/drug.do' ? `tab-shape/${v.ITEM_SEQ}` : `${v.ITEM_SEQ}`}>
+										<Link className="viewLink" to={`/drug.do/tab-shape/${v.ITEM_SEQ}`}>
 											{v.ITEM_NAME}
 										</Link>
 									</li>
