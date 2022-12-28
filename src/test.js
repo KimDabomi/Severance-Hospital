@@ -10,12 +10,13 @@ const Test = memo(() => {
         dispatch(getPayHos());
     },[dispatch]);
     console.log(data);
-    
+    console.log(typeof data);
+
     return (
         loading ? 'loading...' : (
             error ? JSON.stringify(error) : (
                 <>
-                    {JSON.stringify(data)}
+                    {data}
                 </>
             )
         )

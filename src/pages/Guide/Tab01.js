@@ -18,6 +18,8 @@ import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 // 슬라이스
 import { getCode,getCode2,getPayHos } from "../../slices/UnsupportedSlice";
 
+
+
 const Container = styled.div`
   .no_keyword,.min_length {
     display: none;
@@ -182,6 +184,7 @@ const Tab01 = memo(() => {
     dispatch(getPayHos());
   }, [dispatch]);
   console.log(data);
+  console.log(typeof data);
 
   const clickSearch = useCallback((e) => {
     e.preventDefault();
@@ -327,67 +330,66 @@ const Tab01 = memo(() => {
 
         {error ? (
           <p>에러발생함</p>
-        ) : (
-          <>
-            <div className="table_box">
-              <table>
-                <thead>
-                  <tr>
-                    <th rowSpan="2">중분류</th>
-                    <th rowSpan="2">소분류</th>
-                    <th colSpan="2">진료비용항목</th>
-                    <th colSpan="6">항목별 가격정보(단위:원)</th>
-                    <th rowSpan="2">
-                      최종
-                      <br />
-                      변경일
-                    </th>
-                    <th rowSpan="2">특이사항</th>
-                  </tr>
-                  <tr>
-                    <th>코드</th>
-                    <th>명칭</th>
-                    <th>구분</th>
-                    <th>비용</th>
-                    <th>최저비용</th>
-                    <th>최고비용</th>
-                    <th>
-                      치료재료대
-                      <br />
-                      포함여부
-                    </th>
-                    <th>
-                      약제비
-                      <br />
-                      포함여부
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data && data.item.map((v, i) => {
-                    return (
-                      <tr key={i}>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{v.npayKorNm}</td>
-                        <td></td>
-                        <td>{v.middAvgAll}원</td>
-                        <td>O</td>
-                        <td>O</td>
-                        <td>X</td>
-                        <td>X</td>
-                        <td></td>
-                        <td></td>
+        ) : ( 
+          data && data.item.map((v,i) => {
+            return (
+              <>
+                <div className="table_box">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th rowSpan="2">중분류</th>
+                        <th rowSpan="2">소분류</th>
+                        <th colSpan="2">진료비용항목</th>
+                        <th colSpan="6">항목별 가격정보(단위:원)</th>
+                        <th rowSpan="2">
+                          최종
+                          <br />
+                          변경일
+                        </th>
+                        <th rowSpan="2">특이사항</th>
                       </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </>
-        )
-      }
+                      <tr>
+                        <th>코드</th>
+                        <th>명칭</th>
+                        <th>구분</th>
+                        <th>비용</th>
+                        <th>최저비용</th>
+                        <th>최고비용</th>
+                        <th>
+                          치료재료대
+                          <br />
+                          포함여부
+                        </th>
+                        <th>
+                          약제비
+                          <br />
+                          포함여부
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                          <tr key={i}>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{v.npayKorNm}</td>
+                            <td></td>
+                            <td>{v.middAvgAll}원</td>
+                            <td>O</td>
+                            <td>O</td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )
+          })
+        )}
       </>
     </Container>
   );
