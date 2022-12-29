@@ -8,6 +8,8 @@ import icoChevronDown from "./assets/img/ico-chevron-down-sm@2x.png";
 import nodata from "./assets/img/ico-nodata@2x.png";
 //링크아이콘 이미지
 import iconExternal from "./assets/img/ico-external-link@2x.png";
+//bgAll 이미지
+import bgAll from './assets/img/bg-pattern.png' 
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
@@ -74,7 +76,7 @@ textarea{
 }
 
 .bgAll{
-  background: url(../img/bg-pattern.png) no-repeat center top;
+  ${`background: url(${bgAll}) no-repeat center top;`}
   background-position-x: 50%;
   background-size: 1920px;
   width: 100% !important;

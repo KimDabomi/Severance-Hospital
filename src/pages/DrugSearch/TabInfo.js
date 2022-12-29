@@ -13,7 +13,7 @@ import RegexHelper from '../../helper/RegexHelper';
 //상태값을 로드하기 위한 hook과 action함수를 dispatch할 hook참조
 import { useSelector, useDispatch } from "react-redux";
 // Slice에 정의된 액션함수들 참조
-import { getDrugSearch,getDrugDetail } from '../../slices/DrugSearchSlice';
+import { getDrugDetail } from '../../slices/DrugSearchSlice';
 import TopButton from '../../components/TopButton';
 
 
