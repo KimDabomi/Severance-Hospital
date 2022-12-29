@@ -489,7 +489,7 @@ const Reserve1 = memo(() => {
   // 팝업 열기
   const openPopup = useCallback((e) => {
     agreePopup.current.style.visibility = "visible";
-
+    // memberReserveBox.current.style.pointerEvents = "none"
   }, []);
 
   // 팝업 닫기
@@ -528,12 +528,14 @@ const Reserve1 = memo(() => {
 
       {/* 회원 예약 커버 */}
       <MemberReserveCover ref={memberReserveCover}>
-        <a href="#reserve" data-intro="cover" onClick={switchDisplay}>
-          <div className="iconCont">
-            <i />
-            <span>회원 예약</span>
-          </div>
-        </a>
+        <div>
+          <a href="#reserve" data-intro="cover" onClick={switchDisplay}>
+            <div className="iconCont">
+              <i />
+              <span>회원 예약</span>
+            </div>
+          </a>
+        </div>
 
         {/* 회원 예약 양식 */}
         <MemberReserveBox ref={memberReserveBox}>
