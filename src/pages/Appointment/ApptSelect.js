@@ -8,12 +8,12 @@ import styled from 'styled-components';
 import Collapse from '../../components/Collpase';
 import logoappt from '../../assets/img/logo-appt.png';
 
-import Reserve1 from './Reserve1';
-import HJAttp from './HJAppt';
-import Drstep1 from './Drstep1';
-import Drstep2 from './Drstep2';
-import HJstep3 from './HJstep3';
-import HJstep4 from './HJstep4';
+import Step1 from './Reserve1';
+import Step2 from './HJAppt';
+import Step3 from './Drstep1';
+import Step4 from './Drstep2';
+import Step5 from './HJstep3';
+import Step6 from './HJstep4';
 
 const ApptHeader = styled.div`
     width: 1280px;
@@ -198,12 +198,12 @@ const ApptSelect = memo(() => {
                     </ul>
                 </div>
             </div>
-            <Reserve1 />
-            <HJAttp />
-            {/* <Drstep1 />
-            <Drstep2 />
-            <HJstep3 />
-            <HJstep4 /> */}
+            <Step1 />
+            <Step2 />
+            <Step3 />
+            <Step4 />
+            <Step5 />
+            <Step6 />
         </ApptSelectCont>
 
         </>
