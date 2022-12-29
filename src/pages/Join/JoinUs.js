@@ -5,12 +5,14 @@
  * @ Description: 회원가입 정보 입력 페이지
  */
 
-import React, { memo } from "react";
+import React, { memo,useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import LoginHeader from "../../components/LoginHeader";
 import LoginFooter from "../../components/LoginFooter";
+
+// 이미지
 import Right from "../../assets/img/ico-arrow-right-gray@2x.png";
 import step01 from "../../assets/img/ico-login-step1-off@2x.png";
 import step02 from "../../assets/img/ico-login-step2-off@2x.png";
@@ -320,7 +322,7 @@ const Container = styled.div`
   }
 
   // 중복확인 버튼
-  .dup_btn {
+  .dub_btn {
     background-color: #666;
     color: #fff;
     height: 45px;
@@ -431,7 +433,10 @@ const JoinUs = memo(() => {
                         }
                       })}
                     />
-                    <button type="button" className="dup_btn">
+                    <button type="button" className="dub_btn" 
+                    {...register("dubBtn", {
+                      required: "아이디 중복확인을 해주세요."
+                    })}>
                       중복확인
                     </button>
                   </div>

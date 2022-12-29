@@ -7,6 +7,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { pending, fulfilled, rejected } from "../helper/ReduxHelper";
+import {xmlToJson} from "../helper/XmltoJSONHelper";
 
 // 코드별 항목 조회
 export const getCode = createAsyncThunk(
