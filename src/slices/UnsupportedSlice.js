@@ -1,13 +1,12 @@
 /**
  * @ File Name: UnsupportedSlice.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-27 16:34
+ * @ Last Update: 2022-12-29 18:20
  * @ Description: 비급여진료비 안내 페이지 slice
  */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { pending, fulfilled, rejected } from "../helper/ReduxHelper";
-import {xmlToJson} from "../helper/XmltoJSONHelper";
 
 // 코드별 항목 조회
 export const getCode = createAsyncThunk(
@@ -43,8 +42,9 @@ export const getCode2 = createAsyncThunk(
       const response = await axios.get(
         process.env.REACT_APP_UNSUPPORTED_API_CODE2_URL,
         {
-          pageNo: 1,
-          numOfRows: 20,
+          query: payload?.query || '',
+          page: payload?.page || 1,
+          rows: payload?.rows || 20
         }
       );
       result = response.data;
@@ -66,12 +66,15 @@ export const getPayHos = createAsyncThunk(
       const response = await axios.get(
         process.env.REACT_APP_UNSUPPORTED_API_PAY_HOS_URL ,
         {
-          pageNo: 1,
-          numOfRows: 20,
+          query: payload?.query || '',
+          page: payload?.page || 1,
+          rows: payload?.rows || 20
         }
       );
+
       result = response.data;
     } catch (err) {
+      console.error(err);
       result = rejectWithValue(err.response);
     }
 

@@ -1,11 +1,11 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-28 15:25
+ * @ Last Update: 2022-12-29 10:11
  * @ Description: 회원가입 정보 입력 페이지
  */
 
-import React, { memo,useCallback } from "react";
+import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";

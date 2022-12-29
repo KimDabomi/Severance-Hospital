@@ -1,22 +1,26 @@
 /**
  * @ File Name: Tab01.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-27 18:12
+ * @ Last Update: 2022-12-29 18:20
  * @ Description: 비급여진료비-행위 페이지
  */
 
 import React, { memo, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import RegexHelper from "../../helper/RegexHelper";
 import Spinner from "../../components/Spinner";
+import Pagenation from "../../components/Pagenation";
 
 // 이미지
 import search from "../../assets/img/ico-search-white.png";
 import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
 // 슬라이스
-import { getCode,getCode2,getPayHos } from "../../slices/UnsupportedSlice";
+import { getCode, getCode2, getPayHos } from "../../slices/UnsupportedSlice";
+
+import { useQueryString } from "../../hooks/useQueryString";
 
 
 
@@ -151,21 +155,64 @@ const Container = styled.div`
 
   // 테이블
   .table_box {
-    clear: both;
+    width: 1280px;
+    margin: auto;
+    line-height: 1.625;
+    font-size: 16px;
     table {
-      width: 1280px;
-      margin: auto;
+      text-align: center;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
       thead {
         tr {
           th {
             background-color: #f9f9f9;
             vertical-align: middle;
             text-align: center;
-            border-right: 1px solid #fff;
-            border-bottom: 1px solid #fff;
+            border-right: 1px solid #ebebeb;
+            border-bottom: 1px solid #ebebeb;
             font-weight: bold;
+            vertical-align: middle;
+            padding: 13px 15px;
+            box-sizing: border-box;
+            &:last-child {
+              border-right: 0;
+            }
+          }
+          .colspan {
+            height: 50px;
+            padding: 13px 15px;
+            box-sizing: border-box;
+          }
+          .rowspan {
+            height: 160px;
+            width: 82px;
+            padding: 13px 15px;
+            box-sizing: border-box;
           }
         }
+        .under {
+          width: 950px;
+          th {
+            height: 160px;
+            padding: 13px 15px;
+            box-sizing: border-box;
+          }
+        }
+      }
+      tbody {
+        td {
+            border-right: 1px solid #ebebeb;
+            border-bottom: 1px solid #ebebeb;
+            height: 50px;
+            padding: 13px 15px;
+            box-sizing: border-box;
+            vertical-align: middle;
+
+            &:last-child {
+              border-right: 0;
+            }
+          }
       }
     }
   }
@@ -173,18 +220,35 @@ const Container = styled.div`
 
 const Tab01 = memo(() => {
   // hook을 통해 slice가 관리하는 상태값 가져오기
-  const { data, loading, error } = useSelector(
+  const { pagenation, data, loading, error } = useSelector(
     (state) => state.UnsupportedSlice
   );
 
   // dispatch함수 생성
   const dispatch = useDispatch();
 
+  // 페이지 강제 이동을 처리하기 위한 navigate함수 생성
+  const navigate = useNavigate();
+
+
+  /** QueryString 변수 받기 */
+  const { query,page=1 } = useQueryString();
+
   useEffect(() => {
-    dispatch(getPayHos());
-  }, [dispatch]);
-  console.log(data);
-  console.log(typeof data);
+    dispatch(getPayHos({
+      query: query,
+      page: page,
+      rows: 20
+    }));
+  }, [query,page]);
+
+  useEffect(() => {
+    dispatch(getCode({
+      query: query,
+      page: page,
+      rows: 20
+    }));
+  }, [query,page]);
 
   const clickSearch = useCallback((e) => {
     e.preventDefault();
@@ -204,14 +268,19 @@ const Tab01 = memo(() => {
       return;
     }
 
+    // 검색어
+    const query = e.currentTarget.query.value;
 
-    //검색어를 slice에 전달
-    dispatch(
-      getCode({
-        npayKorNm: document.querySelector(".keyword").value
-      })
-    );
-  }, []);
+    // 검색어에 따라 URL을 구성한다.
+    let redirectUrl = query ? `/?query=${query}` : "/";
+    navigate(redirectUrl);
+    // //검색어를 slice에 전달
+    // dispatch(
+    //   getPayHos({
+    //     npayKorNm: document.querySelector(".keyword").value
+    //   })
+    // );
+  }, [navigate]);
 
   const closeBox = (e) => {
     document.querySelector(".no_keyword").style.display = "none";
@@ -233,7 +302,7 @@ const Tab01 = memo(() => {
         <div className="min_length">
           <div className="popup">
             <p>항목명칭 또는 구분을 2글자 이상 입력해<br />
-            주세요.</p>
+              주세요.</p>
             <button type="button" className="close" onClick={closeBox}>
               닫기
             </button>
@@ -330,65 +399,67 @@ const Tab01 = memo(() => {
 
         {error ? (
           <p>에러발생함</p>
-        ) : ( 
-          data && data.item.map((v,i) => {
-            return (
-              <>
-                <div className="table_box">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th rowSpan="2">중분류</th>
-                        <th rowSpan="2">소분류</th>
-                        <th colSpan="2">진료비용항목</th>
-                        <th colSpan="6">항목별 가격정보(단위:원)</th>
-                        <th rowSpan="2">
-                          최종
-                          <br />
-                          변경일
-                        </th>
-                        <th rowSpan="2">특이사항</th>
+        ) : (
+          <>
+            <div className="table_box">
+              <table>
+                <thead>
+                  <tr>
+                    <th rowSpan="2" className="rowspan">중분류</th>
+                    <th rowSpan="2" className="rowspan">소분류</th>
+                    <th colSpan="2" className="colspan">진료비용항목</th>
+                    <th colSpan="6" className="colspan">항목별 가격정보(단위:원)</th>
+                    <th rowSpan="2" className="rowspan">
+                      최종
+                      <br />
+                      변경일
+                    </th>
+                    <th rowSpan="2" className="rowspan">특이사항</th>
+                  </tr>
+                  <tr className="under">
+                    <th>코드</th>
+                    <th>명칭</th>
+                    <th>구분</th>
+                    <th>비용</th>
+                    <th>최저비용</th>
+                    <th>최고비용</th>
+                    <th>
+                      치료재료대
+                      <br />
+                      포함여부
+                    </th>
+                    <th>
+                      약제비
+                      <br />
+                      포함여부
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.response.body.items.item.map((v, i) => {
+                    return (
+                      <tr key={i}>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{v.npayKorNm}</td>
+                        <td></td>
+                        <td>{Number(v.middAvgAll).toLocaleString()}원</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>X</td>
+                        <td>X</td>
+                        <td>2022-01-01</td>
+                        <td></td>
                       </tr>
-                      <tr>
-                        <th>코드</th>
-                        <th>명칭</th>
-                        <th>구분</th>
-                        <th>비용</th>
-                        <th>최저비용</th>
-                        <th>최고비용</th>
-                        <th>
-                          치료재료대
-                          <br />
-                          포함여부
-                        </th>
-                        <th>
-                          약제비
-                          <br />
-                          포함여부
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                          <tr key={i}>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{v.npayKorNm}</td>
-                            <td></td>
-                            <td>{v.middAvgAll}원</td>
-                            <td>O</td>
-                            <td>O</td>
-                            <td>X</td>
-                            <td>X</td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </>
-            )
-          })
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <Pagenation pagenation={pagenation} />
+          </>
+
         )}
       </>
     </Container>

@@ -2,6 +2,7 @@ import React,{memo,useEffect} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import {getCode,getCode2,getPayHos} from './slices/UnsupportedSlice';
 
+
 const Test = memo(() => {
     const dispatch = useDispatch();
     const {data,loading,error} = useSelector((state) => state.UnsupportedSlice);
@@ -10,14 +11,14 @@ const Test = memo(() => {
         dispatch(getPayHos());
     },[dispatch]);
     console.log(data);
-    console.log(typeof data);
+    //console.log(typeof data);
 
     return (
         loading ? 'loading...' : (
             error ? JSON.stringify(error) : (
-                <>
-                    {data}
-                </>
+                <p>
+                    {data.response.body.items.item.map((v, i) => JSON.stringify(v))}
+                </p>
             )
         )
     );
