@@ -1,7 +1,7 @@
 /**
  * @ File Name: Tab01.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-29 18:20
+ * @ Last Update: 2022-12-31 01:50
  * @ Description: 비급여진료비-행위 페이지
  */
 
@@ -11,7 +11,8 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import RegexHelper from "../../helper/RegexHelper";
 import Spinner from "../../components/Spinner";
-import Pagenation from "../../components/Pagenation";
+import { Pagination } from '@mui/material';
+
 
 // 이미지
 import search from "../../assets/img/ico-search-white.png";
@@ -25,6 +26,7 @@ import { useQueryString } from "../../hooks/useQueryString";
 
 
 const Container = styled.div`
+  // 검색어 유효성검사 팝업창
   .no_keyword,.min_length {
     display: none;
     position: fixed;
@@ -59,6 +61,7 @@ const Container = styled.div`
       }
     }
   }
+  
   // 검색어입력
   .search_box {
     width: 1280px;
@@ -216,11 +219,17 @@ const Container = styled.div`
       }
     }
   }
+
+  // 페이지네이션
+  .paging {
+    width: 500px;
+    margin: 30px auto;
+  }
 `;
 
 const Tab01 = memo(() => {
   // hook을 통해 slice가 관리하는 상태값 가져오기
-  const { pagenation, data, loading, error } = useSelector(
+  const { data, loading, error } = useSelector(
     (state) => state.UnsupportedSlice
   );
 
@@ -230,15 +239,20 @@ const Tab01 = memo(() => {
   // 페이지 강제 이동을 처리하기 위한 navigate함수 생성
   const navigate = useNavigate();
 
+  const [page,setPage] = React.useState(1);
+
+  const handleChange = (e,value) => {
+    setPage(value);
+  };
+  console.log(page);
 
   /** QueryString 변수 받기 */
-  const { query,page=3 } = useQueryString();
+  const { query } = useQueryString();
 
   useEffect(() => {
     dispatch(getPayHos({
       query: query,
-      page: 20,
-      rows: 200
+      pageNo: page
     }));
   }, [query,page]);
   console.log(data);
@@ -267,12 +281,6 @@ const Tab01 = memo(() => {
     // 검색어에 따라 URL을 구성한다.
     let redirectUrl = query ? `/?query=${query}` : "/";
     navigate(redirectUrl);
-    // //검색어를 slice에 전달
-    // dispatch(
-    //   getPayHos({
-    //     npayKorNm: document.querySelector(".keyword").value
-    //   })
-    // );
   }, [navigate]);
 
   const closeBox = (e) => {
@@ -450,7 +458,8 @@ const Tab01 = memo(() => {
                 </tbody>
               </table>
             </div>
-            <Pagenation pagenation={pagenation} />
+            <Pagination count={data && parseInt(data.response.body.totalCount/20)+1} showFirstButton showLastButton className="paging" color='primary'
+            page={page} onChange={handleChange} />
           </>
 
         )}
