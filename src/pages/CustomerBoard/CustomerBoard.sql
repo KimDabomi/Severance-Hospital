@@ -34,9 +34,9 @@ create table Notice (
 )ENGINE=InnoDB default charset 'UTF8' comment='공지사항';
 
 create table Drug (
-    ITEM_SEQ int not null primary key comment '품목일련번호',
+    ITEM_SEQ int(8) not null primary key comment '품목일련번호',
     ITEM_NAME varchar(255) not null comment '품목명',
-    ENTP_SEQ int not null comment '업체일련번호',
+    ENTP_SEQ int(9) not null comment '업체일련번호',
     ENTP_NAME varchar(255) not null comment '업체명',
     CHARTN varchar(255) not null comment '성상',
     ITEM_IMAGE varchar(255) null comment '큰제품이미지',
@@ -51,14 +51,14 @@ create table Drug (
     LENG_SHORT float(3,1) null comment '크기(단축)',
     THICK float(3,1) null comment '크기(두께)',
     IMG_REGIST_TS date null comment '약학정보원 이미지 생성일',
-    CLASS_NO int null comment '분류번호',
+    CLASS_NO int(4) null comment '분류번호',
     ETC_OTC_CODE varchar(5) null comment '전문/일반',
     ITEM_PERMIT_DATE date null comment '품목허가일자',
-    SHAPE_CODE int null comment '모양코드',
+    SHAPE_CODE int(5) null comment '모양코드',
     MARK_CODE_FRONT_ANAL varchar(30) null comment '마크내용(앞)',
     MARK_CODE_BACK_ANAL  varchar(30) null comment '마크내용(뒤)',
     MARK_CODE_FRONT_IMG varchar(255) null comment '마크이미지(앞)',
     MARK_CODE_BACK_IMG varchar(255) null comment '마크이미지(뒤)',
     ITEM_ENG_NAME varchar(255) null comment '제품영문명',
-    EDI_CODE varchar(255) null comment '보험코드',
+    EDI_CODE int(9) null comment '보험코드',
 )ENGINE=InnoDB default charset 'UTF8' comment='의약품낱알정보';
