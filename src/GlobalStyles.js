@@ -10,6 +10,14 @@ import nodata from "./assets/img/ico-nodata@2x.png";
 import iconExternal from "./assets/img/ico-external-link@2x.png";
 //bgAll 이미지
 import bgAll from './assets/img/bg-pattern.png' 
+//서치 아이콘 이미지
+import searchIco from './assets/img/ico-search-white.png'
+//동영상 재생 아이콘 이미지
+import playIco from './assets/img/ico-movie-play-md@2x.png'
+//뉴 아이콘 이미지
+import newIco from './assets/img/ico-new@2x.png'
+//로그아웃 아이콘 이미지
+import logoutImg from './assets/img/ico-logout-white.png'
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
@@ -364,7 +372,7 @@ button {
 			width: 22px;
     	height: 26px;
     	line-height: 26px;
-			background: url(../img/ico-search-white.png) no-repeat;
+			${`background: url(${searchIco}) no-repeat;`}
 		}
 	}
   
@@ -712,7 +720,7 @@ button {
     position: absolute;
     left: 12px;
     bottom: 18px;
-    background-image: url(../img/ico-movie-play-md@2x.png);
+    ${`background-image: url(${playIco});`}
     background-size: cover;
   }
     
@@ -809,7 +817,7 @@ button {
     width: 18px;
     height: 18px;
     line-height: 18px;
-    background-image: url(../img/ico-new@2x.png);
+    ${`background-image: url(${newIco});`}
     background-size: cover;
     vertical-align: middle;
   }
@@ -819,7 +827,7 @@ button {
     width: 22px;
     height: 21px;
     line-height: 21px;
-    background-image: url(../img/ico-logout-white.png);
+    ${`background-image: url(${logoutImg});`}
     background-size: cover;
   }
 
