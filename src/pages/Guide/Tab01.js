@@ -232,23 +232,16 @@ const Tab01 = memo(() => {
 
 
   /** QueryString 변수 받기 */
-  const { query,page=1 } = useQueryString();
+  const { query,page=3 } = useQueryString();
 
   useEffect(() => {
     dispatch(getPayHos({
       query: query,
-      page: page,
-      rows: 20
+      page: 20,
+      rows: 200
     }));
   }, [query,page]);
-
-  useEffect(() => {
-    dispatch(getCode({
-      query: query,
-      page: page,
-      rows: 20
-    }));
-  }, [query,page]);
+  console.log(data);
 
   const clickSearch = useCallback((e) => {
     e.preventDefault();

@@ -67,7 +67,7 @@ export const getPayHos = createAsyncThunk(
         process.env.REACT_APP_UNSUPPORTED_API_PAY_HOS_URL ,
         {
           query: payload?.query || '',
-          page: payload?.page || 1,
+          page: payload?.page || 2,
           rows: payload?.rows || 20
         }
       );

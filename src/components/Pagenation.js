@@ -1,7 +1,7 @@
 /**
  * Pagenation.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-27 18:12
+ * @ Last Update: 2022-12-29 22:10
  * @ Description: 페이지번호 컴포넌트
  */
 
@@ -20,29 +20,27 @@ const PagenationContainer = styled.ul`
     .link {
         display: block;
         font-size: 11px;
-        padding: 5px 10px 3px 10px;
+        padding: 5px 10px;
         text-decoration: none;
-        border: 1px solid #ddd;
         margin: 0 1px;
         color: black;
 
-        &.active,&.active:hover {
-            background-color: #4caf50;
-            color: white;
-            border: 1px solid #4caf50;
+        &.active {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ebebeb;
+            border-radius: 50%;
         }
 
-        &.disabled,&.disabled:hover {
-            border: 1px solid #ddd;
-            background-color: #fff;
-            color: #ccc;
-            cursor: no-drop;
+        &.disabled {
+            cursor: pointer;
+            background-color: rgb(0, 148, 251);
+            border-radius: 50%;
+            color: #fff;
         }
 
         &:hover {
-            background-color: #095717;
-            color: white;
-            border: 1px solid #095717;
+            cursor: pointer;
         }
     }
 `;
@@ -96,12 +94,6 @@ const Pagenation = memo(({pagenation:{groupEnd,groupStart,nextGroupFirstPage,now
 
     return (
         <PagenationContainer>
-            {/* 첫페이지로 이동하기 */}
-            {pageNumber(nowPage,1,'&laquo;')}
-
-            {/* 이전 그룹의 마지막 페이지로 이동하기 */}
-            {pageNumber(nowPage,prevGroupLastPage,'&lt;')}
-            
             {/* 페이지 수만큼 출력하기 */}
             {new Array(groupEnd - groupStart + 1).fill(groupStart).map((v,i) => pageNumber(nowPage,v+i))}
 

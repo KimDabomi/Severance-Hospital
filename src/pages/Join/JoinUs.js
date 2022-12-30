@@ -1,7 +1,7 @@
 /**
  * @ File Name: JoinUs.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-29 10:11
+ * @ Last Update: 2022-12-30 15:35
  * @ Description: 회원가입 정보 입력 페이지
  */
 
@@ -572,6 +572,62 @@ const JoinUs = memo(() => {
                       )
                     )}
                   </div>
+                </td>
+              </tr>
+
+              {/* 이름 */}
+              <tr>
+                <th>
+                  <span className="require">*</span>성명
+                </th>
+                <td>
+                  <div>
+                    <input
+                      type="password"
+                      autoComplete="new-password"
+                      name="password"
+                      id="password"
+                      className="password_input"
+                      {...register("name", {
+                        required: "성명을 입력해주세요."
+                      })}
+                    />
+                  </div>
+                  {errors.name && (
+                    <p className="warn">
+                      <img src={warning} alt="warning" />
+                      {errors.name.message}
+                    </p>
+                  )}
+                </td>
+              </tr>
+
+              {/* 성별 */}
+              <tr>
+                <th><span className="require">*</span>성별</th>
+                <td>
+                  <span className="radioList">
+                    <input
+                      type="radio"
+                      id="male"
+                      value="M"
+                      name="prtctorSexdstnCode"
+                      {...register("sex", {
+                        required: "성별을 선택해주세요."
+                      })}
+                    />
+                    <label htmlFor="male">남</label>
+                  </span>
+                  <span className="radioList">
+                    <input type="radio" id="female" value="F" name="prtctorSexdstnCode" readOnly="readOnly" data-parsley-multiple="prtctorSexdstnCode" />
+                    <label htmlFor="female">여</label>
+                  </span>
+                  {errors.sex && (
+                    <p className="warn">
+                      <img src={warning} alt="warning" />
+                      {errors.sex.message}
+                    </p>
+                  )}
                 </td>
               </tr>
 
