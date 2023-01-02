@@ -1,22 +1,29 @@
 /**
  * @ File Name: Unsupported.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-21 16:45
+ * @ Last Update: 2023-01-02 18:10
  * @ Description: 비급여진료비 페이지
  */
 
-import React, { memo } from "react";
-import { Routes,Route,NavLink,useLocation } from "react-router-dom";
+
+import React, { memo, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Tab01 from "./Tab01";
-import Tab02 from "./Tab02";
-import Tab03 from "./Tab03";
-import Tab04 from "./Tab04";
+import { useSelector, useDispatch } from "react-redux";
+import RegexHelper from "../../helper/RegexHelper";
+import Spinner from "../../components/Spinner";
+import { Pagination } from '@mui/material';
 import TopButton from "../../components/TopButton";
 // 이미지
 import boxGuideDecor from "../../assets/img/box-guide-decoration@2x.png";
 import bgImg from "../../assets/img/bg-pattern.png";
+import search from "../../assets/img/ico-search-white.png";
+import dropdown from "../../assets/img/ico-chevron-down@2x.png";
 
+// 슬라이스
+import { getPayHos } from "../../slices/UnsupportedSlice";
+
+import { useQueryString } from "../../hooks/useQueryString";
 
 const Container = styled.div`
   h1 {
@@ -34,19 +41,6 @@ const Container = styled.div`
     font-weight: bold;
     color: #222;
     margin-bottom: 10px;
-
-    // 제목 앞에 파란색 띠
-    &:before {
-      position: absolute;
-      left: 0;
-      width: 6px;
-      height: 20px;
-      background-color: #0094fb;
-      border-radius: 3px;
-      top: 9px;
-      margin-right: 12px;
-      content: "";
-    }
   }
 
   // 안내사항 박스
@@ -77,55 +71,256 @@ const Container = styled.div`
     background-size: 1920px;
     width: 100% !important;
   }
-`;
 
-const TabMenuNav = styled.nav`
-  width: 1280px;
-  margin: 0 auto 60px;
+  // 검색어 유효성검사 팝업창
+  .no_keyword,.min_length {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding-top: 120px;
+    box-sizing: border-box;
+    z-index: 99999;
+    .popup {
+      background-color: #fff;
+      width: 350px;
+      height: 180px;
+      margin: auto;
+      transform: translate(0, 50%);
+      text-align: center;
+      padding-top: 35px;
+      box-sizing: border-box;
 
-  ul {
-    font-size: 18px;
-    display: flex;
-    li {
-      flex: 1;
-      background-color: #eef7fc;
-      border-right: 1px solid #fff;
-      a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        top: 1px;
-        height: 55px;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: -1px;
-          right: 0;
-          bottom: -1px;
-          left: 0;
-          z-index: 100;
-          border: 1px solid transparent;
-          border-bottom: 3px solid transparent;
-        }
-
-        &.active {
-          background-color: white;
-          font-weight: bold;
-          border: 1px solid #0094fb;
-        }
-
-        &.active::before {
-          
-        }
+      // 닫기버튼
+      button {
+        margin-top: 25px;
+        background-color: rgb(0, 148, 251);
+        border: none;
+        color: white;
+        padding: 10px 25px;
+        font-size: 15px;
+        font-weight: 100;
+        border-radius: 3px;
       }
     }
+  }
+  
+  // 검색어입력
+  .search_box {
+    width: 1280px;
+    margin: auto;
+    background-color: #f9f9f9;
+    padding: 15px 200px 15px;
+    box-sizing: border-box;
+    &:before {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    // 검색어 입력란
+    .keyword {
+      width: 700px;
+      height: 46px;
+      float: left;
+      padding: 0;
+      padding-left: 10px;
+      margin-right: 10px;
+      margin-left: 50px;
+      border: 1px solid #e6e6e6;
+      &:focus {
+        outline: 1px solid rgb(0, 148, 251);
+      }
+    }
+    // 검색버튼
+    .searchBtn {
+      height: 48px;
+      width: 60px;
+      border-radius: 2px;
+      background-color: #0094fb;
+      border: 2px solid #0094fb;
+      color: #fff;
+      cursor: pointer;
+      img {
+        margin: auto;
+      }
+    }
+  }
+
+  // 목록수조절
+  .list_select {
+    width: 1280px;
+    margin: auto;
+    .label {
+      float: left;
+      margin: 40px 5px 0 0;
+    }
+    .list_num {
+      float: left;
+      width: 100px;
+      height: 48px;
+      padding-right: 30px;
+      padding-left: 20px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      background: #fff url(${dropdown}) no-repeat right 12px center;
+      background-size: 17px auto;
+      border: 1px solid #e6e6e6;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      float: left;
+      &:focus {
+        outline: 1px solid rgb(0, 148, 251);
+      }
+    }
+
+    // 수가기준일
+    p {
+      float: right;
+      margin-top: 40px;
+    }
+  }
+
+  // 테이블
+  .table_box {
+    width: 1280px;
+    margin: auto;
+    line-height: 1.625;
+    font-size: 16px;
+    table {
+      text-align: center;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      thead {
+        tr {
+          th {
+            background-color: #f9f9f9;
+            vertical-align: middle;
+            text-align: center;
+            border-right: 1px solid #ebebeb;
+            border-bottom: 1px solid #ebebeb;
+            font-weight: bold;
+            vertical-align: middle;
+            padding: 13px 15px;
+            box-sizing: border-box;
+            &:last-child {
+              border-right: 0;
+            }
+          }
+          .colspan {
+            height: 50px;
+            padding: 13px 15px;
+            box-sizing: border-box;
+          }
+          .rowspan {
+            height: 160px;
+            width: 82px;
+            padding: 13px 15px;
+            box-sizing: border-box;
+          }
+        }
+        .under {
+          width: 950px;
+          th {
+            height: 160px;
+            padding: 13px 15px;
+            box-sizing: border-box;
+          }
+        }
+      }
+      tbody {
+        td {
+            border-right: 1px solid #ebebeb;
+            border-bottom: 1px solid #ebebeb;
+            height: 50px;
+            padding: 13px 15px;
+            box-sizing: border-box;
+            vertical-align: middle;
+
+            &:last-child {
+              border-right: 0;
+            }
+          }
+      }
+    }
+  }
+
+  // 페이지네이션
+  .paging {
+    width: 500px;
+    margin: 30px auto;
   }
 `;
 
 const Unsupported = memo(() => {
-  const { pathname } = useLocation();
+  // hook을 통해 slice가 관리하는 상태값 가져오기
+  const { data, loading, error } = useSelector(
+    (state) => state.UnsupportedSlice
+  );
+
+  // dispatch함수 생성
+  const dispatch = useDispatch();
+
+  // 페이지 강제 이동을 처리하기 위한 navigate함수 생성
+  const navigate = useNavigate();
+
+  const [page,setPage] = React.useState(1);
+
+  const handleChange = (e,value) => {
+    setPage(value);
+  };
+  console.log(page);
+
+  /** QueryString 변수 받기 */
+  const { query } = useQueryString();
+
+  useEffect(() => {
+    dispatch(getPayHos({
+      query: query,
+      pageNo: page
+    }));
+  }, [query,page]);
+
+  const clickSearch = useCallback((e) => {
+    e.preventDefault();
+
+    const current = e.currentTarget;
+    const keyword = current.keyword;
+
+    //입력값에 대한 유효성 검사
+    const regex = RegexHelper.getInstance();
+    try {
+      regex.value(document.querySelector(".keyword"));
+    } catch (e) {
+      document.querySelector(".no_keyword").style.display = "block";
+      return;
+    }
+    try {
+      regex.minLength(document.querySelector(".keyword"), 2);
+    } catch (e) {
+      document.querySelector(".min_length").style.display = "block";
+      return;
+    }
+
+    // // 검색어에 따라 URL을 구성한다.
+    // let redirectUrl = query ? `/?query=${query}` : "/";
+    // navigate(redirectUrl);
+
+    dispatch(getPayHos({
+			npayKorNm: document.querySelector('keyword').value,
+			pageNo: page.current
+		}));
+    navigate(`/?keyword=${keyword.value}`);
+  }, [navigate]);
+
+  const closeBox = (e) => {
+    document.querySelector(".no_keyword").style.display = "none";
+    document.querySelector(".min_length").style.display = "none";
+  };
 
   return (
     <Container>
@@ -146,41 +341,141 @@ const Unsupported = memo(() => {
             </li>
           </ul>
         </div>
+        <Spinner loading={loading} />
+        <>
+          <div className="no_keyword">
+            <div className="popup">
+              <p>검색어를 입력해주세요.</p>
+              <button type="button" className="close" onClick={closeBox}>
+                닫기
+              </button>
+            </div>
+          </div>
+          <div className="min_length">
+            <div className="popup">
+              <p>
+                항목명칭 또는 구분을 2글자 이상 입력해
+                <br />
+                주세요.
+              </p>
+              <button type="button" className="close" onClick={closeBox}>
+                닫기
+              </button>
+            </div>
+          </div>
+          {/* 검색어 입력창 */}
+          <form className="search_box">
+            <fieldset>
+              <div className="keyword_input">
+                <input
+                  type="text"
+                  className="keyword"
+                  id="srchKwd"
+                  placeholder="항목명칭 또는 구분을 입력해주세요"
+                  title="항목명칭 또는 구분 입력 검색"
+                />
+                <span className="search_btn">
+                  <button
+                    type="submit"
+                    className="searchBtn"
+                    onClick={clickSearch}
+                  >
+                    <img src={search} alt="search" />
+                  </button>
+                </span>
+              </div>
+            </fieldset>
+          </form>
 
-        {/* 네비게이션 */}
-        <div className="tab">
-          <TabMenuNav>
-            <ul>
-              <li>
-                <NavLink to={pathname === "/guide/unsupported" ? "/guide/unsupported" : "/guide/unsupported/tab01"}>
-                  <span>행위</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="tab02">
-                  <span>치료재료</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="tab03">
-                  <span>약제</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="tab04">
-                  <span>제증명수수료</span>
-                </NavLink>
-              </li>
-            </ul>
-          </TabMenuNav>
-        </div>
-        <Routes>
-          <Route path="/" element={<Tab01 />} />
-          <Route path="tab01" element={<Tab01 />} />
-          <Route path="tab02" element={<Tab02 />} />
-          <Route path="tab03" element={<Tab03 />} />
-          <Route path="tab04" element={<Tab04 />} />
-        </Routes>
+          {/* 목록수조절 */}
+          <div className="list_select">
+            <label htmlFor="pagePerNum" className="label">
+              목록수조절
+            </label>
+            <select name="pagePerNum" id="pagePerNum" className="list_num">
+              <option defaultValue="20" select="">
+                20개
+              </option>
+              <option defaultValue="50">50개</option>
+              <option defaultValue="100">100개</option>
+            </select>
+            <p>※ 수가 기준일 : 2022.12.19</p>
+          </div>
+
+          {error ? (
+            <p>에러발생함</p>
+          ) : (
+            <>
+              <div className="table_box">
+                <table>
+                  <thead>
+                    <tr>
+                      <th colSpan="2" className="colspan">
+                        진료비용항목
+                      </th>
+                      <th colSpan="6" className="colspan">
+                        항목별 가격정보(단위:원)
+                      </th>
+                      <th rowSpan="2" className="rowspan">
+                        최종
+                        <br />
+                        변경일
+                      </th>
+                      <th rowSpan="2" className="rowspan">
+                        특이사항
+                      </th>
+                    </tr>
+                    <tr className="under">
+                      <th>코드</th>
+                      <th>명칭</th>
+                      <th>구분</th>
+                      <th>비용</th>
+                      <th>최저비용</th>
+                      <th>최고비용</th>
+                      <th>
+                        치료재료대
+                        <br />
+                        포함여부
+                      </th>
+                      <th>
+                        약제비
+                        <br />
+                        포함여부
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data &&
+                      data.response.body.items.item.map((v, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{v.npayCd}</td>
+                            <td>{v.npayKorNm}</td>
+                            <td></td>
+                            <td>{Number(v.middAvgAll).toLocaleString()}원</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td>2022-01-01</td>
+                            <td></td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </div>
+              <Pagination
+                count={data && parseInt(data.response.body.totalCount / 20) + 1}
+                showFirstButton
+                showLastButton
+                className="paging"
+                page={page}
+                onChange={handleChange}
+              />
+            </>
+          )}
+        </>
       </div>
     </Container>
   );
