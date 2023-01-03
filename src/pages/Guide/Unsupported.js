@@ -6,7 +6,7 @@
  */
 
 
-import React, { memo, useEffect, useCallback } from "react";
+import React, { memo, useEffect, useCallback,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -192,6 +192,7 @@ const Container = styled.div`
     line-height: 1.625;
     font-size: 16px;
     table {
+      width: 100%;
       text-align: center;
       border-top: 1px solid #333;
       border-bottom: 1px solid #333;
@@ -276,14 +277,23 @@ const Unsupported = memo(() => {
   console.log(page);
 
   /** QueryString 변수 받기 */
-  const { query } = useQueryString();
+  const { keyword } = useQueryString();
+
+  // 목록수 변수 지정
+  const [selected, setSelected] = useState("20");
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
+  console.log(selected);
+
 
   useEffect(() => {
     dispatch(getPayHos({
-      query: query,
-      pageNo: page
+      keyword: keyword,
+      pageNo: page,
+      numOfRows: selected
     }));
-  }, [query,page]);
+  }, [keyword,page,selected]);
 
   const clickSearch = useCallback((e) => {
     e.preventDefault();
@@ -306,14 +316,10 @@ const Unsupported = memo(() => {
       return;
     }
 
-    // // 검색어에 따라 URL을 구성한다.
-    // let redirectUrl = query ? `/?query=${query}` : "/";
-    // navigate(redirectUrl);
-
-    dispatch(getPayHos({
-			npayKorNm: document.querySelector('keyword').value,
-			pageNo: page.current
-		}));
+    // dispatch(getPayHos({
+		// 	npayKorNm: document.querySelector('.keyword').value,
+		// 	pageNo: page.current
+		// }),[dispatch]);
     navigate(`/?keyword=${keyword.value}`);
   }, [navigate]);
 
@@ -321,6 +327,8 @@ const Unsupported = memo(() => {
     document.querySelector(".no_keyword").style.display = "none";
     document.querySelector(".min_length").style.display = "none";
   };
+
+
 
   return (
     <Container>
@@ -378,7 +386,7 @@ const Unsupported = memo(() => {
                   <button
                     type="submit"
                     className="searchBtn"
-                    onClick={clickSearch}
+                    onSubmit={clickSearch}
                   >
                     <img src={search} alt="search" />
                   </button>
@@ -392,12 +400,12 @@ const Unsupported = memo(() => {
             <label htmlFor="pagePerNum" className="label">
               목록수조절
             </label>
-            <select name="pagePerNum" id="pagePerNum" className="list_num">
-              <option defaultValue="20" select="">
+            <select name="pagePerNum" id="pagePerNum" className="list_num" onChange={handleSelect}>
+              <option value="20">
                 20개
               </option>
-              <option defaultValue="50">50개</option>
-              <option defaultValue="100">100개</option>
+              <option value="50">50개</option>
+              <option value="100">100개</option>
             </select>
             <p>※ 수가 기준일 : 2022.12.19</p>
           </div>
@@ -466,7 +474,7 @@ const Unsupported = memo(() => {
                 </table>
               </div>
               <Pagination
-                count={data && parseInt(data.response.body.totalCount / 20) + 1}
+                count={data && parseInt(data.response.body.totalCount / data.response.body.numOfRows) + 1}
                 showFirstButton
                 showLastButton
                 className="paging"

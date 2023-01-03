@@ -1,7 +1,7 @@
 /**
  * @ File Name: UnsupportedSlice.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2023-01-02 18:10
+ * @ Last Update: 2022-12-31 01:50
  * @ Description: 비급여진료비 안내 페이지 slice
  */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -16,19 +16,16 @@ export const getPayHos = createAsyncThunk(
     let result = null;
     let totalCnt = 0;
     let params = null;
-
-    if(payload?.keyword) {
-      // axios에 설정할 querystring 데이터 구성
-      params = {
-        npayKorNm: payload.keyword,
-        pageNo: payload?.pageNo
-      }
-    } 
+    let keyword = null;
 
     try {
       const response = await axios.get(process.env.REACT_APP_UNSUPPORTED_API_PAY_HOS_URL,
         {
-          params: params
+          params: {
+            pageNo: payload?.pageNo,
+            numOfRows: payload?.numOfRows,
+            npayKorNm: payload?.keyword
+          }
       });
       totalCnt = response.data.response.body.totalCount;
       result = response.data;
