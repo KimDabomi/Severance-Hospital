@@ -16,15 +16,20 @@ export const getPayHos = createAsyncThunk(
     let result = null;
     let totalCnt = 0;
     let params = null;
-    let keyword = null;
+
+    if(payload?.keyword) {
+      // axios에 설정할 querystring 데이터 구성
+      params = {
+        npayKorNm: payload.keyword
+      }
+  } 
 
     try {
       const response = await axios.get(process.env.REACT_APP_UNSUPPORTED_API_PAY_HOS_URL,
         {
           params: {
             pageNo: payload?.pageNo,
-            numOfRows: payload?.numOfRows,
-            npayKorNm: payload?.keyword
+            numOfRows: payload?.numOfRows
           }
       });
       totalCnt = response.data.response.body.totalCount;

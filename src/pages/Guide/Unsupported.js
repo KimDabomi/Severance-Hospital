@@ -284,7 +284,6 @@ const Unsupported = memo(() => {
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
-  console.log(selected);
 
 
   useEffect(() => {
@@ -317,10 +316,12 @@ const Unsupported = memo(() => {
     }
 
     // dispatch(getPayHos({
-		// 	npayKorNm: document.querySelector('.keyword').value,
-		// 	pageNo: page.current
+		// 	npayKorNm: document.querySelector('.keyword').value
 		// }),[dispatch]);
+    
+
     navigate(`/?keyword=${keyword.value}`);
+
   }, [navigate]);
 
   const closeBox = (e) => {
