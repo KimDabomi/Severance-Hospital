@@ -81,8 +81,6 @@ const ManagerCooperationHospital = memo(() => {
     dispatch(getList());
   }, []);
 
-  console.log(data);
-
   return (
     <>
       <Spinner loading={loading} />
