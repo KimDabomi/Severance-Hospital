@@ -12,6 +12,8 @@ import Guide from "./pages/Guide/Guide";
 import Cooperation from "./pages/MedicalStaff/Cooperation";
 /** 이용약관, 개인정보처리방침 */
 import Policy from "./pages/Policy/Policy";
+/** 이용약관, 개인정보처리방침 */
+import Manager from "./pages/Manager/Manager";
 
 // 로그인, 아이디/비밀번호 찾기
 import StaffSearch from "./pages/staff/StaffSearch";
@@ -87,6 +89,8 @@ function App() {
         <Route path="/cooperation/*" element={<Cooperation />} />
         {/* 이용약관, 개인정보처리방침 */}
         <Route path="/policy/*" element={<Policy />} />
+        {/* 관리자 */}
+        <Route path="/manager/*" element={<Manager />} />
 
         {/* 예약 페이지 컴포턴트 */}
         <Route path="/member1" exapt={true} element={<Member1 />} />
