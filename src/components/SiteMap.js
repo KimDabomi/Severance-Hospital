@@ -96,6 +96,10 @@ const SubMenuLi = styled.li`
   font-size: 16px;
   line-height: 22px;
   padding: 4px 20px 0;
+
+  &:hover {
+    font-weight: bold;
+  }
 `;
 
 /** 닫기 버튼 스타일 */
@@ -292,12 +296,16 @@ const SiteMap = forwardRef(({}, ref) => {
 
             <MenuLi>
               {/* 서브타이틀 */}
-              <Link to="/news/notice.do">공지/소식</Link>
+              <Link to="/news">공지/소식</Link>
 
               <SubMenuUl>
                 {/* 서브타이틀 하위 목록 */}
-                <SubMenuLi>공지사항</SubMenuLi>
-                <SubMenuLi>언론보도</SubMenuLi>
+                <Link to="/news/notice.do">
+                  <SubMenuLi>공지사항</SubMenuLi>
+                </Link>
+                <Link to="/news/media.do">
+                  <SubMenuLi>언론보도</SubMenuLi>
+                </Link>
               </SubMenuUl>
             </MenuLi>
           </MenuUl>
