@@ -14,6 +14,8 @@ import Cooperation from "./pages/MedicalStaff/Cooperation";
 import Policy from "./pages/Policy/Policy";
 /** 관리자 */
 import Manager from "./pages/Manager/Manager";
+// 관리자 로그인
+import ManagerLogin from "./pages/Manager/ManagerLogin";
 
 // 로그인, 아이디/비밀번호 찾기
 import StaffSearch from "./pages/staff/StaffSearch";
@@ -91,6 +93,8 @@ function App() {
         <Route path="/policy/*" element={<Policy />} />
         {/* 관리자 */}
         <Route path="/manager/*" element={<Manager />} />
+        {/* 관리자 로그인 */}
+        <Route path="/manager_login" element={<ManagerLogin />} />
 
         {/* 예약 페이지 컴포턴트 */}
         <Route path="/member1" exapt={true} element={<Member1 />} />
