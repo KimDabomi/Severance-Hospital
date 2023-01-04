@@ -5,8 +5,12 @@
  * @ Description: 관리자 협력의사 테이블
  */
 
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { getList } from "../../slices/CooperationHospitalSlice";
+
+import Spinner from "../../components/Spinner";
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -68,30 +72,73 @@ const TableEx = styled(Table)`
 `;
 
 const ManagerCooperationHospital = memo(() => {
-  return <>
-        <Table>
-        <thead>
-          <tr>
-            <th>test</th>
-            <th>test</th>
-            <th>test</th>
-            <th>test</th>
-            <th>test</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            <tr>
-              <td>test</td>
-              <td>test</td>
-              <td>test</td>
-              <td>test</td>
-              <td>test</td>
-            </tr>
-          }
-        </tbody>
-      </Table>
-  </>;
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.CooperationHospitalSlice);
+
+  /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+  useEffect(() => {
+    dispatch(getList());
+  }, []);
+
+  console.log(data);
+
+  return (
+    <>
+      <Spinner loading={loading} />
+
+      {/* 조회결과 표시하기 */}
+      {error ? (
+        <h1>에러 발생함</h1>
+      ) : (
+        data && (
+          <Table>
+            <thead>
+              <tr>
+                <th>지역</th>
+                <th>소개</th>
+                <th>주소</th>
+                <th>전화번호</th>
+                <th>이름</th>
+                <th>진료과</th>
+                <th>시작</th>
+                <th>끝</th>
+                <th>수정</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                //처리 결과는 존재하지만 0개인경우
+                data.length > 0 ? (
+                  data.map((v, i) => {
+                    return (
+                      <tr key={v.id}>
+                        <td>{v.CHospitalArea}</td>
+                        <td>{v.CHospitalIntroduction}</td>
+                        <td>{v.CHospitalAddress}</td>
+                        <td>{v.CHospitalTel}</td>
+                        <td>{v.CHospitalName}</td>
+                        <td>{v.CMedicalDepartment}</td>
+                        <td>{v.regDate}</td>
+                        <td>{v.editDate}</td>
+                        <td>수정</td>
+                        <td>삭제</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="4">글이 없습니다.</td>
+                  </tr>
+                )
+              }
+            </tbody>
+          </Table>
+        )
+      )}
+    </>
+  );
 });
 
 export default ManagerCooperationHospital;
