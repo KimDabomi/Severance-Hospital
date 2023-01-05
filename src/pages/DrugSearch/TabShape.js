@@ -234,7 +234,8 @@ const TabShape = memo(() => {
     );
 
     //검색조건에 맞는 결과만 출력
-    
+    // current.colorClass1.value 
+
   }, []);
 
   /** 페이지가 처음 로드되었을 때 정보리셋 */ 

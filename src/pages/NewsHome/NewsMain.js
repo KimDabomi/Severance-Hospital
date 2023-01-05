@@ -18,10 +18,6 @@ import NewsHomeNoticeCarousel from '../../components/NewsHomeNoticeCarousel';
 import facebookImg from '../../assets/img/facebook-thumb-sev.jpg'
 
 const Div = styled.div`
-  .bgWhiteBlue{
-    /* margin-top: 73px; */
-  }
-  
 `
 
 const NewsMain = memo(() => {
