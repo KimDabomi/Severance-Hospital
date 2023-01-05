@@ -10,12 +10,18 @@ import React, { memo } from "react";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-// 서브 라우팅 페이지
-import ManagerCustomerBoard from "./ManagerCustomerBoard";
-import ManagerNews from "./ManagerNews";
-import ManagerNotice from "./ManagerNotice";
-import ManagerCooperationHospital from "./ManagerCooperationHospital";
-import ManagerCooperationDoctor from "./ManagerCooperationDoctor";
+// 서브 라우팅
+import CustomerBoard from "./CustomerBoard/CustomerBoard";
+import News from "./News/News";
+import Notice from "./Notice/Notice";
+import Appointment from "./Appointment/Appointment";
+import UserInfo from "./UserInfo/UserInfo";
+import UserResult from "./UserResult/UserResult";
+import Hospital from "./Hospital/Hospital";
+import Doctor from "./Doctor/Doctor";
+import CHospital from "./CHospital/CHospital";
+import CDoctor from "./CDoctor/CDoctor";
+import Department from "./Department/Department";
 
 /** 전체 메뉴 스타일 */
 const MenuContainer = styled.div`
@@ -49,28 +55,32 @@ const Manager = memo(() => {
   return (
     <>
       <MenuContainer>
-        <MenuLinkContainer to={pathname === "/manager" ? "/manager" : "/manager/manager_customer_board"}>고객의소리</MenuLinkContainer>
-        <MenuLinkContainer to="manager_news">뉴스</MenuLinkContainer>
-        <MenuLinkContainer to="manager_notice">공지사항</MenuLinkContainer>
-        <MenuLinkContainer to="test4">예약</MenuLinkContainer>
-        <MenuLinkContainer to="test5">회원정보</MenuLinkContainer>
-        <MenuLinkContainer to="test6">회원결과</MenuLinkContainer>
-        <MenuLinkContainer to="test7">병원</MenuLinkContainer>
-        <MenuLinkContainer to="test8">의사</MenuLinkContainer>
-        <MenuLinkContainer to="manager_cooperation_hospital">협력병원</MenuLinkContainer>
-        <MenuLinkContainer to="manager_cooperation_doctor">협력의사</MenuLinkContainer>
-        <MenuLinkContainer to="test11">진료과</MenuLinkContainer>
+        <MenuLinkContainer to={pathname === "/manager" ? "/manager" : "/manager/customer_board"}>고객의소리</MenuLinkContainer>
+        <MenuLinkContainer to="news">뉴스</MenuLinkContainer>
+        <MenuLinkContainer to="notice">공지사항</MenuLinkContainer>
+        <MenuLinkContainer to="appointment">예약</MenuLinkContainer>
+        <MenuLinkContainer to="user_info">회원정보</MenuLinkContainer>
+        <MenuLinkContainer to="user_result">회원결과</MenuLinkContainer>
+        <MenuLinkContainer to="hospital">병원</MenuLinkContainer>
+        <MenuLinkContainer to="doctor">의사</MenuLinkContainer>
+        <MenuLinkContainer to="c_hospital">협력병원</MenuLinkContainer>
+        <MenuLinkContainer to="c_doctor">협력의사</MenuLinkContainer>
+        <MenuLinkContainer to="department">진료과</MenuLinkContainer>
       </MenuContainer>
 
       <Routes>
-        <Route path="/" element={<ManagerCustomerBoard />} />
-        <Route path="/manager_customer_board" element={<ManagerCustomerBoard />} />
-        <Route path="/manager_news" element={<ManagerNews />} />
-        <Route path="/manager_notice" element={<ManagerNotice />} />
-
-        
-        <Route path="/manager_cooperation_hospital" element={<ManagerCooperationHospital />} />
-        <Route path="/manager_cooperation_doctor" element={<ManagerCooperationDoctor />} />
+        <Route path="/" element={<CustomerBoard />} />
+        <Route path="/customer_board" element={<CustomerBoard />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/notice" element={<Notice />} />
+        <Route path="/appointment" element={<Appointment />} />
+        <Route path="/user_info" element={<UserInfo />} />
+        <Route path="/user_result" element={<UserResult />} />
+        <Route path="/hospital" element={<Hospital />} />
+        <Route path="/doctor" element={<Doctor />} />
+        <Route path="/c_hospital" element={<CHospital />} />
+        <Route path="/c_doctor" element={<CDoctor />} />
+        <Route path="/department" element={<Department />} />
       </Routes>
     </>
   );
