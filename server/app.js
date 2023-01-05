@@ -37,17 +37,17 @@ const configFileName = process.env.NODE_ENV !== "production" ? ".env.server.deve
 const configPath = join(resolve(), configFileName);
 
 if (!fs.existsSync(configPath)) {
-    try {
-        throw new Error();
-    } catch (e) {
-        console.error("================================================");
-        console.error("|          Configuration Init Error            |");
-        console.error("================================================");
-        console.error("환경설정 파일을 찾을 수 없습니다. 환경설정 파일의 경로를 확인하세요.");
-        console.error(`환경설정 파일 경로: ${configPath}`);
-        console.error("프로그램을 종료합니다.");
-        process.exit(1);
-    }
+  try {
+    throw new Error();
+  } catch (e) {
+    console.error("================================================");
+    console.error("|          Configuration Init Error            |");
+    console.error("================================================");
+    console.error("환경설정 파일을 찾을 수 없습니다. 환경설정 파일의 경로를 확인하세요.");
+    console.error(`환경설정 파일 경로: ${configPath}`);
+    console.error("프로그램을 종료합니다.");
+    process.exit(1);
+  }
 }
 
 dotenv.config({ path: configPath });
@@ -58,31 +58,31 @@ dotenv.config({ path: configPath });
 app.use(useragent.express());
 
 app.use((req, res, next) => {
-    logger.debug("클라이언트가 접속했습니다.");
+  logger.debug("클라이언트가 접속했습니다.");
 
-    const beginTime = Date.now();
+  const beginTime = Date.now();
 
-    const current_url = urlFormat({
-        protocol: req.protocol,
-        host: req.get("host"),
-        port: req.port,
-        pathname: req.originalUrl,
-    });
+  const current_url = urlFormat({
+    protocol: req.protocol,
+    host: req.get("host"),
+    port: req.port,
+    pathname: req.originalUrl
+  });
 
-    logger.debug(`[${req.method}] ${decodeURIComponent(current_url)}`);
+  logger.debug(`[${req.method}] ${decodeURIComponent(current_url)}`);
 
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+  const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 
-    logger.debug(`[client] ${ip} / ${req.useragent.os} / ${req.useragent.browser} (${req.useragent.version}) / ${req.useragent.platform}`);
+  logger.debug(`[client] ${ip} / ${req.useragent.os} / ${req.useragent.browser} (${req.useragent.version}) / ${req.useragent.platform}`);
 
-    res.on("finish", () => {
-        const endTime = Date.now();
-        const time = endTime - beginTime;
-        logger.debug(`클라이언트의 접속이 종료되었습니다. ::: [runtime] ${time}ms`);
-        logger.debug("--------------------------------------------------");
-    });
+  res.on("finish", () => {
+    const endTime = Date.now();
+    const time = endTime - beginTime;
+    logger.debug(`클라이언트의 접속이 종료되었습니다. ::: [runtime] ${time}ms`);
+    logger.debug("--------------------------------------------------");
+  });
 
-    next();
+  next();
 });
 
 /*----------------------------------------------------------
@@ -109,27 +109,27 @@ app.use(cors());
 app.use(WebHelper());
 
 app.use(
-    expressSession({
-        secret: process.env.SESSION_ENCRYPT_KEY,
-        resave: false,
-        saveUninitialized: false,
-        store: new MySQLStore({
-            host: process.env.DATABASE_HOST,
-            port: process.env.DATABASE_PORT,
-            user: process.env.DATABASE_USERNAME,
-            password: process.env.DATABASE_PASSWORD,
-            database: process.env.DATABASE_SCHEMA,
-            createDatabaseTable: process.env.MYSQL_SESSION_CREATE_TABLE,
-            schema: {
-                tableName: process.env.MYSQL_SESSION_TABLE_NAME,
-                columnNames: {
-                    session_id: process.env.MYSQL_SESSION_FIELD_ID,
-                    expires: process.env.MYSQL_SESSION_FIELD_EXPIRES,
-                    data: process.env.MYSQL_SESSION_FIELD_DATA,
-                },
-            },
-        }),
+  expressSession({
+    secret: process.env.SESSION_ENCRYPT_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore({
+      host: process.env.DATABASE_HOST,
+      port: process.env.DATABASE_PORT,
+      user: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_SCHEMA,
+      createDatabaseTable: process.env.MYSQL_SESSION_CREATE_TABLE,
+      schema: {
+        tableName: process.env.MYSQL_SESSION_TABLE_NAME,
+        columnNames: {
+          session_id: process.env.MYSQL_SESSION_FIELD_ID,
+          expires: process.env.MYSQL_SESSION_FIELD_EXPIRES,
+          data: process.env.MYSQL_SESSION_FIELD_DATA
+        }
+      }
     })
+  })
 );
 
 const router = express.Router();
@@ -139,6 +139,7 @@ app.use("/", router);
  | 5) 각 URL별 백엔드 기능 정의
  -----------------------------------------------------------*/
 // 컨트롤러 연결
+app.use(require("./controllers/CHospitalController"));
 
 app.use((err, req, res, next) => res.sendError(err));
 app.use("*", (req, res, next) => res.sendError(new PageNotFoundException()));
@@ -149,21 +150,21 @@ app.use("*", (req, res, next) => res.sendError(new PageNotFoundException()));
 const ip = myip();
 
 app.listen(process.env.PORT, () => {
-    logger.debug("--------------------------------------------------");
-    logger.debug("|              Start Express Server              |");
-    logger.debug("--------------------------------------------------");
+  logger.debug("--------------------------------------------------");
+  logger.debug("|              Start Express Server              |");
+  logger.debug("--------------------------------------------------");
 
-    ip.forEach((v, i) => {
-        logger.debug(`server address => http://${v}:${process.env.PORT}`);
-    });
+  ip.forEach((v, i) => {
+    logger.debug(`server address => http://${v}:${process.env.PORT}`);
+  });
 
-    logger.debug("--------------------------------------------------");
+  logger.debug("--------------------------------------------------");
 });
 
 process.on("exit", function () {
-    logger.debug("백엔드가 종료되었습니다.");
+  logger.debug("백엔드가 종료되었습니다.");
 });
 
 process.on("SIGINT", () => {
-    process.exit();
+  process.exit();
 });
