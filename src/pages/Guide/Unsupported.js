@@ -1,7 +1,7 @@
 /**
  * @ File Name: Unsupported.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2023-01-02 18:10
+ * @ Last Update: 2023-01-05 17:10
  * @ Description: 비급여진료비 페이지
  */
 
@@ -271,10 +271,9 @@ const Unsupported = memo(() => {
 
   const [page,setPage] = React.useState(1);
 
-  const handleChange = (e,value) => {
+  const handleChange = (value) => {
     setPage(value);
   };
-  console.log(page);
 
   /** QueryString 변수 받기 */
   const { keyword } = useQueryString();
@@ -315,12 +314,7 @@ const Unsupported = memo(() => {
       return;
     }
 
-    // dispatch(getPayHos({
-		// 	npayKorNm: document.querySelector('.keyword').value
-		// }),[dispatch]);
-    
-
-    navigate(`/?keyword=${keyword.value}`);
+    navigate(`/guide/unsupported?keyword=${keyword.value}`);
 
   }, [navigate]);
 
@@ -373,11 +367,13 @@ const Unsupported = memo(() => {
             </div>
           </div>
           {/* 검색어 입력창 */}
-          <form className="search_box">
+          <form className="search_box"
+                    onSubmit={clickSearch}>
             <fieldset>
               <div className="keyword_input">
                 <input
                   type="text"
+                  name="keyword"
                   className="keyword"
                   id="srchKwd"
                   placeholder="항목명칭 또는 구분을 입력해주세요"
@@ -387,7 +383,6 @@ const Unsupported = memo(() => {
                   <button
                     type="submit"
                     className="searchBtn"
-                    onSubmit={clickSearch}
                   >
                     <img src={search} alt="search" />
                   </button>
@@ -401,7 +396,7 @@ const Unsupported = memo(() => {
             <label htmlFor="pagePerNum" className="label">
               목록수조절
             </label>
-            <select name="pagePerNum" id="pagePerNum" className="list_num" onChange={handleSelect}>
+            <select name="pagePerNum" id="pagePerNum" className="list_num" onClick={handleSelect}>
               <option value="20">
                 20개
               </option>
