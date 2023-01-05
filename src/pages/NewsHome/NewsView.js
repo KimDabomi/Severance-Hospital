@@ -70,34 +70,45 @@ const NewsView = memo(() => {
 
           {error ? (
             <h1>에러발생함</h1>
-          ) : (
-            data && (
-              <div>
-                {/* 검색결과 */}
-                <div className="bbsList">
-                    {data.data.map((v, i) => {
-                      return (
-                        <div className="bbsItem">
-                        <a key={i} className="inner" href={v.newsLink} rel="noopener noreferrer" target="_blank">
-                          <div className="bbssubjectArea">
-                            <strong>{v.newsTitle}</strong>
-                          </div>
-                          <div className="infoArea">
-                            <span className="date">2022-11-30</span>
-                          </div>
-                        </a>
+          ) : data && data.data ? (
+            <div>
+              {/* 검색결과 */}
+              <div className="bbsList">
+                {data.data.map((v, i) => {
+                  return (
+                    <div className="bbsItem">
+                      <a
+                        key={i}
+                        className="inner"
+                        href={v.newsLink}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <div className="bbssubjectArea">
+                          <strong>{v.newsTitle}</strong>
                         </div>
-                      );
-                    })}
+                        <div className="infoArea">
+                          <span className="date">{v.regDate.substring(0,10)}</span>
+                        </div>
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
 
-                </div>
-
-                {/* 더보기버튼 */}
+              {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
+              {data.pagenation.totalPage > 1 ? (
                 <div className="buttonContColumn">
                   <Link className="btnMore">더보기</Link>
                 </div>
-              </div>
-            )
+              ) : null}
+            </div>
+          ) : (
+            // 검색결과없을 때
+            <div className="nodata">
+              <i className="nodataIcon"></i>
+              <p>검색된 결과가 없습니다.</p>
+            </div>
           )}
         </div>
       </div>
