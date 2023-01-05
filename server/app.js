@@ -139,6 +139,8 @@ app.use("/", router);
  | 5) 각 URL별 백엔드 기능 정의
  -----------------------------------------------------------*/
 // 컨트롤러 연결
+//news
+app.use(require('./controllers/NewsController'));
 
 app.use((err, req, res, next) => res.sendError(err));
 app.use("*", (req, res, next) => res.sendError(new PageNotFoundException()));
