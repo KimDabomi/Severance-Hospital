@@ -35,7 +35,7 @@
 
     <!-- 데이터 저장을 위한 기능 정의 -->
     <insert id='insertItem'>
-        INSERT INTO news (newsTitle, newsLink, regDate, editDate) VALUES (#{newsTitle}, #{newsLink}, #{regDate}, #{editDate});
+        INSERT INTO news (newsTitle, newsLink, regDate, editDate) VALUES (#{newsTitle}, #{newsLink}, date_format(now(), '%Y-%m-%d'), now());
     </insert>
 
     <!-- 데이터 삭제를 위한 기능 정의 -->
@@ -45,7 +45,7 @@
 
     <!-- 데이터 갱신을 위한 기능 정의 -->
     <update id='updateItem'>
-        UPDATE news SET newsTitle=#{newsTitle}, newsLink=#{newsLink}, editDate=#{editDate}
+        UPDATE news SET newsTitle=#{newsTitle}, newsLink=#{newsLink}, editDate=now()
         WHERE id=#{id};
     </update>
 

@@ -36,7 +36,7 @@ module.exports = (() => {
             pageInfo = pagenation(totalCount, page, rows);
 
             params.offset = pageInfo.offset;
-            params.listCount = pageInfo.listCount;
+            params.listCount = pageInfo.rows;
             json = await newsService.getList(params);
         } catch (err) {
             return next(err);

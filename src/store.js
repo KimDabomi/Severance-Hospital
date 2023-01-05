@@ -5,6 +5,7 @@ import DrugSearchSlice from "./slices/DrugSearchSlice";
 import YoutubeSlice from "./slices/YoutubeSlice";
 import UnsupportedSlice from "./slices/UnsupportedSlice";
 import CooperationHospitalSlice from "./slices/CooperationHospitalSlice";
+import NewsSlice from './slices/NewsSlice';
 
 /** Slice 참조 */
 
@@ -16,7 +17,8 @@ const store = configureStore({
     DrugSearchSlice: DrugSearchSlice,
     YoutubeSlice: YoutubeSlice,
     UnsupportedSlice: UnsupportedSlice,
-    CooperationHospitalSlice: CooperationHospitalSlice
+    CooperationHospitalSlice: CooperationHospitalSlice,
+    NewsSlice: NewsSlice
   }
 });
 
