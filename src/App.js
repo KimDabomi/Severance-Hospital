@@ -12,6 +12,10 @@ import Guide from "./pages/Guide/Guide";
 import Cooperation from "./pages/MedicalStaff/Cooperation";
 /** 이용약관, 개인정보처리방침 */
 import Policy from "./pages/Policy/Policy";
+/** 관리자 */
+import Manager from "./pages/Manager/Manager";
+// 관리자 로그인
+import ManagerLogin from "./pages/Manager/ManagerLogin";
 
 // 로그인, 아이디/비밀번호 찾기
 import StaffSearch from "./pages/staff/StaffSearch";
@@ -87,6 +91,10 @@ function App() {
         <Route path="/cooperation/*" element={<Cooperation />} />
         {/* 이용약관, 개인정보처리방침 */}
         <Route path="/policy/*" element={<Policy />} />
+        {/* 관리자 */}
+        <Route path="/manager/*" element={<Manager />} />
+        {/* 관리자 로그인 */}
+        <Route path="/manager_login" element={<ManagerLogin />} />
 
         {/* 예약 페이지 컴포턴트 */}
         <Route path="/member1" exapt={true} element={<Member1 />} />
@@ -107,10 +115,7 @@ function App() {
         <Route path="/find_id_email" element={<FindIdEmail />} />
         <Route path="/find_password" element={<FindPassword />} />
         <Route path="/find_password_email" element={<FindPasswordEmail />} />
-        <Route
-          path="/change_password_email"
-          element={<ChangePasswordEmail />}
-        />
+        <Route path="/change_password_email" element={<ChangePasswordEmail />} />
         <Route path="/new_password" element={<NewPassword />} />
 
         {/* 고객의소리 페이지 라우팅*/}
@@ -129,10 +134,7 @@ function App() {
 
         {/* 마이페이지 라우팅 */}
         <Route path="/mysevrance/*" element={<MysevMain />} />
-        <Route
-          path="/mysevrance/iseverance/mywriting"
-          element={<ISevrance />}
-        />
+        <Route path="/mysevrance/iseverance/mywriting" element={<ISevrance />} />
         <Route path="/user_info/*" element={<UserInfo />} />
 
         {/* 진료 예약 */}

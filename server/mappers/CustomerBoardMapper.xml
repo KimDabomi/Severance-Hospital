@@ -1,0 +1,59 @@
+<!-- 
+ * @ File Name: CustomerBoardMapper.xml
+ * @ Author: 주혜지 (rosyjoo1999@gmail.com)
+ * @ Last Update: 2023-01-05 11:13
+ * @ Description: 고객의소리 sql mapper
+ -->
+ 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustomerBoardMapper">
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id='selectItem'>
+        select id, cbTitle, cbContent, nickName, cbTel, cbEmail, register, institution, dept, staff, aswTitle, aswContent, regDate, editDate from customerboard where id=#{id}
+    </select>
+
+    <!-- 다중행 조희를 위한 기능 정의 -->
+    <select id='selectList'>
+        select id, cbTitle, cbContent, nickName, cbTel, cbEmail, register, institution, dept, staff, aswTitle, aswContent, regDate, editDate from customerboard
+        order by id desc
+
+        <!-- 페이지 구현을 위한 LIMIT절 추가 -->
+        <if test='listCount > 0'>
+        LIMIT ${offset}, ${listCount}
+        </if>
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id='insertItem'>
+        INSERT INTO customerboard (cbTitle, cbContent, nickName, cbTel, cbEmail, register, institution, dept, staff, aswTitle, aswContent, regDate) VALUES (#{cbTitle}, #{cbContent}, #{nickName}, #{cbTel}, #{cbEmail}, #{register}, #{institution}, #{dept}, #{staff}, #{aswTitle}, #{aswContent}, #{regDate});
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id='deleteItem'>
+        DELETE FROM customerboard WHERE id=#{id};
+    </delete>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id='updateItem'>
+        UPDATE customerboard SET cbTitle=#{cbTitle}, cbContent=#{cbContent}, nickName=#{nickName}, cbTel=#{cbTel}, cbEmail=#{cbEmail}, register=#{register}, institution=#{institution}, dept=#{dept} ,staff=#{staff}, aswTitle=#{aswTitle}, aswContent=#{aswContent}, editDate=#{editDate}
+        WHERE id=#{id};
+    </update>
+
+    <!-- 데이터 수 조회하기 -->
+    <select id='selectCountAll'>
+        SELECT COUNT(*) AS cnt FROM customerboard
+
+        <where>
+            <if test='dname !=null and dname !=""'>
+                dname LIKE concat('%',#{dname},'%')
+            </if>
+
+            <if test='loc !=null and loc !=""'>
+                OR loc LIKE concat('%', #{loc}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

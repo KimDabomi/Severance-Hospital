@@ -536,12 +536,8 @@ const MainPage = memo(() => {
     });
   });
 
-  // 페이지 첫 로드 시, 최상단 이동 및 OpenCloseTopBanner 쿠키 제거
+  // 페이지 첫 로드 시, OpenCloseTopBanner 쿠키 제거
   useEffect(() => {
-    window.onbeforeunload = function pushRefresh() {
-      window.scrollTo(0, 0);
-    };
-
     if (cookies[COOKIE_KEY2]) {
       setOpenCloseAni("openAni");
       removeCookie(COOKIE_KEY2, "true", {
@@ -702,13 +698,13 @@ const MainPage = memo(() => {
             <dl style={{ backgroundImage: "url(./img/bg-sympathy-story.jpg)" }}>
               <dt>고객의 소리</dt>
               <dd>
-                <InfoSliderCarousel customer={data} carousel={'customer'} />
+                <InfoSliderCarousel customer={data} carousel={"customer"} />
               </dd>
             </dl>
             <dl style={{ backgroundImage: "url(./img/bg-health-info.jpg)" }}>
               <dt>공지사항</dt>
               <dd>
-                <InfoSliderCarousel notice={null} carousel={'notice'} />
+                <InfoSliderCarousel notice={null} carousel={"notice"} />
               </dd>
             </dl>
             <a href="https://yuhs.severance.healthcare/yuhs/history/museum/cheerupsev.do" className="infoSliderShortcut">
