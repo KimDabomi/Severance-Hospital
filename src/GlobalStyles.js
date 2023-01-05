@@ -599,13 +599,12 @@ button {
       margin: 15px;
     }
     .inner{
-      height: 90px;
+      min-height: 90px;
       padding: 14px 20px;
       display: flex;
       border-radius: 10px;
       border: 1px solid #e6e6e6;
       flex-direction: column;
-      height: 100%;
       box-sizing: border-box;
       justify-content: space-between;
       border-radius: 10px;

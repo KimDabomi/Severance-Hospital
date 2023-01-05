@@ -1,20 +1,20 @@
 /**
- * @ File Name: CustomerBoardService.xml
+ * @ File Name: NewsService.xml
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-05 11:13
- * @ Description: 고객의소리 service
+ * @ Last Update: 2023-01-05 13:40
+ * @ Description: 뉴스 service
  */
 
 const mybatisMapper = require('mybatis-mapper');
 const DBPool = require('../helper/DBPool');
 const { RuntimeException } = require('../helper/ExceptionHelper');
 
-class CustomerBoardService {
+class NewsService {
   /** 생성자 - Mapper파일을 로드한다 */
   constructor() {
     //mapper의 위치는 이 소스파일이 아닌 프로젝트 root를 기준으로 상대경로
     mybatisMapper.createMapper([
-      './Sevrance-Hospital/mappers/CustomerBoardMapper.xml',
+      './server/mappers/NewsMapper.xml',
     ]);
   }
 
@@ -27,7 +27,7 @@ class CustomerBoardService {
       dbcon = await DBPool.getConnection();
 
       let sql = mybatisMapper.getStatement(
-        'CustomerBoardMapper',
+        'NewsMapper',
         'selectList',
         params
       );
@@ -57,7 +57,7 @@ class CustomerBoardService {
       dbcon = await DBPool.getConnection();
 
       let sql = mybatisMapper.getStatement(
-        'CustomerBoardMapper',
+        'NewsMapper',
         'selectItem',
         params
       );
@@ -87,7 +87,7 @@ class CustomerBoardService {
       dbcon = await DBPool.getConnection();
 
       let sql = mybatisMapper.getStatement(
-        'CustomerBoardMapper',
+        'NewsMapper',
         'insertItem',
         params
       );
@@ -98,7 +98,7 @@ class CustomerBoardService {
       }
 
       //새로 저장된 데이터의 PK값을 활용하여 다시 조회
-      sql = mybatisMapper.getStatement('CustomerBoardMapper', 'selectItem', {
+      sql = mybatisMapper.getStatement('NewsMapper', 'selectItem', {
         id: insertId,
       });
       let [result] = await dbcon.query(sql);
@@ -126,7 +126,7 @@ class CustomerBoardService {
       dbcon = await DBPool.getConnection();
 
       let sql = mybatisMapper.getStatement(
-        'CustomerBoardMapper',
+        'NewsMapper',
         'updateItem',
         params
       );
@@ -137,7 +137,7 @@ class CustomerBoardService {
       }
 
       //새로 저장된 데이터의 PK값을 활용하여 다시 조회
-      sql = mybatisMapper.getStatement('CustomerBoardMapper', 'selectItem', {
+      sql = mybatisMapper.getStatement('NewsMapper', 'selectItem', {
         deptno: params.deptno,
       });
       let [result] = await dbcon.query(sql);
@@ -164,7 +164,7 @@ class CustomerBoardService {
       dbcon = await DBPool.getConnection();
 
       let sql = mybatisMapper.getStatement(
-        'CustomerBoardMapper',
+        'NewsMapper',
         'deleteItem',
         params
       );
@@ -191,7 +191,7 @@ class CustomerBoardService {
       dbcon = await DBPool.getConnection();
 
       let sql = mybatisMapper.getStatement(
-        'CustomerBoardMapper',
+        'NewsMapper',
         'selectCountAll',
         params
       );
@@ -211,4 +211,4 @@ class CustomerBoardService {
   }
 }
 
-module.exports = new CustomerBoardService();
+module.exports = new NewsService();
