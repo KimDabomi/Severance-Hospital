@@ -819,6 +819,7 @@ button {
     width: 18px;
     height: 18px;
     line-height: 18px;
+    margin-left: 5px;
     ${`background-image: url(${newIco});`}
     background-size: cover;
     vertical-align: middle;
