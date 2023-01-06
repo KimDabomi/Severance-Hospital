@@ -1,7 +1,7 @@
 <!-- 
  * @ File Name: NewsMapper.xml
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-05 12:12
+ * @ Last Update: 2023-01-06 12:42
  * @ Description: 뉴스 sql mapper
  -->
  
@@ -12,12 +12,12 @@
 <mapper namespace="NewsMapper">
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id='selectItem'>
-        select id, newsTitle, newsLink, regDate, editDate from news where id=#{id}
+        select id, newsTitle, newsLink, date_format(regDate, '%Y-%m-%d') as regDate, editDate from news where id=#{id}
     </select>
 
     <!-- 다중행 조희를 위한 기능 정의 -->
     <select id='selectList'>
-        select id, newsTitle, newsLink, regDate, editDate from news
+        select id, newsTitle, newsLink, date_format(regDate, '%Y-%m-%d') as regDate, editDate from news
         
         <where>
             <if test="newsTitle != null and newsTitle != ''">
@@ -35,7 +35,7 @@
 
     <!-- 데이터 저장을 위한 기능 정의 -->
     <insert id='insertItem'>
-        INSERT INTO news (newsTitle, newsLink, regDate, editDate) VALUES (#{newsTitle}, #{newsLink}, date_format(now(), '%Y-%m-%d'), now());
+        INSERT INTO news (newsTitle, newsLink, regDate, editDate) VALUES (#{newsTitle}, #{newsLink}, now(), now());
     </insert>
 
     <!-- 데이터 삭제를 위한 기능 정의 -->

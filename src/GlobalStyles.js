@@ -590,7 +590,6 @@ button {
   .bbsList{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     margin-top: 15px;
     .bbsItem{
       flex: 0 0 calc(33.333333% - 30px);
@@ -614,8 +613,12 @@ button {
     .bbssubjectArea{
       max-height: 60px;
       line-height: 30px;
-      text-overflow: ellipsis;
+      //두 줄 말줄임표
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
+      text-overflow: ellipsis;
       height: 60px;
       font-size: 18px;
 
