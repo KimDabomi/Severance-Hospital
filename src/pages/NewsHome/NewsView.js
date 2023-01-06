@@ -121,7 +121,7 @@ const NewsView = memo(() => {
 
                           {/* 뉴 아이콘 */}
                           {dayjs(new Date())
-                            .subtract(1, 'day')
+                            .subtract(2, 'day')
                             .format('YYYY-MM-DD') < v.regDate
                             ? (
                               <i className='icoNew' />

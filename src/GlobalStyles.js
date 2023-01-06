@@ -622,6 +622,7 @@ button {
       height: 60px;
       font-size: 18px;
 
+      strong{width: 100%;}
       strong:after{
         content: '';
         display: inline-block;
