@@ -1,13 +1,15 @@
 /**
  * @ File Name: NewsHomeCarousel.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-08
+ * @ Last Update: 2023-01-06 17:32:00
  * @ Description: 뉴스 메인 페이지 슬라이드 컴포넌트
  */
 
 /** import */
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getList } from '../slices/NewsSlice';
 import styled from 'styled-components';
 
 /** Slider관련 참조 */
@@ -22,7 +24,6 @@ const StyledSlider = styled(Slider)`
     display: flex;
     justify-content: space-between;
     margin: 0;
-   
   }
   .slick-slide {
     /* float: left; */
@@ -38,7 +39,7 @@ const StyledSlider = styled(Slider)`
     margin: -3.5px;
     /* padding-top: 30px; */
 
-    li{
+    li {
       display: list-item;
       text-align: center;
       margin: 0;
@@ -59,9 +60,9 @@ const StyledSlider = styled(Slider)`
       }
     }
     //활성화된 도트
-    .slick-active{
+    .slick-active {
       margin-right: 15px;
-      button{
+      button {
         margin: 0;
         margin-top: 30px;
         width: 30px;
@@ -84,67 +85,64 @@ const StyledSlider = styled(Slider)`
   .newsCategory {
     background-color: #0094fb !important;
   }
-
 `;
 
-function NewsHomeCarousel() {
+const NewsHomeCarousel = memo(() => {
   // 슬라이드 설정
   const settings = {
     dots: true /* 아래점 */,
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
+    infinite: false,
     slidesPerRow: 2, //보여질 행의 수
   };
 
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.NewsSlice);
+
+  useEffect(() => {
+    dispatch(
+      getList({
+        page: 1,
+        rows: 12,
+      })
+    );
+  }, []);
+
+  if (data) {
+    console.log(data);
+  }
+
   return (
     <div>
-    <StyledSlider {...settings} className='slick-slider'>
-      {/* 언론보도 */}
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">언론보도</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-    </StyledSlider>
-    <Link className="btnMoreLink media" to="/news/media.do">더보기</Link>
+      <StyledSlider {...settings} className="slick-slider">
+        {data &&
+          data.data.map((v, i) => {
+            return (
+              // 언론보도
+              <a
+                className="newsBox"
+                key={i}
+                href={v.newsLink}
+                rel="noopener noreferrer"
+                title="언론 보도 새창열기"
+                target="_blank"
+                draggable={false}
+              >
+                <span className="newsCategory">언론보도</span>
+                <strong className="newsContentTitle">{v.newsTitle}</strong>
+                <span className="newsDate">{v.regDate}</span>
+              </a>
+            );
+          })}
+      </StyledSlider>
+      <Link className="btnMoreLink media" to="/news/media.do">
+        더보기
+      </Link>
     </div>
   );
-}
+});
 
 export default NewsHomeCarousel;

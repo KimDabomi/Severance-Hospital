@@ -29,6 +29,7 @@ module.exports = (() => {
 
         // 데이터 조회
         let json = null;
+        let pageInfo = null;
 
         try {
             // 전체 데이터 수 얻기
@@ -36,7 +37,8 @@ module.exports = (() => {
             pageInfo = pagenation(totalCount, page, rows);
 
             params.offset = pageInfo.offset;
-            params.listCount = pageInfo.rows;
+            params.listCount = pageInfo.listCount;
+
             json = await newsService.getList(params);
         } catch (err) {
             return next(err);
@@ -46,88 +48,88 @@ module.exports = (() => {
     });
 
     /** 데이터 추가 --> Create(INSERT) */
-    router.post(url, async (req, res, next) => {
-        // 파라미터 받기
-        const { dname, loc } = req.body;
+    // router.post(url, async (req, res, next) => {
+    //     // 파라미터 받기
+    //     const { dname, loc } = req.body;
 
-        // 유효성 검사
-        try {
-            regexHelper.value(dname, "학과 이름이 없습니다.");
-            regexHelper.maxLength(dname, 20, "학과 이름은 최대 20자까지 입력 가능합니다.");
-        } catch (err) {
-            return next(err);
-        }
+    //     // 유효성 검사
+    //     try {
+    //         regexHelper.value(dname, "학과 이름이 없습니다.");
+    //         regexHelper.maxLength(dname, 20, "학과 이름은 최대 20자까지 입력 가능합니다.");
+    //     } catch (err) {
+    //         return next(err);
+    //     }
 
-        // 데이터 저장
-        let json = null;
+    //     // 데이터 저장
+    //     let json = null;
 
-        try {
-            json = await newsService.addItem({
-                dname: dname,
-                loc: loc,
-            });
-        } catch (err) {
-            return next(err);
-        }
+    //     try {
+    //         json = await newsService.addItem({
+    //             dname: dname,
+    //             loc: loc,
+    //         });
+    //     } catch (err) {
+    //         return next(err);
+    //     }
 
-        res.sendResult({ data: json });
-    });
+    //     res.sendResult({ data: json });
+    // });
 
-    /** 데이터 수정 --> Update(UPDATE) */
-    router.put(`${url}/:deptno`, async (req, res, next) => {
-        // 파라미터 받기
-        const { deptno } = req.params;
-        const { dname, loc } = req.body;
+    // /** 데이터 수정 --> Update(UPDATE) */
+    // router.put(`${url}/:deptno`, async (req, res, next) => {
+    //     // 파라미터 받기
+    //     const { deptno } = req.params;
+    //     const { dname, loc } = req.body;
 
-        // 유효성 검사
-        try {
-            regexHelper.value(deptno, "학과번호가 없습니다.");
-            regexHelper.num(deptno, "학과번호가 잘못되었습니다.");
-            regexHelper.value(dname, "학과 이름이 없습니다.");
-            regexHelper.maxLength(dname, 20, "학과 이름은 최대 20자까지 입력 가능합니다.");
-        } catch (err) {
-            return next(err);
-        }
+    //     // 유효성 검사
+    //     try {
+    //         regexHelper.value(deptno, "학과번호가 없습니다.");
+    //         regexHelper.num(deptno, "학과번호가 잘못되었습니다.");
+    //         regexHelper.value(dname, "학과 이름이 없습니다.");
+    //         regexHelper.maxLength(dname, 20, "학과 이름은 최대 20자까지 입력 가능합니다.");
+    //     } catch (err) {
+    //         return next(err);
+    //     }
 
-        // 데이터 저장
-        let json = null;
+    //     // 데이터 저장
+    //     let json = null;
 
-        try {
-            json = await newsService.editItem({
-                deptno: deptno,
-                dname: dname,
-                loc: loc,
-            });
-        } catch (err) {
-            return next(err);
-        }
+    //     try {
+    //         json = await newsService.editItem({
+    //             deptno: deptno,
+    //             dname: dname,
+    //             loc: loc,
+    //         });
+    //     } catch (err) {
+    //         return next(err);
+    //     }
 
-        res.sendResult({ data: json });
-    });
+    //     res.sendResult({ data: json });
+    // });
 
-    /** 데이터 삭제 --> Delete(DELETE) */
-    router.delete(`${url}/:deptno`, async (req, res, next) => {
-        // 파라미터 받기
-        const { deptno } = req.params;
+    // /** 데이터 삭제 --> Delete(DELETE) */
+    // router.delete(`${url}/:deptno`, async (req, res, next) => {
+    //     // 파라미터 받기
+    //     const { deptno } = req.params;
 
-        // 유효성 검사
-        try {
-            regexHelper.value(deptno, "학과번호가 없습니다.");
-            regexHelper.num(deptno, "학과번호가 잘못되었습니다.");
-        } catch (err) {
-            return next(err);
-        }
+    //     // 유효성 검사
+    //     try {
+    //         regexHelper.value(deptno, "학과번호가 없습니다.");
+    //         regexHelper.num(deptno, "학과번호가 잘못되었습니다.");
+    //     } catch (err) {
+    //         return next(err);
+    //     }
 
-        try {
-            await newsService.deleteItem({
-                deptno: deptno,
-            });
-        } catch (err) {
-            return next(err);
-        }
+    //     try {
+    //         await newsService.deleteItem({
+    //             deptno: deptno,
+    //         });
+    //     } catch (err) {
+    //         return next(err);
+    //     }
 
-        res.sendResult();
-    });
+    //     res.sendResult();
+    // });
 
     return router;
 })();

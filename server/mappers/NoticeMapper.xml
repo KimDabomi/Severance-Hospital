@@ -1,27 +1,27 @@
 <!-- 
- * @ File Name: NewsMapper.xml
+ * @ File Name: NoticeMapper.xml
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-06 12:42
- * @ Description: 뉴스 sql mapper
+ * @ Last Update: 2023-01-06 17:53
+ * @ Description: 공지사항 sql mapper
  -->
  
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="NewsMapper">
+<mapper namespace="NoticeMapper">
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id='selectItem'>
-        select id, newsTitle, newsLink, date_format(regDate, '%Y-%m-%d') as regDate, editDate from news where id=#{id}
+        select id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate from notice where id=#{id}
     </select>
 
     <!-- 다중행 조희를 위한 기능 정의 -->
     <select id='selectList'>
-        select id, newsTitle, newsLink, date_format(regDate, '%Y-%m-%d') as regDate, editDate from news
+        select id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate from notice
         
         <where>
-            <if test="newsTitle != null and newsTitle != ''">
-                newsTitle LIKE concat('%', #{newsTitle}, '%')
+            <if test="noticeTitle != null and noticeTitle != ''">
+                noticeTitle LIKE concat('%', #{noticeTitle}, '%')
             </if>
         </where>
         
@@ -35,27 +35,27 @@
 
     <!-- 데이터 저장을 위한 기능 정의 -->
     <insert id='insertItem'>
-        INSERT INTO news (newsTitle, newsLink, regDate, editDate) VALUES (#{newsTitle}, #{newsLink}, now(), now());
+        INSERT INTO notice (noticeTitle, noticeContent, hits, regDate, editDate) VALUES (#{noticeTitle}, #{noticeContent}, #{hits}, now(), now());
     </insert>
 
     <!-- 데이터 삭제를 위한 기능 정의 -->
     <delete id='deleteItem'>
-        DELETE FROM news WHERE id=#{id};
+        DELETE FROM notice WHERE id=#{id};
     </delete>
 
     <!-- 데이터 갱신을 위한 기능 정의 -->
     <update id='updateItem'>
-        UPDATE news SET newsTitle=#{newsTitle}, newsLink=#{newsLink}, editDate=now()
+        UPDATE notice SET noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, hits=#{hits}, editDate=now()
         WHERE id=#{id};
     </update>
 
     <!-- 데이터 수 조회하기 -->
     <select id='selectCountAll'>
-        SELECT COUNT(*) AS cnt FROM news
+        SELECT COUNT(*) AS cnt FROM notice
 
         <where>
-            <if test='newsTitle !=null and newsTitle !=""'>
-                newsTitle LIKE concat('%',#{newsTitle},'%')
+            <if test='noticeTitle !=null and noticeTitle !=""'>
+                noticeTitle LIKE concat('%',#{noticeTitle},'%')
             </if>
         </where>
     </select>

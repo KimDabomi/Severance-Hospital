@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-05 15:58:00
+ * @ Last Update: 2023-01-06 15:58:00
  * @ Description: 뉴스 슬라이스
  */
 
@@ -22,7 +22,7 @@ export const getList = createAsyncThunk("NewsSlice/getList", async (payload, {re
             params: {
                 query: payload?.query || '',
                 page: payload?.page || 1,
-                rows: payload?.rows || 10
+                rows: payload?.rows || 12
             }
         });
         result = response.data;
@@ -61,15 +61,6 @@ export const postItem = createAsyncThunk("NewsSlice/postItem", async (payload, {
     try {
         const response = await axios.post(URL,{
             name: payload.name,
-            tel: payload.tel,
-            email: payload.email,
-            register: payload.register,
-            hospital: payload.hospital,
-            dept: payload.dept,
-            staff: payload.staff,
-            title: payload.title,
-            content: payload.content,
-            date: payload.date,
         });
         result = response.data;
     } catch (err) {
@@ -131,7 +122,17 @@ const NewsSlice = createSlice({
     extraReducers: {
         /** 다중행 데이터 조회를 위한 액션 함수 */
         [getList.pending]:pending,
-        [getList.fulfilled]:fulfilled,
+        [getList.fulfilled]: (state, { payload }) => {
+            if (payload.pagenation.nowPage > 1) {
+                payload.data = state.data.data.concat(payload.data);
+            }
+            
+            return {
+                data: payload,
+                loading: false,
+                error: null
+            }
+        },
         [getList.rejected]:rejected, 
         
         /** 단일행 데이터 조회를 위한 액션 함수 */

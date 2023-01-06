@@ -8,17 +8,17 @@ const DBPool = require('../helper/DBPool');
 const newsService = require('../services/NewsService');
 
 // 뉴스add
-(async () => {
-    try{
-        const params = {newsTitle:'[뉴스1] 세브란스병원, 국가고객만족도 2년 연속 전체 산업 분야 1위',newsLink:'https://www.news1.kr/articles/4915270'};
-        let result = await newsService.addItem(params);
-        console.log(result);
-    }catch(e){
-        console.error(e);
-    }finally{
-        DBPool.close();
-    }
-})();
+// (async () => {
+//     try{
+//         const params = {newsTitle:'[중앙일보] 연세대 송도 세브란스병원 착공… 2026년 말 개원 목표',newsLink:'https://www.joongang.co.kr/article/25129732#home'};
+//         let result = await newsService.addItem(params);
+//         console.log(result);
+//     }catch(e){
+//         console.error(e);
+//     }finally{
+//         DBPool.close();
+//     }
+// })();
 
 // 뉴스 edit
 // (async () => {
@@ -54,6 +54,18 @@ const newsService = require('../services/NewsService');
 //     }catch(e){
 //         console.error(e);
 //     }finally{
+//         DBPool.close();
+//     }
+// })();
+
+//뉴스삭제
+// (async () => {
+//     try {
+//         const params = { id: 16 };
+//         await newsService.deleteItem(params);
+//     } catch (e) {
+//         console.error(e);
+//     } finally {
 //         DBPool.close();
 //     }
 // })();
