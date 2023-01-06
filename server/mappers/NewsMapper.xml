@@ -54,12 +54,8 @@
         SELECT COUNT(*) AS cnt FROM news
 
         <where>
-            <if test='dname !=null and dname !=""'>
-                dname LIKE concat('%',#{dname},'%')
-            </if>
-
-            <if test='loc !=null and loc !=""'>
-                OR loc LIKE concat('%', #{loc}, '%')
+            <if test='newsTitle !=null and newsTitle !=""'>
+                newsTitle LIKE concat('%',#{newsTitle},'%')
             </if>
         </where>
     </select>
