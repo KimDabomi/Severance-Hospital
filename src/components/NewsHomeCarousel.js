@@ -122,8 +122,15 @@ const NewsHomeCarousel = memo(() => {
           data.data.map((v, i) => {
             return (
               // 언론보도
-              <a className="newsBox" key={i} href={v.newsLink} rel="noopener noreferrer"
-              target="_blank">
+              <a
+                className="newsBox"
+                key={i}
+                href={v.newsLink}
+                rel="noopener noreferrer"
+                title="언론 보도 새창열기"
+                target="_blank"
+                draggable={false}
+              >
                 <span className="newsCategory">언론보도</span>
                 <strong className="newsContentTitle">{v.newsTitle}</strong>
                 <span className="newsDate">{v.regDate}</span>

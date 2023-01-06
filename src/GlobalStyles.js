@@ -852,6 +852,8 @@ button {
     
     position: relative;
 
+    
+
     /* 카테고리 (언론 보도) */
     .newsCategory {
       width: 78px;
