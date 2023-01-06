@@ -33,10 +33,6 @@ class NewsService {
       );
       let [result] = await dbcon.query(sql);
 
-      if (result.length === 0) {
-        throw new RuntimeException('조회된 데이터가 없습니다.');
-      }
-
       data = result;
     } catch (err) {
       throw err;

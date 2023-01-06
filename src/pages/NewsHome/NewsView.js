@@ -4,7 +4,7 @@
  * @ Last Update: 2023-01-05 15:20:00
  * @ Description: 뉴스 하위페이지 언론보도 페이지
  */
-import React, { memo, useState, useEffect, useCallback } from 'react';
+import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../../slices/NewsSlice';
@@ -14,14 +14,17 @@ import Spinner from '../../components/Spinner';
 
 const NewsView = memo(() => {
   /** QueryString 변수 받기 */
-  const { query, page = 1 } = useQueryString();
+  const { query } = useQueryString();
+
+  //페이지 번호
+  const page = useRef(1);
 
   /** 화면 갱신을 위한 dummy 상태값 */
   const [isUpdate, setUpdate] = useState(0);
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { pagenation, data, loading, error } = useSelector(
+  const { data, loading, error } = useSelector(
     (state) => state.NewsSlice
   );
 
@@ -30,7 +33,8 @@ const NewsView = memo(() => {
   useEffect(() => {
     dispatch(getList({
       query: query,
-      page: page
+      page: 1,
+      rows: 12
     }
     ));
   }, [isUpdate, query, page]);
@@ -48,9 +52,22 @@ const NewsView = memo(() => {
     //검색어
     const query = e.currentTarget.itemName.value;
     //검색어에 따라 URL 구성
-    let redirectUrl = query ? `?query=${query}` : "/";
+    let redirectUrl = query ? `?query=${query}` : "/news/media.do";
     navigate(redirectUrl);
   },[navigate]);
+
+  /** 더보기 버튼 (페이지) 함수 */
+  const pagePlus = useCallback((e) => {
+    console.log("더보기버튼 누름", page);
+    //페이지 번호 1증가
+    page.current++;
+
+		//추가 검색 결과를 요청
+		dispatch(getList({
+			query: query,
+			page: page.current
+		}));
+	})
 
   return (
     <div>
@@ -78,7 +95,7 @@ const NewsView = memo(() => {
 
           {error ? (
             <h1>에러발생함</h1>
-          ) : data && data.data ? (
+          ) : data && data.data[1] ? (
             <div>
               <Spinner loading={loading} />
               {/* 검색결과 */}
@@ -108,9 +125,9 @@ const NewsView = memo(() => {
               </div>
 
               {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
-              {data.pagenation.totalPage > 1 ? (
+              {data.pagenation.nowPage !== data.pagenation.totalPage? (
                 <div className="buttonContColumn">
-                  <Link className="btnMore">더보기</Link>
+                  <Link className="btnMore" onClick={pagePlus}>더보기</Link>
                 </div>
               ) : null}
             </div>

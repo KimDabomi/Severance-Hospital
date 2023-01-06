@@ -29,6 +29,7 @@ module.exports = (() => {
 
         // 데이터 조회
         let json = null;
+        let pageInfo = null;
 
         try {
             // 전체 데이터 수 얻기
@@ -36,7 +37,10 @@ module.exports = (() => {
             pageInfo = pagenation(totalCount, page, rows);
 
             params.offset = pageInfo.offset;
-            params.listCount = pageInfo.rows;
+            params.listCount = pageInfo.listCount;
+            
+            // params.offset = (page - 1) * rows;
+            // params.listCount = rows;
             json = await newsService.getList(params);
         } catch (err) {
             return next(err);
