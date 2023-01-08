@@ -1,4 +1,5 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 import apptCalendar from "../../assets/img/icon-appt-calendar.png";
@@ -85,6 +86,16 @@ const InternetApptCont = styled.div`
 `;
 
 const InternetAppt = memo(() => {
+  const navigate = useNavigate();
+  
+  const apptBtn = useCallback((e) => {
+    e.preventDefault();
+
+
+
+    navigate("/apptSelect")
+  });
+
   return (
     <InternetApptCont>
       <h4 className="h4title">인터넷 진료예약 안내</h4>
@@ -96,7 +107,7 @@ const InternetAppt = memo(() => {
           </ul>
         </div>
         <div className="appt-btn">
-          <button type="button">
+          <button type="button" onClick={apptBtn}>
             <i></i>&nbsp;인터넷 예약 바로가기&nbsp;
           </button>
         </div>

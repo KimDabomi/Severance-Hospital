@@ -12,6 +12,8 @@ import styled from "styled-components";
 import profile from "../../assets/img/442888.png";
 
 const Container = styled.div`
+  display: none;
+  
   width: 320px;
   color: #333;
   letter-spacing: 0.02em;

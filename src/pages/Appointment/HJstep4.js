@@ -9,6 +9,8 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 import radiocheck from '../../assets/img/ico-radio-checked.png';
 const Div = styled.div`
+  display: none;
+
   .reserveBox {
     width: 305px;
     height: 803px;

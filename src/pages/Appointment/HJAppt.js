@@ -5,7 +5,7 @@
  * @ Description: 회원예약 3.예약방법선택
  */
 
-import React, { memo } from 'react';
+import React, { memo, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 
 //진료과아이콘
@@ -13,6 +13,8 @@ import ico1 from '../../assets/img/ico-online-method01.png';
 import ico2 from '../../assets/img/ico-online-method02.png';
 
 const Div = styled.div`
+  display: none;
+
   .reserveBox {
     width: 305px;
     height: 803px;
@@ -93,6 +95,15 @@ const Div = styled.div`
 `;
 
 const HJAttp = memo(() => {
+
+  const departmentAppt = useRef();
+
+  const onMemberInfo = useCallback((e) => {
+    // memberReserveCover.current.style.display = "none";
+    // memberReserveBox.current.style.display = "block";
+  }, []);
+  
+
   return (
     <Div>
       <div className="reserveBox">
@@ -121,7 +132,7 @@ const HJAttp = memo(() => {
 
         {/* 이전 다음 버튼 */}
         <div className="buttonCont">
-          <button type="submit" className="buttonWhite">
+          <button type="submit" className="buttonWhite" onClick={onMemberInfo}>
             이전
           </button>
         </div>

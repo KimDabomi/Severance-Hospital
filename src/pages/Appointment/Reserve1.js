@@ -479,17 +479,29 @@ const Reserve1 = memo(() => {
   const agreePopup = useRef();
   const memberReserveBox = useRef();
   const memberReserveCover = useRef();
+  const memberDataBox = useRef();
 
   /** 회원 예약 커버의 display를 변경한다. */
-  const switchDisplay = useCallback((e) => {
-    e.target.dataset.intro === "cover" ? (memberReserveBox.current.style.display = "block") : (memberReserveBox.current.style.display = "none");
+  const offCover = useCallback((e) => {
+    memberReserveCover.current.style.display = "none";
+    memberReserveBox.current.style.display = "block";
   }, []);
 
+  /** 회원 예약 커버의 display를 변경한다. */
+  const onCover = useCallback((e) => {
+    memberReserveCover.current.style.display = "block";
+    memberReserveBox.current.style.display = "none";
+  }, []);
+  
+
   /** 팝업 */
-  // 팝업 열기
+  // 팝업 열기 
+  // 다음 버튼 클릭시 회원예약정보 이동
   const openPopup = useCallback((e) => {
-    agreePopup.current.style.visibility = "visible";
-    // memberReserveBox.current.style.pointerEvents = "none"
+    // agreePopup.current.style.visibility = "visible";
+    memberDataBox.current.style.display = "none";
+    memberReserveBox.current.style.opacity = "0.6";
+    memberReserveBox.current.style.pointerEvents = "none";
   }, []);
 
   // 팝업 닫기
@@ -505,7 +517,7 @@ const Reserve1 = memo(() => {
   return (
     <Cnt>
       {/* 회원 정보 박스 */}
-      <MemberDataBox>
+      <MemberDataBox ref={memberDataBox}>
         <p className="title">회원 정보</p>
         <p className="username">
           <span>박다윗</span> 님
@@ -527,9 +539,9 @@ const Reserve1 = memo(() => {
       </MemberDataBox>
 
       {/* 회원 예약 커버 */}
-      <MemberReserveCover ref={memberReserveCover}>
-        <div>
-          <a href="#reserve" data-intro="cover" onClick={switchDisplay}>
+      <MemberReserveCover>
+        <div ref={memberReserveCover}>
+          <a href="#reserve" data-intro="cover" onClick={offCover}>
             <div className="iconCont">
               <i />
               <span>회원 예약</span>
@@ -625,7 +637,7 @@ const Reserve1 = memo(() => {
 
           {/* 이전, 다음 버튼 */}
           <div className="btns">
-            <button type="button" onClick={switchDisplay}>
+            <button type="button" onClick={onCover}>
               이전
             </button>
             <button type="button" onClick={openPopup}>
