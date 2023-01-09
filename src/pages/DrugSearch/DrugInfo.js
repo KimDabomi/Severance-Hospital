@@ -40,7 +40,7 @@ const DrugInfo = memo(() => {
   /** 데이터 값 변경에 따른 사이드 이펙트 처리 */
   const item = useMemo(()=>{
     if(data){
-      console.log('druginfo data',data);
+      // console.log('druginfo data',data);
         return data.items.find((v,i)=> v.ITEM_SEQ == id || v.itemSeq == id);
         // dispatch(getDrugSearch({item_seq:id}));
         // dispatch(getDrugDetail({itemSeq:id}));

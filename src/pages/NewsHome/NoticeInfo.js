@@ -1,18 +1,20 @@
 /**
  * @ File Name: NoticeInfo.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-09 14:35
+ * @ Last Update: 2023-01-09 16:22
  * @ Description: 공지사항상세
  */
 
-import React, { memo, useEffect, useCallback, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import React, { memo, useEffect, useMemo } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getItem } from '../../slices/NoticeSlice';
+import { getCurrent,getItem } from '../../slices/NoticeSlice';
 
 import styled from 'styled-components';
 import prevImg from '../../assets/img/ico-chevron-down-sm@2x.png';
 import Spinner from '../../components/Spinner';
+/** Buffer 디코딩을 위한 참조 */
+window.Buffer = window.Buffer || require('buffer').Buffer;
 
 const Div = styled.div`
   .subjectArea {
@@ -86,9 +88,6 @@ const NoticeInfo = memo(() => {
   /** path 파라미터 받기 */
   const { id } = useParams();
 
-  /** 버퍼 디코딩 */
-  const [buf, setBuf] = useState('');
-
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.NoticeSlice);
@@ -96,10 +95,20 @@ const NoticeInfo = memo(() => {
   /** 페이지가 열린 직후 (혹은 id값이 변경된 경우) 데이터 가져오기 */
   useEffect(() => {
     dispatch(getItem({ id: id }));
+
+    //페이지 렌더 후 화면을 맨 위로 올리기
+    window.scrollTo(0, 0);
   }, [id]);
 
-  /** Buffer 디코딩을 위한 참조 */
-  window.Buffer = window.Buffer || require("buffer").Buffer;
+  /** 데이터 값 변경에 따른 사이드 이펙트 처리 */
+  const item = useMemo(() => {
+    if (data) {
+      return data[0];
+    } else {
+      //새로고침시 현재 데이터만 다시 로드
+      dispatch(getItem({ id: id }));
+    }
+  }, [data]);
 
   return (
     <Div>
@@ -112,23 +121,29 @@ const NoticeInfo = memo(() => {
       {error ? (
         <h1>에러발생함</h1>
       ) : (
-        data[0] && (
+        item && (
           <div className="pageCont">
             <Spinner loading={loading} />
             <div className="subjectArea">
-              <h3 className="subject">{data[0].data.noticeTitle}</h3>
+              <h3 className="subject">{item.data.noticeTitle}</h3>
               <div className="articleInfo">
                 <span>관리자</span>
-                <span className="itemInfo">{data[0].data.regDate}</span>
+                <span className="itemInfo">{item.data.regDate}</span>
                 <span className="itemInfo">
                   <strong>조회수 &nbsp;</strong>
                 </span>
-                <span>{data[0].data.hits}</span>
+                <span>{item.data.hits}</span>
               </div>
             </div>
             <div className="articleBody">
-              {/* {Buffer.from(data[0].data.noticeContent.data, "base64").toString('utf8')} */}
-              <p dangerouslySetInnerHTML={{__html: Buffer.from(data[0].data.noticeContent.data, "base64").toString('utf8')}}></p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: Buffer.from(
+                    item.data.noticeContent.data,
+                    'base64'
+                  ).toString('utf8'),
+                }}
+              ></p>
             </div>
 
             <div className="buttonCont">
