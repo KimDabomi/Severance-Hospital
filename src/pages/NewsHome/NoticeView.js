@@ -4,11 +4,12 @@
  * @ Last Update: 2023-01-09 14:00:00
  * @ Description: 뉴스 하위 페이지 공지사항 페이지
  */
-import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
+import React, { memo, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../../slices/NoticeSlice';
 import { useQueryString } from '../../hooks/useQueryString';
+import RegexHelper from '../../helper/RegexHelper';
 // 최신글 처리를 위한 dayjs
 import dayjs from 'dayjs';
 
@@ -40,8 +41,20 @@ const NoticeView = memo(() => {
     );
   }, [isUpdate, query, page]);
 
-  // if (data) {
-  //   console.log('공지사항data', data);
+   /** 데이터 값 변경에 따른 사이드 이펙트 처리 (뒤로가기문제)*/
+  //  const item = useMemo(() => {
+  //   if (data) {
+  //     return data;
+  //   } else {
+  //     //새로고침시 현재 데이터만 다시 로드
+  //     dispatch(getList({ query: query,
+  //       page: 1,
+  //       rows: 12, }));
+  //   }
+  // }, [data]);
+
+  // if (item) {
+  //   console.log('item', item);
   // }
 
   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
@@ -51,6 +64,22 @@ const NoticeView = memo(() => {
   const onSearchSubmit = useCallback(
     (e) => {
       e.preventDefault();
+
+      //입력값에 대한 유효성 검사
+      const regex = RegexHelper.getInstance();
+
+      try {
+        regex.value(
+          document.querySelector('#itemName'),
+          '검색어를 입력해주세요.'
+        );
+      } catch (e) {
+        // e.selector.focus();
+        document.querySelector('.popUpCont').style.display = 'block';
+        document.querySelector('.alert').innerHTML = e.message;
+        return;
+      }
+
       //검색어
       const query = e.currentTarget.itemName.value;
       //검색어에 따라 URL 구성
@@ -74,6 +103,11 @@ const NoticeView = memo(() => {
       })
     );
   });
+    
+  /** 닫기버튼 눌렸을 때 */
+  const closeClick = useCallback((e) => {
+    document.querySelector(".popUpCont").style.display = "none";
+  });
 
   return (
     <div>
@@ -87,6 +121,7 @@ const NoticeView = memo(() => {
                 <input
                   type="text"
                   name="itemName"
+                  id='itemName'
                   placeholder="검색어를 입력해 주세요"
                   className="formControl"
                 />
@@ -147,6 +182,20 @@ const NoticeView = memo(() => {
             </div>
           )}
         </div>
+
+        {/* 유효성검사 알람 팝업창 */}
+      <div className="popUpCont">
+        <div className="dimed"></div>
+        <div className="popUp">
+          <div className="alert"></div>
+          <div className="closeBtnCont">
+            <button type="button" className="closeBtn" onClick={closeClick}>
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+
       </div>
     </div>
   );

@@ -58,7 +58,7 @@ const NewsView = memo(() => {
 
       try {
         regex.value(
-          document.getElementsByName('itemName'),
+          document.querySelector('#itemName'),
           '검색어를 입력해주세요.'
         );
       } catch (e) {
@@ -109,6 +109,7 @@ const NewsView = memo(() => {
                 <input
                   type="text"
                   name="itemName"
+                  id='itemName'
                   placeholder="검색어를 입력해 주세요"
                   className="formControl"
                 />

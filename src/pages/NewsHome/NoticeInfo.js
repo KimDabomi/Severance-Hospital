@@ -8,11 +8,13 @@
 import React, { memo, useEffect, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrent,getItem } from '../../slices/NoticeSlice';
+import { getCurrent, getItem } from '../../slices/NoticeSlice';
 
 import styled from 'styled-components';
 import prevImg from '../../assets/img/ico-chevron-down-sm@2x.png';
 import Spinner from '../../components/Spinner';
+// 최신글 처리를 위한 dayjs
+import dayjs from 'dayjs';
 /** Buffer 디코딩을 위한 참조 */
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -125,7 +127,14 @@ const NoticeInfo = memo(() => {
           <div className="pageCont">
             <Spinner loading={loading} />
             <div className="subjectArea">
-              <h3 className="subject">{item.data.noticeTitle}</h3>
+              <h3 className="subject">
+                {item.data.noticeTitle}
+                {/* 뉴 아이콘 */}
+                {dayjs(new Date()).subtract(2, 'day').format('YYYY-MM-DD') <
+                item.data.regDate ? (
+                  <i className="icoNew" />
+                ) : null}
+              </h3>
               <div className="articleInfo">
                 <span>관리자</span>
                 <span className="itemInfo">{item.data.regDate}</span>
