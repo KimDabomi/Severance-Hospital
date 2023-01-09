@@ -1,25 +1,29 @@
+<!--
+File Name: CHospitalMapper.xml
+Author: 박다윗 (davidpark.0098@gmail.com)
+Last Update: 2023-01-09 00:33:33
+Description: 협력병원 맵퍼
+-->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CHospitalMapper">
-
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id="selectItem">
-        SELECT deptno, dname, loc FROM department WHERE deptno=#{deptno}
+        SELECT id, CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL, regDate, editDate FROM CHospital WHERE id=#{id}
     </select>
-
     <!-- 다중행 조회를 위한 기능 정의 -->
     <select id="selectList">
-        SELECT CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalTel, CHospitalName, CMedicalDepartment, regDate, editDate FROM CHospital
+        SELECT id, CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL, regDate, editDate FROM CHospital
 
         <where>
-            <if test="dname != null and dname != ''">
-                dname LIKE concat('%', #{dname}, '%')
+            <if test="CHospitalArea != null and CHospitalArea != ''">
+                CHospitalArea LIKE concat('%', #{CHospitalArea}, '%')
             </if>
-
-            <if test="loc != null and loc != ''">
-                OR loc LIKE concat('%', #{loc}, '%')
+            <if test="CHospitalName != null and CHospitalName != ''">
+                OR CHospitalName LIKE concat('%', #{CHospitalName}, '%')
             </if>
         </where>
 
@@ -31,21 +35,25 @@
         </if>
     </select>
 
+
     <!-- 데이터 저장을 위한 기능 정의 -->
     <insert id="insertItem">
-        INSERT INTO CHospital (CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalTel, CHospitalName, CMedicalDepartment, regDate) VALUES (#{CHospitalArea}, #{CHospitalIntroduction}, #{CHospitalAddress}, #{CHospitalTel}, #{CHospitalName}, #{CMedicalDepartment}, now())
+        INSERT INTO CHospital (CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL, regDate) VALUES (#{CHospitalArea}, #{CHospitalIntroduction}, #{CHospitalAddress}, #{CHospitalZipCode}, #{CHospitalTel}, #{CHospitalName}, #{CMedicalDepartment}, #{CHospitalURL}, now())
     </insert>
+
 
     <!-- 데이터 삭제를 위한 기능 정의 -->
     <delete id="deleteItem">
-        DELETE FROM department WHERE deptno=#{deptno}
+        DELETE FROM CHospital WHERE id=#{id}
     </delete>
+
 
     <!-- 데이터 갱신을 위한 기능 정의 -->
     <update id="updateItem">
-        UPDATE department SET dname=#{dname}, loc=#{loc}
-        WHERE deptno=#{deptno}
+        UPDATE CHospital SET CHospitalArea=#{CHospitalArea}, CHospitalIntroduction=#{CHospitalIntroduction}, CHospitalAddress=#{CHospitalAddress}, CHospitalZipCode=#{CHospitalZipCode}, CHospitalTel=#{CHospitalTel}, CHospitalName=#{CHospitalName}, CMedicalDepartment=#{CMedicalDepartment}, CHospitalURL=#{CHospitalURL}, editDate=now()
+        WHERE id=#{id}
     </update>
+
 
     <!-- 데이터 수 조회하기  -->
     <select id="selectCountAll">
@@ -55,11 +63,9 @@
             <if test="CHospitalName != null and CHospitalName != ''">
                 CHospitalName LIKE concat('%', #{CHospitalName}, '%')
             </if>
-
             <if test="CHospitalArea != null and CHospitalArea != ''">
                 OR CHospitalArea LIKE concat('%', #{CHospitalArea}, '%')
             </if>
         </where>
     </select>
-
 </mapper>
