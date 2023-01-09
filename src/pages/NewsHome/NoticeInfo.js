@@ -5,14 +5,13 @@
  * @ Description: 공지사항상세
  */
 
-import React, { memo, useEffect, useCallback } from 'react';
+import React, { memo, useEffect, useCallback, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getItem } from '../../slices/NoticeSlice';
 
 import styled from 'styled-components';
 import prevImg from '../../assets/img/ico-chevron-down-sm@2x.png';
-
 import Spinner from '../../components/Spinner';
 
 const Div = styled.div`
@@ -87,6 +86,9 @@ const NoticeInfo = memo(() => {
   /** path 파라미터 받기 */
   const { id } = useParams();
 
+  /** 버퍼 디코딩 */
+  const [buf, setBuf] = useState('');
+
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.NoticeSlice);
@@ -96,9 +98,9 @@ const NoticeInfo = memo(() => {
     dispatch(getItem({ id: id }));
   }, [id]);
 
-  if (data) {
-    console.log('notice getItem', data);
-  }
+  /** Buffer 디코딩을 위한 참조 */
+  window.Buffer = window.Buffer || require("buffer").Buffer;
+
   return (
     <Div>
       <div className="bgAll">
@@ -110,7 +112,7 @@ const NoticeInfo = memo(() => {
       {error ? (
         <h1>에러발생함</h1>
       ) : (
-        data && (
+        data[0] && (
           <div className="pageCont">
             <Spinner loading={loading} />
             <div className="subjectArea">
@@ -125,7 +127,8 @@ const NoticeInfo = memo(() => {
               </div>
             </div>
             <div className="articleBody">
-            {data[0].data.noticeContent.data.toString("utf-8")}
+              {/* {Buffer.from(data[0].data.noticeContent.data, "base64").toString('utf8')} */}
+              <p dangerouslySetInnerHTML={{__html: Buffer.from(data[0].data.noticeContent.data, "base64").toString('utf8')}}></p>
             </div>
 
             <div className="buttonCont">

@@ -68,7 +68,6 @@ module.exports = (() => {
             json = await noticeService.getItem({
                 id: id,
             });
-            json.noticeContent.data = Buffer.from(json.noticeContent.data, 'utf-8');
         } catch (err) {
             return next(err);
         }
