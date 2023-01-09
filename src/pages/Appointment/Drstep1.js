@@ -14,6 +14,8 @@ import search from "../../assets/img/ico-search-white.png";
 import profile from "../../assets/img/442888.png";
 
 const Container = styled.div`
+  /* display: none; */
+
   width: 630px;
   color: #333;
   letter-spacing: 0.02em;

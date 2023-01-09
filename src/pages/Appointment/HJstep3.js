@@ -16,6 +16,8 @@ import prev from "../../assets/img/ico-arrow-left-white@2x.png";
 import next from "../../assets/img/ico-arrow-right-white@2x.png";
 
 const Div = styled.div`
+  display: none;
+
   .reserveBox {
     width: 305px;
     height: 803px;
