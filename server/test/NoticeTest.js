@@ -34,18 +34,6 @@ const noticeService = require('../services/NoticeService');
 //     }
 // })();
 
-// 조회수
-// (async () => {
-//     try{
-//         const params = {id:1};
-//         let result = await noticeService.editItem(params);
-//         console.log(result);
-//     }catch(e){
-//         console.error(e);
-//     }finally{
-//         DBPool.close();
-//     }
-// })();
 
 // 다중행조회
 // (async () => {
@@ -60,17 +48,17 @@ const noticeService = require('../services/NoticeService');
 // })();
 
 // 단일조회
-(async () => {
-    try{
-        const params = {id:1};
-        let result = await noticeService.getItem(params);
-        console.log(result);
-    }catch(e){
-        console.error(e);
-    }finally{
-        DBPool.close();
-    }
-})();
+// (async () => {
+//     try{
+//         const params = {id:1};
+//         let result = await noticeService.getItem(params);
+//         console.log(result);
+//     }catch(e){
+//         console.error(e);
+//     }finally{
+//         DBPool.close();
+//     }
+// })();
 
 //뉴스삭제
 // (async () => {
