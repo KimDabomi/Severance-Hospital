@@ -5,163 +5,206 @@
  * @ Description: 관리자 협력병원
  */
 
-import React, { memo, useCallback, useEffect } from "react";
+/** import */
+// react
+import React, { memo, useCallback, useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+// redux
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { NavLink, useNavigate } from "react-router-dom";
-import { getList, postItem } from "../../../slices/CHospitalSlice";
+import { getList, postItem, putItem, deleteItem } from "../../../slices/CHospitalSlice";
+// module
 import dayjs from "dayjs";
-
+import { Pagination } from "@mui/material";
+import PaginationItem from "@mui/material/PaginationItem";
+// helper
+import RegexHelper from "../../../helper/RegexHelper";
+import { useQueryString } from "../../../hooks/useQueryString";
+// components
 import Spinner from "../../../components/Spinner";
+import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav, useStyles } from "../common/ManagerStyleConponents";
 
-const Table = styled.table`
-  border-collapse: collapse;
-  border-top: 3px solid #168;
-  font-size: 14px;
-  text-align: center;
-  margin: auto;
-  width: 100%;
-
-  th {
-    color: #168;
-    background: #f0f6f9;
-    border: 1px solid #ddd;
-
-    &:first-child {
-      border-left: 0;
-    }
-
-    &:last-child {
-      border-right: 0;
-    }
-  }
-
-  td {
-    padding: 10px;
-    border: 1px solid #ddd;
-
-    &:first-child {
-      border-left: 0;
-    }
-
-    &:last-child {
-      border-right: 0;
-    }
-  }
-`;
-const TableEx = styled(Table)`
-  margin-bottom: 15px;
-
-  .inputWrapper {
-    padding: 0;
-    position: relative;
-    text-align: left;
-
-    .field {
-      box-sizing: border-box;
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      padding: 0 10px;
-      outline: none;
-      font-size: 14px;
-    }
-  }
-`;
-// 입력 컨트롤들을 포함하는 박스
-const ControlContainer = styled.form`
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-
-  .controll {
-    margin-right: 5px;
-    display: inline-block;
-    font-size: 16px;
-    padding: 7px 10px 5px 10px;
-    border: 1px solid #ccc;
-  }
-
-  .clickable {
-    background-color: #fff;
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #06f2;
-    }
-
-    &:active {
-      transform: scale(0.9, 0.9);
-    }
-  }
-`;
-
-const ManagerCooperationHospital = memo(() => {
-  /** 저장 완료 후 목록으로 되돌아가기 위한 페이지 강제 이동 함수 생성 */
+const CHospital = memo(() => {
+  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
   const navigate = useNavigate();
+
+  /** 화면 갱신 상태값 */
+  const [isUpdate, setIsUpdate] = useState(1);
+  /** 수정 아이디 상태값 */
+  const [updateId, setUpdateId] = useState(-1);
+
+  /** QueryString 값 가져오기 */
+  const { query, page = 1 } = useQueryString();
+
+  /** Pagination */
+  const nowPage = parseInt(page || "1", 10);
+  const classes = useStyles();
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.CHospitalSlice);
+  const { pagenation, data, loading, error } = useSelector((state) => state.CHospitalSlice);
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(() => {
-    dispatch(getList());
-  }, []);
+    dispatch(getList({ query: query, page: page, rows: 20 }));
+  }, [isUpdate, query, page]);
 
-  /** 데이터 추가 */
-  /** <form>의 submit 버튼이 눌러졌을 때 호출될 이벤트 핸들러 */
-  const onCHospitalSubmit = useCallback((e) => {
-    e.preventDefault();
+  /** 추가 */
+  const onAddSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
 
-    // 이벤트가 발생한 폼 객체
-    const current = e.currentTarget;
+      const current = e.currentTarget;
+      const regexHelper = RegexHelper.getInstance();
 
-    // 입력값에 대한 유효성 검사
-    // ... 생략 ...
-
-    // 리덕스를 통한 데이터 저장 요청.
-    dispatch(
-      postItem({
-        CHospitalArea: current.CHospitalArea.value,
-        CHospitalIntroduction: current.CHospitalIntroduction.value,
-        CHospitalAddress: current.CHospitalAddress.value,
-        CHospitalTel: current.CHospitalTel.value,
-        CHospitalName: current.CHospitalName.value,
-        CMedicalDepartment: current.CMedicalDepartment.value
-      })
-    ).then(({ payload, error }) => {
-      if (error) {
-        window.alert(payload.data.rtmsg);
+      // 입력값에 대한 유효성 검사
+      try {
+        regexHelper.value(current.CHospitalArea, "지역이 없습니다.");
+        regexHelper.value(current.CHospitalIntroduction, "소개가 없습니다.");
+        regexHelper.value(current.CHospitalAddress, "주소가 없습니다.");
+        regexHelper.value(current.CHospitalZipCode, "우편번호가 없습니다.");
+        regexHelper.value(current.CHospitalTel, "전화번호가 없습니다.");
+        regexHelper.value(current.CHospitalName, "이름이 없습니다.");
+      } catch (e) {
+        window.alert(e.message);
+        console.group("========== CHospital.js - 데이터 추가 ==========");
+        console.error(e);
+        console.groupEnd();
+        e.selector.focus();
         return;
       }
 
-      // navigate(`/manager/manager_cooperation_hospital`);
-    });
+      // 리덕스를 통한 데이터 저장 요청
+      dispatch(
+        postItem({
+          CHospitalArea: current.CHospitalArea.value,
+          CHospitalIntroduction: current.CHospitalIntroduction.value,
+          CHospitalAddress: current.CHospitalAddress.value,
+          CHospitalZipCode: current.CHospitalZipCode.value,
+          CHospitalTel: current.CHospitalTel.value,
+          CHospitalName: current.CHospitalName.value,
+          CMedicalDepartment: current.CMedicalDepartment.value,
+          CHospitalURL: current.CHospitalURL.value
+        })
+      ).catch(({ payload, error }) => {
+        window.alert(payload.data.rtmsg);
+        return;
+      });
+
+      alert("추가되었습니다.");
+      setIsUpdate(isUpdate + 1);
+    },
+    [isUpdate]
+  );
+
+  /** 수정 */
+  const onEditSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      const current = e.currentTarget;
+      const regexHelper = RegexHelper.getInstance();
+
+      // 입력값에 대한 유효성 검사
+      try {
+        regexHelper.value(current.CHospitalArea, "지역이 없습니다.");
+        regexHelper.value(current.CHospitalIntroduction, "소개가 없습니다.");
+        regexHelper.value(current.CHospitalAddress, "주소가 없습니다.");
+        regexHelper.value(current.CHospitalZipCode, "우편번호가 없습니다.");
+        regexHelper.value(current.CHospitalTel, "전화번호가 없습니다.");
+        regexHelper.value(current.CHospitalName, "이름이 없습니다.");
+      } catch (e) {
+        window.alert(e.message);
+        console.group("========== CHospital.js - 데이터 수정 ==========");
+        console.error(e);
+        console.groupEnd();
+        e.selector.focus();
+        return;
+      }
+
+      // 리덕스를 통한 데이터 저장 요청.
+      dispatch(
+        putItem({
+          id: current.id.value,
+          CHospitalArea: current.CHospitalArea.value,
+          CHospitalIntroduction: current.CHospitalIntroduction.value,
+          CHospitalAddress: current.CHospitalAddress.value,
+          CHospitalZipCode: current.CHospitalZipCode.value,
+          CHospitalTel: current.CHospitalTel.value,
+          CHospitalName: current.CHospitalName.value,
+          CMedicalDepartment: current.CMedicalDepartment.value,
+          CHospitalURL: current.CHospitalURL.value
+        })
+      ).catch(({ payload, error }) => {
+        window.alert(payload.data.rtmsg);
+        return;
+      });
+
+      alert("수정되었습니다.");
+      setIsUpdate(isUpdate + 1);
+      setUpdateId(-1);
+    },
+    [isUpdate]
+  );
+
+  /** 삭제 */
+  const onDeleteClick = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      const current = e.currentTarget;
+
+      if (window.confirm(`정말 ${current.dataset.name}(을)를 삭제하시겠습니까?`)) {
+        dispatch(deleteItem({ id: current.dataset.id })).then(({ payload, error }) => {
+          if (error) {
+            window.alert(payload.data.rtmsg);
+            return;
+          }
+
+          window.alert("삭제되었습니다.");
+          setIsUpdate(isUpdate + 1);
+        });
+      }
+    },
+    [isUpdate]
+  );
+
+  /** 수정 버튼 */
+  const onEditClick = useCallback((e) => {
+    e.preventDefault();
+
+    const current = e.currentTarget;
+    const id = parseInt(current.dataset.id);
+    setUpdateId(id);
   }, []);
+
+  /** 검색 */
+  const onSearchSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      // 검색어
+      const query = e.currentTarget.query.value;
+
+      // 검색어에 따라 URL을 구성한다.
+      let redirectUrl = query ? `/manager/c_hospital/?query=${query}` : "/manager/c_hospital";
+      navigate(redirectUrl);
+    },
+    [navigate]
+  );
+
+  /** 페이지 */
+  const handleChange = useCallback(() => {
+    // 스크롤바를 강제로 맨 위로 이동시킨다.
+    window.scrollTo(0, 0);
+  });
 
   return (
     <>
+      {/* 로딩 */}
       <Spinner loading={loading} />
 
-      {/* 검색폼 */}
-      <ControlContainer>
-        <NavLink to="c_hospital_add" className="controll clickable">
-          학과정보 추가하기
-        </NavLink>
-      </ControlContainer>
-
-      {/* 데이터 추가 */}
-      <form onSubmit={onCHospitalSubmit}>
+      {/* 추가 */}
+      <AddForm onSubmit={onAddSubmit}>
         <TableEx>
           <colgroup>
             <col width="120" />
@@ -187,6 +230,12 @@ const ManagerCooperationHospital = memo(() => {
               </td>
             </tr>
             <tr>
+              <th>우편번호</th>
+              <td className="inputWrapper">
+                <input className="field" type="text" name="CHospitalZipCode" />
+              </td>
+            </tr>
+            <tr>
               <th>전화번호</th>
               <td className="inputWrapper">
                 <input className="field" type="text" name="CHospitalTel" />
@@ -204,63 +253,142 @@ const ManagerCooperationHospital = memo(() => {
                 <input className="field" type="text" name="CMedicalDepartment" />
               </td>
             </tr>
+            <tr>
+              <th>URL</th>
+              <td className="inputWrapper">
+                <input className="field" type="text" name="CHospitalURL" />
+              </td>
+            </tr>
           </tbody>
         </TableEx>
-        <button type="submit">저장하기</button>
-      </form>
+        <button type="submit">새로운 정보 추가</button>
+      </AddForm>
 
-      {/* 조회결과 표시하기 */}
-      {error ? (
-        <h1>에러 발생함</h1>
-      ) : (
-        data && (
-          <Table>
-            <thead>
-              <tr>
-                <th>지역</th>
-                <th>소개</th>
-                <th>주소</th>
-                <th>전화번호</th>
-                <th>이름</th>
-                <th>진료과</th>
-                <th>등록일시</th>
-                <th>변경일시</th>
-                <th>수정</th>
-                <th>삭제</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                //처리 결과는 존재하지만 0개인경우
-                data.length > 0 ? (
-                  data.map((v, i) => {
-                    return (
-                      <tr key={i}>
-                        <td>{v.CHospitalArea}</td>
-                        <td>{v.CHospitalIntroduction}</td>
-                        <td>{v.CHospitalAddress}</td>
-                        <td>{v.CHospitalTel}</td>
-                        <td>{v.CHospitalName}</td>
-                        <td>{v.CMedicalDepartment}</td>
-                        <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
-                        <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
-                        <td>수정</td>
-                        <td>삭제</td>
-                      </tr>
-                    );
+      {/* 검색 */}
+      <SearchForm onSubmit={onSearchSubmit}>
+        <input type="text" name="query" defaultValue={query} placeholder="지역, 이름 검색" />
+        <button type="submit">검색</button>
+      </SearchForm>
+
+      {/* 조회, 수정 */}
+      <GetEditForm onSubmit={onEditSubmit}>
+        <Table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>지역</th>
+              <th>소개</th>
+              <th>주소</th>
+              <th>우편번호</th>
+              <th>전화번호</th>
+              <th>이름</th>
+              <th>진료과</th>
+              <th>URL</th>
+              <th>등록일시</th>
+              <th>변경일시</th>
+              <th colSpan="2">수정 / 삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              //처리 결과는 존재하지만 0개인경우
+              data && pagenation && !error
+                ? data.map((v, i) => {
+                    if (v.id === updateId) {
+                      return (
+                        <tr key={v.id} data-id={v.id} className="editTr">
+                          <td style={{ display: "none" }}>
+                            <input type="hidden" name="id" defaultValue={v.id} />
+                          </td>
+                          <td>{v.id}</td>
+                          <td>
+                            <input type="text" name="CHospitalArea" defaultValue={v.CHospitalArea} />
+                          </td>
+                          <td>
+                            <input type="text" name="CHospitalIntroduction" defaultValue={v.CHospitalIntroduction} />
+                          </td>
+                          <td>
+                            <input type="text" name="CHospitalAddress" defaultValue={v.CHospitalAddress} />
+                          </td>
+                          <td>
+                            <input type="text" name="CHospitalZipCode" defaultValue={v.CHospitalZipCode} />
+                          </td>
+                          <td>
+                            <input type="text" name="CHospitalTel" defaultValue={v.CHospitalTel} />
+                          </td>
+                          <td>
+                            <input type="text" name="CHospitalName" defaultValue={v.CHospitalName} />
+                          </td>
+                          <td>
+                            <input type="text" name="CMedicalDepartment" defaultValue={v.CMedicalDepartment} />
+                          </td>
+                          <td>
+                            <input type="text" name="CHospitalURL" defaultValue={v.CHospitalURL} />
+                          </td>
+                          <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
+                          <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
+                          <td colSpan="2">
+                            <button type="submit">수정완료</button>
+                          </td>
+                        </tr>
+                      );
+                    } else {
+                      return (
+                        <tr key={v.id}>
+                          <td>{v.id}</td>
+                          <td>{v.CHospitalArea}</td>
+                          <td>{v.CHospitalIntroduction}</td>
+                          <td>{v.CHospitalAddress}</td>
+                          <td>{v.CHospitalZipCode}</td>
+                          <td>{v.CHospitalTel}</td>
+                          <td>{v.CHospitalName}</td>
+                          <td>{v.CMedicalDepartment}</td>
+                          <td>{v.CHospitalURL}</td>
+                          <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
+                          <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
+                          <td>
+                            <button type="button" data-id={v.id} onClick={onEditClick}>
+                              수정하기
+                            </button>
+                          </td>
+                          <td>
+                            <button type="button" data-id={v.id} data-name={v.CHospitalName} onClick={onDeleteClick}>
+                              삭제하기
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    }
                   })
-                ) : (
-                  <tr>
-                    <td colSpan="4">글이 없습니다.</td>
-                  </tr>
-                )
-              }
-            </tbody>
-          </Table>
-        )
+                : error && (
+                    <tr>
+                      <td colSpan="13" align="center">
+                        {error.message}
+                      </td>
+                    </tr>
+                  )
+            }
+          </tbody>
+        </Table>
+      </GetEditForm>
+
+      {/* 페이지 */}
+      {data && pagenation && !error && (
+        <PaginationNav>
+          <Pagination
+            count={pagenation.totalPage}
+            defaultPage={1}
+            siblingCount={2}
+            boundaryCount={1}
+            page={nowPage}
+            className={classes.root}
+            onChange={handleChange}
+            renderItem={(item) => <PaginationItem component={Link} to={`/manager/c_hospital?page=${item.page}`} {...item} />}
+          />
+        </PaginationNav>
       )}
     </>
   );
 });
 
-export default ManagerCooperationHospital;
+export default CHospital;

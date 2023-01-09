@@ -6,10 +6,13 @@
  */
 
 /** import */
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Pagination } from "@mui/material";
 import { Link } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getList } from "../../slices/CHospitalSlice";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -257,17 +260,13 @@ const Hospital = memo(() => {
   // active
   const [activeList, setActiveList] = useState(1);
 
-  // 검색 결과 리스트 출력
-  const searchList = useCallback(() => {
-    const result = [];
-    for (let i = 0; i < 12; i++) {
-      result.push(
-        <li key={i}>
-          <Link to="/cooperation/hospital-detail.do">{i}</Link>
-        </li>
-      );
-    }
-    return result;
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.CHospitalSlice);
+
+  /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+  useEffect(() => {
+    dispatch(getList());
   }, []);
 
   return (
@@ -711,7 +710,16 @@ const Hospital = memo(() => {
 
       {/* 검색 결과 리스트 */}
       <PartnerListBoxSection>
-        <ul>{searchList()}</ul>
+        <ul>
+          {data &&
+            data.map((v, i) => {
+              return (
+                <li key={i}>
+                  <Link to={`/cooperation/hospital-detail.do/${v.id}`}>{v.CHospitalName}</Link>
+                </li>
+              );
+            })}
+        </ul>
       </PartnerListBoxSection>
 
       {/* Pagination */}

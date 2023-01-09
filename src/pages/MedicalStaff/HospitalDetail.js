@@ -7,8 +7,11 @@
 
 /** import */
 import React, { memo, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getItem, getList } from "../../slices/CHospitalSlice";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -167,48 +170,72 @@ const MapStyle = styled.div`
 `;
 
 const HospitalDetail = memo(() => {
+  /** path로 아이디값을 전달 받는다. */
+  const path = useParams().id;
+
   // KAKAO MAP OPEN API
   const { kakao } = window;
   // a태그 url 상태값 (임시)
-  const [url, setUrl] = useState("http://www.kyungheehp.co.kr");
+  const [url, setUrl] = useState("");
 
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.CHospitalSlice);
+
+  /** 최초마운트시 리덕스를 통해 단일정보를 조회한다. */
+  useEffect(() => {
+    dispatch(getItem({ id: path }));
+  }, []);
+
+  /** 단일 데이터 정보를 item에 넣는다. */
+  const item = data && data[0].data;
+
+  /** 카카오맵 */
   useEffect(() => {
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
     /** @todo: addressSearch "경기도 안산시 단원구 광덕대로 162"에 adress 데이터 적용 */
-    geocoder.addressSearch("경기도 안산시 단원구 광덕대로 162", function (result, status) {
-      // 정상적으로 검색이 완료됐으면
-      if (status === kakao.maps.services.Status.OK) {
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    item &&
+      geocoder.addressSearch(item.CHospitalAddress, function (result, status) {
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+            mapOption = {
+              center: coords, // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+            };
+          // 지도를 생성합니다
+          var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-          mapOption = {
-            center: coords, // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-          };
+          // 결과값으로 받은 위치를 마커로 표시합니다
+          var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+          });
 
-        // 지도를 생성합니다
-        var map = new kakao.maps.Map(mapContainer, mapOption);
+          // 인포윈도우로 장소에 대한 설명을 표시합니다
+          var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + item.CHospitalName + "</div>"
+          }); /** @todo: content 태그 사이 '경희요양병원'에 hospitalName 데이터 적용 {hospitalName} */
+          infowindow.open(map, marker);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords
-        });
+          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+          map.setCenter(coords);
+        } else {
+          var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+            mapOption = {
+              center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+            };
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;">' + "경희요양병원" + "</div>"
-        }); /** @todo: content 태그 사이 '경희요양병원'에 hospitalName 데이터 적용 {hospitalName} */
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-      }
-    });
-  }, []);
+          // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+          var map = new kakao.maps.Map(mapContainer, mapOption);
+        }
+      });
+  }, [item]);
 
   return (
     <>
@@ -221,37 +248,39 @@ const HospitalDetail = memo(() => {
         </ListStyleUl>
       </section>
 
-      <DetailDataStyle>
-        <h4>
-          <span>경희요양병원</span>
-          {/* @todo: url data 적용 */}
-          <a href={url} target="_black" rel="noopener noreferrer">
-            <i className={url ? "" : "grayIcon"} />
-          </a>
-        </h4>
+        {item && (
+          <DetailDataStyle>
+            <h4>
+              <span>{item.CHospitalName}</span>
+              {/* @todo: url data 적용 */}
+              <a href={item.CHospitalURL !== null ? item.CHospitalURL : "javascript:void(0)"} target={item.CHospitalURL !== null ? "_black" : "_self"} rel="noopener noreferrer">
+                <i className={item.CHospitalURL ? "" : "grayIcon"} />
+              </a>
+            </h4>
 
-        <dl>
-          <dt>소개</dt>
-          <dd>양,한방 재활요양병원</dd>
-        </dl>
-        <dl>
-          <dt>진료과</dt>
-          <dd>내과, 신경과, 재활의학과, 가정의학과</dd>
-        </dl>
+            <dl>
+              <dt>소개</dt>
+              <dd>{item.CHospitalIntroduction}</dd>
+            </dl>
+            <dl>
+              <dt>진료과</dt>
+              <dd>{item.CMedicalDepartment}</dd>
+            </dl>
 
-        <address>
-          <div className="address">
-            <i className="location" />
-            <p>15355 경기도 안산시 단원구 광덕대로 162</p>
-          </div>
+            <address>
+              <div className="address">
+                <i className="location" />
+                <p>{`${item.CHospitalZipCode} ${item.CHospitalAddress}`}</p>
+              </div>
 
-          <div className="address">
-            <i className="call" />
-            <p>031-402-2222</p>
-          </div>
-        </address>
-        <MapStyle id="map"></MapStyle>
-      </DetailDataStyle>
+              <div className="address">
+                <i className="call" />
+                <p>{item.CHospitalTel}</p>
+              </div>
+            </address>
+            <MapStyle id="map"></MapStyle>
+          </DetailDataStyle>
+        )}
 
       <SingleButtonDiv>
         <Link to="/cooperation/hospital.do">목록</Link>

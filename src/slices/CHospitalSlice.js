@@ -7,13 +7,13 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { pending, fulfilled, rejected } from "../helper/ReduxHelper";
+import { pending, fulfilled, rejected } from "../helper/ReduxHelperV2";
 import { cloneDeep } from "lodash";
 
 /** 다중행 데이터 조회를 위한 비동기 함수 */
 export const getList = createAsyncThunk("CHospitalSlice/getList", async (payload, { rejectWithValue }) => {
   let result = null;
-  const URL = process.env.REACT_APP_API_COOPERATIONHOSPITAL_LIST;
+  const URL = process.env.REACT_APP_API_COOPERATION_HOSPITAL_LIST;
 
   try {
     const response = await axios.get(URL, {
@@ -23,7 +23,7 @@ export const getList = createAsyncThunk("CHospitalSlice/getList", async (payload
           rows: payload?.rows || 10
       }
   });
-    result = response.data.data;
+    result = response.data;
   } catch (err) {
     console.group("CHospitalSlice.getList");
     console.error(err);
@@ -39,7 +39,7 @@ export const getItem = createAsyncThunk("CHospitalSlice/getitem", async (payload
 
   //환경설정 파일에 정의된 URL에서 ':id' 부분을 찾아 payload를 통해 전달된 일련번호로 치환
   //어떤 항목을 수정할지 판별할 id가 필요
-  const URL = process.env.REACT_APP_API_COOPERATIONHOSPITAL_ID.replace(":id", payload.id);
+  const URL = process.env.REACT_APP_API_COOPERATION_HOSPITAL_ID.replace(":id", payload.id);
 
   try {
     const response = await axios.get(URL);
@@ -54,16 +54,18 @@ export const getItem = createAsyncThunk("CHospitalSlice/getitem", async (payload
 export const postItem = createAsyncThunk("CHospitalSlice/postItem", async (payload, { rejectWithValue }) => {
   let result = null;
 
-  const URL = process.env.REACT_APP_API_COOPERATIONHOSPITAL_LIST;
+  const URL = process.env.REACT_APP_API_COOPERATION_HOSPITAL_LIST;
 
   try {
     const response = await axios.post(URL, {
       CHospitalArea: payload.CHospitalArea,
       CHospitalIntroduction: payload.CHospitalIntroduction,
       CHospitalAddress: payload.CHospitalAddress,
+      CHospitalZipCode: payload.CHospitalZipCode,
       CHospitalTel: payload.CHospitalTel,
       CHospitalName: payload.CHospitalName,
       CMedicalDepartment: payload.CMedicalDepartment,
+      CHospitalURL: payload.CHospitalURL,
       regDate: payload.regDate,
       editDate: payload.editDate
     });
@@ -79,16 +81,18 @@ export const putItem = createAsyncThunk("CHospitalSlice/putItem", async (payload
   let result = null;
 
   //어떤 항목을 수정할지 판별할 id가 필요
-  const URL = process.env.REACT_APP_API_COOPERATIONHOSPITAL_ID.replace(":id", payload.id);
+  const URL = process.env.REACT_APP_API_COOPERATION_HOSPITAL_ID.replace(":id", payload.id);
 
   try {
     const response = await axios.put(URL, {
       CHospitalArea: payload.CHospitalArea,
       CHospitalIntroduction: payload.CHospitalIntroduction,
       CHospitalAddress: payload.CHospitalAddress,
+      CHospitalZipCode: payload.CHospitalZipCode,
       CHospitalTel: payload.CHospitalTel,
       CHospitalName: payload.CHospitalName,
       CMedicalDepartment: payload.CMedicalDepartment,
+      CHospitalURL: payload.CHospitalURL,
       regDate: payload.regDate,
       editDate: payload.editDate
     });
@@ -104,7 +108,7 @@ export const deleteItem = createAsyncThunk("CHospitalSlice/deleteItem", async (p
   let result = null;
 
   //어떤 항목을 수정할지 판별할 id가 필요
-  const URL = process.env.REACT_APP_API_COOPERATIONHOSPITAL_ID.replace(":id", payload.id);
+  const URL = process.env.REACT_APP_API_COOPERATION_HOSPITAL_ID.replace(":id", payload.id);
 
   try {
     const response = await axios.delete(URL);
@@ -139,7 +143,7 @@ const CHospitalSlice = createSlice({
     [getItem.pending]: pending,
     [getItem.fulfilled]: (state, { meta, payload }) => {
       return {
-        data: [payload],
+        data: [payload.data],
         loading: false,
         error: null
       };
@@ -151,10 +155,9 @@ const CHospitalSlice = createSlice({
     [postItem.fulfilled]: (state, { meta, payload }) => {
       //기존의 상태값을 복사한다. (원본이 JSON이므로 깊은 복사를 수행해야한다.)
       const data = cloneDeep(state.data);
-      console.log(data);
 
       //새로 저장된 결과를 기존 상태값 배열의 맨 뒤에 추가한다.
-      data.push(payload);
+      data.push(payload.data);
 
       return {
         data: data,
@@ -174,7 +177,7 @@ const CHospitalSlice = createSlice({
       const targetId = data.findIndex((v, i) => v.id === meta.arg.id);
 
       //해당 인덱스의 원소를 백엔드의 응답 결과로 교체
-      data.splice(targetId, 1, payload);
+      data.splice(targetId, 1, payload.data);
 
       return {
         data: data,

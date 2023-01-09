@@ -36,8 +36,8 @@ const Cooperation = memo(() => {
           <Routes>
             <Route path="/hospital.do" element={<Hospital />} />
             <Route path="/doctor.do" element={<Doctor />} />
-            <Route path="/hospital-detail.do" element={<HospitalDetail />} />
-            <Route path="/doctor-detail.do" element={<DoctorDetail />} />
+            <Route path="/hospital-detail.do/:id" element={<HospitalDetail />} />
+            <Route path="/doctor-detail.do/:id" element={<DoctorDetail />} />
           </Routes>
         </div>
       </div>
