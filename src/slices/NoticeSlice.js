@@ -39,12 +39,8 @@ export const getList = createAsyncThunk("NoticeSlice/getList", async (payload, {
 export const getItem = createAsyncThunk("NoticeSlice/getitem", async (payload, {rejectWithValue }) => {
     let result = null;
 
-    //환경설정 파일에 정의된 URL에서 ':id' 부분을 찾아 payload를 통해 전달된 일련번호로 치환
-    //어떤 항목을 수정할지 판별할 id가 필요
-    const URL = process.env.REACT_APP_API_Notice_ID.replace(':id',payload.id);
-
     try {
-        const response = await axios.get(URL);
+        const response = await axios.get(`${URL}/${payload?.id}`);
         result = response.data;
     } catch (err) {
         result = rejectWithValue(err.response);

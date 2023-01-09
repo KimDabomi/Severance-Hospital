@@ -109,7 +109,7 @@ const NoticeView = memo(() => {
                 {data.data.map((v, i) => {
                   return (
                     <div className="bbsItem" key={v.id}>
-                      <Link className="inner" to={v.id}>
+                      <Link className="inner" to={`${v.id}`}>
                         <div className="bbssubjectArea">
                           <strong>{v.noticeTitle}</strong>
 

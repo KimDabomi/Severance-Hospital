@@ -1,14 +1,19 @@
 /**
  * @ File Name: NoticeInfo.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-28 18:00
+ * @ Last Update: 2023-01-09 14:35
  * @ Description: 공지사항상세
  */
 
-import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { memo, useEffect, useCallback } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getItem } from '../../slices/NoticeSlice';
+
 import styled from 'styled-components';
 import prevImg from '../../assets/img/ico-chevron-down-sm@2x.png';
+
+import Spinner from '../../components/Spinner';
 
 const Div = styled.div`
   .subjectArea {
@@ -79,6 +84,21 @@ const Div = styled.div`
 `;
 
 const NoticeInfo = memo(() => {
+  /** path 파라미터 받기 */
+  const { id } = useParams();
+
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.NoticeSlice);
+
+  /** 페이지가 열린 직후 (혹은 id값이 변경된 경우) 데이터 가져오기 */
+  useEffect(() => {
+    dispatch(getItem({ id: id }));
+  }, [id]);
+
+  if (data) {
+    console.log('notice getItem', data);
+  }
   return (
     <Div>
       <div className="bgAll">
@@ -87,39 +107,46 @@ const NoticeInfo = memo(() => {
         </div>
       </div>
 
-      <div className="pageCont">
-        <div className="subjectArea">
-          <h3 className="subject">추석 연휴 병동 면회 제한 안내</h3>
-          <div className="articleInfo">
-            <span>관리자</span>
-            <span className="itemInfo">2020-09-29</span>
-            <span className="itemInfo">
-              <strong>조회수 &nbsp;</strong>
-            </span>
-            <span>19190</span>
+      {error ? (
+        <h1>에러발생함</h1>
+      ) : (
+        data && (
+          <div className="pageCont">
+            <Spinner loading={loading} />
+            <div className="subjectArea">
+              <h3 className="subject">{data[0].data.noticeTitle}</h3>
+              <div className="articleInfo">
+                <span>관리자</span>
+                <span className="itemInfo">{data[0].data.regDate}</span>
+                <span className="itemInfo">
+                  <strong>조회수 &nbsp;</strong>
+                </span>
+                <span>{data[0].data.hits}</span>
+              </div>
+            </div>
+            <div className="articleBody">
+            {data[0].data.noticeContent.data.toString("utf-8")}
+            </div>
+
+            <div className="buttonCont">
+              <Link className="buttonBlue" to="/news/notice.do">
+                목록
+              </Link>
+            </div>
+
+            <ul className="articleNav">
+              <li className="prev">
+                <strong>이전글</strong>
+                <Link>이전글 제목제목</Link>
+              </li>
+              <li className="next">
+                <strong>다음글</strong>
+                <Link>다음글 제목제목</Link>
+              </li>
+            </ul>
           </div>
-        </div>
-        <div className="articleBody">
-        {/* <p>2022년 11월 1일(화)부터 서울(서부)역과 용산역 셔틀버스가 신설되었습니다.</p><p>서울(서부)역과 용산역에서 셔틀버스를 타시면 세브란스병원 본관 3층에서 하차합니다. 많은 이용 부탁 드립니다.</p><p><br/></p><p>그리고 신촌역과 경복궁역을 가는 셔틀버스의 승강장이 변경됐습니다.</p><img src="https://sev.severance.healthcare/_attach/yuhs/editor-image/2022/11/YbIQGFxURhUXEgVKvidNaPvsYS.jpg" alt="공지사항"/> */}
-        </div>
-
-        <div className="buttonCont">
-          <Link className="buttonBlue" to="/news/notice.do">
-            목록
-          </Link>
-        </div>
-
-        <ul className="articleNav">
-          <li className="prev">
-            <strong>이전글</strong>
-            <Link>이전글 제목제목</Link>
-          </li>
-          <li className="next">
-            <strong>다음글</strong>
-            <Link>다음글 제목제목</Link>
-          </li>
-        </ul>
-      </div>
+        )
+      )}
     </Div>
   );
 });
