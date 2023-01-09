@@ -23,12 +23,18 @@ import CHospital from "./CHospital/CHospital";
 import CDoctor from "./CDoctor/CDoctor";
 import Department from "./Department/Department";
 
+/** manager */
+const Container = styled.div`
+  padding: 0 3%;
+`;
+
 /** 전체 메뉴 스타일 */
 const MenuContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
-  padding: 50px 100px 20px;
+  padding: 50px 10% 20px;
   border-bottom: 1px solid #eee;
 `;
 // 각 메뉴 스타일
@@ -36,14 +42,16 @@ const MenuLinkContainer = styled(NavLink)`
   font-size: 18px;
   padding-bottom: 2px;
   color: #ccc;
+  transition: 0.3s;
+  margin-right: 10px;
 
   &:hover {
-    color: #222;
+    color: #168;
     font-weight: bold;
   }
 
   &.active {
-    color: #222;
+    color: #168;
     font-weight: bold;
   }
 `;
@@ -53,7 +61,7 @@ const Manager = memo(() => {
   const { pathname } = useLocation();
 
   return (
-    <>
+    <Container>
       <MenuContainer>
         <MenuLinkContainer to={pathname === "/manager" ? "/manager" : "/manager/customer_board"}>고객의소리</MenuLinkContainer>
         <MenuLinkContainer to="news">뉴스</MenuLinkContainer>
@@ -82,7 +90,7 @@ const Manager = memo(() => {
         <Route path="/c_doctor" element={<CDoctor />} />
         <Route path="/department" element={<Department />} />
       </Routes>
-    </>
+    </Container>
   );
 });
 
