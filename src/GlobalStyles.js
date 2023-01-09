@@ -205,7 +205,7 @@ textarea{
         position:fixed;
         top:150px; left:30px;
         box-shadow : #000000B3 0 0 0 9999px;
-        z-index : 100;
+        z-index : 9998;
     }
     .popUp{
         position:fixed;
@@ -213,7 +213,7 @@ textarea{
         width: 360px; height: 182px;
         transform: translate(-50%, -50%);
         background-color: #fff;
-        z-index : 101;
+        z-index : 9999;
         text-align:center;
         padding: 30px;
         box-sizing: border-box;
