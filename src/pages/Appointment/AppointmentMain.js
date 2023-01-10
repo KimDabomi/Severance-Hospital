@@ -15,10 +15,10 @@ const ApptCont = styled.div`
 const Appointment = memo(() => {
 
     return (
-      <ApptCont className='pageCont'>
-        <Header />
-        <ApptHeader />
-
+      <>
+      <Header />
+      <ApptHeader />
+      <ApptCont className='pageCont' >
         {/* navbar */}
         <nav className="tabMenu">
           <NavLink to="internet_appt">인터넷예약</NavLink>
@@ -32,6 +32,7 @@ const Appointment = memo(() => {
         <div></div>
         <Footer />
       </ApptCont>
+      </>
     );
 });
 
