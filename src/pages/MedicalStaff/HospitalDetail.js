@@ -11,7 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, getList } from "../../slices/CHospitalSlice";
+import { getItem, getList } from "../../slices/CHospitalClinicSlice";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -180,7 +180,7 @@ const HospitalDetail = memo(() => {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.CHospitalSlice);
+  const { data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
 
   /** 최초마운트시 리덕스를 통해 단일정보를 조회한다. */
   useEffect(() => {
@@ -198,7 +198,7 @@ const HospitalDetail = memo(() => {
     // 주소로 좌표를 검색합니다
     /** @todo: addressSearch "경기도 안산시 단원구 광덕대로 162"에 adress 데이터 적용 */
     item &&
-      geocoder.addressSearch(item.CHospitalAddress, function (result, status) {
+      geocoder.addressSearch(item.address, function (result, status) {
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
           var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -218,7 +218,7 @@ const HospitalDetail = memo(() => {
 
           // 인포윈도우로 장소에 대한 설명을 표시합니다
           var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + item.CHospitalName + "</div>"
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + item.name + "</div>"
           }); /** @todo: content 태그 사이 '경희요양병원'에 hospitalName 데이터 적용 {hospitalName} */
           infowindow.open(map, marker);
 
@@ -251,31 +251,31 @@ const HospitalDetail = memo(() => {
         {item && (
           <DetailDataStyle>
             <h4>
-              <span>{item.CHospitalName}</span>
+              <span>{item.name}</span>
               {/* @todo: url data 적용 */}
-              <a href={item.CHospitalURL !== null ? item.CHospitalURL : "javascript:void(0)"} target={item.CHospitalURL !== null ? "_black" : "_self"} rel="noopener noreferrer">
-                <i className={item.CHospitalURL ? "" : "grayIcon"} />
+              <a href={item.url !== null ? item.url : "javascript:void(0)"} target={item.url !== null ? "_black" : "_self"} rel="noopener noreferrer">
+                <i className={item.url ? "" : "grayIcon"} />
               </a>
             </h4>
 
             <dl>
               <dt>소개</dt>
-              <dd>{item.CHospitalIntroduction}</dd>
+              <dd>{item.introduction}</dd>
             </dl>
             <dl>
               <dt>진료과</dt>
-              <dd>{item.CMedicalDepartment}</dd>
+              <dd>{item.department}</dd>
             </dl>
 
             <address>
               <div className="address">
                 <i className="location" />
-                <p>{`${item.CHospitalZipCode} ${item.CHospitalAddress}`}</p>
+                <p>{`${item.zipCode} ${item.address}`}</p>
               </div>
 
               <div className="address">
                 <i className="call" />
-                <p>{item.CHospitalTel}</p>
+                <p>{item.tel}</p>
               </div>
             </address>
             <MapStyle id="map"></MapStyle>
