@@ -11,7 +11,7 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { getList, postItem, putItem, deleteItem } from "../../../slices/CHospitalSlice";
+import { getList, postItem, putItem, deleteItem } from "../../../slices/CHospitalClinicSlice";
 // module
 import dayjs from "dayjs";
 import { Pagination } from "@mui/material";
@@ -41,7 +41,7 @@ const CHospital = memo(() => {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { pagenation, data, loading, error } = useSelector((state) => state.CHospitalSlice);
+  const { pagenation, data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(() => {
@@ -58,17 +58,18 @@ const CHospital = memo(() => {
 
       // 입력값에 대한 유효성 검사
       try {
-        regexHelper.value(current.CHospitalArea, "지역이 없습니다.");
-        regexHelper.value(current.CHospitalIntroduction, "소개가 없습니다.");
-        regexHelper.value(current.CHospitalAddress, "주소가 없습니다.");
-        regexHelper.value(current.CHospitalZipCode, "우편번호가 없습니다.");
-        regexHelper.value(current.CHospitalTel, "전화번호가 없습니다.");
-        regexHelper.value(current.CHospitalName, "이름이 없습니다.");
+        regexHelper.value(current.area, "지역이 없습니다.");
+        regexHelper.value(current.introduction, "소개가 없습니다.");
+        regexHelper.value(current.address, "주소가 없습니다.");
+        regexHelper.value(current.zipCode, "우편번호가 없습니다.");
+        regexHelper.value(current.tel, "전화번호가 없습니다.");
+        regexHelper.value(current.name, "병의원명이 없습니다.");
+        regexHelper.value(current.department, "진료과가 없습니다.");
+        regexHelper.value(current.url, "URL이 없습니다.");
+        regexHelper.value(current.division, "병의원 구분이 없습니다.");
       } catch (e) {
         window.alert(e.message);
-        console.group("========== CHospital.js - 데이터 추가 ==========");
         console.error(e);
-        console.groupEnd();
         e.selector.focus();
         return;
       }
@@ -76,14 +77,15 @@ const CHospital = memo(() => {
       // 리덕스를 통한 데이터 저장 요청
       dispatch(
         postItem({
-          CHospitalArea: current.CHospitalArea.value,
-          CHospitalIntroduction: current.CHospitalIntroduction.value,
-          CHospitalAddress: current.CHospitalAddress.value,
-          CHospitalZipCode: current.CHospitalZipCode.value,
-          CHospitalTel: current.CHospitalTel.value,
-          CHospitalName: current.CHospitalName.value,
-          CMedicalDepartment: current.CMedicalDepartment.value,
-          CHospitalURL: current.CHospitalURL.value
+          area: current.area.value,
+          introduction: current.introduction.value,
+          address: current.address.value,
+          zipCode: current.zipCode.value,
+          tel: current.tel.value,
+          name: current.name.value,
+          department: current.department.value,
+          url: current.url.value,
+          division: current.division.value
         })
       ).catch(({ payload, error }) => {
         window.alert(payload.data.rtmsg);
@@ -106,33 +108,35 @@ const CHospital = memo(() => {
 
       // 입력값에 대한 유효성 검사
       try {
-        regexHelper.value(current.CHospitalArea, "지역이 없습니다.");
-        regexHelper.value(current.CHospitalIntroduction, "소개가 없습니다.");
-        regexHelper.value(current.CHospitalAddress, "주소가 없습니다.");
-        regexHelper.value(current.CHospitalZipCode, "우편번호가 없습니다.");
-        regexHelper.value(current.CHospitalTel, "전화번호가 없습니다.");
-        regexHelper.value(current.CHospitalName, "이름이 없습니다.");
+        regexHelper.value(current.area, "지역이 없습니다.");
+        regexHelper.value(current.introduction, "소개가 없습니다.");
+        regexHelper.value(current.address, "주소가 없습니다.");
+        regexHelper.value(current.zipCode, "우편번호가 없습니다.");
+        regexHelper.value(current.tel, "전화번호가 없습니다.");
+        regexHelper.value(current.name, "병의원명이 없습니다.");
+        regexHelper.value(current.department, "진료과가 없습니다.");
+        regexHelper.value(current.url, "URL이 없습니다.");
+        regexHelper.value(current.division, "병의원 구분이 없습니다.");
       } catch (e) {
         window.alert(e.message);
-        console.group("========== CHospital.js - 데이터 수정 ==========");
         console.error(e);
-        console.groupEnd();
         e.selector.focus();
         return;
       }
 
-      // 리덕스를 통한 데이터 저장 요청.
+      // 리덕스를 통한 데이터 저장 요청
       dispatch(
         putItem({
           id: current.id.value,
-          CHospitalArea: current.CHospitalArea.value,
-          CHospitalIntroduction: current.CHospitalIntroduction.value,
-          CHospitalAddress: current.CHospitalAddress.value,
-          CHospitalZipCode: current.CHospitalZipCode.value,
-          CHospitalTel: current.CHospitalTel.value,
-          CHospitalName: current.CHospitalName.value,
-          CMedicalDepartment: current.CMedicalDepartment.value,
-          CHospitalURL: current.CHospitalURL.value
+          area: current.area.value,
+          introduction: current.introduction.value,
+          address: current.address.value,
+          zipCode: current.zipCode.value,
+          tel: current.tel.value,
+          name: current.name.value,
+          department: current.department.value,
+          url: current.url.value,
+          division: current.division.value
         })
       ).catch(({ payload, error }) => {
         window.alert(payload.data.rtmsg);
@@ -186,7 +190,7 @@ const CHospital = memo(() => {
       const query = e.currentTarget.query.value;
 
       // 검색어에 따라 URL을 구성한다.
-      let redirectUrl = query ? `/manager/c_hospital/?query=${query}` : "/manager/c_hospital";
+      let redirectUrl = query ? `/manager/cooperation_hospital/?query=${query}` : "/manager/cooperation_hospital";
       navigate(redirectUrl);
     },
     [navigate]
@@ -214,49 +218,55 @@ const CHospital = memo(() => {
             <tr>
               <th>지역</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CHospitalArea" />
+                <input className="field" type="text" name="area" />
               </td>
             </tr>
             <tr>
               <th>소개</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CHospitalIntroduction" />
+                <input className="field" type="text" name="introduction" />
               </td>
             </tr>
             <tr>
               <th>주소</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CHospitalAddress" />
+                <input className="field" type="text" name="address" />
               </td>
             </tr>
             <tr>
               <th>우편번호</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CHospitalZipCode" />
+                <input className="field" type="text" name="zipCode" />
               </td>
             </tr>
             <tr>
               <th>전화번호</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CHospitalTel" />
+                <input className="field" type="text" name="tel" />
               </td>
             </tr>
             <tr>
-              <th>이름</th>
+              <th>병의원명</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CHospitalName" />
+                <input className="field" type="text" name="name" />
               </td>
             </tr>
             <tr>
               <th>진료과</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CMedicalDepartment" />
+                <input className="field" type="text" name="department" />
               </td>
             </tr>
             <tr>
               <th>URL</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="CHospitalURL" />
+                <input className="field" type="text" name="url" />
+              </td>
+            </tr>
+            <tr>
+              <th>병의원 구분</th>
+              <td className="inputWrapper">
+                <input className="field" type="text" name="division" />
               </td>
             </tr>
           </tbody>
@@ -281,9 +291,10 @@ const CHospital = memo(() => {
               <th>주소</th>
               <th>우편번호</th>
               <th>전화번호</th>
-              <th>이름</th>
+              <th>병의원명</th>
               <th>진료과</th>
               <th>URL</th>
+              <th>병의원 구분</th>
               <th>등록일시</th>
               <th>변경일시</th>
               <th colSpan="2">수정 / 삭제</th>
@@ -291,7 +302,6 @@ const CHospital = memo(() => {
           </thead>
           <tbody>
             {
-              //처리 결과는 존재하지만 0개인경우
               data && pagenation && !error
                 ? data.map((v, i) => {
                     if (v.id === updateId) {
@@ -302,28 +312,31 @@ const CHospital = memo(() => {
                           </td>
                           <td>{v.id}</td>
                           <td>
-                            <input type="text" name="CHospitalArea" defaultValue={v.CHospitalArea} />
+                            <input type="text" name="area" defaultValue={v.area} />
                           </td>
                           <td>
-                            <input type="text" name="CHospitalIntroduction" defaultValue={v.CHospitalIntroduction} />
+                            <input type="text" name="introduction" defaultValue={v.introduction} />
                           </td>
                           <td>
-                            <input type="text" name="CHospitalAddress" defaultValue={v.CHospitalAddress} />
+                            <input type="text" name="address" defaultValue={v.address} />
                           </td>
                           <td>
-                            <input type="text" name="CHospitalZipCode" defaultValue={v.CHospitalZipCode} />
+                            <input type="text" name="zipCode" defaultValue={v.zipCode} />
                           </td>
                           <td>
-                            <input type="text" name="CHospitalTel" defaultValue={v.CHospitalTel} />
+                            <input type="text" name="tel" defaultValue={v.tel} />
                           </td>
                           <td>
-                            <input type="text" name="CHospitalName" defaultValue={v.CHospitalName} />
+                            <input type="text" name="name" defaultValue={v.name} />
                           </td>
                           <td>
-                            <input type="text" name="CMedicalDepartment" defaultValue={v.CMedicalDepartment} />
+                            <input type="text" name="department" defaultValue={v.department} />
                           </td>
                           <td>
-                            <input type="text" name="CHospitalURL" defaultValue={v.CHospitalURL} />
+                            <input type="text" name="url" defaultValue={v.url} />
+                          </td>
+                          <td>
+                            <input type="text" name="division" defaultValue={v.division} />
                           </td>
                           <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
                           <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
@@ -336,14 +349,15 @@ const CHospital = memo(() => {
                       return (
                         <tr key={v.id}>
                           <td>{v.id}</td>
-                          <td>{v.CHospitalArea}</td>
-                          <td>{v.CHospitalIntroduction}</td>
-                          <td>{v.CHospitalAddress}</td>
-                          <td>{v.CHospitalZipCode}</td>
-                          <td>{v.CHospitalTel}</td>
-                          <td>{v.CHospitalName}</td>
-                          <td>{v.CMedicalDepartment}</td>
-                          <td>{v.CHospitalURL}</td>
+                          <td>{v.area}</td>
+                          <td>{v.introduction}</td>
+                          <td>{v.address}</td>
+                          <td>{v.zipCode}</td>
+                          <td>{v.tel}</td>
+                          <td>{v.name}</td>
+                          <td>{v.department}</td>
+                          <td>{v.url}</td>
+                          <td>{v.division}</td>
                           <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
                           <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
                           <td>
@@ -352,7 +366,7 @@ const CHospital = memo(() => {
                             </button>
                           </td>
                           <td>
-                            <button type="button" data-id={v.id} data-name={v.CHospitalName} onClick={onDeleteClick}>
+                            <button type="button" data-id={v.id} data-name={v.name} onClick={onDeleteClick}>
                               삭제하기
                             </button>
                           </td>
@@ -362,7 +376,7 @@ const CHospital = memo(() => {
                   })
                 : error && (
                     <tr>
-                      <td colSpan="13" align="center">
+                      <td colSpan="14" align="center">
                         {error.message}
                       </td>
                     </tr>
@@ -383,7 +397,7 @@ const CHospital = memo(() => {
             page={nowPage}
             className={classes.root}
             onChange={handleChange}
-            renderItem={(item) => <PaginationItem component={Link} to={`/manager/c_hospital?page=${item.page}`} {...item} />}
+            renderItem={(item) => <PaginationItem component={Link} to={`/manager/cooperation_hospital?page=${item.page}`} {...item} />}
           />
         </PaginationNav>
       )}

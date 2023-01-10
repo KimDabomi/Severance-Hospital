@@ -18,11 +18,11 @@ export const getList = createAsyncThunk("CHospitalSlice/getList", async (payload
   try {
     const response = await axios.get(URL, {
       params: {
-          query: payload?.query || '',
-          page: payload?.page || 1,
-          rows: payload?.rows || 10
+        query: payload?.query || "",
+        page: payload?.page || 1,
+        rows: payload?.rows || 10
       }
-  });
+    });
     result = response.data;
   } catch (err) {
     console.group("CHospitalSlice.getList");
@@ -58,16 +58,15 @@ export const postItem = createAsyncThunk("CHospitalSlice/postItem", async (paylo
 
   try {
     const response = await axios.post(URL, {
-      CHospitalArea: payload.CHospitalArea,
-      CHospitalIntroduction: payload.CHospitalIntroduction,
-      CHospitalAddress: payload.CHospitalAddress,
-      CHospitalZipCode: payload.CHospitalZipCode,
-      CHospitalTel: payload.CHospitalTel,
-      CHospitalName: payload.CHospitalName,
-      CMedicalDepartment: payload.CMedicalDepartment,
-      CHospitalURL: payload.CHospitalURL,
-      regDate: payload.regDate,
-      editDate: payload.editDate
+      area: payload.area,
+      introduction: payload.introduction,
+      address: payload.address,
+      zipCode: payload.zipCode,
+      tel: payload.tel,
+      name: payload.name,
+      department: payload.department,
+      url: payload.url,
+      division: payload.division
     });
     result = response.data;
   } catch (err) {
@@ -85,16 +84,15 @@ export const putItem = createAsyncThunk("CHospitalSlice/putItem", async (payload
 
   try {
     const response = await axios.put(URL, {
-      CHospitalArea: payload.CHospitalArea,
-      CHospitalIntroduction: payload.CHospitalIntroduction,
-      CHospitalAddress: payload.CHospitalAddress,
-      CHospitalZipCode: payload.CHospitalZipCode,
-      CHospitalTel: payload.CHospitalTel,
-      CHospitalName: payload.CHospitalName,
-      CMedicalDepartment: payload.CMedicalDepartment,
-      CHospitalURL: payload.CHospitalURL,
-      regDate: payload.regDate,
-      editDate: payload.editDate
+      area: payload.area,
+      introduction: payload.introduction,
+      address: payload.address,
+      zipCode: payload.zipCode,
+      tel: payload.tel,
+      name: payload.name,
+      department: payload.department,
+      url: payload.url,
+      division: payload.division
     });
     result = response.data;
   } catch (err) {
@@ -123,10 +121,10 @@ const CHospitalSlice = createSlice({
   name: "CHospitalSlice",
   // 이 모듈이 관리하고자하는 상태값들을 명시
   initialState: {
-    data: null,
     pagenation: null,
+    data: null,
     loading: false,
-    error: null,
+    error: null
   },
   reducers: {
     getCurrentData: (state, action) => {

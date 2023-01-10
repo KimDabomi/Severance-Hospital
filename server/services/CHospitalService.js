@@ -71,30 +71,19 @@ class CHospitalService {
     return data;
   }
 
-  /** 추가, 추가된 결과 조회 */
+  /** 추가 */
   async addItem(params) {
     let dbcon = null;
-    let data = null;
 
     try {
       dbcon = await DBPool.getConnection();
 
       let sql = mybatisMapper.getStatement("CHospitalMapper", "insertItem", params);
-      let [{ insertId, affectedRows }] = await dbcon.query(sql);
+      let [{ affectedRows }] = await dbcon.query(sql);
 
       if (affectedRows === 0) {
         throw new RuntimeException("저장된 데이터가 없습니다.");
       }
-
-      // 새로 저장된 데이터의 PK값을 활용하여 다시 조회
-      sql = mybatisMapper.getStatement("CHospitalMapper", "selectList", params);
-      let [result] = await dbcon.query(sql);
-
-      if (result.length === 0) {
-        throw new RuntimeException("조회된 데이터가 없습니다.");
-      }
-
-      data = result;
     } catch (err) {
       throw err;
     } finally {
@@ -102,14 +91,11 @@ class CHospitalService {
         dbcon.release();
       }
     }
-
-    return data;
   }
 
-  /** 수정, 수정된 결과 조회 */
+  /** 수정 */
   async editItem(params) {
     let dbcon = null;
-    let data = null;
 
     try {
       dbcon = await DBPool.getConnection();
@@ -120,16 +106,6 @@ class CHospitalService {
       if (affectedRows === 0) {
         throw new RuntimeException("저장된 데이터가 없습니다.");
       }
-
-      // 새로 저장된 데이터의 PK값을 활용하여 다시 조회
-      sql = mybatisMapper.getStatement("CHospitalMapper", "selectItem", { id: params.id });
-      let [result] = await dbcon.query(sql);
-
-      if (result.length === 0) {
-        throw new RuntimeException("저장된 데이터를 조회할 수 없습니다.");
-      }
-
-      data = result[0];
     } catch (err) {
       throw err;
     } finally {
@@ -137,8 +113,6 @@ class CHospitalService {
         dbcon.release();
       }
     }
-
-    return data;
   }
 
   /** 삭제 */

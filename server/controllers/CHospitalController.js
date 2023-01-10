@@ -1,7 +1,7 @@
 /**
  * @ File Name: CHospitalController.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
- * @ Last Update: 2023-01-09 00:33:33
+ * @ Last Update: 2023-01-10 00:33:33
  * @ Description: 협력병원 컨트롤러
  */
 
@@ -15,7 +15,7 @@ const logger = require("../helper/LogHelper");
 const { ForbiddenException } = require("../helper/ExceptionHelper");
 
 module.exports = (() => {
-  const url = "/manager/cooperation_hospital";
+  const url = "/manager/cooperation_hospital_clinic";
   const router = express.Router();
 
   /** 목록 조회 */
@@ -26,16 +26,14 @@ module.exports = (() => {
     // 검색어를 MyBatis에 전달하기 위한 객체로 구성
     const params = {};
     if (query) {
-      params.CHospitalArea = query;
-      params.CHospitalName = query;
+      params.area = query;
+      params.hospitalClinicName = query;
     }
 
-    // 조회
     let json = null;
     let pageInfo = null;
 
     try {
-      // 전체 수 얻기
       const totalCount = await CHospitalService.getCount(params);
       pageInfo = pagenation(totalCount, page, rows);
 
@@ -51,18 +49,16 @@ module.exports = (() => {
 
   /** 단일 조회 */
   router.get(`${url}/:id`, async (req, res, next) => {
-    // 파라미터 받기
+    // 파라미터
     const { id } = req.params;
 
     // 파라미터 유효성검사
     try {
-      regexHelper.value(id, "해당 아이디가 없습니다.");
-      regexHelper.num(id, "타입 유효성검사");
+      regexHelper.value(id, "ID가 없습니다.");
     } catch (err) {
       return next(err);
     }
 
-    // 조회
     let json = null;
 
     try {
@@ -78,95 +74,92 @@ module.exports = (() => {
 
   /** 추가 */
   router.post(url, async (req, res, next) => {
-    // 파라미터 받기
-    const { CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL } =
-      req.body;
+    // 파라미터
+    const { area, introduction, address, zipCode, tel, name, department, url, division } = req.body;
 
-    // 유효성 검사
+    // 파라미터 유효성검사
     try {
-      regexHelper.value(CHospitalArea, "지역이 없습니다.");
-      regexHelper.value(CHospitalIntroduction, "소개가 없습니다.");
-      regexHelper.value(CHospitalAddress, "주소가 없습니다.");
-      regexHelper.value(CHospitalZipCode, "우편번호가 없습니다.");
-      regexHelper.value(CHospitalTel, "전화번호가 없습니다.");
-      regexHelper.value(CHospitalName, "이름이 없습니다.");
-      regexHelper.value(CMedicalDepartment, "진료과가 없습니다.");
+      regexHelper.value(area, "지역이 없습니다.");
+      regexHelper.value(introduction, "소개가 없습니다.");
+      regexHelper.value(address, "주소가 없습니다.");
+      regexHelper.value(zipCode, "우편번호가 없습니다.");
+      regexHelper.value(tel, "전화번호가 없습니다.");
+      regexHelper.value(name, "병의원명이 없습니다.");
+      regexHelper.value(department, "진료과가 없습니다.");
+      regexHelper.value(url, "URL이 없습니다.");
+      regexHelper.value(division, "병의원 구분이 없습니다.");
     } catch (err) {
       return next(err);
     }
 
-    // 저장
-    let json = null;
-
     try {
-      json = await CHospitalService.addItem({
-        CHospitalArea: CHospitalArea,
-        CHospitalIntroduction: CHospitalIntroduction,
-        CHospitalAddress: CHospitalAddress,
-        CHospitalZipCode: CHospitalZipCode,
-        CHospitalTel: CHospitalTel,
-        CHospitalName: CHospitalName,
-        CMedicalDepartment: CMedicalDepartment,
-        CHospitalURL: CHospitalURL
+      await CHospitalService.addItem({
+        area: area,
+        introduction: introduction,
+        address: address,
+        zipCode: zipCode,
+        tel: tel,
+        name: name,
+        department: department,
+        url: url,
+        division: division
       });
     } catch (err) {
       return next(err);
     }
 
-    res.sendResult({ data: json });
+    res.sendResult();
   });
 
   /** 수정 */
   router.put(`${url}/:id`, async (req, res, next) => {
-    // 파라미터 받기
+    // 파라미터
     const { id } = req.params;
-    const { CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL } =
-      req.body;
+    const { area, introduction, address, zipCode, tel, name, department, url, division } = req.body;
 
-    // 유효성 검사
+    // 파라미터 유효성검사
     try {
-      regexHelper.value(CHospitalArea, "지역이 없습니다.");
-      regexHelper.value(CHospitalIntroduction, "소개가 없습니다.");
-      regexHelper.value(CHospitalAddress, "주소가 없습니다.");
-      regexHelper.value(CHospitalZipCode, "우편번호가 없습니다.");
-      regexHelper.value(CHospitalTel, "전화번호가 없습니다.");
-      regexHelper.value(CHospitalName, "이름이 없습니다.");
-      regexHelper.value(CMedicalDepartment, "진료과가 없습니다.");
+      regexHelper.value(area, "지역이 없습니다.");
+      regexHelper.value(introduction, "소개가 없습니다.");
+      regexHelper.value(address, "주소가 없습니다.");
+      regexHelper.value(zipCode, "우편번호가 없습니다.");
+      regexHelper.value(tel, "전화번호가 없습니다.");
+      regexHelper.value(name, "병의원명이 없습니다.");
+      regexHelper.value(department, "진료과가 없습니다.");
+      regexHelper.value(url, "URL이 없습니다.");
+      regexHelper.value(division, "병의원 구분이 없습니다.");
     } catch (err) {
       return next(err);
     }
 
-    // 저장
-    let json = null;
-
     try {
-      json = await CHospitalService.editItem({
+      await CHospitalService.editItem({
         id: id,
-        CHospitalArea: CHospitalArea,
-        CHospitalIntroduction: CHospitalIntroduction,
-        CHospitalAddress: CHospitalAddress,
-        CHospitalZipCode: CHospitalZipCode,
-        CHospitalTel: CHospitalTel,
-        CHospitalName: CHospitalName,
-        CMedicalDepartment: CMedicalDepartment,
-        CHospitalURL: CHospitalURL
+        area: area,
+        introduction: introduction,
+        address: address,
+        zipCode: zipCode,
+        tel: tel,
+        name: name,
+        department: department,
+        url: url,
+        division: division
       });
     } catch (err) {
       return next(err);
     }
 
-    res.sendResult({ data: json });
+    res.sendResult();
   });
 
   /** 삭제 */
   router.delete(`${url}/:id`, async (req, res, next) => {
-    // 파라미터 받기
+    // 파라미터
     const { id } = req.params;
 
-    // 유효성 검사
+    // 파라미터 유효성검사
     try {
-      regexHelper.value(id, "해당 아이디가 없습니다.");
-      regexHelper.num(id, "타입 유효성검사");
+      regexHelper.value(id, "ID가 없습니다.");
     } catch (err) {
       return next(err);
     }
