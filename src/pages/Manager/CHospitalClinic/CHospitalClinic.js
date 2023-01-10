@@ -23,7 +23,7 @@ import { useQueryString } from "../../../hooks/useQueryString";
 import Spinner from "../../../components/Spinner";
 import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav, useStyles } from "../common/ManagerStyleConponents";
 
-const CHospital = memo(() => {
+const CHospitalClinic = memo(() => {
   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
   const navigate = useNavigate();
 
@@ -405,4 +405,4 @@ const CHospital = memo(() => {
   );
 });
 
-export default CHospital;
+export default CHospitalClinic;
