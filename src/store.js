@@ -4,7 +4,8 @@ import CustomerBoardSlice from "./slices/CustomerBoardSlice";
 import DrugSearchSlice from "./slices/DrugSearchSlice";
 import YoutubeSlice from "./slices/YoutubeSlice";
 import UnsupportedSlice from "./slices/UnsupportedSlice";
-import CHospitalSlice from "./slices/CHospitalSlice";
+import CHospitalClinicSlice from "./slices/CHospitalClinicSlice";
+import CDoctorSlice from "./slices/CDoctorSlice";
 import NewsSlice from "./slices/NewsSlice";
 
 /** Slice 참조 */
@@ -17,7 +18,8 @@ const store = configureStore({
     DrugSearchSlice: DrugSearchSlice,
     YoutubeSlice: YoutubeSlice,
     UnsupportedSlice: UnsupportedSlice,
-    CHospitalSlice: CHospitalSlice,
+    CHospitalClinicSlice: CHospitalClinicSlice,
+    CDoctorSlice: CDoctorSlice,
     NewsSlice: NewsSlice
   },
   middleware: (getDefaultMiddleware) => [
