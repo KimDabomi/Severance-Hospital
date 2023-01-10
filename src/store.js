@@ -7,6 +7,7 @@ import UnsupportedSlice from "./slices/UnsupportedSlice";
 import CHospitalClinicSlice from "./slices/CHospitalClinicSlice";
 import CDoctorSlice from "./slices/CDoctorSlice";
 import NewsSlice from "./slices/NewsSlice";
+import NoticeSlice from './slices/NoticeSlice';
 
 /** Slice 참조 */
 
@@ -20,7 +21,8 @@ const store = configureStore({
     UnsupportedSlice: UnsupportedSlice,
     CHospitalClinicSlice: CHospitalClinicSlice,
     CDoctorSlice: CDoctorSlice,
-    NewsSlice: NewsSlice
+    NewsSlice: NewsSlice,
+    NoticeSlice: NoticeSlice
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({

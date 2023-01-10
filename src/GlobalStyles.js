@@ -1,23 +1,23 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 /**이미지 import*/
 //select form뒤 화살표 이미지
-import icoChevronDown from "./assets/img/ico-chevron-down-sm@2x.png";
+import icoChevronDown from './assets/img/ico-chevron-down-sm@2x.png';
 //nodata 이미지
-import nodata from "./assets/img/ico-nodata@2x.png";
+import nodata from './assets/img/ico-nodata@2x.png';
 //링크아이콘 이미지
-import iconExternal from "./assets/img/ico-external-link@2x.png";
+import iconExternal from './assets/img/ico-external-link@2x.png';
 //bgAll 이미지
-import bgAll from './assets/img/bg-pattern.png' 
+import bgAll from './assets/img/bg-pattern.png';
 //서치 아이콘 이미지
-import searchIco from './assets/img/ico-search-white.png'
+import searchIco from './assets/img/ico-search-white.png';
 //동영상 재생 아이콘 이미지
-import playIco from './assets/img/ico-movie-play-md@2x.png'
+import playIco from './assets/img/ico-movie-play-md@2x.png';
 //뉴 아이콘 이미지
-import newIco from './assets/img/ico-new@2x.png'
+import newIco from './assets/img/ico-new@2x.png';
 //로그아웃 아이콘 이미지
-import logoutImg from './assets/img/ico-logout-white.png'
+import logoutImg from './assets/img/ico-logout-white.png';
 
 const GlobalStyles = createGlobalStyle`
 /** 리셋 CSS */
@@ -140,6 +140,11 @@ textarea{
     border-bottom: 1px solid #aaa;
     border-left: 1px solid #ebebeb;
   }
+
+  p{
+    margin: 5px 0;
+  }
+  img{margin: auto;}
 }
 
 //공지사항
@@ -205,7 +210,7 @@ textarea{
         position:fixed;
         top:150px; left:30px;
         box-shadow : #000000B3 0 0 0 9999px;
-        z-index : 100;
+        z-index : 9998;
     }
     .popUp{
         position:fixed;
@@ -213,7 +218,7 @@ textarea{
         width: 360px; height: 182px;
         transform: translate(-50%, -50%);
         background-color: #fff;
-        z-index : 101;
+        z-index : 9999;
         text-align:center;
         padding: 30px;
         box-sizing: border-box;

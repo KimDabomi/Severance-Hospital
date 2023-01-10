@@ -11,26 +11,35 @@
  import boxGuideDecor from '../../assets/img/box-guide-decoration@2x.png'
  
  const ApptHeaderCont = styled.div`
+        padding-bottom: 95px;
+        
         .pageTitle{
             text-align: center;
             font-size: 40px;
             padding: 73px 0 65px 0;
             box-sizing: border-box;
         }
- 
-        ul{
-            margin: 4px 0;
-            li{
-                color: #333333;
-                font-size: 17px;
-                box-sizing: border-box;
-                list-style:square inside;
-                line-height: 1.5;
-                margin-top: 5px;
-                &::marker{color: #999999;}
+        .boxGuide {
+            max-width: 1280px;
+        }
+
+        .boxGuide {
+            margin: 0 auto;
+            max-width: 1280px;
+            
+            ul{
+                margin: 4px 0;
+                li{
+                    color: #333333;
+                    font-size: 17px;
+                    box-sizing: border-box;
+                    list-style:square inside;
+                    line-height: 1.5;
+                    margin-top: 5px;
+                    &::marker{color: #999999;}
+                }
             }
         }
-         
      `;
  
  const Header = memo(() => {

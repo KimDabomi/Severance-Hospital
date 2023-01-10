@@ -143,6 +143,7 @@ app.use(require("./controllers/CHospitalController"));
 app.use(require("./controllers/CDoctorController"));
 //news
 app.use(require('./controllers/NewsController'));
+app.use(require('./controllers/NoticeController'));
 
 app.use((err, req, res, next) => res.sendError(err));
 app.use("*", (req, res, next) => res.sendError(new PageNotFoundException()));

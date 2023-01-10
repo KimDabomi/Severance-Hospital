@@ -26,7 +26,7 @@ const NewsAllMain = memo(() => {
             <Route path="/*" element={<NewsMain />} />
             <Route path="media.do" element={<NewsView />} />
             <Route path="notice.do" element={<NoticeView />} />
-            <Route path="notice.do/id" element={<NoticeInfo />} />
+            <Route path="notice.do/:id" element={<NoticeInfo />} />
         </Routes>
       </div>
       <Footer />

@@ -1,13 +1,14 @@
 /**
  * @ File Name: NewsView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-06 16:56:00
+ * @ Last Update: 2023-01-09 14:19:00
  * @ Description: 뉴스 하위페이지 언론보도 페이지
  */
 import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../../slices/NewsSlice';
+import RegexHelper from '../../helper/RegexHelper';
 import { useQueryString } from '../../hooks/useQueryString';
 // 최신글 처리를 위한 dayjs
 import dayjs from 'dayjs';
@@ -51,6 +52,22 @@ const NewsView = memo(() => {
   const onSearchSubmit = useCallback(
     (e) => {
       e.preventDefault();
+
+      //입력값에 대한 유효성 검사
+      const regex = RegexHelper.getInstance();
+
+      try {
+        regex.value(
+          document.querySelector('#itemName'),
+          '검색어를 입력해주세요.'
+        );
+      } catch (e) {
+        // e.selector.focus();
+        document.querySelector('.popUpCont').style.display = 'block';
+        document.querySelector('.alert').innerHTML = e.message;
+        return;
+      }
+
       //검색어
       const query = e.currentTarget.itemName.value;
       //검색어에 따라 URL 구성
@@ -74,6 +91,11 @@ const NewsView = memo(() => {
       })
     );
   });
+  
+  /** 닫기버튼 눌렸을 때 */
+  const closeClick = useCallback((e) => {
+    document.querySelector(".popUpCont").style.display = "none";
+  });
 
   return (
     <div>
@@ -87,6 +109,7 @@ const NewsView = memo(() => {
                 <input
                   type="text"
                   name="itemName"
+                  id='itemName'
                   placeholder="검색어를 입력해 주세요"
                   className="formControl"
                 />
@@ -101,16 +124,15 @@ const NewsView = memo(() => {
 
           {error ? (
             <h1>에러발생함</h1>
-          ) : data && data.data[1] ? (
+          ) : data && data.data[0] ? (
             <div>
               <Spinner loading={loading} />
               {/* 검색결과 */}
               <div className="bbsList">
                 {data.data.map((v, i) => {
                   return (
-                    <div className="bbsItem">
+                    <div className="bbsItem" key={v.id}>
                       <a
-                        key={i}
                         className="inner"
                         href={v.newsLink}
                         rel="noopener noreferrer"
@@ -122,11 +144,9 @@ const NewsView = memo(() => {
                           {/* 뉴 아이콘 */}
                           {dayjs(new Date())
                             .subtract(2, 'day')
-                            .format('YYYY-MM-DD') < v.regDate
-                            ? (
-                              <i className='icoNew' />
-                            )
-                            : null}
+                            .format('YYYY-MM-DD') < v.regDate ? (
+                            <i className="icoNew" />
+                          ) : null}
                         </div>
                         <div className="infoArea">
                           <span className="date">{v.regDate}</span>
@@ -153,6 +173,19 @@ const NewsView = memo(() => {
               <p>검색된 결과가 없습니다.</p>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* 유효성검사 알람 팝업창 */}
+      <div className="popUpCont">
+        <div className="dimed"></div>
+        <div className="popUp">
+          <div className="alert"></div>
+          <div className="closeBtnCont">
+            <button type="button" className="closeBtn" onClick={closeClick}>
+              닫기
+            </button>
+          </div>
         </div>
       </div>
     </div>
