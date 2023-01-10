@@ -8,18 +8,18 @@ const DBPool = require('../helper/DBPool');
 const noticeService = require('../services/NoticeService');
 
 // add
-// (async () => {
-//     try{
-//         const params = {noticeTitle:'서울(서부)역‧용산역 셔틀버스 신설 안내',noticeContent:'<p>2022년 11월 1일(화)부터 서울(서부)역과 용산역 셔틀버스가 신설되었습니다.</p><p>서울(서부)역과 용산역에서 셔틀버스를 타시면 세브란스병원 본관 3층에서 하차합니다. 많은 이용 부탁 드립니다.</p><p><br/></p><p>그리고 신촌역과 경복궁역을 가는 셔틀버스의 승강장이 변경됐습니다.</p><img src="https://sev.severance.healthcare/_attach/yuhs/editor-image/2022/11/YbIQGFxURhUXEgVKvidNaPvsYS.jpg" alt="공지사항"/>', hits:0
-//     };
-//         let result = await noticeService.addItem(params);
-//         console.log(result);
-//     }catch(e){
-//         console.error(e);
-//     }finally{
-//         DBPool.close();
-//     }
-// })();
+(async () => {
+    try{
+        const params = {noticeTitle:'서울(서부)역‧용산역 셔틀버스 신설 안내',noticeContent:'<p>2022년 11월 1일(화)부터 서울(서부)역과 용산역 셔틀버스가 신설되었습니다.</p><p>서울(서부)역과 용산역에서 셔틀버스를 타시면 세브란스병원 본관 3층에서 하차합니다. 많은 이용 부탁 드립니다.</p><p><br/></p><p>그리고 신촌역과 경복궁역을 가는 셔틀버스의 승강장이 변경됐습니다.</p><img src="https://sev.severance.healthcare/_attach/yuhs/editor-image/2022/11/YbIQGFxURhUXEgVKvidNaPvsYS.jpg" alt="공지사항"/>', hits:0
+    };
+        let result = await noticeService.addItem(params);
+        console.log(result);
+    }catch(e){
+        console.error(e);
+    }finally{
+        DBPool.close();
+    }
+})();
 
 // edit
 // (async () => {
