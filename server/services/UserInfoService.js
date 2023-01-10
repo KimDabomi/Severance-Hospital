@@ -1,7 +1,7 @@
 /*
  * @ File name: UserInfoService.js
  * @ Author: 김다보미(cdabomi60@gmail.com)
- * @ Last Update: 2023-01-09 21:45
+ * @ Last Update: 2023-01-10 20:15
  * @ Description: 회원정보 서비스
 */
 
@@ -10,14 +10,13 @@ const mybatisMapper = require('mybatis-mapper');
 const DBPool = require('../helper/DBPool');
 const { RuntimeException } = require('../helper/ExceptionHelper');
 
-class ProfessorService {
+class UserInfoService {
 
     /** 생성자 - Mapper파일을 로드한다 */
     constructor() {
         // mapper의 위치는 이 소스 파일이 아닌 프로젝트 root를 기준으로 상대경로
         mybatisMapper.createMapper([
-            './test/mappers/ProfessorMapper.xml',
-            './test/mappers/DepartmentMapper.xml'
+            './server/mappers/UserInfoMapper.xml'
         ]);
     }
 
@@ -29,7 +28,7 @@ class ProfessorService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('ProfessorMapper', 'selectList', params);
+            let sql = mybatisMapper.getStatement('UserInfoMapper', 'selectList', params);
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -54,7 +53,7 @@ class ProfessorService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('ProfessorMapper', 'selectItem', params);
+            let sql = mybatisMapper.getStatement('UserInfoMapper', 'selectItem', params);
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -79,7 +78,7 @@ class ProfessorService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('ProfessorMapper', 'insertItem', params);
+            let sql = mybatisMapper.getStatement('UserInfoMapper', 'insertItem', params);
             let [{insertId, affectedRows}] = await dbcon.query(sql);
 
             if (affectedRows === 0) {
@@ -87,7 +86,7 @@ class ProfessorService {
             }
 
             // 새로 저장된 데이터의 PK값을 활용하여 다시 조회
-            sql = mybatisMapper.getStatement('ProfessorMapper', 'selectItem', {profno: insertId});
+            sql = mybatisMapper.getStatement('UserInfoMapper', 'selectItem', {id: insertId});
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -112,7 +111,7 @@ class ProfessorService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('ProfessorMapper', 'updateItem', params);
+            let sql = mybatisMapper.getStatement('UserInfoMapper', 'updateItem', params);
             let [{affectedRows}] = await dbcon.query(sql);
 
             if (affectedRows === 0) {
@@ -120,7 +119,7 @@ class ProfessorService {
             }
 
             // 새로 저장된 데이터의 PK값을 활용하여 다시 조회
-            sql = mybatisMapper.getStatement('ProfessorMapper', 'selectItem', {profno: params.profno});
+            sql = mybatisMapper.getStatement('UserInfoMapper', 'selectItem', {id: params.id});
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -144,7 +143,7 @@ class ProfessorService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('ProfessorMapper', 'deleteItem', params);
+            let sql = mybatisMapper.getStatement('UserInfoMapper', 'deleteItem', params);
             let [{affectedRows}] = await dbcon.query(sql);
 
             if (affectedRows === 0) {
@@ -165,7 +164,7 @@ class ProfessorService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('ProfessorMapper', 'selectCountAll', params);
+            let sql = mybatisMapper.getStatement('UserInfoMapper', 'selectCountAll', params);
             let [result] = await dbcon.query(sql);
 
             if (result.length > 0) {
@@ -181,4 +180,4 @@ class ProfessorService {
     }
 }
 
-module.exports = new ProfessorService();
+module.exports = new UserInfoService();

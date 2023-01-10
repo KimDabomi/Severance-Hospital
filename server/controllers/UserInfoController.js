@@ -1,17 +1,17 @@
 /*
  * @ File name: UserInfoController.js
  * @ Author: 김다보미(cdabomi60@gmail.com)
- * @ Last Update: 2023-01-09 21:45
+ * @ Last Update: 2023-01-10 20:15
  * @ Description: 회원정보 컨트롤러
 */
 
 const express = require("express");
-const regexHelper = require('../../helper/RegexHelper');
-const ProfessorService = require("../service/ProfessorService");
-const { pagenation } = require('../../helper/UtilHelper');
+const regexHelper = require('../helper/RegexHelper');
+const UserInfoService = require("../services/UserInfoService");
+const { pagenation } = require('../helper/UtilHelper');
 
 module.exports = (() => {
-    const url = "/professor";
+    const url = "/userinfo";
     const router = express.Router();
 
     /** 전체 목록 조회 --> Read(SELECT) */
@@ -22,13 +22,10 @@ module.exports = (() => {
         // 검색어를 MyBatis에 전달하기 위한 객체로 구성
         const params = {};
         if (query) {
-            params.name = query;
-            params.userid = query;
-            params.position = query;
-            params.sal = query;
-            params.hiredate = query;
-            params.comm = query;
-            params.deptno = query;
+            params.userId = query;
+            params.userName = query;
+            params.userSex = query;
+            params.userTel = query;
         }
 
         // 데이터 조회
@@ -36,12 +33,12 @@ module.exports = (() => {
 
         try {
             // 전체 데이터 수 얻기
-            const totalCount = await ProfessorService.getCount(params);
+            const totalCount = await UserInfoService.getCount(params);
             pageInfo = pagenation(totalCount, page, rows);
 
             params.offset = pageInfo.offset;
             params.listCount = pageInfo.listCount;
-            json = await ProfessorService.getList(params);
+            json = await UserInfoService.getList(params);
         } catch (err) {
             return next(err);
         }
@@ -50,14 +47,14 @@ module.exports = (() => {
     });
 
     /** 단일행 조회 --> Read(SELECT) */
-    router.get(`${url}/:profno`, async (req, res, next) => {
+    router.get(`${url}/:id`, async (req, res, next) => {
         // 파라미터 받기
-        const { profno } = req.params;
+        const { id } = req.params;
 
         // 파라미터 유효성검사
         try {
-            regexHelper.value(profno, "교수번호가 없습니다.");
-            regexHelper.num(profno, "교수번호가 잘못되었습니다.");
+            regexHelper.value(id, "회원번호가 없습니다.");
+            regexHelper.num(id, "회원번호가 잘못되었습니다.");
         } catch (err) {
             return next(err);
         }
@@ -66,8 +63,8 @@ module.exports = (() => {
         let json = null;
 
         try {
-            json = await ProfessorService.getItem({
-              profno: profno,
+            json = await UserInfoService.getItem({
+              id: id
             });
         } catch (err) {
             return next(err);
@@ -79,28 +76,47 @@ module.exports = (() => {
     /** 데이터 추가 --> Create(INSERT) */
     router.post(url, async (req, res, next) => {
         // 파라미터 받기
-        const { name,userid,position,sal,hiredate,comm,deptno } = req.body;
+        const { userId,userPassword,userName,userSex,userTel,userPreTel,userEmail,prtctorName,prtctorSex,prtctorBirth,regDate,userCategory,withdrawalStatus,withdrawalDate,withdrawalReason,editDate,pwEditDate,authCode,termsAgree,privateAgree,marketingAgree } = req.body;
 
         // 유효성 검사
         try {
-            regexHelper.value(name, "교수 이름이 없습니다.");
-            regexHelper.maxLength(name, 20, "교수 이름은 최대 20자까지 입력 가능합니다.");
+            regexHelper.value(userId, "회원아이디가 없습니다.");
+            regexHelper.minLength(userId, 6, "아이디는 6자 이상 20자 이내로 입력해주세요.");
+            regexHelper.maxLength(userId, 20, "아이디는 6자 이상 20자 이내로 입력해주세요.");
+            regexHelper.value(userPassword, "비밀번호가 없습니다.");
+            regexHelper.value(userName, "회원이름이 없습니다.");
+            regexHelper.value(userSex, "회원성별이 없습니다.");
+            regexHelper.value(userTel, "회원전화번호가 없습니다."); 
         } catch (err) {
-            return next(err);
+            return next(err); 
         }
 
         // 데이터 저장
         let json = null;
 
         try {
-            json = await ProfessorService.addItem({
-                name: name,
-                userid: userid,
-                position: position,
-                sal: sal,
-                hiredate: hiredate,
-                comm: comm,
-                deptno: deptno
+            json = await UserInfoService.addItem({
+                userId: userId,
+                userPassword: userPassword,
+                userName: userName,
+                userSex: userSex,
+                userTel: userTel,
+                userPreTel: userPreTel,
+                userEmail: userEmail,
+                prtctorName: prtctorName,
+                prtctorSex: prtctorSex,
+                prtctorBirth: prtctorBirth,
+                regDate: regDate,
+                userCategory: userCategory,
+                withdrawalStatus: withdrawalStatus,
+                withdrawalDate: withdrawalDate,
+                withdrawalReason: withdrawalReason,
+                editDate: editDate,
+                pwEditDate: pwEditDate,
+                authCode: authCode,
+                termsAgree: termsAgree,
+                privateAgree: privateAgree,
+                marketingAgree: marketingAgree
             });
         } catch (err) {
             return next(err);
@@ -110,17 +126,15 @@ module.exports = (() => {
     });
 
     /** 데이터 수정 --> Update(UPDATE) */
-    router.put(`${url}/:profno`, async (req, res, next) => {
+    router.put(`${url}/:id`, async (req, res, next) => {
         // 파라미터 받기
-        const { profno } = req.params;
-        const { name,userid,position,sal,hiredate,comm,deptno } = req.body;
+        const { id } = req.params;
+        const { userPassword,userTel,userPreTel,userEmail,editDate,pwEditDate } = req.body;
 
         // 유효성 검사
         try {
-            regexHelper.value(profno, "교수번호가 없습니다.");
-            regexHelper.num(profno, "교수번호가 잘못되었습니다.");
-            regexHelper.value(name, "교수 이름이 없습니다.");
-            regexHelper.maxLength(name, 20, "교수 이름은 최대 20자까지 입력 가능합니다.");
+            regexHelper.value(userPassword, "비밀번호가 없습니다.");
+            regexHelper.value(userTel, "회원전화번호가 없습니다.");
         } catch (err) {
             return next(err);
         }
@@ -129,15 +143,14 @@ module.exports = (() => {
         let json = null;
 
         try {
-            json = await ProfessorService.editItem({
-                profno: profno,
-                name: name,
-                userid: userid,
-                position: position,
-                sal: sal,
-                hiredate: hiredate,
-                comm: comm,
-                deptno: deptno
+            json = await UserInfoService.editItem({
+                id: id,
+                userPassword: userPassword,
+                userTel: userTel,
+                userPreTel: userPreTel,
+                userEmail: userEmail,
+                editDate: editDate,
+                pwEditDate: pwEditDate
             });
         } catch (err) {
             return next(err);
@@ -147,21 +160,21 @@ module.exports = (() => {
     });
 
     /** 데이터 삭제 --> Delete(DELETE) */
-    router.delete(`${url}/:profno`, async (req, res, next) => {
+    router.delete(`${url}/:id`, async (req, res, next) => {
         // 파라미터 받기
-        const { profno } = req.params;
+        const { id } = req.params;
 
         // 유효성 검사
         try {
-            regexHelper.value(profno, "교수번호가 없습니다.");
-            regexHelper.num(profno, "교수번호가 잘못되었습니다.");
+            regexHelper.value(id, "회원번호가 없습니다.");
+            regexHelper.num(id, "회원번호가 잘못되었습니다.");
         } catch (err) {
             return next(err);
         }
 
         try {
             await ProfessorService.deleteItem({
-              profno: profno,
+              id: id
             });
         } catch (err) {
             return next(err);
