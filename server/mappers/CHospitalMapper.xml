@@ -12,18 +12,18 @@ Description: 협력병원 맵퍼
 <mapper namespace="CHospitalMapper">
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id="selectItem">
-        SELECT id, CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL, regDate, editDate FROM CHospital WHERE id=#{id}
+        SELECT id, area, introduction, address, zipCode, tel, name, department, url, division, regDate, editDate FROM cooperationHospitalClinic WHERE id=#{id}
     </select>
     <!-- 다중행 조회를 위한 기능 정의 -->
     <select id="selectList">
-        SELECT id, CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL, regDate, editDate FROM CHospital
+        SELECT id, area, introduction, address, zipCode, tel, name, department, url, division, regDate, editDate FROM cooperationHospitalClinic
 
         <where>
-            <if test="CHospitalArea != null and CHospitalArea != ''">
-                CHospitalArea LIKE concat('%', #{CHospitalArea}, '%')
+            <if test="area != null and area != ''">
+                area LIKE concat('%', #{area}, '%')
             </if>
-            <if test="CHospitalName != null and CHospitalName != ''">
-                OR CHospitalName LIKE concat('%', #{CHospitalName}, '%')
+            <if test="hospitalClinicName != null and hospitalClinicName != ''">
+                OR name LIKE concat('%', #{hospitalClinicName}, '%')
             </if>
         </where>
 
@@ -38,33 +38,33 @@ Description: 협력병원 맵퍼
 
     <!-- 데이터 저장을 위한 기능 정의 -->
     <insert id="insertItem">
-        INSERT INTO CHospital (CHospitalArea, CHospitalIntroduction, CHospitalAddress, CHospitalZipCode, CHospitalTel, CHospitalName, CMedicalDepartment, CHospitalURL, regDate) VALUES (#{CHospitalArea}, #{CHospitalIntroduction}, #{CHospitalAddress}, #{CHospitalZipCode}, #{CHospitalTel}, #{CHospitalName}, #{CMedicalDepartment}, #{CHospitalURL}, now())
+        INSERT INTO cooperationHospitalClinic (area, introduction, address, zipCode, tel, name, department, url, division, regDate) VALUES (#{area}, #{introduction}, #{address}, #{zipCode}, #{tel}, #{name}, #{department}, #{url}, #{division}, now())
     </insert>
 
 
     <!-- 데이터 삭제를 위한 기능 정의 -->
     <delete id="deleteItem">
-        DELETE FROM CHospital WHERE id=#{id}
+        DELETE FROM cooperationHospitalClinic WHERE id=#{id}
     </delete>
 
 
     <!-- 데이터 갱신을 위한 기능 정의 -->
     <update id="updateItem">
-        UPDATE CHospital SET CHospitalArea=#{CHospitalArea}, CHospitalIntroduction=#{CHospitalIntroduction}, CHospitalAddress=#{CHospitalAddress}, CHospitalZipCode=#{CHospitalZipCode}, CHospitalTel=#{CHospitalTel}, CHospitalName=#{CHospitalName}, CMedicalDepartment=#{CMedicalDepartment}, CHospitalURL=#{CHospitalURL}, editDate=now()
+        UPDATE cooperationHospitalClinic SET area=#{area}, introduction=#{introduction}, address=#{address}, zipCode=#{zipCode}, tel=#{tel}, name=#{name}, department=#{department}, url=#{url}, division=#{division}, editDate=now()
         WHERE id=#{id}
     </update>
 
 
     <!-- 데이터 수 조회하기  -->
     <select id="selectCountAll">
-        SELECT COUNT(*) AS cnt FROM CHospital
+        SELECT COUNT(*) AS cnt FROM cooperationHospitalClinic
 
         <where>
-            <if test="CHospitalName != null and CHospitalName != ''">
-                CHospitalName LIKE concat('%', #{CHospitalName}, '%')
+            <if test="name != null and name != ''">
+                name LIKE concat('%', #{name}, '%')
             </if>
-            <if test="CHospitalArea != null and CHospitalArea != ''">
-                OR CHospitalArea LIKE concat('%', #{CHospitalArea}, '%')
+            <if test="area != null and area != ''">
+                OR area LIKE concat('%', #{area}, '%')
             </if>
         </where>
     </select>

@@ -140,6 +140,7 @@ app.use("/", router);
  -----------------------------------------------------------*/
 // 컨트롤러 연결
 app.use(require("./controllers/CHospitalController"));
+app.use(require("./controllers/CDoctorController"));
 //news
 app.use(require('./controllers/NewsController'));
 app.use(require('./controllers/NoticeController'));

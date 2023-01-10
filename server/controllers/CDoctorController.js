@@ -1,21 +1,21 @@
 /**
- * @ File Name: CHospitalController.js
+ * @ File Name: CDoctorController.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
- * @ Last Update: 2023-01-10 00:33:33
- * @ Description: 협력병원 컨트롤러
+ * @ Last Update: 2023-01-09 00:33:33
+ * @ Description: 협력의사 컨트롤러
  */
 
 /** import */
 const express = require("express");
 const regexHelper = require("../helper/RegexHelper");
-const CHospitalService = require("../services/CHospitalService");
+const CDoctorService = require("../services/CDoctorService");
 const { pagenation } = require("../helper/UtilHelper");
 
 const logger = require("../helper/LogHelper");
 const { ForbiddenException } = require("../helper/ExceptionHelper");
 
 module.exports = (() => {
-  const url = "/manager/cooperation_hospital_clinic";
+  const url = "/manager/cooperation_doctor";
   const router = express.Router();
 
   /** 목록 조회 */
@@ -26,7 +26,7 @@ module.exports = (() => {
     // 검색어를 MyBatis에 전달하기 위한 객체로 구성
     const params = {};
     if (query) {
-      params.area = query;
+      params.doctorName = query;
       params.hospitalClinicName = query;
     }
 
@@ -34,12 +34,12 @@ module.exports = (() => {
     let pageInfo = null;
 
     try {
-      const totalCount = await CHospitalService.getCount(params);
+      const totalCount = await CDoctorService.getCount(params);
       pageInfo = pagenation(totalCount, page, rows);
 
       params.offset = pageInfo.offset;
       params.listCount = pageInfo.listCount;
-      json = await CHospitalService.getList(params);
+      json = await CDoctorService.getList(params);
     } catch (err) {
       return next(err);
     }
@@ -62,7 +62,7 @@ module.exports = (() => {
     let json = null;
 
     try {
-      json = await CHospitalService.getItem({
+      json = await CDoctorService.getItem({
         id: id
       });
     } catch (err) {
@@ -75,34 +75,20 @@ module.exports = (() => {
   /** 추가 */
   router.post(url, async (req, res, next) => {
     // 파라미터
-    const { area, introduction, address, zipCode, tel, name, department, url, division } = req.body;
+    const { doctorName, hospitalClinicName } = req.body;
 
     // 파라미터 유효성검사
     try {
-      regexHelper.value(area, "지역이 없습니다.");
-      regexHelper.value(introduction, "소개가 없습니다.");
-      regexHelper.value(address, "주소가 없습니다.");
-      regexHelper.value(zipCode, "우편번호가 없습니다.");
-      regexHelper.value(tel, "전화번호가 없습니다.");
-      regexHelper.value(name, "병의원명이 없습니다.");
-      regexHelper.value(department, "진료과가 없습니다.");
-      regexHelper.value(url, "URL이 없습니다.");
-      regexHelper.value(division, "병의원 구분이 없습니다.");
+      regexHelper.value(doctorName, "의사명이 없습니다.");
+      regexHelper.value(hospitalClinicName, "병의원명이 없습니다.");
     } catch (err) {
       return next(err);
     }
 
     try {
-      await CHospitalService.addItem({
-        area: area,
-        introduction: introduction,
-        address: address,
-        zipCode: zipCode,
-        tel: tel,
-        name: name,
-        department: department,
-        url: url,
-        division: division
+      await CDoctorService.addItem({
+        doctorName: doctorName,
+        hospitalClinicName: hospitalClinicName
       });
     } catch (err) {
       return next(err);
@@ -115,35 +101,21 @@ module.exports = (() => {
   router.put(`${url}/:id`, async (req, res, next) => {
     // 파라미터
     const { id } = req.params;
-    const { area, introduction, address, zipCode, tel, name, department, url, division } = req.body;
+    const { doctorName, hospitalClinicName } = req.body;
 
     // 파라미터 유효성검사
     try {
-      regexHelper.value(area, "지역이 없습니다.");
-      regexHelper.value(introduction, "소개가 없습니다.");
-      regexHelper.value(address, "주소가 없습니다.");
-      regexHelper.value(zipCode, "우편번호가 없습니다.");
-      regexHelper.value(tel, "전화번호가 없습니다.");
-      regexHelper.value(name, "병의원명이 없습니다.");
-      regexHelper.value(department, "진료과가 없습니다.");
-      regexHelper.value(url, "URL이 없습니다.");
-      regexHelper.value(division, "병의원 구분이 없습니다.");
+      regexHelper.value(doctorName, "의사명이 없습니다.");
+      regexHelper.value(hospitalClinicName, "병의원명이 없습니다.");
     } catch (err) {
       return next(err);
     }
 
     try {
-      await CHospitalService.editItem({
+      await CDoctorService.editItem({
         id: id,
-        area: area,
-        introduction: introduction,
-        address: address,
-        zipCode: zipCode,
-        tel: tel,
-        name: name,
-        department: department,
-        url: url,
-        division: division
+        doctorName: doctorName,
+        hospitalClinicName: hospitalClinicName
       });
     } catch (err) {
       return next(err);
@@ -165,7 +137,7 @@ module.exports = (() => {
     }
 
     try {
-      await CHospitalService.deleteItem({
+      await CDoctorService.deleteItem({
         id: id
       });
     } catch (err) {

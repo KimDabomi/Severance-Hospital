@@ -19,7 +19,7 @@ import UserInfo from "./UserInfo/UserInfo";
 import UserResult from "./UserResult/UserResult";
 import Hospital from "./Hospital/Hospital";
 import Doctor from "./Doctor/Doctor";
-import CHospital from "./CHospital/CHospital";
+import CHospitalClinic from "./CHospitalClinic/CHospitalClinic";
 import CDoctor from "./CDoctor/CDoctor";
 import Department from "./Department/Department";
 
@@ -71,8 +71,8 @@ const Manager = memo(() => {
         <MenuLinkContainer to="user_result">회원결과</MenuLinkContainer>
         <MenuLinkContainer to="hospital">병원</MenuLinkContainer>
         <MenuLinkContainer to="doctor">의사</MenuLinkContainer>
-        <MenuLinkContainer to="c_hospital">협력병원</MenuLinkContainer>
-        <MenuLinkContainer to="c_doctor">협력의사</MenuLinkContainer>
+        <MenuLinkContainer to="cooperation_hospital_clinic">협력병의원</MenuLinkContainer>
+        <MenuLinkContainer to="cooperation_doctor">협력의사</MenuLinkContainer>
         <MenuLinkContainer to="department">진료과</MenuLinkContainer>
       </MenuContainer>
 
@@ -86,8 +86,8 @@ const Manager = memo(() => {
         <Route path="/user_result" element={<UserResult />} />
         <Route path="/hospital" element={<Hospital />} />
         <Route path="/doctor" element={<Doctor />} />
-        <Route path="/c_hospital" element={<CHospital />} />
-        <Route path="/c_doctor" element={<CDoctor />} />
+        <Route path="/cooperation_hospital_clinic" element={<CHospitalClinic />} />
+        <Route path="/cooperation_doctor" element={<CDoctor />} />
         <Route path="/department" element={<Department />} />
       </Routes>
     </Container>

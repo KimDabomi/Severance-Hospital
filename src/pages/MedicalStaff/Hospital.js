@@ -12,7 +12,7 @@ import { Pagination } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getList } from "../../slices/CHospitalSlice";
+import { getList } from "../../slices/CHospitalClinicSlice";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -262,7 +262,7 @@ const Hospital = memo(() => {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.CHospitalSlice);
+  const { data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(() => {
@@ -715,7 +715,7 @@ const Hospital = memo(() => {
             data.map((v, i) => {
               return (
                 <li key={i}>
-                  <Link to={`/cooperation/hospital-detail.do/${v.id}`}>{v.CHospitalName}</Link>
+                  <Link to={`/cooperation/hospital-detail.do/${v.id}`}>{v.name}</Link>
                 </li>
               );
             })}

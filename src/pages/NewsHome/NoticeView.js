@@ -41,22 +41,6 @@ const NoticeView = memo(() => {
     );
   }, [isUpdate, query, page]);
 
-   /** 데이터 값 변경에 따른 사이드 이펙트 처리 (뒤로가기문제)*/
-  //  const item = useMemo(() => {
-  //   if (data) {
-  //     return data;
-  //   } else {
-  //     //새로고침시 현재 데이터만 다시 로드
-  //     dispatch(getList({ query: query,
-  //       page: 1,
-  //       rows: 12, }));
-  //   }
-  // }, [data]);
-
-  // if (item) {
-  //   console.log('item', item);
-  // }
-
   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
   const navigate = useNavigate();
 

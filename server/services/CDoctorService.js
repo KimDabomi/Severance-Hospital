@@ -1,8 +1,8 @@
 /**
- * @ File Name: CHospitalService.js
+ * @ File Name: CDoctorService.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
  * @ Last Update: 2023-01-09 00:33:33
- * @ Description: 협력병원 서비스
+ * @ Description: 협력의사 서비스
  */
 
 /** import */
@@ -10,11 +10,11 @@ const mybatisMapper = require("mybatis-mapper");
 const DBPool = require("../helper/DBPool");
 const { RuntimeException } = require("../helper/ExceptionHelper");
 
-class CHospitalService {
+class CDoctorService {
   /** 생성자 - Mapper파일을 로드한다 */
   constructor() {
     // mapper의 위치는 이 소스 파일이 아닌 프로젝트 root를 기준으로 상대경로
-    mybatisMapper.createMapper(["./server/mappers/CHospitalMapper.xml"]);
+    mybatisMapper.createMapper(["./server/mappers/CDoctorMapper.xml"]);
   }
 
   /** 목록 조회 */
@@ -25,7 +25,7 @@ class CHospitalService {
     try {
       dbcon = await DBPool.getConnection();
 
-      let sql = mybatisMapper.getStatement("CHospitalMapper", "selectList", params);
+      let sql = mybatisMapper.getStatement("CDoctorMapper", "selectList", params);
       let [result] = await dbcon.query(sql);
 
       if (result.length === 0) {
@@ -52,7 +52,7 @@ class CHospitalService {
     try {
       dbcon = await DBPool.getConnection();
 
-      let sql = mybatisMapper.getStatement("CHospitalMapper", "selectItem", params);
+      let sql = mybatisMapper.getStatement("CDoctorMapper", "selectItem", params);
       let [result] = await dbcon.query(sql);
 
       if (result.length === 0) {
@@ -78,7 +78,7 @@ class CHospitalService {
     try {
       dbcon = await DBPool.getConnection();
 
-      let sql = mybatisMapper.getStatement("CHospitalMapper", "insertItem", params);
+      let sql = mybatisMapper.getStatement("CDoctorMapper", "insertItem", params);
       let [{ affectedRows }] = await dbcon.query(sql);
 
       if (affectedRows === 0) {
@@ -100,7 +100,7 @@ class CHospitalService {
     try {
       dbcon = await DBPool.getConnection();
 
-      let sql = mybatisMapper.getStatement("CHospitalMapper", "updateItem", params);
+      let sql = mybatisMapper.getStatement("CDoctorMapper", "updateItem", params);
       let [{ affectedRows }] = await dbcon.query(sql);
 
       if (affectedRows === 0) {
@@ -122,7 +122,7 @@ class CHospitalService {
     try {
       dbcon = await DBPool.getConnection();
 
-      let sql = mybatisMapper.getStatement("CHospitalMapper", "deleteItem", params);
+      let sql = mybatisMapper.getStatement("CDoctorMapper", "deleteItem", params);
       let [{ affectedRows }] = await dbcon.query(sql);
 
       if (affectedRows === 0) {
@@ -145,7 +145,7 @@ class CHospitalService {
     try {
       dbcon = await DBPool.getConnection();
 
-      let sql = mybatisMapper.getStatement("CHospitalMapper", "selectCountAll", params);
+      let sql = mybatisMapper.getStatement("CDoctorMapper", "selectCountAll", params);
       let [result] = await dbcon.query(sql);
 
       if (result.length > 0) {
@@ -163,4 +163,4 @@ class CHospitalService {
   }
 }
 
-module.exports = new CHospitalService();
+module.exports = new CDoctorService();

@@ -36,7 +36,7 @@ export const getList = createAsyncThunk("NoticeSlice/getList", async (payload, {
 });
 
 /** 단일행 데이터 조회를 위한 비동기 함수 */
-export const getItem = createAsyncThunk("NoticeSlice/getitem", async (payload, {rejectWithValue }) => {
+export const getItem = createAsyncThunk("NoticeSlice/getItem", async (payload, {rejectWithValue }) => {
     let result = null;
 
     try {

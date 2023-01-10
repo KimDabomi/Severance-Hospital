@@ -5,18 +5,17 @@
  * @ Description: 고객의 소리 페이지
  */
 
-import React, { memo, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { memo, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import styled from "styled-components";
 
 import CustomerBoardList from "./CustomerBoardList";
 import CustomerBoardAdd from "./CustomerBoardAdd";
 import CustomerBoardView from "./CustomerBoardView";
 
-
-import Header from '../../components/MainPageHeader';
-import Footer from '../../components/Footer';
-import TopButton from '../../components/TopButton';
+import Header from "../../components/MainPageHeader";
+import Footer from "../../components/Footer";
+import TopButton from "../../components/TopButton";
 
 const CustomerBoardCont = styled.div`
   .pageCont {
@@ -30,11 +29,11 @@ const CustomerBoardMain = memo(() => {
       <TopButton />
       <CustomerBoardCont>
         <Header />
-          <Routes>
-            <Route path="/" element={<CustomerBoardList />} />
-            <Route path="suggest.do" element={<CustomerBoardAdd />} />
-            <Route path="suggestion/:id" element={<CustomerBoardView />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<CustomerBoardList />} />
+          <Route path="suggest.do" element={<CustomerBoardAdd />} />
+          <Route path="suggestion/:id" element={<CustomerBoardView />} />
+        </Routes>
       </CustomerBoardCont>
       <Footer />
     </div>
