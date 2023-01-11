@@ -44,6 +44,7 @@ const News = memo(() => {
   const { pagenation, data, loading, error } = useSelector((state) => state.NewsSlice);
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+  // 리덕스를 통한 데이터 요청
   useEffect(() => {
     dispatch(getList({ query: query, page: page, rows: 20 }));
   }, [isUpdate, query, page]);
@@ -104,7 +105,7 @@ const News = memo(() => {
         return;
       }
 
-      // 리덕스를 통한 데이터 저장 요청
+      // 리덕스를 통한 데이터 수정 요청
       dispatch(
         putItem({
           id: current.id.value,
@@ -131,6 +132,7 @@ const News = memo(() => {
       const current = e.currentTarget;
 
       if (window.confirm(`정말 ${current.dataset.name}(을)를 삭제하시겠습니까?`)) {
+        // 리덕스를 통한 데이터 삭제 요청
         dispatch(deleteItem({ id: current.dataset.id })).then(({ payload, error }) => {
           if (error) {
             window.alert(payload.data.rtmsg);
