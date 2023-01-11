@@ -79,6 +79,7 @@ const News = memo(() => {
       });
 
       alert("추가되었습니다.");
+      current.reset();
       setIsUpdate(isUpdate + 1);
     },
     [isUpdate]
@@ -94,8 +95,8 @@ const News = memo(() => {
 
       // 입력값에 대한 유효성 검사
       try {
-        regexHelper.value(current.newsTitle, "지역이 없습니다.");
-        regexHelper.value(current.newsLink, "소개가 없습니다.");
+        regexHelper.value(current.newsTitle, "뉴스제목이 없습니다.");
+        regexHelper.value(current.newsLink, "뉴스링크가 없습니다.");
       } catch (e) {
         window.alert(e.message);
         console.error(e);
