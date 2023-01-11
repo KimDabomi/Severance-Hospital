@@ -1,13 +1,15 @@
 /**
- * @ File Name: NewsHomeCarousel.js
+ * @ File Name: NewsHomeNoticeCarousel.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-08
- * @ Description: 뉴스 메인 페이지 슬라이드 컴포넌트
+ * @ Last Update: 2023-01-11
+ * @ Description: 뉴스 메인 페이지 공지사항 슬라이드 컴포넌트
  */
 
 /** import */
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getList } from '../slices/NoticeSlice';
 import styled from 'styled-components';
 
 // slick
@@ -84,57 +86,49 @@ function NewsHomeNoticeCarousel() {
   // 슬라이드 설정
   const settings = {
     dots: true /* 아래점 */,
-    // rows: 2,
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
+    infinite: false,
     slidesPerRow: 2, //보여질 행의 수
   };
+
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.NoticeSlice);
+
+  useEffect(() => {
+    dispatch(
+      getList({
+        page: 1,
+        rows: 12,
+      })
+    );
+  }, []);
+
+   if (data) {
+    console.log(data);
+  }
 
   return (
     <div>
     <StyledSlider {...settings} className='slick-slider'>
-      {/* 언론보도 */}
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
-      <article className="newsBox">
-        <span className="newsCategory">공지사항</span>
-        <strong className="newsContentTitle">뉴스제목</strong>
-        <span className="newsDate">2022-22-22</span>
-      </article>
+      {data && data.map((v,i)=>{
+        return(
+          // 언론보도
+          <Link
+          className="newsBox"
+          key={i}
+          title="공지사항 새창열기"
+          draggable={false}
+          to={`notice.do/${v.id}`}
+        >
+          <span className="newsCategory">공지사항</span>
+          <strong className="newsContentTitle">{v.noticeTitle}</strong>
+          <span className="newsDate">{v.regDate}</span>
+        </Link>
+        )
+      })}
     </StyledSlider>
     <Link className="btnMoreLink notice" to="/news/notice.do">더보기</Link>
     </div>

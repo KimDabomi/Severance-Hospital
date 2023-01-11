@@ -1,7 +1,7 @@
 <!-- 
  * @ File Name: NoticeMapper.xml
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-06 17:53
+ * @ Last Update: 2023-01-11 17:53
  * @ Description: 공지사항 sql mapper
  -->
  
@@ -12,8 +12,11 @@
 <mapper namespace="NoticeMapper">
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id='selectItem'>
-        select id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate from notice where id=#{id}
+        select id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate from notice where id=#{id};
     </select>
+    <!-- <select id='selectItem'>
+        select id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate from notice where id=#{id} UNION ALL(SELECT id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate FROM notice where id < #{id}  ORDER BY id DESC LIMIT 1) UNION ALL(SELECT id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate FROM notice  where id > #{id}  ORDER BY id ASC LIMIT 1);
+    </select> -->
 
     <!-- 다중행 조희를 위한 기능 정의 -->
     <select id='selectList'>
@@ -37,8 +40,11 @@
     </select>
 
     <!-- 데이터 저장을 위한 기능 정의 -->
+    <!-- <insert id='insertItem'>
+        INSERT INTO notice (noticeTitle, noticeContent, hits, regDate) VALUES (#{noticeTitle}, #{noticeContent}, #{hits}, now());
+    </insert> -->
     <insert id='insertItem'>
-        INSERT INTO notice (noticeTitle, noticeContent, hits, regDate, editDate) VALUES (#{noticeTitle}, #{noticeContent}, #{hits}, now(), now());
+        INSERT INTO notice (noticeTitle, noticeContent, hits, regDate) VALUES (#{noticeTitle}, #{noticeContent}, #{hits}, now());
     </insert>
 
     <!-- 데이터 삭제를 위한 기능 정의 -->

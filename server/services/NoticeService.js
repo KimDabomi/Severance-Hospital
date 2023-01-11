@@ -52,14 +52,6 @@ class NoticeService {
     try {
       dbcon = await DBPool.getConnection();
 
-    //   조회수
-      let hit = mybatisMapper.getStatement(
-        'NoticeMapper',
-        'updateHitCnt',
-        params
-      );
-      let [hitresult] = await dbcon.query(hit);
-
       let sql = mybatisMapper.getStatement(
         'NoticeMapper',
         'selectItem',
