@@ -6,7 +6,6 @@
  */
 
 /** import */
-import { makeStyles } from "@material-ui/core";
 import styled from "styled-components";
 
 /** styled */
@@ -20,6 +19,26 @@ export const Table = styled.table`
   text-align: center;
   margin: auto;
   width: 100%;
+
+  thead {
+    width: 100%;
+    tr {
+      width: 100%;
+
+      th:first-child {
+        width: 1%;
+      }
+      th:nth-last-child(3) {
+        width: 1%;
+      }
+      th:nth-last-child(2) {
+        width: 1%;
+      }
+      th:last-child {
+        width: 1%;
+      }
+    }
+  }
 
   th {
     color: #168;
@@ -96,44 +115,46 @@ export const TableEx = styled(Table)`
     }
   }
 `;
-export const SearchForm = styled.form`
-  display: flex;
-  padding-bottom: 10px;
+export const SearchForm = styled.div`
+  form {
+    display: flex;
+    padding-bottom: 10px;
 
-  input {
-    width: 75%;
-    height: 35px;
-    text-align: center;
-    border: 2px solid #168;
-
-    box-sizing: border-box;
-    padding: 10px;
-    transition: 0.3s;
-
-    &::placeholder {
+    input {
+      width: 75%;
+      height: 35px;
       text-align: center;
+      border: 2px solid #168;
+
+      box-sizing: border-box;
+      padding: 10px;
+      transition: 0.3s;
+
+      &::placeholder {
+        text-align: center;
+      }
+
+      &:focus {
+        outline: none;
+      }
     }
 
-    &:focus {
-      outline: none;
+    button {
+      width: 25%;
+      height: 35px;
+      display: block;
+      font-weight: bold;
+      padding: 0;
+
+      background-color: #fff;
+      color: #000;
+      text-decoration: none;
+      border: none;
+
+      transition: 0.3s;
+      background-color: #168;
+      color: white;
     }
-  }
-
-  button {
-    width: 25%;
-    height: 35px;
-    display: block;
-    font-weight: bold;
-    padding: 0;
-
-    background-color: #fff;
-    color: #000;
-    text-decoration: none;
-    border: none;
-
-    transition: 0.3s;
-    background-color: #168;
-    color: white;
   }
 `;
 export const AddForm = styled.form`

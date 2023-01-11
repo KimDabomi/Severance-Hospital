@@ -7,8 +7,8 @@
 
 /** import */
 import React, { memo, useCallback } from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 // pagination
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
@@ -25,11 +25,15 @@ const PaginationNav = styled.nav`
  * @page useQueryString()을 통해 가져온 값
  * @pagenation Redux의 pagenation값
  * @pageQueryPath 현재 페이지 번호를 QueryString으로 표현하기 위한 Path
+ * @query 검색어를 QueryString으로 가져온 값
  */
-const PaginationCustom = memo(({ page, pagenation, pageQueryPath }) => {
+const PaginationCustom = memo(({ page, pagenation, pageQueryPath, query }) => {
   /** 페이지 구성 */
   const nowPage = parseInt(page || "1", 10);
-  
+
+  /** 검색어가 있는 경우 QueryString으로 표현 */
+  const searchQueryString = query ? `query=${query}&` : "";
+
   /** 페이지 커스텀 스타일 */
   const paginationStyle = makeStyles((theme) => ({
     root: {
@@ -39,6 +43,7 @@ const PaginationCustom = memo(({ page, pagenation, pageQueryPath }) => {
       }
     }
   }));
+
   // classes 적용
   const classes = paginationStyle();
 
@@ -58,7 +63,7 @@ const PaginationCustom = memo(({ page, pagenation, pageQueryPath }) => {
         page={nowPage}
         className={classes.root}
         onChange={handleChange}
-        renderItem={(item) => <PaginationItem component={Link} to={`${pageQueryPath}?page=${item.page}`} {...item} />}
+        renderItem={(item) => <PaginationItem component={Link} to={`${pageQueryPath}?${searchQueryString}page=${item.page}`} {...item} />}
       />
     </PaginationNav>
   );

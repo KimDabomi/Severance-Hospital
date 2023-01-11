@@ -8,7 +8,6 @@
 /** import */
 // react
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getList, postItem, putItem, deleteItem } from "../../../slices/NewsSlice";
@@ -21,11 +20,9 @@ import { useQueryString } from "../../../hooks/useQueryString";
 import Spinner from "../../../components/Spinner";
 import { GetEditForm, Table, TableEx, SearchForm, AddForm } from "../common/ManagerStyle";
 import PaginationCustom from "../common/PaginationCustom";
+import TableSearch from "../common/TableSearch";
 
 const News = memo(() => {
-  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
-  const navigate = useNavigate();
-
   /** 화면 갱신 상태값 */
   const [isUpdate, setIsUpdate] = useState(1);
   /** 수정 아이디 상태값 */
@@ -41,7 +38,7 @@ const News = memo(() => {
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   // 리덕스를 통한 데이터 요청
   useEffect(() => {
-    dispatch(getList({ query: query, page: page, rows: 20 }));
+    dispatch(getList({ query: query, page: page, rows: 10 }));
   }, [isUpdate, query, page]);
 
   /** 추가 */
@@ -151,21 +148,6 @@ const News = memo(() => {
     setUpdateId(id);
   }, []);
 
-  /** 검색 */
-  const onSearchSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-
-      // 검색어
-      const query = e.currentTarget.query.value;
-
-      // 검색어에 따라 URL을 구성한다.
-      let redirectUrl = query ? `/manager/news/?query=${query}` : "/manager/news";
-      navigate(redirectUrl);
-    },
-    [navigate]
-  );
-
   return (
     <>
       {/* 로딩 */}
@@ -197,9 +179,8 @@ const News = memo(() => {
       </AddForm>
 
       {/* 검색 */}
-      <SearchForm onSubmit={onSearchSubmit}>
-        <input type="text" name="query" defaultValue={query} placeholder="제목 검색" />
-        <button type="submit">검색</button>
+      <SearchForm>
+        <TableSearch query={query} placeholder="제목 검색" searchQueryPath="/manager/news" page={page} />
       </SearchForm>
 
       {/* 조회, 수정 */}
@@ -272,7 +253,7 @@ const News = memo(() => {
       </GetEditForm>
 
       {/* 페이지 */}
-      {data && pagenation && !error && <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" />}
+      {data && pagenation && !error && <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" query={query} />}
     </>
   );
 });
