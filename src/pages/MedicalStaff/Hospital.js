@@ -7,9 +7,14 @@
 
 /** import */
 import React, { memo, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-import { Pagination } from "@mui/material";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import { Pagination } from "@mui/material";
+import { makeStyles } from "@material-ui/core";
+import PaginationItem from "@mui/material/PaginationItem";
+// helper, hooks
+import { useQueryString } from "../../hooks/useQueryString";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getList } from "../../slices/CHospitalClinicSlice";
@@ -22,6 +27,9 @@ import Region from "../../assets/img/img-region.png";
 import Blank from "../../assets/img/blank.png";
 // 검색 아이콘
 import Search from "../../assets/img/ico-search-white.png";
+
+/** components */
+import Spinner from "../../components/Spinner";
 
 /** 리스트 스타일 */
 // ul태그
@@ -260,9 +268,30 @@ const Hospital = memo(() => {
   // active
   const [activeList, setActiveList] = useState(1);
 
+  /** QueryString 값 가져오기 */
+  const { query, page = 1 } = useQueryString();
+
+  /** Pagination */
+  const nowPage = parseInt(page || "1", 10);
+
+  /** 페이지 */
+  const handleChange = useCallback(() => {
+    // 스크롤바를 강제로 맨 위로 이동시킨다.
+    window.scrollTo(0, 0);
+  });
+
+  const classes = makeStyles((theme) => ({
+    root: {
+      "& .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
+        backgroundColor: "#168",
+        color: "#fff"
+      }
+    }
+  }));
+
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
+  const { pagenation, data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(() => {
@@ -271,6 +300,9 @@ const Hospital = memo(() => {
 
   return (
     <>
+      {/* 로딩 */}
+      <Spinner loading={loading} />
+
       {/* 페이지 타이틀 */}
       <h1 className="pageTitle">협력병원 현황</h1>
       <section className="boxGuide">
@@ -713,19 +745,32 @@ const Hospital = memo(() => {
         <ul>
           {data &&
             data.map((v, i) => {
-              return (
-                <li key={i}>
-                  <Link to={`/cooperation/hospital-detail.do/${v.id}`}>{v.name}</Link>
-                </li>
-              );
+              if (v.division === "H") {
+                return (
+                  <li key={v.id}>
+                    <Link to={`/cooperation/hospital-detail.do/${v.id}`}>{v.name}</Link>
+                  </li>
+                );
+              }
             })}
         </ul>
       </PartnerListBoxSection>
 
       {/* Pagination */}
-      <PaginationDiv>
-        <Pagination count={10} className="pagination" />
-      </PaginationDiv>
+      {data && pagenation && !error && (
+        <PaginationDiv>
+          <Pagination
+            count={pagenation.totalPage}
+            defaultPage={1}
+            siblingCount={2}
+            boundaryCount={1}
+            page={nowPage}
+            className={classes.root}
+            onChange={handleChange}
+            renderItem={(item) => <PaginationItem component={Link} to={`/manager/cooperation_hospital?page=${item.page}`} {...item} />}
+          />
+        </PaginationDiv>
+      )}
     </>
   );
 });
