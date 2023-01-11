@@ -12,12 +12,12 @@
 <mapper namespace="NewsMapper">
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id='selectItem'>
-        select id, newsTitle, newsLink, date_format(regDate, '%Y-%m-%d') as regDate, editDate from news where id=#{id}
+        select id, newsTitle, newsLink, regDate, editDate from news where id=#{id}
     </select>
 
     <!-- 다중행 조희를 위한 기능 정의 -->
     <select id='selectList'>
-        select id, newsTitle, newsLink, date_format(regDate, '%Y-%m-%d') as regDate, editDate from news
+        select id, newsTitle, newsLink, regDate, editDate from news
         
         <where>
             <if test="newsTitle != null and newsTitle != ''">
@@ -25,7 +25,7 @@
             </if>
         </where>
         
-        order by regDate desc
+        order by id desc
 
         <!-- 페이지 구현을 위한 LIMIT절 추가 -->
         <if test='listCount > 0'>
