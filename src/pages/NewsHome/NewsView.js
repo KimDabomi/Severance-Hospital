@@ -39,12 +39,12 @@ const NewsView = memo(() => {
         page: page,
         rows: 12
       })
-    ).then((data) => {
+    ).then(({payload}) => {
       if (query !== queryStatus) {
-        setIsData(data.payload.data);
+        setIsData(payload.data);
         setQueryStatus(query);
       } else {
-        setIsData((nowData) => nowData.concat(data.payload.data));
+        setIsData((nowData) => nowData.concat(payload.data));
       }
     });
   }, [page, query]);
@@ -74,12 +74,6 @@ const NewsView = memo(() => {
     let redirectUrl = query ? `?query=${query}` : "/news/media.do";
     navigate(redirectUrl);
     query !== queryStatus && setPage(1);
-  });
-
-  /** 더보기 버튼 (페이지) 함수 */
-  const pagePlus = useCallback((e) => {
-    console.log("더보기버튼 누름", page);
-    setPage(page + 1);
   });
 
   /** 닫기버튼 눌렸을 때 */
@@ -144,7 +138,7 @@ const NewsView = memo(() => {
               {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
               {pagenation.nowPage !== pagenation.totalPage ? (
                 <div className="buttonContColumn">
-                  <button type="button" className="btnMore" onClick={pagePlus}>
+                  <button type="button" className="btnMore" onClick={() => setPage(page + 1)}>
                     더보기
                   </button>
                 </div>
