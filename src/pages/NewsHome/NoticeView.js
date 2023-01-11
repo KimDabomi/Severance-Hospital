@@ -1,10 +1,10 @@
 /**
  * @ File Name: NoticeView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-09 14:00:00
+ * @ Last Update: 2023-01-11 14:00:00
  * @ Description: 뉴스 하위 페이지 공지사항 페이지
  */
-import React, { memo, useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../../slices/NoticeSlice';
@@ -27,7 +27,7 @@ const NoticeView = memo(() => {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.NoticeSlice);
+  const { pagenation, data, loading, error } = useSelector((state) => state.NoticeSlice);
 
   /** 최초 마운트시 리덕스를 통해 목록을 조회한다. */
   // 화면 새로고침에 대한 상태값이 변경된다면 데이터를 새로 로드함
@@ -43,6 +43,10 @@ const NoticeView = memo(() => {
 
   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
   const navigate = useNavigate();
+
+   if (data) {
+    console.log('공지data', data, pagenation);
+  }
 
   /** 검색했을 때 이벤트 */
   const onSearchSubmit = useCallback(
@@ -120,12 +124,12 @@ const NoticeView = memo(() => {
 
           {error ? (
             <h1>에러발생함</h1>
-          ) : data && data.data[0] ? (
+          ) : data && data[0] ? (
             <div>
               <Spinner loading={loading} />
               {/* 검색결과 */}
               <div className="bbsList">
-                {data.data.map((v, i) => {
+                {data.map((v, i) => {
                   return (
                     <div className="bbsItem" key={v.id}>
                       <Link className="inner" to={`${v.id}`}>
@@ -149,7 +153,7 @@ const NoticeView = memo(() => {
               </div>
 
               {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
-              {data.pagenation.nowPage !== data.pagenation.totalPage ? (
+              {pagenation.nowPage !== pagenation.totalPage ? (
                 <div className="buttonContColumn">
                   <Link className="btnMore" onClick={pagePlus}>
                     더보기

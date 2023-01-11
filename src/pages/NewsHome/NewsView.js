@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-09 14:19:00
+ * @ Last Update: 2023-01-11 14:19:00
  * @ Description: 뉴스 하위페이지 언론보도 페이지
  */
 import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
