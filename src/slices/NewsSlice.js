@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-06 15:58:00
+ * @ Last Update: 2023-01-11 15:58:00
  * @ Description: 뉴스 슬라이스
  */
 
@@ -35,7 +35,7 @@ export const getList = createAsyncThunk("NewsSlice/getList", async (payload, { r
 });
 
 /** 단일행 데이터 조회를 위한 비동기 함수 */
-export const getItem = createAsyncThunk("NewsSlice/getitem", async (payload, { rejectWithValue }) => {
+export const getItem = createAsyncThunk("NewsSlice/getItem", async (payload, { rejectWithValue }) => {
   let result = null;
 
   //환경설정 파일에 정의된 URL에서 ':id' 부분을 찾아 payload를 통해 전달된 일련번호로 치환
@@ -119,7 +119,17 @@ const NewsSlice = createSlice({
   extraReducers: {
     /** 다중행 데이터 조회를 위한 액션 함수 */
     [getList.pending]: pending,
-    [getList.fulfilled]: fulfilled,
+    [getList.fulfilled]: (state, { payload }) => {
+      if (payload.pagenation.nowPage > 1) {
+        payload.data = state.data.concat(payload.data);
+      }
+      return {
+        data: payload.data,
+        pagenation: payload.pagenation,
+        loading: false,
+        error: null
+      };
+    },
     [getList.rejected]: rejected,
 
     /** 단일행 데이터 조회를 위한 액션 함수 */
