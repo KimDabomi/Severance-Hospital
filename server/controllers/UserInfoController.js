@@ -1,7 +1,7 @@
 /*
  * @ File name: UserInfoController.js
  * @ Author: 김다보미(cdabomi60@gmail.com)
- * @ Last Update: 2023-01-10 20:15
+ * @ Last Update: 2023-01-11 17:50
  * @ Description: 회원정보 컨트롤러
 */
 
@@ -173,7 +173,7 @@ module.exports = (() => {
         }
 
         try {
-            await ProfessorService.deleteItem({
+            await UserInfoService.deleteItem({
               id: id
             });
         } catch (err) {
