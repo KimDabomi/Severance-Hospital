@@ -96,11 +96,7 @@ const NoticeInfo = memo(() => {
 
   /** 페이지가 열린 직후 (혹은 id값이 변경된 경우) 데이터 가져오기 */
   useEffect(() => {
-    if(data){
-      dispatch(getItem({ id: id }));
-    }else{
-      dispatch(getItem({ id: id }));
-    }
+    dispatch(getItem({ id: id }));
   }, [id]);
 
   if (data) {
@@ -123,7 +119,6 @@ const NoticeInfo = memo(() => {
       ) : (
         !data[0] && (
           <div className="pageCont">
-
             <div className="subjectArea">
               <h3 className="subject">
                 {data.noticeTitle}
