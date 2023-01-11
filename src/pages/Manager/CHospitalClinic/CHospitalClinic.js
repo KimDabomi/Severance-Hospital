@@ -193,7 +193,7 @@ const CHospitalClinic = memo(() => {
       const query = e.currentTarget.query.value;
 
       // 검색어에 따라 URL을 구성한다.
-      let redirectUrl = query ? `/manager/cooperation_hospital/?query=${query}` : "/manager/cooperation_hospital";
+      let redirectUrl = query ? `/manager/cooperation_hospital_clinic/?query=${query}` : "/manager/cooperation_hospital_clinic";
       navigate(redirectUrl);
     },
     [navigate]
