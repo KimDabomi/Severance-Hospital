@@ -27,7 +27,7 @@ const NewsView = memo(() => {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.NewsSlice);
+  const { pagenation, data, loading, error } = useSelector((state) => state.NewsSlice);
 
   /** 최초 마운트시 리덕스를 통해 목록을 조회한다. */
   // 화면 새로고침에 대한 상태값이 변경된다면 데이터를 새로 로드함
@@ -45,7 +45,7 @@ const NewsView = memo(() => {
   const navigate = useNavigate();
 
   // if (data) {
-  //   console.log('뉴스data', data);
+  //   console.log('뉴스data', data, pagenation);
   // }
 
   /** 검색했을 때 이벤트 */
@@ -124,12 +124,12 @@ const NewsView = memo(() => {
 
           {error ? (
             <h1>에러발생함</h1>
-          ) : data && data.data[0] ? (
+          ) : data && data[0] ? (
             <div>
               <Spinner loading={loading} />
               {/* 검색결과 */}
               <div className="bbsList">
-                {data.data.map((v, i) => {
+                {data.map((v, i) => {
                   return (
                     <div className="bbsItem" key={v.id}>
                       <a
@@ -158,7 +158,7 @@ const NewsView = memo(() => {
               </div>
 
               {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
-              {data.pagenation.nowPage !== data.pagenation.totalPage ? (
+              {pagenation.nowPage !== pagenation.totalPage ? (
                 <div className="buttonContColumn">
                   <Link className="btnMore" onClick={pagePlus}>
                     더보기

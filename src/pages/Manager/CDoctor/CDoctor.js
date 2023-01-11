@@ -44,6 +44,7 @@ const CDoctor = memo(() => {
   const { pagenation, data, loading, error } = useSelector((state) => state.CDoctorSlice);
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+  // 리덕스를 통한 데이터 요청
   useEffect(() => {
     dispatch(getList({ query: query, page: page, rows: 20 }));
   }, [isUpdate, query, page]);
@@ -79,6 +80,7 @@ const CDoctor = memo(() => {
       });
 
       alert("추가되었습니다.");
+      current.reset();
       setIsUpdate(isUpdate + 1);
     },
     [isUpdate]
@@ -103,7 +105,7 @@ const CDoctor = memo(() => {
         return;
       }
 
-      // 리덕스를 통한 데이터 저장 요청
+      // 리덕스를 통한 데이터 수정 요청
       dispatch(
         putItem({
           id: current.id.value,
@@ -130,6 +132,7 @@ const CDoctor = memo(() => {
       const current = e.currentTarget;
 
       if (window.confirm(`정말 '${current.dataset.name}'님을 삭제하시겠습니까?`)) {
+        // 리덕스를 통한 데이터 삭제 요청
         dispatch(deleteItem({ id: current.dataset.id })).then(({ payload, error }) => {
           if (error) {
             window.alert(payload.data.rtmsg);
@@ -232,75 +235,73 @@ const CDoctor = memo(() => {
             </tr>
           </thead>
           <tbody>
-            {
-              data && pagenation && !error
-                ? data.map((v, i) => {
-                    if (v.id === updateId) {
-                      return (
-                        <tr key={v.id} data-id={v.id} className="editTr">
-                          <td style={{ display: "none" }}>
-                            <input type="hidden" name="id" defaultValue={v.id} />
-                          </td>
-                          <td>{v.id}</td>
-                          <td>
-                            <input type="text" name="doctorName" defaultValue={v.doctorName} />
-                          </td>
-                          <td>{v.area}</td>
-                          <td>{v.introduction}</td>
-                          <td>{v.address}</td>
-                          <td>{v.zipCode}</td>
-                          <td>{v.tel}</td>
-                          <td>
-                            <input type="text" name="hospitalClinicName" defaultValue={v.hospitalClinicName} />
-                          </td>
-                          <td>{v.department}</td>
-                          <td>{v.url}</td>
-                          <td>{v.division}</td>
-                          <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
-                          <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
-                          <td colSpan="2">
-                            <button type="submit">수정완료</button>
-                          </td>
-                        </tr>
-                      );
-                    } else {
-                      return (
-                        <tr key={v.id}>
-                          <td>{v.id}</td>
-                          <td>{v.doctorName}</td>
-                          <td>{v.area}</td>
-                          <td>{v.introduction}</td>
-                          <td>{v.address}</td>
-                          <td>{v.zipCode}</td>
-                          <td>{v.tel}</td>
-                          <td>{v.hospitalClinicName}</td>
-                          <td>{v.department}</td>
-                          <td>{v.url}</td>
-                          <td>{v.division}</td>
-                          <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
-                          <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
-                          <td>
-                            <button type="button" data-id={v.id} onClick={onEditClick}>
-                              수정하기
-                            </button>
-                          </td>
-                          <td>
-                            <button type="button" data-id={v.id} data-name={v.doctorName} onClick={onDeleteClick}>
-                              삭제하기
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  })
-                : error && (
-                    <tr>
-                      <td colSpan="15" align="center">
-                        {error.message}
-                      </td>
-                    </tr>
-                  )
-            }
+            {data && pagenation && !error
+              ? data.map((v, i) => {
+                  if (v.id === updateId) {
+                    return (
+                      <tr key={v.id} data-id={v.id} className="editTr">
+                        <td style={{ display: "none" }}>
+                          <input type="hidden" name="id" defaultValue={v.id} />
+                        </td>
+                        <td>{v.id}</td>
+                        <td>
+                          <input type="text" name="doctorName" defaultValue={v.doctorName} />
+                        </td>
+                        <td>{v.area}</td>
+                        <td>{v.introduction}</td>
+                        <td>{v.address}</td>
+                        <td>{v.zipCode}</td>
+                        <td>{v.tel}</td>
+                        <td>
+                          <input type="text" name="hospitalClinicName" defaultValue={v.hospitalClinicName} />
+                        </td>
+                        <td>{v.department}</td>
+                        <td>{v.url}</td>
+                        <td>{v.division}</td>
+                        <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
+                        <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
+                        <td colSpan="2">
+                          <button type="submit">수정완료</button>
+                        </td>
+                      </tr>
+                    );
+                  } else {
+                    return (
+                      <tr key={v.id}>
+                        <td>{v.id}</td>
+                        <td>{v.doctorName}</td>
+                        <td>{v.area}</td>
+                        <td>{v.introduction}</td>
+                        <td>{v.address}</td>
+                        <td>{v.zipCode}</td>
+                        <td>{v.tel}</td>
+                        <td>{v.hospitalClinicName}</td>
+                        <td>{v.department}</td>
+                        <td>{v.url}</td>
+                        <td>{v.division}</td>
+                        <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
+                        <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
+                        <td>
+                          <button type="button" data-id={v.id} onClick={onEditClick}>
+                            수정하기
+                          </button>
+                        </td>
+                        <td>
+                          <button type="button" data-id={v.id} data-name={v.doctorName} onClick={onDeleteClick}>
+                            삭제하기
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  }
+                })
+              : error && (
+                  <tr>
+                    <td colSpan="15" align="center">
+                      {error.message}
+                    </td>
+                  </tr>
+                )}
           </tbody>
         </Table>
       </GetEditForm>

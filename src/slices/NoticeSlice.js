@@ -106,6 +106,7 @@ const NoticeSlice = createSlice({
     name: 'NoticeSlice',
     // 이 모듈이 관리하고자하는 상태값들을 명시
     initialState: {
+        pagenation: null,
         data: null,
         loading: false,
         error: null
