@@ -8,20 +8,19 @@
 /** import */
 // react
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getList, postItem, putItem, deleteItem } from "../../../slices/CHospitalClinicSlice";
 // module
 import dayjs from "dayjs";
-import { Pagination } from "@mui/material";
-import PaginationItem from "@mui/material/PaginationItem";
 // helper
 import RegexHelper from "../../../helper/RegexHelper";
 import { useQueryString } from "../../../hooks/useQueryString";
 // components
 import Spinner from "../../../components/Spinner";
-import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav, useStyles } from "../common/ManagerStyleConponents";
+import { GetEditForm, Table, TableEx, SearchForm, AddForm } from "../common/ManagerStyle";
+import PaginationCustom from "../common/PaginationCustom";
 
 const CHospitalClinic = memo(() => {
   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
@@ -35,10 +34,6 @@ const CHospitalClinic = memo(() => {
   /** QueryString 값 가져오기 */
   const { query, page = 1 } = useQueryString();
 
-  /** Pagination */
-  const nowPage = parseInt(page || "1", 10);
-  const classes = useStyles();
-
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
   const { pagenation, data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
@@ -46,7 +41,7 @@ const CHospitalClinic = memo(() => {
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   // 리덕스를 통한 데이터 요청
   useEffect(() => {
-    dispatch(getList({ query: query, page: page, rows: 20 }));
+    dispatch(getList({ query: query, page: page, rows: 5 }));
   }, [isUpdate, query, page]);
 
   /** 추가 */
@@ -199,12 +194,6 @@ const CHospitalClinic = memo(() => {
     [navigate]
   );
 
-  /** 페이지 */
-  const handleChange = useCallback(() => {
-    // 스크롤바를 강제로 맨 위로 이동시킨다.
-    window.scrollTo(0, 0);
-  });
-
   return (
     <>
       {/* 로딩 */}
@@ -279,7 +268,7 @@ const CHospitalClinic = memo(() => {
 
       {/* 검색 */}
       <SearchForm onSubmit={onSearchSubmit}>
-        <input type="text" name="query" defaultValue={query} placeholder="지역, 이름 검색" />
+        <input type="text" name="query" defaultValue={query} key={query} placeholder="지역, 이름 검색" />
         <button type="submit">검색</button>
       </SearchForm>
 
@@ -388,20 +377,7 @@ const CHospitalClinic = memo(() => {
       </GetEditForm>
 
       {/* 페이지 */}
-      {data && pagenation && !error && (
-        <PaginationNav>
-          <Pagination
-            count={pagenation.totalPage}
-            defaultPage={1}
-            siblingCount={2}
-            boundaryCount={1}
-            page={nowPage}
-            className={classes.root}
-            onChange={handleChange}
-            renderItem={(item) => <PaginationItem component={Link} to={`/manager/cooperation_hospital?page=${item.page}`} {...item} />}
-          />
-        </PaginationNav>
-      )}
+      {data && pagenation && !error && <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/cooperation_hospital_clinic" />}
     </>
   );
 });

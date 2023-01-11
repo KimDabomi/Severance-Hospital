@@ -8,20 +8,19 @@
 /** import */
 // react
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getList, postItem, putItem, deleteItem } from "../../../slices/NewsSlice";
 // module
 import dayjs from "dayjs";
-import { Pagination } from "@mui/material";
-import PaginationItem from "@mui/material/PaginationItem";
 // helper
 import RegexHelper from "../../../helper/RegexHelper";
 import { useQueryString } from "../../../hooks/useQueryString";
 // components
 import Spinner from "../../../components/Spinner";
-import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav, useStyles } from "../common/ManagerStyleConponents";
+import { GetEditForm, Table, TableEx, SearchForm, AddForm } from "../common/ManagerStyle";
+import PaginationCustom from "../common/PaginationCustom";
 
 const News = memo(() => {
   /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
@@ -34,10 +33,6 @@ const News = memo(() => {
 
   /** QueryString 값 가져오기 */
   const { query, page = 1 } = useQueryString();
-
-  /** Pagination */
-  const nowPage = parseInt(page || "1", 10);
-  const classes = useStyles();
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
@@ -171,12 +166,6 @@ const News = memo(() => {
     [navigate]
   );
 
-  /** 페이지 */
-  const handleChange = useCallback(() => {
-    // 스크롤바를 강제로 맨 위로 이동시킨다.
-    window.scrollTo(0, 0);
-  });
-
   return (
     <>
       {/* 로딩 */}
@@ -283,20 +272,7 @@ const News = memo(() => {
       </GetEditForm>
 
       {/* 페이지 */}
-      {data && pagenation && !error && (
-        <PaginationNav>
-          <Pagination
-            count={pagenation.totalPage}
-            defaultPage={1}
-            siblingCount={2}
-            boundaryCount={1}
-            page={nowPage}
-            className={classes.root}
-            onChange={handleChange}
-            renderItem={(item) => <PaginationItem component={Link} to={`/manager/news?page=${item.page}`} {...item} />}
-          />
-        </PaginationNav>
-      )}
+      {data && pagenation && !error && <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" />}
     </>
   );
 });

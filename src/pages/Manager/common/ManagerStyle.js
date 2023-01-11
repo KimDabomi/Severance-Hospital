@@ -164,16 +164,3 @@ export const AddForm = styled.form`
     }
   }
 `;
-export const PaginationNav = styled.nav`
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-`;
-export const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
-      backgroundColor: "#168",
-      color: "#fff"
-    }
-  }
-}));
