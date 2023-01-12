@@ -117,7 +117,7 @@ const NoticeInfo = memo(() => {
       {error ? (
         <h1>에러발생함</h1>
       ) : (
-        !data[0] && (
+        data && (
           <div className="pageCont">
             <div className="subjectArea">
               <h3 className="subject">

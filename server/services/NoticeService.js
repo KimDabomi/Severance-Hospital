@@ -1,7 +1,7 @@
 /**
  * @ File Name: NoticeService.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-09 12:45
+ * @ Last Update: 2023-01-12 13:00
  * @ Description: 공지사항 service
  */
 
@@ -54,9 +54,17 @@ class NoticeService {
 
       let sql = mybatisMapper.getStatement(
         'NoticeMapper',
-        'selectItem',
+        'updateHitCnt',
         params
       );
+
+      let [{ affectedRows }] = await dbcon.query(sql);
+
+      if (affectedRows === 0) {
+        throw new RuntimeException('조회수를 업데이트할 데이터가 없습니다.');
+      }
+
+      sql = mybatisMapper.getStatement('NoticeMapper', 'selectItem', params);
       let [result] = await dbcon.query(sql);
 
       if (result.length === 0) {
