@@ -18,7 +18,7 @@ import RegexHelper from "../../../helper/RegexHelper";
 import { useQueryString } from "../../../hooks/useQueryString";
 // components
 import Spinner from "../../../components/Spinner";
-import { GetEditForm, Table, TableEx, SearchForm, AddForm } from "../common/ManagerStyle";
+import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav } from "../common/ManagerStyle";
 import PaginationCustom from "../common/PaginationCustom";
 import TableSearch from "../common/TableSearch";
 
@@ -253,7 +253,11 @@ const News = memo(() => {
       </GetEditForm>
 
       {/* 페이지 */}
-      {data && pagenation && !error && <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" query={query} />}
+      {data && pagenation && !error && (
+        <PaginationNav>
+          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" query={query} />
+        </PaginationNav>
+      )}
     </>
   );
 });
