@@ -1,0 +1,64 @@
+<!--
+ * @ File Name: HospitalController.js
+ * @ Author: 오태원
+ * @ Last Update:
+ * @ Description: 병원 sql 맵퍼
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="HospitalMapper">
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem">
+        SELECT id, hospitalName, date_format(regDate, '%Y-%m-%d'), date_format(editDate, '%Y-%m-%d') FROM hospital WHERE id=#{id}
+    </select>
+
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList">
+        SELECT id, hospitalName, date_format(regDate, '%Y-%m-%d'), date_format(editDate, '%Y-%m-%d') From hospital
+        
+        <where>
+            <if test="hospitalName != null and hospitalName != ''">
+                hospitalName LIKE concat('%',#{hospitalName},'%')
+            </if>
+        </where>
+
+        ORDER BY id DESC
+
+        <!-- 페이지 구현을 위한 LIMIT절 추가 -->
+        <if test="listCount > 0">
+            LIMIT ${offset}, ${listCount}
+        </if>
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem">
+        INSERT INTO hospital (hospitalName, regDate) VALUES (#{hospitalName}, now())
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem">
+        DELETE FROM hospital WHERE id=#{id}
+    </delete>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem">
+        UPDATE hospital SET hospitalName=#{hospitalName}, editDate=now()
+        WHERE id=#{id}
+    </update>
+
+    <!-- 데이터 수 조회하기  -->
+    <select id="selectCountAll">
+        SELECT COUNT(*) AS cnt FROM hospital
+
+        <where>
+            <if test="hospitalName != null and hospitalName != ''">
+                hospitalName LIKE concat('%', #{hospitalName}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
