@@ -80,7 +80,7 @@ const NewsView = memo(() => {
   const closeClick = useCallback((e) => {
     document.querySelector(".popUpCont").style.display = "none";
   });
-
+  
   return (
     <div>
       <div className="bgAll">
@@ -110,46 +110,46 @@ const NewsView = memo(() => {
 
           {error ? (
             <h1>에러발생함</h1>
-          ) : isData && pagenation ? (
-            <div>
-              <Spinner loading={loading} />
-              {/* 검색결과 */}
-              <div className="bbsList">
-                {isData.map((v, i) => {
-                  const regDate = v.regDate.slice(0,10);
-                  return (
-                    <div className="bbsItem" key={v.id}>
-                      <a className="inner" href={v.newsLink} rel="noopener noreferrer" target="_blank">
-                        <div className="bbssubjectArea">
-                          <strong>{v.newsTitle}</strong>
-
-                          {/* 뉴 아이콘 */}
-                          {dayjs(new Date()).subtract(2, "day").format("YYYY-MM-DD") < regDate ? <i className="icoNew" /> : null}
-                        </div>
-                        <div className="infoArea">
-                          <span className="date">{regDate}</span>
-                        </div>
-                      </a>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
-              {pagenation.nowPage !== pagenation.totalPage ? (
-                <div className="buttonContColumn">
-                  <button type="button" className="btnMore" onClick={() => setPage(page + 1)}>
-                    더보기
-                  </button>
-                </div>
-              ) : null}
-            </div>
-          ) : (
+          ) : !isData.length ? (
             // 검색결과없을 때
             <div className="nodata">
               <i className="nodataIcon"></i>
               <p>검색된 결과가 없습니다.</p>
             </div>
+          ) : (
+            <div>
+            <Spinner loading={loading} />
+            {/* 검색결과 */}
+            <div className="bbsList">
+              {isData.map((v, i) => {
+                const regDate = v.regDate.slice(0,10);
+                return (
+                  <div className="bbsItem" key={v.id}>
+                    <a className="inner" href={v.newsLink} rel="noopener noreferrer" target="_blank">
+                      <div className="bbssubjectArea">
+                        <strong>{v.newsTitle}</strong>
+
+                        {/* 뉴 아이콘 */}
+                        {dayjs(new Date()).subtract(2, "day").format("YYYY-MM-DD") < regDate ? <i className="icoNew" /> : null}
+                      </div>
+                      <div className="infoArea">
+                        <span className="date">{regDate}</span>
+                      </div>
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
+            {pagenation.nowPage !== pagenation.totalPage ? (
+              <div className="buttonContColumn">
+                <button type="button" className="btnMore" onClick={() => setPage(page + 1)}>
+                  더보기
+                </button>
+              </div>
+            ) : null}
+          </div>
           )}
         </div>
       </div>
