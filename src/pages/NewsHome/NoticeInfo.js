@@ -1,7 +1,7 @@
 /**
  * @ File Name: NoticeInfo.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-11 16:22
+ * @ Last Update: 2023-01-12 16:46
  * @ Description: 공지사항상세
  */
 
@@ -94,7 +94,9 @@ const NoticeInfo = memo(() => {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.NoticeSlice);
+  const { data, loading, error, pnN } = useSelector(
+    (state) => state.NoticeSlice
+  );
 
   /** 페이지가 열린 직후 (혹은 id값이 변경된 경우) 데이터 가져오기 */
   useEffect(() => {
@@ -102,6 +104,10 @@ const NoticeInfo = memo(() => {
       setInit(true);
     });
   }, [id]);
+
+  if (pnN) {
+    console.log('pnN:', pnN);
+  }
 
   return (
     <Div>
@@ -116,7 +122,8 @@ const NoticeInfo = memo(() => {
       {error ? (
         <h1>에러발생함</h1>
       ) : (
-        (init && data) && (
+        init &&
+        data && (
           <div className="pageCont">
             <div className="subjectArea">
               <h3 className="subject">
@@ -129,7 +136,7 @@ const NoticeInfo = memo(() => {
               </h3>
               <div className="articleInfo">
                 <span>관리자</span>
-                <span className="itemInfo">{data.regDate}</span>
+                <span className="itemInfo">{data.regDate.slice(0, 10)}</span>
                 <span className="itemInfo">
                   <strong>조회수 &nbsp;</strong>
                 </span>
@@ -153,16 +160,40 @@ const NoticeInfo = memo(() => {
               </Link>
             </div>
 
-            <ul className="articleNav">
-              <li className="prev">
-                <strong>이전글</strong>
-                <Link>이전글 제목제목</Link>
-              </li>
-              <li className="next">
-                <strong>다음글</strong>
-                <Link>다음글 제목제목</Link>
-              </li>
-            </ul>
+            {pnN.length == 2 ? (
+              <ul className="articleNav">
+                <li className="prev">
+                  <strong>이전글</strong>
+                  <Link to={`/news/notice.do/${pnN[0].id}`}>
+                    {pnN[0].noticeTitle}
+                  </Link>
+                </li>
+                <li className="next">
+                  <strong>다음글</strong>
+                  <Link to={`/news/notice.do/${pnN[1].id}`}>
+                    {pnN[1].noticeTitle}
+                  </Link>
+                </li>
+              </ul>
+            ) : pnN[0].id > data.id ? (
+              <ul className="articleNav">
+                <li className="next">
+                  <strong>다음글</strong>
+                  <Link to={`/news/notice.do/${pnN[0].id}`}>
+                    {pnN[0].noticeTitle}
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              <ul className="articleNav">
+                <li className="prev">
+                  <strong>이전글</strong>
+                  <Link to={`/news/notice.do/${pnN[0].id}`}>
+                    {pnN[0].noticeTitle}
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
         )
       )}
