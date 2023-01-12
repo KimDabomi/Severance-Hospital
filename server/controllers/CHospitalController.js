@@ -80,13 +80,11 @@ module.exports = (() => {
     // 파라미터 유효성검사
     try {
       regexHelper.value(area, "지역이 없습니다.");
-      regexHelper.value(introduction, "소개가 없습니다.");
       regexHelper.value(address, "주소가 없습니다.");
       regexHelper.value(zipCode, "우편번호가 없습니다.");
       regexHelper.value(tel, "전화번호가 없습니다.");
       regexHelper.value(name, "병의원명이 없습니다.");
       regexHelper.value(department, "진료과가 없습니다.");
-      regexHelper.value(url, "URL이 없습니다.");
       regexHelper.value(division, "병의원 구분이 없습니다.");
     } catch (err) {
       return next(err);
@@ -120,13 +118,11 @@ module.exports = (() => {
     // 파라미터 유효성검사
     try {
       regexHelper.value(area, "지역이 없습니다.");
-      regexHelper.value(introduction, "소개가 없습니다.");
       regexHelper.value(address, "주소가 없습니다.");
       regexHelper.value(zipCode, "우편번호가 없습니다.");
       regexHelper.value(tel, "전화번호가 없습니다.");
       regexHelper.value(name, "병의원명이 없습니다.");
       regexHelper.value(department, "진료과가 없습니다.");
-      regexHelper.value(url, "URL이 없습니다.");
       regexHelper.value(division, "병의원 구분이 없습니다.");
     } catch (err) {
       return next(err);
