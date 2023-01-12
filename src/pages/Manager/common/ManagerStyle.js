@@ -185,3 +185,8 @@ export const AddForm = styled.form`
     }
   }
 `;
+export const PaginationNav = styled.nav`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+`;

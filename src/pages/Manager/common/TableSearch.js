@@ -15,8 +15,8 @@ import { useNavigate } from "react-router-dom";
  * @page 페이지 번호를 QueryString으로 가져온 값
  */
 const TableSearch = memo(({ name = "query", query, placeholder, searchQueryPath, page }) => {
-    /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
-    const navigate = useNavigate();
+  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
+  const navigate = useNavigate();
 
   /** 검색 */
   const onSearchSubmit = useCallback(

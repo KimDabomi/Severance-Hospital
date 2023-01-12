@@ -8,18 +8,10 @@
 /** import */
 import React, { memo, useCallback } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 // pagination
 import { Pagination } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import PaginationItem from "@mui/material/PaginationItem";
-
-/** style */
-const PaginationNav = styled.nav`
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-`;
 
 /**
  * @page useQueryString()을 통해 가져온 값
@@ -54,18 +46,16 @@ const PaginationCustom = memo(({ page, pagenation, pageQueryPath, query }) => {
   });
 
   return (
-    <PaginationNav>
-      <Pagination
-        count={pagenation.totalPage}
-        defaultPage={1}
-        siblingCount={2}
-        boundaryCount={1}
-        page={nowPage}
-        className={classes.root}
-        onChange={handleChange}
-        renderItem={(item) => <PaginationItem component={Link} to={`${pageQueryPath}?${searchQueryString}page=${item.page}`} {...item} />}
-      />
-    </PaginationNav>
+    <Pagination
+      count={pagenation.totalPage}
+      defaultPage={1}
+      siblingCount={2}
+      boundaryCount={1}
+      page={nowPage}
+      className={classes.root}
+      onChange={handleChange}
+      renderItem={(item) => <PaginationItem component={Link} to={`${pageQueryPath}?${searchQueryString}page=${item.page}`} {...item} />}
+    />
   );
 });
 
