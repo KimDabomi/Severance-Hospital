@@ -1,7 +1,7 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2022-12-27
+ * @ Last Update: 2023-01-12 18:03:00
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
@@ -13,7 +13,7 @@ import RegexHelper from '../../helper/RegexHelper';
 //상태값을 로드하기 위한 hook과 action함수를 dispatch할 hook참조
 import { useSelector, useDispatch } from "react-redux";
 // Slice에 정의된 액션함수들 참조
-import { getDrugDetail } from '../../slices/DrugSearchSlice';
+import { getDrug_info } from '../../slices/DrugSearchSlice';
 import TopButton from '../../components/TopButton';
 
 
@@ -58,24 +58,24 @@ const TabInfo = memo(() => {
       return;
     }
 
-		dispatch(getDrugDetail({
+		dispatch(getDrug_info({
 			itemName: document.querySelector('#itemName').value,
 			pageNo: page.current
 		}));
 	}, []);
 
-	if (data) {
-		console.log('Tabinfo페이지 data', data);
-	}
+	// if (data) {
+	// 	console.log('Tabinfo페이지 data', data);
+	// }
 
   /** 더보기 버튼 (페이지) 함수 */
   const pagePlus = useCallback((e) => {
-    console.log("더보기버튼 누름", page);
+    // console.log("더보기버튼 누름", page);
     //페이지 번호 1증가
     page.current++;
 
 		//추가 검색 결과를 요청
-		dispatch(getDrugDetail({
+		dispatch(getDrug_info({
 			pageNo: page.current,
 			item_name:document.querySelector('#itemName').value
 		}));

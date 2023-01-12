@@ -155,7 +155,7 @@ app.use(require('./controllers/DoctorController'));
 app.use(require('./controllers/HospitalController'));
 
 // 진료과
-// app.use(require('./controllers/DepartmentController'));
+app.use(require('./controllers/DepartmentController'));
 
 // 로그인
 // router.post('/login',(req,res,next) => {
