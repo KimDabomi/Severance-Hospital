@@ -5,7 +5,7 @@
  * @ Description: 공지사항상세
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getItem } from '../../slices/NoticeSlice';
@@ -87,6 +87,8 @@ const Div = styled.div`
 `;
 
 const NoticeInfo = memo(() => {
+  /** 리덕스 처리가 끝남을 감지하는 상태값 */
+  const [init, setInit] = useState(false);
   /** path 파라미터 받기 */
   const { id } = useParams();
 
@@ -96,13 +98,10 @@ const NoticeInfo = memo(() => {
 
   /** 페이지가 열린 직후 (혹은 id값이 변경된 경우) 데이터 가져오기 */
   useEffect(() => {
-    dispatch(getItem({ id: id }));
+    dispatch(getItem({ id: id })).then(() => {
+      setInit(true);
+    });
   }, [id]);
-
-  if (data) {
-    console.log('지금데이터', data);
-  }
-  // if(item){console.log('지금아이템 ',item);}
 
   return (
     <Div>
@@ -117,7 +116,7 @@ const NoticeInfo = memo(() => {
       {error ? (
         <h1>에러발생함</h1>
       ) : (
-        data && (
+        (init && data) && (
           <div className="pageCont">
             <div className="subjectArea">
               <h3 className="subject">

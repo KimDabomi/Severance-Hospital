@@ -84,6 +84,7 @@ const NoticeView = memo(() => {
     document.querySelector('.popUpCont').style.display = 'none';
   });
 
+  if(isData){console.log('NoticeView data',isData)}
   return (
     <div>
       <div className="bgAll">
