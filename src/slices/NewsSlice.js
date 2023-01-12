@@ -119,17 +119,7 @@ const NewsSlice = createSlice({
   extraReducers: {
     /** 다중행 데이터 조회를 위한 액션 함수 */
     [getList.pending]: pending,
-    [getList.fulfilled]: (state, { payload }) => {
-      if (payload.pagenation.nowPage > 1) {
-        payload.data = state.data.concat(payload.data);
-      }
-      return {
-        data: payload.data,
-        pagenation: payload.pagenation,
-        loading: false,
-        error: null
-      };
-    },
+    [getList.fulfilled]: fulfilled,
     [getList.rejected]: rejected,
 
     /** 단일행 데이터 조회를 위한 액션 함수 */

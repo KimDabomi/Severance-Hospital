@@ -1,17 +1,18 @@
 /**
  * @ File Name: HospitalDetail.js
  * @ Author: 박다윗 (davidpark.0098@gmail.com)
- * @ Last Update: 2022-12-19 15:02:00
+ * @ Last Update: 2022-01-11 15:02:00
  * @ Description: 협력병원 현황 상세 페이지
  */
 
 /** import */
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
+/** redux */
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, getList } from "../../slices/CHospitalClinicSlice";
+import { getItem } from "../../slices/CHospitalClinicSlice";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -23,6 +24,9 @@ import homeGray from "../../assets/img/ico-lg-home-gray@2x.png";
 import address from "../../assets/img/ico-education-adress@2x.png";
 // 전화 아이콘
 import call from "../../assets/img/ico-education-call@2x.png";
+
+/** components */
+import Spinner from "../../components/Spinner";
 
 /** 리스트 스타일 */
 // ul태그
@@ -175,8 +179,6 @@ const HospitalDetail = memo(() => {
 
   // KAKAO MAP OPEN API
   const { kakao } = window;
-  // a태그 url 상태값 (임시)
-  const [url, setUrl] = useState("");
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
@@ -188,7 +190,7 @@ const HospitalDetail = memo(() => {
   }, []);
 
   /** 단일 데이터 정보를 item에 넣는다. */
-  const item = data && data[0].data;
+  const item = data && !error && data[0];
 
   /** 카카오맵 */
   useEffect(() => {
@@ -239,6 +241,9 @@ const HospitalDetail = memo(() => {
 
   return (
     <>
+      {/* 로딩 */}
+      <Spinner loading={loading} />
+
       {/* 페이지 타이틀 */}
       <h1 className="pageTitle">협력병원 현황</h1>
       <section className="boxGuide">
@@ -248,39 +253,43 @@ const HospitalDetail = memo(() => {
         </ListStyleUl>
       </section>
 
-        {item && (
-          <DetailDataStyle>
-            <h4>
-              <span>{item.name}</span>
-              {/* @todo: url data 적용 */}
-              <a href={item.url !== null ? item.url : "javascript:void(0)"} target={item.url !== null ? "_black" : "_self"} rel="noopener noreferrer">
-                <i className={item.url ? "" : "grayIcon"} />
-              </a>
-            </h4>
+      {item && (
+        <DetailDataStyle>
+          <h4>
+            <span>{item.name}</span>
+            <a
+              href={item.url !== null ? item.url : ""}
+              onClick={(e) => item.url !== null ? "" : e.preventDefault()}
+              target={item.url !== null ? "_black" : "_self"}
+              rel="noopener noreferrer"
+            >
+              <i className={item.url ? "" : "grayIcon"} />
+            </a>
+          </h4>
 
-            <dl>
-              <dt>소개</dt>
-              <dd>{item.introduction}</dd>
-            </dl>
-            <dl>
-              <dt>진료과</dt>
-              <dd>{item.department}</dd>
-            </dl>
+          <dl>
+            <dt>소개</dt>
+            <dd>{item.introduction}</dd>
+          </dl>
+          <dl>
+            <dt>진료과</dt>
+            <dd>{item.department}</dd>
+          </dl>
 
-            <address>
-              <div className="address">
-                <i className="location" />
-                <p>{`${item.zipCode} ${item.address}`}</p>
-              </div>
+          <address>
+            <div className="address">
+              <i className="location" />
+              <p>{`${item.zipCode} ${item.address}`}</p>
+            </div>
 
-              <div className="address">
-                <i className="call" />
-                <p>{item.tel}</p>
-              </div>
-            </address>
-            <MapStyle id="map"></MapStyle>
-          </DetailDataStyle>
-        )}
+            <div className="address">
+              <i className="call" />
+              <p>{item.tel}</p>
+            </div>
+          </address>
+          <MapStyle id="map"></MapStyle>
+        </DetailDataStyle>
+      )}
 
       <SingleButtonDiv>
         <Link to="/cooperation/hospital.do">목록</Link>

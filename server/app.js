@@ -148,6 +148,14 @@ app.use(require('./controllers/NoticeController'));
 // 회원정보
 app.use(require('./controllers/UserInfoController'));
 
+// 의사
+app.use(require('./controllers/DoctorController'));
+
+// 병원
+app.use(require('./controllers/HospitalController'));
+
+// 진료과
+// app.use(require('./controllers/DepartmentController'));
 
 // 로그인
 // router.post('/login',(req,res,next) => {

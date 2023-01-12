@@ -8,25 +8,21 @@
 /** import */
 // react
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getList, postItem, putItem, deleteItem } from "../../../slices/CHospitalClinicSlice";
 // module
 import dayjs from "dayjs";
-import { Pagination } from "@mui/material";
-import PaginationItem from "@mui/material/PaginationItem";
 // helper
 import RegexHelper from "../../../helper/RegexHelper";
 import { useQueryString } from "../../../hooks/useQueryString";
 // components
 import Spinner from "../../../components/Spinner";
-import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav, useStyles } from "../common/ManagerStyleConponents";
+import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav } from "../common/ManagerStyle";
+import PaginationCustom from "../common/PaginationCustom";
+import TableSearch from "../common/TableSearch";
 
 const CHospitalClinic = memo(() => {
-  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
-  const navigate = useNavigate();
-
   /** 화면 갱신 상태값 */
   const [isUpdate, setIsUpdate] = useState(1);
   /** 수정 아이디 상태값 */
@@ -35,10 +31,6 @@ const CHospitalClinic = memo(() => {
   /** QueryString 값 가져오기 */
   const { query, page = 1 } = useQueryString();
 
-  /** Pagination */
-  const nowPage = parseInt(page || "1", 10);
-  const classes = useStyles();
-
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
   const { pagenation, data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
@@ -46,7 +38,7 @@ const CHospitalClinic = memo(() => {
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   // 리덕스를 통한 데이터 요청
   useEffect(() => {
-    dispatch(getList({ query: query, page: page, rows: 20 }));
+    dispatch(getList({ query: query, page: page, rows: 10 }));
   }, [isUpdate, query, page]);
 
   /** 추가 */
@@ -60,13 +52,11 @@ const CHospitalClinic = memo(() => {
       // 입력값에 대한 유효성 검사
       try {
         regexHelper.value(current.area, "지역이 없습니다.");
-        regexHelper.value(current.introduction, "소개가 없습니다.");
         regexHelper.value(current.address, "주소가 없습니다.");
         regexHelper.value(current.zipCode, "우편번호가 없습니다.");
         regexHelper.value(current.tel, "전화번호가 없습니다.");
         regexHelper.value(current.name, "병의원명이 없습니다.");
         regexHelper.value(current.department, "진료과가 없습니다.");
-        regexHelper.value(current.url, "URL이 없습니다.");
         regexHelper.value(current.division, "병의원 구분이 없습니다.");
       } catch (e) {
         window.alert(e.message);
@@ -111,13 +101,11 @@ const CHospitalClinic = memo(() => {
       // 입력값에 대한 유효성 검사
       try {
         regexHelper.value(current.area, "지역이 없습니다.");
-        regexHelper.value(current.introduction, "소개가 없습니다.");
         regexHelper.value(current.address, "주소가 없습니다.");
         regexHelper.value(current.zipCode, "우편번호가 없습니다.");
         regexHelper.value(current.tel, "전화번호가 없습니다.");
         regexHelper.value(current.name, "병의원명이 없습니다.");
         regexHelper.value(current.department, "진료과가 없습니다.");
-        regexHelper.value(current.url, "URL이 없습니다.");
         regexHelper.value(current.division, "병의원 구분이 없습니다.");
       } catch (e) {
         window.alert(e.message);
@@ -184,27 +172,6 @@ const CHospitalClinic = memo(() => {
     setUpdateId(id);
   }, []);
 
-  /** 검색 */
-  const onSearchSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-
-      // 검색어
-      const query = e.currentTarget.query.value;
-
-      // 검색어에 따라 URL을 구성한다.
-      let redirectUrl = query ? `/manager/cooperation_hospital/?query=${query}` : "/manager/cooperation_hospital";
-      navigate(redirectUrl);
-    },
-    [navigate]
-  );
-
-  /** 페이지 */
-  const handleChange = useCallback(() => {
-    // 스크롤바를 강제로 맨 위로 이동시킨다.
-    window.scrollTo(0, 0);
-  });
-
   return (
     <>
       {/* 로딩 */}
@@ -221,7 +188,27 @@ const CHospitalClinic = memo(() => {
             <tr>
               <th>지역</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="area" />
+                <select name="area">
+                  <option value="" hidden>
+                    선택
+                  </option>
+                  <option value="강원도">강원도</option>
+                  <option value="경기도">경기도</option>
+                  <option value="경상남도">경상남도</option>
+                  <option value="경상북도">경상북도</option>
+                  <option value="광주광역시">광주광역시</option>
+                  <option value="대구광역시">대구광역시</option>
+                  <option value="대전광역시">대전광역시</option>
+                  <option value="부산광역시">부산광역시</option>
+                  <option value="서울특별시">서울특별시</option>
+                  <option value="울산광역시">울산광역시</option>
+                  <option value="인천광역시">인천광역시</option>
+                  <option value="전라남도">전라남도</option>
+                  <option value="전라북도">전라북도</option>
+                  <option value="제주도">제주도</option>
+                  <option value="충남/세종시">충남/세종시</option>
+                  <option value="충남/충청북도">충남/충청북도</option>
+                </select>
               </td>
             </tr>
             <tr>
@@ -269,7 +256,13 @@ const CHospitalClinic = memo(() => {
             <tr>
               <th>병의원 구분</th>
               <td className="inputWrapper">
-                <input className="field" type="text" name="division" />
+                <select name="division">
+                  <option value="" hidden>
+                    선택
+                  </option>
+                  <option value="H">병원</option>
+                  <option value="C">의원</option>
+                </select>
               </td>
             </tr>
           </tbody>
@@ -278,9 +271,8 @@ const CHospitalClinic = memo(() => {
       </AddForm>
 
       {/* 검색 */}
-      <SearchForm onSubmit={onSearchSubmit}>
-        <input type="text" name="query" defaultValue={query} placeholder="지역, 이름 검색" />
-        <button type="submit">검색</button>
+      <SearchForm>
+        <TableSearch query={query} placeholder="지역, 병의원명 검색" searchQueryPath="/manager/cooperation_hospital_clinic" page={page} />
       </SearchForm>
 
       {/* 조회, 수정 */}
@@ -314,7 +306,27 @@ const CHospitalClinic = memo(() => {
                         </td>
                         <td>{v.id}</td>
                         <td>
-                          <input type="text" name="area" defaultValue={v.area} />
+                          <select name="area" defaultValue={v.area}>
+                            <option value="" hidden>
+                              선택
+                            </option>
+                            <option value="강원도">강원도</option>
+                            <option value="경기도">경기도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="광주광역시">광주광역시</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="대전광역시">대전광역시</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="전라북도">전라북도</option>
+                            <option value="제주도">제주도</option>
+                            <option value="충남/세종시">충남/세종시</option>
+                            <option value="충남/충청북도">충남/충청북도</option>
+                          </select>
                         </td>
                         <td>
                           <input type="text" name="introduction" defaultValue={v.introduction} />
@@ -338,7 +350,13 @@ const CHospitalClinic = memo(() => {
                           <input type="text" name="url" defaultValue={v.url} />
                         </td>
                         <td>
-                          <input type="text" name="division" defaultValue={v.division} />
+                          <select name="division" defaultValue={v.division}>
+                            <option value="" hidden>
+                              선택
+                            </option>
+                            <option value="H">병원</option>
+                            <option value="C">의원</option>
+                          </select>
                         </td>
                         <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
                         <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
@@ -359,7 +377,7 @@ const CHospitalClinic = memo(() => {
                         <td>{v.name}</td>
                         <td>{v.department}</td>
                         <td>{v.url}</td>
-                        <td>{v.division}</td>
+                        <td>{v.division === "H" ? "병원" : "의원"}</td>
                         <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
                         <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
                         <td>
@@ -390,15 +408,13 @@ const CHospitalClinic = memo(() => {
       {/* 페이지 */}
       {data && pagenation && !error && (
         <PaginationNav>
-          <Pagination
-            count={pagenation.totalPage}
-            defaultPage={1}
-            siblingCount={2}
-            boundaryCount={1}
-            page={nowPage}
-            className={classes.root}
-            onChange={handleChange}
-            renderItem={(item) => <PaginationItem component={Link} to={`/manager/cooperation_hospital?page=${item.page}`} {...item} />}
+          <PaginationCustom
+            page={page}
+            pagenation={pagenation}
+            pageQueryPath="/manager/cooperation_hospital_clinic"
+            query={query}
+            color="#fff"
+            bgColor="#168"
           />
         </PaginationNav>
       )}

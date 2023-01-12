@@ -111,9 +111,9 @@ const NewsHomeCarousel = memo(() => {
     );
   }, []);
 
-  if (data) {
-    console.log(data);
-  }
+  // if (data) {
+  //   console.log(data);
+  // }
 
   return (
     <div>

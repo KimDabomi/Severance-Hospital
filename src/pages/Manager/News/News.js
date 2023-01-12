@@ -8,25 +8,21 @@
 /** import */
 // react
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getList, postItem, putItem, deleteItem } from "../../../slices/NewsSlice";
 // module
 import dayjs from "dayjs";
-import { Pagination } from "@mui/material";
-import PaginationItem from "@mui/material/PaginationItem";
 // helper
 import RegexHelper from "../../../helper/RegexHelper";
 import { useQueryString } from "../../../hooks/useQueryString";
 // components
 import Spinner from "../../../components/Spinner";
-import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav, useStyles } from "../common/ManagerStyleConponents";
+import { GetEditForm, Table, TableEx, SearchForm, AddForm, PaginationNav } from "../common/ManagerStyle";
+import PaginationCustom from "../common/PaginationCustom";
+import TableSearch from "../common/TableSearch";
 
 const News = memo(() => {
-  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
-  const navigate = useNavigate();
-
   /** 화면 갱신 상태값 */
   const [isUpdate, setIsUpdate] = useState(1);
   /** 수정 아이디 상태값 */
@@ -35,10 +31,6 @@ const News = memo(() => {
   /** QueryString 값 가져오기 */
   const { query, page = 1 } = useQueryString();
 
-  /** Pagination */
-  const nowPage = parseInt(page || "1", 10);
-  const classes = useStyles();
-
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
   const { pagenation, data, loading, error } = useSelector((state) => state.NewsSlice);
@@ -46,7 +38,7 @@ const News = memo(() => {
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   // 리덕스를 통한 데이터 요청
   useEffect(() => {
-    dispatch(getList({ query: query, page: page, rows: 20 }));
+    dispatch(getList({ query: query, page: page, rows: 10 }));
   }, [isUpdate, query, page]);
 
   /** 추가 */
@@ -156,27 +148,6 @@ const News = memo(() => {
     setUpdateId(id);
   }, []);
 
-  /** 검색 */
-  const onSearchSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-
-      // 검색어
-      const query = e.currentTarget.query.value;
-
-      // 검색어에 따라 URL을 구성한다.
-      let redirectUrl = query ? `/manager/news/?query=${query}` : "/manager/news";
-      navigate(redirectUrl);
-    },
-    [navigate]
-  );
-
-  /** 페이지 */
-  const handleChange = useCallback(() => {
-    // 스크롤바를 강제로 맨 위로 이동시킨다.
-    window.scrollTo(0, 0);
-  });
-
   return (
     <>
       {/* 로딩 */}
@@ -208,9 +179,8 @@ const News = memo(() => {
       </AddForm>
 
       {/* 검색 */}
-      <SearchForm onSubmit={onSearchSubmit}>
-        <input type="text" name="query" defaultValue={query} placeholder="제목 검색" />
-        <button type="submit">검색</button>
+      <SearchForm>
+        <TableSearch query={query} placeholder="제목 검색" searchQueryPath="/manager/news" page={page} />
       </SearchForm>
 
       {/* 조회, 수정 */}
@@ -285,16 +255,7 @@ const News = memo(() => {
       {/* 페이지 */}
       {data && pagenation && !error && (
         <PaginationNav>
-          <Pagination
-            count={pagenation.totalPage}
-            defaultPage={1}
-            siblingCount={2}
-            boundaryCount={1}
-            page={nowPage}
-            className={classes.root}
-            onChange={handleChange}
-            renderItem={(item) => <PaginationItem component={Link} to={`/manager/news?page=${item.page}`} {...item} />}
-          />
+          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" query={query} color="#fff" bgColor="#168" />
         </PaginationNav>
       )}
     </>

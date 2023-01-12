@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsController.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-05 14:30
+ * @ Last Update: 2023-01-12 16:00
  * @ Description: 뉴스 백엔드 Controller
  */
 
@@ -54,8 +54,8 @@ module.exports = (() => {
 
     // 유효성 검사
     try {
-      regexHelper.value(newsTitle, "학과 이름이 없습니다.");
-      regexHelper.value(newsLink, "학과 이름이 없습니다.");
+      regexHelper.value(newsTitle, "뉴스 제목이 없습니다.");
+      regexHelper.value(newsLink, "뉴스 링크가 없습니다.");
     } catch (err) {
       return next(err);
     }
@@ -66,7 +66,7 @@ module.exports = (() => {
     try {
       json = await newsService.addItem({
         newsTitle: newsTitle,
-        newsLink: newsLink
+        newsLink: newsLink,
       });
     } catch (err) {
       return next(err);
@@ -83,8 +83,8 @@ module.exports = (() => {
 
     // 유효성 검사
     try {
-      regexHelper.value(newsTitle, "학과 이름이 없습니다.");
-      regexHelper.value(newsLink, "학과 이름이 없습니다.");
+      regexHelper.value(newsTitle, "뉴스 제목이 없습니다.");
+      regexHelper.value(newsLink, "뉴스 링크가 없습니다.");
     } catch (err) {
       return next(err);
     }
@@ -96,7 +96,7 @@ module.exports = (() => {
       json = await newsService.editItem({
         id: id,
         newsTitle: newsTitle,
-        newsLink: newsLink
+        newsLink: newsLink,
       });
     } catch (err) {
       return next(err);
@@ -112,14 +112,14 @@ module.exports = (() => {
 
     // 유효성 검사
     try {
-      regexHelper.value(id, "학과번호가 없습니다.");
+      regexHelper.value(id, "뉴스번호가 없습니다.");
     } catch (err) {
       return next(err);
     }
 
     try {
       await newsService.deleteItem({
-        id: id
+        id: id,
       });
     } catch (err) {
       return next(err);
