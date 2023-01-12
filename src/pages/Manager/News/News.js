@@ -255,7 +255,7 @@ const News = memo(() => {
       {/* 페이지 */}
       {data && pagenation && !error && (
         <PaginationNav>
-          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" query={query} />
+          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/news" query={query} color="#fff" bgColor="#168" />
         </PaginationNav>
       )}
     </>

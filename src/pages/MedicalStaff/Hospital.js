@@ -7,12 +7,10 @@
 
 /** import */
 import React, { memo, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { Pagination } from "@mui/material";
-import { makeStyles } from "@material-ui/core";
-import PaginationItem from "@mui/material/PaginationItem";
 // helper, hooks
 import { useQueryString } from "../../hooks/useQueryString";
 
@@ -30,6 +28,7 @@ import Search from "../../assets/img/ico-search-white.png";
 
 /** components */
 import Spinner from "../../components/Spinner";
+import PaginationCustom from "../Manager/common/PaginationCustom";
 
 /** 리스트 스타일 */
 // ul태그
@@ -165,7 +164,7 @@ const MapListArticle = styled.article`
 `;
 
 /** 검색 스타일 */
-const SearchSection = styled.section`
+const SearchForm = styled.form`
   width: 100%;
   margin-top: 20px;
   display: flex;
@@ -256,38 +255,25 @@ const PartnerListBoxSection = styled.section`
 `;
 
 /** 페이지 블록 스타일 */
-const PaginationDiv = styled.div`
+const PaginationNav = styled.nav`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
 const Hospital = memo(() => {
+  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
+  const navigate = useNavigate();
+
   // background 이미지의 위치 변경을 위한 상태값
   const [bgPosition, setBgPosition] = useState(-9168);
   // active
   const [activeList, setActiveList] = useState(1);
+  // 지역 상태값
+  const [aeraStatus, setAeraStatus] = useState("전국");
 
   /** QueryString 값 가져오기 */
   const { query, page = 1 } = useQueryString();
-
-  /** Pagination */
-  const nowPage = parseInt(page || "1", 10);
-
-  /** 페이지 */
-  const handleChange = useCallback(() => {
-    // 스크롤바를 강제로 맨 위로 이동시킨다.
-    window.scrollTo(0, 0);
-  });
-
-  const classes = makeStyles((theme) => ({
-    root: {
-      "& .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
-        backgroundColor: "#168",
-        color: "#fff"
-      }
-    }
-  }));
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
@@ -295,8 +281,23 @@ const Hospital = memo(() => {
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(() => {
-    dispatch(getList());
-  }, []);
+    dispatch(getList({ query: query, page: page, rows: 12 }));
+  }, [query, page, aeraStatus]);
+
+  /** 검색 */
+  const onSearchSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      // 검색어
+      const search = e.currentTarget.search.value;
+
+      // 검색어에 따라 URL을 구성한다.
+      let redirectUrl = search ? `/cooperation/hospital.do?query=${search}&page=${page}` : "/cooperation/hospital.do";
+      navigate(redirectUrl);
+    },
+    [navigate]
+  );
 
   return (
     <>
@@ -333,6 +334,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(0);
                 setActiveList(2);
+                setAeraStatus("강원도");
               }} // 이미지 클릭 시, 해당 이미지의 포지션 값과, 맵리스트의 active props 셋팅
             />
 
@@ -344,6 +346,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-573);
                 setActiveList(3);
+                setAeraStatus("경기도");
               }}
             />
 
@@ -355,6 +358,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-1146);
                 setActiveList(4);
+                setAeraStatus("경상남도");
               }}
             />
 
@@ -366,6 +370,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-1719);
                 setActiveList(5);
+                setAeraStatus("경상북도");
               }}
             />
 
@@ -377,6 +382,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-2292);
                 setActiveList(6);
+                setAeraStatus("광주광역시");
               }}
             />
 
@@ -388,6 +394,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-2865);
                 setActiveList(7);
+                setAeraStatus("대구광역시");
               }}
             />
 
@@ -399,6 +406,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-3438);
                 setActiveList(8);
+                setAeraStatus("대전광역시");
               }}
             />
 
@@ -410,6 +418,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-4011);
                 setActiveList(9);
+                setAeraStatus("부산광역시");
               }}
             />
 
@@ -421,6 +430,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-4584);
                 setActiveList(10);
+                setAeraStatus("서울특별시");
               }}
             />
 
@@ -432,6 +442,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-5157);
                 setActiveList(11);
+                setAeraStatus("울산광역시");
               }}
             />
 
@@ -443,6 +454,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-5730);
                 setActiveList(12);
+                setAeraStatus("인천광역시");
               }}
             />
 
@@ -454,6 +466,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-6303);
                 setActiveList(13);
+                setAeraStatus("전라남도");
               }}
             />
 
@@ -465,6 +478,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-6876);
                 setActiveList(14);
+                setAeraStatus("전라북도");
               }}
             />
 
@@ -476,6 +490,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-7449);
                 setActiveList(15);
+                setAeraStatus("제주도");
               }}
             />
 
@@ -487,6 +502,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-8022);
                 setActiveList(16);
+                setAeraStatus("충청남도");
               }}
             />
 
@@ -498,6 +514,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-8595);
                 setActiveList(17);
+                setAeraStatus("충청북도");
               }}
             />
           </map>
@@ -507,11 +524,13 @@ const Hospital = memo(() => {
           <ListStyleUl num={activeList}>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 1 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(1);
                   setBgPosition(-9168);
+                  setAeraStatus("전국");
+                  e.preventDefault();
                 }}
               >
                 <span>전국</span>
@@ -520,11 +539,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 2 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(2);
                   setBgPosition(0);
+                  setAeraStatus("강원도");
+                  e.preventDefault();
                 }}
               >
                 <span>강원도</span>
@@ -533,11 +554,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 3 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(3);
                   setBgPosition(-573);
+                  setAeraStatus("경기도");
+                  e.preventDefault();
                 }}
               >
                 <span>경기도</span>
@@ -546,11 +569,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 4 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(4);
                   setBgPosition(-1146);
+                  setAeraStatus("경상남도");
+                  e.preventDefault();
                 }}
               >
                 <span>경상남도</span>
@@ -559,11 +584,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 5 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(5);
                   setBgPosition(-1719);
+                  setAeraStatus("경상북도");
+                  e.preventDefault();
                 }}
               >
                 <span>경상북도</span>
@@ -572,11 +599,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 6 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(6);
                   setBgPosition(-2292);
+                  setAeraStatus("광주광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>광주광역시</span>
@@ -585,11 +614,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 7 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(7);
                   setBgPosition(-2865);
+                  setAeraStatus("대구광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>대구광역시</span>
@@ -598,11 +629,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 8 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(8);
                   setBgPosition(-3438);
+                  setAeraStatus("대전광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>대전광역시</span>
@@ -611,11 +644,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 9 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(9);
                   setBgPosition(-4011);
+                  setAeraStatus("부산광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>부산광역시</span>
@@ -624,11 +659,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 10 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(10);
                   setBgPosition(-4584);
+                  setAeraStatus("서울특별시");
+                  e.preventDefault();
                 }}
               >
                 <span>서울특별시</span>
@@ -637,11 +674,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 11 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(11);
                   setBgPosition(-5157);
+                  setAeraStatus("울산광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>울산광역시</span>
@@ -650,11 +689,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 12 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(12);
                   setBgPosition(-5730);
+                  setAeraStatus("인천광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>인천광역시</span>
@@ -663,11 +704,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 13 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(13);
                   setBgPosition(-6303);
+                  setAeraStatus("전라남도");
+                  e.preventDefault();
                 }}
               >
                 <span>전라남도</span>
@@ -676,11 +719,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 14 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(14);
                   setBgPosition(-6876);
+                  setAeraStatus("전라북도");
+                  e.preventDefault();
                 }}
               >
                 <span>전라북도</span>
@@ -689,11 +734,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 15 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(15);
                   setBgPosition(-7449);
+                  setAeraStatus("제주도");
+                  e.preventDefault();
                 }}
               >
                 <span>제주도</span>
@@ -702,11 +749,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 16 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(16);
                   setBgPosition(-8022);
+                  setAeraStatus("충남/세종시");
+                  e.preventDefault();
                 }}
               >
                 <span>충남/세종시</span>
@@ -715,11 +764,13 @@ const Hospital = memo(() => {
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 17 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(17);
                   setBgPosition(-8595);
+                  setAeraStatus("충청북도");
+                  e.preventDefault();
                 }}
               >
                 <span>충청북도</span>
@@ -733,19 +784,28 @@ const Hospital = memo(() => {
       </PartnerHospitalBoxSection>
 
       {/* 검색 */}
-      <SearchSection>
-        <input type="text" id="srchKwd" placeholder="협력병원명 또는 지역을 입력해주세요" title="협력병원명 또는 지역을 검색"></input>
-        <button>
+      <SearchForm onSubmit={onSearchSubmit}>
+        <input
+          type="text"
+          id="srchKwd"
+          name="search"
+          defaultValue={query}
+          key={query}
+          placeholder="협력병원명 또는 지역을 입력해주세요."
+          title="협력병원명 또는 지역을 검색"
+        ></input>
+        <button type="submit">
           <i></i>
         </button>
-      </SearchSection>
+      </SearchForm>
 
       {/* 검색 결과 리스트 */}
       <PartnerListBoxSection>
         <ul>
           {data &&
+            aeraStatus &&
             data.map((v, i) => {
-              if (v.division === "H") {
+              if (v.division === "H" && (aeraStatus === "전국" || v.area === aeraStatus)) {
                 return (
                   <li key={v.id}>
                     <Link to={`/cooperation/hospital-detail.do/${v.id}`}>{v.name}</Link>
@@ -758,18 +818,9 @@ const Hospital = memo(() => {
 
       {/* Pagination */}
       {data && pagenation && !error && (
-        <PaginationDiv>
-          <Pagination
-            count={pagenation.totalPage}
-            defaultPage={1}
-            siblingCount={2}
-            boundaryCount={1}
-            page={nowPage}
-            className={classes.root}
-            onChange={handleChange}
-            renderItem={(item) => <PaginationItem component={Link} to={`/manager/cooperation_hospital?page=${item.page}`} {...item} />}
-          />
-        </PaginationDiv>
+        <PaginationNav>
+          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/cooperation/hospital.do" query={query} />
+        </PaginationNav>
       )}
     </>
   );
