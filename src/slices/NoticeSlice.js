@@ -120,6 +120,7 @@ const NoticeSlice = createSlice({
   // 이 모듈이 관리하고자하는 상태값들을 명시
   initialState: {
     pagenation: null,
+    pnN : null,
     data: null,
     loading: false,
     error: null,
@@ -147,7 +148,15 @@ const NoticeSlice = createSlice({
 
     /** 단일행 데이터 조회를 위한 액션 함수 */
     [getItem.pending]: pending,
-    [getItem.fulfilled]: fulfilled,
+    [getItem.fulfilled]: (state, { payload }) => {
+      return {
+          data: payload.data,
+          pagenation: payload.pagenation,
+          pnN: payload.pnN,
+          loading: false,
+          error: null
+      }
+  },
     [getItem.rejected]: rejected,
 
     /** 데이터 저장을 위한 액션 함수 */

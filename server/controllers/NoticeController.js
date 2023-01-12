@@ -63,16 +63,18 @@ module.exports = (() => {
 
     // 데이터 조회
     let json = null;
+    let pnN = null;
 
     try {
       json = await noticeService.getItem({
         id: id
       });
+      pnN = await noticeService.getPreNext({id: id});
     } catch (err) {
       return next(err);
     }
 
-    res.sendResult({ data: json });
+    res.sendResult({ data: json, pnN: pnN });
   });
 
   /** 데이터 추가 --> Create(INSERT) */
