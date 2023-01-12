@@ -66,7 +66,7 @@ module.exports = (() => {
     try {
       json = await newsService.addItem({
         newsTitle: newsTitle,
-        newsLink: newsLink
+        newsLink: newsLink,
       });
     } catch (err) {
       return next(err);
@@ -96,7 +96,7 @@ module.exports = (() => {
       json = await newsService.editItem({
         id: id,
         newsTitle: newsTitle,
-        newsLink: newsLink
+        newsLink: newsLink,
       });
     } catch (err) {
       return next(err);
@@ -119,7 +119,7 @@ module.exports = (() => {
 
     try {
       await newsService.deleteItem({
-        id: id
+        id: id,
       });
     } catch (err) {
       return next(err);

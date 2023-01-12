@@ -1,0 +1,93 @@
+<!--
+ * @ File Name: DoctorController.js
+ * @ Author: 오태원
+ * @ Last Update:
+ * @ Description: 의사 sql 맵퍼
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DoctorMapper">
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem">
+        SELECT d.id, d.doctorName, dp.departmentName, d.medicalField, d.treatmentPlace, date_format(d.regDate, '%Y-%m-%d'), date_format(d.editDate, '%Y-%m-%d') 
+        FROM doctor d, department dp
+        WHERE d.id = #{id} AND d.department_id = dp.id
+    </select>
+
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList">
+        SELECT d.id, d.doctorName, dp.departmentName, d.medicalField, d.treatmentPlace, date_format(d.regDate, '%Y-%m-%d'), date_format(d.editDate, '%Y-%m-%d') 
+        FROM doctor d, department dp
+        
+        <where>
+        d.department_id = dp.id
+
+            <if test="doctorName != null and doctorName != ''">
+                AND d.doctorName LIKE concat('%', #{doctorName}, '%')
+            </if>
+
+            OR d.department_id = dp.id
+
+            <if test="medicalField != null and medicalField != ''">
+                AND d.medicalField LIKE concat('%', #{medicalField}, '%')
+            </if>
+        </where>
+
+        ORDER BY id DESC
+
+        <!-- 페이지 구현을 위한 LIMIT절 추가 -->
+        <if test="listCount > 0">
+            LIMIT ${offset}, ${listCount}
+        </if>
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem">
+        INSERT INTO doctor (doctorName, medicalField, treatmentPlace, regDate, department_id) VALUES (#{doctorName}, #{medicalField}, #{treatmentPlace}, now(), (SELECT id FROM department WHERE departmentName = #{departmentName}))
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem">
+        DELETE FROM doctor WHERE id=#{id}
+    </delete>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem">
+        UPDATE doctor SET doctorName=#{doctorName}, medicalField=#{medicalField}, treatmentPlace=#{treatmentPlace}, editDate=now(), department_id=(SELECT id FROM department WHERE departmentName = #{departmentName})
+        WHERE id=#{id}
+    </update>
+
+    <!-- 데이터 수 조회하기  -->
+    <select id="selectCountAll">
+        SELECT COUNT(*) AS cnt FROM doctor
+
+        <where>
+            <if test="doctorName != null and doctorName != ''">
+                doctorName LIKE concat('%',#{doctorName},'%')
+            </if>
+
+            <if test="medicalField != null and medicalField != ''">
+                OR medicalField LIKE concat('%',#{medicalField},'%')
+            </if>
+        </where>
+
+        <!-- <where>
+        d.department_id = dp.id
+
+            <if test="doctorName != null and doctorName != ''">
+                AND d.doctorName LIKE concat('%', #{doctorName}, '%')
+            </if>
+
+            OR d.department_id = dp.id
+
+            <if test="medicalField != null and medicalField != ''">
+                AND d.medicalField LIKE concat('%', #{medicalField}, '%')
+            </if>
+        </where> -->
+    </select>
+
+</mapper>
