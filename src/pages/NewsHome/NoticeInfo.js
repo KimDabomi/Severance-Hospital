@@ -105,10 +105,6 @@ const NoticeInfo = memo(() => {
     });
   }, [id]);
 
-  if (pnN) {
-    console.log('pnN:', pnN);
-  }
-
   return (
     <Div>
       <div className="bgAll">
