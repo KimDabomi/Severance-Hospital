@@ -1,7 +1,7 @@
 <!-- 
  * @ File Name: NoticeMapper.xml
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-12 13:00
+ * @ Last Update: 2023-01-12 15:48
  * @ Description: 공지사항 sql mapper
  -->
  
@@ -14,9 +14,11 @@
     <select id='selectItem'>
         select id, noticeTitle, noticeContent, hits, regDate, editDate from notice where id=#{id};
     </select>
-    <!-- <select id='selectItem'>
-        select id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate from notice where id=#{id} UNION ALL(SELECT id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate FROM notice where id < #{id}  ORDER BY id DESC LIMIT 1) UNION ALL(SELECT id, noticeTitle, noticeContent, hits, date_format(regDate, '%Y-%m-%d') as regDate, editDate FROM notice  where id > #{id}  ORDER BY id ASC LIMIT 1);
-    </select> -->
+    
+    <!-- 이전글, 다음글 조회를 위한 기능 정의 -->
+    <select id='selectPNItem'>
+        select noticeTitle from notice where id IN ((SELECT id FROM notice WHERE id &lt; #{id} ORDER BY id DESC LIMIT 1),(SELECT id FROM notice WHERE id &gt; #{id} ORDER BY id LIMIT 1));
+    </select>
 
     <!-- 다중행 조회를 위한 기능 정의 -->
     <select id='selectList'>

@@ -82,6 +82,32 @@ class NoticeService {
     return data;
   }
 
+  /** 이전글 다음글 조회 */
+  async getPreNext(params) {
+    let dbcon = null;
+    let data = null;
+
+    try {
+      dbcon = await DBPool.getConnection();
+
+      let sql = mybatisMapper.getStatement(
+        'NoticeMapper',
+        'selectPNItem',
+        params
+      );
+      let [result] = await dbcon.query(sql);
+
+      data = result;
+    } catch (err) {
+      throw err;
+    } finally {
+      if (dbcon) {
+        dbcon.release();
+      }
+    }
+    return data;
+  }
+
   /** 데이터를 추가하고 추가된 결과를 조회하여 리턴 */
   async addItem(params) {
     let dbcon = null;

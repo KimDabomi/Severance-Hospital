@@ -48,10 +48,23 @@ const noticeService = require('../services/NoticeService');
 // })();
 
 // 단일조회
+// (async () => {
+//     try{
+//         const params = {id:1};
+//         let result = await noticeService.getItem(params);
+//         console.log(result);
+//     }catch(e){
+//         console.error(e);
+//     }finally{
+//         DBPool.close();
+//     }
+// })();
+
+// 이전글, 다음글 조회
 (async () => {
     try{
         const params = {id:1};
-        let result = await noticeService.getItem(params);
+        let result = await noticeService.getPreNext(params);
         console.log(result);
     }catch(e){
         console.error(e);
