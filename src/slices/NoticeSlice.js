@@ -17,7 +17,7 @@ export const getList = createAsyncThunk(
   'NoticeSlice/getList',
   async (payload, { rejectWithValue }) => {
     let result = null;
-    console.log('NoticeSlice/getList실행됨')
+
     try {
       const response = await axios.get(URL, {
         params: {
@@ -42,7 +42,6 @@ export const getItem = createAsyncThunk(
   'NoticeSlice/getItem',
   async (payload, { rejectWithValue }) => {
     let result = null;
-    console.log('NoticeSlice/getItem실행됨', payload)
 
     try {
       const response = await axios.get(`${URL}/${payload?.id}`);

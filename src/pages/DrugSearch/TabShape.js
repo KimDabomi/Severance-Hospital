@@ -14,7 +14,7 @@ import TopButton from '../../components/TopButton';
 //상태값을 로드하기 위한 hook과 action함수를 dispatch할 hook참조
 import { useSelector, useDispatch } from 'react-redux';
 // Slice에 정의된 액션함수들 참조
-import { getDrugSearch } from '../../slices/DrugSearchSlice';
+import { getDrug_shape } from '../../slices/DrugSearchSlice';
 
 const DrugCont = styled.div`
   .buttonCont {
@@ -227,7 +227,7 @@ const TabShape = memo(() => {
 
     //검색어를 slice에 전달
     dispatch(
-      getDrugSearch({
+      getDrug_shape({
         item_name: document.querySelector('#itemName').value,
         pageNo: page.current,
       })
@@ -240,7 +240,7 @@ const TabShape = memo(() => {
 
   /** 페이지가 처음 로드되었을 때 정보리셋 */ 
   useEffect(() => {
-    dispatch(getDrugSearch({ item_name: '검색어없음' }));
+    dispatch(getDrug_shape({ item_name: '검색어없음' }));
   }, []);
 
   /** 더보기 버튼 (페이지) 함수 */
@@ -250,7 +250,7 @@ const TabShape = memo(() => {
 
     //추가 검색 결과를 요청
     dispatch(
-      getDrugSearch({
+      getDrug_shape({
         pageNo: page.current,
         item_name: document.querySelector('#itemName').value,
       })
@@ -259,7 +259,7 @@ const TabShape = memo(() => {
 
   /** 초기화 버튼 눌렀을 때 호출될 이벤트 핸들러 */
   const onResetClick = useCallback((e)=>{
-    dispatch(getDrugSearch({ item_name: '검색어없음' }));
+    dispatch(getDrug_shape({ item_name: '검색어없음' }));
   })
 
   return (
