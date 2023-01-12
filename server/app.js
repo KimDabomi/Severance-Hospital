@@ -155,7 +155,7 @@ app.use(require('./controllers/DoctorController'));
 app.use(require('./controllers/HospitalController'));
 
 // 진료과
-// app.use(require('./controllers/DepartmentController'));
+app.use(require('./controllers/DepartmentController'));
 
 app.use((err, req, res, next) => res.sendError(err));
 app.use("*", (req, res, next) => res.sendError(new PageNotFoundException()));

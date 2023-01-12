@@ -11,6 +11,11 @@
 
 <mapper namespace="DoctorMapper">
 
+    <!-- 특정 진료과에 속한 의사 일괄 삭제 -->
+    <delete id="deleteItemByDepartmentId">
+        DELETE FROM doctor WHERE department_id=#{id};
+    </delete>
+
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id="selectItem">
         SELECT d.id, d.doctorName, dp.departmentName, d.medicalField, d.treatmentPlace, date_format(d.regDate, '%Y-%m-%d'), date_format(d.editDate, '%Y-%m-%d') 

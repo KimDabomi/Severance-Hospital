@@ -1,22 +1,22 @@
 /*
- * @ File name: HospitalService.js
+ * @ File name: DepartmentService.js
  * @ Author: 오태원
  * @ Last Update: 
- * @ Description: 병원 서비스
+ * @ Description: 진료과 서비스
 */
 
 const mybatisMapper = require('mybatis-mapper');
 const DBPool = require('../helper/DBPool');
 const { RuntimeException } = require('../helper/ExceptionHelper');
 
-class HospitalService {
+class DepartmentService {
 
     /** 생성자 - Mapper파일을 로드한다 */
     constructor() {
         // mapper의 위치는 이 소스 파일이 아닌 프로젝트 root를 기준으로 상대경로
         mybatisMapper.createMapper([
-            './server/mappers/HospitalMapper.xml',
-            './server/mappers/DepartmentMapper.xml'
+            './server/mappers/DepartmentMapper.xml',
+            './server/mappers/DoctorMapper.xml'
         ]);
     }
 
@@ -28,7 +28,7 @@ class HospitalService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('HospitalMapper', 'selectList', params);
+            let sql = mybatisMapper.getStatement('DepartmentMapper', 'selectList', params);
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -53,7 +53,7 @@ class HospitalService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('HospitalMapper', 'selectItem', params);
+            let sql = mybatisMapper.getStatement('DepartmentMapper', 'selectItem', params);
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -78,7 +78,7 @@ class HospitalService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('HospitalMapper', 'insertItem', params);
+            let sql = mybatisMapper.getStatement('DepartmentMapper', 'insertItem', params);
             let [{insertId, affectedRows}] = await dbcon.query(sql);
 
             if (affectedRows === 0) {
@@ -86,7 +86,7 @@ class HospitalService {
             }
 
             // 새로 저장된 데이터의 PK값을 활용하여 다시 조회
-            sql = mybatisMapper.getStatement('HospitalMapper', 'selectItem', {id: insertId});
+            sql = mybatisMapper.getStatement('DepartmentMapper', 'selectItem', {id: insertId});
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -111,7 +111,7 @@ class HospitalService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('HospitalMapper', 'updateItem', params);
+            let sql = mybatisMapper.getStatement('DepartmentMapper', 'updateItem', params);
             let [{affectedRows}] = await dbcon.query(sql);
 
             if (affectedRows === 0) {
@@ -119,7 +119,7 @@ class HospitalService {
             }
 
             // 새로 저장된 데이터의 PK값을 활용하여 다시 조회
-            sql = mybatisMapper.getStatement('HospitalMapper', 'selectItem', {id: params.id});
+            sql = mybatisMapper.getStatement('DepartmentMapper', 'selectItem', {id: params.id});
             let [result] = await dbcon.query(sql);
 
             if (result.length === 0) {
@@ -143,10 +143,10 @@ class HospitalService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('DepartmentMapper', 'deleteItemByHospitalId', params);
+            let sql = mybatisMapper.getStatement('DoctorMapper', 'deleteItemByDepartmentId', params);
             let [{affectedRows}] = await dbcon.query(sql);
 
-            sql = mybatisMapper.getStatement('HospitalMapper', 'deleteItem', params);
+            sql = mybatisMapper.getStatement('DepartmentMapper', 'deleteItem', params);
             [{affectedRows}] = await dbcon.query(sql);
 
             if (affectedRows === 0) {
@@ -167,7 +167,7 @@ class HospitalService {
         try {
             dbcon = await DBPool.getConnection();
 
-            let sql = mybatisMapper.getStatement('HospitalMapper', 'selectCountAll', params);
+            let sql = mybatisMapper.getStatement('DepartmentMapper', 'selectCountAll', params);
             let [result] = await dbcon.query(sql);
 
             if (result.length > 0) {
@@ -183,4 +183,4 @@ class HospitalService {
     }
 }
 
-module.exports = new HospitalService();
+module.exports = new DepartmentService();
