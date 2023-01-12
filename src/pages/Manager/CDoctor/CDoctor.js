@@ -248,7 +248,7 @@ const CDoctor = memo(() => {
                         <td>{v.hospitalClinicName}</td>
                         <td>{v.department}</td>
                         <td>{v.url}</td>
-                        <td>{v.division}</td>
+                        <td>{v.division === "H" ? "병원" : "의원"}</td>
                         <td>{dayjs(v.regDate).format("YYYY.MM.DD HH:mm:ss")}</td>
                         <td>{v.editDate !== null ? dayjs(v.editDate).format("YYYY.MM.DD HH:mm:ss") : ""}</td>
                         <td>
@@ -279,7 +279,7 @@ const CDoctor = memo(() => {
       {/* 페이지 */}
       {data && pagenation && !error && (
         <PaginationNav>
-          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/cooperation_doctor" query={query} />
+          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/manager/cooperation_doctor" query={query} color="#fff" bgColor="#168" />
         </PaginationNav>
       )}
     </>
