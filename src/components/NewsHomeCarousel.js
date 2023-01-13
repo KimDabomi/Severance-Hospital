@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsHomeCarousel.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-11 10:52:00
+ * @ Last Update: 2023-01-13 14:56:00
  * @ Description: 뉴스 메인 페이지 슬라이드 컴포넌트
  */
 
@@ -133,7 +133,7 @@ const NewsHomeCarousel = memo(() => {
               >
                 <span className="newsCategory">언론보도</span>
                 <strong className="newsContentTitle">{v.newsTitle}</strong>
-                <span className="newsDate">{v.regDate}</span>
+                <span className="newsDate">{v.regDate.slice(0,10)}</span>
               </a>
             );
           })}
