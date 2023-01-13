@@ -15,23 +15,30 @@ const logger = require("../helper/LogHelper");
 const { ForbiddenException } = require("../helper/ExceptionHelper");
 
 module.exports = (() => {
-  const url = "/manager/cooperation_doctor";
+  const url = "/cooperation_doctor";
   const router = express.Router();
 
   /** 목록 조회 */
   router.get(url, async (req, res, next) => {
     // 검색어, 페이지 번호, 한 페이지에 표시할 목록 수 파라미터
-    const { query, page = 1, rows = 20 } = req.query;
+    const { query, areaQuery, division, page = 1, rows = 20 } = req.query;
 
     // 검색어를 MyBatis에 전달하기 위한 객체로 구성
     const params = {};
     if (query) {
       params.doctorName = query;
-      params.hospitalClinicName = query;
+      params.area = query;
+    }
+    if (areaQuery) {
+      params.areaQuery = areaQuery;
+    }
+    if (division) {
+      params.division = division;
     }
 
     let json = null;
     let pageInfo = null;
+    let areaCount = null;
 
     try {
       const totalCount = await CDoctorService.getCount(params);
@@ -40,11 +47,12 @@ module.exports = (() => {
       params.offset = pageInfo.offset;
       params.listCount = pageInfo.listCount;
       json = await CDoctorService.getList(params);
+      areaCount = await CDoctorService.getAreaCount(params);
     } catch (err) {
       return next(err);
     }
 
-    res.sendResult({ pagenation: pageInfo, data: json });
+    res.sendResult({ pagenation: pageInfo, data: json, areaCount: areaCount });
   });
 
   /** 단일 조회 */

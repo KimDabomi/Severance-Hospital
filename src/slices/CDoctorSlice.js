@@ -19,6 +19,8 @@ export const getList = createAsyncThunk("CDoctorSlice/getList", async (payload, 
     const response = await axios.get(URL, {
       params: {
         query: payload?.query || "",
+        areaQuery: payload?.areaQuery || "",
+        division: payload?.division || "",
         page: payload?.page || 1,
         rows: payload?.rows || 10
       }
@@ -107,6 +109,7 @@ const CDoctorSlice = createSlice({
   name: "CDoctorSlice",
   // 이 모듈이 관리하고자하는 상태값들을 명시
   initialState: {
+    areaCount: null,
     pagenation: null,
     data: null,
     loading: false,
@@ -120,14 +123,22 @@ const CDoctorSlice = createSlice({
   extraReducers: {
     /** 다중행 데이터 조회를 위한 액션 함수 */
     [getList.pending]: pending,
-    [getList.fulfilled]: fulfilled,
+    [getList.fulfilled]: (state, { meta, payload }) => {
+      return {
+        areaCount: payload.areaCount,
+        data: payload.data,
+        pagenation: payload.pagenation,
+        loading: false,
+        error: null
+      };
+    },
     [getList.rejected]: rejected,
 
     /** 단일행 데이터 조회를 위한 액션 함수 */
     [getItem.pending]: pending,
     [getItem.fulfilled]: (state, { meta, payload }) => {
       return {
-        data: [payload.data],
+        data: payload.data,
         loading: false,
         error: null
       };

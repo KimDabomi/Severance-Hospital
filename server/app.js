@@ -145,6 +145,9 @@ app.use(require("./controllers/CDoctorController"));
 app.use(require('./controllers/NewsController'));
 app.use(require('./controllers/NoticeController'));
 
+// 의약품
+app.use(require('./controllers/DrugController'));
+
 // 회원정보
 app.use(require('./controllers/UserInfoController'));
 

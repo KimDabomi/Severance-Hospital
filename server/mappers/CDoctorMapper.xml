@@ -10,70 +10,87 @@ Description: 협력의사 맵퍼
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CDoctorMapper">
-	<!-- 단일행 조회를 위한 기능 정의 -->
-	<select id="selectItem">
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem">
     SELECT d.id, d.name AS doctorName, hc.area, hc.introduction, hc.address, hc.zipCode, hc.tel, hc.name AS hospitalClinicName, hc.department, hc.url, hc.division, d.regDate, d.editDate FROM cooperationDoctor d, cooperationHospitalClinic hc
     WHERE d.id = #{id} AND d.cooperationHospitalClinic_id = hc.id
     </select>
 
-	<!-- 다중행 조회를 위한 기능 정의 -->
-	<select id="selectList">
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList">
     SELECT d.id, d.name AS doctorName, hc.area, hc.introduction, hc.address, hc.zipCode, hc.tel, hc.name AS hospitalClinicName, hc.department, hc.url, hc.division, d.regDate, d.editDate FROM cooperationDoctor d, cooperationHospitalClinic hc 
 
-		<where>
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
         d.cooperationHospitalClinic_id = hc.id
-            
-			<if test="doctorName != null and doctorName != ''">
-            AND d.name LIKE concat('%', #{doctorName}, '%')
+            <if test="division != null and division != ''">
+                AND division = #{division}
             </if>
-            
-            OR d.cooperationHospitalClinic_id = hc.id
-            
-			<if test="hospitalClinicName != null and hospitalClinicName != ''">
-            AND hc.name LIKE concat('%', #{hospitalClinicName}, '%')
+            <if test="doctorName != null and doctorName != ''">
+            AND (d.name LIKE concat('%', #{doctorName}, '%')
             </if>
-		</where>
+            <if test="area != null and area != ''">
+            OR hc.area LIKE concat('%', #{area}, '%'))
+            </if>
+            <if test="areaQuery != null and areaQuery != ''">
+                AND area LIKE concat('%', #{areaQuery}, '%')
+            </if>
+        </trim>
 
         ORDER BY id DESC
 
-		<!-- 페이지 구현을 위한 LIMIT절 추가 -->
-		<if test="listCount > 0">
+        <if test="listCount > 0">
             LIMIT ${offset}, ${listCount}
         </if>
-	</select>
+    </select>
 
-	<!-- 데이터 저장을 위한 기능 정의 -->
-	<insert id="insertItem">
+    <!-- 지역별 데이터 수 조회 -->
+    <select id="selectAreaCount">
+        SELECT area, COUNT(area) AS 'areaCount' FROM cooperationDoctor d, cooperationHospitalClinic hc 
+
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+        d.cooperationHospitalClinic_id = hc.id
+            <if test="division != null and division != ''">
+                AND division = #{division}
+            </if>
+        </trim>
+
+        GROUP BY area;
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem">
         INSERT INTO cooperationDoctor (name, regDate, cooperationHospitalClinic_id) VALUES (#{doctorName}, now(), (SELECT id FROM cooperationHospitalClinic WHERE name = #{hospitalClinicName}))
     </insert>
 
-	<!-- 데이터 삭제를 위한 기능 정의 -->
-	<delete id="deleteItem">
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem">
         DELETE FROM cooperationDoctor WHERE id=#{id}
     </delete>
 
-	<!-- 데이터 갱신을 위한 기능 정의 -->
-	<update id="updateItem">
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem">
         UPDATE cooperationDoctor SET name=#{doctorName}, editDate=now(), cooperationHospitalClinic_id=(SELECT id FROM cooperationHospitalClinic WHERE name = #{hospitalClinicName})
         WHERE id=#{id}
     </update>
 
-	<!-- 데이터 수 조회하기  -->
-	<select id="selectCountAll">
+    <!-- 데이터 수 조회하기  -->
+    <select id="selectCountAll">
         SELECT COUNT(*) AS cnt FROM cooperationDoctor d, cooperationHospitalClinic hc 
 
-		<where>
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
         d.cooperationHospitalClinic_id = hc.id
-            
-			<if test="doctorName != null and doctorName != ''">
-            AND d.name LIKE concat('%', #{doctorName}, '%')
+            <if test="division != null and division != ''">
+                AND division = #{division}
             </if>
-            
-            OR d.cooperationHospitalClinic_id = hc.id
-            
-			<if test="hospitalClinicName != null and hospitalClinicName != ''">
-            AND hc.name LIKE concat('%', #{hospitalClinicName}, '%')
+            <if test="doctorName != null and doctorName != ''">
+            AND (d.name LIKE concat('%', #{doctorName}, '%')
             </if>
-		</where>
-	</select>
+            <if test="area != null and area != ''">
+            OR hc.area LIKE concat('%', #{area}, '%'))
+            </if>
+            <if test="areaQuery != null and areaQuery != ''">
+                AND area LIKE concat('%', #{areaQuery}, '%')
+            </if>
+        </trim>
+    </select>
 </mapper>

@@ -19,14 +19,25 @@ module.exports = (() => {
   /** 전체 목록 조회 --> Read(SELECT) */
   router.get(url, async (req, res, next) => {
     // 검색어, 페이지 번호, 한 페이지에 표시할 목록 수 파라미터
-    const { query, page = 1, rows = 12 } = req.query;
+    const {
+      query,
+      DRUG_SHAPE,
+      COLOR_CLASS,
+      trapezoid,
+      line,
+      page = 1,
+      rows = 12,
+    } = req.query;
 
     // 검색어를 MyBatis에 전달하기 위한 객체로 구성
     const params = {};
-    if (query) {
+    if (query || DRUG_SHAPE || COLOR_CLASS || trapezoid || line) {
       params.ITEM_NAME = query;
-      params.ITEM_ENG_NAME = query;
-    }
+      params.DRUG_SHAPE = DRUG_SHAPE;
+      params.COLOR_CLASS = COLOR_CLASS;
+      params.trapezoid = trapezoid;
+      params.line = line;
+    };
 
     // 데이터 조회
     let json = null;

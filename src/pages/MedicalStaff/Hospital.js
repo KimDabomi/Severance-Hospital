@@ -10,12 +10,18 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import dayjs from "dayjs";
 
 // helper, hooks
 import { useQueryString } from "../../hooks/useQueryString";
 
+/** Redux */
 import { useDispatch, useSelector } from "react-redux";
 import { getList } from "../../slices/CHospitalClinicSlice";
+
+/** components */
+import Spinner from "../../components/Spinner";
+import PaginationCustom from "../Manager/common/PaginationCustom";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -26,12 +32,7 @@ import Blank from "../../assets/img/blank.png";
 // 검색 아이콘
 import Search from "../../assets/img/ico-search-white.png";
 
-/** components */
-import Spinner from "../../components/Spinner";
-import PaginationCustom from "../Manager/common/PaginationCustom";
-
 /** 리스트 스타일 */
-// ul태그
 const ListStyleUl = styled.ul`
   margin: 4px 0;
 
@@ -267,21 +268,21 @@ const Hospital = memo(() => {
 
   // background 이미지의 위치 변경을 위한 상태값
   const [bgPosition, setBgPosition] = useState(-9168);
-  // active
+  // active 상태값
   const [activeList, setActiveList] = useState(1);
   // 지역 상태값
-  const [aeraStatus, setAeraStatus] = useState("전국");
+  const [aeraStatus, setAeraStatus] = useState("");
 
   /** QueryString 값 가져오기 */
   const { query, page = 1 } = useQueryString();
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { pagenation, data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
+  const { areaCount, pagenation, data, loading, error } = useSelector((state) => state.CHospitalClinicSlice);
 
   /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
   useEffect(() => {
-    dispatch(getList({ query: query, page: page, rows: 12 }));
+    dispatch(getList({ query: query, areaQuery: aeraStatus, division: "H", page: page, rows: 12 }));
   }, [query, page, aeraStatus]);
 
   /** 검색 */
@@ -293,11 +294,23 @@ const Hospital = memo(() => {
       const search = e.currentTarget.search.value;
 
       // 검색어에 따라 URL을 구성한다.
-      let redirectUrl = search ? `/cooperation/hospital.do?query=${search}&page=${page}` : "/cooperation/hospital.do";
+      let redirectUrl = search ? `/cooperation/hospital.do?query=${search}&page=1` : "/cooperation/hospital.do";
       navigate(redirectUrl);
     },
     [navigate]
   );
+
+  /** 각 지역 총 개수 표시 */
+  const displayAreaCount = useCallback((e) => {
+    const result = !areaCount
+      ? false
+      : e === "전국"
+      ? areaCount.reduce((acc, cur) => {
+          return (acc += cur.areaCount);
+        }, 0)
+      : areaCount.find((v) => v.area === e)?.areaCount;
+    return result ? `(${result})` : "(0)";
+  });
 
   return (
     <>
@@ -313,7 +326,7 @@ const Hospital = memo(() => {
         </ListStyleUl>
       </section>
 
-      {/* 파트너 병원 */}
+      {/* 협력 병원 */}
       <PartnerHospitalBoxSection>
         {/* props에 useState 상태값을 적용한다. */}
         <MapArticle position={bgPosition}>
@@ -321,7 +334,7 @@ const Hospital = memo(() => {
           {/* useMap과 <map>태그의 name속성은 같아야 한다. */}
           <img src={Blank} alt="전국 병원리스트 보기" useMap="#image-map1" />
 
-          <map name="image-map1">
+          <map name="image-map1" onClick={() => navigate("/cooperation/hospital.do?page=1")}>
             {/* @todo: onFocus="this.blur();" 속성 관련 찾기 */}
             {/* 이미지 영역 */}
             <area shape="poly" alt="전국 병원리스트 보기" nohref="true" />
@@ -521,7 +534,7 @@ const Hospital = memo(() => {
         </MapArticle>
 
         <MapListArticle>
-          <ListStyleUl num={activeList}>
+          <ListStyleUl num={activeList} onClick={() => navigate("/cooperation/hospital.do?page=1")}>
             <li>
               <a
                 href="#!"
@@ -529,12 +542,12 @@ const Hospital = memo(() => {
                 onClick={(e) => {
                   setActiveList(1);
                   setBgPosition(-9168);
-                  setAeraStatus("전국");
+                  setAeraStatus("");
                   e.preventDefault();
                 }}
               >
                 <span>전국</span>
-                <span>(286)</span>
+                <span>{displayAreaCount("전국")}</span>
               </a>
             </li>
             <li>
@@ -549,7 +562,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>강원도</span>
-                <span>(9)</span>
+                <span>{displayAreaCount("강원도")}</span>
               </a>
             </li>
             <li>
@@ -564,7 +577,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>경기도</span>
-                <span>(64)</span>
+                <span>{displayAreaCount("경기도")}</span>
               </a>
             </li>
             <li>
@@ -579,7 +592,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>경상남도</span>
-                <span>(20)</span>
+                <span>{displayAreaCount("경상남도")}</span>
               </a>
             </li>
             <li>
@@ -594,7 +607,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>경상북도</span>
-                <span>(12)</span>
+                <span>{displayAreaCount("경상북도")}</span>
               </a>
             </li>
             <li>
@@ -609,7 +622,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>광주광역시</span>
-                <span>(10)</span>
+                <span>{displayAreaCount("광주광역시")}</span>
               </a>
             </li>
             <li>
@@ -624,7 +637,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>대구광역시</span>
-                <span>(14)</span>
+                <span>{displayAreaCount("대구광역시")}</span>
               </a>
             </li>
             <li>
@@ -639,7 +652,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>대전광역시</span>
-                <span>(11)</span>
+                <span>{displayAreaCount("대전광역시")}</span>
               </a>
             </li>
             <li>
@@ -654,7 +667,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>부산광역시</span>
-                <span>(19)</span>
+                <span>{displayAreaCount("부산광역시")}</span>
               </a>
             </li>
             <li>
@@ -669,7 +682,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>서울특별시</span>
-                <span>(69)</span>
+                <span>{displayAreaCount("서울특별시")}</span>
               </a>
             </li>
             <li>
@@ -684,7 +697,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>울산광역시</span>
-                <span>(2)</span>
+                <span>{displayAreaCount("울산광역시")}</span>
               </a>
             </li>
             <li>
@@ -699,7 +712,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>인천광역시</span>
-                <span>(22)</span>
+                <span>{displayAreaCount("인천광역시")}</span>
               </a>
             </li>
             <li>
@@ -714,7 +727,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>전라남도</span>
-                <span>(8)</span>
+                <span>{displayAreaCount("전라남도")}</span>
               </a>
             </li>
             <li>
@@ -729,7 +742,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>전라북도</span>
-                <span>(10)</span>
+                <span>{displayAreaCount("전라북도")}</span>
               </a>
             </li>
             <li>
@@ -744,7 +757,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>제주도</span>
-                <span>(4)</span>
+                <span>{displayAreaCount("제주도")}</span>
               </a>
             </li>
             <li>
@@ -759,7 +772,7 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>충남/세종시</span>
-                <span>(5)</span>
+                <span>{displayAreaCount("충남/세종시")}</span>
               </a>
             </li>
             <li>
@@ -774,12 +787,14 @@ const Hospital = memo(() => {
                 }}
               >
                 <span>충청북도</span>
-                <span>(7)</span>
+                <span>{displayAreaCount("충청북도")}</span>
               </a>
             </li>
           </ListStyleUl>
 
-          <p>기준 : 2022-12-16 (총 286)</p>
+          <p>
+            기준 : {dayjs().format("YYYY-MM-DD")} {displayAreaCount("전국").replace("(", "(총 ")}
+          </p>
         </MapListArticle>
       </PartnerHospitalBoxSection>
 
@@ -802,17 +817,15 @@ const Hospital = memo(() => {
       {/* 검색 결과 리스트 */}
       <PartnerListBoxSection>
         <ul>
-          {data &&
-            aeraStatus &&
-            data.map((v, i) => {
-              if (v.division === "H" && (aeraStatus === "전국" || v.area === aeraStatus)) {
+          {data && pagenation && !error
+            ? data.map((v, i) => {
                 return (
                   <li key={v.id}>
                     <Link to={`/cooperation/hospital-detail.do/${v.id}`}>{v.name}</Link>
                   </li>
                 );
-              }
-            })}
+              })
+            : "조회된 데이터가 없습니다."}
         </ul>
       </PartnerListBoxSection>
 

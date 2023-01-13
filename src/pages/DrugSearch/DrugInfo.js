@@ -9,7 +9,7 @@ import React, { memo, useEffect, useMemo } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentData, getDrug_shape, getDrug_info } from '../../slices/DrugSearchSlice';
+import { getCurrentData, getList, getDrug_info } from '../../slices/DrugSearchSlice';
 
 import Spinner from '../../components/Spinner';
 
@@ -42,14 +42,14 @@ const DrugInfo = memo(() => {
     if(data){
       // console.log('druginfo data',data);
         return data.items.find((v,i)=> v.ITEM_SEQ == id || v.itemSeq == id);
-        // dispatch(getDrug_shape({item_seq:id}));
+        // dispatch(getList({item_seq:id}));
         // dispatch(getDrug_info({itemSeq:id}));
     }else{
         //새로고침시 현재 데이터만 다시 로드
         //url에 따라 다른 api처리
         if(pathname.substring(9,18) == `tab-shape`){
           console.log(pathname.substring(9,18));
-          dispatch(getDrug_shape({item_seq:id}));
+          dispatch(getList({item_seq:id}));
         }else{
           dispatch(getDrug_info({itemSeq:id}));
         }

@@ -207,7 +207,7 @@ const CHospitalClinic = memo(() => {
                   <option value="전라북도">전라북도</option>
                   <option value="제주도">제주도</option>
                   <option value="충남/세종시">충남/세종시</option>
-                  <option value="충남/충청북도">충남/충청북도</option>
+                  <option value="충청북도">충청북도</option>
                 </select>
               </td>
             </tr>
@@ -325,7 +325,7 @@ const CHospitalClinic = memo(() => {
                             <option value="전라북도">전라북도</option>
                             <option value="제주도">제주도</option>
                             <option value="충남/세종시">충남/세종시</option>
-                            <option value="충남/충청북도">충남/충청북도</option>
+                            <option value="충청북도">충청북도</option>
                           </select>
                         </td>
                         <td>
