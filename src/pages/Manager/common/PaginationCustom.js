@@ -43,10 +43,10 @@ const PaginationCustom = memo(({ page, pagenation: { totalPage }, pageQueryPath,
   const classes = paginationStyle();
 
   /** 페이지 최상단 이동 */
-  const handleChange = useCallback(() => {
-    // 스크롤바를 강제로 맨 위로 이동시킨다.
-    window.scrollTo(0, 0);
-  });
+  // const handleChange = useCallback(() => {
+  //   // 스크롤바를 강제로 맨 위로 이동시킨다.
+  //   window.scrollTo(0, 0);
+  // });
 
   return (
     <Pagination
@@ -56,7 +56,7 @@ const PaginationCustom = memo(({ page, pagenation: { totalPage }, pageQueryPath,
       boundaryCount={1}
       page={nowPage}
       className={classes.root}
-      onChange={handleChange}
+      // onChange={handleChange}
       renderItem={(item) => <PaginationItem component={Link} to={`${pageQueryPath}?${searchQueryString}page=${item.page}`} {...item} />}
     />
   );
