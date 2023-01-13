@@ -396,7 +396,7 @@ const JoinUs = memo(() => {
             </li>
           </ol>
         </div>
-        <form className="dafault_info" onSubmit={handleSubmit(onSubmit, onError)}>
+        <form className="dafault_info" onSubmit={handleSubmit(onSubmit, onError)} id="default_info">
           <h4>
             기본정보입력
             <span className="sub_text">
@@ -434,9 +434,10 @@ const JoinUs = memo(() => {
                       })}
                     />
                     <button type="button" className="dub_btn" 
-                    {...register("dubBtn", {
-                      required: "아이디 중복확인을 해주세요."
-                    })}>
+                    // {...register("dubBtn", {
+                    //   required: "아이디 중복확인을 해주세요."
+                    // })}
+                    >
                       중복확인
                     </button>
                   </div>
@@ -583,7 +584,7 @@ const JoinUs = memo(() => {
                 <td>
                   <div>
                     <input
-                      type="password"
+                      type="text"
                       autoComplete="new-password"
                       name="password"
                       id="password"
@@ -612,9 +613,6 @@ const JoinUs = memo(() => {
                       id="male"
                       value="M"
                       name="prtctorSexdstnCode"
-                      {...register("sex", {
-                        required: "성별을 선택해주세요."
-                      })}
                     />
                     <label htmlFor="male">남</label>
                   </span>
@@ -622,12 +620,6 @@ const JoinUs = memo(() => {
                     <input type="radio" id="female" value="F" name="prtctorSexdstnCode" readOnly="readOnly" data-parsley-multiple="prtctorSexdstnCode" />
                     <label htmlFor="female">여</label>
                   </span>
-                  {errors.sex && (
-                    <p className="warn">
-                      <img src={warning} alt="warning" />
-                      {errors.sex.message}
-                    </p>
-                  )}
                 </td>
               </tr>
 

@@ -271,9 +271,11 @@ const Unsupported = memo(() => {
 
   const [page,setPage] = React.useState(1);
 
-  const handleChange = (value) => {
+  const handleChange = (e,value) => {
+    e.preventDefault();
     setPage(value);
   };
+  console.log(page);
 
   /** QueryString 변수 받기 */
   const { keyword } = useQueryString();
@@ -292,6 +294,7 @@ const Unsupported = memo(() => {
       numOfRows: selected
     }));
   }, [keyword,page,selected]);
+
 
   const clickSearch = useCallback((e) => {
     e.preventDefault();

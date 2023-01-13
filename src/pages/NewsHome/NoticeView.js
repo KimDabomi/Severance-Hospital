@@ -4,7 +4,7 @@
  * @ Last Update: 2023-01-12 12:30:00
  * @ Description: 뉴스 하위 페이지 공지사항 페이지
  */
-import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
+import React, { memo, useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../../slices/NoticeSlice';
@@ -20,7 +20,6 @@ const NoticeView = memo(() => {
 
   //페이지 번호 상태값
   const [page, setPage] = useState(1);
-  // const page = useRef(1);
   // 검색어 상태값
   const [queryStatus, setQueryStatus] = useState('');
   // 데이터 관리 상태값
@@ -127,6 +126,7 @@ const NoticeView = memo(() => {
             {/* 검색결과 */}
             <div className="bbsList">
               {isData.map((v, i) => {
+                const regDate = v.regDate.slice(0,10);
                 return (
                   <div className="bbsItem" key={v.id}>
                     <Link className="inner" to={`${v.id}`}>
@@ -136,12 +136,12 @@ const NoticeView = memo(() => {
                         {/* 뉴 아이콘 */}
                         {dayjs(new Date())
                           .subtract(2, 'day')
-                          .format('YYYY-MM-DD') < v.regDate ? (
+                          .format('YYYY-MM-DD') < regDate ? (
                           <i className="icoNew" />
                         ) : null}
                       </div>
                       <div className="infoArea">
-                        <span className="date">{v.regDate}</span>
+                        <span className="date">{regDate}</span>
                       </div>
                     </Link>
                   </div>
