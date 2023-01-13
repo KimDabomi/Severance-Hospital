@@ -1,7 +1,7 @@
 /**
  * @ File Name: ChangePassword.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-28 15:25
+ * @ Last Update: 2023-01-13 16:40
  * @ Description: 비밀번호변경 페이지
  */
 
@@ -123,7 +123,8 @@ const Container = styled.div`
   }
 
   // 버튼
-  .submit,.cancel {
+  .submit,
+  .cancel {
     box-sizing: border-box;
     width: 280px;
     float: left;
@@ -173,13 +174,13 @@ const Container = styled.div`
 const ChangePassword = memo(() => {
   const navigate = useNavigate();
 
-  const closeBox = e => {
-    document.querySelector('.complete').style.display = 'none';
+  const closeBox = (e) => {
+    document.querySelector(".complete").style.display = "none";
   };
-  
-  const goHome = e => {
-    navigate('/mysevrance');
-  }
+
+  const goHome = (e) => {
+    navigate("/mysevrance");
+  };
 
   const {
     register,
@@ -193,18 +194,20 @@ const ChangePassword = memo(() => {
 
   const onSubmit = (data) => {
     console.log(data);
-    document.querySelector('.complete').style.display = 'block';
+    document.querySelector(".complete").style.display = "block";
   };
-
 
   const onError = (error) => {
     console.log(error);
   };
   const watching = useWatch({
     control,
-    name: ["password","newpasswordcheck"],
+    name: ["password", "newpasswordcheck"],
   });
   console.log(watching);
+
+  const newpasswordValue = watch("newpassword");
+  const repasswordValue = watch("repassword");
 
   return (
     <Container>
@@ -215,21 +218,20 @@ const ChangePassword = memo(() => {
           <img src={boxGuideDecor} alt="boxGuideDecor" />
           <ul>
             <li>8자 이상 ~ 20자 이내로 설정해주세요.</li>
+            <li>영문, 숫자, 특수문자를 모두 포함해주세요.</li>
             <li>
-            영문, 숫자, 특수문자를 모두 포함해주세요.
-            </li>
-            <li>
-            문자열이 3자리 이상 연속되거나 동일하지 않게 해주세요. (ex. 111, 123, 321, aaa, abc 등)
+              문자열이 3자리 이상 연속되거나 동일하지 않게 해주세요. (ex. 111,
+              123, 321, aaa, abc 등)
             </li>
           </ul>
         </div>
         <form className="content" onSubmit={handleSubmit(onSubmit, onError)}>
-            <input
+          <input
             type="password"
             className="password"
             placeholder="현재비밀번호"
-            {...register("password",{
-                required: true
+            {...register("password", {
+              required: true,
             })}
           />
           <hr />
@@ -254,17 +256,18 @@ const ChangePassword = memo(() => {
               },
             })}
           />
-          {errors.newpassword && (
+          {errors.newpassword ? (
             <p className="warn">
               <img src={warning} alt="warning" />
               {errors.newpassword.message}
             </p>
-          )}
-          {!errors.newpassword && (
-            <p className="check">
-              <img src={check} alt="check" />
-              안전한 비밀번호입니다.
-            </p>
+          ) : (
+            newpasswordValue && (
+              <p className="check">
+                <img src={check} alt="check" />
+                안전한 비밀번호입니다.
+              </p>
+            )
           )}
           <ul>
             <li>※ 8자 이상 ~ 20자 이내로 설정해주세요.</li>
@@ -280,7 +283,7 @@ const ChangePassword = memo(() => {
             type="password"
             className="new_password_check"
             placeholder="비밀번호확인"
-            {...register("newpasswordcheck", {
+            {...register("repassword", {
               required: true,
               validate: (val) => {
                 if (watch("newpassword") != val) {
@@ -289,17 +292,45 @@ const ChangePassword = memo(() => {
               },
             })}
           />
-          {errors.newpasswordcheck && (
-            <p className="warn">
-              <img src={warning} alt="warning" />
-              {errors.newpasswordcheck.message}
-            </p>
-          )}
-          {!errors.newpasswordcheck && (
+          {errors.repassword ? (
+            newpasswordValue ? (
+              errors.newpassword ? (
+                <p className="warn">
+                  <img src={warning} alt="warning" />
+                  {errors.newpassword.message}
+                </p>
+              ) : (
+                <p className="warn">
+                  <img src={warning} alt="warning" />
+                  {errors.repassword.message}
+                </p>
+              )
+            ) : (
+              <p className="warn">
+                <img src={warning} alt="warning" />
+                비밀번호를 입력해주세요.
+              </p>
+            )
+          ) : newpasswordValue === repasswordValue &&
+            repasswordValue &&
+            !errors.newpassword &&
+            !errors.repassword ? (
             <p className="check">
               <img src={check} alt="check" />
               비밀번호가 일치합니다.
             </p>
+          ) : repasswordValue && errors.newpassword ? (
+            <p className="warn">
+              <img src={warning} alt="warning" />
+              {errors.newpassword.message}
+            </p>
+          ) : (
+            repasswordValue && (
+              <p className="warn">
+                <img src={warning} alt="warning" />
+                비밀번호가 일치하지 않습니다.
+              </p>
+            )
           )}
           <div className="buttonCont">
             <button
@@ -309,23 +340,25 @@ const ChangePassword = memo(() => {
             >
               비밀번호변경
             </button>
-            <button type="button" className="cancel buttonBlue" onClick={goHome}>
-                취소
+            <button
+              type="button"
+              className="cancel buttonBlue"
+              onClick={goHome}
+            >
+              취소
             </button>
           </div>
         </form>
 
         {/* 팝업 */}
-          <form className="complete">
-            <div className="popup">
-              <p>
-                비밀번호를 변경했습니다.
-              </p>
-              <button type="button" className="close" onClick={closeBox}>
-                닫기
-              </button>
-            </div>
-          </form>
+        <form className="complete">
+          <div className="popup">
+            <p>비밀번호를 변경했습니다.</p>
+            <button type="button" className="close" onClick={closeBox}>
+              닫기
+            </button>
+          </div>
+        </form>
       </div>
       <LoginFooter />
     </Container>
