@@ -1,12 +1,12 @@
 /**
  * @ File Name: CustomerBoardView.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-12 18:03:00
+ * @ Last Update: 2023-01-13 14:08:00
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
-import React, { memo, useCallback, useRef, useEffect } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import React, { memo, useCallback, useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/Spinner'
 import RegexHelper from '../../helper/RegexHelper';
@@ -22,6 +22,8 @@ const DrugCont = styled.div``;
 const TabInfo = memo(() => {
   //dispatch함수 생성
   const dispatch = useDispatch();
+  /** 리덕스 처리가 끝남을 감지하는 상태값 */
+  const [init, setInit] = useState(false);
 
   //hook을 통해 slice가 관리하는 상태값 가져오기
   const { data, loading, error } = useSelector(
@@ -64,9 +66,9 @@ const TabInfo = memo(() => {
 		}));
 	}, []);
 
-	// if (data) {
-	// 	console.log('Tabinfo페이지 data', data);
-	// }
+	if (data) {
+		console.log('Tabinfo페이지 data', data);
+	}
 
   /** 더보기 버튼 (페이지) 함수 */
   const pagePlus = useCallback((e) => {
@@ -126,7 +128,7 @@ const TabInfo = memo(() => {
 			{error ? (
 				<h1>에러발생함</h1>
 			) : (
-				data && data.items ? (
+				(data && data.items) ? (
 					<div>
 						<ul className="drugListCont">
 							{/* // 검색 결과 표시 (최대12개)  */}
