@@ -15,7 +15,7 @@ const logger = require("../helper/LogHelper");
 const { ForbiddenException } = require("../helper/ExceptionHelper");
 
 module.exports = (() => {
-  const url = "/manager/cooperation_doctor";
+  const url = "/cooperation_doctor";
   const router = express.Router();
 
   /** 목록 조회 */
