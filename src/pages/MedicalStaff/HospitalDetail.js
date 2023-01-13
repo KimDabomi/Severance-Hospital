@@ -29,7 +29,6 @@ import call from "../../assets/img/ico-education-call@2x.png";
 import Spinner from "../../components/Spinner";
 
 /** 리스트 스타일 */
-// ul태그
 const ListStyleUl = styled.ul`
   margin: 4px 0;
 
@@ -55,7 +54,6 @@ const ListStyleUl = styled.ul`
     }
   }
 `;
-
 /** 한개 버튼 박스 스타일 */
 const SingleButtonDiv = styled.div`
   display: flex;
@@ -82,7 +80,6 @@ const SingleButtonDiv = styled.div`
     background-color: #0094fb;
   }
 `;
-
 /** 협력병원 현황 상세 정보 박스 스타일 */
 const DetailDataStyle = styled.section`
   h4 {
@@ -167,14 +164,8 @@ const DetailDataStyle = styled.section`
   }
 `;
 
-/** 지도 스타일 */
-const MapStyle = styled.div`
-  width: 100%;
-  height: 615px;
-`;
-
 const HospitalDetail = memo(() => {
-  /** path로 아이디값을 전달 받는다. */
+  /** path로 아이디값 전달 */
   const path = useParams().id;
 
   // KAKAO MAP OPEN API
@@ -189,18 +180,15 @@ const HospitalDetail = memo(() => {
     dispatch(getItem({ id: path }));
   }, []);
 
-  /** 단일 데이터 정보를 item에 넣는다. */
-  const item = data && !error && data[0];
-
   /** 카카오맵 */
   useEffect(() => {
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
-    /** @todo: addressSearch "경기도 안산시 단원구 광덕대로 162"에 adress 데이터 적용 */
-    item &&
-      geocoder.addressSearch(item.address, function (result, status) {
+    !error &&
+      data &&
+      geocoder.addressSearch(data.address, function (result, status) {
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
           var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -220,7 +208,7 @@ const HospitalDetail = memo(() => {
 
           // 인포윈도우로 장소에 대한 설명을 표시합니다
           var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + item.name + "</div>"
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + data.name + "</div>"
           }); /** @todo: content 태그 사이 '경희요양병원'에 hospitalName 데이터 적용 {hospitalName} */
           infowindow.open(map, marker);
 
@@ -237,7 +225,7 @@ const HospitalDetail = memo(() => {
           var map = new kakao.maps.Map(mapContainer, mapOption);
         }
       });
-  }, [item]);
+  }, [data]);
 
   return (
     <>
@@ -253,41 +241,45 @@ const HospitalDetail = memo(() => {
         </ListStyleUl>
       </section>
 
-      {item && (
+      {!error && data && (
         <DetailDataStyle>
           <h4>
-            <span>{item.name}</span>
+            {/* 병원 이름 */}
+            <span>{data.name}</span>
+            {/* URL 바로가기 아이콘 */}
             <a
-              href={item.url !== null ? item.url : ""}
-              onClick={(e) => item.url !== null ? "" : e.preventDefault()}
-              target={item.url !== null ? "_black" : "_self"}
+              href={data.url !== null ? data.url : ""}
+              onClick={(e) => {
+                e.currentTarget.href !== data.url && e.preventDefault();
+              }}
+              target="_black"
               rel="noopener noreferrer"
             >
-              <i className={item.url ? "" : "grayIcon"} />
+              <i className={data.url ? "" : "grayIcon"} />
             </a>
           </h4>
 
           <dl>
             <dt>소개</dt>
-            <dd>{item.introduction}</dd>
+            <dd>{data.introduction}</dd>
           </dl>
           <dl>
             <dt>진료과</dt>
-            <dd>{item.department}</dd>
+            <dd>{data.department}</dd>
           </dl>
 
           <address>
             <div className="address">
               <i className="location" />
-              <p>{`${item.zipCode} ${item.address}`}</p>
+              <p>{`${data.zipCode} ${data.address}`}</p>
             </div>
 
             <div className="address">
               <i className="call" />
-              <p>{item.tel}</p>
+              <p>{data.tel}</p>
             </div>
           </address>
-          <MapStyle id="map"></MapStyle>
+          <div id="map" style={{ width: 100 + "%", height: 615 + "px" }}></div>
         </DetailDataStyle>
       )}
 

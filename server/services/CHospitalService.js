@@ -71,6 +71,33 @@ class CHospitalService {
     return data;
   }
 
+  /** 지역별 데이터 수 조회 */
+  async getAreaCount(params) {
+    let dbcon = null;
+    let data = null;
+
+    try {
+      dbcon = await DBPool.getConnection();
+
+      let sql = mybatisMapper.getStatement("CHospitalMapper", "selectAreaCount", params);
+      let [result] = await dbcon.query(sql);
+
+      if (result.length === 0) {
+        throw new RuntimeException("조회된 데이터가 없습니다.");
+      }
+
+      data = result;
+    } catch (err) {
+      throw err;
+    } finally {
+      if (dbcon) {
+        dbcon.release();
+      }
+    }
+
+    return data;
+  }
+
   /** 추가 */
   async addItem(params) {
     let dbcon = null;
