@@ -1,17 +1,19 @@
 /**
  * @ File Name: LoginWay01.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-20 17:00
+ * @ Last Update: 2023-01-13 15:20
  * @ Description: 세브란스 로그인 페이지
  */
 
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import {  Link } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import naver from "../../assets/img/ico-sns-naver@2x.png";
 import kakao from "../../assets/img/ico-sns-kakao@2x.png";
 import facebook from "../../assets/img/ico-sns-facebook@2x.png";
+import checkBox from "../../assets/img/ico-checkbox-checked-white.png";
 
 const Container = styled.div`
   position: relative;
@@ -32,7 +34,7 @@ const Container = styled.div`
       margin-top: 120px;
       position: relative;
 
-      .email_input,
+      .id_input,
       .password_input {
         width: 58%;
         height: 50px;
@@ -153,7 +155,7 @@ const Container = styled.div`
     content: "";
     border: 0;
     border-radius: 50%;
-    background: #959595 url(./img/ico-checkbox-checked-white.png) no-repeat 45%
+    background: #959595 url(${checkBox}) no-repeat 45%
       center !important;
     background-size: 11px 8px !important;
   }
@@ -223,49 +225,51 @@ const TabMenuNav = styled.nav`
 `;
 
 const LoginWay01 = memo(() => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const onEmailHandler = (e) => {
-    setEmail(e.currentTarget.value);
-  };
 
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
-  };
+  const onSubmit = (async (e) => {
+      e.preventDefault();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    navigate("/mypage");
-  };
+      const user_id = e.currentTarget.id_input.value;
+      const user_pw = e.currentTarget.password_input.value;
+
+      try {
+          // Ajax 요청 보내기 -> 백엔드가 전달한 결과값이 response.data에 저장된다.
+          const response = await axios.post('/api/login', { userid: user_id, userpw: user_pw });
+          console.log(response.data);
+          navigate('/mysevrance');
+      } catch (error) {
+          const errorMsg = '[' + error.response.status + '] ' + error.response.statusText;
+          console.error(errorMsg);
+          alert('로그인에 실패했습니다. 아이디나 비밀번호를 확인하세요.');
+      }
+  });
+
 
   const joinBtnClick = (e) => {
     navigate("/join_way");
   };
 
+
   return (
     <Container>
       <div>
         <div className="login_ways">
-          <form className="login_input">
+          <form className="login_input"  method="post" action="/api/login" onSubmit={onSubmit}>
             <input
-              name="email"
-              type="email"
+              name="id_input"
+              type="text"
               placeholder="아이디를 입력해 주세요."
-              value={email}
-              onChange={onEmailHandler}
-              className="email_input"
+              className="id_input"
             />
             <input
-              name="password"
-              type="new_password"
+              name="password_input"
+              type="password"
               placeholder="비밀번호를 입력해 주세요."
-              value={password}
-              onChange={onPasswordHandler}
               className="password_input"
             />
-            <button type="submit" onSubmit={onSubmit} className="login_button">
+            <button type="submit" className="login_button">
               로그인
             </button>
           </form>

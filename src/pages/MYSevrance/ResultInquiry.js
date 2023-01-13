@@ -110,7 +110,7 @@ const Container = styled.div`
   }
   .notice,
   .information {
-    width: 800px;
+    width: 700px;
     margin: auto;
     ul {
       li {
@@ -129,7 +129,7 @@ const Container = styled.div`
     }
     .qna_button {
       float: right;
-      width: 800px;
+      width: 700px;
       background-color: white;
       border: 1px solid #e6e6e6;
       padding: 10px 25px;
