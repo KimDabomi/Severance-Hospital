@@ -95,7 +95,7 @@ function NewsHomeNoticeCarousel() {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.NoticeSlice);
+  const { data } = useSelector((state) => state.NoticeSlice);
 
   useEffect(() => {
     dispatch(
@@ -105,10 +105,6 @@ function NewsHomeNoticeCarousel() {
       })
     );
   }, []);
-
-   if (data) {
-    console.log(data);
-  }
 
   return (
     <div>

@@ -22,18 +22,18 @@ export const getList = createAsyncThunk(
       const response = await axios.get(URL, {
         params: {
           query: payload?.query || '',
-          DRUG_SHAPE: payload?.DRUG_SHAPE || '',
-          COLOR_CLASS: payload?.COLOR_CLASS || '',
+          shape: payload?.shape || '',
+          color: payload?.color || '',
           trapezoid: payload?.trapezoid || '',
           line: payload?.line || '',
           page: payload?.page || 1,
           rows: payload?.rows || 12,
         },
       });
+      console.log('낱알식별 payload: ',payload);
       result = response.data;
-      // console.log('낱알식별 result: ',result);
     } catch (err) {
-        console.group('DrugSearchSlice.getDrug_shape');
+        console.group('DrugSearchSlice.getList');
         console.error(err);
         console.groupEnd();
         result = rejectWithValue(err.response);
@@ -104,9 +104,9 @@ const DrugSearchSlice = createSlice({
   //이 모듈이 관리하는 상태값
   initialState: {
     pagenation: null,
-    data: null, //Ajax처리를 통해 수신된 데이터
-    loading: false, //로딩여부
-    error: null, //에러정보
+    data: null,
+    loading: false,
+    error: null,
   },
   reducers: {
     getCurrentData: (state, action) => {
