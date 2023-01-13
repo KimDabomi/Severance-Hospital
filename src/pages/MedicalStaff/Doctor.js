@@ -6,10 +6,22 @@
  */
 
 /** import */
-import React, { memo, useCallback, useState } from "react";
-import styled from "styled-components";
-import { Pagination } from "@mui/material";
+import React, { memo, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import dayjs from "dayjs";
+
+// helper, hooks
+import { useQueryString } from "../../hooks/useQueryString";
+
+/** Redux */
+import { useDispatch, useSelector } from "react-redux";
+import { getList } from "../../slices/CDoctorSlice";
+
+/** components */
+import Spinner from "../../components/Spinner";
+import PaginationCustom from "../Manager/common/PaginationCustom";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -21,7 +33,6 @@ import Blank from "../../assets/img/blank.png";
 import Search from "../../assets/img/ico-search-white.png";
 
 /** 리스트 스타일 */
-// ul태그
 const ListStyleUl = styled.ul`
   margin: 4px 0;
 
@@ -154,7 +165,7 @@ const MapListArticle = styled.article`
 `;
 
 /** 검색 스타일 */
-const SearchSection = styled.section`
+const SearchForm = styled.form`
   width: 100%;
   margin-top: 20px;
   display: flex;
@@ -245,33 +256,67 @@ const PartnerListBoxSection = styled.section`
 `;
 
 /** 페이지 블록 스타일 */
-const PaginationDiv = styled.div`
+const PaginationNav = styled.nav`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
-const Hospital = memo(() => {
+const Doctor = memo(() => {
+  /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
+  const navigate = useNavigate();
+
   // background 이미지의 위치 변경을 위한 상태값
   const [bgPosition, setBgPosition] = useState(-9168);
   // active
   const [activeList, setActiveList] = useState(1);
+  // 지역 상태값
+  const [aeraStatus, setAeraStatus] = useState("");
 
-  // 검색 결과 리스트 출력
-  const searchList = useCallback(() => {
-    const result = [];
-    for (let i = 0; i < 12; i++) {
-      result.push(
-        <li key={i}>
-          <Link to="/cooperation/doctor-detail.do">{i}</Link>
-        </li>
-      );
-    }
-    return result;
-  }, []);
+  /** QueryString 값 가져오기 */
+  const { query, page = 1 } = useQueryString();
+
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { areaCount, pagenation, data, loading, error } = useSelector((state) => state.CDoctorSlice);
+
+  /** 최초마운트시 리덕스를 통해 목록을 조회한다. */
+  useEffect(() => {
+    dispatch(getList({ query: query, areaQuery: aeraStatus, page: page, rows: 12 }));
+  }, [query, page, aeraStatus]);
+
+  /** 검색 */
+  const onSearchSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      // 검색어
+      const search = e.currentTarget.search.value;
+
+      // 검색어에 따라 URL을 구성한다.
+      let redirectUrl = search ? `/cooperation/doctor.do?query=${search}&page=1` : "/cooperation/doctor.do";
+      navigate(redirectUrl);
+    },
+    [navigate]
+  );
+
+  /** 각 지역 총 개수 표시 */
+  const displayAreaCount = useCallback((e) => {
+    const result = !areaCount
+      ? false
+      : e === "전국"
+      ? areaCount.reduce((acc, cur) => {
+          return (acc += cur.areaCount);
+        }, 0)
+      : areaCount.find((v) => v.area === e)?.areaCount;
+    return result ? `(${result})` : "(0)";
+  });
 
   return (
     <>
+      {/* 로딩 */}
+      <Spinner loading={loading} />
+
       {/* 페이지 타이틀 */}
       <h1 className="pageTitle">협진병, 의원 현황</h1>
       <section className="boxGuide">
@@ -281,7 +326,7 @@ const Hospital = memo(() => {
         </ListStyleUl>
       </section>
 
-      {/* 파트너 병원 */}
+      {/* 협력 의사 */}
       <PartnerHospitalBoxSection>
         {/* props에 useState 상태값을 적용한다. */}
         <MapArticle position={bgPosition}>
@@ -289,7 +334,7 @@ const Hospital = memo(() => {
           {/* useMap과 <map>태그의 name속성은 같아야 한다. */}
           <img src={Blank} alt="전국 병원리스트 보기" useMap="#image-map1" />
 
-          <map name="image-map1">
+          <map name="image-map1" onClick={() => navigate("/cooperation/doctor.do?page=1")}>
             {/* @todo: onFocus="this.blur();" 속성 관련 찾기 */}
             {/* 이미지 영역 */}
             <area shape="poly" alt="전국 병원리스트 보기" nohref="true" />
@@ -302,6 +347,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(0);
                 setActiveList(2);
+                setAeraStatus("강원도");
               }} // 이미지 클릭 시, 해당 이미지의 포지션 값과, 맵리스트의 active props 셋팅
             />
 
@@ -313,6 +359,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-573);
                 setActiveList(3);
+                setAeraStatus("경기도");
               }}
             />
 
@@ -324,6 +371,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-1146);
                 setActiveList(4);
+                setAeraStatus("경상남도");
               }}
             />
 
@@ -335,6 +383,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-1719);
                 setActiveList(5);
+                setAeraStatus("경상북도");
               }}
             />
 
@@ -346,6 +395,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-2292);
                 setActiveList(6);
+                setAeraStatus("광주광역시");
               }}
             />
 
@@ -357,6 +407,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-2865);
                 setActiveList(7);
+                setAeraStatus("대구광역시");
               }}
             />
 
@@ -368,6 +419,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-3438);
                 setActiveList(8);
+                setAeraStatus("대전광역시");
               }}
             />
 
@@ -379,6 +431,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-4011);
                 setActiveList(9);
+                setAeraStatus("부산광역시");
               }}
             />
 
@@ -390,6 +443,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-4584);
                 setActiveList(10);
+                setAeraStatus("서울특별시");
               }}
             />
 
@@ -401,6 +455,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-5157);
                 setActiveList(11);
+                setAeraStatus("울산광역시");
               }}
             />
 
@@ -412,6 +467,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-5730);
                 setActiveList(12);
+                setAeraStatus("인천광역시");
               }}
             />
 
@@ -423,6 +479,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-6303);
                 setActiveList(13);
+                setAeraStatus("전라남도");
               }}
             />
 
@@ -434,6 +491,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-6876);
                 setActiveList(14);
+                setAeraStatus("전라북도");
               }}
             />
 
@@ -445,6 +503,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-7449);
                 setActiveList(15);
+                setAeraStatus("제주도");
               }}
             />
 
@@ -456,6 +515,7 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-8022);
                 setActiveList(16);
+                setAeraStatus("충청남도");
               }}
             />
 
@@ -467,259 +527,319 @@ const Hospital = memo(() => {
               onClick={() => {
                 setBgPosition(-8595);
                 setActiveList(17);
+                setAeraStatus("충청북도");
               }}
             />
           </map>
         </MapArticle>
 
         <MapListArticle>
-          <ListStyleUl num={activeList}>
+          <ListStyleUl num={activeList} onClick={() => navigate("/cooperation/doctor.do?page=1")}>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 1 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(1);
                   setBgPosition(-9168);
+                  setAeraStatus("");
+                  e.preventDefault();
                 }}
               >
                 <span>전국</span>
-                <span>(286)</span>
+                <span>{displayAreaCount("전국")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 2 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(2);
                   setBgPosition(0);
+                  setAeraStatus("강원도");
+                  e.preventDefault();
                 }}
               >
                 <span>강원도</span>
-                <span>(9)</span>
+                <span>{displayAreaCount("강원도")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 3 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(3);
                   setBgPosition(-573);
+                  setAeraStatus("경기도");
+                  e.preventDefault();
                 }}
               >
                 <span>경기도</span>
-                <span>(64)</span>
+                <span>{displayAreaCount("경기도")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 4 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(4);
                   setBgPosition(-1146);
+                  setAeraStatus("경상남도");
+                  e.preventDefault();
                 }}
               >
                 <span>경상남도</span>
-                <span>(20)</span>
+                <span>{displayAreaCount("경상남도")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 5 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(5);
                   setBgPosition(-1719);
+                  setAeraStatus("경상북도");
+                  e.preventDefault();
                 }}
               >
                 <span>경상북도</span>
-                <span>(12)</span>
+                <span>{displayAreaCount("경상북도")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 6 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(6);
                   setBgPosition(-2292);
+                  setAeraStatus("광주광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>광주광역시</span>
-                <span>(10)</span>
+                <span>{displayAreaCount("광주광역시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 7 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(7);
                   setBgPosition(-2865);
+                  setAeraStatus("대구광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>대구광역시</span>
-                <span>(14)</span>
+                <span>{displayAreaCount("대구광역시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 8 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(8);
                   setBgPosition(-3438);
+                  setAeraStatus("대전광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>대전광역시</span>
-                <span>(11)</span>
+                <span>{displayAreaCount("대전광역시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 9 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(9);
                   setBgPosition(-4011);
+                  setAeraStatus("부산광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>부산광역시</span>
-                <span>(19)</span>
+                <span>{displayAreaCount("부산광역시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 10 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(10);
                   setBgPosition(-4584);
+                  setAeraStatus("서울특별시");
+                  e.preventDefault();
                 }}
               >
                 <span>서울특별시</span>
-                <span>(69)</span>
+                <span>{displayAreaCount("서울특별시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 11 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(11);
                   setBgPosition(-5157);
+                  setAeraStatus("울산광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>울산광역시</span>
-                <span>(2)</span>
+                <span>{displayAreaCount("울산광역시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 12 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(12);
                   setBgPosition(-5730);
+                  setAeraStatus("인천광역시");
+                  e.preventDefault();
                 }}
               >
                 <span>인천광역시</span>
-                <span>(22)</span>
+                <span>{displayAreaCount("인천광역시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 13 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(13);
                   setBgPosition(-6303);
+                  setAeraStatus("전라남도");
+                  e.preventDefault();
                 }}
               >
                 <span>전라남도</span>
-                <span>(8)</span>
+                <span>{displayAreaCount("전라남도")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 14 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(14);
                   setBgPosition(-6876);
+                  setAeraStatus("전라북도");
+                  e.preventDefault();
                 }}
               >
                 <span>전라북도</span>
-                <span>(10)</span>
+                <span>{displayAreaCount("전라북도")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 15 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(15);
                   setBgPosition(-7449);
+                  setAeraStatus("제주도");
+                  e.preventDefault();
                 }}
               >
                 <span>제주도</span>
-                <span>(4)</span>
+                <span>{displayAreaCount("제주도")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 16 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(16);
                   setBgPosition(-8022);
+                  setAeraStatus("충남/세종시");
+                  e.preventDefault();
                 }}
               >
                 <span>충남/세종시</span>
-                <span>(5)</span>
+                <span>{displayAreaCount("충남/세종시")}</span>
               </a>
             </li>
             <li>
               <a
-                href="#;"
+                href="#!"
                 className={activeList === 17 ? "active" : ""}
-                onClick={() => {
+                onClick={(e) => {
                   setActiveList(17);
                   setBgPosition(-8595);
+                  setAeraStatus("충청북도");
+                  e.preventDefault();
                 }}
               >
                 <span>충청북도</span>
-                <span>(7)</span>
+                <span>{displayAreaCount("충청북도")}</span>
               </a>
             </li>
           </ListStyleUl>
 
-          <p>기준 : 2022-12-16 (총 286)</p>
+          <p>
+            기준 : {dayjs().format("YYYY-MM-DD")} {displayAreaCount("전국").replace("(", "(총 ")}
+          </p>
         </MapListArticle>
       </PartnerHospitalBoxSection>
 
       {/* 검색 */}
-      <SearchSection>
-        <input type="text" id="srchKwd" placeholder="협진병의원명 또는 지역을 입력해주세요." title="협력병원명 또는 지역을 검색"></input>
-        <button>
+      <SearchForm onSubmit={onSearchSubmit}>
+        <input
+          type="text"
+          id="srchKwd"
+          name="search"
+          defaultValue={query}
+          key={query}
+          placeholder="협진병의원명 또는 지역을 입력해주세요."
+          title="협진병의원명 또는 지역을 검색"
+        ></input>
+        <button type="submit">
           <i></i>
         </button>
-      </SearchSection>
+      </SearchForm>
 
       {/* 검색 결과 리스트 */}
       <PartnerListBoxSection>
-        <ul>{searchList()}</ul>
+        <ul>
+          {data && pagenation && !error
+            ? data.map((v, i) => {
+                return (
+                  <li key={v.id}>
+                    <Link to={`/cooperation/doctor-detail.do/${v.id}`}>
+                      {v.name}
+                      {v.doctorName}
+                    </Link>
+                  </li>
+                );
+              })
+            : "조회된 데이터가 없습니다."}
+        </ul>
       </PartnerListBoxSection>
 
       {/* Pagination */}
-      <PaginationDiv>
-        <Pagination count={10} className="pagination" />
-      </PaginationDiv>
+      {data && pagenation && !error && (
+        <PaginationNav>
+          <PaginationCustom page={page} pagenation={pagenation} pageQueryPath="/cooperation/doctor.do" query={query} />
+        </PaginationNav>
+      )}
     </>
   );
 });
 
-export default Hospital;
+export default Doctor;

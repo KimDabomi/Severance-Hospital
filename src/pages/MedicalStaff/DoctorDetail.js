@@ -6,9 +6,13 @@
  */
 
 /** import */
-import React, { memo, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { memo, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+
+/** Redux */
+import { useDispatch, useSelector } from "react-redux";
+import { getItem } from "../../slices/CDoctorSlice";
 
 /** 이미지 */
 // 공지사항 박스 아이콘
@@ -21,8 +25,10 @@ import address from "../../assets/img/ico-education-adress@2x.png";
 // 전화 아이콘
 import call from "../../assets/img/ico-education-call@2x.png";
 
+/** components */
+import Spinner from "../../components/Spinner";
+
 /** 리스트 스타일 */
-// ul태그
 const ListStyleUl = styled.ul`
   margin: 4px 0;
 
@@ -160,58 +166,74 @@ const DetailDataStyle = styled.section`
   }
 `;
 
-/** 지도 스타일 */
-const MapStyle = styled.div`
-  width: 100%;
-  height: 615px;
-`;
+const DoctorDetail = memo(() => {
+  /** path로 아이디값 전달 */
+  const path = useParams().id;
 
-const HospitalDetail = memo(() => {
   // KAKAO MAP OPEN API
   const { kakao } = window;
-  // a태그 url 상태값 (임시)
-  const [url, setUrl] = useState();
 
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.CDoctorSlice);
+
+  /** 최초마운트시 리덕스를 통해 단일정보를 조회한다. */
+  useEffect(() => {
+    dispatch(getItem({ id: path }));
+  }, []);
+
+  /** 카카오맵 */
   useEffect(() => {
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
-    /** @todo: addressSearch "충청남도 보령시 대해로 52 (궁촌동)"에 adress 데이터 적용 */
-    geocoder.addressSearch("충청남도 보령시 대해로 52 (궁촌동)", function (result, status) {
-      // 정상적으로 검색이 완료됐으면
-      if (status === kakao.maps.services.Status.OK) {
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    !error &&
+      data &&
+      geocoder.addressSearch(data.address, function (result, status) {
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+            mapOption = {
+              center: coords, // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+            };
+          // 지도를 생성합니다
+          var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-          mapOption = {
-            center: coords, // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-          };
+          // 결과값으로 받은 위치를 마커로 표시합니다
+          var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+          });
 
-        // 지도를 생성합니다
-        var map = new kakao.maps.Map(mapContainer, mapOption);
+          // 인포윈도우로 장소에 대한 설명을 표시합니다
+          var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + data.hospitalClinicName + "</div>"
+          }); /** @todo: content 태그 사이 '경희요양병원'에 hospitalName 데이터 적용 {hospitalName} */
+          infowindow.open(map, marker);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords
-        });
+          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+          map.setCenter(coords);
+        } else {
+          var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+            mapOption = {
+              center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+            };
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;">' + "(신)제일병원" + "</div>"
-        }); /** @todo: content 태그 사이 '(신)제일병원'에 hospitalName 데이터 적용 {hospitalName} */
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-      }
-    });
-  }, []);
+          // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+          var map = new kakao.maps.Map(mapContainer, mapOption);
+        }
+      });
+  }, [data]);
 
   return (
     <>
+      {/* 로딩 */}
+      <Spinner loading={loading} />
+
       {/* 페이지 타이틀 */}
       <h1 className="pageTitle">협진병, 의원 현황</h1>
       <section className="boxGuide">
@@ -221,47 +243,57 @@ const HospitalDetail = memo(() => {
         </ListStyleUl>
       </section>
 
-      <DetailDataStyle>
-        <h4>
-          <span>(신)제일병원</span>
-          {/* @todo: url data 적용 */}
-          <a href={url} target="_black" rel="noopener noreferrer">
-            <i className={url ? "" : "grayIcon"} />
-          </a>
-        </h4>
+      {!error && data && (
+        <DetailDataStyle>
+          <h4>
+            {/* 병원 이름 */}
+            <span>{data.hospitalClinicName}</span>
+            {/* URL 바로가기 아이콘 */}
+            <a
+              href={data.url !== null ? data.url : ""}
+              onClick={(e) => {
+                e.currentTarget.href !== data.url && e.preventDefault();
+              }}
+              target="_black"
+              rel="noopener noreferrer"
+            >
+              <i className={data.url ? "" : "grayIcon"} />
+            </a>
+          </h4>
 
-        <dl>
-          <dt>의사명</dt>
-          <dd>박관석</dd>
-        </dl>
-        <dl>
-          <dt>소개</dt>
-          <dd>병원</dd>
-        </dl>
-        <dl>
-          <dt>진료과</dt>
-          <dd>소화기내과</dd>
-        </dl>
+          <dl>
+            <dt>의사명</dt>
+            <dd>{data.doctorName}</dd>
+          </dl>
+          <dl>
+            <dt>소개</dt>
+            <dd>{data.introduction}</dd>
+          </dl>
+          <dl>
+            <dt>진료과</dt>
+            <dd>{data.department}</dd>
+          </dl>
 
-        <address>
-          <div className="address">
-            <i className="location" />
-            <p>33458 충청남도 보령시 대해로 52 (궁촌동)</p>
-          </div>
+          <address>
+            <div className="address">
+              <i className="location" />
+              <p>{`${data.zipCode} ${data.address}`}</p>
+            </div>
 
-          <div className="address">
-            <i className="call" />
-            <p>041-931-8330</p>
-          </div>
-        </address>
-        <MapStyle id="map"></MapStyle>
-      </DetailDataStyle>
+            <div className="address">
+              <i className="call" />
+              <p>{data.tel}</p>
+            </div>
+          </address>
+          <div id="map" style={{ width: 100 + "%", height: 615 + "px" }}></div>
+        </DetailDataStyle>
+      )}
 
       <SingleButtonDiv>
-        <Link to="/cooperation/hospital.do">목록</Link>
+        <Link to="/cooperation/doctor.do">목록</Link>
       </SingleButtonDiv>
     </>
   );
 });
 
-export default HospitalDetail;
+export default DoctorDetail;
