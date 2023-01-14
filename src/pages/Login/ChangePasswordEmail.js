@@ -1,7 +1,7 @@
 /**
  * @ File Name: ChangePasswordEmail.js
  * @ Author: 김다보미 (cdabomi@nate.com)
- * @ Last Update: 2022-12-23 11:00
+ * @ Last Update: 2023-01-13 16:35
  * @ Description: 비밀번호 찾기 새비밀번호 설정 페이지
  */
 
@@ -128,9 +128,12 @@ const ChangePasswordEmail = memo(() => {
   };
   const watching = useWatch({
     control,
-    name: ["password","newpasswordcheck"],
+    name: ["password", "newpasswordcheck"],
   });
   console.log(watching);
+
+  const passwordValue = watch("password");
+  const repasswordValue = watch("repassword");
 
   return (
     <Container>
@@ -144,7 +147,7 @@ const ChangePasswordEmail = memo(() => {
             type="password"
             className="new_password"
             placeholder="새로운 비밀번호를 입력해 주세요."
-            {...register("newpassword", {
+            {...register("password", {
               required: "비밀번호를 입력해주세요.",
               minLength: {
                 value: 8,
@@ -161,17 +164,18 @@ const ChangePasswordEmail = memo(() => {
               },
             })}
           />
-          {errors.newpassword && (
+          {errors.password ? (
             <p className="warn">
               <img src={warning} alt="warning" />
-              {errors.newpassword.message}
+              {errors.password.message}
             </p>
-          )}
-          {!errors.newpassword && (
-            <p className="check">
-              <img src={check} alt="check" />
-              안전한 비밀번호입니다.
-            </p>
+          ) : (
+            passwordValue && (
+              <p className="check">
+                <img src={check} alt="check" />
+                안전한 비밀번호입니다.
+              </p>
+            )
           )}
           <ul>
             <li>※ 8자 이상 ~ 20자 이내로 설정해주세요.</li>
@@ -187,26 +191,54 @@ const ChangePasswordEmail = memo(() => {
             type="password"
             className="new_password_check"
             placeholder="비밀번호를 한번 더 입력해 주세요."
-            {...register("newpasswordcheck", {
+            {...register("repassword", {
               required: true,
               validate: (val) => {
-                if (watch("newpassword") != val) {
+                if (watch("password") != val) {
                   return "비밀번호가 일치하지 않습니다.";
                 }
               },
             })}
           />
-          {errors.newpasswordcheck && (
-            <p className="warn">
-              <img src={warning} alt="warning" />
-              {errors.newpasswordcheck.message}
-            </p>
-          )}
-          {!errors.newpasswordcheck && (
+          {errors.repassword ? (
+            passwordValue ? (
+              errors.password ? (
+                <p className="warn">
+                  <img src={warning} alt="warning" />
+                  {errors.password.message}
+                </p>
+              ) : (
+                <p className="warn">
+                  <img src={warning} alt="warning" />
+                  {errors.repassword.message}
+                </p>
+              )
+            ) : (
+              <p className="warn">
+                <img src={warning} alt="warning" />
+                비밀번호를 입력해주세요.
+              </p>
+            )
+          ) : passwordValue === repasswordValue &&
+            repasswordValue &&
+            !errors.password &&
+            !errors.repassword ? (
             <p className="check">
               <img src={check} alt="check" />
               비밀번호가 일치합니다.
             </p>
+          ) : repasswordValue && errors.password ? (
+            <p className="warn">
+              <img src={warning} alt="warning" />
+              {errors.password.message}
+            </p>
+          ) : (
+            repasswordValue && (
+              <p className="warn">
+                <img src={warning} alt="warning" />
+                비밀번호가 일치하지 않습니다.
+              </p>
+            )
           )}
           <div className="button_box">
             <button

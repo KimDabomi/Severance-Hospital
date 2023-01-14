@@ -1,7 +1,7 @@
 /**
  * @ File Name: NewsHomeNoticeCarousel.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-11
+ * @ Last Update: 2023-01-13
  * @ Description: 뉴스 메인 페이지 공지사항 슬라이드 컴포넌트
  */
 
@@ -95,7 +95,7 @@ function NewsHomeNoticeCarousel() {
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.NoticeSlice);
+  const { data } = useSelector((state) => state.NoticeSlice);
 
   useEffect(() => {
     dispatch(
@@ -105,10 +105,6 @@ function NewsHomeNoticeCarousel() {
       })
     );
   }, []);
-
-   if (data) {
-    console.log(data);
-  }
 
   return (
     <div>
@@ -125,7 +121,7 @@ function NewsHomeNoticeCarousel() {
         >
           <span className="newsCategory">공지사항</span>
           <strong className="newsContentTitle">{v.noticeTitle}</strong>
-          <span className="newsDate">{v.regDate}</span>
+          <span className="newsDate">{v.regDate.slice(0,10)}</span>
         </Link>
         )
       })}

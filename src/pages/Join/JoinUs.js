@@ -286,7 +286,7 @@ const Container = styled.div`
   }
 
   // 테이블 레이아웃
-  .dafault_info {
+  .default_info {
     width: 1280px;
     margin: auto;
     table {
@@ -396,7 +396,7 @@ const JoinUs = memo(() => {
             </li>
           </ol>
         </div>
-        <form className="dafault_info" onSubmit={handleSubmit(onSubmit, onError)} id="default_info">
+        <form className="default_info" onSubmit={handleSubmit(onSubmit, onError)} id="default_info">
           <h4>
             기본정보입력
             <span className="sub_text">

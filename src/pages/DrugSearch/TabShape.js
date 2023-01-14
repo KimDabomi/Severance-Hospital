@@ -5,16 +5,15 @@
  * @ Description: 의약품 검색 약모양으로찾기 탭
  */
 
-import React, { memo, useCallback, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { memo, useState, useCallback, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getList } from '../../slices/DrugSearchSlice';
+import RegexHelper from '../../helper/RegexHelper';
+import { useQueryString } from '../../hooks/useQueryString';
+
 import styled from 'styled-components';
 import TopButton from '../../components/TopButton';
-// import RegexHelper from '../../helper/RegexHelper';
-
-//상태값을 로드하기 위한 hook과 action함수를 dispatch할 hook참조
-import { useSelector, useDispatch } from 'react-redux';
-// Slice에 정의된 액션함수들 참조
-import { getDrug_shape } from '../../slices/DrugSearchSlice';
 
 const DrugCont = styled.div`
   .buttonCont {
@@ -204,63 +203,89 @@ const DrugCont = styled.div`
 `;
 
 const TabShape = memo(() => {
-  //dispatch함수 생성
-  const dispatch = useDispatch();
+  // 페이지 번호 상태값
+  const [page, setPage] = useState(1);
+  // 페이지 초기화를 위한 검색어 상태값
+  const [queryStatus, setQueryStatus] = useState({});
+  // 데이터 관리 상태값
+  const [isData, setIsData] = useState([]);
 
-  //hook을 통해 slice가 관리하는 상태값 가져오기
-  const { data, loading, error } = useSelector(
+  // 검색어 받기
+  const { query, shape, color, trapezoid, line } = useQueryString();
+  console.log(`query=${query}`);
+  console.log(`shape=${shape}`);
+  console.log(`color=${color}`);
+  console.log(`trapezoid=${trapezoid}`);
+  console.log(`line=${line}`);
+
+  /** 리덕스 관련 초기화 */
+  const dispatch = useDispatch();
+  const { pagenation, loading, error } = useSelector(
     (state) => state.DrugSearchSlice
   );
 
-  //페이지 번호
-  const page = useRef(1);
+  const navigate = useNavigate();
 
   /** <form>의 submit버튼이 눌러졌을 때 호출될 이벤트 핸들러 */
   const onDrugInfoSubmit = useCallback((e) => {
     e.preventDefault();
 
-    //이벤트가 발생한 폼 개체
-    const current = e.target;
+    const queryString = e.currentTarget.itemName.value;
+    const shape = e.currentTarget.drugShape.value;
+    const color = e.currentTarget.colorClass1.value;
+    const trapezoid = e.currentTarget.formCodeName.value;
+    const line = e.currentTarget.lineFront.value;
 
-    //검색을 새로했으니 페이지 초기화
-    page.current = 1;
-
-    //검색어를 slice에 전달
-    dispatch(
-      getDrug_shape({
-        item_name: document.querySelector('#itemName').value,
-        pageNo: page.current,
-      })
+    navigate(
+      `${window.location.pathname}?query=${queryString}&shape=${shape}&color=${color}&trapezoid=${trapezoid}&line=${line}`
     );
-
-    //검색조건에 맞는 결과만 출력
-    // current.colorClass1.value 
-
   }, []);
 
-  /** 페이지가 처음 로드되었을 때 정보리셋 */ 
   useEffect(() => {
-    dispatch(getDrug_shape({ item_name: '검색어없음' }));
-  }, []);
-
-  /** 더보기 버튼 (페이지) 함수 */
-  const pagePlus = useCallback((e) => {
-    //페이지 번호 1증가
-    page.current++;
-
-    //추가 검색 결과를 요청
     dispatch(
-      getDrug_shape({
-        pageNo: page.current,
-        item_name: document.querySelector('#itemName').value,
+      getList({
+        query: query, 
+        shape: shape, 
+        color: color, 
+        trapezoid: trapezoid, 
+        line: line,
+        page: page,
+        rows: 12,
       })
     );
-  });
+  }, [query, shape, color, trapezoid, line]);
+
+  /** 더보기 눌렀을 때 추가 검색 결과를 요청 */
+  // useEffect(() => {
+  //   if (page > 1) {
+  //     console.log('추가검색결과요청');
+
+  //     dispatch(
+  //       getList({
+  //         query: queryStatus,
+  //         page: page,
+  //         rows: 12,
+  //       })
+  //     ).then(({ payload }) => {
+  //       setIsData((nowData) => nowData.concat(payload.data));
+  //     });
+  //   }
+  // }, [page]);
 
   /** 초기화 버튼 눌렀을 때 호출될 이벤트 핸들러 */
-  const onResetClick = useCallback((e)=>{
-    dispatch(getDrug_shape({ item_name: '검색어없음' }));
-  })
+  const onResetClick = useCallback((e) => {
+    //setIsData([]);
+  });
+
+  // if (isData) {
+  //   console.log('TabShape isData:', isData);
+  // }
+  // if (pagenation) {
+  //   console.log('Pagenation:', pagenation);
+  // }
+  // if (queryStatus) {
+  //   console.log('현재검색어', queryStatus);
+  // }
 
   return (
     <DrugCont>
@@ -709,33 +734,32 @@ const TabShape = memo(() => {
             <button type="submit" className="buttonBlue">
               검색
             </button>
-            <button type="reset" className="buttonWhite marginleft" onClick={onResetClick}>
+            <button
+              type="reset"
+              className="buttonWhite marginleft"
+              onClick={onResetClick}
+            >
               초기화
             </button>
           </div>
         </form>
       </fieldset>
 
-      {/* 유효성검사 알람 팝업창 */}
-      {/* <div className="popUpCont">
-        <div className="dimed"></div>
-        <div className="popUp">
-          <div className="alert"></div>
-          <div className="closeBtnCont">
-            <button type="button" className="closeBtn" onClick={closeClick} >
-              닫기
-            </button>
-          </div>
-        </div>
-      </div> */}
-
       {error ? (
         <h1>에러발생함</h1>
-      ) : data && data.items ? (
+      ) : !isData.length ? (
+        pagenation && (
+          // 검색결과없을 때
+          <div className="nodata">
+            <i className="nodataIcon"></i>
+            <p>선택한 조건에 맞는 의약품 검색결과가 없습니다.</p>
+          </div>
+        )
+      ) : (
         <div>
           <ul className="drugListCont">
             {/* // 검색 결과 표시 (최대12개)  */}
-            {data.items.map((v, i) => {
+            {isData.map((v, i) => {
               // console.log(v);
               return (
                 <li key={i} className="drugList">
@@ -750,25 +774,21 @@ const TabShape = memo(() => {
             })}
           </ul>
           {/* 페이지가 2페이지 이상일 경우 더보기 버튼 */}
-          {data.totalCount > page.current * 12 ? (
+          {pagenation.nowPage !== pagenation.totalPage ? (
             <div className="buttonContColumn">
-              <Link className="btnMore" onClick={pagePlus}>
+              <button
+                type="button"
+                className="btnMore"
+                onClick={() => setPage(page + 1)}
+              >
                 더보기
                 <span>
-                  ({data.pageNo * 12}/{data.totalCount})
+                  ({pagenation.nowPage * 12}/{pagenation.totalCount})
                 </span>
-              </Link>
+              </button>
             </div>
           ) : null}
         </div>
-      ) : (
-        data && (
-          // 검색결과없을 때
-          <div className="nodata">
-            <i className="nodataIcon"></i>
-            <p>선택한 조건에 맞는 의약품 검색결과가 없습니다.</p>
-          </div>
-        )
       )}
     </DrugCont>
   );
