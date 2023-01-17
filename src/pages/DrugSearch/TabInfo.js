@@ -5,7 +5,7 @@
  * @ Description: 의약품 검색 약정보로찾기 탭
  */
 
-import React, { memo, useCallback, useRef, useEffect, useState } from 'react';
+import React, { memo, useCallback, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/Spinner'

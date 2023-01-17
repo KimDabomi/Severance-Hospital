@@ -212,11 +212,11 @@ const TabShape = memo(() => {
 
   // 검색어 받기
   const { query= "", shape= "", color= "", trapezoid= "", line= "" } = useQueryString();
-  console.log(`query=${query}`);
-  console.log(`shape=${shape}`);
-  console.log(`color=${color}`);
-  console.log(`trapezoid=${trapezoid}`);
-  console.log(`line=${line}`);
+  // console.log(`query=${query}`);
+  // console.log(`shape=${shape}`);
+  // console.log(`color=${color}`);
+  // console.log(`trapezoid=${trapezoid}`);
+  // console.log(`line=${line}`);
 
   /** 리덕스 관련 초기화 */
   const dispatch = useDispatch();
@@ -633,7 +633,7 @@ const TabShape = memo(() => {
                   />
                   <span className="label">
                     <i className="drugIco formula2"></i>
-                    <span className="text">연질캡슐</span>
+                    <span className="text">필름</span>
                   </span>
                 </label>
                 <label>
@@ -645,7 +645,7 @@ const TabShape = memo(() => {
                   />
                   <span className="label">
                     <i className="drugIco formula3"></i>
-                    <span className="text">경질캡슐</span>
+                    <span className="text">경질</span>
                   </span>
                 </label>
               </dd>

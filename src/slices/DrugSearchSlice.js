@@ -1,7 +1,7 @@
 /**
  * @ File Name: DrugSearchSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-13 14:46:00
+ * @ Last Update: 2023-01-17 14:46:00
  * @ Description: 의약품 검색 페이지 slice
  */
 
@@ -30,7 +30,7 @@ export const getList = createAsyncThunk(
           rows: payload?.rows || 12,
         },
       });
-      console.log('낱알식별 payload: ',payload);
+      // console.log('낱알식별 payload: ',payload);
       result = response.data;
     } catch (err) {
         console.group('DrugSearchSlice.getList');
