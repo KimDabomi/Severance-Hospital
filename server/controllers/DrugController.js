@@ -1,7 +1,7 @@
 /**
  * @ File Name: drugController.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-12 17:21
+ * @ Last Update: 2023-01-12 16:06
  * @ Description: 의약품 백엔드 Controller
  */
 
@@ -21,20 +21,27 @@ module.exports = (() => {
     // 검색어, 페이지 번호, 한 페이지에 표시할 목록 수 파라미터
     const {
       query,
-      DRUG_SHAPE,
-      COLOR_CLASS,
+      shape,
+      color,
       trapezoid,
       line,
       page = 1,
       rows = 12,
     } = req.query;
 
+    
+    console.log(`query=${query}`);
+    console.log(`shape=${shape}`);
+    console.log(`color=${color}`);
+    console.log(`trapezoid=${trapezoid}`);
+    console.log(`line=${line}`);
+
     // 검색어를 MyBatis에 전달하기 위한 객체로 구성
     const params = {};
-    if (query || DRUG_SHAPE || COLOR_CLASS || trapezoid || line) {
+    if (query || shape || color || trapezoid || line) {
       params.ITEM_NAME = query;
-      params.DRUG_SHAPE = DRUG_SHAPE;
-      params.COLOR_CLASS = COLOR_CLASS;
+      params.DRUG_SHAPE = shape;
+      params.COLOR_CLASS = color;
       params.trapezoid = trapezoid;
       params.line = line;
     };
@@ -64,6 +71,8 @@ module.exports = (() => {
     // 파라미터 받기
     const { id } = req.params;
 
+    console.log(`id=${id}`);
+
     // 파라미터 유효성검사
     try {
       regexHelper.value(id, '품목일련번호가 없습니다.');
@@ -77,7 +86,7 @@ module.exports = (() => {
 
     try {
       json = await drugService.getItem({
-        ITEM_SEQ: id,
+        id: id,
       });
     } catch (err) {
       return next(err);
