@@ -22,8 +22,6 @@ const DrugCont = styled.div``;
 const TabInfo = memo(() => {
   //dispatch함수 생성
   const dispatch = useDispatch();
-  /** 리덕스 처리가 끝남을 감지하는 상태값 */
-  const [init, setInit] = useState(false);
 
   //hook을 통해 slice가 관리하는 상태값 가져오기
   const { data, loading, error } = useSelector(

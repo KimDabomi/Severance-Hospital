@@ -262,15 +262,6 @@ const TabShape = memo(() => {
     });
   }, [query, shape, color, trapezoid, line, page]);
 
-  if(pagenation){
-    console.log(pagenation);
-  }
-
-  if(isData){
-    console.log(isData);
-  }
-
-
   return (
     <DrugCont>
       <TopButton />

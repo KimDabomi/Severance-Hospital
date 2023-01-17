@@ -1,7 +1,7 @@
 /**
  * @ File Name: DrugSearchSlice.js
  * @ Author: 주혜지 (rosyjoo1999@gmail.com)
- * @ Last Update: 2023-01-17 14:46:00
+ * @ Last Update: 2023-01-17 16:05:00
  * @ Description: 의약품 검색 페이지 slice
  */
 
@@ -42,6 +42,23 @@ export const getList = createAsyncThunk(
   }
 );
 
+/** 의약품 낱알식별 - tab-shape 다중행조회 */
+export const getItem = createAsyncThunk(
+  'DrugSearchSlice/getItem',
+  async (payload, { rejectWithValue }) => {
+    let result = null;
+
+    try {
+      const response = await axios.get(`${URL}/${payload?.id}`);
+      console.log('의약품낱알식별');
+      result = response.data;
+    } catch (err) {
+      result = rejectWithValue(err.response);
+    }
+    return result;
+  }
+);
+
 /** e약은요 openAPI - tab-info*/
 export const getDrug_info = createAsyncThunk(
   'DrugSearchSlice/getDrug_info',
@@ -70,33 +87,6 @@ export const getDrug_info = createAsyncThunk(
   }
 );
 
-/** e약은요 단일행 데이터 조회 */
-export const getDrug_infoItem = createAsyncThunk(
-  'DrugSearchSlice/getDrug_info',
-  async (payload, { rejectWithValue }) => {
-    let result = null;
-
-    try {
-      const response = await axios.get(process.env.REACT_APP_DRUG_API_URL, {
-        params: {
-          serviceKey:
-            process.env.REACT_APP_DRUG_API_DECODING_KEY ||
-            process.env.REACT_APP_DRUG_API_ENCODING_KEY,
-          type: 'json', //데이터포맷
-          pageNo: payload?.pageNo, //페이지번호
-          numOfRows: 12, //한 페이지 결과 수
-          itemSeq: payload?.itemSeq,
-          itemName: payload?.itemName,
-        },
-      });
-      result = response.data.body;
-      // console.log('e약은요 result: ',response.data.body);
-    } catch (err) {
-      result = rejectWithValue(err.response);
-    }
-    return result;
-  }
-);
 
 /** slice 정의 */
 const DrugSearchSlice = createSlice({
@@ -119,6 +109,15 @@ const DrugSearchSlice = createSlice({
     [getList.fulfilled]: fulfilled,
     [getList.rejected]: rejected,
 
+    /** tab-Shape 단일행 데이터 조회를 위한 액션 함수 */
+    [getItem.pending]: pending,
+    [getItem.fulfilled]:(state, { meta, payload }) => {
+      return {
+        data: payload.data,
+        loading: false,
+        error: null
+      };
+    },
     /** e약은요 액션함수 */
     [getDrug_info.pending]:pending,
     [getDrug_info.fulfilled]: (state, { payload }) => {
