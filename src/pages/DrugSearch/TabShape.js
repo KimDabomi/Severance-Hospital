@@ -9,7 +9,6 @@ import React, { memo, useState, useCallback, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../../slices/DrugSearchSlice';
-import RegexHelper from '../../helper/RegexHelper';
 import { useQueryString } from '../../hooks/useQueryString';
 
 import styled from 'styled-components';
@@ -262,6 +261,14 @@ const TabShape = memo(() => {
       }
     });
   }, [query, shape, color, trapezoid, line, page]);
+
+  if(pagenation){
+    console.log(pagenation);
+  }
+
+  if(isData){
+    console.log(isData);
+  }
 
 
   return (
